@@ -41,7 +41,9 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'encodeLabels' => false,
         'items' => array_filter([
-            ['label' => '<span class="glyphicon glyphicon-home"></span> ' . Yii::t('app', 'NAV_HOME'), 'url' => ['/main/default/index']],
+        !Yii::$app->user->isGuest ?
+            ['label' => '<span class="glyphicon glyphicon-home"></span> ' . Yii::t('app', 'NAV_HOME'), 'url' => ['/main/default/index']] :
+            false,
             // ['label' => Yii::t('app', 'NAV_CONTACT'), 'url' => ['/main/contact/index']],
             // ['label' => '<span class="glyphicon glyphicon-envelope"></span>  ' . Yii::t('app', 'NAV_CONTACT'), 'url' => ['/main/contact/index']],
         // Yii::$app->user->isGuest ?
@@ -93,13 +95,28 @@ AppAsset::register($this);
     </div>
 </div>
 
-<footer class="footer">
+<!-- <footer class="footer">
     <div class="container">
-        <p class="pull-left"><b>&copy; <?= Yii::$app->params['org'] . '' ?> <?= date('Y') ?></b></p>
+        <p class="pull-left"><b>&copy;  -->
+            <?php
+                // Yii::$app->params['org'] . '' 
+            ?>
+            <?php
+                // date('Y') 
+            ?>
+<!--         </b></p>
 
-        <p class="pull-right"><?= Html::img('@web/img/logo/logo.png', ['width'=>'36','height'=>'36'])?>  <b><?= Yii::$app->name ?> </b></p>
+        <p class="pull-right"> -->
+            <?php
+                // Html::img('@web/img/logo/logo.png', ['width'=>'36','height'=>'36'])
+            ?>
+            <!-- <b> -->
+            <?php
+                // Yii::$app->name 
+            ?> 
+<!--         </b></p>
     </div>
-</footer>
+</footer> -->
 
 <?php $this->endBody() ?>
 </body>

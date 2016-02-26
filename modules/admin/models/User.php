@@ -1,0 +1,102 @@
+<?php
+
+namespace app\modules\admin\models;
+ 
+use yii\helpers\ArrayHelper;
+use app\modules\user\Module;
+use Yii;
+ 
+class User extends \app\modules\user\models\User
+{
+    const SCENARIO_ADMIN_CREATE = 'adminCreate';
+    const SCENARIO_ADMIN_UPDATE = 'adminUpdate';
+ 
+    public $newPassword;
+    public $newPasswordRepeat;
+    public $fullname;
+    public $file;
+ 
+    public function rules()
+    {
+        return ArrayHelper::merge(parent::rules(), [
+            [['newPassword', 'newPasswordRepeat'], 'required', 'on' => self::SCENARIO_ADMIN_CREATE],
+            ['newPassword', 'string', 'min' => 6],
+            ['newPasswordRepeat', 'compare', 'compareAttribute' => 'newPassword'],
+            [['fullName', 'photo', 'file'], 'safe'],
+            [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 1],
+        ]);
+    }
+ 
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios[self::SCENARIO_ADMIN_CREATE] = ['surname', 'name', 'photo','patronymic', 'email', 'position', 'status', 'newPassword', 'newPasswordRepeat'];
+        $scenarios[self::SCENARIO_ADMIN_UPDATE] = ['surname', 'name', 'photo', 'patronymic', 'email', 'position', 'status', 'newPassword', 'newPasswordRepeat'];
+        return $scenarios;
+    }
+ 
+    public function attributeLabels()
+    {
+        return ArrayHelper::merge(parent::attributeLabels(), [
+            'newPassword' => Yii::t('app', 'USER_NEW_PASSWORD'),
+            'newPasswordRepeat' => Yii::t('app', 'USER_REPEAT_PASSWORD'),
+        ]);
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if (!empty($this->newPassword)) {
+                $this->setPassword($this->newPassword);
+
+                $first_name = mb_substr($this->name,0,1, 'UTF-8');
+                $last_name = mb_substr($this->name,1);
+                $first_name = mb_strtoupper($first_name, 'UTF-8');
+                $last_name = mb_strtolower($last_name, 'UTF-8');
+                $this->name = $first_name.$last_name;
+
+                $first_surname = mb_substr($this->surname,0,1, 'UTF-8');
+                $last_surname = mb_substr($this->surname,1);
+                $first_surname = mb_strtoupper($first_surname, 'UTF-8');
+                $last_surname = mb_strtolower($last_surname, 'UTF-8');
+                $this->surname = $first_surname.$last_surname;
+
+                $first_patronymic = mb_substr($this->patronymic,0,1, 'UTF-8');
+                $last_patronymic = mb_substr($this->patronymic,1);
+                $first_patronymic = mb_strtoupper($first_patronymic, 'UTF-8');
+                $last_patronymic = mb_strtolower($last_patronymic, 'UTF-8');
+                $this->patronymic = $first_patronymic.$last_patronymic;
+
+                // $this->fullname=$this->surname . ' ' . $this->name . ' ' . $this->patronymic;
+                // $this->shortname=$this->surname . ' ' . mb_substr($this->name,0,1,'UTF-8') . '.' . mb_substr($this->patronymic,0,1,'UTF-8') . '.';
+                $this->username=$this->surname.mb_substr($this->name,0,1,'UTF-8').mb_substr($this->patronymic,0,1,'UTF-8');
+            }
+            else {
+                $first_name = mb_substr($this->name,0,1, 'UTF-8');
+                $last_name = mb_substr($this->name,1);
+                $first_name = mb_strtoupper($first_name, 'UTF-8');
+                $last_name = mb_strtolower($last_name, 'UTF-8');
+                $this->name = $first_name.$last_name;
+
+                $first_surname = mb_substr($this->surname,0,1, 'UTF-8');
+                $last_surname = mb_substr($this->surname,1);
+                $first_surname = mb_strtoupper($first_surname, 'UTF-8');
+                $last_surname = mb_strtolower($last_surname, 'UTF-8');
+                $this->surname = $first_surname.$last_surname;
+
+                $first_patronymic = mb_substr($this->patronymic,0,1, 'UTF-8');
+                $last_patronymic = mb_substr($this->patronymic,1);
+                $first_patronymic = mb_strtoupper($first_patronymic, 'UTF-8');
+                $last_patronymic = mb_strtolower($last_patronymic, 'UTF-8');
+                $this->patronymic = $first_patronymic.$last_patronymic;
+
+                // $this->fullname=$this->surname . ' ' . $this->name . ' ' . $this->patronymic;
+                // $this->shortname=$this->surname . ' ' . mb_substr($this->name,0,1,'UTF-8') . '.' . mb_substr($this->patronymic,0,1,'UTF-8') . '.';
+                $this->username=$this->surname.mb_substr($this->name,0,1,'UTF-8').mb_substr($this->patronymic,0,1,'UTF-8');
+                // $this->photo = $this->surname;
+            }
+            return true;
+        }
+        return false;
+    }
+}

@@ -30,7 +30,22 @@ use dosamigos\tinymce\TinyMce;
     
     <?= $form->field($model, 'position', ['template'=>' <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-briefcase"></span></span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'position' )]) ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'description')->widget(TinyMce::className(), [
+    'options' => ['rows' => 10, 'cols' => 20],
+    'language' => 'ru',
+    'clientOptions' => [
+        'plugins' => [
+            "advlist autolink lists link charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime media table contextmenu paste"
+        ],
+        'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+    ]
+]);?>
+
+    <?php
+        // $form->field($model, 'description')->textarea(['rows' => 6]) 
+    ?>
     
     <?php 
     // $form->field($model, 'description')->widget(TinyMce::className(), [

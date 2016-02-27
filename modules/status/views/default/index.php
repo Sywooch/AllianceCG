@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="css/queryLoader.css" type="text/css" />
 <script type='text/javascript' src='js/queryLoader.js'></script>
 
-<meta http-equiv="Refresh" content="15" />
+<!-- <meta http-equiv="Refresh" content="15" /> -->
 
 <?php
 

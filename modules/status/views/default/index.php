@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="css/queryLoader.css" type="text/css" />
 <script type='text/javascript' src='js/queryLoader.js'></script>
 
-<!-- <meta http-equiv="Refresh" content="15" /> -->
+<meta http-equiv="Refresh" content="15" />
 
 <?php
 
@@ -65,7 +65,14 @@ $cars = new SqlDataProvider([
                 </h2>
 
                 <h2>
-                    <?= Yii::$app->formatter->asTime('now', 'php:H:i:s'); ?>
+                    <?php
+                        // echo Yii::$app->formatter->asTime('now', 'php:H:i:s'); 
+                        // echo '<br/>';
+                        $formatter = new \yii\i18n\Formatter;
+                        $formatter->dateFormat = 'php:H:i:s';
+                        $formatter->timeZone = 'Europe/Minsk';
+                        echo $formatter->asTime('now');
+                    ?>
                 </h2>
             </div>
             <div class="col-lg-4" style="text-align: center">
@@ -171,6 +178,6 @@ $cars = new SqlDataProvider([
 <?php Pjax::end(); ?>
 
 
-// <script type='text/javascript'>
-// QueryLoader.init();
-// </script>
+<script type='text/javascript'>
+    QueryLoader.init();
+</script>

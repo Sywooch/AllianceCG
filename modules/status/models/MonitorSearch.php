@@ -6,13 +6,17 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\data\Sort;
-use app\modules\status\models\MonitorSearch;
+use app\modules\status\models\Statusmonitor;
 
 /**
  * StatusmonitorSearch represents the model behind the search form about `app\modules\status\models\Statusmonitor`.
  */
-class StatusmonitorSearch extends Statusmonitor
+class MonitorSearch extends Statusmonitor
 {
+
+
+    public $carstatus;
+
     /**
      * @inheritdoc
      */
@@ -43,7 +47,14 @@ class StatusmonitorSearch extends Statusmonitor
      */
     public function search($params)
     {
+
+        $time = new \DateTime('now');
+        $today = $time->format('Y-m-d');
+
+        // $query = Statusmonitor::find()->where('from = :today', [':today' => $today])->all();
         $query = Statusmonitor::find();
+            // ->where(['from' => Yii::$app->formatter->asDate('now')])
+            // ->all();
 
         $sort = new Sort([
             'defaultOrder' => ['id' => SORT_DESC],
@@ -96,4 +107,41 @@ class StatusmonitorSearch extends Statusmonitor
 
         return $dataProvider;
     }
+
+
+
+    public function getCarWorkStatus() 
+    {
+        $today = Yii::$app->getFormatter()->asDatetime(time());
+        if (strtotime($today) < strtotime($this->from)){
+            $carstatus = 'Ожидание';
+        }
+        elseif (strtotime($today) >= strtotime($this->from) && strtotime($today) < strtotime($this->to)) {
+            // print 'В работе';
+            $carstatus = 'В работе';
+        }
+        elseif (strtotime($today) >= strtotime($this->to)) {
+            // print 'Готово';
+            $carstatus = 'Готово';
+        }
+
+        return $carstatus;
+    }  
+
+    public function getFromDateFormat()
+    {
+        // $today = Yii::$app->getFormatter()->asDatetime(time());
+
+        // if (strtotime($today) <= strtotime($this->from)){
+        //     $df = 'datetime';
+        // }
+        // else
+        // {
+        //     $df = 'time';
+        // }
+
+        // return $df;        
+        return 'datetime';
+    }        
+
 }

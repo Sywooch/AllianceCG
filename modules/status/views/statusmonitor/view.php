@@ -36,13 +36,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?php
-// $tz = new DateTimeZone('Europe/Minsk');  
-// $formatter = \Yii::$app->formatter;
-// echo $formatter->asTime('2016-03-04 10:00:00');
-
-// $df = (Yii::$app->getFormatter()->asDate($model->from) < Yii::$app->getFormatter()->asDate(time()) || Yii::$app->getFormatter()->asDate($model->from) > Yii::$app->getFormatter()->asDate(time()) ) ? 'datetime' : 'time';
-// print $df;
-
+    // echo Yii::$app->formatter->asDate($model->from, 'php:yy-m-d')
+// echo time($model->from, '%y:%m:%d')
+    // echo $model->from('yyyy-MM-dd');
 ?>
 
 

@@ -61,7 +61,18 @@ class Statusmonitor extends \yii\db\ActiveRecord
             $percent = '0';
         }
         elseif (strtotime($today) >= strtotime($this->from) && strtotime($today) < strtotime($this->to)) {
-            $percent = '50';
+            // $percent = '50';
+
+            $curdate = '2016-02-27 21:00:00';
+            $datetime1 = $this->from;
+            $datetime2 = $this->to;
+            $diff1 = strtotime($datetime2) - strtotime($datetime1);
+            $diff2 = strtotime($curdate) - strtotime($datetime1);
+            $hours1 = floor($diff1 / 60/60);
+            $hours2 = floor($diff2 / 60/60);
+            
+            $percent = round(($hours2 / $hours1) * 100);
+
         }
         elseif (strtotime($today) >= strtotime($this->to)) {
             $percent = '100';

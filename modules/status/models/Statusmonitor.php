@@ -22,6 +22,7 @@ class Statusmonitor extends \yii\db\ActiveRecord
 
     public $carstatus;
     public $allname;
+    public $progress;
 
     const STATUS_FINISHED = 0;
     const STATUS_ATWORK = 1;
@@ -41,17 +42,67 @@ class Statusmonitor extends \yii\db\ActiveRecord
         if (strtotime($today) < strtotime($this->from)){
             $carstatus = 'Ожидание';
         }
-        elseif (strtotime($today) > strtotime($this->from) && strtotime($today) < strtotime($this->to)) {
+        elseif (strtotime($today) >= strtotime($this->from) && strtotime($today) < strtotime($this->to)) {
             // print 'В работе';
             $carstatus = 'В работе';
         }
-        elseif (strtotime($today) > strtotime($this->to)) {
+        elseif (strtotime($today) >= strtotime($this->to)) {
             // print 'Готово';
             $carstatus = 'Готово';
         }
 
         return $carstatus;
-    }
+    }  
+
+    public function getPercentStatusBar()
+    {
+        $today = Yii::$app->getFormatter()->asDatetime(time());
+        if (strtotime($today) < strtotime($this->from)){
+            $percent = '0';
+        }
+        elseif (strtotime($today) >= strtotime($this->from) && strtotime($today) < strtotime($this->to)) {
+            $percent = '50';
+        }
+        elseif (strtotime($today) >= strtotime($this->to)) {
+            $percent = '100';
+        }    
+
+        return $percent;        
+    } 
+
+    public function getFromDateFormat()
+    {
+        // $today = Yii::$app->getFormatter()->asDatetime(time());
+
+        // if (strtotime($today) <= strtotime($this->from)){
+        //     $df = 'datetime';
+        // }
+        // else
+        // {
+        //     $df = 'time';
+        // }
+
+        // return $df;      
+        $df = 'datetime';
+        return (string)$df;
+    }    
+
+
+    public function getColorStatusBar()
+    {
+        $today = Yii::$app->getFormatter()->asDatetime(time());
+        if (strtotime($today) < strtotime($this->from)){
+            $cssclass = 'progress-bar-warning';
+        }
+        elseif (strtotime($today) >= strtotime($this->from) && strtotime($today) < strtotime($this->to)) {
+            $cssclass = 'progress-bar-danger';
+        }
+        elseif (strtotime($today) >= strtotime($this->to)) {
+            $cssclass = 'progress-bar-success';
+        }    
+
+        return $cssclass;        
+    }        
 
     public function getUserNameById()
     {
@@ -91,6 +142,7 @@ class Statusmonitor extends \yii\db\ActiveRecord
             'to' => Module::t('module', 'STATUS_TO'),
             'responsible' => Module::t('module', 'STATUS_RESPONSIBLE'),
             'carstatus' => Module::t('module', 'STATUS_STATUS'),
+            'progress' => Module::t('module', 'STATUS_PROGRESS'),
         ];
     }
 }

@@ -10,6 +10,8 @@ use app\components\grid\ActionColumn;
 use app\components\grid\SetColumn;
 use app\components\grid\LinkColumn;
 use app\modules\status\Module;
+use yii\bootstrap\Progress;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\status\models\StatusmonitorSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -120,12 +122,21 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                     // 'contentOptions'=>['style'=>'width: 100px;'],
                 ],
-                // 'regnumber',
-                // 'from',
-                // 'to',
-                // 'responsible',
-                // 'status',    
-                // ['class' => 'yii\grid\ActionColumn'],
+                [
+                    'attribute' => 'progress',
+                    'content' => function($data) {
+                        return Progress::widget([
+                            // 'percent' => 60,
+                            'percent' => $data->getPercentStatusBar(),
+                            'label' => $data->getPercentStatusBar(),
+                            'barOptions' => [
+                                // 'class' => 'progress-bar-danger',
+                                'class' => $data->getColorStatusBar(),
+                            ],
+                        ]);
+                    },
+                    'contentOptions'=>['style'=>'width: 100px;'],
+                ],
                 [
                     'class' => ActionColumn::className(),
                     'contentOptions'=>['style'=>'width: 20px;'],

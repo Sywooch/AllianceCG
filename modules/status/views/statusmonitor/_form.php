@@ -28,7 +28,7 @@ use kartik\datetime\DateTimePicker;
         <?= Html::a('<span class="glyphicon glyphicon-floppy-remove"></span>  ' . Module::t('module', 'BUTTON_CANCEL'), ['/status/statusmonitor'], ['class' => 'btn btn-danger']) ?>
     </div>
 
-    <?= $form->field($model, 'regnumber')->widget(\yii\widgets\MaskedInput::className(), ['mask' => 'a999aa-999',]) ?>   
+    <?= $form->field($model, 'regnumber')->widget(\yii\widgets\MaskedInput::className(), ['mask' => 'a999aa-99',]) ?>   
 
 <div class="input-group">
 

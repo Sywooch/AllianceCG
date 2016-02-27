@@ -6,6 +6,7 @@ use app\modules\status\models\Statusmonitor;
 use app\modules\status\Module;
 use app\components\grid\SetColumn;
 use app\modules\admin\models\User;
+use yii\bootstrap\Progress;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\status\models\Statusmonitor */
@@ -31,15 +32,17 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
 <?php
-        $names = User::find()
-            ->where(['id' => $model->responsible])
-            ->all();
-            
-        foreach ($names as $key => $value) {
-            $mcname = $value->name . ' ' . $value->surname;
-            $value->allname = $mcname;
-            print $value->allname . '<br/>';
-        }
+
+?>
+
+<?php
+// $tz = new DateTimeZone('Europe/Minsk');  
+// $formatter = \Yii::$app->formatter;
+// echo $formatter->asTime('2016-03-04 10:00:00');
+
+// $df = (Yii::$app->getFormatter()->asDate($model->from) < Yii::$app->getFormatter()->asDate(time()) || Yii::$app->getFormatter()->asDate($model->from) > Yii::$app->getFormatter()->asDate(time()) ) ? 'datetime' : 'time';
+// print $df;
+
 ?>
 
 

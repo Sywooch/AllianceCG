@@ -5,7 +5,38 @@
 // $this->title = 'My Yii Application';
 $this->title = Yii::$app->name;;
 ?>
-<div class="site-index">
+
+<?=
+\dosamigos\highcharts\HighCharts::widget([
+    'clientOptions' => [
+        'chart' => [
+                'type' => 'pie'
+        ],
+        'title' => [
+             'text' => 'Fruit Consumption'
+             ],
+        'xAxis' => [
+            'categories' => [
+                'Apples',
+                'Bananas',
+                'Oranges'
+            ]
+        ],
+        'yAxis' => [
+            'title' => [
+                'text' => 'Fruit eaten'
+            ]
+        ],
+        'series' => [
+            ['name' => 'Jane', 'data' => [1, 0, 4]],
+            ['name' => 'John', 'data' => [5, 7, 3]]
+        ]
+    ]
+]);
+
+?>
+
+<!-- <div class="site-index">
 
     <div class="jumbotron">
         <h1>Congratulations!</h1>
@@ -51,4 +82,4 @@ $this->title = Yii::$app->name;;
         </div>
 
     </div>
-</div>
+</div> -->

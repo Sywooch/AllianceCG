@@ -13,6 +13,10 @@ use app\modules\status\models\Statusmonitor;
  */
 class StatusmonitorSearch extends Statusmonitor
 {
+
+
+    public $carstatus;
+
     /**
      * @inheritdoc
      */
@@ -96,4 +100,41 @@ class StatusmonitorSearch extends Statusmonitor
 
         return $dataProvider;
     }
+
+
+
+    public function getCarWorkStatus() 
+    {
+        $today = Yii::$app->getFormatter()->asDatetime(time());
+        if (strtotime($today) < strtotime($this->from)){
+            $carstatus = 'Ожидание';
+        }
+        elseif (strtotime($today) >= strtotime($this->from) && strtotime($today) < strtotime($this->to)) {
+            // print 'В работе';
+            $carstatus = 'В работе';
+        }
+        elseif (strtotime($today) >= strtotime($this->to)) {
+            // print 'Готово';
+            $carstatus = 'Готово';
+        }
+
+        return $carstatus;
+    }  
+
+    public function getFromDateFormat()
+    {
+        // $today = Yii::$app->getFormatter()->asDatetime(time());
+
+        // if (strtotime($today) <= strtotime($this->from)){
+        //     $df = 'datetime';
+        // }
+        // else
+        // {
+        //     $df = 'time';
+        // }
+
+        // return $df;        
+        return 'datetime';
+    }        
+
 }

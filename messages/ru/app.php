@@ -55,6 +55,7 @@
 
 	    // Администрирование / Amin 	/admin
 	    'ADMIN' => 'Администрирование',
+		'USER_ROLE' => 'Роль',
 
 	    // Администрирование - Пользователи/Admin - Users 	admin/users/index
 	    'ADMIN_USERS' => 'Пользователи',

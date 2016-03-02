@@ -59,6 +59,8 @@ use yii\widgets\ActiveForm;
         ];
         echo $form->field($model, 'position', ['template'=>'<div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-briefcase"></span></span>{input}</div>{error}'])->dropDownList($items,$params);
     ?>
+
+    <?=  $form->field($model, 'role', ['template'=>'<div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-briefcase"></span></span>{input}</div>{error}'])->dropDownList(User::getRolesArray(),['prompt'=>'-- ' . $model->getAttributeLabel( 'role' ) . ' --']); ?>
     
     <?php
     // $form->field($model, 'username')->textInput(['maxlength' => true])

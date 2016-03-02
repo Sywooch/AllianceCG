@@ -40,7 +40,11 @@ class User extends ActiveRecord implements IdentityInterface
 
     const STATUS_BLOCKED = 0;
     const STATUS_ACTIVE = 1;
-    // const STATUS_WAIT = 2;
+    
+    const ROLE_MANAGER = 'manager';
+    const ROLE_HEAD = 'head';
+    const ROLE_ADMIN = 'admin';
+    const ROLE_ROOT = 'root';
 
     // public function scenarios()
     // {
@@ -92,7 +96,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['surname', 'name', 'patronymic', 'photo', 'position'], 'string', 'max' => 255],
             // [['surname', 'name', 'patronymic','position', 'password'], 'required'],
             
-            [['surname', 'name', 'patronymic','position', 'email'], 'required'],
+            [['surname', 'name', 'patronymic','position', 'email', 'role'], 'required'],
                
             // [['surname', 'name', 'patronymic', 'company', 'department', 'position'], 'safe'],
             // ['username', 'required'],
@@ -104,7 +108,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['username', 'unique', 'targetClass' => self::className(), 'message' => Yii::t('app', 'ERROR_USERNAME_EXISTS')],
 
             // Username - type strind, min. symbol - 2, max. symbol - 255
-            [['username', 'avatar'], 'string', 'min' => 2, 'max' => 255],
+            [['username', 'avatar', 'role'], 'string', 'min' => 2, 'max' => 255],
  
             // Require field - Email
             // ['email', 'required'],
@@ -126,8 +130,9 @@ class User extends ActiveRecord implements IdentityInterface
 
             // Status value in function "getStatusesArray"
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
+            ['role', 'in', 'range' => array_keys(self::getRolesArray())],
             [['fullname', 'avatar'], 'safe'],
-            [['mcname'], 'safe'],
+            [['mcname', 'role'], 'safe'],
 
         ];
     }
@@ -162,6 +167,12 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return ArrayHelper::getValue(self::getStatusesArray(), $this->status);
     }
+
+    public function getRolesName()
+    {
+        return ArrayHelper::getValue(self::getRolesArray(), $this->role);
+    }
+
 
 
     public function getFullName()
@@ -223,6 +234,16 @@ class User extends ActiveRecord implements IdentityInterface
             // self::STATUS_WAIT => 'Ожидает подтверждения',
         ];
     }
+
+    public static function getRolesArray()
+    {
+        return [
+            self::ROLE_MANAGER => 'Менеджер',
+            self::ROLE_HEAD => 'Руководитель структурного подразделения',
+            self::ROLE_ADMIN => 'Администратор',
+            self::ROLE_ROOT => 'Суперпользователь',
+        ];
+    }    
 
     /**
      * @inheritdoc

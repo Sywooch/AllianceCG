@@ -4,14 +4,24 @@ $config = [
     'defaultRoute' => 'main/default/index',
     'components' => [
         'formatter' => [
-            // 'timeZone' => 'Europe/Minsk',
-            // 'timeZone' => 'UTC',
+            // 'timeZone' => 'Europe/Moscow',
+            // 'timeZone' => 'GMT',
+            'timeZone' => 'UTC',
             'dateFormat' => 'yyyy-MM-dd',
-            'timeFormat' => 'H:mm:ss',
+            'timeFormat' => 'php:H:i:s',
             'datetimeFormat' => 'yyyy-MM-dd H:mm',
             'decimalSeparator' => ',',
             'thousandSeparator' => ' ',
             'currencyCode' => 'EUR',
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => [
+                'manager',
+                'head',
+                'admin',
+                'root'
+            ],
         ],
         'user' => [
             // 'identityClass' => 'app\modules\user\models\User',

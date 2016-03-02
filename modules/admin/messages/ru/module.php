@@ -42,4 +42,6 @@
 		'ADMIN_POSITIONS_UPDATE' => 'Редактировать',
 		'ADMIN_POSITIONS_DELETE' => 'Удалить',
 		'ADMIN_POSITIONS_REALY_DELETE' => 'Удалить,',
+		'ADMIN_USER_DELETE_CONFIRM' => 'Удалить пользователя?',
+		'USER_ROLE' => 'Роль',
 	];

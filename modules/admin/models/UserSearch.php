@@ -30,6 +30,7 @@ class UserSearch extends Model
     public $date_to;
     public $photo;
     public $file;
+    public $role;
 
     public function rules()
     {
@@ -37,7 +38,7 @@ class UserSearch extends Model
             // [['id', 'created_at', 'updated_at', 'status'], 'integer'],
             // [['username', 'auth_key', 'email_confirm_token', 'password_hash', 'password_reset_token', 'email'], 'safe'],
             [['id', 'status'], 'integer'],
-            [['username', 'email', 'name', 'surname', 'patronymic', 'fullname', 'email', 'photo', 'position'], 'safe'],
+            [['username', 'email', 'name', 'surname', 'patronymic', 'fullname', 'email', 'photo', 'position', 'role'], 'safe'],
             [['date_from', 'date_to'], 'date', 'format' => 'php:Y-m-d'],
             [['fullname'], 'safe'],
             ['photo', 'safe'],
@@ -88,6 +89,7 @@ class UserSearch extends Model
                 'created_at',
                 'username',
                 'position',
+                'role',
                 'status',
                 'fullname' => [
                     'asc' => ['name' => SORT_ASC, 'surname' => SORT_ASC],

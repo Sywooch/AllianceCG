@@ -1,38 +1,55 @@
 <?php
 
+use yii\helpers\Html;
+use app\modules\status\models\Statusmonitor;
+
+
 /* @var $this yii\web\View */
 
 // $this->title = 'My Yii Application';
 $this->title = Yii::$app->name;;
 ?>
 
-<?=
-\dosamigos\highcharts\HighCharts::widget([
-    'clientOptions' => [
-        'chart' => [
-                'type' => 'pie'
-        ],
-        'title' => [
-             'text' => 'Fruit Consumption'
-             ],
-        'xAxis' => [
-            'categories' => [
-                'Apples',
-                'Bananas',
-                'Oranges'
-            ]
-        ],
-        'yAxis' => [
-            'title' => [
-                'text' => 'Fruit eaten'
-            ]
-        ],
-        'series' => [
-            ['name' => 'Jane', 'data' => [1, 0, 4]],
-            ['name' => 'John', 'data' => [5, 7, 3]]
-        ]
-    ]
-]);
+<?php
+
+// SELECT DISTINCT(`responsible`) AS manager, COUNT(`regnumber`) AS number  FROM `sk_statusmonitor` GROUP BY `responsible`
+// $sql = 'SELECT DISTINCT(`responsible`) AS manager, COUNT(`regnumber`) AS number  FROM `sk_statusmonitor` GROUP BY `responsible`; ';
+// $request = Statusmonitor::findBySql($sql)->all();
+
+// foreach ($request as $key => $value) {
+//     print $value['responsible'];
+// }
+
+?>
+
+
+<?php
+// \dosamigos\highcharts\HighCharts::widget([
+//     'clientOptions' => [
+//         'chart' => [
+//                 'type' => 'line'
+//         ],
+//         'title' => [
+//              'text' => 'Fruit Consumption'
+//              ],
+//         'xAxis' => [
+//             'categories' => [
+//                 'Apples',
+//                 'Bananas',
+//                 'Oranges'
+//             ]
+//         ],
+//         'yAxis' => [
+//             'title' => [
+//                 'text' => 'Fruit eaten'
+//             ]
+//         ],
+//         'series' => [
+//             ['name' => 'Jane', 'data' => [1, 0, 4]],
+//             ['name' => 'John', 'data' => [5, 7, 3]]
+//         ]
+//     ]
+// ]);
 
 ?>
 

@@ -19,10 +19,10 @@ class User extends \app\modules\user\models\User
     public function rules()
     {
         return ArrayHelper::merge(parent::rules(), [
-            [['newPassword', 'newPasswordRepeat'], 'required', 'on' => self::SCENARIO_ADMIN_CREATE],
+            [['newPassword', 'newPasswordRepeat', 'role'], 'required', 'on' => self::SCENARIO_ADMIN_CREATE],
             ['newPassword', 'string', 'min' => 6],
             ['newPasswordRepeat', 'compare', 'compareAttribute' => 'newPassword'],
-            [['fullName', 'photo', 'file'], 'safe'],
+            [['fullName', 'photo', 'file', 'role'], 'safe'],
             [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 1],
         ]);
     }
@@ -30,8 +30,8 @@ class User extends \app\modules\user\models\User
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios[self::SCENARIO_ADMIN_CREATE] = ['surname', 'name', 'photo','patronymic', 'email', 'position', 'status', 'newPassword', 'newPasswordRepeat'];
-        $scenarios[self::SCENARIO_ADMIN_UPDATE] = ['surname', 'name', 'photo', 'patronymic', 'email', 'position', 'status', 'newPassword', 'newPasswordRepeat'];
+        $scenarios[self::SCENARIO_ADMIN_CREATE] = ['surname', 'name', 'photo', 'role', 'patronymic', 'email', 'position', 'status', 'newPassword', 'newPasswordRepeat'];
+        $scenarios[self::SCENARIO_ADMIN_UPDATE] = ['surname', 'name', 'photo', 'role', 'patronymic', 'email', 'position', 'status', 'newPassword', 'newPasswordRepeat'];
         return $scenarios;
     }
  
@@ -40,6 +40,7 @@ class User extends \app\modules\user\models\User
         return ArrayHelper::merge(parent::attributeLabels(), [
             'newPassword' => Yii::t('app', 'USER_NEW_PASSWORD'),
             'newPasswordRepeat' => Yii::t('app', 'USER_REPEAT_PASSWORD'),
+            'role' => Yii::t('app', 'USER_ROLE'),
         ]);
     }
 

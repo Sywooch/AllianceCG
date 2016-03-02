@@ -1,18 +1,20 @@
 <?php
 
-namespace app\modules\admin\controllers;
+namespace app\modules\skoda\controllers;
 
 use Yii;
-use app\modules\admin\models\Positions;
-use app\modules\admin\models\PositionsSearch;
+use app\modules\skoda\models\Statusmonitor;
+use app\modules\skoda\models\StatusmonitorSearch;
+use app\modules\skoda\models\MonitorSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 
 /**
- * PositionsController implements the CRUD actions for Positions model.
+ * StatusmonitorController implements the CRUD actions for Statusmonitor model.
  */
-class PositionsController extends Controller
+class StatusmonitorController extends Controller
 {
     /**
      * @inheritdoc
@@ -26,16 +28,31 @@ class PositionsController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            // 'access' => [
+            //     'class' => AccessControl::className(),
+            //     'rules' => [
+            //         [
+            //             'allow' => true,
+            //             'actions'=>['error', 'monitor'],
+            //             'roles' => ['?'],
+            //         ],
+            //         [
+            //             'allow' => true,
+            //             'actions'=>['view', 'create', 'update', 'index', 'monitor', 'dashboard'],
+            //             'roles' => ['@'],
+            //         ],                  
+            //     ],
+            // ],            
         ];
     }
 
     /**
-     * Lists all Positions models.
+     * Lists all Statusmonitor models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PositionsSearch();
+        $searchModel = new StatusmonitorSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -44,8 +61,19 @@ class PositionsController extends Controller
         ]);
     }
 
+    public function actionMonitor()
+    { 
+        $searchModel = new MonitorSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('monitor', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);     
+    }    
+
     /**
-     * Displays a single Positions model.
+     * Displays a single Statusmonitor model.
      * @param integer $id
      * @return mixed
      */
@@ -57,13 +85,13 @@ class PositionsController extends Controller
     }
 
     /**
-     * Creates a new Positions model.
+     * Creates a new Statusmonitor model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Positions();
+        $model = new Statusmonitor();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -75,7 +103,7 @@ class PositionsController extends Controller
     }
 
     /**
-     * Updates an existing Positions model.
+     * Updates an existing Statusmonitor model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,7 +122,7 @@ class PositionsController extends Controller
     }
 
     /**
-     * Deletes an existing Positions model.
+     * Deletes an existing Statusmonitor model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -107,33 +135,18 @@ class PositionsController extends Controller
     }
 
     /**
-     * Finds the Positions model based on its primary key value.
+     * Finds the Statusmonitor model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Positions the loaded model
+     * @return Statusmonitor the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Positions::findOne($id)) !== null) {
+        if (($model = Statusmonitor::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-
-    public function actionMultipledelete()
-    {
-        $pk = Yii::$app->request->post('row_id');
-
-        foreach ($pk as $key => $value) 
-        {
-            $sql = "DELETE FROM sk_positions WHERE id = $value";
-            $query = Yii::$app->db->createCommand($sql)->execute();
-        }
-
-        return $this->redirect(['index']);
-
-    }
-
 }

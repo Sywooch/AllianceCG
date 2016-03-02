@@ -13,6 +13,29 @@ use app\modules\admin\Module;
 
 $this->title = Module::t('module', 'ADMIN_POSITIONS');
 $this->params['breadcrumbs'][] = $this->title;
+
+$this->registerJs(' 
+
+    $(document).ready(function(){
+    $(\'#MultipleDelete\').click(function(){
+            var PosId = $(\'#admin-positions-grid\').yiiGridView(\'getSelectedRows\');
+            if (PosId=="") {
+                alert("Нет отмеченных записей!", "Alert Dialog");
+            }
+            else if (confirm("Are you sure you want to delete this?")) {
+              $.ajax({
+                type: \'POST\',
+                url : \'/admin/positions/multipledelete\',
+                data : {row_id: PosId},
+                success : function() {
+                    alert("successfully!!!");
+                }
+              });
+            }
+    });
+    });', \yii\web\View::POS_READY);
+
+
 ?>
 
     <h1><span class="glyphicon glyphicon-briefcase" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
@@ -24,21 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('<span class="glyphicon glyphicon-plus"></span>  ' . Module::t('module', 'ADMIN_CREATE_POSITIONS'), ['create'], ['class' => 'btn btn-success']) ?>
         
         <?= Html::a('<span class="glyphicon glyphicon-refresh"></span>  ' . Module::t('module', 'ADMIN_USERS_REFRESH'), ['index'], ['class' => 'btn btn-primary', 'id' => 'refreshButton']) ?>
-        
-        <?= Html::a('<span class="glyphicon glyphicon-trash"></span>  ' . Module::t('module', 'ADMIN_USERS_DELETE'),'users/massdelete', [
-                'class' => 'btn btn-danger',
-                'title' => Module::t('module', 'Close'),
-                    'onclick'=>"$('#close').dialog('open');
-                    $.ajax({
-                    type     :'POST',
-                    cache    : false,
-                    url  : 'users/massdelete',
-                    success  : function(response) {
-                        $('#close').html(response);
-                    }
-                    });return false;",
-            ]);
-        ?>            
+
+        <?= Html::a('<span class="glyphicon glyphicon-trash"></span>  ' . Module::t('module', 'ADMIN_USERS_DELETE'), ['#'], ['class' => 'btn btn-danger', 'id' => 'MultipleDelete']) ?>         
     </p>
     <?= GridView::widget([
         'id' => 'admin-positions-grid',

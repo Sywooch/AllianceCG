@@ -1,0 +1,196 @@
+
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js'></script>
+<link rel="stylesheet" href="css/queryLoader.css" type="text/css" />
+<script type='text/javascript' src='js/queryLoader.js'></script>
+
+<meta http-equiv="Refresh" content="15" />
+
+<?php
+
+use app\components\grid\ActionColumn;
+use app\modules\skoda\models\Statusmonitor;
+use app\modules\skoda\models\MonitorSearch;
+use app\components\grid\SetColumn;
+use app\modules\user\models\User;
+use yii\widgets\ListView;
+use yii\widgets\Pjax;
+use yii\helpers\Html;
+use yii\data\ActiveDataProvider;
+use yii\grid\GridView;
+use app\modules\skoda\Module;
+use yii\data\SqlDataProvider;
+use yii\bootstrap\Progress;
+
+$this->title = Module::t('module', 'STATUSMONITOR_TITLE');
+
+
+// $script = <<< JS
+// $(document).ready(function() {
+//     setInterval(function(){ $("#refreshButton").click(); }, 120000);
+// });
+// JS;
+// $this->registerJs($script);
+
+
+// $mc_id_sql = 'SELECT responsible FROM `sk_statusmonitor` where DATE(`from`)=CURDATE() or DATE(`to`)=CURDATE();';
+// $mc_id_sql = 'SELECT responsible FROM `sk_statusmonitor` where DATE(`from`)=CURDATE() or DATE(`to`)=CURDATE();';
+// $sm = Statusmonitor::findBySql($mc_id_sql)->all();
+
+
+// foreach ($sm as $key => $value) {
+//     echo $value->responsible . '<br/>';
+// }
+
+// var_dump($sm);
+
+// $mc_data_sql = 'SELECT * FROM `sk_user` where id = '. $sm->responsible . ';';
+// $mc = User::findBySql($mc_data_sql)->all();
+
+
+// $listData = new ActiveDataProvider([
+//     'query' => User::find()->where(['id' => (string)$sm->responsible]),
+//     'pagination' => [
+//         'pageSize' => 20,
+//     ],
+// ]);
+
+// $cars = new SqlDataProvider([
+//     'sql' => 'SELECT * FROM `sk_statusmonitor` where DATE(`from`)=CURDATE() or DATE(`to`)=CURDATE();',
+//     'params' => [':author' => 'Arno Slatius'],
+// ]);
+
+?>
+
+<?php Pjax::begin(); ?>
+<?= Html::a("Refresh", ['index'], ['class' => 'btn btn-lg btn-primary', 'id' => 'refreshButton', 'style' => 'display: none']) ?>
+
+        <div class="row">
+            <div class="col-lg-4" style="text-align: center">
+                <h2>
+                    <?= Yii::$app->params['org'] . '' ?>
+                </h2>
+            </div>
+            <div class="col-lg-4" style="text-align: center">
+                <h2>
+                    <?= Yii::$app->formatter->asDate('now', 'php:d.m.Y'); ?>
+                </h2>
+
+                <h2>
+                    <?php
+                        $formatter = new \yii\i18n\Formatter;
+                        $formatter->dateFormat = 'php:H:i';
+                        $formatter->timeZone = 'Europe/Minsk';
+                        echo $formatter->asTime('now');
+                    ?>
+                </h2>
+            </div>
+            <div class="col-lg-4" style="text-align: center">
+                <h2>
+                    <?= Yii::$app->params['brand'] . '' ?>
+                </h2>
+                <!-- <h2> -->
+                    <?php // echo Html::img('@web/img/logo/logo.png', ['width'=>'70']) ?>
+                <!-- </h2> -->
+            </div>
+            </div><div class="row">
+            <div class="col-lg-12" style="text-align: center">
+                <h1><?= Module::t('module', 'WELCOME_MSG') ?> </h1>
+            </div>
+            <div class="col-lg-12" style="text-align: center; margin-left: 10%;">
+                    <?php
+
+                        $provider_top = new ActiveDataProvider([
+                                    'query' => User::find()->where(['position' => 'Мастер-консультант', 'status' => '1'])
+                                ]);                          
+
+                                echo ListView::widget([
+                                    'dataProvider' => $provider_top,
+                                    'layout' => '{items}',
+                                    'summary' => false,
+                                    'options' => [
+                                        'tag' => 'div',
+                                        'class' => 'tipochegi',
+                                        'id' => 'list-tipochegi',
+                                    ],
+                                    'itemView' => '_mc',
+                                ]);                             
+                             
+                        // }
+
+                    ?>
+            </div></div>
+        </div>
+
+<br/>
+
+<?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'summary' => "",
+        // 'showHeader' => false,
+        'columns' => [
+            [
+                'class' => 'yii\grid\SerialColumn',
+                'header' => '№',
+                'contentOptions'=>['style'=>'width: 20px;']
+            ],
+            [
+                'attribute'=>'regnumber',
+
+            ],
+            [
+                'attribute'=>'from',
+                'contentOptions'=>['style'=>'width: 200px;'],
+                'format' => MonitorSearch::getFromDateFormat(),
+
+            ],
+            [
+                'attribute'=>'to',
+                'contentOptions'=>['style'=>'width: 200px;'],
+                'format' => MonitorSearch::getFromDateFormat(),
+
+            ],
+            [
+                'class' => SetColumn::className(),
+                'attribute' => 'carstatus',
+                'filter' => false,
+                'format' => 'raw',    
+                'value' => function ($data) {
+                    return $data->getCarWorkStatus();
+                },
+                'contentOptions'=>['style'=>'width: 50px;'],
+                'cssCLasses' => [
+                        'Готово' => 'success',
+                        'В работе' => 'danger',
+                        'Ожидание' => 'warning',
+                    ],
+                'contentOptions'=>['style'=>'width: 60px;'],
+            ],
+            [
+                'attribute' => 'progress',
+                'content' => function($data) {
+                    return Progress::widget([
+                        // 'percent' => 60,
+                        'percent' => $data->getPercentStatusBar(),
+                        'label' => $data->getPercentStatusBar(),
+                        'barOptions' => [
+                            'class' => $data->getColorStatusBar(),
+                        ],
+                    ]);
+                },
+                'contentOptions'=>['style'=>'width: 300px;'],
+            ],
+        ],
+    ]); ?>
+
+<div class="jumbotron col-lg-5 col-lg-offset-3" style="margin-top: 1px">
+
+
+
+</div>
+
+<?php Pjax::end(); ?>
+
+
+<script type='text/javascript'>
+    // QueryLoader.init();
+</script>

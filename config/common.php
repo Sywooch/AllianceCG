@@ -16,7 +16,7 @@ return [
         'app\modules\admin\Bootstrap',
         'app\modules\main\Bootstrap',
         'app\modules\user\Bootstrap',
-        'app\modules\status\Bootstrap',
+        'app\modules\skoda\Bootstrap',
         ],
     'modules' => [
         'admin' => [
@@ -25,8 +25,8 @@ return [
         'main' => [
             'class' => 'app\modules\main\Module',
         ],
-        'status' => [
-            'class' => 'app\modules\status\Module',
+        'skoda' => [
+            'class' => 'app\modules\skoda\Module',
         ],
         'user' => [
             'class' => 'app\modules\user\Module',

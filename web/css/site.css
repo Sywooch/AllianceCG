@@ -151,6 +151,10 @@ a.desc:after {
     margin-top: -6%;
 }
 
+.statusmonitor-item {
+    float: left;
+}
+
 .positions-index {
     width: 75%;
     float: left;    
@@ -227,4 +231,8 @@ a.desc:after {
   -webkit-box-sizing: initial;
      -moz-box-sizing: content-box;
           box-sizing: border-box;
+}
+
+.col-lg-5 {
+    width: 50%;
 }

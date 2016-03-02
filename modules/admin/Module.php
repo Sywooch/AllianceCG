@@ -14,6 +14,8 @@ class Module extends \yii\base\Module
                 'rules' => [
                     [
                         'allow' => true,
+                        // 'actions'=>['index', 'create', 'update', 'view', 'delete', 'massdelete'],
+                        // 'actions'=>['*'],
                         'roles' => ['@'],
                     ],
                 ],

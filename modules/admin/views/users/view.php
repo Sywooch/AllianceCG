@@ -72,6 +72,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             // 'status',
             [
+                'attribute' => 'role',
+                'value' => $model->getRolesName(),
+            ],
+            [
                 'attribute' => 'status',
                 'value' => $model->getStatusName(),
             ],

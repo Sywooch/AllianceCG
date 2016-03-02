@@ -3,6 +3,7 @@
 // namespace app\components\grid;
 
 use app\modules\admin\models\User;
+use app\modules\user\models\User as Users;
 use kartik\date\DatePicker;
 use yii\helpers\Html;
 use yii\grid\GridView;
@@ -53,6 +54,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php
         // Pjax::begin();
+        // $roles = Yii::$app->authManager->getRoles();
+        // var_dump($roles);
+        // $userroles = Yii::$app->authManager->getRolesByUser('1');
+        // $userroles = Yii::$app->getAuthManager()->getRoles();
+        // $userroles = Yii::$app->authManager->roles;
+        // var_dump($userroles);
     ?>
 
     <?= GridView::widget([
@@ -112,6 +119,25 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'position',
                 'filter' => false,   
                 'contentOptions'=>['style'=>'width: 50px;'],
+            ],
+            // [
+            //     'attribute' => 'role',
+            //     'filter' => false,   
+            //     'contentOptions'=>['style'=>'width: 50px;'],
+            // ],
+            [
+                'class' => SetColumn::className(),
+                // 'value' => $data->getRolesArray(),
+                'filter' => false,
+                'attribute' => 'role',
+                'name' => 'role',
+                'contentOptions'=>['style'=>'width: 50px;'],
+                'cssCLasses' => [
+                    User::ROLE_MANAGER => 'default',
+                    User::ROLE_HEAD => 'success',
+                    User::ROLE_ADMIN => 'warning',
+                    User::ROLE_ROOT => 'danger',
+                ],
             ],
             [
                 'class' => SetColumn::className(),

@@ -54,14 +54,15 @@ AppAsset::register($this);
             false,
         !Yii::$app->user->isGuest ?
             ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_STATUS'), 'items' => [
-                ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_STATUS'), 'url' => ['/status/default/index']],
-                ['label' => '<span class="glyphicon glyphicon-user"></span> ' . Yii::t('app', 'STATUS_MANAGEMENT'), 'url' => ['/status/statusmonitor/index']],
+                ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_SHEDULER'), 'url' => ['/skoda/servicesheduler/index']],
+                ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'STATUS_MANAGEMENT'), 'url' => ['/skoda/statusmonitor/index']],
+                ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_STATUS'), 'url' => ['/skoda/statusmonitor/monitor']],
             ]] :
             false,
-        !Yii::$app->user->isGuest ?
+        Yii::$app->user->can('admin') ?
             ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_ADMIN'), 'items' => [
                 ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_ADMIN'), 'url' => ['/admin/default/index']],
-                ['label' => '<span class="glyphicon glyphicon-user"></span> ' . Yii::t('app', 'ADMIN_USERS'), 'url' => ['/admin/users/index']],
+                ['label' => '<span class="glyphicon glyphicon-user"></span> ' . Yii::t('app', 'ADMIN_USERS'), 'url' => ['/admin/users/index'], ],
                 ['label' => '<span class="glyphicon glyphicon-briefcase"></span> ' . Yii::t('app', 'ADMIN_POSITIONS'), 'url' => ['/admin/positions/index']],
             ]] :
             false,

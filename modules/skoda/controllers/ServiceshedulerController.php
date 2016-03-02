@@ -1,41 +1,38 @@
 <?php
 
-namespace app\modules\admin\controllers;
+namespace app\modules\skoda\controllers;
 
 use Yii;
-use app\modules\admin\models\Positions;
-use app\modules\admin\models\PositionsSearch;
+use app\modules\skoda\models\Servicesheduler;
+use app\modules\skoda\models\ServiceshedulerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PositionsController implements the CRUD actions for Positions model.
+ * ServiceshedulerController implements the CRUD actions for Servicesheduler model.
  */
-class PositionsController extends Controller
+class ServiceshedulerController extends Controller
 {
-    /**
-     * @inheritdoc
-     */
     public function behaviors()
     {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
                 ],
             ],
         ];
     }
 
     /**
-     * Lists all Positions models.
+     * Lists all Servicesheduler models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PositionsSearch();
+        $searchModel = new ServiceshedulerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +42,7 @@ class PositionsController extends Controller
     }
 
     /**
-     * Displays a single Positions model.
+     * Displays a single Servicesheduler model.
      * @param integer $id
      * @return mixed
      */
@@ -57,13 +54,13 @@ class PositionsController extends Controller
     }
 
     /**
-     * Creates a new Positions model.
+     * Creates a new Servicesheduler model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Positions();
+        $model = new Servicesheduler();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -75,7 +72,7 @@ class PositionsController extends Controller
     }
 
     /**
-     * Updates an existing Positions model.
+     * Updates an existing Servicesheduler model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,7 +91,7 @@ class PositionsController extends Controller
     }
 
     /**
-     * Deletes an existing Positions model.
+     * Deletes an existing Servicesheduler model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -107,33 +104,18 @@ class PositionsController extends Controller
     }
 
     /**
-     * Finds the Positions model based on its primary key value.
+     * Finds the Servicesheduler model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Positions the loaded model
+     * @return Servicesheduler the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Positions::findOne($id)) !== null) {
+        if (($model = Servicesheduler::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-
-    public function actionMultipledelete()
-    {
-        $pk = Yii::$app->request->post('row_id');
-
-        foreach ($pk as $key => $value) 
-        {
-            $sql = "DELETE FROM sk_positions WHERE id = $value";
-            $query = Yii::$app->db->createCommand($sql)->execute();
-        }
-
-        return $this->redirect(['index']);
-
-    }
-
 }

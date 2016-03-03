@@ -140,6 +140,12 @@ a.desc:after {
     float: left;
 }
 
+.servicesheduler-index {
+    width: 75%;
+    float: left;
+}
+
+
 .statusmonitor-index {
     width: 75%;
     float: left;
@@ -169,6 +175,12 @@ a.desc:after {
 }
 
 .user-search-form {
+    /* width: 40%; */
+    float: right;
+    margin-top: -6%;
+}
+
+.servicesheduler-search-form {
     /* width: 40%; */
     float: right;
     margin-top: -6%;

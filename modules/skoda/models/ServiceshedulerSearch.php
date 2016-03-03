@@ -12,6 +12,12 @@ use app\modules\skoda\models\Servicesheduler;
  */
 class ServiceshedulerSearch extends Servicesheduler
 {
+
+    public $date_from;
+    public $date_to;
+    public $events;
+    public $tasks;
+
     /**
      * @inheritdoc
      */
@@ -20,6 +26,8 @@ class ServiceshedulerSearch extends Servicesheduler
         return [
             [['id'], 'integer'],
             [['responsible'], 'string'],
+            [['date_from', 'date_to'], 'safe'],
+            // [['date_from', 'date_to'], 'date', 'format' => 'php:Y-m-d'],
             [['date'], 'safe'],
         ];
     }
@@ -56,11 +64,17 @@ class ServiceshedulerSearch extends Servicesheduler
             return $dataProvider;
         }
 
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'date' => $this->date,
-            'responsible' => $this->responsible,
-        ]);
+        // $query->andFilterWhere([
+        //     'id' => $this->id,
+        //     'date' => $this->date,
+        //     'responsible' => $this->responsible,
+        // ]);
+
+        $query
+            ->andFilterWhere(['like', 'responsible', $this->responsible])
+            ->andFilterWhere(['>=', 'date', $this->date_from ? strtotime($this->date_from) : null])
+            ->andFilterWhere(['<=', 'date', $this->date_to ? strtotime($this->date_to) : null])
+            ->andFilterWhere(['like', 'date', $this->date]);
 
         return $dataProvider;
     }

@@ -14,6 +14,10 @@ use app\modules\skoda\Module;
  */
 class Servicesheduler extends \yii\db\ActiveRecord
 {
+
+    public $date_from;
+    public $date_to;
+
     /**
      * @inheritdoc
      */
@@ -30,6 +34,9 @@ class Servicesheduler extends \yii\db\ActiveRecord
         return [
             [['date', 'responsible'], 'required'],
             [['date'], 'safe'],
+            [['responsible'], 'safe'],
+            [['date_from', 'date_to'], 'safe'],
+            [['date'], 'unique'],
             [['responsible'], 'string']
         ];
     }
@@ -45,4 +52,14 @@ class Servicesheduler extends \yii\db\ActiveRecord
             'responsible' => Module::t('module', 'WORKSHEDULER_RESPONSIBLE'),
         ];
     }
+
+
+    // public function beforeSave($insert)
+    // {
+    //     if (parent::beforeSave($insert)) {
+            
+    //     }
+    //     return false;
+    // }
+
 }

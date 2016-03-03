@@ -35,9 +35,25 @@ class ServiceshedulerController extends Controller
         $searchModel = new ServiceshedulerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $events = Servicesheduler::find()->all();
+
+        $tasks = [];
+        foreach ($events as $eve) {
+            $event = new \yii2fullcalendar\models\Event();
+            $event->id = $eve->id;
+            $event->start = $eve->date.'T00:00:01';
+            $event->end = $eve->date.'T23:59:59';
+            $event->title = $eve->responsible;
+            $event->backgroundColor = '#4ba82e';
+            // $event->dayClick = 'http://google.com';
+            $event->allDay = true;
+            $tasks[] = $event;
+        }
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'events' => $tasks, 
         ]);
     }
 

@@ -83,7 +83,6 @@ $this->params['breadcrumbs'][] = $this->title;
 // echo $today;
 // $programs = Programs::find()->where(['>=', 'close_date', $today])->all();
 
-
 ?>
 
 

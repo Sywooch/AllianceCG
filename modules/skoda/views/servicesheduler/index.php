@@ -10,16 +10,21 @@ use app\modules\skoda\Module;
 /* @var $searchModel app\modules\skoda\models\ServiceshedulerSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Serviceshedulers');
+$this->title = Module::t('module', 'SERVICESHEDULER_INDEX');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="servicesheduler-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+<h1><span class="glyphicon glyphicon-wrench" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
+    
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+<div class="servicesheduler-index center-block">
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Servicesheduler'), ['create'], ['class' => 'btn btn-success']) ?>
+    <p style="text-align: right">
+
+        <?= Html::a('<span class="glyphicon glyphicon-plus"></span>  ' . Module::t('module', 'STATUS_CREATE'), ['create'], ['class' => 'btn btn-success']) ?>
+        
+        <?= Html::a('<span class="glyphicon glyphicon-refresh"></span>  ' . Module::t('module', 'STATUS_REFRESH'), ['index'], ['class' => 'btn btn-primary', 'id' => 'refreshButton']) ?>
+
     </p>
 
     <div class="servicesheduler-tabs">
@@ -32,7 +37,9 @@ echo Tabs::widget([
             'content' => $this->render('_calendar', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
+                'events' => $events, 
             ]),
+            'active' => true
         ],
         [
             'label' => Module::t('module', 'SERVICESHEDULER_TABLE'),
@@ -41,7 +48,6 @@ echo Tabs::widget([
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]),
-            'active' => true
         ],
     ]
 ]);    

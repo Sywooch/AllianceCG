@@ -140,13 +140,13 @@ $this->title = Module::t('module', 'STATUSMONITOR_TITLE');
             [
                 'attribute'=>'from',
                 'contentOptions'=>['style'=>'width: 200px;'],
-                'format' => MonitorSearch::getFromDateFormat(),
+                'format' => 'time',
 
             ],
             [
                 'attribute'=>'to',
                 'contentOptions'=>['style'=>'width: 200px;'],
-                'format' => MonitorSearch::getFromDateFormat(),
+                'format' => 'time',
 
             ],
             [

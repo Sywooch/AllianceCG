@@ -16,6 +16,7 @@ class MonitorSearch extends Statusmonitor
 
 
     public $carstatus;
+    public $curdatetime;
 
     /**
      * @inheritdoc
@@ -59,18 +60,44 @@ class MonitorSearch extends Statusmonitor
 
         // $query = Statusmonitor::find()->where('from = :today', [':today' => $today])->all();
         $time = new \DateTime('now');
-        $today = $time->format('Y-m-d');
+        $begin = $time->format('Y-m-d 00:00:00');
+        $end = $time->format('Y-m-d 23:59:59');
 
-        $query = Statusmonitor::find();
-            // ->where(['>=', 'from', $today])
-            // ->all();
-            // ->where(['from' => Yii::$app->formatter->asDate('now')])
-            // ->all();
+
+        // $yesterday = new \yii\db\Expression("NOW() - INTERVAL 1 DAY");
+        // $today_from = $time->format('Y-m-d 00:00:01');
+        // $today_to = $time->format('Y-m-d 23:29:59');
+
+        // $query = Statusmonitor::find()
+        //     ->where(['>=', 'from', $begin])
+        //     ->andwhere(['<=', 'from', $end]);
+
+
+        $query = Statusmonitor::find()
+            ->where(['and',
+                    ['>=', 'from', $begin],
+                    ['<=', 'from', $end],
+                ])
+            ->orwhere(['and',                    
+                    ['>=', 'to', $begin],
+                    ['<=', 'to', $end]
+            ]);
+
+
+
+        // $query = Statusmonitor::find()
+        //     ->where(['<=', 'from', $curdatetime])
+        //     ->andwhere(['>=', 'to', $curdatetime]);
+        // $query = Statusmonitor::find()
+        //     ->andwhere(['<=', 'from', $curdatetime])
+        //     ->andwhere(['>=', 'to', $curdatetime]);            
 
         $sort = new Sort([
-            'defaultOrder' => ['id' => SORT_DESC],
+            'defaultOrder' => ['to' => SORT_DESC],
             'attributes' => [
                 'id',
+                'from',
+                'to',
                 // 'regnumber',
                 // 'responsible',
                 // 'from' => [
@@ -118,6 +145,13 @@ class MonitorSearch extends Statusmonitor
 
         return $dataProvider;
     }
+
+    public function afterFind()
+    {
+        // $fromval = Yii::$app->formatter->asDate($this->from);
+        // $this->date = Yii::$app->formatter->asDatetime($this->date);
+        // $this->from = Yii::$app->formatter->asDate($this->from);
+    }    
 
     // public static  function getFromDateFormat()
     // {

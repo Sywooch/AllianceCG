@@ -18,7 +18,7 @@ use kartik\datetime\DateTimePicker;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <h1><span class="glyphicon glyphicon-piggy-bank" style='padding-right:10px;'></span><?= Module::t('module', 'STATUS_UPDATE_RN') . ' ' . $model->regnumber; ?></h1>
+    <h1><span class="glyphicon glyphicon-piggy-bank" style='padding-right:10px;'></span><?= $model->isNewRecord ? Module::t('module', 'STATUS_CREATE_RN') : Module::t('module', 'STATUS_UPDATE_RN') . ' ' . $model->regnumber; ?></h1>
 
 
     <div class="form-group" style="text-align: right">

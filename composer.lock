@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "31e1fd292e9166f58d9f55d0efde244f",
-    "content-hash": "c57cf8b7a0ccbf27eba52642b5d8d66a",
+    "hash": "466e8dea4540124e93a23015179c0c22",
+    "content-hash": "f60a70db09d913e8b5a9d0f3f62c1816",
     "packages": [
         {
             "name": "2amigos/yii2-date-time-picker-widget",
@@ -241,6 +241,61 @@
             ]
         },
         {
+            "name": "bower-asset/fullcalendar",
+            "version": "v2.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fullcalendar/fullcalendar.git",
+                "reference": "4a15df42d12edd56b6b9df24e18c90349c649f53"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fullcalendar/fullcalendar/zipball/4a15df42d12edd56b6b9df24e18c90349c649f53",
+                "reference": "4a15df42d12edd56b6b9df24e18c90349c649f53",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.7.1",
+                "bower-asset/moment": ">=2.5.0"
+            },
+            "require-dev": {
+                "bower-asset/bootstrap": "~3.2.0",
+                "bower-asset/jasmine-fixture": "~1.2.0",
+                "bower-asset/jasmine-jquery": "~2.0.3",
+                "bower-asset/jquery-mockjax": "~1.5.4",
+                "bower-asset/jquery-simulate": "~1.0.1",
+                "bower-asset/jquery-ui": ">=1.11.1",
+                "bower-asset/moment-timezone": "~0.2.1"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "dist/fullcalendar.js",
+                    "dist/fullcalendar.css"
+                ],
+                "bower-asset-ignore": [
+                    "*",
+                    "**/.*",
+                    "!/dist/**",
+                    "!/README.*",
+                    "!/LICENSE.*",
+                    "!/CHANGELOG.*",
+                    "!/CONTRIBUTING.*"
+                ]
+            },
+            "license": {
+                "type": "MIT",
+                "url": "https://github.com/fullcalendar/fullcalendar/blob/master/LICENSE.txt"
+            },
+            "description": "Full-sized drag & drop event calendar",
+            "keywords": [
+                "calendar",
+                "event",
+                "full-sized",
+                "jquery-plugin"
+            ]
+        },
+        {
             "name": "bower-asset/highcharts-release",
             "version": "v4.1.4",
             "source": {
@@ -406,6 +461,43 @@
                 "mask",
                 "plugins"
             ]
+        },
+        {
+            "name": "bower-asset/moment",
+            "version": "2.11.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/moment/moment.git",
+                "reference": "dd9cff0104c0dc3f114f54107397c59920e764cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moment/moment/zipball/dd9cff0104c0dc3f114f54107397c59920e764cc",
+                "reference": "dd9cff0104c0dc3f114f54107397c59920e764cc",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "moment.js",
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "benchmarks",
+                    "bower_components",
+                    "meteor",
+                    "node_modules",
+                    "scripts",
+                    "tasks",
+                    "test",
+                    "component.json",
+                    "composer.json",
+                    "CONTRIBUTING.md",
+                    "ender.js",
+                    "Gruntfile.js",
+                    "Moment.js.nuspec",
+                    "package.js",
+                    "package.json"
+                ]
+            }
         },
         {
             "name": "bower-asset/punycode",
@@ -728,22 +820,27 @@
         },
         {
             "name": "kartik-v/yii2-widget-datepicker",
-            "version": "v1.3.7",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-datepicker.git",
-                "reference": "ff5a97576c49a72e0480f135d9e7ce1a18c788e6"
+                "reference": "bc22b97c342f9cbea25e5eee6ce7312ed0561cbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/ff5a97576c49a72e0480f135d9e7ce1a18c788e6",
-                "reference": "ff5a97576c49a72e0480f135d9e7ce1a18c788e6",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/bc22b97c342f9cbea25e5eee6ce7312ed0561cbd",
+                "reference": "bc22b97c342f9cbea25e5eee6ce7312ed0561cbd",
                 "shasum": ""
             },
             "require": {
                 "kartik-v/yii2-krajee-base": "~1.7"
             },
             "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "kartik\\date\\": ""
@@ -773,7 +870,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-01-10 15:14:17"
+            "time": "2016-02-28 17:19:12"
         },
         {
             "name": "kartik-v/yii2-widget-datetimepicker",
@@ -823,6 +920,55 @@
                 "yii2"
             ],
             "time": "2016-01-10 12:18:38"
+        },
+        {
+            "name": "philippfrenzel/yii2fullcalendar",
+            "version": "2.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/philippfrenzel/yii2fullcalendar.git",
+                "reference": "7b6d4f94e0a050ef3dcb013270207b49c27a9e56"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/philippfrenzel/yii2fullcalendar/zipball/7b6d4f94e0a050ef3dcb013270207b49c27a9e56",
+                "reference": "7b6d4f94e0a050ef3dcb013270207b49c27a9e56",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/fullcalendar": "2.*",
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-jui": "*"
+            },
+            "require-dev": {
+                "codeception/codeception": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "yii2fullcalendar\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Philipp Frenzel",
+                    "email": "philipp@frenzel.net",
+                    "homepage": "http://www.frenzel.net/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Yii2 fullcalendar Widgets",
+            "homepage": "http://www.frenzel.net/",
+            "keywords": [
+                "fullcalendar",
+                "yii2"
+            ],
+            "time": "2015-12-28 07:25:32"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -876,6 +1022,52 @@
                 "mailer"
             ],
             "time": "2015-06-06 14:19:39"
+        },
+        {
+            "name": "thiagotalma/yii2-fullcalendar",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thiagotalma/yii2-talma-fullcalendar-widget.git",
+                "reference": "f83c2766fc018b562e8378d3098830a485c4ee29"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thiagotalma/yii2-talma-fullcalendar-widget/zipball/f83c2766fc018b562e8378d3098830a485c4ee29",
+                "reference": "f83c2766fc018b562e8378d3098830a485c4ee29",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-jui": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "talma\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Thiago Talma",
+                    "email": "thiago@thiagomt.com",
+                    "homepage": "http://www.thiagomt.com/"
+                }
+            ],
+            "description": "Widget for Yii Framework 2.0 to use FullCalendar",
+            "homepage": "https://github.com/thiagotalma/yii2-talma-fullcalendar-widget",
+            "keywords": [
+                "calendar",
+                "extension",
+                "fullcalendar",
+                "widget",
+                "yii2"
+            ],
+            "time": "2014-11-07 11:32:05"
         },
         {
             "name": "tinymce/tinymce",
@@ -1524,7 +1716,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "kartik-v/yii2-widget-datepicker": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

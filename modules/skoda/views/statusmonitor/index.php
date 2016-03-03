@@ -66,7 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
 // else {
 //     echo 'unknown role!';
 // }    
-
+echo Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
     ?>
 
     <?php Pjax::begin(); ?>    
@@ -103,6 +103,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     'filter' => false,                    
                     'contentOptions'=>['style'=>'width: 130px;'],                    
                 ],
+                // [
+                //     'attribute' => 'worker',
+                //     'filter' => false,
+                //     'format' => 'raw',    
+                //     'value' => function ($data) {
+                //         return $data->getResponsible();
+                //     },
+
+                // ],
                 [
                     'attribute' => 'responsible',
                     'filter' => false,

@@ -9,6 +9,7 @@
 	    'NAV_PROFILE' => 'Профиль',
 	    'NAV_LOGOUT' => 'Выход',
 	    'NAV_ADMIN' => 'Администрирование',
+	    'NAV_SHEDULER' => 'График смен',
 	 	
 	 	// Регистрация/SignUp
 	 	'TITLE_SIGNUP' => 'Регистрация',

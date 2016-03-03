@@ -2,23 +2,61 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\date\DatePicker;
+use app\modules\skoda\Module;
+use app\modules\admin\models\User;
+use app\modules\user\models\User as UserName;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\skoda\models\Servicesheduler */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="servicesheduler-form">
+<div class="user-form center-block">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'date')->textInput() ?>
 
-    <?= $form->field($model, 'responsible')->textInput() ?>
+    <h1><span class="glyphicon glyphicon-piggy-bank" style='padding-right:10px;'></span><?= $model->isNewRecord ? Module::t('module', 'STATUS_CREATE') : Module::t('module', 'STATUS_UPDATE_RN') . ' ' . $model->date; ?></h1>
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    <div class="form-group" style="text-align: right">
+        <?= Html::submitButton($model->isNewRecord ? '<span class="glyphicon glyphicon-floppy-saved"></span>  ' . Module::t('module', 'STATUS_CREATE') : '<span class="glyphicon glyphicon-pencil"></span>  ' . Module::t('module', 'STATUS_UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-floppy-remove"></span>  ' . Module::t('module', 'BUTTON_CANCEL'), ['/skoda/servicesheduler'], ['class' => 'btn btn-danger']) ?>
     </div>
+
+    <?php 
+		echo DatePicker::widget([
+		    'name' => Module::t('module', 'WORKSHEDULER_DATE'), 
+    		'model' => $model, 
+    		'attribute' => 'date',
+		    'options' => ['placeholder' => $model->getAttributeLabel( 'date' )],
+		    'pluginOptions' => [
+		        'format' => 'yyyy-mm-dd',
+		        'todayHighlight' => true
+		    ]
+		]);   
+
+        echo '<br/>';
+
+        $mc = User::findAll([
+                'position' => 'Мастер-консультант',
+                ]            
+            );
+
+        foreach ($mc as $key => $value) {
+            $mcname = $value->name . ' ' . $value->surname;
+            $value->allname = $mcname;
+        }
+    
+        $items = ArrayHelper::map($mc,'allname','allname');
+        $params = [
+            'prompt' => '-- ' . $model->getAttributeLabel( 'responsible' ) . ' --',
+            'inline' => false,
+        ];
+
+        echo $form->field($model, 'responsible')->radioList($items,$params,['class' => 'form-control input-sm radio', 'itemOptions' => ['class' => 'radio']])
+    ?> 
 
     <?php ActiveForm::end(); ?>
 

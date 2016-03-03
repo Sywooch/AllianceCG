@@ -6,6 +6,7 @@ use Yii;
 use app\modules\skoda\Module;
 use app\modules\admin\models\User;
 use app\modules\skoda\models\Statusmonitor;
+use app\modules\skoda\models\Servicesheduler;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -25,6 +26,7 @@ class Statusmonitor extends \yii\db\ActiveRecord
     public $allname;
     public $progress;
     public $timeformat;
+    public $worker;
 
     const STATUS_FINISHED = 0;
     const STATUS_ATWORK = 1;
@@ -145,6 +147,18 @@ class Statusmonitor extends \yii\db\ActiveRecord
         }
 
     }
+
+    public function getResponsible()
+    {
+        $wcs = Servicesheduler::find()
+            ->where(['date' => $this->to])
+            ->all();
+
+        foreach ($wcs as $wc) {
+            $worker = $wc->responsible;
+            return $worker;
+        }
+    }    
 
     /**
      * @inheritdoc

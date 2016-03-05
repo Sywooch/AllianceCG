@@ -1,3 +1,8 @@
+
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js'></script>
+<link rel="stylesheet" href="/css/queryLoader.css" type="text/css" />
+<script type='text/javascript' src='/js/queryLoader.js'></script>
+
 <?php
 
 use yii\helpers\Html;
@@ -9,10 +14,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="admin-default-index center-block">
     <h1><?= Html::encode($this->title) ?></h1>
  
-    <p>
-        <?php // echo Html::a('<span class="glyphicon glyphicon-calendar"></span>  ' . Module::t('module', 'SERVICESHEDULER'), ['servicesheduler/index'], ['class' => 'btn btn-success']) ?>
+    <p style="text-align: right">
+        <?php echo Html::a('<span class="glyphicon glyphicon-calendar"></span>  ' . Module::t('module', 'SERVICESHEDULER'), ['servicesheduler/index'], ['class' => 'btn btn-success']) ?>
         
-        <?php // echo Html::a('<span class="glyphicon glyphicon-wrench"></span>  ' . Module::t('module', 'STATUSMONITOR'), ['statusmonitor/index'], ['class' => 'btn btn-success']) ?>
+        <?php echo Html::a('<span class="glyphicon glyphicon-wrench"></span>  ' . Module::t('module', 'STATUSMONITOR'), ['statusmonitor/index'], ['class' => 'btn btn-success']) ?>
     </p>    
     
 </div>
@@ -20,31 +25,62 @@ $this->params['breadcrumbs'][] = $this->title;
 <script src='/js/highcharts/highcharts.js'></script>
 <script>
 $(function () {
+
+        jQuery.extend({
+            getValues: function(url) {
+                var result = null;
+                $.ajax({
+                    url: url,
+                    type: 'get',
+                    dataType: 'json',
+                    async: false,
+                    success: function(data) {
+                        result = data;
+                    }
+                });
+               return result;
+            }
+        });
+
+        var myServerData = $.getValues("/src/skoda_statusmonitorgraph.php"); 
+
     $('#skoda').highcharts({
+        chart: {
+            type: 'column',
+            renderTo: 'container',
+            margin: 75,
+            options3d: {
+                enabled: true,
+                alpha: 15,
+                beta: 15,
+                depth: 50,
+                viewDistance: 25
+            }
+        },
         title: {
-            text: 'Monthly Average Temperature',
+            text: 'График нагрузки (текущий месяц)',
             x: -20 //center
         },
         subtitle: {
-            text: 'Source: WorldClimate.com',
+            text: 'ООО "СтрелаАвто"',
             x: -20
         },
+        plotOptions: {
+            column: {
+                depth: 25
+            }
+        },
         xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            categories: [],
+                labels: {
+                    style: { color: '#4ba82e' }
+            },
         },
         yAxis: {
             title: {
-                text: 'Temperature (°C)'
+                text: 'Кол-во автомобилей в день'
             },
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
-        },
-        tooltip: {
-            valueSuffix: '°C'
+            tickInterval: 1,
         },
         legend: {
             layout: 'vertical',
@@ -53,20 +89,30 @@ $(function () {
             borderWidth: 0
         },
         series: [{
-            name: 'Tokyo',
-            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-        }, {
-            name: 'New York',
-            data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-        }, {
-            name: 'Berlin',
-            data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-        }, {
-            name: 'London',
-            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+            name: 'Кол-во автомобилей в день',
+            data: myServerData,
+            color: '#4ba82e',
+            dataLabels: {
+                enabled: true,
+                rotation: -90,
+                color: '#FFFFFF',
+                align: 'right',
+                x: 4,
+                y: 10,
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif',
+                    textShadow: '0 0 3px black'
+                }
+            }
         }]
     });
 });
 </script>
 
-<div id="skoda" style="width:100%; height:300px;"></div>
+<div id="skoda" style="width:70%; height:300px;" align="center"></div>
+
+
+<script type='text/javascript'>
+    QueryLoader.init();
+</script>

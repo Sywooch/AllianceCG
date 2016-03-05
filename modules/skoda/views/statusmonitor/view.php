@@ -7,6 +7,7 @@ use app\modules\skoda\Module;
 use app\components\grid\SetColumn;
 use app\modules\admin\models\User;
 use yii\bootstrap\Progress;
+use app\modules\skoda\models\Servicesheduler;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\skoda\models\Statusmonitor */
@@ -32,69 +33,29 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
 <?php
+    // $to_date = Yii::$app->formatter->asDate($model->to, 'yyyy-MM-dd');
+    // $wcs = Servicesheduler::find()
+    //     ->where(['date' => $to_date])
+    //     ->one();
+
+    // $exc = new \yii\web\NotFoundHttpException('User not found');
+    // $request = !empty($wcs->responsible) ? 'Yes' : $exc;
+    // echo $request;
 
 ?>
-
-<?php
-    // echo Yii::$app->formatter->asDate($model->from, 'php:yy-m-d')
-// echo time($model->from, '%y:%m:%d')
-    // echo $model->from('yyyy-MM-dd');
-    // // 
-    // $formatter = new \yii\i18n\Formatter;
-    // $formatter->timeZone = 'UTC';
-
-// echo date_default_timezone_get() . '<br/>';
-// echo Yii::$app->formatter->asDateTime('2014-01-01 10:24:00', 'long') . '<br/>';
-// echo date() . '<br/>';
-
-    // echo Yii::$app->getFormatter()->asDatetime(time()) . '<br/>';
-    // 
-    // echo Yii::$app->formatter->asDatetime(date('Y-m-d h:i:s')) . '<br/>';
-    // echo Yii::$app->getFormatter()->asDatetime($model->from) . '<br/>';
-    // echo Yii::$app->getFormatter()->asDatetime($model->to) . '<br/>';
-
-
-
-        // $today = Yii::$app->getFormatter()->asDatetime(time());
-        
-        // $today = Yii::$app->formatter->asDatetime(date('Y-m-d H:i:s'));
-        // echo $today . '<br/>';
-
-        // if (strtotime($today) < strtotime($model->from)){
-        //     $percent = '0';
-        // }
-        // elseif (strtotime($today) >= strtotime($model->from) && strtotime($today) < strtotime($model->to)) {
-        //     $datetime1 = $model->from;
-        //     $datetime2 = $model->to;
-        //     $diff1 = strtotime($datetime2) - strtotime($datetime1);
-        //     $diff2 = strtotime($today) - strtotime($datetime1);            
-        //     $percent = intval(($diff2 / $diff1) * 100);
-
-        // }
-        // elseif (strtotime($today) >= strtotime($model->to)) {
-        //     $percent = '100';
-        // }    
-
-        // echo $percent;    
-
-
-// $time = new \DateTime('now');
-// $today = $time->format('Y-m-d');
-// echo $today;
-// $programs = Programs::find()->where(['>=', 'close_date', $today])->all();
-
-?>
-
-
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'from',
             'to',
             // 'responsible',
+            // [
+            //     'attribute' => 'responsible',
+            //     'value' => $model->getUserNameById(),
+            // ],
             [
-                'attribute' => 'responsible',
-                'value' => $model->getUserNameById(),
+                'attribute' => 'worker',
+                'value' => $model->getResponsible(),
             ],
             [
                     'class' => SetColumn::className(),

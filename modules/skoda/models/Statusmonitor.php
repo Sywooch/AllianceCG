@@ -8,6 +8,7 @@ use app\modules\admin\models\User;
 use app\modules\skoda\models\Statusmonitor;
 use app\modules\skoda\models\Servicesheduler;
 use yii\helpers\ArrayHelper;
+use app\components\validators\WorkshedulerValidator;
 
 /**
  * This is the model class for table "{{%statusmonitor}}".
@@ -150,15 +151,16 @@ class Statusmonitor extends \yii\db\ActiveRecord
 
     public function getResponsible()
     {
+        $to_date = Yii::$app->formatter->asDate($this->to, 'yyyy-MM-dd');
         $wcs = Servicesheduler::find()
-            ->where(['date' => $this->to])
+            ->where(['date' => $to_date])
             ->all();
 
         foreach ($wcs as $wc) {
             $worker = $wc->responsible;
             return $worker;
         }
-    }    
+    }
 
     /**
      * @inheritdoc
@@ -169,6 +171,9 @@ class Statusmonitor extends \yii\db\ActiveRecord
             [['regnumber', 'responsible'], 'required'],
             // [['status'], 'integer'],
             [['from', 'to', 'regnumber', 'responsible'], 'safe'],
+            // ['to', WorkshedulerValidator::className()],
+            ['to', 'validateWorkshedulerTo'],
+            ['from', 'validateWorkshedulerFrom'],
             [['responsible', 'regnumber'], 'string', 'max' => 255],
         ];
     }
@@ -184,8 +189,41 @@ class Statusmonitor extends \yii\db\ActiveRecord
             'from' => Module::t('module', 'STATUS_FROM'),
             'to' => Module::t('module', 'STATUS_TO'),
             'responsible' => Module::t('module', 'STATUS_RESPONSIBLE'),
+            'worker' => Module::t('module', 'STATUS_RESPONSIBLE'),
             'carstatus' => Module::t('module', 'STATUS_STATUS'),
             'progress' => Module::t('module', 'STATUS_PROGRESS'),
         ];
     }
+
+    public function validateWorkshedulerTo($to, $params)
+    {
+            $to_date = Yii::$app->formatter->asDate($this->to, 'yyyy-MM-dd');
+            $from_date = Yii::$app->formatter->asDate($this->from, 'yyyy-MM-dd');
+            $wcs = Servicesheduler::find()
+                ->where(['date' => $to_date])
+                ->one();
+    
+            if(empty($wcs->responsible))                
+            {
+                // throw new \yii\web\NotFoundHttpException('User not found');
+                $this->addError('to', Yii::t('app', 'ERROR_WORKSHEDULER_DOES_NOT_EXIST_TO'));
+                // throw new \yii\web\Exception('hello world');
+            }
+    }
+
+    public function validateWorkshedulerFrom($from, $params)
+    {            
+            $from_date = Yii::$app->formatter->asDate($this->from, 'yyyy-MM-dd');
+            $wcs = Servicesheduler::find()
+                ->where(['date' => $from_date])
+                ->one();
+    
+            if(empty($wcs->responsible))                
+            {
+                // throw new \yii\web\NotFoundHttpException('User not found');
+                $this->addError('from', Yii::t('app', 'ERROR_WORKSHEDULER_DOES_NOT_EXIST_FROM'));
+                // throw new \yii\web\Exception('hello world');
+            }
+    }  
+
 }

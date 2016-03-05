@@ -6,8 +6,8 @@
 		'STATUS_DELETE' => 'Удалить',
 		'STATUS_RESET' => 'Сброс',
 		'STATUS_REGNUMBER' => 'Гос. Рег. №',
-		'STATUS_FROM' => 'Время начала',
-		'STATUS_TO' => 'Время окончания',
+		'STATUS_FROM' => 'Начало',
+		'STATUS_TO' => 'Окончание',
 		'STATUS_RESPONSIBLE' => 'Ответственный МК',
 		'STATUS_STATUS' => 'Статус',
 		'STATUS_TITLE' => 'Монитор',
@@ -31,4 +31,7 @@
 		'SERVICESHEDULER_SEARCH' => 'Поиск',
 		'SERVICESHEDULER_RESET' => 'Сброс',
 		'SERVICESHEDULER_CREATE' => 'Добавление',
+		'SERVICESHEDULER' => 'График смен',
+		'STATUSMONITOR' => 'Монитор готовности',
 	];
+	

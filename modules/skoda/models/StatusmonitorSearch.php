@@ -55,6 +55,7 @@ class StatusmonitorSearch extends Statusmonitor
                 'id',
                 'regnumber',
                 'responsible',
+                'worker',
                 'from' => [
                     'asc' => ['from' => SORT_ASC],
                     'desc' => ['from' => SORT_DESC],
@@ -74,7 +75,10 @@ class StatusmonitorSearch extends Statusmonitor
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => $sort,
+            'sort' => $sort,           
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
 
         $this->load($params);

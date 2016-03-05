@@ -107,6 +107,12 @@
 	    
 	    'GRID_RECORDS_SHOW ' => 'Записи',
 
+	    'ERROR_WORKSHEDULER_DOES_NOT_EXIST' => 'В справочнике "График смен" не назначен мастер-консультант на одну из указанных дат',
+	    'ERROR_WORKSHEDULER_DOES_NOT_EXIST_FROM' => 'В справочнике "График смен" не назначен мастер-консультант на дату начала работ',
+	    'ERROR_WORKSHEDULER_DOES_NOT_EXIST_TO' => 'В справочнике "График смен" не назначен мастер-консультант на дату окончания работ',
+	    'MASTER_CONSULTANT_DOES_NOT_EXIST_TODAY' => 'Необходимо назначить мастера-консультанта на текущую дату!',
+	    'CURRENT_MASTER_CONSULTANT' => 'Ответственный мастер-консультант',
+
 
 	    'HELLO {username}' => 'Здравствуйте, {username}!',
 	    'FOLLOW_TO_RESET_PASSWORD' => 'Для смены пароля пройдите по ссылке:',

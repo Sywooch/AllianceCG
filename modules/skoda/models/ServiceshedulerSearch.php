@@ -5,6 +5,7 @@ namespace app\modules\skoda\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\data\Sort;
 use app\modules\skoda\models\Servicesheduler;
 
 /**
@@ -52,8 +53,19 @@ class ServiceshedulerSearch extends Servicesheduler
     {
         $query = Servicesheduler::find();
 
+
+        $sort = new Sort([
+            'defaultOrder' => ['date' => SORT_DESC],
+            'attributes' => [
+                'id',
+                'date',
+                'responsible',
+            ],
+        ]);          
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => $sort,
         ]);
 
         $this->load($params);
@@ -72,8 +84,10 @@ class ServiceshedulerSearch extends Servicesheduler
 
         $query
             ->andFilterWhere(['like', 'responsible', $this->responsible])
-            ->andFilterWhere(['>=', 'date', $this->date_from ? strtotime($this->date_from) : null])
-            ->andFilterWhere(['<=', 'date', $this->date_to ? strtotime($this->date_to) : null])
+            ->andFilterWhere(['>=', 'date', $this->date_from])
+            ->andFilterWhere(['<=', 'date', $this->date_to])
+            // ->andFilterWhere(['>=', 'date', $this->date_from ? strtotime($this->date_from) : null])
+            // ->andFilterWhere(['<=', 'date', $this->date_to ? strtotime($this->date_to) : null])
             ->andFilterWhere(['like', 'date', $this->date]);
 
         return $dataProvider;

@@ -53,13 +53,4 @@ class Servicesheduler extends \yii\db\ActiveRecord
         ];
     }
 
-
-    // public function beforeSave($insert)
-    // {
-    //     if (parent::beforeSave($insert)) {
-            
-    //     }
-    //     return false;
-    // }
-
 }

@@ -26,17 +26,15 @@ use yii\helpers\ArrayHelper;
     </div>
 
     <?php 
-		echo DatePicker::widget([
-		    'name' => Module::t('module', 'WORKSHEDULER_DATE'), 
-    		'model' => $model, 
-    		'attribute' => 'date',
-		    'options' => ['placeholder' => $model->getAttributeLabel( 'date' )],
-		    'pluginOptions' => [
-		        'format' => 'yyyy-mm-dd',
-		        'todayHighlight' => true
-		    ]
-		]);   
-
+        echo $form->field($model, 'date', ['template' => "{input}\n{hint}\n{error}"])->widget(DatePicker::classname(),[
+              'options' => ['placeholder' => $model->getAttributeLabel( 'date' )],
+              'pluginOptions' => [
+                'autoclose'=>true,
+                'format' => 'yyyy-mm-dd',
+                'todayHighlight' => TRUE,
+            ],
+            ]);    
+            
         echo '<br/>';
 
         $mc = User::findAll([
@@ -55,7 +53,7 @@ use yii\helpers\ArrayHelper;
             'inline' => false,
         ];
 
-        echo $form->field($model, 'responsible')->radioList($items,$params,['class' => 'form-control input-sm radio', 'itemOptions' => ['class' => 'radio']])
+        echo $form->field($model, 'responsible', ['template'=>' {input}{error}'])->radioList($items,$params,['class' => 'form-control input-sm radio', 'itemOptions' => ['class' => 'radio']])
     ?> 
 
     <?php ActiveForm::end(); ?>

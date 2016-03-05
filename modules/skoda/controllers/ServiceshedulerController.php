@@ -50,6 +50,20 @@ class ServiceshedulerController extends Controller
             $tasks[] = $event;
         }
 
+        $today = Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
+        $wcs = Servicesheduler::find()
+            ->where(['date' => $today])
+            ->one();
+    
+        if(empty($wcs->responsible))                
+        {
+            \Yii::$app->getSession()->setFlash('danger', Yii::t('app', 'MASTER_CONSULTANT_DOES_NOT_EXIST_TODAY'));
+        }
+        else
+        {
+            \Yii::$app->getSession()->setFlash('success', Yii::$app->formatter->asDate($wcs->date, 'dd/MM/yyyy') . ' - ' . Yii::t('app', 'CURRENT_MASTER_CONSULTANT') .' - '. $wcs->responsible);
+        }        
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -118,6 +132,20 @@ class ServiceshedulerController extends Controller
 
         return $this->redirect(['index']);
     }
+
+    public function actionMultipledelete()
+    {
+        $pk = Yii::$app->request->post('row_id');
+
+        foreach ($pk as $key => $value) 
+        {
+            $sql = "DELETE FROM sk_servicesheduler WHERE id = $value";
+            $query = Yii::$app->db->createCommand($sql)->execute();
+        }
+
+        return $this->redirect(['index']);
+
+    }    
 
     /**
      * Finds the Servicesheduler model based on its primary key value.

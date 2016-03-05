@@ -10,6 +10,7 @@
 use app\components\grid\ActionColumn;
 use app\modules\skoda\models\Statusmonitor;
 use app\modules\skoda\models\MonitorSearch;
+use app\modules\skoda\models\Servicesheduler;
 use app\components\grid\SetColumn;
 use app\modules\user\models\User;
 use yii\widgets\ListView;
@@ -98,6 +99,11 @@ $this->title = Module::t('module', 'STATUSMONITOR_TITLE');
             </div>
             <div class="col-lg-12" style="text-align: center; margin-left: 10%;">
                     <?php
+                        // $to_date = Yii::$app->formatter->asDate($this->to, 'yyyy-MM-dd');
+
+                        // $provider_top = Servicesheduler::find()
+                        //     ->where(['date' => $to_date])
+                        //     ->all();
 
                         $provider_top = new ActiveDataProvider([
                                     'query' => User::find()->where(['position' => 'Мастер-консультант', 'status' => '1'])

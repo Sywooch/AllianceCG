@@ -28,21 +28,21 @@ use app\modules\admin\models\User;
                 'contentOptions'=>['style'=>'width: 20px;']
             ],
             [
+                'class' => 'yii\grid\CheckboxColumn',
+                'contentOptions'=>['style'=>'width: 20px;']
+            ],  
+            [
                 'attribute' => 'date',
-                'filter' => false,
+                'filter' => false,  
+                'format' => ['date', 'php:d/m/Y'],
                 'contentOptions'=>['style'=>'width: 100px;']
             ],
-            // 'responsible',    
             [
                 'class' => LinkColumn::className(),
                 'attribute' => 'responsible',
                 'filter' => false,
                 'format' => 'raw',  
-                // 'contentOptions'=>['style'=>'width: 100px;'],
             ],
-            // [
-            //     'class' => 'yii\grid\ActionColumn'
-            // ],
             [
                 'class' => ActionColumn::className(),
                 'contentOptions'=>['style'=>'width: 20px;'],

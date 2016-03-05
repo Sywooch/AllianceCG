@@ -26,6 +26,8 @@ use kartik\datetime\DateTimePicker;
         <?= Html::a('<span class="glyphicon glyphicon-floppy-remove"></span>  ' . Module::t('module', 'BUTTON_CANCEL'), ['/skoda/statusmonitor'], ['class' => 'btn btn-danger']) ?>
     </div>
 
+    <?= $form->errorSummary($model); ?>
+
     <?= $form->field($model, 'regnumber')->widget(\yii\widgets\MaskedInput::className(), ['mask' => 'a999aa-99',]) ?>   
 
 <div class="input-group">

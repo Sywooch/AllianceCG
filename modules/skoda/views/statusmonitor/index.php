@@ -9,14 +9,14 @@ use yii\widgets\Pjax;
 use app\components\grid\ActionColumn;
 use app\components\grid\SetColumn;
 use app\components\grid\LinkColumn;
-use app\modules\skoda\Module;
+use app\modules\skoda\Module as curmodule;
 use yii\bootstrap\Progress;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\status\models\StatusmonitorSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('module', 'STATUS_TITLE');
+$this->title = curmodule::t('module', 'STATUS_TITLE');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -28,13 +28,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <p style="text-align: right">
-        <?= Html::a('<span class="glyphicon glyphicon-plus"></span>  ' . Module::t('module', 'STATUS_CREATE'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-plus"></span>  ' . curmodule::t('module', 'STATUS_CREATE'), ['create'], ['class' => 'btn btn-success']) ?>
         
-        <?= Html::a('<span class="glyphicon glyphicon-refresh"></span>  ' . Module::t('module', 'STATUS_REFRESH'), ['index'], ['class' => 'btn btn-primary', 'id' => 'refreshButton']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-refresh"></span>  ' . curmodule::t('module', 'STATUS_REFRESH'), ['index'], ['class' => 'btn btn-primary', 'id' => 'refreshButton']) ?>
         
-        <?= Html::a('<span class="glyphicon glyphicon-trash"></span>  ' . Module::t('module', 'STATUS_DELETE'),'users/massdelete', [
+        <?= Html::a('<span class="glyphicon glyphicon-trash"></span>  ' . curmodule::t('module', 'STATUS_DELETE'),'users/massdelete', [
                 'class' => 'btn btn-danger',
-                'title' => Module::t('module', 'Close'),
+                'title' => curmodule::t('module', 'Close'),
                     'onclick'=>"$('#close').dialog('open');
                     $.ajax({
                     type     :'POST',
@@ -48,6 +48,8 @@ $this->params['breadcrumbs'][] = $this->title;
         ?>            
 
     </p>
+
+    <?= Yii::$app->session->getFlash('error'); ?>
 
     <?php
 
@@ -66,10 +68,12 @@ $this->params['breadcrumbs'][] = $this->title;
 // else {
 //     echo 'unknown role!';
 // }    
-echo Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
+
+// echo Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
+// if(isset($this->module)): echo $this->module->getName(); endif;
     ?>
 
-    <?php Pjax::begin(); ?>    
+    <?php // Pjax::begin(); ?>    
     <?= 
         GridView::widget([
             'id' => 'statusmonitor-users-grid',
@@ -95,31 +99,33 @@ echo Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
                 ],
                 [
                     'attribute' => 'from',
-                    'filter' => false,                    
-                    'contentOptions'=>['style'=>'width: 130px;'],                    
+                    'filter' => false,    
+                    'format' => ['date', 'php:H:i:s d/m/Y'],
+                    'contentOptions'=>['style'=>'width: 200px;'],                    
                 ],
                 [
                     'attribute' => 'to',
-                    'filter' => false,                    
-                    'contentOptions'=>['style'=>'width: 130px;'],                    
+                    'filter' => false,      
+                    'format' => ['date', 'php:H:i:s d/m/Y'],                 
+                    'contentOptions'=>['style'=>'width: 200px;'],                    
                 ],
-                // [
-                //     'attribute' => 'worker',
-                //     'filter' => false,
-                //     'format' => 'raw',    
-                //     'value' => function ($data) {
-                //         return $data->getResponsible();
-                //     },
-
-                // ],
                 [
-                    'attribute' => 'responsible',
+                    'attribute' => 'worker',
                     'filter' => false,
                     'format' => 'raw',    
                     'value' => function ($data) {
-                        return $data->getUserNameById();
+                        return $data->getResponsible();
                     },
+
                 ],
+                // [
+                //     'attribute' => 'responsible',
+                //     'filter' => false,
+                //     'format' => 'raw',    
+                //     'value' => function ($data) {
+                //         return $data->getUserNameById();
+                //     },
+                // ],
                 // [
                 //     'class' => SetColumn::className(),
                 //     'filter' => false,
@@ -187,5 +193,5 @@ echo Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
         ]); 
     ?>
     
-    <?php Pjax::end(); ?>
+    <?php // Pjax::end(); ?>
     </div>

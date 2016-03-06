@@ -39,7 +39,6 @@ use kartik\datetime\DateTimePicker;
             'convertFormat' => true,
             'pluginOptions' => [
                 'format' => 'yyyy-MM-dd HH:mm',
-                // 'startDate' => '01-Mar-2014 12:00 AM',
                 'todayHighlight' => true
             ]
         ]);
@@ -54,41 +53,12 @@ use kartik\datetime\DateTimePicker;
             'convertFormat' => true,
             'pluginOptions' => [
                 'format' => 'yyyy-MM-dd HH:mm',
-                // 'startDate' => '01-Mar-2014 12:00 AM',
                 'todayHighlight' => true
             ]
         ]);
     ?>
 </div>    
 <br/>
-
-    <?php 
-        $form->field($model, 'responsible')->textInput(['maxlength' => true]) 
-    ?>
-    
-    <?php
-
-        // $mc = User::find()
-        //     ->where(['position' => 'Мастер-консультант'])
-        //     ->all();
-
-        $mc = User::findAll([
-                'position' => 'Мастер-консультант',
-                ]            
-            );
-
-        foreach ($mc as $key => $value) {
-            $mcname = $value->name . ' ' . $value->surname;
-            $value->allname = $mcname;
-        }
-    
-        $items = ArrayHelper::map($mc,'id','allname');
-        $params = [
-            'prompt' => '-- ' . $model->getAttributeLabel( 'responsible' ) . ' --',
-        ];
-
-        echo $form->field($model, 'responsible')->radioList($items,$params)
-    ?>    
 
     <?php ActiveForm::end(); ?>
 

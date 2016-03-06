@@ -8,7 +8,7 @@
 use yii\helpers\Html;
 use app\modules\skoda\Module;
 
-$this->title = Module::t('module', 'SKODA');
+$this->title = Module::t('module', 'ŠKODA');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="admin-default-index center-block">
@@ -61,6 +61,13 @@ $(function () {
             text: 'График нагрузки (текущий месяц)',
             x: -20 //center
         },
+        credits: {
+            enabled: true,
+            href: "http://www.alians-kmv.ru",
+            position: undefined,
+            style: undefined,
+            text: "Alliance CG",            
+        },
         subtitle: {
             text: 'ООО "СтрелаАвто"',
             x: -20
@@ -71,6 +78,9 @@ $(function () {
             }
         },
         xAxis: {
+            title: {
+                text: 'Дата'
+            },
             categories: [],
                 labels: {
                     style: { color: '#4ba82e' }
@@ -114,5 +124,5 @@ $(function () {
 
 
 <script type='text/javascript'>
-    QueryLoader.init();
+    // QueryLoader.init();
 </script>

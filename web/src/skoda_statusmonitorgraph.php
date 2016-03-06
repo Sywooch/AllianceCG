@@ -20,7 +20,6 @@ $result->free();
 
 $mysqli->close();
 
-// var_dump($data_car);
 echo json_encode($data_car);
 
 ?>

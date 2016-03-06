@@ -24,9 +24,9 @@ class MonitorSearch extends Statusmonitor
     public function rules()
     {
         return [
-            [['id', 'status'], 'integer'],
-            [['regnumber', 'responsible'], 'string', 'max' => 255],
-            [['from', 'to', 'responsible', 'regnumber'], 'safe'],
+            [['id'], 'integer'],
+            [['regnumber'], 'string', 'max' => 255],
+            [['from', 'to', 'regnumber'], 'safe'],
         ];
     }
 
@@ -69,20 +69,6 @@ class MonitorSearch extends Statusmonitor
                 'id',
                 'from',
                 'to',
-                // 'regnumber',
-                // 'responsible',
-                // 'from' => [
-                //     'asc' => ['from' => SORT_ASC],
-                //     'desc' => ['from' => SORT_DESC],
-                //     'label' => 'from',
-                //     'default' => SORT_ASC
-                // ],
-                // 'to' => [
-                //     'asc' => ['to' => SORT_ASC],
-                //     'desc' => ['to' => SORT_DESC],
-                //     'label' => 'to',
-                //     'default' => SORT_ASC
-                // ],
             ],
         ]);       
 

@@ -23,9 +23,9 @@ class StatusmonitorSearch extends Statusmonitor
     public function rules()
     {
         return [
-            [['id', 'status'], 'integer'],
-            [['regnumber', 'responsible'], 'string', 'max' => 255],
-            [['from', 'to', 'responsible', 'regnumber'], 'safe'],
+            [['id'], 'integer'],
+            [['regnumber'], 'string', 'max' => 255],
+            [['from', 'to', 'regnumber'], 'safe'],
         ];
     }
 
@@ -54,7 +54,6 @@ class StatusmonitorSearch extends Statusmonitor
             'attributes' => [
                 'id',
                 'regnumber',
-                'responsible',
                 'worker',
                 'from' => [
                     'asc' => ['from' => SORT_ASC],
@@ -89,17 +88,7 @@ class StatusmonitorSearch extends Statusmonitor
             return $dataProvider;
         }
 
-        // grid filtering conditions
-        // $query->andFilterWhere([
-        //     'id' => $this->id,
-        //     'regnumber' => $this->regnumber,
-        //     'from' => $this->from,
-        //     'to' => $this->to,
-        //     'status' => $this->status,
-        // ]);
-
         $query
-            ->andFilterWhere(['like', 'responsible', $this->responsible])
             ->andFilterWhere(['like', 'from', $this->from])
             ->andFilterWhere(['like', 'to', $this->to])
             // ->andFilterWhere(['>=', 'from', $this->from ? strtotime($this->from . ' 00:00:00') : null])

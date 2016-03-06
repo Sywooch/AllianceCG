@@ -26,15 +26,28 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-    <?php
+ <?php
+
+    function getNavbarCSS()
+    {
+        $curmodule = Yii::$app->controller->module->id;
+        if($curmodule == 'skoda'){
+            return 'navbar navbar-fixed-top navbar-skoda';
+        }
+        else{
+            return 'navbar-inverse navbar-fixed-top';
+        }
+    }
+
     NavBar::begin([
         // 'brandLabel' => 'My Company',
         // 'brandLabel' => '<img src="img/logo/fsrar_orig.png" height="36" width="36" class="pull-left"/>FSRAR_LOGO',
         'brandLabel' => Html::img('@web/img/logo/logo.png', ['width'=>'48','height'=>'48']),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
+            'class' => getNavbarCSS(),
             // 'class' => 'navbar-inverse navbar-fixed-top',
-        'class' => 'navbar navbar-fixed-top',
+            'class' => 'navbar navbar-fixed-top navbar-skoda',
         ],
     ]);
     echo Nav::widget([
@@ -53,10 +66,11 @@ AppAsset::register($this);
             ['label' => '<span class="glyphicon glyphicon-user"></span> ' . Yii::t('app', 'NAV_LOGIN'), 'url' => ['/user/default/login']] :
             false,
         !Yii::$app->user->isGuest ?
-            ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_STATUS'), 'items' => [
+            ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_SKODA'), 'items' => [
+                ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_SKODA'), 'url' => ['/skoda/']],
                 ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_SHEDULER'), 'url' => ['/skoda/servicesheduler/index']],
-                ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'STATUS_MANAGEMENT'), 'url' => ['/skoda/statusmonitor/index']],
-                ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_STATUS'), 'url' => ['/skoda/statusmonitor/monitor']],
+                ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_STATUS'), 'url' => ['/skoda/statusmonitor/index']],
+                // ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_STATUS'), 'url' => ['/skoda/statusmonitor/monitor']],
             ]] :
             false,
         Yii::$app->user->can('admin') ?

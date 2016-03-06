@@ -10,6 +10,7 @@
 	    'NAV_LOGOUT' => 'Выход',
 	    'NAV_ADMIN' => 'Администрирование',
 	    'NAV_SHEDULER' => 'График смен',
+	    'NAV_SKODA' => 'ŠKODA',
 	 	
 	 	// Регистрация/SignUp
 	 	'TITLE_SIGNUP' => 'Регистрация',

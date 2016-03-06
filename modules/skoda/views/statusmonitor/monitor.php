@@ -24,6 +24,7 @@ use yii\bootstrap\Progress;
 
 $this->title = Module::t('module', 'STATUSMONITOR_TITLE');
 
+echo Yii::$app->controller->module->id;
 
 // $script = <<< JS
 // $(document).ready(function() {
@@ -31,34 +32,6 @@ $this->title = Module::t('module', 'STATUSMONITOR_TITLE');
 // });
 // JS;
 // $this->registerJs($script);
-
-
-// $mc_id_sql = 'SELECT responsible FROM `sk_statusmonitor` where DATE(`from`)=CURDATE() or DATE(`to`)=CURDATE();';
-// $mc_id_sql = 'SELECT responsible FROM `sk_statusmonitor` where DATE(`from`)=CURDATE() or DATE(`to`)=CURDATE();';
-// $sm = Statusmonitor::findBySql($mc_id_sql)->all();
-
-
-// foreach ($sm as $key => $value) {
-//     echo $value->responsible . '<br/>';
-// }
-
-// var_dump($sm);
-
-// $mc_data_sql = 'SELECT * FROM `sk_user` where id = '. $sm->responsible . ';';
-// $mc = User::findBySql($mc_data_sql)->all();
-
-
-// $listData = new ActiveDataProvider([
-//     'query' => User::find()->where(['id' => (string)$sm->responsible]),
-//     'pagination' => [
-//         'pageSize' => 20,
-//     ],
-// ]);
-
-// $cars = new SqlDataProvider([
-//     'sql' => 'SELECT * FROM `sk_statusmonitor` where DATE(`from`)=CURDATE() or DATE(`to`)=CURDATE();',
-//     'params' => [':author' => 'Arno Slatius'],
-// ]);
 
 ?>
 
@@ -97,16 +70,17 @@ $this->title = Module::t('module', 'STATUSMONITOR_TITLE');
             <div class="col-lg-12" style="text-align: center">
                 <h1><?= Module::t('module', 'WELCOME_MSG') ?> </h1>
             </div>
-            <div class="col-lg-12" style="text-align: center; margin-left: 10%;">
+            <div class="col-lg-6" style="text-align: center; margin-left: 10%;">
                     <?php
-                        // $to_date = Yii::$app->formatter->asDate($this->to, 'yyyy-MM-dd');
+                        $today = Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
 
-                        // $provider_top = Servicesheduler::find()
-                        //     ->where(['date' => $to_date])
-                        //     ->all();
+                        $master_cons_today = Servicesheduler::find()
+                            ->where(['date' => $today])
+                            ->one();
 
                         $provider_top = new ActiveDataProvider([
-                                    'query' => User::find()->where(['position' => 'Мастер-консультант', 'status' => '1'])
+                                    // 'query' => User::find()->where(['position' => 'Мастер-консультант', 'status' => '1'])
+                            'query' => User::find()->where(['full_name' => $master_cons_today->responsible])
                                 ]);                          
 
                                 echo ListView::widget([

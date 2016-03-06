@@ -71,6 +71,7 @@ class User extends \app\modules\user\models\User
                 // $this->fullname=$this->surname . ' ' . $this->name . ' ' . $this->patronymic;
                 // $this->shortname=$this->surname . ' ' . mb_substr($this->name,0,1,'UTF-8') . '.' . mb_substr($this->patronymic,0,1,'UTF-8') . '.';
                 $this->username=$this->surname.mb_substr($this->name,0,1,'UTF-8').mb_substr($this->patronymic,0,1,'UTF-8');
+                $this->full_name = $this->name . ' ' . $this->surname;
             }
             else {
                 $first_name = mb_substr($this->name,0,1, 'UTF-8');
@@ -94,6 +95,7 @@ class User extends \app\modules\user\models\User
                 // $this->fullname=$this->surname . ' ' . $this->name . ' ' . $this->patronymic;
                 // $this->shortname=$this->surname . ' ' . mb_substr($this->name,0,1,'UTF-8') . '.' . mb_substr($this->patronymic,0,1,'UTF-8') . '.';
                 $this->username=$this->surname.mb_substr($this->name,0,1,'UTF-8').mb_substr($this->patronymic,0,1,'UTF-8');
+                $this->full_name = $this->name . ' ' . $this->surname;
                 // $this->photo = $this->surname;
             }
             return true;

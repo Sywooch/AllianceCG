@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
+use app\modules\user\models\User;
 ?>
  
 <div class="statusmonitor-item" style="text-align: center">
@@ -9,17 +10,24 @@ use yii\helpers\HtmlPurifier;
     <th rowspan="2">
     	<h2>
             <?php 
-                echo Html::img('@web/' . $model->photo, ['width'=>'100']) 
+                // echo Html::img('@web/' . $model->photo, ['width'=>'100']) 
+                // return !empty($this->photo) ? \Yii::$app->homeUrl.$this->photo : \Yii::$app->homeUrl.'img/logo/avatar.jpeg';
+                if (!empty($model->photo)){
+                    echo Html::img('@web/' . $model->photo, ['width'=>'100']);
+                }
+                else{
+                    echo Html::img('@web/img/logo/avatar.jpeg', ['width'=>'100']);
+                }
+                // echo User::getImageurl();
             ?>
         </h2>
     </th>
     <th style="padding-left: 25px; width: 80%;">
     	<!-- <h2> -->
             <?php
-                echo '<h2>' . $model->name. ' ' . $model->surname . '</h2>';
+                echo '<h3>' . $model->name. ' ' . $model->surname . '</h3>';
                 echo '<br/>';
-                echo '<h3>' . $model->position . '</h3>';
-                // echo $model->id;
+                echo '<h4>' . HtmlPurifier::process($model->position ) . '</h4>';
             ?>
         <!-- </h2> -->
     </th>
@@ -41,9 +49,9 @@ use yii\helpers\HtmlPurifier;
     	?>
     <!-- </h2>     -->
     <?php
-    	// HtmlPurifier::process($model->name) 
+    	HtmlPurifier::process($model->name) 
     ?>    
     <?php
-    	// HtmlPurifier::process($model->surname) 
+    	HtmlPurifier::process($model->surname) 
     ?>    
 </div>

@@ -17,7 +17,6 @@ use app\components\validators\WorkshedulerValidator;
  * @property integer $regnumber
  * @property string $from
  * @property string $to
- * @property string $responsible
  * @property integer $status
  */
 class Statusmonitor extends \yii\db\ActiveRecord
@@ -49,11 +48,9 @@ class Statusmonitor extends \yii\db\ActiveRecord
             $carstatus = 'Ожидание';
         }
         elseif (strtotime($today) >= strtotime($this->from) && strtotime($today) < strtotime($this->to)) {
-            // print 'В работе';
             $carstatus = 'В работе';
         }
         elseif (strtotime($today) >= strtotime($this->to)) {
-            // print 'Готово';
             $carstatus = 'Готово';
         }
 
@@ -118,36 +115,36 @@ class Statusmonitor extends \yii\db\ActiveRecord
     //     return $timeformat;        
     // }         
 
-    public static function getFromDateFormat()
-    {
+    // public static function getFromDateFormat()
+    // {
 
-        $today = Yii::$app->formatter->asDatetime(date('Y-m-d H:i:s'));
-        $smon = new Statusmonitor();
-        if (strtotime($today) < strtotime($smon->from)){
-            $timeformat = 'datetime';
-        }
-        elseif (strtotime($today) >= strtotime($smon->from) AND strtotime($today) < strtotime($smon->to)) {
-            $timeformat = 'time';
-        }
-        elseif (strtotime($today) >= strtotime($smon->to)) {
-            $timeformat = 'datetime';
-        }    
+    //     $today = Yii::$app->formatter->asDatetime(date('Y-m-d H:i:s'));
+    //     $smon = new Statusmonitor();
+    //     if (strtotime($today) < strtotime($smon->from)){
+    //         $timeformat = 'datetime';
+    //     }
+    //     elseif (strtotime($today) >= strtotime($smon->from) AND strtotime($today) < strtotime($smon->to)) {
+    //         $timeformat = 'time';
+    //     }
+    //     elseif (strtotime($today) >= strtotime($smon->to)) {
+    //         $timeformat = 'datetime';
+    //     }    
 
-        return $timeformat;        
-    }          
+    //     return $timeformat;        
+    // }          
 
-    public function getUserNameById()
-    {
-        $names = User::find()
-            ->where(['id' => $this->responsible])
-            ->all();
+    // public function getUserNameById()
+    // {
+    //     $names = User::find()
+    //         ->where(['id' => $this->responsible])
+    //         ->all();
             
-        foreach ($names as $key => $value) {
-            $allname = $value->name . ' ' . $value->surname;
-        return $allname;
-        }
+    //     foreach ($names as $key => $value) {
+    //         $allname = $value->name . ' ' . $value->surname;
+    //     return $allname;
+    //     }
 
-    }
+    // }
 
     public function getResponsible()
     {
@@ -168,9 +165,9 @@ class Statusmonitor extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['regnumber', 'responsible'], 'required'],
+            [['regnumber'], 'required'],
             // [['status'], 'integer'],
-            [['from', 'to', 'regnumber', 'responsible'], 'safe'],
+            [['from', 'to', 'regnumber'], 'safe'],
             // ['to', WorkshedulerValidator::className()],
             ['to', 'validateWorkshedulerTo'],
             ['from', 'validateWorkshedulerFrom'],
@@ -184,11 +181,10 @@ class Statusmonitor extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
             'regnumber' => Module::t('module', 'STATUS_REGNUMBER'),
             'from' => Module::t('module', 'STATUS_FROM'),
             'to' => Module::t('module', 'STATUS_TO'),
-            'responsible' => Module::t('module', 'STATUS_RESPONSIBLE'),
+            // 'responsible' => Module::t('module', 'STATUS_RESPONSIBLE'),
             'worker' => Module::t('module', 'STATUS_RESPONSIBLE'),
             'carstatus' => Module::t('module', 'STATUS_STATUS'),
             'progress' => Module::t('module', 'STATUS_PROGRESS'),

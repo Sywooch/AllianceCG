@@ -35,6 +35,7 @@ class User extends ActiveRecord implements IdentityInterface
     public $fullname;
     public $allname;
     public $mcname;
+    public $avatar;
 
     const SCENARIO_PROFILE = 'profile';
 
@@ -93,7 +94,7 @@ class User extends ActiveRecord implements IdentityInterface
             // Require field - Username   
             [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 1],
             // [['file'], 'file'],
-            [['surname', 'name', 'patronymic', 'photo', 'position'], 'string', 'max' => 255],
+            [['surname', 'name', 'patronymic', 'full_name', 'photo', 'position'], 'string', 'max' => 255],
             // [['surname', 'name', 'patronymic','position', 'password'], 'required'],
             
             [['surname', 'name', 'patronymic','position', 'email', 'role'], 'required'],
@@ -157,6 +158,7 @@ class User extends ActiveRecord implements IdentityInterface
             'department' => Yii::t('app', 'USER_DEPARTMENT'),
             'position' => Yii::t('app', 'USER_POSITION'),
             'fullname' => Yii::t('app', 'USER_FULLNAME'),
+            'full_name' => Yii::t('app', 'USER_FULLNAME'),
             'allname' => Yii::t('app', 'USER_FULLNAME'),
             'photo' => Yii::t('app', 'USER_PHOTO'),
             'file' => Yii::t('app', 'USER_PHOTO'),

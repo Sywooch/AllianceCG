@@ -29,28 +29,6 @@ use kartik\date\DatePicker;
 
     <?= $form->field($model, 'regnumber', ['template'=>' <div class="input-group"><span class="input-group-addon" style="width: 0;"><span class="glyphicon glyphicon-calendar"></span></span>{input}'])->textInput(['placeholder' => $model->getAttributeLabel( 'regnumber' )]) . '</div>' ?>  
 
-    <?php
-
-        // $mcs = Statusmonitor::find()->all();
-
-        $mc = User::find()
-            ->where(['position' => 'Мастер-консультант'])
-            ->all();
-
-        foreach ($mc as $key => $value) {
-            $mcname = $value->name . ' ' . $value->surname;
-            $value->allname = $mcname;
-        }        
-    
-        $items = ArrayHelper::map($mc,'id','allname');
-        $params = [
-            'prompt' => '-- ' . $model->getAttributeLabel( 'responsible' ) . ' --',
-        ];
-
-        // echo $form->field($model, 'responsible')->dropDownList($items,$params)
-    ?> 
-
-    <?= $form->field($model, 'responsible', ['template'=>' <div class="input-group"><span class="input-group-addon" style="width: 0;"><span class="glyphicon glyphicon-user"></span></span>{input}'])->dropDownList($items,$params) . '</div>' ?>    
 
 <div style="width: 250px; ">
 

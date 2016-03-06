@@ -15,8 +15,8 @@ class PasswordResetRequestForm extends Model
 {
     public $email;
 
-    // private $_user = false;
-    // private $_timeout;
+    private $_user = false;
+    private $_timeout;
 
     /**
      * PasswordResetRequestForm constructor.

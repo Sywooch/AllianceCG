@@ -57,11 +57,6 @@ AppAsset::register($this);
         !Yii::$app->user->isGuest ?
             ['label' => '<span class="glyphicon glyphicon-home"></span> ' . Yii::t('app', 'NAV_HOME'), 'url' => ['/main/default/index']] :
             false,
-            // ['label' => Yii::t('app', 'NAV_CONTACT'), 'url' => ['/main/contact/index']],
-            // ['label' => '<span class="glyphicon glyphicon-envelope"></span>  ' . Yii::t('app', 'NAV_CONTACT'), 'url' => ['/main/contact/index']],
-        // Yii::$app->user->isGuest ?
-        //     ['label' => '<span class="glyphicon glyphicon-send"></span> ' . Yii::t('app', 'NAV_SIGNUP'), 'url' => ['/user/default/signup']] :
-        //     false,
         Yii::$app->user->isGuest ?
             ['label' => '<span class="glyphicon glyphicon-user"></span> ' . Yii::t('app', 'NAV_LOGIN'), 'url' => ['/user/default/login']] :
             false,
@@ -70,7 +65,6 @@ AppAsset::register($this);
                 ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_SKODA'), 'url' => ['/skoda/']],
                 ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_SHEDULER'), 'url' => ['/skoda/servicesheduler/index']],
                 ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_STATUS'), 'url' => ['/skoda/statusmonitor/index']],
-                // ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_STATUS'), 'url' => ['/skoda/statusmonitor/monitor']],
             ]] :
             false,
         Yii::$app->user->can('admin') ?
@@ -88,14 +82,6 @@ AppAsset::register($this);
                 ['label' => '<span class="glyphicon glyphicon-off"></span> ' . Yii::t('app', 'NAV_LOGOUT'), 'url' => ['/user/default/logout'], 'linkOptions' => ['data-method' => 'post']]
             ]] :
             false,
-        // !Yii::$app->user->isGuest ?
-        //     ['label' => '<span class="glyphicon glyphicon-user"></span> ' . Yii::t('app', 'NAV_PROFILE'), 'url' => ['/user/profile/index']] :
-        //     false,
-        // !Yii::$app->user->isGuest ?
-        //     ['label' => '<span class="glyphicon glyphicon-off"></span> ' . Yii::t('app', 'NAV_LOGOUT'),
-        //         'url' => ['/user/default/logout'],
-        //         'linkOptions' => ['data-method' => 'post']] :
-        //     false,
         ]),
     ]);
     NavBar::end();

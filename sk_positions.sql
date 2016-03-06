@@ -21,7 +21,7 @@
 
 LOCK TABLES `sk_positions` WRITE;
 /*!40000 ALTER TABLE `sk_positions` DISABLE KEYS */;
-INSERT INTO `sk_positions` VALUES (2,'Директор','1'),(3,'Администратор',''),(4,'Ассистент сервиса',''),(5,'Мастер-консультант',''),(6,'РОС','Руководитель отдела сервиса');
+INSERT INTO `sk_positions` VALUES (2,'Директор',''),(3,'Администратор',''),(4,'Ассистент сервиса',''),(5,'Мастер-консультант',''),(6,'РОС','Руководитель отдела сервиса');
 /*!40000 ALTER TABLE `sk_positions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -34,4 +34,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-28  9:20:58
+-- Dump completed on 2016-03-07  0:06:15

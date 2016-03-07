@@ -10,6 +10,7 @@ use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
 use yii\web\UploadedFile;
 use app\modules\admin\models\Positions;
+use app\modules\user\Module;
 
 /**
  * This is the model class for table "{{%user}}".
@@ -41,6 +42,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     const STATUS_BLOCKED = 0;
     const STATUS_ACTIVE = 1;
+    const STATUS_WAIT = 2;
     
     const ROLE_MANAGER = 'manager';
     const ROLE_HEAD = 'head';
@@ -83,42 +85,29 @@ class User extends ActiveRecord implements IdentityInterface
         return [
 
             // Default GII-generated rules
-
-            // [['created_at', 'updated_at', 'username', 'password_hash', 'email'], 'required'],
-            // [['created_at', 'updated_at', 'status'], 'integer'],
-            // [['username', 'email_confirm_token', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
-            // [['auth_key'], 'string', 'max' => 32]
-            
-            // [['photo'], 'file', 'message' => 'Error!!!'],
             
             // Require field - Username   
             [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 1],
-            // [['file'], 'file'],
             [['surname', 'name', 'patronymic', 'full_name', 'photo', 'position'], 'string', 'max' => 255],
-            // [['surname', 'name', 'patronymic','position', 'password'], 'required'],
             
             [['surname', 'name', 'patronymic','position', 'email', 'role'], 'required'],
                
-            // [['surname', 'name', 'patronymic', 'company', 'department', 'position'], 'safe'],
-            // ['username', 'required'],
 
             // Simbol match in username-field
             // ['username', 'match', 'pattern' => '#^[\w_-]+$#i'],
 
             // Username - unique field
-            ['username', 'unique', 'targetClass' => self::className(), 'message' => Yii::t('app', 'ERROR_USERNAME_EXISTS')],
+            // ['username', 'unique', 'targetClass' => self::className(), 'message' => Yii::t('app', 'ERROR_USERNAME_EXISTS')],
 
             // Username - type strind, min. symbol - 2, max. symbol - 255
             [['username', 'avatar', 'role'], 'string', 'min' => 2, 'max' => 255],
  
-            // Require field - Email
-            // ['email', 'required'],
 
             // Field validator - Email
-            // ['email', 'email'],
+            ['email', 'email'],
 
             // Email - unique field
-            // ['email', 'unique', 'targetClass' => self::className(), 'message' => Yii::t('app', 'ERROR_EMAIL_EXISTS')],
+            ['email', 'unique', 'targetClass' => self::className(), 'message' => Yii::t('app', 'ERROR_EMAIL_EXISTS')],
 
             // Email - type string, max. symbol - 255
             // ['email', 'string', 'max' => 255],
@@ -145,23 +134,23 @@ class User extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'created_at' => Yii::t('app', 'USER_CREATED_AT'),
-            'updated_at' => Yii::t('app', 'USER_UPDATED_AT'),
-            'username' => Yii::t('app', 'USER_USERNAME'),
-            'email' => Yii::t('app', 'USER_EMAIL'),
-            'status' => Yii::t('app', 'USER_STATUS'),
-            'user_id' => Yii::t('app', 'User ID'),
-            'surname' => Yii::t('app', 'USER_SURNAME'),
-            'name' => Yii::t('app', 'USER_NAME'),
-            'patronymic' => Yii::t('app', 'USER_PATRONYMIC'),
-            'company' => Yii::t('app', 'USER_COMPANY'),
-            'department' => Yii::t('app', 'USER_DEPARTMENT'),
-            'position' => Yii::t('app', 'USER_POSITION'),
-            'fullname' => Yii::t('app', 'USER_FULLNAME'),
-            'full_name' => Yii::t('app', 'USER_FULLNAME'),
-            'allname' => Yii::t('app', 'USER_FULLNAME'),
-            'photo' => Yii::t('app', 'USER_PHOTO'),
-            'file' => Yii::t('app', 'USER_PHOTO'),
+            'created_at' => Module::t('module', 'USER_CREATED_AT'),
+            'updated_at' => Module::t('module', 'USER_UPDATED_AT'),
+            'username' => Module::t('module', 'USER_USERNAME'),
+            'email' => Module::t('module', 'USER_EMAIL'),
+            'status' => Module::t('module', 'USER_STATUS'),
+            'user_id' => Module::t('module', 'User ID'),
+            'surname' => Module::t('module', 'USER_SURNAME'),
+            'name' => Module::t('module', 'USER_NAME'),
+            'patronymic' => Module::t('module', 'USER_PATRONYMIC'),
+            'company' => Module::t('module', 'USER_COMPANY'),
+            'department' => Module::t('module', 'USER_DEPARTMENT'),
+            'position' => Module::t('module', 'USER_POSITION'),
+            'fullname' => Module::t('module', 'USER_FULLNAME'),
+            'full_name' => Module::t('module', 'USER_FULLNAME'),
+            'allname' => Module::t('module', 'USER_FULLNAME'),
+            'photo' => Module::t('module', 'USER_PHOTO'),
+            'file' => Module::t('module', 'USER_PHOTO'),
         ];
     }    
 
@@ -233,7 +222,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             self::STATUS_ACTIVE => 'Активен',
             self::STATUS_BLOCKED => 'Заблокирован',
-            // self::STATUS_WAIT => 'Ожидает подтверждения',
+            self::STATUS_WAIT => 'Ожидает подтверждения',
         ];
     }
 

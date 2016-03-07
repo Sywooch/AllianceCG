@@ -83,11 +83,13 @@ class UsersController extends Controller
  
         if ($model->load(Yii::$app->request->post())) {
 
-            $imageName = $model->surname;
+            $imageName = mktime(date('h'), date('i'), date('s'), date('d'), date('m'), date('y'));
             $model->file = UploadedFile::getInstance($model, 'file');
-            $model->file->saveAs('img/uploads/userphoto/'.$imageName.'.'.$model->file->extension);
-
-            $model->photo = 'img/uploads/userphoto/'.$imageName.'.'.$model->file->extension;
+            if ($model->file = UploadedFile::getInstance($model, 'file'))
+            {
+                $model->file->saveAs('img/uploads/userphoto/'.$imageName.'.'.$model->file->extension);
+                $model->photo = 'img/uploads/userphoto/'.$imageName.'.'.$model->file->extension;                
+            }
 
             $model->save();
 
@@ -120,10 +122,10 @@ class UsersController extends Controller
  
         if ($model->load(Yii::$app->request->post())) {
 
-            $imageName = $model->surname;
+            $imageName = mktime(date('h'), date('i'), date('s'), date('d'), date('m'), date('y'));
             if ($model->file = UploadedFile::getInstance($model, 'file')) {
+            @unlink($model->photo);
             $model->file->saveAs('img/uploads/userphoto/'.$imageName.'.'.$model->file->extension);
-
             $model->photo = 'img/uploads/userphoto/'.$imageName.'.'.$model->file->extension;
 
             }
@@ -146,6 +148,11 @@ class UsersController extends Controller
      */
     public function actionDelete($id)
     {
+        $model = $this->findModel($id);
+        if(!empty($model->photo))
+        {
+            @unlink($model->photo);
+        }
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

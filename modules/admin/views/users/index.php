@@ -34,22 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('<span class="glyphicon glyphicon-plus"></span>  ' . Module::t('module', 'ADMIN_USERS_CREATE'), ['create'], ['class' => 'btn btn-success']) ?>
         
         <?= Html::a('<span class="glyphicon glyphicon-refresh"></span>  ' . Module::t('module', 'ADMIN_USERS_REFRESH'), ['index'], ['class' => 'btn btn-primary', 'id' => 'refreshButton']) ?>
-        
-        <?= Html::a('<span class="glyphicon glyphicon-trash"></span>  ' . Module::t('module', 'ADMIN_USERS_DELETE'),'users/massdelete', [
-                'class' => 'btn btn-danger',
-                'title' => Module::t('module', 'Close'),
-                    'onclick'=>"$('#close').dialog('open');
-                    $.ajax({
-                    type     :'POST',
-                    cache    : false,
-                    url  : 'users/massdelete',
-                    success  : function(response) {
-                        $('#close').html(response);
-                    }
-                    });return false;",
-            ]);
-        ?>            
-
     </p>
 
     <?php
@@ -57,9 +41,11 @@ $this->params['breadcrumbs'][] = $this->title;
         // $roles = Yii::$app->authManager->getRoles();
         // var_dump($roles);
         // $userroles = Yii::$app->authManager->getRolesByUser('1');
+        // var_dump($userroles);
         // $userroles = Yii::$app->getAuthManager()->getRoles();
         // $userroles = Yii::$app->authManager->roles;
         // var_dump($userroles);
+        // echo mktime(date('h'), date('i'), date('s'), date('d'), date('m'), date('y'));
     ?>
 
     <?= GridView::widget([

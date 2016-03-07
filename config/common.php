@@ -63,14 +63,14 @@ return [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            'transport' => [
-                'class' => 'Swift_SmtpTransport',
-                'host' => 'mail.gorodavto.com',  // e.g. smtp.mandrillapp.com or smtp.gmail.com
-                'username' => 'it.service@alians-kmv.ru',
-                'password' => 'As12zx',
-                'port' => '25', // Port 25 is a very common port too
-                // 'encryption' => 'tls', // It is often used, check your provider or mail server specs
-            ],            
+            // 'transport' => [
+            //     'class' => 'Swift_SmtpTransport',
+            //     'host' => 'mail.gorodavto.com',  // e.g. smtp.mandrillapp.com or smtp.gmail.com
+            //     'username' => 'it.service@alians-kmv.ru',
+            //     'password' => 'As12zx',
+            //     'port' => '25', // Port 25 is a very common port too
+            //     // 'encryption' => 'tls', // It is often used, check your provider or mail server specs
+            // ],            
         ],
         'cache' => [
             'class' => 'yii\caching\DummyCache',

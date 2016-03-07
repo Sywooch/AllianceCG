@@ -14,6 +14,7 @@ class m160306_204740_create_companies_table extends Migration
         $this->createTable('{{%companies}}', [
             'id' => $this->primaryKey(),
             'company_name' => $this->string(255),
+            'company_brand' => $this->string(255),
             'company_logo' => $this->string(255),
             'company_description' => $this->text(),
         ]);

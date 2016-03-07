@@ -16,6 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('<span class="glyphicon glyphicon-user"></span>  ' . Module::t('module', 'ADMIN_USERS'), ['users/index'], ['class' => 'btn btn-primary']) ?>
         
         <?= Html::a('<span class="glyphicon glyphicon-briefcase"></span>  ' . Module::t('module', 'ADMIN_POSITIONS'), ['positions/index'], ['class' => 'btn btn-primary']) ?>
+        
+        <?= Html::a('<span class="glyphicon glyphicon-tent"></span>  ' . Module::t('module', 'ADMIN_COMPANIES'), ['companies/index'], ['class' => 'btn btn-primary']) ?>
     </p>    
     
 </div>

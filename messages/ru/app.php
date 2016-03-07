@@ -13,11 +13,9 @@
 	    'NAV_SKODA' => 'ŠKODA',
 	 	
 	 	// Регистрация/SignUp
-	 	'TITLE_SIGNUP' => 'Регистрация',
 	    'USER_USERNAME' => 'Имя Пользователя',
 	    'USER_EMAIL' => 'EMAIL',
 	    'USER_PASSWORD' => 'Пароль',
-	    'PLEASE_FILL_FOR_SIGNUP' => 'Заполнить для регистрации',
 	    'USER_VERIFY_CODE' => 'Код подтверждения',
 
 	    // Контактная форма/Contacts 		contact
@@ -31,17 +29,9 @@
 	    'BUTTON_SUBMIT' => 'Отправить',
 
 	    // Форма входа/Login 		login
-	    'PLEASE_FILL_FOR_LOGIN' => 'Заполнить для входа',
-	    'USER_REMEMBER_ME' => 'Запомнить',
-	    'LINK_PASSWORD_RESET' => 'Сброс пароля',
-	    'USER_BUTTON_LOGIN' => 'Вход',
-	    'TITLE_LOGIN' => 'Вход',
 	    'ERROR_WRONG_USERNAME_OR_PASSWORD' => 'Неверное имя пользователя или пароль',
 	    'ERROR_PROFILE_BLOCKED' => 'Аккаунт заблокирован',
 	    'ERROR_PROFILE_NOT_CONFIRMED' => 'Аккаунт не подтвержден',
-	    'TITLE_PASSWORD_RESET' => 'Сброс пароля',
-	    'PLEASE_FILL_FOR_RESET_REQUEST' => 'Заполнить для сброса пароля',
-        'LOGIN_INFO' => '<b>Внимание: </b>Имя пользователя формируется из фамилии, указанной с заглавной буквы и инициалов, не разделенных пробелами и знаками препинания.<br /><b>Пример:</b> Имя входа пользователя Иванов Иван Иванович - ИвановИИ',
 
 	    // Профиль/Profile 	user/profile
 	    'TITLE_PROFILE'=>'Просмотр профиля',
@@ -82,15 +72,16 @@
         'ADMIN_USER_EMAIL_EMPTY' => 'EMAIL не указан',
         'ADMIN_USERS_REFRESH' => 'Обновить',
         'ADMIN_POSITIONS' => 'Должности',
-        'ADMIN_CREATE_POSITIONS' => 'Добавить',
-        'ADMIN_POSITION_SEARCH' => 'Поиск',
-        'ADMIN_POSITION_RESET' => 'Сброс',
-        'ADMIN_POSITIONS_POSITION' => 'Должность',
-        'ADMIN_POSITIONS_DESCRIPTION' => 'Описание',
-        'ADMIN_POSITIONS_CREATE' => 'Добавить должность',
-        'ADMIN_POSITIONS_REALY_DELETE' => 'Удалить?',
-        'ADMIN_POSITIONS_UPDATE' => 'Редактировать',
-        'ADMIN_POSITIONS_DELETE' => 'Удалить',
+        // 'ADMIN_CREATE_POSITIONS' => 'Добавить',
+        // 'ADMIN_POSITION_SEARCH' => 'Поиск',
+        // 'ADMIN_POSITION_RESET' => 'Сброс',
+        // 'ADMIN_POSITIONS_POSITION' => 'Должность',
+        // 'ADMIN_POSITIONS_DESCRIPTION' => 'Описание',
+        // 'ADMIN_POSITIONS_CREATE' => 'Добавить должность',
+        // 'ADMIN_POSITIONS_REALY_DELETE' => 'Удалить?',
+        // 'ADMIN_POSITIONS_UPDATE' => 'Редактировать',
+        // 'ADMIN_POSITIONS_DELETE' => 'Удалить',
+        'ADMIN_COMPANIES' => 'Компании',
 
         // Монитор готовности
         'NAV_STATUS' => 'Монитор готовности',
@@ -98,13 +89,6 @@
         'STATUS_UPDATE' => 'Редактирование',
 
 
-	    'BUTTON_SEND' => 'Отправить',
-	    'BUTTON_SAVE' => 'Сохранить',
-	    'BUTTON_CREATE' => 'Сохранить',
-	    'BUTTON_UPDATE' => 'Редактировать',
-	    'BUTTON_DELETE' => 'Удалить',	    
-	    'BUTTON_SUBMIT' => 'Отправить',
-	    'BUTTON_CANCEL' => 'Отмена',
 	    
 	    'GRID_RECORDS_SHOW ' => 'Записи',
 

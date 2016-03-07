@@ -9,17 +9,17 @@ use app\modules\user\Module;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \app\modules\user\models\form\SignupForm */
 
-$this->title = Yii::t('app', 'TITLE_SIGNUP');
+$this->title = Module::t('module', 'TITLE_SIGNUP');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-default-signup">
-    <h1><?= Html::encode($this->title) ?></h1>
     
     <div class="row">
         <div class="col-lg-5 col-lg-offset-3">
+        <h1><?= Html::encode($this->title) ?></h1>
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
-            <p><?= Yii::t('app', 'PLEASE_FILL_FOR_SIGNUP') ?></p>
+            <p><?= Module::t('module', 'PLEASE_FILL_FOR_SIGNUP') ?></p>
             
             <?= $form->field($model, 'username', ['template'=>' <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'username' )]) ?>
 
@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6"> <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-warning-sign"></span></span>{input}</div></div></div>',
             ]) ?>
             <div class="form-group" style="text-align: right">
-                <?= Html::submitButton('<span class="glyphicon glyphicon-send"></span>  ' . Yii::t('app', 'BUTTON_SUBMIT'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                <?= Html::submitButton('<span class="glyphicon glyphicon-send"></span>  ' . Module::t('module', 'BUTTON_SUBMIT'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
             </div>
             <?php ActiveForm::end(); ?>
         </div>

@@ -6,32 +6,33 @@ use dosamigos\tinymce\TinyMce;
 use app\modules\admin\Module;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\admin\models\Positions */
+/* @var $model app\modules\admin\models\Companies */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="positions-form center-block">
+<div class="companies-form center-block">
 
     <?php $form = ActiveForm::begin(); ?>
-    
-    <h1><span class="glyphicon glyphicon-briefcase" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
+
+    <h1><span class="glyphicon glyphicon-tent" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
            
     <div class="form-group" style="text-align: right;">
         <?= Html::submitButton(
             $model->isNewRecord ? '<span class="glyphicon glyphicon-floppy-saved"></span>  ' . Module::t('module', 'ADMIN_CREATE_POSITIONS') : '<span class="glyphicon glyphicon-pencil"></span>  ' . Module::t('module', 'ADMIN_POSITIONS_BUTTON_UPDATE'),
             ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']
         ) ?>
-        <?= Html::a('<span class="glyphicon glyphicon-floppy-remove"></span>  ' . Module::t('module', 'ADMIN_POSITIONS_BUTTON_CANCEL'), ['/admin/positions'], ['class' => 'btn btn-danger']) ?>
-    </div>    
-    
+        <?= Html::a('<span class="glyphicon glyphicon-floppy-remove"></span>  ' . Module::t('module', 'ADMIN_POSITIONS_BUTTON_CANCEL'), ['/admin/companies'], ['class' => 'btn btn-danger']) ?>
+    </div>        
 
-    <?php
-        // $form->field($model, 'position')->textInput(['maxlength' => true]) 
-    ?>
-    
-    <?= $form->field($model, 'position', ['template'=>' <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-briefcase"></span></span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'position' )]) ?>
+    <?= $form->field($model, 'company_name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'description')->widget(TinyMce::className(), [
+    <?= $form->field($model, 'company_brand')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'company_logo')->textInput(['maxlength' => true]) ?>
+
+    <?php // $form->field($model, 'company_description')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'company_description')->widget(TinyMce::className(), [
     'options' => ['rows' => 10, 'cols' => 20],
     'language' => 'ru',
     'clientOptions' => [
@@ -42,7 +43,11 @@ use app\modules\admin\Module;
         ],
         'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
     ]
-]);?>
+]);?>    
+
+    <div class="form-group">
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    </div>
 
     <?php ActiveForm::end(); ?>
 

@@ -5,6 +5,7 @@ namespace app\modules\admin\models;
 use Yii;
 use yii\data\Sort;
 use yii\data\ActiveDataProvider;
+use app\modules\admin\Module;
 
 /**
  * This is the model class for table "{{%positions}}".
@@ -29,8 +30,7 @@ class PositionsSearch extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            // [['position', 'description'], 'required'],
-            ['position', 'unique', 'targetClass' => Positions::className(), 'message' => Yii::t('app', 'ADMIN_POSITIONS_ERROR_RECORD_EXIST')],
+            ['position', 'unique', 'targetClass' => Positions::className(), 'message' => Module::t('module', 'ADMIN_POSITIONS_ERROR_RECORD_EXIST')],
             [['description'], 'string'],
             [['position'], 'string', 'max' => 255],
         ];
@@ -42,9 +42,9 @@ class PositionsSearch extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'position' => Yii::t('app', 'ADMIN_POSITIONS_POSITION'),
-            'description' => Yii::t('app', 'ADMIN_POSITIONS_DESCRIPTION'),
+            'id' => Module::t('module', 'ID'),
+            'position' => Module::t('module', 'ADMIN_POSITIONS_POSITION'),
+            'description' => Module::t('module', 'ADMIN_POSITIONS_DESCRIPTION'),         
         ];
     }
     

@@ -29,7 +29,7 @@ use app\modules\admin\Module;
     <?= $form->field($model, 'email', ['template'=>' <div class="input-group"><span class="input-group-addon" style="width: 0;"><span class="glyphicon glyphicon-inbox"></span></span>{input}'])->textInput(['placeholder' => $model->getAttributeLabel( 'email' )]) . '</div>' ?>    
 
     <?php
-        echo $form->field($model, 'status')->radioList(User::getStatusesArray())
+        echo $form->field($model, 'status', ['template' => "<div class=\"radio\">\n{input}\n{error}\n{hint}\n</div>"])->dropDownList(User::getStatusesArray(), ['prompt' => $model->getAttributeLabel('status')]);
     ?>    
 
     <div class="form-group" style="text-align: left">

@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\Sort;
 use yii\data\ActiveDataProvider;
+use app\modules\admin\Module;
 
 /**
  * UserSearch represents the model behind the search form about `app\modules\user\models\User`.
@@ -35,8 +36,6 @@ class UserSearch extends Model
     public function rules()
     {
         return [
-            // [['id', 'created_at', 'updated_at', 'status'], 'integer'],
-            // [['username', 'auth_key', 'email_confirm_token', 'password_hash', 'password_reset_token', 'email'], 'safe'],
             [['id', 'status'], 'integer'],
             [['username', 'email', 'name', 'surname', 'patronymic', 'fullname', 'email', 'photo', 'position', 'role'], 'safe'],
             [['date_from', 'date_to'], 'date', 'format' => 'php:Y-m-d'],
@@ -49,17 +48,17 @@ class UserSearch extends Model
     {
         return [
             'id' => 'ID',
-            'created_at' => Yii::t('app', 'USER_CREATED'),
-            'updated_at' => Yii::t('app', 'USER_UPDATED'),
-            'surname' => Yii::t('app', 'USER_SURNAME'),
-            'name' => Yii::t('app', 'USER_NAME'),
-            'patronymic' => Yii::t('app', 'USER_PATRONYMIC'),
-            'fullname' => Yii::t('app', 'USER_FULLNAME'),
-            'shortname' => Yii::t('app', 'USER_SHORTNAME'),
-            'position' => Yii::t('app', 'USER_POSITION'),
-            'username' => Yii::t('app', 'USER_USERNAME'),
-            'email' => Yii::t('app', 'USER_EMAIL'),
-            'status' => Yii::t('app', 'USER_STATUS'),
+            'created_at' => Module::t('module', 'USER_CREATED'),
+            'updated_at' => Module::t('module', 'USER_UPDATED'),
+            'surname' => Module::t('module', 'USER_SURNAME'),
+            'name' => Module::t('module', 'USER_NAME'),
+            'patronymic' => Module::t('module', 'USER_PATRONYMIC'),
+            'fullname' => Module::t('module', 'USER_FULLNAME'),
+            'shortname' => Module::t('module', 'USER_SHORTNAME'),
+            'position' => Module::t('module', 'USER_POSITION'),
+            'username' => Module::t('module', 'USER_USERNAME'),
+            'email' => Module::t('module', 'USER_EMAIL'),
+            'status' => Module::t('module', 'USER_STATUS'),
         ];
     }
 
@@ -101,7 +100,6 @@ class UserSearch extends Model
                     'asc' => ['username' => SORT_ASC, 'email' => SORT_ASC],
                     'desc' => ['username' => SORT_DESC, 'email' => SORT_DESC],
                     'default' => SORT_DESC,
-                    // 'label' => 'Name',
                 ],
             ],
         ]);        
@@ -132,21 +130,6 @@ class UserSearch extends Model
             ->andFilterWhere(['<=', 'created_at', $this->date_to ? strtotime($this->date_to . ' 23:59:59') : null])
             ->andWhere('surname LIKE "%' . $this->fullname . '%" ' . 'OR name LIKE "%' . $this->fullname . '%" ' . 'OR patronymic LIKE "%' . $this->fullname . '%" '
             );
- 
-
-        // $query->andFilterWhere([
-        //     'id' => $this->id,
-        //     'created_at' => $this->created_at,
-        //     'updated_at' => $this->updated_at,
-        //     'status' => $this->status,
-        // ]);
-
-        // $query->andFilterWhere(['like', 'username', $this->username])
-        //     ->andFilterWhere(['like', 'auth_key', $this->auth_key])
-        //     ->andFilterWhere(['like', 'email_confirm_token', $this->email_confirm_token])
-        //     ->andFilterWhere(['like', 'password_hash', $this->password_hash])
-        //     ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
-        //     ->andFilterWhere(['like', 'email', $this->email]);
 
         return $dataProvider;
     }

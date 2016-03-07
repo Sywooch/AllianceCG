@@ -1,9 +1,8 @@
 <?php
 
-use yii\db\Schema;
 use yii\db\Migration;
 
-class m160214_083340_create_user_table extends Migration
+class m160307_125127_create_user_table extends Migration
 {
     public function up()
     {
@@ -19,8 +18,10 @@ class m160214_083340_create_user_table extends Migration
             'name' => $this->string(255),
             'surname' => $this->string(255),
             'patronymic' => $this->string(255),
+            'full_name' => $this->string(255),
             'photo' => $this->string(255),
             'position' => $this->string(255),
+            'role' => $this->string(255),
             'username' => $this->string()->notNull(),
             'auth_key' => $this->string(32),
             'email_confirm_token' => $this->string(),
@@ -39,15 +40,4 @@ class m160214_083340_create_user_table extends Migration
     {
         $this->dropTable('{{%user}}');
     }
-
-    /*
-    // Use safeUp/safeDown to run migration code within a transaction
-    public function safeUp()
-    {
-    }
-
-    public function safeDown()
-    {
-    }
-    */
 }

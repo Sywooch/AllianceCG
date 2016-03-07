@@ -3,6 +3,7 @@
 namespace app\modules\admin\models;
 
 use Yii;
+use app\modules\admin\Module;
 
 /**
  * This is the model class for table "{{%positions}}".
@@ -39,9 +40,12 @@ class Positions extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'position' => Yii::t('app', 'ADMIN_POSITIONS_POSITION'),
-            'description' => Yii::t('app', 'ADMIN_POSITIONS_DESCRIPTION'),
+            // 'id' => Yii::t('app', 'ID'),
+            // 'position' => Yii::t('app', 'ADMIN_POSITIONS_POSITION'),
+            // 'description' => Yii::t('app', 'ADMIN_POSITIONS_DESCRIPTION'),
+            'id' => Module::t('module', 'ID'),
+            'position' => Module::t('module', 'ADMIN_POSITIONS_POSITION'),
+            'description' => Module::t('module', 'ADMIN_POSITIONS_DESCRIPTION'),            
         ];
     }
 }

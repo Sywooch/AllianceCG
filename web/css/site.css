@@ -180,6 +180,12 @@ a.desc:after {
     margin-top: -6%;
 }
 
+.companies-search-form {
+    /* width: 40%; */
+    float: right;
+    margin-top: -6%;
+}
+
 .servicesheduler-search-form {
     /* width: 40%; */
     float: right;

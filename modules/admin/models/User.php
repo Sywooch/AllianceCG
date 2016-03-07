@@ -3,7 +3,8 @@
 namespace app\modules\admin\models;
  
 use yii\helpers\ArrayHelper;
-use app\modules\user\Module;
+// use app\modules\user\Module;
+use app\modules\admin\Module;
 use Yii;
  
 class User extends \app\modules\user\models\User
@@ -38,9 +39,9 @@ class User extends \app\modules\user\models\User
     public function attributeLabels()
     {
         return ArrayHelper::merge(parent::attributeLabels(), [
-            'newPassword' => Yii::t('app', 'USER_NEW_PASSWORD'),
-            'newPasswordRepeat' => Yii::t('app', 'USER_REPEAT_PASSWORD'),
-            'role' => Yii::t('app', 'USER_ROLE'),
+            'newPassword' => Module::t('module', 'ADMIN_USER_NEW_PASSWORD'),
+            'newPasswordRepeat' => Module::t('module', 'ADMIN_USER_REPEAT_PASSWORD'),
+            'role' => Module::t('module', 'ADMIN_USERS_ROLE'),
         ]);
     }
 
@@ -67,9 +68,6 @@ class User extends \app\modules\user\models\User
                 $first_patronymic = mb_strtoupper($first_patronymic, 'UTF-8');
                 $last_patronymic = mb_strtolower($last_patronymic, 'UTF-8');
                 $this->patronymic = $first_patronymic.$last_patronymic;
-
-                // $this->fullname=$this->surname . ' ' . $this->name . ' ' . $this->patronymic;
-                // $this->shortname=$this->surname . ' ' . mb_substr($this->name,0,1,'UTF-8') . '.' . mb_substr($this->patronymic,0,1,'UTF-8') . '.';
                 $this->username=$this->surname.mb_substr($this->name,0,1,'UTF-8').mb_substr($this->patronymic,0,1,'UTF-8');
                 $this->full_name = $this->name . ' ' . $this->surname;
             }
@@ -91,12 +89,8 @@ class User extends \app\modules\user\models\User
                 $first_patronymic = mb_strtoupper($first_patronymic, 'UTF-8');
                 $last_patronymic = mb_strtolower($last_patronymic, 'UTF-8');
                 $this->patronymic = $first_patronymic.$last_patronymic;
-
-                // $this->fullname=$this->surname . ' ' . $this->name . ' ' . $this->patronymic;
-                // $this->shortname=$this->surname . ' ' . mb_substr($this->name,0,1,'UTF-8') . '.' . mb_substr($this->patronymic,0,1,'UTF-8') . '.';
                 $this->username=$this->surname.mb_substr($this->name,0,1,'UTF-8').mb_substr($this->patronymic,0,1,'UTF-8');
                 $this->full_name = $this->name . ' ' . $this->surname;
-                // $this->photo = $this->surname;
             }
             return true;
         }

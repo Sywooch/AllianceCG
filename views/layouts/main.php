@@ -72,6 +72,7 @@ AppAsset::register($this);
                 ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_ADMIN'), 'url' => ['/admin/default/index']],
                 ['label' => '<span class="glyphicon glyphicon-user"></span> ' . Yii::t('app', 'ADMIN_USERS'), 'url' => ['/admin/users/index'], ],
                 ['label' => '<span class="glyphicon glyphicon-briefcase"></span> ' . Yii::t('app', 'ADMIN_POSITIONS'), 'url' => ['/admin/positions/index']],
+                ['label' => '<span class="glyphicon glyphicon-tent"></span> ' . Yii::t('app', 'ADMIN_COMPANIES'), 'url' => ['/admin/companies/index']],
             ]] :
             false,
         !Yii::$app->user->isGuest ?

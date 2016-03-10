@@ -44,11 +44,14 @@ $(function () {
         });
 
         var serviceLoad = $.getValues("/src/skoda_statusmonitorgraph.php"); 
-        var workerLoad = $.getValues("/src/skoda_service_worker_load.php");
+        var workerLoad = $.getValues("/src/skoda_serviceworkerloadgraph.php");
 
     $('#skoda').highcharts({
         chart: {
-            type: 'line',
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'area',
             renderTo: 'container',
             margin: 75,
             options3d: {
@@ -58,6 +61,16 @@ $(function () {
                 depth: 50,
                 viewDistance: 25
             }
+        },
+        labels: {
+            items: [{
+                // html: 'Заголовок',
+                style: {
+                    left: '50px',
+                    top: '18px',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                }
+            }]
         },
         title: {
             text: 'График нагрузки (текущий месяц)',
@@ -71,17 +84,52 @@ $(function () {
             text: "Alliance Company Group",            
         },
         subtitle: {
-            text: 'ООО "СтрелаАвто"',
+            text: '<b>ООО "СтрелаАвто"</b>',
             x: -20
         },
         plotOptions: {
             column: {
                 depth: 25
+            },
+            area: {
+                fillColor: {
+                    linearGradient: {
+                        x1: 0,
+                        y1: 0,
+                        x2: 0,
+                        y2: 1
+                    },
+                    stops: [
+                        [0, Highcharts.getOptions().colors[0]],
+                        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                    ]
+                },
+                marker: {
+                    radius: 2
+                },
+                lineWidth: 1,
+                states: {
+                    hover: {
+                        lineWidth: 1
+                    }
+                },
+                threshold: null
+            },
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>:<br/>{point.y} ({point.percentage:.1f} %)',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
             }
         },
         xAxis: {
             title: {
-                text: 'Дата'
+                text: '<b>Дата</b>'
             },
             categories: [],
                 labels: {
@@ -90,7 +138,7 @@ $(function () {
         },
         yAxis: {
             title: {
-                text: 'Кол-во автомобилей в день'
+                text: '<b>Кол-во автомобилей на дату</b>'
             },
             tickInterval: 1,
         },
@@ -101,43 +149,39 @@ $(function () {
             borderWidth: 0
         },
         series: [{
-            name: 'Кол-во автомобилей в день',
+            name: 'Кол-во автомобилей на дату',
             data: serviceLoad,
             color: '#4ba82e',
             dataLabels: {
                 enabled: true,
-                rotation: -90,
-                color: '#FFFFFF',
-                align: 'right',
-                x: 4,
-                y: 10,
+                // rotation: -90,
+                color: '#4ba82e',
+                // align: 'right',
+                x: 5,
+                y: -5,
                 style: {
                     fontSize: '13px',
                     fontFamily: 'Verdana, sans-serif',
-                    textShadow: '0 0 3px black'
+                    // textShadow: '0 0 3px black'
                 }
             }
         },
         {
             type: 'pie',
-            name: 'Total consumption',
+            name: 'Кол-во',
             data: workerLoad,
-            center: [100, 80],
+            center: [200, 30],
             size: 100,
-            showInLegend: false,
+            showInLegend: true,
             dataLabels: {
-                enabled: false
+                enabled: true,
             }
-        
-
-        }
-
-        ]
+        }]
     });
 });
 </script>
 
-<div class="col-lg-10" id="skoda"></div>
+<div class="col-lg-12" id="skoda"></div>
 
 
 

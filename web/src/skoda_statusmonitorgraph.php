@@ -2,13 +2,6 @@
 
 include 'dbconn.php';
 
-$mysqli = new mysqli($dbhost, $dbuser, $dbpassword, $dbname);
-
-if ($mysqli->connect_errno) {
-    printf("Не удалось подключиться: %s\n", $mysqli->connect_error);
-    exit();
-}
-
 $query = "SELECT DATE_FORMAT(`to`, '%Y-%m-%d') as date, COUNT(`regnumber`) AS car FROM sk_statusmonitor WHERE MONTH(DATE_FORMAT(`to`, '%Y-%m-%d')) = MONTH(CURDATE()) GROUP BY date";
 $result = $mysqli->query($query);
 

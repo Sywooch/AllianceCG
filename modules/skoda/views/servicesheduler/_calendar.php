@@ -28,7 +28,7 @@
     		//     $dataProvider,
     		// ],
 			lang: 'ru',
-			events: "/src/skoda_servicesheduler.php",
+			events: "/src/skoda_servicesheduler_cal.php",
 			// dayClick: function(date, jsEvent, view, resourceObj) {
    //      		window.location.replace('servicesheduler/create');
 			// },

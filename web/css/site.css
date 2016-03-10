@@ -105,12 +105,12 @@ a.desc:after {
     /*background-color: #4ba82e;*/
 }
 
-.navbar-nav > li > .dropdown-menu a:hover{
+.navbar-skoda > li > .dropdown-menu a:hover{
     color: #4ba82e;
     /*background-color: #4ba82e;*/
 }
 
-.navbar-fixed-top a:link {
+.navbar-skoda a:link {
     color:#FFFFFF;
 }
 
@@ -167,7 +167,7 @@ a.desc:after {
 }
 
 .user-form {
-    width: 50%;
+    width: 60%;
 }
 
 .positions-form {

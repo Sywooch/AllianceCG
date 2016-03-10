@@ -10,20 +10,27 @@ use yii\web\ForbiddenHttpException;
 class Module extends \yii\base\Module
 {
     public $controllerNamespace = 'app\modules\main\controllers';
-    // public function behaviors()
-    // {
-    //     return [
-    //         'access' => [
-    //             'class' => AccessControl::className(),
-    //             'rules' => [
-    //                 [
-    //                     'allow' => true,
-    //                     'roles' => ['?'],
-    //                 ],          
-    //             ],
-    //         ],
-    //     ];
-    // }
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),                
+                'only' => ['index', 'contact', 'error'],
+                'rules' => [
+                    [
+                        'actions'=>['contact'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions'=>['index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }    
 
     public function init()
     {
@@ -31,7 +38,6 @@ class Module extends \yii\base\Module
         if (Yii::$app instanceof ConsoleApplication) {
             $this->controllerNamespace = 'app\modules\main\commands';
         }
-        // custom initialization code goes here
     }
 
     public static function t($category, $message, $params = [], $language = null)

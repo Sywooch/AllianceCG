@@ -49,8 +49,12 @@ $this->registerJs('
     </p>
 
     <?php
-        $begin_end = '<span class="label label-success">{begin} - {end}</span></h1>';
-    // $begin = 'begin';
+        // bootstrap label summary widget
+        $begin_end = '<span class="label label-success">{begin} - {end}</span>';
+        $count = '<span class="label label-danger">{count}</span>';
+        $totalCount = '<span class="label label-primary">{totalCount}</span>';
+        $page = '<span class="label label-primary">{page}</span>';
+        $pageCount = '<span class="label label-primary">{pageCount}</span>';
     ?>
 
     <?= GridView::widget([
@@ -58,7 +62,8 @@ $this->registerJs('
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'layout'=>"{pager}\n{summary}\n{items}",
-        'summary' => "$begin_end {count} {totalCount} {page} {pageCount}",
+        // Виджет суммарных результатов с использованием bootstrap label
+        // 'summary' => "Показаны записи $begin_end из $count . Всего $totalCount . Стр. $page из $pageCount" . '<br/><br/>',
         'columns' => [
             [
                 'class' => 'yii\grid\SerialColumn',

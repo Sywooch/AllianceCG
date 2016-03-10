@@ -21,21 +21,13 @@ use app\modules\admin\Module;
 
 <h1><span class="glyphicon glyphicon-search" style='padding-right:10px;'></span> <?= Module::t('module', 'ADMIN_SEARCH_TITLE') ?> </h1>
 
-    <?php 
-        // $form->field($model, 'company_name') 
-    ?>
-
     <?= $form->field($model, 'company_name', ['template'=>' <div class="input-group"><span class="input-group-addon" style="width: 0;"><span class="glyphicon glyphicon-tent"></span></span>{input}'])->textInput(['placeholder' => $model->getAttributeLabel( 'company_name' )]) . '</div>' ?>
-
-    <?php
-        // $form->field($model, 'company_brand') 
-    ?>
 
     <?= $form->field($model, 'company_brand', ['template'=>' <div class="input-group"><span class="input-group-addon" style="width: 0;"><span class="glyphicon glyphicon-tent"></span></span>{input}'])->textInput(['placeholder' => $model->getAttributeLabel( 'company_brand' )]) . '</div>' ?>    
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('<span class="glyphicon glyphicon-search"></span>  ' . Module::t('module', 'ADMIN_POSITION_SEARCH'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton('<span class="glyphicon glyphicon-filter"></span>  ' . Module::t('module', 'ADMIN_POSITION_RESET'), ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

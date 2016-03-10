@@ -36,7 +36,8 @@ AppAsset::register($this);
             return 'navbar navbar-fixed-top navbar-skoda';
         }
         else{
-            return 'navbar-inverse navbar-fixed-top';
+            // return 'navbar-inverse navbar-fixed-top';
+            return 'navbar navbar-fixed-top';
         }
     }
 

@@ -78,5 +78,6 @@
 		'ADMIN_COMPANIES_REFRESH' => 'Обновить',
 		'ADMIN_COMPANIES_UPDATE' => 'Редактировать',
 		'ADMIN_COMPANIES_DELETE' => 'Удалить',
+		// 'ADMIN_COMPANIES_UPDATE' => 
 
 	];

@@ -39,5 +39,6 @@ return [
 	'USER_PATRONYMIC' => 'Отчество',	
 	'USER_USERNAME' => 'Имя пользователя',	
 	'USER_COMPANY' => 'Организация',
+	'USER_PASSWORD' => 'Пароль',
 
 ];

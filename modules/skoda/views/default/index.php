@@ -1,3 +1,4 @@
+<meta charset="UTF-8">
 
 <!-- <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js'></script> -->
 <!-- <link rel="stylesheet" href="/css/queryLoader.css" type="text/css" /> -->
@@ -42,11 +43,12 @@ $(function () {
             }
         });
 
-        var myServerData = $.getValues("/src/skoda_statusmonitorgraph.php"); 
+        var serviceLoad = $.getValues("/src/skoda_statusmonitorgraph.php"); 
+        var workerLoad = $.getValues("/src/skoda_service_worker_load.php");
 
     $('#skoda').highcharts({
         chart: {
-            type: 'column',
+            type: 'line',
             renderTo: 'container',
             margin: 75,
             options3d: {
@@ -64,9 +66,9 @@ $(function () {
         credits: {
             enabled: true,
             href: "http://www.alians-kmv.ru",
-            position: undefined,
-            style: undefined,
-            text: "Alliance CG",            
+            // position: undefined,
+            // style: undefined,
+            text: "Alliance Company Group",            
         },
         subtitle: {
             text: 'ООО "СтрелаАвто"',
@@ -100,7 +102,7 @@ $(function () {
         },
         series: [{
             name: 'Кол-во автомобилей в день',
-            data: myServerData,
+            data: serviceLoad,
             color: '#4ba82e',
             dataLabels: {
                 enabled: true,
@@ -115,12 +117,28 @@ $(function () {
                     textShadow: '0 0 3px black'
                 }
             }
-        }]
+        },
+        {
+            type: 'pie',
+            name: 'Total consumption',
+            data: workerLoad,
+            center: [100, 80],
+            size: 100,
+            showInLegend: false,
+            dataLabels: {
+                enabled: false
+            }
+        
+
+        }
+
+        ]
     });
 });
 </script>
 
-<div id="skoda" style="width:70%; height:300px;" align="center"></div>
+<div class="col-lg-10" id="skoda"></div>
+
 
 
 <!--script type='text/javascript'>

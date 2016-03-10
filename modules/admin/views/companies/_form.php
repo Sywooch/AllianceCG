@@ -30,8 +30,19 @@ use app\modules\admin\Module;
     <?= $form->field($model, 'company_brand')->textInput(['maxlength' => true]) ?>
 
     <?php
-        // $form->field($model, 'company_logo')->textInput(['maxlength' => true]) 
-    ?>
+        $preview = !empty($model->company_logo) ? $model->company_logo : false;
+    ?>        
+
+    <div class="col-lg-3">
+        <?php
+            // Html::img('/' . $preview, ['height'=>'50']); 
+        ?>
+    </div>
+    <div class="col-lg-9">
+        <?php
+            // $form->field($model, 'brandlogo')->fileInput() 
+        ?>
+    </div>
 
     <?= $form->field($model, 'brandlogo')->fileInput() ?>
 

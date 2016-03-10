@@ -8,6 +8,7 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
+use yii\helpers\Url;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
@@ -29,8 +30,8 @@ AppAsset::register($this);
  <?php
 
     function getNavbarCSS()
-    {
-        $curmodule = Yii::$app->controller->module->id;
+    {   
+        $curmodule = Yii::$app->controller->module->id;    
         if($curmodule == 'skoda'){
             return 'navbar navbar-fixed-top navbar-skoda';
         }
@@ -39,15 +40,33 @@ AppAsset::register($this);
         }
     }
 
+    function getNavbarBrandUrl()
+    {   
+        $curmodule = Yii::$app->controller->module->id;    
+        if($curmodule == 'skoda'){
+            return Url::toRoute('/skoda');
+        }
+        else{
+            return Yii::$app->homeUrl;
+        }
+    }    
+
+    function getNavbarLogo()
+    {
+        $curmodule = Yii::$app->controller->module->id;    
+        if($curmodule == 'skoda'){
+            return Html::img('@web/img/logo/skoda_logo.png', ['width'=>'48','height'=>'48']);
+        }
+        else{
+            return Html::img('@web/img/logo/alliance_logo.png', ['height'=>'55']);
+        }
+    }
+
     NavBar::begin([
-        // 'brandLabel' => 'My Company',
-        // 'brandLabel' => '<img src="img/logo/fsrar_orig.png" height="36" width="36" class="pull-left"/>FSRAR_LOGO',
-        'brandLabel' => Html::img('@web/img/logo/logo.png', ['width'=>'48','height'=>'48']),
-        'brandUrl' => Yii::$app->homeUrl,
+        'brandLabel' => getNavbarLogo(),
+        'brandUrl' => getNavbarBrandUrl(),
         'options' => [
             'class' => getNavbarCSS(),
-            // 'class' => 'navbar-inverse navbar-fixed-top',
-            'class' => 'navbar navbar-fixed-top navbar-skoda',
         ],
     ]);
     echo Nav::widget([

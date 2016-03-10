@@ -18,9 +18,20 @@ MODULES STRUCTURE
 INSTALLATION
 ------------
 
+Create a project
+
 ~~~
 composer global require "fxp/composer-asset-plugin:~1.0.0"
 composer create-project --prefer-dist --stability=dev m-ishchenko/skoda project
+~~~
+
+Or clone the repository for pull command availability:
+
+~~~
+git clone https://github.com/m-ishchenko/skoda.git project
+cd project
+composer global require "fxp/composer-asset-plugin:~1.0.0"
+composer install
 ~~~
 
 ### Install from an Archive File

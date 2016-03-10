@@ -97,6 +97,20 @@ class Statusmonitor extends \yii\db\ActiveRecord
         return $cssclass;        
     }   
 
+    public function getStatusBarAnimation()
+    {
+        // $today = Yii::$app->getFormatter()->asDatetime(time());
+        $today = Yii::$app->formatter->asDatetime(date('Y-m-d H:i:s'));
+        if (strtotime($today) >= strtotime($this->from) AND strtotime($today) < strtotime($this->to)) {
+            $animcssclass = 'active progress-striped';
+        }
+        else {
+            $animcssclass = ' ';
+        }    
+
+        return $animcssclass;        
+    }      
+
     // public function getFromDateFormat()
     // {
     //     // $today = Yii::$app->getFormatter()->asDatetime(time());

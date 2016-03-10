@@ -146,12 +146,14 @@ $this->title = Module::t('module', 'STATUSMONITOR_TITLE');
                 'attribute' => 'progress',
                 'content' => function($data) {
                     return Progress::widget([
-                        // 'percent' => 60,
                         'percent' => $data->getPercentStatusBar(),
                         'label' => $data->getPercentStatusBar(),
                         'barOptions' => [
                             'class' => $data->getColorStatusBar(),
                         ],
+                        'options' => [
+                            'class' => $data->getStatusBarAnimation(),
+                        ]
                     ]);
                 },
                 'contentOptions'=>['style'=>'width: 300px;'],

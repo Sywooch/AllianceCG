@@ -1,0 +1,1 @@
+ SELECT DISTINCT(DATE_FORMAT(FROM_UNIXTIME(created_at), '%Y-%m-%d')) AS date, COUNT(id) AS userscount FROM sk_user GROUP BY date;

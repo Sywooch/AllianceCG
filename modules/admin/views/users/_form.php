@@ -3,6 +3,7 @@
 use app\modules\admin\models\User;
 use app\modules\admin\Module;
 use app\modules\admin\models\Positions;
+use app\modules\admin\models\Companies;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -43,6 +44,23 @@ use yii\widgets\ActiveForm;
         ];
         echo $form->field($model, 'position', ['template'=>'<div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-briefcase"></span></span>{input}</div>{error}'])->dropDownList($items,$params);
     ?>
+
+    
+    <?php
+        $companies = Companies::find()->all();
+
+        foreach ($companies as $arr) {
+            $arr->merge_companies = $arr->company_name . ' (' . $arr->company_brand . ')';
+        }
+    
+        $items = ArrayHelper::map($companies,'company_name','merge_companies');
+        $params = [
+            'prompt' => '-- ' . $model->getAttributeLabel( 'company' ) . ' --',
+            // 'template'=>' <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>{input}</div>{error}'
+            // 'template'=>'{input}{error}}',
+        ];
+        echo $form->field($model, 'position', ['template'=>'<div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-tent"></span></span>{input}</div>{error}'])->dropDownList($items,$params);
+    ?>    
 
     <?=  $form->field($model, 'role', ['template'=>'<div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-briefcase"></span></span>{input}</div>{error}'])->dropDownList(User::getRolesArray(),['prompt'=>'-- ' . $model->getAttributeLabel( 'role' ) . ' --']); ?>
 

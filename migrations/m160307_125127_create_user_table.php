@@ -20,6 +20,7 @@ class m160307_125127_create_user_table extends Migration
             'patronymic' => $this->string(255),
             'full_name' => $this->string(255),
             'photo' => $this->string(255),
+            'company' => $this->string(255),
             'position' => $this->string(255),
             'role' => $this->string(255),
             'username' => $this->string()->notNull(),

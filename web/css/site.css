@@ -254,3 +254,12 @@ a.desc:after {
 .col-lg-5 {
     width: 50%;
 }
+
+.statusmonitor-item h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#servicesheduler-responsible label{
+    width: 50%;
+}

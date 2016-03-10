@@ -8,6 +8,7 @@ use app\modules\admin\models\CompaniesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * CompaniesController implements the CRUD actions for Companies model.
@@ -41,6 +42,30 @@ class CompaniesController extends Controller
         ]);
     }
 
+    public function actionCreate()
+    {
+        $model = new Companies();
+ 
+        if ($model->load(Yii::$app->request->post())) {
+
+            $imageName = mktime(date('h'), date('i'), date('s'), date('d'), date('m'), date('y'));
+            $model->brandlogo = UploadedFile::getInstance($model, 'brandlogo');
+            if ($model->brandlogo = UploadedFile::getInstance($model, 'brandlogo'))
+            {
+                $model->brandlogo->saveAs('img/uploads/companylogo/'.$imageName.'.'.$model->brandlogo->extension);
+                $model->company_logo = 'img/uploads/companylogo/'.$imageName.'.'.$model->brandlogo->extension;
+            }
+
+            $model->save();
+
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+    }     
+
     /**
      * Displays a single Companies model.
      * @param integer $id
@@ -58,18 +83,18 @@ class CompaniesController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
-        $model = new Companies();
+    // public function actionCreate()
+    // {
+    //     $model = new Companies();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }
+    //     if ($model->load(Yii::$app->request->post()) && $model->save()) {
+    //         return $this->redirect(['view', 'id' => $model->id]);
+    //     } else {
+    //         return $this->render('create', [
+    //             'model' => $model,
+    //         ]);
+    //     }
+    // }
 
     /**
      * Updates an existing Companies model.
@@ -118,4 +143,19 @@ class CompaniesController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionMultipledelete()
+    {
+        $pk = Yii::$app->request->post('row_id');
+
+        foreach ($pk as $key => $value) 
+        {
+            $sql = "DELETE FROM sk_companies WHERE id = $value";
+            $query = Yii::$app->db->createCommand($sql)->execute();
+        }
+
+        return $this->redirect(['index']);
+
+    }
+
 }

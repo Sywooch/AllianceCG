@@ -28,7 +28,7 @@ use kartik\datetime\DateTimePicker;
 
     <?= $form->errorSummary($model); ?>
 
-    <?= $form->field($model, 'regnumber')->widget(\yii\widgets\MaskedInput::className(), ['mask' => 'a999aa-99',]) ?>   
+    <?= $form->field($model, 'regnumber')->widget(\yii\widgets\MaskedInput::className(), ['mask' => 'a999aa-99*',]) ?>   
 
 <div class="input-group">
 

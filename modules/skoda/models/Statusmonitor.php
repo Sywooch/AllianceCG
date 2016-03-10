@@ -165,7 +165,7 @@ class Statusmonitor extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['regnumber'], 'required'],
+            [['regnumber', 'from', 'to'], 'required'],
             // [['status'], 'integer'],
             [['from', 'to', 'regnumber'], 'safe'],
             // ['to', WorkshedulerValidator::className()],

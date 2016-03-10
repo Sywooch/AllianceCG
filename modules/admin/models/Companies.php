@@ -4,6 +4,7 @@ namespace app\modules\admin\models;
 
 use Yii;
 use app\modules\admin\Module;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "{{%companies}}".
@@ -18,7 +19,9 @@ class Companies extends \yii\db\ActiveRecord
 {
 
     public $brandlogo;
+    public $logo;
     public $file;
+    public $merge_companies;
 
     /**
      * @inheritdoc
@@ -38,6 +41,9 @@ class Companies extends \yii\db\ActiveRecord
             [['company_name', 'company_brand'], 'required'],
             [['company_name', 'company_brand', 'company_logo'], 'string', 'max' => 255],
             [['company_description'], 'string'],
+            [['brandlogo'], 'safe'],
+            [['brandlogo'], 'file'],
+            // [['brandlogo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 1],
         ];
     }
 
@@ -51,7 +57,21 @@ class Companies extends \yii\db\ActiveRecord
             'company_name' => Module::t('module', 'ADMIN_COMPANY_NAME'),
             'company_brand' => Module::t('module', 'ADMIN_COMPANY_BRAND'),
             'company_logo' => Module::t('module', 'ADMIN_COMPANY_LOGO'),
+            'brandlogo' => Module::t('module', 'ADMIN_COMPANY_LOGO'),
             'company_description' => Module::t('module', 'ADMIN_COMPANY_DESCRIPTION'),
         ];
     }
+
+    public function getLogoName()
+    {
+        $company_title = !empty($this->company_logo) ? Html::img('/' . $this->company_logo,['height' => '50']) . ' ' . $this->company_name : $this->company_name;
+        return $company_title;
+    }
+
+    public function getSingleLogo()
+    {
+        $nologo = 'img/logo/company_nologo.png';
+        $logo = !empty($this->company_logo) ? '/' . $this->company_logo : '/' . $nologo;
+        return $logo;
+    }    
 }

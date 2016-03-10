@@ -90,7 +90,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 1],
             [['surname', 'name', 'patronymic', 'full_name', 'photo', 'position'], 'string', 'max' => 255],
             
-            [['surname', 'name', 'patronymic','position', 'email', 'role'], 'required'],
+            [['surname', 'name', 'patronymic','position', 'email', 'role', 'company'], 'required'],
                
 
             // Simbol match in username-field
@@ -100,7 +100,7 @@ class User extends ActiveRecord implements IdentityInterface
             // ['username', 'unique', 'targetClass' => self::className(), 'message' => Yii::t('app', 'ERROR_USERNAME_EXISTS')],
 
             // Username - type strind, min. symbol - 2, max. symbol - 255
-            [['username', 'avatar', 'role'], 'string', 'min' => 2, 'max' => 255],
+            [['username', 'avatar', 'role', 'company'], 'string', 'min' => 2, 'max' => 255],
  
 
             // Field validator - Email
@@ -151,6 +151,7 @@ class User extends ActiveRecord implements IdentityInterface
             'allname' => Module::t('module', 'USER_FULLNAME'),
             'photo' => Module::t('module', 'USER_PHOTO'),
             'file' => Module::t('module', 'USER_PHOTO'),
+            'company' => Module::t('module', 'USER_COMPANY'),
         ];
     }    
 

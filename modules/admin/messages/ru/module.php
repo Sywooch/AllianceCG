@@ -1,11 +1,12 @@
 <?php
 
 	return [
+		'BUTTON_CREATE' => 'Сохранить',
 		// ADMIN DEFAULT
 		'ADMIN' => 'Администрирование',
 		'ADMIN_USERS' => 'Пользователи',
 		'ADMIN_POSITIONS' => 'Должности',
-		'ADMIN_COMPANIES' => 'Компании',
+		'ADMIN_COMPANIES' => 'Организации',
 
 		// ADMIN USERS INDEX
 		'ADMIN_USERS_CREATE' => 'Добавить',
@@ -65,5 +66,17 @@
 		'ADMIN_COMPANY_BRAND' => 'Бренд',
 		'ADMIN_COMPANY_LOGO' => 'Логотип',
 		'ADMIN_COMPANY_DESCRIPTION' => 'Описание',
+
+		'USER_POSITION' => 'Должность',
+		'USER_FULLNAME' => 'Ф.И.О.',
+		'USER_EMAIL' => 'EMAIL',
+		'ADMIN_USER_NEW_PASSWORD' => 'Новый пароль',
+		'ADMIN_USER_REPEAT_PASSWORD' => 'Повтор пароля',
+		'USER_STATUS' => 'Статус',
+
+		'ADMIN_COMPANIES_CREATE' => 'Добавить',
+		'ADMIN_COMPANIES_REFRESH' => 'Обновить',
+		'ADMIN_COMPANIES_UPDATE' => 'Редактировать',
+		'ADMIN_COMPANIES_DELETE' => 'Удалить',
 
 	];

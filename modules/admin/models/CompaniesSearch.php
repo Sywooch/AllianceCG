@@ -12,6 +12,9 @@ use app\modules\admin\models\Companies;
  */
 class CompaniesSearch extends Companies
 {
+
+    public $brandlogo;
+
     /**
      * @inheritdoc
      */
@@ -19,7 +22,8 @@ class CompaniesSearch extends Companies
     {
         return [
             [['id'], 'integer'],
-            [['company_name', 'company_brand', 'company_logo', 'company_description'], 'safe'],
+            [['brandlogo'], 'safe'],
+            [['company_name', 'company_brand', 'company_logo', 'company_description', 'brandlogo'], 'safe'],
         ];
     }
 

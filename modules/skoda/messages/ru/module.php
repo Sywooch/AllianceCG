@@ -33,6 +33,6 @@
 		'SERVICESHEDULER_CREATE' => 'Добавление',
 		'SERVICESHEDULER' => 'График смен',
 		'STATUSMONITOR' => 'Монитор готовности',
-		'STATUS_SHOW_MONITOR' => 'Просмотр',
+		'STATUS_SHOW_MONITOR' => 'Просмотр',	
 	];
 	

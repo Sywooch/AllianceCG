@@ -1,7 +1,7 @@
 
-<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js'></script>
-<link rel="stylesheet" href="/css/queryLoader.css" type="text/css" />
-<script type='text/javascript' src='/js/queryLoader.js'></script>
+<!-- <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js'></script> -->
+<!-- <link rel="stylesheet" href="/css/queryLoader.css" type="text/css" /> -->
+<!-- <script type='text/javascript' src='/js/queryLoader.js'></script> -->
 
 <?php
 
@@ -123,6 +123,6 @@ $(function () {
 <div id="skoda" style="width:70%; height:300px;" align="center"></div>
 
 
-<script type='text/javascript'>
-    // QueryLoader.init();
-</script>
+<!--script type='text/javascript'>
+    QueryLoader.init();
+</script-->

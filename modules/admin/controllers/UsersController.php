@@ -74,7 +74,7 @@ class UsersController extends Controller
     //         ]);
     //     }
     // }
-
+ 
     public function actionCreate()
     {
         $model = new User();

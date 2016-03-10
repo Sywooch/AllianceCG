@@ -65,32 +65,6 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => 'yii\grid\CheckboxColumn',
                 'contentOptions'=>['style'=>'width: 20px;']
-            ],           
-            // [
-            //     'filter' => DatePicker::widget([
-            //         'model' => $searchModel,
-            //         'attribute' => 'date_from',
-            //         'attribute2' => 'date_to',
-            //         'type' => DatePicker::TYPE_RANGE,
-            //         'separator' => '-',
-            //         'pluginOptions' => ['format' => 'yyyy-mm-dd']
-            //     ]),
-            //     'attribute' => 'created_at',
-            //     'format' => 'datetime',
-            //     'contentOptions'=>['style'=>'max-width: 100px;'],
-            // ],
-            [
-                'class' => LinkColumn::className(),
-                'attribute' => 'fullname',
-                'filter' => false,
-                'format' => 'raw',    
-                'value' => function ($data) {
-                    // return Html::img(Yii::$app->request->BaseUrl.'/'.$data->photo,
-                    // ['width' => '50px']);
-                    // return Html::img($data->getFullname(), ['class' => 'user_title_grid']);
-                    return $data->getFullname();
-                },
-                // 'contentOptions'=>['style'=>'width: 100px;'],
             ],
             [
                 'attribute' => 'photo',
@@ -100,20 +74,23 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions'=>['style'=>'width: 60px;'],
                 
             ],
-            // 'position',
+            [
+                'class' => LinkColumn::className(),
+                'attribute' => 'fullname',
+                'filter' => false,
+                'format' => 'raw',    
+                'value' => function ($data) {
+                    return $data->getFullname();
+                },
+                // 'contentOptions'=>['style'=>'width: 100px;'],
+            ],
             [
                 'attribute' => 'position',
                 'filter' => false,   
                 'contentOptions'=>['style'=>'width: 50px;'],
             ],
-            // [
-            //     'attribute' => 'role',
-            //     'filter' => false,   
-            //     'contentOptions'=>['style'=>'width: 50px;'],
-            // ],
             [
                 'class' => SetColumn::className(),
-                // 'value' => $data->getRolesArray(),
                 'filter' => false,
                 'attribute' => 'role',
                 'name' => 'role',
@@ -127,14 +104,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => SetColumn::className(),
-                // 'filter' => User::getStatusesArray(),
                 'filter' => false,
                 'attribute' => 'status',
                 'name' => 'statusName',
                 'contentOptions'=>['style'=>'width: 50px;'],
                 'cssCLasses' => [
                     User::STATUS_ACTIVE => 'success',
-                    // User::STATUS_WAIT => 'warning',
+                    User::STATUS_WAIT => 'warning',
                     User::STATUS_BLOCKED => 'default',
                 ],
             ],
@@ -145,17 +121,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                     'update' => function ($url, $model) {
                         $title = false;
-                        $options = []; // you forgot to initialize this
+                        $options = []; 
                         $icon = '<span class="glyphicon glyphicon-pencil"></span>';
                         $label = $icon;
                         $url = Url::toRoute(['update', 'id' => $model->id]);
                         $options['tabindex'] = '-1';
-                        // return '<li>' . Html::a($label, $url, $options) . '</li>' . PHP_EOL;
                         return Html::a($label, $url, $options) .''. PHP_EOL;
                     },
                 ],
             ],
-            // ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 

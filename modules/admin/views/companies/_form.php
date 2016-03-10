@@ -10,9 +10,10 @@ use app\modules\admin\Module;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="companies-form center-block">
+<!-- <div class="companies-form center-block"> -->
+<div class="user-form center-block">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <h1><span class="glyphicon glyphicon-tent" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
            
@@ -28,9 +29,11 @@ use app\modules\admin\Module;
 
     <?= $form->field($model, 'company_brand')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'company_logo')->textInput(['maxlength' => true]) ?>
+    <?php
+        // $form->field($model, 'company_logo')->textInput(['maxlength' => true]) 
+    ?>
 
-    <?php // $form->field($model, 'company_description')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'brandlogo')->fileInput() ?>
 
     <?= $form->field($model, 'company_description')->widget(TinyMce::className(), [
     'options' => ['rows' => 10, 'cols' => 20],
@@ -46,7 +49,7 @@ use app\modules\admin\Module;
 ]);?>    
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?php Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

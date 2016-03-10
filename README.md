@@ -10,18 +10,10 @@ Based on Basic Project Template of [Yii 2 Framework](http://www.yiiframework.com
 MODULES STRUCTURE
 -------------------
 
-      main/               contains main, error, login and logout action
-      user/               contains console commands (controllers)
-      admin/              contains application configurations
-      skoda/              contains Web controller classes
-
-
-
-REQUIREMENTS
-------------
-
-The minimum requirement by this project template that your Web server supports PHP 5.4.0.
-
+      main/               contains main, error, login and logout actions
+      user/               contains Identity interface, view, update profile, change password actions
+      admin/              contains User, Companies and Positions administration CRUD actions
+      skoda/              contains Service Sheduler, Statusmonitor actions for Skoda StrelaAvto
 
 INSTALLATION
 ------------

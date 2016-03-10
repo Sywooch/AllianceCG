@@ -113,7 +113,8 @@ $(function () {
                         lineWidth: 1
                     }
                 },
-                threshold: null
+                threshold: null,
+                softThreshold: true,
             },
             pie: {
                 allowPointSelect: true,

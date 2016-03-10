@@ -10,7 +10,7 @@ Based on Basic Project Template of [Yii 2 Framework](http://www.yiiframework.com
 MODULES STRUCTURE
 -------------------
 
-      main/               contains assets definition
+      main/               contains main, error, login and logout action
       user/               contains console commands (controllers)
       admin/              contains application configurations
       skoda/              contains Web controller classes

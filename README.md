@@ -18,6 +18,11 @@ MODULES STRUCTURE
 INSTALLATION
 ------------
 
+~~~
+composer global require "fxp/composer-asset-plugin:~1.0.0"
+composer create-project --prefer-dist --stability=dev m-ishchenko/skoda project
+~~~
+
 ### Install from an Archive File
 
 Extract the archive file downloaded from [yiiframework.com](http://www.yiiframework.com/download/) to
@@ -80,6 +85,3 @@ return [
 
 Also check and edit the other files in the `config/` directory to customize your application.
 =======
-# skoda
-Skoda interactive monitor
->>>>>>> 7f4e3778175ddf728a8bf34a425a8b9f6215adbd

@@ -34,7 +34,7 @@ composer global require "fxp/composer-asset-plugin:~1.0.0"
 composer install
 ~~~
 
-Setup a virtual host on web server to project directory
+Setup virtual host on web server to project directory
 
 Init an environment:
 
@@ -54,3 +54,5 @@ Sign up or create first user manually
 php yii user/users/create
 ~~~
 
+Also check and edit the other files in the `config/` directory to customize your application.
+=======

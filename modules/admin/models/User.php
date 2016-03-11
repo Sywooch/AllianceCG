@@ -23,7 +23,7 @@ class User extends \app\modules\user\models\User
             [['newPassword', 'newPasswordRepeat', 'role'], 'required', 'on' => self::SCENARIO_ADMIN_CREATE],
             ['newPassword', 'string', 'min' => 6],
             ['newPasswordRepeat', 'compare', 'compareAttribute' => 'newPassword'],
-            [['fullName', 'photo', 'file', 'role'], 'safe'],
+            [['fullName', 'photo', 'file', 'role', 'company'], 'safe'],
             [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 1],
         ]);
     }
@@ -31,8 +31,8 @@ class User extends \app\modules\user\models\User
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios[self::SCENARIO_ADMIN_CREATE] = ['surname', 'name', 'photo', 'role', 'patronymic', 'email', 'position', 'status', 'newPassword', 'newPasswordRepeat'];
-        $scenarios[self::SCENARIO_ADMIN_UPDATE] = ['surname', 'name', 'photo', 'role', 'patronymic', 'email', 'position', 'status', 'newPassword', 'newPasswordRepeat'];
+        $scenarios[self::SCENARIO_ADMIN_CREATE] = ['surname', 'name', 'photo', 'role', 'patronymic', 'email', 'position', 'company', 'status', 'newPassword', 'newPasswordRepeat'];
+        $scenarios[self::SCENARIO_ADMIN_UPDATE] = ['surname', 'name', 'photo', 'role', 'patronymic', 'email', 'position', 'company', 'status', 'newPassword', 'newPasswordRepeat'];
         return $scenarios;
     }
  

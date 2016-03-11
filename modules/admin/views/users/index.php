@@ -85,6 +85,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 // 'contentOptions'=>['style'=>'width: 100px;'],
             ],
             [
+                'attribute' => 'company',
+                'filter' => false,
+            ],
+            [
                 'attribute' => 'position',
                 'filter' => false,   
                 'contentOptions'=>['style'=>'width: 50px;'],

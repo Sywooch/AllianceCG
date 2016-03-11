@@ -122,7 +122,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
             ['role', 'in', 'range' => array_keys(self::getRolesArray())],
             [['fullname', 'avatar'], 'safe'],
-            [['mcname', 'role'], 'safe'],
+            [['mcname', 'role', 'company'], 'safe'],
 
         ];
     }

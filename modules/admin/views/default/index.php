@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="admin-default-index center-block">
     <h1><?= Html::encode($this->title) ?></h1>
  
-    <p>
+    <p style="text-align: right">
         <?= Html::a('<span class="glyphicon glyphicon-user"></span>  ' . Module::t('module', 'ADMIN_USERS'), ['users/index'], ['class' => 'btn btn-primary']) ?>
         
         <?= Html::a('<span class="glyphicon glyphicon-briefcase"></span>  ' . Module::t('module', 'ADMIN_POSITIONS'), ['positions/index'], ['class' => 'btn btn-primary']) ?>
@@ -43,7 +43,7 @@ $(function () {
         });
 
         var users_create = $.getValues("/src/admin_usercreategraph.php"); 
-        // var workerLoad = $.getValues("/src/skoda_serviceworkerloadgraph.php");
+        var users_by_company = $.getValues("/src/admin_companyusercountgraph.php");
 
     $('#admin').highcharts({
         chart: {
@@ -91,6 +91,7 @@ $(function () {
                 depth: 25
             },
             area: {
+                pointStart: 0,
                 fillColor: {
                     linearGradient: {
                         x1: 0,
@@ -112,20 +113,20 @@ $(function () {
                         lineWidth: 1
                     }
                 },
-                threshold: null,
-                softThreshold: true,
+                // threshold: 0,
+                // softThreshold: false,
             },
-            // pie: {
-            //     allowPointSelect: true,
-            //     cursor: 'pointer',
-            //     dataLabels: {
-            //         enabled: true,
-            //         format: '<b>{point.name}</b>:<br/>{point.y} ({point.percentage:.1f} %)',
-            //         style: {
-            //             color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-            //         }
-            //     }
-            // }
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>:<br/>{point.y} ({point.percentage:.1f} %)',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
         },
         xAxis: {
             title: {
@@ -137,10 +138,19 @@ $(function () {
             },
         },
         yAxis: {
+            // min: 0,
+            // max: 100,
+            // minRange : 0.1,
+            // minPadding: 0, 
+            // maxPadding: 0, 
+            // startOnTick: false,
+            // endOnTick: false,
             title: {
                 text: '<b>График регистрации пользователей</b>'
             },
             tickInterval: 1,
+            min: 0,
+            minRange: 0.1,
         },
         legend: {
             layout: 'vertical',
@@ -166,17 +176,17 @@ $(function () {
                 }
             }
         },
-        // {
-        //     type: 'pie',
-        //     name: 'Кол-во',
-        //     data: workerLoad,
-        //     center: [200, 30],
-        //     size: 100,
-        //     showInLegend: true,
-        //     dataLabels: {
-        //         enabled: true,
-        //     }
-        // }
+        {
+            type: 'pie',
+            name: 'Кол-во',
+            data: users_by_company,
+            center: [200, 30],
+            size: 100,
+            showInLegend: true,
+            dataLabels: {
+                enabled: true,
+            }
+        }
         ]
     });
 });

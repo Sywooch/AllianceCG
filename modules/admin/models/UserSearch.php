@@ -24,6 +24,7 @@ class UserSearch extends Model
     public $name;
     public $surname;
     public $position;
+    public $company;
     public $patronymic;
     public $email;
     public $status;
@@ -39,7 +40,7 @@ class UserSearch extends Model
             [['id', 'status'], 'integer'],
             [['username', 'email', 'name', 'surname', 'patronymic', 'fullname', 'email', 'photo', 'position', 'role'], 'safe'],
             [['date_from', 'date_to'], 'date', 'format' => 'php:Y-m-d'],
-            [['fullname'], 'safe'],
+            [['fullname', 'company'], 'safe'],
             ['photo', 'safe'],
         ];
     }
@@ -88,6 +89,7 @@ class UserSearch extends Model
                 'created_at',
                 'username',
                 'position',
+                'company',
                 'role',
                 'status',
                 'fullname' => [

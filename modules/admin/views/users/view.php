@@ -56,6 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'username',
             'position',
+            'company',
             // [
             //     'attribute' => 'position',
             //     'value' => $model->getPositionByPk(),

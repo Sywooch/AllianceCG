@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
  
     <p style="text-align: right">
-        <?php echo Html::a('<span class="glyphicon glyphicon-calendar"></span>  ' . Module::t('module', 'SERVICESHEDULER'), ['servicesheduler/index'], ['class' => 'btn btn-success']) ?>
+        <?php echo Html::a('<span class="glyphicon glyphicon-calendar"></span>  ' . Module::t('module', 'SERVICESHEDULER'), ['servicesheduler/calendar'], ['class' => 'btn btn-success']) ?>
         
         <?php echo Html::a('<span class="glyphicon glyphicon-wrench"></span>  ' . Module::t('module', 'STATUSMONITOR'), ['statusmonitor/index'], ['class' => 'btn btn-success']) ?>
     </p>    

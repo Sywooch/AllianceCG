@@ -2,10 +2,11 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\bootstrap\Tabs;
 use app\modules\skoda\Module;
-use yii\widgets\Pjax;
-// use app\components\grid\LinkColumn;
+use yii\bootstrap\Nav;
+use app\components\grid\LinkColumn;
+use app\components\grid\ActionColumn;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\skoda\models\ServiceshedulerSearch */
@@ -39,16 +40,13 @@ $this->registerJs('
     });
     });', \yii\web\View::POS_READY);
 
-
-
 $this->title = Module::t('module', 'SERVICESHEDULER_INDEX');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <h1><span class="glyphicon glyphicon-wrench" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
     
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
-<div class="servicesheduler-index center-block">
+    <?php // $this->render('_search', ['model' => $searchModel]); ?>
 
     <p style="text-align: right">
 
@@ -62,49 +60,67 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= Yii::$app->session->getFlash('error'); ?>    
 
-    <div class="servicesheduler-tabs">
     <?php
-
-echo Tabs::widget([
-    'items' => [
-        [
-            'label' => Module::t('module', 'SERVICESHEDULER_CALENDAR'),
-            'content' => $this->render('_calendar', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-                'events' => $events, 
+        echo Nav::widget([
+            'options' => ['class' => 'nav-tabs'],
+            'encodeLabels' => false,
+            'items' => array_filter([
+                [
+                    'label' => Module::t('module', 'SERVICESHEDULER_CALENDAR'),
+                    'url' => '/skoda/servicesheduler/calendar',
+                ],
+                [
+                    'label' => Module::t('module', 'SERVICESHEDULER_TABLE'),
+                    'url' => '/skoda/servicesheduler',
+                ],
             ]),
-            'active' => true
-        ],
-        [
-            'label' => Module::t('module', 'SERVICESHEDULER_TABLE'),
-            // 'content' => 'Tab 1',
-            'content' => $this->render('_table', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]),
-        ],
-    ]
-]);    
-
+        ]);
     ?>
 
-    </div>
+    <br/><br/><br/>
 
-    <?php 
-        // GridView::widget([
-        //     'dataProvider' => $dataProvider,
-        //     'filterModel' => $searchModel,
-        //     'columns' => [
-        //         ['class' => 'yii\grid\SerialColumn'],
-    
-        //         'id',
-        //         'date',
-        //         'responsible',
-    
-        //         ['class' => 'yii\grid\ActionColumn'],
-        //     ],
-        // ]); 
-    ?>
+    <?= GridView::widget([
+        'id' => 'servicesheduler-grid',
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            [
+                'class' => 'yii\grid\SerialColumn',
+                'header' => '№',
+                'contentOptions'=>['style'=>'width: 20px;']
+            ],
+            [
+                'class' => 'yii\grid\CheckboxColumn',
+                'contentOptions'=>['style'=>'width: 20px;']
+            ],  
+            [
+                'attribute' => 'date',
+                'format' => ['date', 'php:d/m/Y'],
+                'contentOptions'=>['style'=>'width: 100px;']
+            ],
+            [
+                'class' => LinkColumn::className(),
+                'attribute' => 'responsible',
+                'format' => 'raw',  
+            ],
+            [
+                'class' => ActionColumn::className(),
+                'contentOptions'=>['style'=>'width: 20px;'],
+                'template' => '{update}',
+                'buttons' => [
+                    'update' => function ($url, $model) {
+                        $title = false;
+                        $options = [];
+                        $icon = '<span class="glyphicon glyphicon-pencil"></span>';
+                        $label = $icon;
+                        $url = Url::toRoute(['update', 'id' => $model->id]);
+                        $options['tabindex'] = '-1';
+                        return Html::a($label, $url, $options) .''. PHP_EOL;
+                    },
+                ],
+            ],
+        ],
+    ]); ?>
+
 
 </div>

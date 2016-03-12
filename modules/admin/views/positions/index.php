@@ -39,7 +39,7 @@ $this->registerJs('
 ?>
 
     <h1><span class="glyphicon glyphicon-briefcase" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // $this->render('_search', ['model' => $searchModel]); ?>
     
     <div class="positions-index center-block">
 
@@ -71,7 +71,6 @@ $this->registerJs('
             [
                 'class' => LinkColumn::className(),
                 'attribute' => 'position',
-                'filter' => false,
                 'format' => 'raw',   
                 // 'contentOptions'=>['style'=>'width: 100px;'],
             ],
@@ -79,7 +78,7 @@ $this->registerJs('
 
             // ['class' => 'yii\grid\ActionColumn'],
             [
-                'class' => ActionColumn::className(),
+               'class' => ActionColumn::className(),
                'contentOptions'=>['style'=>'width: 20px;'],
                 'template' => '{update}',
                 'buttons' => [

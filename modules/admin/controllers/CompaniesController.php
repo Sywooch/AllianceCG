@@ -42,6 +42,12 @@ class CompaniesController extends Controller
         ]);
     }
 
+    public function actionTest()
+    {
+        $this->layout = '@app/views/layouts/_navbarleft';
+        return $this->render('test');
+    }    
+
     public function actionCreate()
     {
         $model = new Companies();
@@ -102,11 +108,23 @@ class CompaniesController extends Controller
      * @param integer $id
      * @return mixed
      */
+    
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+ 
+        if ($model->load(Yii::$app->request->post())) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $imageName = mktime(date('h'), date('i'), date('s'), date('d'), date('m'), date('y'));
+            if ($model->brandlogo = UploadedFile::getInstance($model, 'brandlogo')) {
+            @unlink($model->company_logo);
+            $model->brandlogo->saveAs('img/uploads/companylogo/'.$imageName.'.'.$model->brandlogo->extension);
+            $model->company_logo = 'img/uploads/companylogo/'.$imageName.'.'.$model->brandlogo->extension;
+
+            }
+
+            $model->save();
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -114,6 +132,19 @@ class CompaniesController extends Controller
             ]);
         }
     }
+
+    // public function actionUpdate($id)
+    // {
+    //     $model = $this->findModel($id);
+
+    //     if ($model->load(Yii::$app->request->post()) && $model->save()) {
+    //         return $this->redirect(['view', 'id' => $model->id]);
+    //     } else {
+    //         return $this->render('update', [
+    //             'model' => $model,
+    //         ]);
+    //     }
+    // }
 
     /**
      * Deletes an existing Companies model.
@@ -123,6 +154,10 @@ class CompaniesController extends Controller
      */
     public function actionDelete($id)
     {
+        if(!empty($model->company_logo))
+        {
+            @unlink('/' . $model->company_logo);
+        }
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

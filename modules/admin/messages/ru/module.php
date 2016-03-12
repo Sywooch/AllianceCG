@@ -78,6 +78,6 @@
 		'ADMIN_COMPANIES_REFRESH' => 'Обновить',
 		'ADMIN_COMPANIES_UPDATE' => 'Редактировать',
 		'ADMIN_COMPANIES_DELETE' => 'Удалить',
-		// 'ADMIN_COMPANIES_UPDATE' => 
+		'ADMIN_COMPANY_DELETE_CONFIRM' => 'Удалить организацию?',
 
 	];

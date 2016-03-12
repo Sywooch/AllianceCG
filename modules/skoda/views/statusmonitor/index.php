@@ -44,7 +44,7 @@ $this->registerJs('
 ?>
 
     <h1><span class="glyphicon glyphicon-wrench" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // $this->render('_search', ['model' => $searchModel]); ?>
     
     <div class="user-index center-block">
     <!-- <div class="statusmonitor-index"> -->
@@ -83,7 +83,6 @@ $this->registerJs('
                 [
                     'class' => LinkColumn::className(),
                     'attribute' => 'regnumber',
-                    'filter' => false,
                     'format' => 'raw',  
                     // 'contentOptions'=>['style'=>'width: 100px;'],
                 ],

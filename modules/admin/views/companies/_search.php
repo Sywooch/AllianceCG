@@ -9,21 +9,31 @@ use app\modules\admin\Module;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="companies-search">
+<div class="companies-search" id="companies_search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
         'options' => [
-            'class' => 'companies-search-form'
+            'class' => 'companies-search-form',
         ],
     ]); ?>
 
-<h1><span class="glyphicon glyphicon-search" style='padding-right:10px;'></span> <?= Module::t('module', 'ADMIN_SEARCH_TITLE') ?> </h1>
+<!-- <h1> -->
+    <!-- <span class="glyphicon glyphicon-search" style='padding-right:10px;'></span> -->
+        <?php // echo Module::t('module', 'ADMIN_SEARCH_TITLE') ?> 
+<!-- </h1> -->
 
+<div class="col-ld-6">
     <?= $form->field($model, 'company_name', ['template'=>' <div class="input-group"><span class="input-group-addon" style="width: 0;"><span class="glyphicon glyphicon-tent"></span></span>{input}'])->textInput(['placeholder' => $model->getAttributeLabel( 'company_name' )]) . '</div>' ?>
 
-    <?= $form->field($model, 'company_brand', ['template'=>' <div class="input-group"><span class="input-group-addon" style="width: 0;"><span class="glyphicon glyphicon-tent"></span></span>{input}'])->textInput(['placeholder' => $model->getAttributeLabel( 'company_brand' )]) . '</div>' ?>    
+</div>
+
+<div class="col-ld-6">
+
+    <?= $form->field($model, 'company_brand', ['template'=>' <div class="input-group"><span class="input-group-addon" style="width: 0;"><span class="glyphicon glyphicon-tent"></span></span>{input}'])->textInput(['placeholder' => $model->getAttributeLabel( 'company_brand' )]) . '</div>' ?>   
+
+</div>
 
     <div class="form-group">
         <?= Html::submitButton('<span class="glyphicon glyphicon-search"></span>  ' . Module::t('module', 'ADMIN_POSITION_SEARCH'), ['class' => 'btn btn-primary']) ?>

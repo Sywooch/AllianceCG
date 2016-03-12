@@ -94,10 +94,18 @@ a.desc:after {
     padding: 0;
 }
 
+.navbar-brand > img{
+    height: 45px;
+}
+
 /* */
 
 .navbar-skoda {
     background-color: #4ba82e;
+}
+
+.navbar-skoda  > li.disabled > a {
+    color: #FFFFFF;
 }
 
 .navbar-nav > li > .dropdown-menu a:link{
@@ -135,10 +143,10 @@ a.desc:after {
     max-width: 7em;
 }
 
-.user-index {
+/*.user-index {
     width: 75%;
     float: left;
-}
+}*/
 
 .servicesheduler-index {
     width: 75%;
@@ -162,8 +170,8 @@ a.desc:after {
 }
 
 .positions-index {
-    width: 75%;
-    float: left;    
+/*    width: 75%;
+    float: left;    */
 }
 
 .user-form {
@@ -180,11 +188,11 @@ a.desc:after {
     margin-top: -6%;
 }
 
-.companies-search-form {
-    /* width: 40%; */
+/*.companies-search-form {
+     width: 40%; 
     float: right;
     margin-top: -6%;
-}
+}*/
 
 .servicesheduler-search-form {
     /* width: 40%; */
@@ -208,7 +216,7 @@ a.desc:after {
 }
 
 #statusmonitor-users-grid {
-    margin-left: 10%;
+    /*margin-left: 10%;*/
 }
 
 .clearfix:before,
@@ -245,11 +253,11 @@ a.desc:after {
   content: " ";
 }
 
-* {
+/** {
   -webkit-box-sizing: initial;
-     -moz-box-sizing: content-box;
-          box-sizing: border-box;
-}
+  -moz-box-sizing: content-box;
+  -box-sizing: border-box;
+}*/
 
 .col-lg-5 {
     width: 50%;
@@ -263,3 +271,48 @@ a.desc:after {
 #servicesheduler-responsible label{
     width: 50%;
 }
+
+.navbar-primary {
+    background-color: #ffffff;
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+}
+
+/*.navbar-primary > ul > li:hover:after{
+    border: 1px solid red;
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: absolute;
+    width: 100px;
+}*/
+
+/*NavBar Primary Like Twitter Menu*/
+
+/*.navbar-primary > ul {
+    list-style: none outside none;
+}
+.navbar-primary > ul li {
+    border-bottom: 2px solid #DDDDDD;
+    cursor: pointer;
+    float: left;
+    margin: 0;
+    width:100px;
+    height:50px;
+    line-height:50px;
+    position: relative;
+    text-align:center;
+}
+.clearfix {
+    clear: both;
+}
+.navbar-primary > ul li:hover:after,
+ul li.active:after{
+    border: 1px solid red;
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: absolute;
+    width: 100px;
+}*/
+
+/*End*/

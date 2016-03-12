@@ -27,6 +27,8 @@ return [
         ],
         'skoda' => [
             'class' => 'app\modules\skoda\Module',
+            'layoutPath' => '@app/modules/skoda/views/layouts',
+            'layout' => 'main'
         ],
         'user' => [
             'class' => 'app\modules\user\Module',

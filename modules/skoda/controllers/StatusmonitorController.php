@@ -1,5 +1,5 @@
 <?php
-
+ 
 namespace app\modules\skoda\controllers;
 
 use Yii;
@@ -77,7 +77,8 @@ class StatusmonitorController extends Controller
     }
 
     public function actionMonitor()
-    { 
+    {
+        $this->layout = '@app/modules/skoda/views/layouts/monitor/main';
         $searchModel = new MonitorSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

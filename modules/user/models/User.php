@@ -11,6 +11,7 @@ use yii\web\IdentityInterface;
 use yii\web\UploadedFile;
 use app\modules\admin\models\Positions;
 use app\modules\user\Module;
+use app\modules\admin\models\Companies;
 
 /**
  * This is the model class for table "{{%user}}".
@@ -108,9 +109,6 @@ class User extends ActiveRecord implements IdentityInterface
 
             // Email - unique field
             ['email', 'unique', 'targetClass' => self::className(), 'message' => Yii::t('app', 'ERROR_EMAIL_EXISTS')],
-
-            // Email - type string, max. symbol - 255
-            // ['email', 'string', 'max' => 255],
  
             // Status - field type integer
             ['status', 'integer'],
@@ -164,8 +162,6 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return ArrayHelper::getValue(self::getRolesArray(), $this->role);
     }
-
-
 
     public function getFullName()
     {

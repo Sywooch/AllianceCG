@@ -99,7 +99,6 @@ class Statusmonitor extends \yii\db\ActiveRecord
 
     public function getStatusBarAnimation()
     {
-        // $today = Yii::$app->getFormatter()->asDatetime(time());
         $today = Yii::$app->formatter->asDatetime(date('Y-m-d H:i:s'));
         if (strtotime($today) >= strtotime($this->from) AND strtotime($today) < strtotime($this->to)) {
             $animcssclass = 'active progress-striped';
@@ -109,57 +108,8 @@ class Statusmonitor extends \yii\db\ActiveRecord
         }    
 
         return $animcssclass;        
-    }      
-
-    // public function getFromDateFormat()
-    // {
-    //     // $today = Yii::$app->getFormatter()->asDatetime(time());
-    //     $today = Yii::$app->formatter->asDatetime(date('Y-m-d h:i:s'));
-    //     $smon = new Statusmonitor();
-    //     if (strtotime($today) < strtotime($smon->from)){
-    //         $timeformat = 'datetime';
-    //     }
-    //     elseif (strtotime($today) >= strtotime($smon->from) AND strtotime($today) < strtotime($smon->to)) {
-    //         $timeformat = 'time';
-    //     }
-    //     elseif (strtotime($today) >= strtotime($smon->to)) {
-    //         $timeformat = 'datetime';
-    //     }    
-
-    //     return $timeformat;        
-    // }         
-
-    // public static function getFromDateFormat()
-    // {
-
-    //     $today = Yii::$app->formatter->asDatetime(date('Y-m-d H:i:s'));
-    //     $smon = new Statusmonitor();
-    //     if (strtotime($today) < strtotime($smon->from)){
-    //         $timeformat = 'datetime';
-    //     }
-    //     elseif (strtotime($today) >= strtotime($smon->from) AND strtotime($today) < strtotime($smon->to)) {
-    //         $timeformat = 'time';
-    //     }
-    //     elseif (strtotime($today) >= strtotime($smon->to)) {
-    //         $timeformat = 'datetime';
-    //     }    
-
-    //     return $timeformat;        
-    // }          
-
-    // public function getUserNameById()
-    // {
-    //     $names = User::find()
-    //         ->where(['id' => $this->responsible])
-    //         ->all();
-            
-    //     foreach ($names as $key => $value) {
-    //         $allname = $value->name . ' ' . $value->surname;
-    //     return $allname;
-    //     }
-
-    // }
-
+    }
+    
     public function getResponsible()
     {
         $to_date = Yii::$app->formatter->asDate($this->to, 'yyyy-MM-dd');

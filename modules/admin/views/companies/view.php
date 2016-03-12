@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('<span class="glyphicon glyphicon-remove"></span>  ' . Module::t('module', 'ADMIN_COMPANIES_DELETE'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Module::t('module', 'ADMIN_USER_DELETE_CONFIRM'),
+                'confirm' => Module::t('module', 'ADMIN_COMPANY_DELETE_CONFIRM'),
                 'method' => 'post',
             ],
         ]) ?>        

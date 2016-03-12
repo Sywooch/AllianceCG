@@ -71,6 +71,11 @@ class ServiceshedulerController extends Controller
         ]);
     }
 
+    public function actionCalendar()
+    {
+        return $this->render('calendar');
+    }
+
     /**
      * Displays a single Servicesheduler model.
      * @param integer $id

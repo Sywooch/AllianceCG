@@ -36,8 +36,9 @@ $this->registerJs('
 ?>
 
     <h1><span class="glyphicon glyphicon-user" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
+    <?php // $this->render('_search', ['model' => $searchModel]); ?>
+    
     <div class="user-index center-block">
 
     <p style="text-align: right">
@@ -49,12 +50,12 @@ $this->registerJs('
     </p>
 
     <?php
-        // bootstrap label summary widget
-        $begin_end = '<span class="label label-success">{begin} - {end}</span>';
-        $count = '<span class="label label-danger">{count}</span>';
-        $totalCount = '<span class="label label-primary">{totalCount}</span>';
-        $page = '<span class="label label-primary">{page}</span>';
-        $pageCount = '<span class="label label-primary">{pageCount}</span>';
+        // bootstrap label of summary widget
+        // $begin_end = '<span class="label label-success">{begin} - {end}</span>';
+        // $count = '<span class="label label-danger">{count}</span>';
+        // $totalCount = '<span class="label label-primary">{totalCount}</span>';
+        // $page = '<span class="label label-primary">{page}</span>';
+        // $pageCount = '<span class="label label-primary">{pageCount}</span>';
     ?>
 
     <?= GridView::widget([
@@ -76,17 +77,14 @@ $this->registerJs('
             ],
             [
                 'attribute' => 'company_brand',
-                'filter' => false,
                 'format' => 'raw',
-                // 'value'=>function($data) { return Html::img($data->imageurl,['height' => '50']); },
                 'value'=>function($data) { return Html::img($data->getSingleLogo(),['height' => '50']); },
-                // 'value' => $data->getSingleLogo(),
                 'contentOptions'=>['style'=>'width: 60px;'],
             ],
             [
                 'class' => LinkColumn::className(),
                 'attribute' => 'company_name',
-                'filter' => false,
+                // 'filter' => false,
                 'format' => 'raw',  
                 // 'contentOptions'=>['style'=>'width: 100px;'],
             ],

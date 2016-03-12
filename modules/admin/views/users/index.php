@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
     <h1><span class="glyphicon glyphicon-user" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // $this->render('_search', ['model' => $searchModel]); ?>
 
     <!-- <div class="user-index col-lg-offset-5 col-centered"> -->
     <div class="user-index center-block">
@@ -77,7 +77,6 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => LinkColumn::className(),
                 'attribute' => 'fullname',
-                'filter' => false,
                 'format' => 'raw',    
                 'value' => function ($data) {
                     return $data->getFullname();
@@ -86,17 +85,16 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'company',
-                'filter' => false,
+                'contentOptions'=>['style'=>'width: 150px;'],
             ],
             [
                 'attribute' => 'position',
-                'filter' => false,   
-                'contentOptions'=>['style'=>'width: 50px;'],
+                'contentOptions'=>['style'=>'width: 150px;'],
             ],
             [
                 'class' => SetColumn::className(),
-                'filter' => false,
                 'attribute' => 'role',
+                'filter' => User::getRolesArray(),
                 'name' => 'role',
                 'contentOptions'=>['style'=>'width: 50px;'],
                 'cssCLasses' => [
@@ -108,7 +106,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => SetColumn::className(),
-                'filter' => false,
+                'filter' => User::getStatusesArray(),
                 'attribute' => 'status',
                 'name' => 'statusName',
                 'contentOptions'=>['style'=>'width: 50px;'],

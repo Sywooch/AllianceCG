@@ -27,8 +27,10 @@ AppAsset::register($this);
 
 <?= $this->render('@app/modules/skoda/views/layouts/default/_header') ?>
 
+
     <div class="container">
-            <?= $content ?>
+    	<?= $this->render('@app/modules/skoda/views/layouts/default/_breadcrumbs') ?>
+        <?= $content ?>
     </div>
 </div>
 

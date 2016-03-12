@@ -11,7 +11,7 @@ use app\modules\skoda\Module;
 
 $this->title = Module::t('module', 'ŠKODA');
 $this->params['breadcrumbs'][] = $this->title;
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda']];
+// $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda']];
 ?>
 <div class="admin-default-index center-block">
     <h1><?= Html::encode($this->title) ?></h1>

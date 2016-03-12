@@ -5,6 +5,7 @@
     use yii\bootstrap\Nav;
 
     $this->title = Module::t('module', 'SERVICESHEDULER_INDEX');
+    $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda']];
     $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><span class="glyphicon glyphicon-wrench" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
@@ -25,7 +26,7 @@
 
 <?php 
     echo Nav::widget([
-        'options' => ['class' => 'nav nav-tabs'],
+        'options' => ['class' => 'nav nav-tabs nav-justified'],
         'encodeLabels' => false,
         'items' => array_filter([
             [
@@ -77,7 +78,6 @@
     });
 </script>
 
-<br/><br/>
 <br/><br/>
 
 <div id='calendar'></div>

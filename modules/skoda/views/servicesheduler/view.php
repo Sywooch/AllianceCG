@@ -8,10 +8,11 @@ use app\modules\skoda\Module;
 /* @var $model app\modules\skoda\models\Servicesheduler */
 
 $this->title = $model->date;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Serviceshedulers'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'SERVICESHEDULER_INDEX'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="servicesheduler-view col-lg-5 col-lg-offset-3">
+<div class="servicesheduler-view col-lg-12">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

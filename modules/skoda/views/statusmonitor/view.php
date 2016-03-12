@@ -13,10 +13,11 @@ use app\modules\skoda\models\Servicesheduler;
 /* @var $model app\modules\skoda\models\Statusmonitor */
 
 $this->title = $model->regnumber;
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda']];
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'STATUS_TITLE'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="statusmonitor-view col-lg-5 col-lg-offset-3">
+<div class="col-lg-12">
 
     <h1><span class="glyphicon glyphicon-comment" style='padding-right:10px;'></span><?= Module::t('module', 'STATUS_VIEW') . ' ' . Html::encode($this->title) ?></h1>
 

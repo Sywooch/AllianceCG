@@ -25,21 +25,14 @@ AppAsset::register($this);
 
 <div class="wrap">
 
-<?= $this->render('@app/modules/skoda/views/layouts/_header') ?>
+<?= $this->render('@app/modules/skoda/views/layouts/default/_header') ?>
 
     <div class="container">
-        <div class="col-sm-2">
-        <?= $this->render('@app/modules/skoda/views/layouts/_sidebar') ?>
-        </div>
-        <div class="col-sm-10">        
-            <?= $this->render('@app/modules/skoda/views/layouts/_breadcrumbs') ?>
-            <?= Alert::widget() ?>
             <?= $content ?>
-        </div>
     </div>
 </div>
 
-<?= $this->render('@app/modules/skoda/views/layouts/_footer') ?>
+<?php echo $this->render('@app/modules/skoda/views/layouts/default/_footer') ?>
 
 <?php $this->endBody() ?>
 </body>

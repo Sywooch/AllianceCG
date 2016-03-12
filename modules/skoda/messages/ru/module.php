@@ -34,5 +34,6 @@
 		'SERVICESHEDULER' => 'График смен',
 		'STATUSMONITOR' => 'Монитор готовности',
 		'STATUS_SHOW_MONITOR' => 'Просмотр',	
+		'NAV_SKODA' => 'ŠKODA',
 	];
 	

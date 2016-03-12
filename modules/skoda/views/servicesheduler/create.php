@@ -8,6 +8,7 @@ use app\modules\skoda\Module;
 /* @var $model app\modules\skoda\models\Servicesheduler */
 
 $this->title = Module::t('module', 'SERVICESHEDULER_CREATE');
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda']];
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'SERVICESHEDULER_INDEX'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

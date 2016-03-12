@@ -12,6 +12,9 @@ use app\modules\skoda\models\Servicesheduler;
  */
 class DefaultController extends Controller
 {
+
+    public $layout = '@app/modules/skoda/views/layouts/default/main';
+
     /**
      * Renders the index view for the module
      * @return string

@@ -41,6 +41,7 @@ $this->registerJs('
     });', \yii\web\View::POS_READY);
 
 $this->title = Module::t('module', 'SERVICESHEDULER_INDEX');
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -62,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php
         echo Nav::widget([
-            'options' => ['class' => 'nav-tabs'],
+            'options' => ['class' => 'nav nav-tabs nav-justified'],
             'encodeLabels' => false,
             'items' => array_filter([
                 [
@@ -77,7 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]);
     ?>
 
-    <br/><br/><br/>
+    <br/><br/>
 
     <?= GridView::widget([
         'id' => 'servicesheduler-grid',

@@ -14,7 +14,8 @@ use kartik\datetime\DateTimePicker;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="user-form center-block">
+<!-- <div class="user-form center-block"> -->
+<div>
 
     <?php $form = ActiveForm::begin(); ?>
 

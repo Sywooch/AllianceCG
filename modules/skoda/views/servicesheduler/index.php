@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php
         echo Nav::widget([
-            'options' => ['class' => 'nav nav-tabs nav-justified'],
+            'options' => ['class' => 'nav navbar-left nav-pills'],
             'encodeLabels' => false,
             'items' => array_filter([
                 [
@@ -78,7 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]);
     ?>
 
-    <br/><br/>
+    <br/><br/><br/>
 
     <?= GridView::widget([
         'id' => 'servicesheduler-grid',

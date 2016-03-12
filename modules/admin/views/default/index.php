@@ -2,6 +2,7 @@
  
 use yii\helpers\Html;
 use app\modules\admin\Module;
+use yii\bootstrap\Nav;
  
 /* @var $this yii\web\View */
 /* @var $model \app\modules\user\models\User */
@@ -13,11 +14,27 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
  
     <p style="text-align: right">
-        <?= Html::a('<span class="glyphicon glyphicon-user"></span>  ' . Module::t('module', 'ADMIN_USERS'), ['users/index'], ['class' => 'btn btn-primary']) ?>
-        
-        <?= Html::a('<span class="glyphicon glyphicon-briefcase"></span>  ' . Module::t('module', 'ADMIN_POSITIONS'), ['positions/index'], ['class' => 'btn btn-primary']) ?>
-        
-        <?= Html::a('<span class="glyphicon glyphicon-tent"></span>  ' . Module::t('module', 'ADMIN_COMPANIES'), ['companies/index'], ['class' => 'btn btn-primary']) ?>
+
+        <?php 
+            echo Nav::widget([
+                'options' => ['class' => 'nav navbar-right nav-pills'],
+                'encodeLabels' => false,
+                'items' => array_filter([
+                    [
+                        'label' => '<span class="glyphicon glyphicon-user"></span>  ' . Module::t('module', 'ADMIN_USERS'),
+                        'url' => '/admin/users/index',
+                    ],
+                    [
+                        'label' => '<span class="glyphicon glyphicon-briefcase"></span>  ' . Module::t('module', 'ADMIN_POSITIONS'),
+                        'url' => '/admin/positions/index',
+                    ],
+                    [
+                        'label' => '<span class="glyphicon glyphicon-tent"></span>  ' . Module::t('module', 'ADMIN_COMPANIES'),
+                        'url' => '/admin/companies/index',
+                    ],
+                ]),
+            ]);
+        ?>
     </p>    
     
 </div>

@@ -26,7 +26,7 @@
 
 <?php 
     echo Nav::widget([
-        'options' => ['class' => 'nav nav-tabs nav-justified'],
+        'options' => ['class' => 'nav navbar-left nav-pills'],
         'encodeLabels' => false,
         'items' => array_filter([
             [
@@ -78,6 +78,6 @@
     });
 </script>
 
-<br/><br/>
+<br/><br/><br/><br/>
 
 <div id='calendar'></div>

@@ -65,7 +65,10 @@ class ServiceshedulerSearch extends Servicesheduler
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => $sort,
+            'sort' => $sort,         
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
 
         $this->load($params);

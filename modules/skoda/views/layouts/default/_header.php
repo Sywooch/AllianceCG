@@ -13,7 +13,7 @@ use yii\helpers\Url;
         ],
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
+        'options' => ['class' => 'navbar-nav navbar-right navbar-skoda'],
         'encodeLabels' => false,
         'items' => array_filter([
         !Yii::$app->user->isGuest ?

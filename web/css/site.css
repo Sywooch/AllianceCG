@@ -48,6 +48,17 @@ a.asc:after, a.desc:after {
     padding-left: 5px;
 }
 
+.navbar-skoda > li > a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.navbar-skoda > a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+
 a.asc:after {
     content: /*"\e113"*/ "\e151";
 }

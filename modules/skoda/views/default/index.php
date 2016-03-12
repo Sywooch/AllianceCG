@@ -8,6 +8,7 @@
 
 use yii\helpers\Html;
 use app\modules\skoda\Module;
+use yii\bootstrap\Nav;
 
 $this->title = Module::t('module', 'ŠKODA');
 $this->params['breadcrumbs'][] = $this->title;
@@ -15,11 +16,24 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="admin-default-index center-block">
     <h1><?= Html::encode($this->title) ?></h1>
- 
+
     <p style="text-align: right">
-        <?php echo Html::a('<span class="glyphicon glyphicon-calendar"></span>  ' . Module::t('module', 'SERVICESHEDULER'), ['servicesheduler/calendar'], ['class' => 'btn btn-success']) ?>
-        
-        <?php echo Html::a('<span class="glyphicon glyphicon-wrench"></span>  ' . Module::t('module', 'STATUSMONITOR'), ['statusmonitor/index'], ['class' => 'btn btn-success']) ?>
+        <?php 
+            echo Nav::widget([
+                'options' => ['class' => 'nav navbar-right nav-pills'],
+                'encodeLabels' => false,
+                'items' => array_filter([
+                    [
+                        'label' => '<span class="glyphicon glyphicon-calendar"></span>  ' . Module::t('module', 'SERVICESHEDULER'),
+                        'url' => '/skoda/servicesheduler/calendar',
+                    ],
+                    [
+                        'label' => '<span class="glyphicon glyphicon-wrench"></span>  ' . Module::t('module', 'STATUSMONITOR'),
+                        'url' => '/skoda/servicesheduler',
+                    ],
+                ]),
+            ]);
+        ?>
     </p>    
     
 </div>

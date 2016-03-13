@@ -32,9 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
             // $form->field($model, 'password')->passwordInput() 
             ?>
             
-            <div class="alert alert-danger">
-                <?= Module::t('module', 'LOGIN_INFO') ?>
-            </div>            
+            <!-- <div class="alert alert-danger"> -->
+                <?php Module::t('module', 'LOGIN_INFO') ?>
+            <!-- </div>             -->
             
             <?= $form->field($model, 'rememberMe')->checkbox() ?>
             <div style="color:#999;margin:1em 0;text-align: right;">

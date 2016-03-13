@@ -23,11 +23,11 @@ class PasswordResetRequestForm extends Model
      * @param integer $timeout
      * @param array $config
      */
-    // public function __construct($timeout, $config = [])
-    // {
-    //     $this->_timeout = $timeout;
-    //     parent::__construct($config);
-    // }
+    public function __construct($timeout, $config = [])
+    {
+        $this->_timeout = $timeout;
+        parent::__construct($config);
+    }
 
     /**
      * @inheritdoc
@@ -81,7 +81,8 @@ class PasswordResetRequestForm extends Model
             $user->generatePasswordResetToken();
             if ($user->save()) {
                 // return Yii::$app->mailer->compose(['text' => '@app/modules/user/mails/passwordReset'], ['user' => $user])
-                return Yii::$app->mailer->compose(['text' => '@app/modules/user/mails/passwordReset'], ['user' => $user])
+                return Yii::$app->mailer->compose(['html' => '@app/modules/user/mails/passwordReset'], ['user' => $user])
+                // return Yii::$app->mailer->compose(['html' => 'passwordResetToken'], ['user' => $user])
                     ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
                     ->setTo($this->email)
                     ->setSubject('Password reset for ' . Yii::$app->name)

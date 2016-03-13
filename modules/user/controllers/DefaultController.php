@@ -25,6 +25,7 @@ use yii\filters\VerbFilter;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use Yii;
+use app\modules\user\Module;
  
 class DefaultController extends Controller
 {
@@ -68,6 +69,8 @@ class DefaultController extends Controller
  
      public function actionLogin()
     {
+        $this->layout = '@app/modules/user/views/layouts/default/main';
+
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -91,6 +94,8 @@ class DefaultController extends Controller
  
     public function actionSignup()
     {
+        $this->layout = '@app/modules/user/views/layouts/default/main';
+
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
@@ -121,19 +126,38 @@ class DefaultController extends Controller
         return $this->goHome();
     }
  
+    // public function actionPasswordResetRequest()
+    // {
+    //     $this->layout = '@app/modules/user/views/layouts/default/main';
+
+    //     $model = new PasswordResetRequestForm();
+    //     if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+    //         if ($model->sendEmail()) {
+    //             Yii::$app->getSession()->setFlash('success', 'Спасибо! На ваш Email было отправлено письмо со ссылкой на восстановление пароля.');
+ 
+    //             return $this->goHome();
+    //         } else {
+    //             Yii::$app->getSession()->setFlash('error', 'Извините. У нас возникли проблемы с отправкой.');
+    //         }
+    //     }
+ 
+    //     return $this->render('passwordResetRequest', [
+    //         'model' => $model,
+    //     ]);
+    // }
+
     public function actionPasswordResetRequest()
     {
+        // $model = new PasswordResetRequestForm($this->module->passwordResetTokenExpire);
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
-                Yii::$app->getSession()->setFlash('success', 'Спасибо! На ваш Email было отправлено письмо со ссылкой на восстановление пароля.');
- 
+                Yii::$app->getSession()->setFlash('success', Module::t('module', 'FLASH_PASSWORD_RESET_REQUEST'));
                 return $this->goHome();
             } else {
-                Yii::$app->getSession()->setFlash('error', 'Извините. У нас возникли проблемы с отправкой.');
+                Yii::$app->getSession()->setFlash('error', Module::t('module', 'FLASH_PASSWORD_RESET_ERROR'));
             }
         }
- 
         return $this->render('passwordResetRequest', [
             'model' => $model,
         ]);

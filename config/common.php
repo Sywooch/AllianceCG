@@ -21,6 +21,8 @@ return [
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin\Module',
+            'layoutPath' => '@app/modules/admin/views/layouts',
+            'layout' => 'main'
         ],    
         'main' => [
             'class' => 'app\modules\main\Module',
@@ -32,6 +34,8 @@ return [
         ],
         'user' => [
             'class' => 'app\modules\user\Module',
+            'layoutPath' => '@app/modules/user/views/layouts',
+            'layout' => 'main'
         ],
     ],    
     'components' => [

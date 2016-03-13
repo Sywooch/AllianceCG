@@ -126,7 +126,9 @@ class UserSearch extends Model
         $query
             ->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'position', $this->position])
+            ->andFilterWhere(['like', 'company', $this->company])
             ->andFilterWhere(['like', 'status', $this->status])
+            ->andFilterWhere(['like', 'role', $this->role])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['>=', 'created_at', $this->date_from ? strtotime($this->date_from . ' 00:00:00') : null])
             ->andFilterWhere(['<=', 'created_at', $this->date_to ? strtotime($this->date_to . ' 23:59:59') : null])

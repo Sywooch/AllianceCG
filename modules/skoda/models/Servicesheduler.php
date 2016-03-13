@@ -4,6 +4,7 @@ namespace app\modules\skoda\models;
 
 use Yii;
 use app\modules\skoda\Module;
+use app\modules\skoda\models\Servicesheduler;
 
 /**
  * This is the model class for table "{{%servicesheduler}}".

@@ -107,11 +107,9 @@ class StatusmonitorSearch extends Statusmonitor
             $carstatus = 'Ожидание';
         }
         elseif (strtotime($today) >= strtotime($this->from) && strtotime($today) < strtotime($this->to)) {
-            // print 'В работе';
             $carstatus = 'В работе';
         }
         elseif (strtotime($today) >= strtotime($this->to)) {
-            // print 'Готово';
             $carstatus = 'Готово';
         }
 

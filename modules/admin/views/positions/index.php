@@ -6,6 +6,8 @@ use app\components\grid\ActionColumn;
 use app\components\grid\LinkColumn;
 use yii\helpers\Url;
 use app\modules\admin\Module;
+use yii\helpers\ArrayHelper;
+use app\modules\admin\models\Positions;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\admin\models\PositionsSearch */
@@ -71,7 +73,8 @@ $this->registerJs('
             [
                 'class' => LinkColumn::className(),
                 'attribute' => 'position',
-                'format' => 'raw',   
+                // 'format' => 'raw',
+                'filter' => ArrayHelper::map(Positions::find()->asArray()->all(), 'position', 'position'),
                 // 'contentOptions'=>['style'=>'width: 100px;'],
             ],
             // 'description:ntext',

@@ -13,7 +13,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-profile-update">
  
  
-    <div class="user-form col-lg-5 col-lg-offset-3">
+    <!-- <div class="user-form col-lg-5 col-lg-offset-3"> -->
+    <div>
  
         <?php $form = ActiveForm::begin(); ?>
         

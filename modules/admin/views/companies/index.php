@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use app\modules\admin\Module;
 use app\components\grid\ActionColumn;
+use yii\helpers\ArrayHelper;
+use app\modules\admin\models\Companies;
 use app\components\grid\LinkColumn;
 
 /* @var $this yii\web\View */
@@ -78,13 +80,14 @@ $this->registerJs('
             [
                 'attribute' => 'company_brand',
                 'format' => 'raw',
+                'filter' => ArrayHelper::map(Companies::find()->asArray()->all(), 'company_brand', 'company_brand'),
                 'value'=>function($data) { return Html::img($data->getSingleLogo(),['height' => '50']); },
                 'contentOptions'=>['style'=>'width: 60px;'],
             ],
             [
                 'class' => LinkColumn::className(),
                 'attribute' => 'company_name',
-                // 'filter' => false,
+                'filter' => ArrayHelper::map(Companies::find()->asArray()->all(), 'company_name', 'company_name'),
                 'format' => 'raw',  
                 // 'contentOptions'=>['style'=>'width: 100px;'],
             ],

@@ -30,7 +30,7 @@ class PositionsSearch extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            ['position', 'unique', 'targetClass' => Positions::className(), 'message' => Module::t('module', 'ADMIN_POSITIONS_ERROR_RECORD_EXIST')],
+            // ['position', 'unique', 'targetClass' => Positions::className(), 'message' => Module::t('module', 'ADMIN_POSITIONS_ERROR_RECORD_EXIST')],
             [['description'], 'string'],
             [['position'], 'string', 'max' => 255],
         ];
@@ -83,7 +83,7 @@ class PositionsSearch extends \yii\db\ActiveRecord
             $query->where('0=1');
             return $dataProvider;
         }
-        
+
         $query
             ->andFilterWhere(['like', 'position', $this->position]);
 

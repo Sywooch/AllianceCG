@@ -33,21 +33,30 @@ use yii\helpers\Url;
         //     ]] :
         //     false,
         Yii::$app->user->can('admin') ?
-            ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_ADMIN'), 'items' => [
-                ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_ADMIN'), 'url' => ['/admin/default/index']],
-                ['label' => '<span class="glyphicon glyphicon-user"></span> ' . Yii::t('app', 'ADMIN_USERS'), 'url' => ['/admin/users/index'], ],
-                ['label' => '<span class="glyphicon glyphicon-briefcase"></span> ' . Yii::t('app', 'ADMIN_POSITIONS'), 'url' => ['/admin/positions/index']],
-                ['label' => '<span class="glyphicon glyphicon-tent"></span> ' . Yii::t('app', 'ADMIN_COMPANIES'), 'url' => ['/admin/companies/index']],
-            ]] :
+            ['label' => '<span class="glyphicon glyphicon-cog"></span> ' . Yii::t('app', 'NAV_ADMIN'), 'url' => ['//admin/default/index']] :
             false,
         !Yii::$app->user->isGuest ?
-            ['label' => '<span class="glyphicon glyphicon-user"></span> ' . Yii::t('app', 'NAV_PROFILE'), 'items' => [
-                ['label' => '<span class="glyphicon glyphicon-search"></span> ' . Yii::t('app', 'NAV_PROFILE_VIEW'), 'url' => ['/user/profile']],
-                ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_PROFILE_EDIT'), 'url' => ['/user/profile/update']],
-                ['label' => '<span class="glyphicon glyphicon-asterisk"></span> ' . Yii::t('app', 'NAV_PROFILE_PASSWORD_RESET'), 'url' => ['/user/profile/password-change']],
-                ['label' => '<span class="glyphicon glyphicon-off"></span> ' . Yii::t('app', 'NAV_LOGOUT'), 'url' => ['/user/default/logout'], 'linkOptions' => ['data-method' => 'post']]
-            ]] :
+            ['label' => '<span class="glyphicon glyphicon-user"></span> ' . Yii::t('app', 'NAV_PROFILE'), 'url' => ['/user/profile']] :
             false,
+        !Yii::$app->user->isGuest ?
+            ['label' => '<span class="glyphicon glyphicon-off"></span> ' . Yii::t('app', 'NAV_LOGOUT'), 'url' => ['/user/default/logout'], 'linkOptions' => ['data-method' => 'post']] :
+            false,
+        // Yii::$app->user->can('admin') ?
+        //     ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_ADMIN'), 'items' => [
+        //         ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_ADMIN'), 'url' => ['/admin/default/index']],
+        //         ['label' => '<span class="glyphicon glyphicon-user"></span> ' . Yii::t('app', 'ADMIN_USERS'), 'url' => ['/admin/users/index'], ],
+        //         ['label' => '<span class="glyphicon glyphicon-briefcase"></span> ' . Yii::t('app', 'ADMIN_POSITIONS'), 'url' => ['/admin/positions/index']],
+        //         ['label' => '<span class="glyphicon glyphicon-tent"></span> ' . Yii::t('app', 'ADMIN_COMPANIES'), 'url' => ['/admin/companies/index']],
+        //     ]] :
+        //     false,
+        // !Yii::$app->user->isGuest ?
+        //     ['label' => '<span class="glyphicon glyphicon-user"></span> ' . Yii::t('app', 'NAV_PROFILE'), 'items' => [
+        //         ['label' => '<span class="glyphicon glyphicon-search"></span> ' . Yii::t('app', 'NAV_PROFILE_VIEW'), 'url' => ['/user/profile']],
+        //         ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_PROFILE_EDIT'), 'url' => ['/user/profile/update']],
+        //         ['label' => '<span class="glyphicon glyphicon-asterisk"></span> ' . Yii::t('app', 'NAV_PROFILE_PASSWORD_RESET'), 'url' => ['/user/profile/password-change']],
+        //         ['label' => '<span class="glyphicon glyphicon-off"></span> ' . Yii::t('app', 'NAV_LOGOUT'), 'url' => ['/user/default/logout'], 'linkOptions' => ['data-method' => 'post']]
+        //     ]] :
+        //     false,
         ]),
     ]);
     NavBar::end();

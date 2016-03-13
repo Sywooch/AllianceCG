@@ -12,6 +12,7 @@ use app\components\grid\SetColumn;
 use app\components\grid\LinkColumn;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
+use yii\helpers\ArrayHelper;
 use app\modules\admin\Module;
 
 /* @var $this yii\web\View */
@@ -35,18 +36,6 @@ $this->params['breadcrumbs'][] = $this->title;
         
         <?= Html::a('<span class="glyphicon glyphicon-refresh"></span>  ' . Module::t('module', 'ADMIN_USERS_REFRESH'), ['index'], ['class' => 'btn btn-primary', 'id' => 'refreshButton']) ?>
     </p>
-
-    <?php
-        // Pjax::begin();
-        // $roles = Yii::$app->authManager->getRoles();
-        // var_dump($roles);
-        // $userroles = Yii::$app->authManager->getRolesByUser('1');
-        // var_dump($userroles);
-        // $userroles = Yii::$app->getAuthManager()->getRoles();
-        // $userroles = Yii::$app->authManager->roles;
-        // var_dump($userroles);
-        // echo mktime(date('h'), date('i'), date('s'), date('d'), date('m'), date('y'));
-    ?>
 
     <?= GridView::widget([
         'id' => 'admin-users-grid',
@@ -81,15 +70,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function ($data) {
                     return $data->getFullname();
                 },
-                // 'contentOptions'=>['style'=>'width: 100px;'],
             ],
             [
                 'attribute' => 'company',
                 'contentOptions'=>['style'=>'width: 150px;'],
+                'filter'=>ArrayHelper::map(User::find()->asArray()->all(), 'company', 'company'),
             ],
             [
                 'attribute' => 'position',
                 'contentOptions'=>['style'=>'width: 150px;'],
+                'filter'=>ArrayHelper::map(User::find()->asArray()->all(), 'position', 'position'),
             ],
             [
                 'class' => SetColumn::className(),

@@ -52,9 +52,9 @@ class LoginForm extends Model
             } elseif ($user && $user->status == User::STATUS_BLOCKED) {
                 $this->addError('username', Yii::t('app', 'ERROR_PROFILE_BLOCKED'));
             } 
-            // elseif ($user && $user->status == User::STATUS_WAIT) {
-            //     $this->addError('username', Yii::t('app', 'ERROR_PROFILE_NOT_CONFIRMED'));
-            // }
+            elseif ($user && $user->status == User::STATUS_WAIT) {
+                $this->addError('username', Yii::t('app', 'ERROR_PROFILE_NOT_CONFIRMED'));
+            }
         }
     }
 
@@ -78,7 +78,13 @@ class LoginForm extends Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = User::findByUsername($this->username);
+            // $this->_user = User::findByUsername($this->username);
+            if(strpos($this->username, '@') !== false){
+                $this->_user = User::findByEmail($this->username);
+            }
+            else {
+                $this->_user = User::findByUsername($this->username);
+            }
         }
 
         return $this->_user;

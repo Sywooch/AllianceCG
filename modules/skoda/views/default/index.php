@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'label' => '<span class="glyphicon glyphicon-wrench"></span>  ' . Module::t('module', 'STATUSMONITOR'),
-                        'url' => '/skoda/servicesheduler',
+                        'url' => '/skoda/statusmonitor/',
                     ],
                 ]),
             ]);

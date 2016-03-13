@@ -21,8 +21,8 @@ class RbacController extends Controller
         $auth = new DbManager;
         $auth->init();
  
-        $auth->removeAll(); //удаляем старые данные
-        // Rules
+        $auth->removeAll(); 
+
         $groupRule = new GroupRule();
  
         $auth->add($groupRule);
@@ -33,23 +33,23 @@ class RbacController extends Controller
         $manager->ruleName = $groupRule->name;
         $auth->add($manager);
  
-        $head = $auth->createRole(' head ');
+        $head = $auth->createRole('head');
         $head ->description = 'head ';
         $head ->ruleName = $groupRule->name;
         $auth->add($head);
-        $auth->addChild($head, $manager);
+        // $auth->addChild($head, $manager);
  
         $admin = $auth->createRole('admin');
         $admin->description = 'Admin';
         $admin->ruleName = $groupRule->name;
         $auth->add($admin);
-        $auth->addChild($admin, $head);
+        // $auth->addChild($admin, $head);
  
         $root = $auth->createRole('root');
         $root->description = 'root';
         $root->ruleName = $groupRule->name;
         $auth->add($root);
-        $auth->addChild($root, $admin);
+        // $auth->addChild($root, $admin);
  
         // Superadmin assignments
         if ($id !== null) {

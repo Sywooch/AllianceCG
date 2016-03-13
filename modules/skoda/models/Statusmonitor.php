@@ -42,7 +42,6 @@ class Statusmonitor extends \yii\db\ActiveRecord
 
     public function getCarWorkStatus() 
     {
-        // $today = Yii::$app->getFormatter()->asDatetime(time());
         $today = Yii::$app->formatter->asDatetime(date('Y-m-d H:i:s'));
         if (strtotime($today) < strtotime($this->from)){
             $carstatus = 'Ожидание';
@@ -82,7 +81,6 @@ class Statusmonitor extends \yii\db\ActiveRecord
 
     public function getColorStatusBar()
     {
-        // $today = Yii::$app->getFormatter()->asDatetime(time());
         $today = Yii::$app->formatter->asDatetime(date('Y-m-d H:i:s'));
         if (strtotime($today) < strtotime($this->from)){
             $cssclass = 'progress-bar-warning';
@@ -121,7 +119,7 @@ class Statusmonitor extends \yii\db\ActiveRecord
             $worker = $wc->responsible;
             return $worker;
         }
-    }
+    }   
 
     /**
      * @inheritdoc
@@ -130,9 +128,7 @@ class Statusmonitor extends \yii\db\ActiveRecord
     {
         return [
             [['regnumber', 'from', 'to'], 'required'],
-            // [['status'], 'integer'],
             [['from', 'to', 'regnumber'], 'safe'],
-            // ['to', WorkshedulerValidator::className()],
             ['to', 'validateWorkshedulerTo'],
             ['from', 'validateWorkshedulerFrom'],
             [['responsible', 'regnumber'], 'string', 'max' => 255],
@@ -148,7 +144,6 @@ class Statusmonitor extends \yii\db\ActiveRecord
             'regnumber' => Module::t('module', 'STATUS_REGNUMBER'),
             'from' => Module::t('module', 'STATUS_FROM'),
             'to' => Module::t('module', 'STATUS_TO'),
-            // 'responsible' => Module::t('module', 'STATUS_RESPONSIBLE'),
             'worker' => Module::t('module', 'STATUS_RESPONSIBLE'),
             'carstatus' => Module::t('module', 'STATUS_STATUS'),
             'progress' => Module::t('module', 'STATUS_PROGRESS'),
@@ -165,25 +160,21 @@ class Statusmonitor extends \yii\db\ActiveRecord
     
             if(empty($wcs->responsible))                
             {
-                // throw new \yii\web\NotFoundHttpException('User not found');
                 $this->addError('to', Yii::t('app', 'ERROR_WORKSHEDULER_DOES_NOT_EXIST_TO'));
-                // throw new \yii\web\Exception('hello world');
             }
     }
 
     public function validateWorkshedulerFrom($from, $params)
     {            
-            $from_date = Yii::$app->formatter->asDate($this->from, 'yyyy-MM-dd');
-            $wcs = Servicesheduler::find()
-                ->where(['date' => $from_date])
-                ->one();
+        $from_date = Yii::$app->formatter->asDate($this->from, 'yyyy-MM-dd');
+        $wcs = Servicesheduler::find()
+            ->where(['date' => $from_date])
+            ->one();
     
-            if(empty($wcs->responsible))                
-            {
-                // throw new \yii\web\NotFoundHttpException('User not found');
-                $this->addError('from', Yii::t('app', 'ERROR_WORKSHEDULER_DOES_NOT_EXIST_FROM'));
-                // throw new \yii\web\Exception('hello world');
-            }
+        if(empty($wcs->responsible))                
+        {
+            $this->addError('from', Yii::t('app', 'ERROR_WORKSHEDULER_DOES_NOT_EXIST_FROM'));
+        }
     }  
 
 }

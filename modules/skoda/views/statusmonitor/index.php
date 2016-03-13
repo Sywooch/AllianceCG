@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use app\modules\skoda\models\Statusmonitor;
+use app\modules\skoda\models\Servicesheduler;
 use app\modules\admin\models\User;
 use yii\grid\GridView;
 use yii\helpers\Url;
@@ -11,6 +12,8 @@ use app\components\grid\SetColumn;
 use app\components\grid\LinkColumn;
 use app\modules\skoda\Module;
 use yii\bootstrap\Progress;
+use yii\helpers\ArrayHelper;
+use yii\jui\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\status\models\StatusmonitorSearch */
@@ -90,20 +93,28 @@ $this->registerJs('
                 ],
                 [
                     'attribute' => 'from',
-                    'filter' => false,    
+                    'filter' => DatePicker::widget([
+                            'model' => $searchModel,
+                            'attribute' => 'from',
+                            'options' => ['class' => 'form-control']
+                        ]),
                     'format' => ['date', 'php:H:i:s d/m/Y'],
                     'contentOptions'=>['style'=>'width: 200px;'],                    
                 ],
                 [
                     'attribute' => 'to',
-                    'filter' => false,      
+                    'filter' => DatePicker::widget([
+                            'model' => $searchModel,
+                            'attribute' => 'to',
+                            'options' => ['class' => 'form-control']
+                        ]),   
                     'format' => ['date', 'php:H:i:s d/m/Y'],                 
                     'contentOptions'=>['style'=>'width: 200px;'],                    
                 ],
                 [
                     'attribute' => 'worker',
-                    'filter' => false,
-                    'format' => 'raw',    
+                    'format' => 'raw',
+                    'filter' => ArrayHelper::map(Servicesheduler::find()->asArray()->all(), 'responsible', 'responsible'),
                     'value' => function ($data) {
                         return $data->getResponsible();
                     },

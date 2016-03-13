@@ -7,6 +7,9 @@ use yii\bootstrap\Nav;
 use app\components\grid\LinkColumn;
 use app\components\grid\ActionColumn;
 use yii\helpers\Url;
+use yii\jui\DatePicker;
+use yii\helpers\ArrayHelper;
+use app\modules\skoda\models\Servicesheduler;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\skoda\models\ServiceshedulerSearch */
@@ -97,11 +100,17 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'date',
                 'format' => ['date', 'php:d/m/Y'],
+                'filter' => DatePicker::widget([
+                        'model' => $searchModel,
+                        'attribute' => 'date',
+                        'options' => ['class' => 'form-control']
+                    ]),
                 'contentOptions'=>['style'=>'width: 100px;']
             ],
             [
                 'class' => LinkColumn::className(),
                 'attribute' => 'responsible',
+                'filter' => ArrayHelper::map(Servicesheduler::find()->asArray()->all(), 'responsible', 'responsible'),
                 'format' => 'raw',  
             ],
             [

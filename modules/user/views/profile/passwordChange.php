@@ -13,7 +13,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-profile-password-change">
  
-    <div class="user-form col-lg-offset-3">
+    <!-- <div class="user-form col-lg-offset-3"> -->
+    <div>
         
         <div class="form-group" style="text-align: right">
             <?= Html::submitButton('<span class="glyphicon glyphicon-floppy-saved"></span>  ' . Module::t('module', 'PROFILE_BUTTON_SAVE'), ['class' => 'btn btn-primary']) ?>

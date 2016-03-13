@@ -11,7 +11,8 @@ use app\modules\user\Module;
 $this->title = Module::t('module', 'PROFILE_TITLE_PROFILE');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-profile col-lg-6 col-lg-offset-3">
+<!-- <div class="user-profile col-lg-6 col-lg-offset-3"> -->
+<div>
  
     <h1>
     <?php 

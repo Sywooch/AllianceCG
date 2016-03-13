@@ -28,7 +28,6 @@ class ServiceshedulerSearch extends Servicesheduler
             [['id'], 'integer'],
             [['responsible'], 'string'],
             [['date_from', 'date_to'], 'safe'],
-            // [['date_from', 'date_to'], 'date', 'format' => 'php:Y-m-d'],
             [['date'], 'safe'],
         ];
     }

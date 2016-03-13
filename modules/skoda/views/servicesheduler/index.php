@@ -48,6 +48,22 @@ $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_SKODA'), '
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+<?php if (Yii::$app->session->hasFlash('masterConsultantDoesNotExistToday')): ?>
+
+    <div class="alert alert-danger">
+        <?= Yii::t('app', 'CURRENT_MASTER_CONSULTANT') ?>
+    </div>
+
+<?php //endif; ?>
+
+<?php elseif (Yii::$app->session->hasFlash('masterConsultantIs')) : ?>
+
+    <div class="alert alert-success">
+        <?= Yii::$app->formatter->asDate($wcs->date, 'dd/MM/yyyy') . ' - ' . Yii::t('app', 'CURRENT_MASTER_CONSULTANT') .' - '. $wcs->responsible ?>
+    </div>
+
+<?php endif; ?>
+
 <h1><span class="glyphicon glyphicon-wrench" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
     
     <?php // $this->render('_search', ['model' => $searchModel]); ?>

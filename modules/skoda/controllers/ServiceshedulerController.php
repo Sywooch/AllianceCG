@@ -57,23 +57,42 @@ class ServiceshedulerController extends Controller
     
         if(empty($wcs->responsible))                
         {
-            \Yii::$app->getSession()->setFlash('danger', Yii::t('app', 'MASTER_CONSULTANT_DOES_NOT_EXIST_TODAY'));
+            // \Yii::$app->getSession()->setFlash('danger', Yii::t('app', 'MASTER_CONSULTANT_DOES_NOT_EXIST_TODAY'));
+            Yii::$app->session->setFlash('masterConsultantDoesNotExistToday');
         }
         else
         {
-            \Yii::$app->getSession()->setFlash('success', Yii::$app->formatter->asDate($wcs->date, 'dd/MM/yyyy') . ' - ' . Yii::t('app', 'CURRENT_MASTER_CONSULTANT') .' - '. $wcs->responsible);
+            // \Yii::$app->getSession()->setFlash('success', Yii::$app->formatter->asDate($wcs->date, 'dd/MM/yyyy') . ' - ' . Yii::t('app', 'CURRENT_MASTER_CONSULTANT') .' - '. $wcs->responsible);
+            Yii::$app->session->setFlash('masterConsultantIs');
         }        
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'events' => $tasks, 
+            'wcs' => $wcs,
         ]);
     }
 
     public function actionCalendar()
     {
-        return $this->render('calendar');
+
+        $today = Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
+        $wcs = Servicesheduler::find()
+            ->where(['date' => $today])
+            ->one();
+    
+        if(empty($wcs->responsible))                
+        {
+            Yii::$app->session->setFlash('masterConsultantDoesNotExistToday');
+        }
+        else
+        {
+            Yii::$app->session->setFlash('masterConsultantIs');
+        }        
+        return $this->render('calendar', [
+            'wcs' => $wcs,                
+            ]);
     }
 
     /**

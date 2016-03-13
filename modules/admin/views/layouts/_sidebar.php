@@ -6,7 +6,7 @@ use yii\helpers\Url;
 use app\modules\admin\Module;
 
     echo Nav::widget([
-        'options' => ['class' => 'nav nav-pills nav-stacked'],
+        'options' => ['class' => 'nav nav-list'],
         'encodeLabels' => false,
         'items' => array_filter([
             [

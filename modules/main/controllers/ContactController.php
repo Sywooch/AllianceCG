@@ -4,6 +4,7 @@ namespace app\modules\main\controllers;
  
 use app\modules\main\models\ContactForm;
 use yii\web\Controller;
+use yii\filters\AccessControl;
 use Yii;
 
 class ContactController extends Controller
@@ -17,6 +18,22 @@ class ContactController extends Controller
             ],
         ];
     }
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['?', '@'],
+                    ],
+                ],
+            ],
+        ];        
+    }        
  
     public function actionIndex()
     {

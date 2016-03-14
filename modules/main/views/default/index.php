@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use app\modules\status\models\Statusmonitor;
 use rmrevin\yii\fontawesome\FA;
+use app\modules\main\Module;
 
 
 /* @var $this yii\web\View */

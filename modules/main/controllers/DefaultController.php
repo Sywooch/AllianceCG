@@ -14,6 +14,7 @@
 namespace app\modules\main\controllers;
  
 use yii\web\Controller;
+use yii\filters\AccessControl;
  
 class DefaultController extends Controller
 {
@@ -25,6 +26,23 @@ class DefaultController extends Controller
             ],
         ];
     }
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions'=>['error', 'index'],
+                        'roles' => ['?', '@'],
+                    ],               
+                ],
+            ],
+        ];
+    }
+
  
     public function actionIndex()
     {

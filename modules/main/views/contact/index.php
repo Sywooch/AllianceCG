@@ -32,7 +32,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 
                 <h1><?= Html::encode($this->title) ?></h1>
 
-                    <p><?= Yii::t('app', 'CONTACT_INFO'); ?></p>
+                <div class="alert alert-info">
+
+                    <p><?= Module::t('module', 'CONTACT_INFO'); ?></p>
+
+                </div>
 
                     <?= $form->field($model, 'name', ['template'=>' <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'name' )]) ?>
                     
@@ -49,11 +53,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             'placeholder' => $model->getAttributeLabel( 'verifyCode' ),
                             'label' => false,
                         ],                        
-                        'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6"> <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-warning-sign"></span></span>{input}</div></div></div>',
+                        'template' => '<div class="row" style="text-align: left"><div class="col-lg-6">{image}</div><div class="col-lg-6"> <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-warning-sign"></span></span>{input}</div></div></div>',
                     ]) ?>
                     
                     <div class="form-group" style="text-align: right">
-                        <?= Html::submitButton('<span class="glyphicon glyphicon-envelope"></span>  ' . Yii::t('app', 'BUTTON_SUBMIT'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+                        <?= Html::submitButton('<span class="glyphicon glyphicon-envelope"></span>  ' . Module::t('module', 'BUTTON_SUBMIT'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
                     </div>
 
                 <?php ActiveForm::end(); ?>

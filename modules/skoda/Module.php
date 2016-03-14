@@ -14,26 +14,34 @@ class Module extends \yii\base\Module
      * @inheritdoc
      */
     public $controllerNamespace = 'app\modules\skoda\controllers';
-    // public function behaviors()
-    // {
-    //     return [
-    //         'access' => [
-    //             'class' => AccessControl::className(),
-    //             'rules' => [
-    //                 [
-    //                     'allow' => true,
-    //                     'actions'=>['index', 'error', 'monitor', 'dashboard'],
-    //                     'roles' => ['?'],
-    //                 ],
-    //                 [
-    //                     'allow' => true,
-    //                     'actions'=>['view', 'create', 'update', 'index', 'monitor', 'dashboard'],
-    //                     'roles' => ['@'],
-    //                 ],                
-    //             ],
-    //         ],
-    //     ];
-    // }
+    
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions'=>['monitor'],
+                        'allow' => true,
+                        'roles' => ['?', '@'],
+                    ],
+                    [
+                        'actions'=>['index', 'create', 'view', 'update', 'calendar'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions'=>['delete', 'multipleDelete'],
+                        'allow' => true,
+                        'roles' => ['head', 'admin', 'root'],
+                    ],
+                ],
+            ],
+        ];
+
+    } 
+
     /**
      * @inheritdoc
      */

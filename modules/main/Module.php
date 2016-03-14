@@ -15,21 +15,17 @@ class Module extends \yii\base\Module
         return [
             'access' => [
                 'class' => AccessControl::className(),                
-                'only' => ['index', 'contact', 'error'],
+                // 'only' => ['index', 'contact', 'error'],
                 'rules' => [
                     [
-                        'actions'=>['contact'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'actions'=>['index'],
+                        'actions'=>['index', 'error'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
                 ],
             ],
         ];
+
     }    
 
     public function init()

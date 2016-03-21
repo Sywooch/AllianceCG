@@ -15,7 +15,7 @@ use app\modules\admin\Module;
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-    <h1><span class="glyphicon glyphicon-tent" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
+    <h1><span class="glyphicon glyphicon-user" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
            
     <div class="form-group" style="text-align: right;">
         <?= Html::submitButton(

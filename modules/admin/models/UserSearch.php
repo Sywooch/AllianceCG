@@ -38,7 +38,7 @@ class UserSearch extends Model
     {
         return [
             [['id', 'status'], 'integer'],
-            [['username', 'email', 'name', 'surname', 'patronymic', 'fullname', 'email', 'photo', 'position', 'role'], 'safe'],
+            [['username', 'email', 'name', 'surname', 'patronymic', 'fullname', 'photo', 'position', 'role'], 'safe'],
             [['date_from', 'date_to'], 'date', 'format' => 'php:Y-m-d'],
             [['fullname', 'company'], 'safe'],
             ['photo', 'safe'],

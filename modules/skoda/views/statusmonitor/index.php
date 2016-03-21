@@ -160,6 +160,9 @@ $this->registerJs('
                             'barOptions' => [
                                 'class' => $data->getColorStatusBar(),
                             ],
+                            'options' => [
+                                'class' => $data->getStatusBarAnimation(),
+                            ]
                         ]);
                     },
                     'contentOptions'=>['style'=>'width: 100px;'],

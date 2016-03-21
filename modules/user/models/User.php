@@ -8,6 +8,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
+use app\modules\user\models\query\UserQuery;
 use yii\web\UploadedFile;
 use app\modules\admin\models\Positions;
 use app\modules\user\Module;
@@ -68,6 +69,14 @@ class User extends ActiveRecord implements IdentityInterface
     public function getuserprofiles()
     {
         return $this->hasOne(Userprofile::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * @return UserQuery
+     */
+    public static function find()
+    {
+        return Yii::createObject(UserQuery::className(), [get_called_class()]);
     }
 
     /**
@@ -349,9 +358,9 @@ class User extends ActiveRecord implements IdentityInterface
      * @param string $token password reset token
      * @return static|null
      */
-    public static function findByPasswordResetToken($token)
+    public static function findByPasswordResetToken($token, $timeout)
     {
-        if (!static::isPasswordResetTokenValid($token)) {
+        if (!static::isPasswordResetTokenValid($token, $timeout)) {
             return null;
         }
         return static::findOne([
@@ -376,15 +385,15 @@ class User extends ActiveRecord implements IdentityInterface
     //     $timestamp = (int) end($parts);
     //     return $timestamp + $expire >= time();
     // }
-    public static function isPasswordResetTokenValid($token)
+    public static function isPasswordResetTokenValid($token, $timeout)
     {
         if (empty($token)) {
             return false;
         }
-        $expire = Yii::$app->params['user.passwordResetTokenExpire'];
+        // $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         $parts = explode('_', $token);
         $timestamp = (int) end($parts);
-        return $timestamp + $expire >= time();
+        return $timestamp + $timeout >= time();
     }
  
     /**

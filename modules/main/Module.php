@@ -10,23 +10,26 @@ use yii\web\ForbiddenHttpException;
 class Module extends \yii\base\Module
 {
     public $controllerNamespace = 'app\modules\main\controllers';
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),                
-                // 'only' => ['index', 'contact', 'error'],
-                'rules' => [
-                    [
-                        'actions'=>['index', 'error'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-        ];
-
-    }    
+    // public function behaviors()
+    // {
+        // return [
+        //     'access' => [
+        //         'class' => AccessControl::className(),
+        //         'rules' => [
+        //             [
+        //                 'actions'=>['index', 'error'],
+        //                 'allow' => true,
+        //                 'roles' => ['@'],
+        //             ],
+        //             [
+        //                 'actions'=>['captcha'],
+        //                 'allow' => true,
+        //                 'roles' => ['?', '@'],
+        //             ],
+        //         ],
+        //     ],
+        // ];
+    // }    
 
     public function init()
     {

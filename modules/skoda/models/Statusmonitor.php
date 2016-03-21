@@ -160,7 +160,7 @@ class Statusmonitor extends \yii\db\ActiveRecord
     
             if(empty($wcs->responsible))                
             {
-                $this->addError('to', Yii::t('app', 'ERROR_WORKSHEDULER_DOES_NOT_EXIST_TO'));
+                $this->addError('to', Moduel::t('module', 'ERROR_WORKSHEDULER_DOES_NOT_EXIST_TO'));
             }
     }
 
@@ -173,7 +173,7 @@ class Statusmonitor extends \yii\db\ActiveRecord
     
         if(empty($wcs->responsible))                
         {
-            $this->addError('from', Yii::t('app', 'ERROR_WORKSHEDULER_DOES_NOT_EXIST_FROM'));
+            $this->addError('from', Module::t('module', 'ERROR_WORKSHEDULER_DOES_NOT_EXIST_FROM'));
         }
     }  
 

@@ -8,6 +8,14 @@ use Yii;
 class Module extends \yii\base\Module
 {
     public $controllerNamespace = 'app\modules\user\controllers';
+    /**
+     * @var int
+     */
+    public $emailConfirmTokenExpire = 259200; // 3 days
+    /**
+     * @var int
+     */
+    public $passwordResetTokenExpire = 3600;
 
     public function init()
     {
@@ -15,7 +23,6 @@ class Module extends \yii\base\Module
         if (Yii::$app instanceof ConsoleApplication) {
             $this->controllerNamespace = 'app\modules\user\commands';
         }
-        // custom initialization code goes here
     }
 
     public static function t($category, $message, $params = [], $language = null)

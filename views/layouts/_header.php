@@ -2,6 +2,7 @@
 
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -17,14 +18,14 @@ use yii\helpers\Url;
         'encodeLabels' => false,
         'items' => array_filter([
         !Yii::$app->user->isGuest ?
-            ['label' => '<span class="glyphicon glyphicon-home"></span> ' . Yii::t('app', 'NAV_HOME'), 'url' => ['/main/default/index']] :
+            ['label' => FA::icon('home') . Yii::t('app', 'NAV_HOME'), 'url' => ['/main/default/index']] :
             false,
-        ['label' => '<span class="glyphicon glyphicon-home"></span> ' . Yii::t('app', 'NAV_CONTACT'), 'url' => ['/main/contact/index']],
+        ['label' => FA::icon('at') . Yii::t('app', 'NAV_CONTACT'), 'url' => ['/main/contact/index']],
         Yii::$app->user->isGuest ?
-            ['label' => '<span class="glyphicon glyphicon-user"></span> ' . Yii::t('app', 'NAV_LOGIN'), 'url' => ['/user/default/login']] :
+            ['label' => FA::icon('user') . Yii::t('app', 'NAV_LOGIN'), 'url' => ['/user/default/login']] :
             false,
         !Yii::$app->user->isGuest ?
-            ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_SKODA'), 'url' => ['/skoda/']] :
+            ['label' => FA::icon('wrench') . Yii::t('app', 'NAV_SKODA'), 'url' => ['/skoda/']] :
             false,
         // !Yii::$app->user->isGuest ?
         //     ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_SKODA'), 'items' => [
@@ -34,13 +35,13 @@ use yii\helpers\Url;
         //     ]] :
         //     false,
         Yii::$app->user->can('admin') ?
-            ['label' => '<span class="glyphicon glyphicon-cog"></span> ' . Yii::t('app', 'NAV_ADMIN'), 'url' => ['//admin/default/index']] :
+            ['label' => FA::icon('cog') . Yii::t('app', 'NAV_ADMIN'), 'url' => ['//admin/default/index']] :
             false,
         !Yii::$app->user->isGuest ?
-            ['label' => '<span class="glyphicon glyphicon-user"></span> ' . Yii::t('app', 'NAV_PROFILE'), 'url' => ['/user/profile']] :
+            ['label' => FA::icon('user') . Yii::t('app', 'NAV_PROFILE'), 'url' => ['/user/profile']] :
             false,
         !Yii::$app->user->isGuest ?
-            ['label' => '<span class="glyphicon glyphicon-off"></span> ' . Yii::t('app', 'NAV_LOGOUT'), 'url' => ['/user/default/logout'], 'linkOptions' => ['data-method' => 'post']] :
+            ['label' => FA::icon('power-off') . Yii::t('app', 'NAV_LOGOUT'), 'url' => ['/user/default/logout'], 'linkOptions' => ['data-method' => 'post']] :
             false,
         // Yii::$app->user->can('admin') ?
         //     ['label' => '<span class="glyphicon glyphicon-wrench"></span> ' . Yii::t('app', 'NAV_ADMIN'), 'items' => [

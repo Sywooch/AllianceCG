@@ -35,5 +35,6 @@
 		'STATUSMONITOR' => 'Монитор готовности',
 		'STATUS_SHOW_MONITOR' => 'Просмотр',	
 		'NAV_SKODA' => 'ŠKODA',
+		'ERROR_WORKSHEDULER_DOES_NOT_EXIST_TO' => 'kkjkjk',
 	];
 	

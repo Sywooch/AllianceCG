@@ -26,7 +26,7 @@ class ContactController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index'],
+                        'actions' => ['index', 'captcha'],
                         'allow' => true,
                         'roles' => ['?', '@'],
                     ],

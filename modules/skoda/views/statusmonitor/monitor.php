@@ -101,7 +101,6 @@ $this->title = Module::t('module', 'STATUSMONITOR_TITLE');
                         'В работе' => 'danger',
                         'Ожидание' => 'warning',
                     ],
-                'contentOptions'=>['style'=>'width: 60px;'],
             ],
             [
                 'attribute' => 'progress',

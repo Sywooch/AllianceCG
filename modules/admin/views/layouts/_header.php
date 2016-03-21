@@ -19,6 +19,7 @@ use yii\helpers\Url;
         !Yii::$app->user->isGuest ?
             ['label' => '<span class="glyphicon glyphicon-home"></span> ' . Yii::t('app', 'NAV_HOME'), 'url' => ['/main/default/index']] :
             false,
+        ['label' => '<span class="glyphicon glyphicon-home"></span> ' . Yii::t('app', 'NAV_CONTACT'), 'url' => ['/main/contact/index']],
         Yii::$app->user->isGuest ?
             ['label' => '<span class="glyphicon glyphicon-user"></span> ' . Yii::t('app', 'NAV_LOGIN'), 'url' => ['/user/default/login']] :
             false,

@@ -53,10 +53,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             'placeholder' => $model->getAttributeLabel( 'verifyCode' ),
                             'label' => false,
                         ],                        
-                        'template' => '<div class="row" style="text-align: left"><div class="col-lg-6">{image}</div><div class="col-lg-6"> <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-warning-sign"></span></span>{input}</div></div></div>',
+                        'template' => '<div class="row" style="text-align: left"><div class="col-lg-3">{image}</div><div class="col-lg-5"> <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-warning-sign"></span></span>{input}</div></div></div>',
                     ]) ?>
                     
-                    <div class="form-group" style="text-align: right">
+                    <div class="form-group">
                         <?= Html::submitButton('<span class="glyphicon glyphicon-envelope"></span>  ' . Module::t('module', 'BUTTON_SUBMIT'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
                     </div>
 

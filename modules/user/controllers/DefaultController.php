@@ -131,29 +131,10 @@ class DefaultController extends Controller
         return $this->goHome();
     }
  
-    // public function actionPasswordResetRequest()
-    // {
-    //     $this->layout = '@app/modules/user/views/layouts/default/main';
-
-    //     $model = new PasswordResetRequestForm();
-    //     if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-    //         if ($model->sendEmail()) {
-    //             Yii::$app->getSession()->setFlash('success', 'Спасибо! На ваш Email было отправлено письмо со ссылкой на восстановление пароля.');
- 
-    //             return $this->goHome();
-    //         } else {
-    //             Yii::$app->getSession()->setFlash('error', 'Извините. У нас возникли проблемы с отправкой.');
-    //         }
-    //     }
- 
-    //     return $this->render('passwordResetRequest', [
-    //         'model' => $model,
-    //     ]);
-    // }
-
     public function actionPasswordResetRequest()
     {
-        // $model = new PasswordResetRequestForm($this->module->passwordResetTokenExpire);
+        $this->layout = '@app/modules/user/views/layouts/default/main';
+
         $model = new PasswordResetRequestForm($this->module->passwordResetTokenExpire);
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
@@ -170,6 +151,8 @@ class DefaultController extends Controller
  
     public function actionPasswordReset($token)
     {
+        $this->layout = '@app/modules/user/views/layouts/default/main';
+        
         try {
             $model = new PasswordResetForm($token, $this->module->passwordResetTokenExpire);
         } catch (InvalidParamException $e) {

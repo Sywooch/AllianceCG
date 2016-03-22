@@ -23,14 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <p><?= Module::t('module', 'PLEASE_FILL_FOR_LOGIN') ?></p>
 
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-            <?= $form->field($model, 'username', ['template'=>' <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'username' )]) ?>
-            <?php
-            // $form->field($model, 'username')
-            ?>
-            <?= $form->field($model, 'password', ['template'=>' <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>{input}</div>{error}'])->passwordInput(['placeholder' => $model->getAttributeLabel( 'password' )]) ?>
-            <?php
-            // $form->field($model, 'password')->passwordInput() 
-            ?>
+            <?= $form->field($model, 'username', ['template'=>' <div class="input-group"><span class="input-group-addon">'. FA::icon('user') . '</span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'username' )]) ?>
+
+            <?= $form->field($model, 'password', ['template'=>' <div class="input-group"><span class="input-group-addon">'. FA::icon('briefcase') . '</span>{input}</div>{error}'])->passwordInput(['placeholder' => $model->getAttributeLabel( 'password' )]) ?>
             
             <!-- <div class="alert alert-danger"> -->
                 <?php Module::t('module', 'LOGIN_INFO') ?>
@@ -40,9 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <div style="color:#999;margin:1em 0;text-align: right;">
                 <?php // Html::a('<span class="glyphicon glyphicon-refresh"></span>  ' . Module::t('module', 'LINK_SIGNUP'), ['signup']) ?>
                 &nbsp&nbsp&nbsp&nbsp            
-                <?= Html::a('<span class="glyphicon glyphicon-refresh"></span>  ' . Module::t('module', 'LINK_PASSWORD_RESET'), ['password-reset-request']) ?>
+                <?= Html::a(FA::icon('refresh') . Module::t('module', 'LINK_PASSWORD_RESET'), ['password-reset-request']) ?>
                 &nbsp&nbsp&nbsp&nbsp
-                <?= Html::submitButton('<span class="glyphicon glyphicon-play-circle"></span>  ' . Module::t('module', 'USER_BUTTON_LOGIN'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                <?= Html::submitButton(FA::icon('sign-in') . Module::t('module', 'USER_BUTTON_LOGIN'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
             
 

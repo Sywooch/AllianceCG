@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use app\modules\user\Module;
+use rmrevin\yii\fontawesome\FA;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
@@ -20,12 +21,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <p><?= Module::t('module', 'PLEASE_FILL_FOR_RESET_REQUEST') ?></p>
 
-            <?php
-            // $form->field($model, 'email')
-            ?>
-            <?= $form->field($model, 'email', ['template'=>' <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-inbox"></span></span>{input}{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'email' )]) . '</div>' ?>
+            <?= $form->field($model, 'email', ['template'=>' <div class="input-group"><span class="input-group-addon">'. FA::icon('envelope') .'</span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'email' )]) ?>
             <div class="form-group" style="text-align: right">
-                <?= Html::submitButton('<span class="glyphicon glyphicon-send"></span>  ' . Module::t('module', 'BUTTON_SEND'), ['class' => 'btn btn-primary', 'name' => 'reset-button']) ?>
+                <?= Html::submitButton(FA::icon('send') . Module::t('module', 'BUTTON_SEND'), ['class' => 'btn btn-primary', 'name' => 'reset-button']) ?>
             </div>
             <?php ActiveForm::end(); ?>
         </div>

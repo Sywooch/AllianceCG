@@ -46,7 +46,7 @@ class ProfileUpdateForm extends Model
                 'email',
                 'unique',
                 'targetClass' => User::className(),
-                'message' => Yii::t('app', 'ERROR_EMAIL_EXISTS'),
+                'message' => Module::t('module', 'ERROR_EMAIL_EXISTS'),
                 'filter' => function (ActiveQuery $query) {
                         $query->andWhere(['<>', 'id', $this->_user->id]);
                     },
@@ -82,10 +82,10 @@ class ProfileUpdateForm extends Model
     public function attributeLabels()
     {
         return [
-            'email' => Yii::t('app', 'USER_EMAIL'),
-            'surname' => Yii::t('app', 'USER_SURNAME'),
-            'name' => Yii::t('app', 'USER_NAME'),
-            'patronymic' => Yii::t('app', 'USER_PATRONYMIC'),
+            'email' => Module::t('module', 'USER_EMAIL'),
+            'surname' => Module::t('module', 'USER_SURNAME'),
+            'name' => Module::t('module', 'USER_NAME'),
+            'patronymic' => Module::t('module', 'USER_PATRONYMIC'),
         ];
     }       
  

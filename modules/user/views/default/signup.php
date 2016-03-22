@@ -4,6 +4,7 @@ use yii\captcha\Captcha;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use app\modules\user\Module;
+use rmrevin\yii\fontawesome\FA;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
@@ -21,19 +22,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <p><?= Module::t('module', 'PLEASE_FILL_FOR_SIGNUP') ?></p>
             
-            <?= $form->field($model, 'username', ['template'=>' <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'username' )]) ?>
+            <?= $form->field($model, 'username', ['template'=>' <div class="input-group"><span class="input-group-addon">' . FA::icon('user') . '</span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'username' )]) ?>
 
             <?php
             // $form->field($model, 'username')
             ?>
 
-            <?= $form->field($model, 'email', ['template'=>' <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-inbox"></span></span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'email' )]) ?>
+            <?= $form->field($model, 'email', ['template'=>' <div class="input-group"><span class="input-group-addon">' . FA::icon('envelope') . '</span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'email' )]) ?>
 
             <?php
             // $form->field($model, 'email')
             ?>
 
-            <?= $form->field($model, 'password', ['template'=>' <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'password' )]) ?>
+            <?= $form->field($model, 'password', ['template'=>' <div class="input-group"><span class="input-group-addon">' . FA::icon('suitcase') . '</span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'password' )]) ?>
 
             <?php
             // $form->field($model, 'password')->passwordInput()
@@ -45,10 +46,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     'placeholder' => $model->getAttributeLabel( 'verifyCode' ),
                     'label' => false,
                 ],  
-                'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6"> <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-warning-sign"></span></span>{input}</div></div></div>',
+                'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6"> <div class="input-group"><span class="input-group-addon">' . FA::icon('asterisk') . '</span>{input}</div></div></div>',
             ]) ?>
             <div class="form-group" style="text-align: right">
-                <?= Html::submitButton('<span class="glyphicon glyphicon-send"></span>  ' . Module::t('module', 'BUTTON_SUBMIT'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                <?= Html::submitButton(FA::icon('send') . Module::t('module', 'BUTTON_SUBMIT'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
             </div>
             <?php ActiveForm::end(); ?>
         </div>

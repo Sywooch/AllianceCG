@@ -223,7 +223,7 @@ a.desc:after {
 }
 
 .user-view {
-    width: 60%;
+    /*width: 60%;*/
 }
 
 #statusmonitor-users-grid {

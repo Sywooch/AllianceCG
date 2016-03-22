@@ -12,24 +12,10 @@ $this->title = $model->getFullname();
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN_USERS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-view col-lg-5 col-lg-offset-3">
+<div class="user-view col-lg-10 col-lg-offset-1">
+<!-- <div class="user-view"> -->
 
-    <h1>
-        <?php
-            // Html::encode($this->title) 
-        ?>
-    </h1>
-
-    
-<table style="margin-bottom: 30px;">
-  <tr>
-    <th colspan="2"><h1><span class="glyphicon glyphicon-user" style='padding-right:10px;'></span><?= Html::encode($model->getAllname()) ?></h1></th>
-  </tr>
-  <tr>
-    <td><?= Module::t('module', 'ADMIN_WHERE_USER_CREATED') ?></td>
-    <td><?= Yii::$app->formatter->asDate($model->created_at, 'dd/MM/yyyy'); ?></td>
-  </tr>
-</table>
+    <h1><?= Html::img($model->getImageUrl(),['height' => '80', 'class'=>'img-rounded']) . ' &nbsp; ' . Html::encode($model->getAllname()) ?></h1>
     
     <p style="text-align: right;">
         <?= Html::a('<span class="glyphicon glyphicon-th-list"></span>  ' . Module::t('module', 'ADMIN_USERS'), ['/admin/users'], ['class' => 'btn btn-warning']) ?>
@@ -45,33 +31,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
-        'attributes' => [
-            // 'id',
-            // 'created_at',
-            // 'updated_at',   
-            [
-                'attribute'=>'photo',
-                'value'=>$model->getImageurl(),
-                'format' => ['image',['height'=>'80']],
-            ],
+        'attributes' => [  
+            // [
+            //     'attribute'=>'photo',
+            //     'value'=>$model->getImageurl(),
+            //     'format' => ['image',['height'=>'80']],
+            // ],
             'username',
             'position',
             'company',
-            // [
-            //     'attribute' => 'position',
-            //     'value' => $model->getPositionByPk(),
-            // ],
-            // 'auth_key',
-            // 'email_confirm_token:email',
-            // 'password_hash',
-            // 'password_reset_token',
-            // 'email:email',
             [
                 'attribute' => 'email',
                 'format' => 'email',
                 // 'value' => $model->getEmailStatus(),
             ],
-            // 'status',
             [
                 'attribute' => 'role',
                 'value' => $model->getRolesName(),
@@ -80,6 +53,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'status',
                 'value' => $model->getStatusName(),
             ],
+            [
+                'attribute' => 'created_at',
+                'format' => 'datetime',
+            ],
+            'created_at:datetime',
         ],
     ]) ?>
 

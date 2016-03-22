@@ -5,13 +5,13 @@ use yii\bootstrap\NavBar;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use app\modules\skoda\Module;
+use app\modules\main\Module;
 
     NavBar::begin([
-        'brandLabel' => Html::img('@web/img/logo/skoda_logo.png', ['width'=>'48','height'=>'48']),
-        'brandUrl' => Url::toRoute('/skoda'),
+        'brandLabel' => Html::img('@web/img/logo/alliance_logo.png', ['height'=>'55']),
+        'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar navbar-fixed-top navbar-skoda',
+            'class' => 'navbar navbar-fixed-top navbar-primary',
         ],
     ]);
     echo Nav::widget([

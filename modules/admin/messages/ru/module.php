@@ -80,4 +80,13 @@
 		'ADMIN_COMPANIES_DELETE' => 'Удалить',
 		'ADMIN_COMPANY_DELETE_CONFIRM' => 'Удалить организацию?',
 
+	    'NAV_HOME' => 'Главная',
+	    'NAV_CONTACT' => 'Связь',
+	    'NAV_LOGIN' => 'Вход',
+	    'NAV_SKODA' => 'ŠKODA',
+	    'NAV_ADMIN' => 'Администрирование',
+	    'NAV_PROFILE' => 'Профиль',
+	    'NAV_LOGOUT' => 'Выход',
+
+
 	];

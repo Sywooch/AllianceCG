@@ -39,7 +39,7 @@ AppAsset::register($this);
     </div>
 </div>
 
-<?= $this->render('//layouts/_footer') ?>
+<?= $this->render('@app/modules/user/views/layouts/default/_footer') ?>
 
 <?php $this->endBody() ?>
 </body>

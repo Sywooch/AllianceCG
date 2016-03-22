@@ -64,6 +64,7 @@ $this->title = Module::t('module', 'STATUSMONITOR_TITLE');
 <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'summary' => "",
+        'showOnEmpty' => false,
         // 'showHeader' => false,
         'columns' => [
             [
@@ -119,6 +120,7 @@ $this->title = Module::t('module', 'STATUSMONITOR_TITLE');
                 'contentOptions'=>['style'=>'width: 300px;'],
             ],
         ],
+        'tableOptions' =>['class' => 'table table-striped table-bordered'],
     ]); ?>
 
 <script type='text/javascript'>

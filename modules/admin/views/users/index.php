@@ -59,8 +59,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'photo',
                 'filter' => false,
                 'format' => 'raw',
-                'value'=>function($data) { return Html::img($data->imageurl,['height' => '50']); },
-                'contentOptions'=>['style'=>'width: 60px;'],
+                'value'=>function($data) { return Html::img($data->imageurl,['height' => '50', 'class'=>'img-rounded']); },
+                // 'contentOptions'=>['style'=>'width: 60px;'],
+                'contentOptions' =>['class' => 'table_img','style'=>'width: 60px;'],
                 
             ],
             [

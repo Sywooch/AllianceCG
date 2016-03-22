@@ -36,5 +36,13 @@
 		'STATUS_SHOW_MONITOR' => 'Просмотр',	
 		'NAV_SKODA' => 'ŠKODA',
 		'ERROR_WORKSHEDULER_DOES_NOT_EXIST_TO' => 'kkjkjk',
+		
+		'NAV_HOME' => 'Главная',
+		'NAV_CONTACT' => 'Связь',
+		'NAV_LOGIN' => 'Вход',
+		'NAV_SKODA' => 'ŠKODA',
+		'NAV_ADMIN' => 'Администрирование',
+		'NAV_PROFILE' => 'Профиль',
+		'NAV_LOGOUT' => 'Выход',
 	];
 	

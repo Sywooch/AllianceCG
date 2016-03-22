@@ -11,7 +11,8 @@ $this->title = $model->company_brand;
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN_COMPANIES_TITLE'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="companies-view col-lg-5 col-lg-offset-3">
+<!-- <div class="companies-view col-lg-5 col-lg-offset-3"> -->
+<div class="companies-view col-lg-10 col-lg-offset-1">
 
     <h1>
         <?= $model->getLogoName(); ?>
@@ -33,11 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'company_name',
             'company_brand',
-            [
-                'attribute'=>'company_logo',
-                'value'=>$model->getSingleLogo(),
-                'format' => ['image',['height'=>'80']],
-            ],
+            // [
+            //     'attribute'=>'company_logo',
+            //     'value'=>$model->getSingleLogo(),
+            //     'format' => ['image',['height'=>'80']],
+            // ],
             [
                 'attribute' => 'company_description',
                 'format' => 'raw',

@@ -42,4 +42,12 @@ return [
 	'USER_COMPANY' => 'Организация',
 	'USER_PASSWORD' => 'Пароль',
 
+	'NAV_HOME' => 'Главная',
+	'NAV_CONTACT' => 'Связь',
+	'NAV_LOGIN' => 'Вход',
+	'NAV_SKODA' => 'ŠKODA',
+	'NAV_ADMIN' => 'Администрирование',
+	'NAV_PROFILE' => 'Профиль',
+	'NAV_LOGOUT' => 'Выход',
+
 ];

@@ -57,7 +57,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'created_at',
                 'format' => 'datetime',
             ],
-            'created_at:datetime',
         ],
     ]) ?>
 

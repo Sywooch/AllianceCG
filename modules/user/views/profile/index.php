@@ -25,25 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('<span class="glyphicon glyphicon-refresh"></span>  ' . Module::t('module', 'PROFILE_LINK_PASSWORD_CHANGE'), ['password-change'], ['class' => 'btn btn-danger']) ?>
     </p>
 
-    <table style="margin-bottom: 30px;">
-      <tr>
-        <th colspan="2"><h1><span class="glyphicon glyphicon-user" style='padding-right:10px;'></span><?= $model->getAllname(); ?></h1></th>
-      </tr>
-      <tr>
-        <td><?= Module::t('module', 'PROFILE_WHERE_USER_CREATED') ?></td>
-        <td><?= Yii::$app->formatter->asDate($model->created_at, 'dd/MM/yyyy');  ?></td>
-        <!--<td>-->
-            <?php
-                // Yii::t('app', 'ADMIN_WHERE_USER_UPDATED')
-            ?>
-        <!--</td>-->
-        <!--<td>-->
-            <?php 
-                // Yii::$app->formatter->asDate($model->updated_at, 'dd/MM/yyyy')
-            ?>
-        <!--</td>-->
-      </tr>
-    </table>
+    <h1><?= Html::img($model->getImageUrl(),['height' => '80', 'class'=>'img-rounded']) . ' &nbsp; ' .  $model->getAllname(); ?></h1>
  
     <?= DetailView::widget([
         'model' => $model,
@@ -51,6 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'username',
             'position',
             'email',
+            'company',
+            'created_at:datetime'
         ],
     ]) ?>
  

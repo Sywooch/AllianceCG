@@ -17,6 +17,7 @@ return [
 	'USER_POSITION' => 'Должность',
 	'USER_STATUS' => 'Статус',
 	'TITLE_LOGIN' => 'Вход',
+	'USER_CREATED_AT' => 'Зарегистрирован',
 	'PLEASE_FILL_FOR_LOGIN' => 'Заполнить для входа',
 	'USER_REMEMBER_ME' => 'Запомнить',
 	'LINK_PASSWORD_RESET' => 'Сброс пароля',

@@ -73,6 +73,7 @@
 		'ADMIN_USER_NEW_PASSWORD' => 'Новый пароль',
 		'ADMIN_USER_REPEAT_PASSWORD' => 'Повтор пароля',
 		'USER_STATUS' => 'Статус',
+		'USER_CREATED_AT' => 'Зарегистрирован',
 
 		'ADMIN_COMPANIES_CREATE' => 'Добавить',
 		'ADMIN_COMPANIES_REFRESH' => 'Обновить',

@@ -80,6 +80,9 @@
     		// ],
 			lang: 'ru',
 			events: "/src/skoda_servicesheduler_cal.php",
+            eventRender: function(event, element) {
+                  $(element).tooltip({title: event.title});             
+            },
 			// dayClick: function(date, jsEvent, view, resourceObj) {
    //      		window.location.replace('servicesheduler/create');
 			// },

@@ -83,11 +83,10 @@
             eventRender: function(event, element) {
                   $(element).tooltip({title: event.title});             
             },
-			// dayClick: function(date, jsEvent, view, resourceObj) {
-   //      		window.location.replace('servicesheduler/create');
-			// },
-    		eventClick: function(calEvent, jsEvent, view) {		
-    		    // alert('Ответственный: ' + calEvent.title + '\r\nДата: ' + calEvent.start.format());
+			dayClick: function(date, jsEvent, view, resourceObj) {
+        		window.location.replace('create');
+			},
+    		eventClick: function(calEvent, jsEvent, view) {
     		    alert('Ответственный: ' + calEvent.title + '\r\nДата: ' + calEvent.start.format());
     		},
     		eventColor: '#4ba82e',

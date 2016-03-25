@@ -2,11 +2,12 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\date\DatePicker;
+// use kartik\date\DatePicker;
 use app\modules\skoda\Module;
 use app\modules\admin\models\User;
 use app\modules\user\models\User as UserName;
 use yii\helpers\ArrayHelper;
+use yii\jui\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\skoda\models\Servicesheduler */
@@ -26,15 +27,26 @@ use yii\helpers\ArrayHelper;
         <?= Html::a('<span class="glyphicon glyphicon-floppy-remove"></span>  ' . Module::t('module', 'BUTTON_CANCEL'), ['/skoda/servicesheduler'], ['class' => 'btn btn-danger']) ?>
     </div>
 
+    <?= $form->field($model,'date')->widget(DatePicker::className(),['options' => ['class' => 'form-control', 'placeholder' => $model->getAttributeLabel( 'date' )]]) ?>
+
     <?php 
-        echo $form->field($model, 'date', ['template' => "{input}\n{hint}\n{error}"])->widget(DatePicker::classname(),[
-              'options' => ['placeholder' => $model->getAttributeLabel( 'date' )],
-              'pluginOptions' => [
-                'autoclose'=>true,
-                'format' => 'yyyy-mm-dd',
-                'todayHighlight' => TRUE,
-            ],
-            ]);    
+//         echo $form->field($model, 'date', ['template' => "{input}\n{hint}\n{error}"])->widget(DatePicker::classname(),[
+//               'options' => ['placeholder' => $model->getAttributeLabel( 'date' )],
+//               'pluginOptions' => [
+//                 'autoclose'=>true,
+//                 'format' => 'yyyy-mm-dd',
+//                 'todayHighlight' => TRUE,
+//             ],
+//             ]);    
+
+
+
+// DatePicker::widget([
+//                         'model' => $searchModel,
+//                         'attribute' => 'date',
+//                         'options' => ['class' => 'form-control']
+//                     ]),
+
             
         echo '<br/>';
 

@@ -48,20 +48,42 @@ class MonitorSearch extends Statusmonitor
      */
     public function search($params)
     {
+        $duration = 60;     // время кэширования запроса в секундах
+        $dependency = '';   // зависимости (опционально)
 
-        $time = new \DateTime('now');
-        $begin = $time->format('Y-m-d 00:00:00');
-        $end = $time->format('Y-m-d 23:59:59');
+        $query = Statusmonitor::getDb()->cache(function ($db) {
 
-        $query = Statusmonitor::find()
-            ->where(['and',
-                    ['>=', 'from', $begin],
-                    ['<=', 'from', $end],
-                ])
-            ->orwhere(['and',                    
-                    ['>=', 'to', $begin],
-                    ['<=', 'to', $end]
-            ]);      
+            $time = new \DateTime('now');
+            $begin = $time->format('Y-m-d 00:00:00');
+            $end = $time->format('Y-m-d 23:59:59');
+
+            $result = Statusmonitor::find()
+                    ->where(['and',
+                            ['>=', 'from', $begin],
+                            ['<=', 'from', $end],
+                        ])
+                    ->orwhere(['and',                    
+                            ['>=', 'to', $begin],
+                            ['<=', 'to', $end]
+                    ]); 
+
+            return $result;
+
+        }, $duration, $dependency);
+
+        // $time = new \DateTime('now');
+        // $begin = $time->format('Y-m-d 00:00:00');
+        // $end = $time->format('Y-m-d 23:59:59');
+
+        // $query = Statusmonitor::find()
+        //     ->where(['and',
+        //             ['>=', 'from', $begin],
+        //             ['<=', 'from', $end],
+        //         ])
+        //     ->orwhere(['and',                    
+        //             ['>=', 'to', $begin],
+        //             ['<=', 'to', $end]
+        //     ]);      
 
         $sort = new Sort([
             'defaultOrder' => ['to' => SORT_DESC],

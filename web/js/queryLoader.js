@@ -61,8 +61,10 @@ var QueryLoader = {
 			
 			if ($(this).css("background-image") != "none") {
 				var url = $(this).css("background-image");
-			} else if (typeof($(this).attr("src")) != "undefined" && $(this).attr("tagName").toLowerCase() == "img") {
-				var url = $(this).attr("src");
+			// } else if (typeof($(this).attr("src")) != "undefined" && $(this).attr("tagName").toLowerCase() == "img") {
+			// 	var url = $(this).attr("src");
+			} else if (typeof($(this).prop("src")) != "undefined" && $(this).prop("tagName").toLowerCase() == "img") {
+				var url = $(this).prop("src");
 			}
 			
 			url = url.replace("url(\"", "");

@@ -10,6 +10,7 @@ return [
 	'PROFILE_TITLE_UPDATE' => 'Редактирование профиля',
 	'PROFILE_BUTTON_SAVE' => 'Сохранить',
 	'PROFILE_BUTTON_CANCEL' => 'Отмена',
+	'ERROR_WRONG_USERNAME_OR_PASSWORD' => 'Неправильные имя пользователя или пароль',
 	'PROFILE_UPDATE_INFO' => '',
 	'PROFILE_TITLE_PASSWORD_CHANGE' => 'Смена пароля',
 	'USER_FULLNAME' => 'Ф.И.О.',

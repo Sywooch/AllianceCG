@@ -20,7 +20,7 @@ use yii\helpers\Url;
         'items' => array_filter([
             [
                 'label' => 'Skoda',
-                'options' => ['class' => 'disabled'],
+                'options' => ['class' => 'disabled bold_grid'],
             ]
         ]),
     ]);
@@ -30,7 +30,7 @@ use yii\helpers\Url;
         'items' => array_filter([
             [
             	'label' => 'ООО "СтрелаАвто"',
-                'options' => ['class' => 'disabled'],
+                'options' => ['class' => 'disabled bold_grid'],
             ]
         ]),
     ]);

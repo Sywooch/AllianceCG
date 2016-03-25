@@ -8,6 +8,5 @@ return [
     'controllerNamespace' => 'app\commands',
     'modules' => [
         'gii' => 'yii\gii\Module',
-        // 'allowedIPs' => ['127.0.0.1', '::1', '192.168.1.100', '10.18.125.8', '10.18.123.7', '10.18.123.17']
     ],
 ];

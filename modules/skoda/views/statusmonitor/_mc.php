@@ -11,7 +11,7 @@ use app\modules\user\models\User;
         <h2>
             <?php 
                 if (!empty($model->photo)){
-                    echo Html::img('@web/' . $model->photo, ['width'=>'100']);
+                    echo Html::img('@web/' . $model->photo, ['width'=>'200', 'class' => 'img-rounded']);
                 }
                 else{
                     echo Html::img('@web/img/logo/avatar.jpeg', ['width'=>'100']);

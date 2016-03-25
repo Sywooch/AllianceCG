@@ -80,9 +80,14 @@ return [
             //     // 'encryption' => 'tls', // It is often used, check your provider or mail server specs
             // ],            
         ],
-        'cache' => [
-            'class' => 'yii\caching\DummyCache',
-        ],
+        // 'cache' => [
+        //     'class' => 'yii\caching\DummyCache',
+        // ],
+        // 'cache' => [
+        //     'class' => 'yii\caching\DbCache',
+        //     'db' => 'db',
+        //     'cacheTable' => '{{%cache}}',
+        // ],
         'log' => [
             'class' => 'yii\log\Dispatcher',
         ],

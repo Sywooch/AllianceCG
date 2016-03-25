@@ -1,4 +1,8 @@
-<meta http-equiv="Refresh" content="15" />
+
+<meta http-equiv="Refresh" content="30" />
+
+<!-- <link rel="stylesheet" href="/css/queryLoader.css" type="text/css"> -->
+<!-- <script type='text/javascript' src='/js/queryLoader.js'></script> -->
 
 <?php
 
@@ -65,30 +69,35 @@ $this->title = Module::t('module', 'STATUSMONITOR_TITLE');
         'dataProvider' => $dataProvider,
         'summary' => "",
         'showOnEmpty' => false,
-        // 'showHeader' => false,
+        'showHeader' => false,
         'columns' => [
             [
                 'class' => 'yii\grid\SerialColumn',
-                'header' => '№',
-                'contentOptions'=>['style'=>'width: 20px;']
+                'header' => '<h3>№</h3>',
+                'contentOptions'=>['class' => 'bold_grid','style'=>'width: 20px;'],
             ],
             [
+                'header' => '<h3>'. $searchModel->getAttributeLabel( 'regnumber' ) .'</h3>',
                 'attribute'=>'regnumber',
+                'contentOptions'=>['class' => 'bold_grid'],
 
             ],
             [
+                'header' => '<h3>'. $searchModel->getAttributeLabel( 'from' ) .'</h3>',
                 'attribute'=>'from',
-                'contentOptions'=>['style'=>'width: 200px;'],
+                'contentOptions'=>['class' => 'bold_grid', 'style'=>'width: 200px;'],
                 'format' => 'time',
 
             ],
             [
+                'header' => '<h3>'. $searchModel->getAttributeLabel( 'to' ) .'</h3>',
                 'attribute'=>'to',
-                'contentOptions'=>['style'=>'width: 200px;'],
+                'contentOptions'=>['class' => 'bold_grid', 'style'=>'width: 200px;'],
                 'format' => 'time',
 
             ],
             [
+                'header' => '<h3>'. $searchModel->getAttributeLabel( 'carstatus' ) .'</h3>',
                 'class' => SetColumn::className(),
                 'attribute' => 'carstatus',
                 'filter' => false,
@@ -104,6 +113,7 @@ $this->title = Module::t('module', 'STATUSMONITOR_TITLE');
                     ],
             ],
             [
+                'header' => '<h3>'. $searchModel->getAttributeLabel( 'progress' ) .'</h3>',
                 'attribute' => 'progress',
                 'content' => function($data) {
                     return Progress::widget([
@@ -117,12 +127,13 @@ $this->title = Module::t('module', 'STATUSMONITOR_TITLE');
                         ]
                     ]);
                 },
-                'contentOptions'=>['style'=>'width: 300px;'],
+                'contentOptions'=>['class' => 'bold_grid', 'style'=>'width: 300px;'],
             ],
         ],
-        'tableOptions' =>['class' => 'table table-striped table-bordered'],
+        'tableOptions' =>['class' => 'table'],
     ]); ?>
 
-<script type='text/javascript'>
+<script>
+    // QueryLoader.selectorPreload = "body";
     // QueryLoader.init();
 </script>

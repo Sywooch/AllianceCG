@@ -83,13 +83,13 @@ class Statusmonitor extends \yii\db\ActiveRecord
     {
         $today = Yii::$app->formatter->asDatetime(date('Y-m-d H:i:s'));
         if (strtotime($today) < strtotime($this->from)){
-            $cssclass = 'progress-bar-warning';
+            $cssclass = 'progress-bar-warning progress-lg';
         }
         elseif (strtotime($today) >= strtotime($this->from) AND strtotime($today) < strtotime($this->to)) {
-            $cssclass = 'progress-bar-danger';
+            $cssclass = 'progress-bar-danger progress-lg';
         }
         elseif (strtotime($today) >= strtotime($this->to)) {
-            $cssclass = 'progress-bar-success';
+            $cssclass = 'progress-bar-success progress-lg';
         }    
 
         return $cssclass;        

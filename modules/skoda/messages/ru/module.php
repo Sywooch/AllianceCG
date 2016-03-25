@@ -35,7 +35,10 @@
 		'STATUSMONITOR' => 'Монитор готовности',
 		'STATUS_SHOW_MONITOR' => 'Просмотр',	
 		'NAV_SKODA' => 'ŠKODA',
-		'ERROR_WORKSHEDULER_DOES_NOT_EXIST_TO' => 'kkjkjk',
+		'ERROR_WORKSHEDULER_DOES_NOT_EXIST_TO' => 'На дату окончания не назначен мастер-консультант',
+		'ERROR_WORKSHEDULER_DOES_NOT_EXIST_FROM' => 'На дату начала не назначен мастер-консультант',
+		'MASTER_CONSULTANT_DOES_NOT_EXIST_TODAY' => 'Не назначен мастер-консультант на указанную дату',
+		'CURRENT_MASTER_CONSULTANT' => 'Мастер-консультант',
 		
 		'NAV_HOME' => 'Главная',
 		'NAV_CONTACT' => 'Связь',

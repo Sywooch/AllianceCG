@@ -1,8 +1,8 @@
 
 <meta http-equiv="Refresh" content="30" />
 
-<!-- <link rel="stylesheet" href="/css/queryLoader.css" type="text/css"> -->
-<!-- <script type='text/javascript' src='/js/queryLoader.js'></script> -->
+<link rel="stylesheet" href="/css/queryLoader.css" type="text/css">
+<script type='text/javascript' src='/js/queryLoader.js'></script>
 
 <?php
 
@@ -25,10 +25,7 @@ $this->title = Module::t('module', 'STATUSMONITOR_TITLE');
 ?>
 
 <div class="row">
-<div class="col-lg-12" style="text-align: center">
-    <h1><?= Module::t('module', 'WELCOME_MSG') ?> </h1>
-</div>
-<div class="col-lg-12" style="text-align: center; margin-left: 40%;">
+
         <?php
             $today = Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
 
@@ -36,23 +33,33 @@ $this->title = Module::t('module', 'STATUSMONITOR_TITLE');
                 ->where(['date' => $today])
                 ->one();
 
-            $provider_top = new ActiveDataProvider([
-                'query' => User::find()->where(['full_name' => $master_cons_today->responsible])
-                    ]);                          
+            if(!empty($master_cons_today->responsible)){
+                $provider_top = new ActiveDataProvider([
+                    'query' => User::find()->where(['full_name' => $master_cons_today->responsible])
+                        ]);                          
+    
+                        echo '<div class="col-lg-12" style="text-align: center"><h1>';
+                        echo Module::t('module', 'WELCOME_MSG');
+                        echo '</h1></div>';
 
-                    echo ListView::widget([
-                        'dataProvider' => $provider_top,
-                        'layout' => '{items}',
-                        'summary' => false,
-                        'options' => [
-                            'tag' => 'div',
-                            'class' => 'tipochegi',
-                            'id' => 'list-tipochegi',
-                        ],
-                        'itemView' => '_mc',
-                    ]);
+
+                        echo '<div class="col-lg-12" style="text-align: center; margin-left: 40%;">';
+                        echo ListView::widget([
+                            'dataProvider' => $provider_top,
+                            'layout' => '{items}',
+                            'summary' => false,
+                            'options' => [
+                                'tag' => 'div',
+                                'class' => 'tipochegi',
+                                'id' => 'list-tipochegi',
+                            ],
+                            'itemView' => '_mc',
+                        ]);                
+                        echo '</div>';
+            }
+
         ?>
-</div></div>
+</div>
 <div class="col-lg-12" style="text-align: center">                
         <?php
             $formatter = new \yii\i18n\Formatter;
@@ -135,5 +142,5 @@ $this->title = Module::t('module', 'STATUSMONITOR_TITLE');
 
 <script>
     // QueryLoader.selectorPreload = "body";
-    // QueryLoader.init();
+    QueryLoader.init();
 </script>

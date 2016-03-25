@@ -4,6 +4,7 @@ namespace app\modules\skoda\models;
 
 use Yii;
 use yii\base\Model;
+use app\modules\skoda\Module;
 use yii\data\ActiveDataProvider;
 use yii\data\Sort;
 use app\modules\skoda\models\Servicesheduler;

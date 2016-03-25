@@ -5,6 +5,7 @@ namespace app\modules\skoda\controllers;
 use Yii;
 use app\modules\skoda\models\Servicesheduler;
 use app\modules\skoda\models\ServiceshedulerSearch;
+use app\modules\skoda\Module;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -89,7 +90,8 @@ class ServiceshedulerController extends Controller
         else
         {
             Yii::$app->session->setFlash('masterConsultantIs');
-        }        
+        }
+                
         return $this->render('calendar', [
             'wcs' => $wcs,                
             ]);

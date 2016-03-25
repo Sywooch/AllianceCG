@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php if (Yii::$app->session->hasFlash('masterConsultantDoesNotExistToday')): ?>
 
     <div class="alert alert-danger">
-        <?= Yii::t('app', 'CURRENT_MASTER_CONSULTANT') ?>
+        <?= Yii::$app->formatter->asDate('now', 'dd/MM/yyyy') . ' - ' . Module::t('module', 'MASTER_CONSULTANT_DOES_NOT_EXIST_TODAY') ?>
     </div>
 
 <?php //endif; ?>
@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php elseif (Yii::$app->session->hasFlash('masterConsultantIs')) : ?>
 
     <div class="alert alert-success">
-        <?= Yii::$app->formatter->asDate($wcs->date, 'dd/MM/yyyy') . ' - ' . Yii::t('app', 'CURRENT_MASTER_CONSULTANT') .' - '. $wcs->responsible ?>
+        <?= Yii::$app->formatter->asDate($wcs->date, 'dd/MM/yyyy') . ' - ' . Module::t('module', 'CURRENT_MASTER_CONSULTANT') .' - '. $wcs->responsible ?>
     </div>
 
 <?php endif; ?>

@@ -8,7 +8,7 @@ use app\modules\admin\models\User;
 use app\modules\skoda\models\Statusmonitor;
 use app\modules\skoda\models\Servicesheduler;
 use yii\helpers\ArrayHelper;
-use app\components\validators\WorkshedulerValidator;
+// use app\components\validators\WorkshedulerValidator;
 
 /**
  * This is the model class for table "{{%statusmonitor}}".
@@ -160,7 +160,7 @@ class Statusmonitor extends \yii\db\ActiveRecord
     
             if(empty($wcs->responsible))                
             {
-                $this->addError('to', Moduel::t('module', 'ERROR_WORKSHEDULER_DOES_NOT_EXIST_TO'));
+                $this->addError('to', Module::t('module', 'ERROR_WORKSHEDULER_DOES_NOT_EXIST_TO'));
             }
     }
 

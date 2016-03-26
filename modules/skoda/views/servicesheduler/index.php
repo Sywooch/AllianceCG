@@ -10,6 +10,7 @@ use yii\helpers\Url;
 use yii\jui\DatePicker;
 use yii\helpers\ArrayHelper;
 use app\modules\skoda\models\Servicesheduler;
+use rmrevin\yii\fontawesome\FA;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\skoda\models\ServiceshedulerSearch */
@@ -68,6 +69,23 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <?php // $this->render('_search', ['model' => $searchModel]); ?>
 
+    <?php
+        echo Nav::widget([
+            'options' => ['class' => 'nav navbar-left nav-pills'],
+            'encodeLabels' => false,
+            'items' => array_filter([
+                [
+                    'label' => FA::icon('calendar') . Module::t('module', 'SERVICESHEDULER_CALENDAR'),
+                    'url' => '/skoda/servicesheduler/calendar',
+                ],
+                [
+                    'label' => FA::icon('table') . Module::t('module', 'SERVICESHEDULER_TABLE'),
+                    'url' => '/skoda/servicesheduler',
+                ],
+            ]),
+        ]);
+    ?>
+
     <p style="text-align: right">
 
         <?= Html::a('<span class="glyphicon glyphicon-plus"></span>  ' . Module::t('module', 'STATUS_CREATE'), ['create'], ['class' => 'btn btn-success', 'id' => 'refreshButton']) ?>
@@ -79,25 +97,6 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
 <?= Yii::$app->session->getFlash('error'); ?>    
-
-    <?php
-        echo Nav::widget([
-            'options' => ['class' => 'nav navbar-left nav-pills'],
-            'encodeLabels' => false,
-            'items' => array_filter([
-                [
-                    'label' => Module::t('module', 'SERVICESHEDULER_CALENDAR'),
-                    'url' => '/skoda/servicesheduler/calendar',
-                ],
-                [
-                    'label' => Module::t('module', 'SERVICESHEDULER_TABLE'),
-                    'url' => '/skoda/servicesheduler',
-                ],
-            ]),
-        ]);
-    ?>
-
-    <br/><br/><br/>
 
     <?= GridView::widget([
         'id' => 'servicesheduler-grid',

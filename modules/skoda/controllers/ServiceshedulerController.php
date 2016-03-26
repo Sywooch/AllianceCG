@@ -78,6 +78,7 @@ class ServiceshedulerController extends Controller
     public function actionCalendar()
     {
 
+        $model = new Servicesheduler();
         $today = Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
         $wcs = Servicesheduler::find()
             ->where(['date' => $today])
@@ -93,6 +94,7 @@ class ServiceshedulerController extends Controller
         }
                 
         return $this->render('calendar', [
+            'model' => $model,
             'wcs' => $wcs,                
             ]);
     }
@@ -172,6 +174,11 @@ class ServiceshedulerController extends Controller
         return $this->redirect(['index']);
 
     }    
+
+    public function actionTest()
+    {
+        return $this->render('test');
+    }
 
     /**
      * Finds the Servicesheduler model based on its primary key value.

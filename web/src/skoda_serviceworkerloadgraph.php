@@ -17,4 +17,10 @@ $mysqli->close();
 
 echo json_encode($data_worker);
 
+// use yii\helpers\Json;
+
+// $items = Yii::$app->db->createCommand("SELECT DISTINCT(`responsible`) AS worker, COUNT(sk_statusmonitor.regnumber) AS carcount FROM sk_servicesheduler INNER JOIN sk_statusmonitor ON date = DATE_FORMAT(`to`, '%Y-%m-%d') AND YEAR(date) = YEAR(NOW()) AND MONTH(date) = MONTH(NOW()) GROUP BY worker")->queryAll();
+// var_dump($items)
+// echo Json::encode($items);
+
 ?>

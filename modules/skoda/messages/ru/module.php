@@ -39,7 +39,9 @@
 		'ERROR_WORKSHEDULER_DOES_NOT_EXIST_FROM' => 'На дату начала не назначен мастер-консультант',
 		'MASTER_CONSULTANT_DOES_NOT_EXIST_TODAY' => 'Не назначен мастер-консультант на указанную дату',
 		'CURRENT_MASTER_CONSULTANT' => 'Мастер-консультант',
-		
+		'NO_RECORDS_FOUND' => 'Записи на текущую дату отсутствуют',
+		'CALENDAR_CANCEL' => 'Отмена',
+		'CALENDAR_SAVE' => 'Сохранить',
 		'NAV_HOME' => 'Главная',
 		'NAV_CONTACT' => 'Связь',
 		'NAV_LOGIN' => 'Вход',

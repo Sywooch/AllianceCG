@@ -22,7 +22,7 @@ class Module extends \yii\base\Module
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions'=>['monitor'],
+                        'actions'=>['monitor', 'test'],
                         'allow' => true,
                         'roles' => ['?', '@'],
                     ],

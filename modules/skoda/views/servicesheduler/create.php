@@ -13,9 +13,12 @@ $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'SERVICESHEDULE
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="servicesheduler-create ">
+<div class="user-form center-block">
+
 
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
 
+</div>
 </div>

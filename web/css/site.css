@@ -53,11 +53,15 @@ a.asc:after, a.desc:after {
     text-decoration: none;
 }
 
-.navbar-skoda > a {
+.navbar-skoda > nav > li > a {
     color: #FFFFFF;
     text-decoration: none;
 }
 
+.navbar-skoda > a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
 
 a.asc:after {
     content: /*"\e113"*/ "\e151";
@@ -283,9 +287,23 @@ a.desc:after {
     width: 50%;
 }
 
+.empty_grid {
+    text-align: center;
+}
+
+#empty_grid {
+    font-size: 18px;
+    text-align: center;
+    /*font-weight: normal;*/
+}
+
 .bold_grid {
     font-weight: bold;
     font-size: large;
+}
+
+.fc-day-number {
+    font-weight: bold;
 }
 
 /*.progress-lg {

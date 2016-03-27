@@ -8,7 +8,7 @@ $json = array();
 
 // Запрос, возвращающий события
 $request = "SELECT `id` AS id, `id` AS url, `date` AS start, `date` AS end, `responsible` AS title FROM `sk_servicesheduler`;";
-mysql_query('SET NAMES utf8');
+// mysql_query('SET NAMES utf8');
  // Соединение с БД
 try {
 // $dbcon = new PDO('mysql:host=localhost;dbname=skoda', 'user', 'password');

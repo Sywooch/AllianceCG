@@ -1,12 +1,12 @@
 {
-	"name": "m-ishchenko/AllianceCG",
-	"description": "Alliance Company Group",
-	"homepage": "http://monitor.strela-avto.ru",
+	"name": "elisdn/seokeys",
+	"description": "SEO-service Yii 2",
+	"homepage": "http://www.elisdn.ru",
 	"type": "project",
 	"license": "BSD-3-Clause",
 	"support": {
-		"wiki": "https://github.com/m-ishchenko/AllianceCG/wiki",
-		"source": "https://github.com/m-ishchenko/AllianceCG"
+		"wiki": "http://www.elisdn.ru/blog/60/seo-service-on-yii2-installing-of-application",
+		"source": "https://github.com/ElisDN/seokeys"
 	},
 	"minimum-stability": "stable",
 	"require": {
@@ -17,9 +17,16 @@
 		"bower-asset/html5shiv": "*",
 		"bower-asset/respond": "*",
 		"bower-asset/jquery": "1.*",
+		"kartik-v/yii2-widget-datepicker": "@dev",
+		"kartik-v/yii2-field-range": "*",
 		"kartik-v/yii2-widget-datetimepicker": "*",
+		"2amigos/yii2-date-time-picker-widget": "~1.0",
 		"yiisoft/yii2-jui": "^2.0",
 		"2amigos/yii2-tinymce-widget": "~1.1",
+		"2amigos/yii2-highcharts-widget": "~1.0",
+		"thiagotalma/yii2-fullcalendar": "*",
+		"philippfrenzel/yii2fullcalendar": "*",
+		"kartik-v/yii2-widget-sidenav": "*",
 		"FortAwesome/Font-Awesome": "*",
 		"rmrevin/yii2-fontawesome": "~2.12"
 	},

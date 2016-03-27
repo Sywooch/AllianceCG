@@ -32,13 +32,17 @@ use yii\jui\DatePicker;
         <?= Html::a('<span class="glyphicon glyphicon-floppy-remove"></span>  ' . Module::t('module', 'BUTTON_CANCEL'), ['/skoda/servicesheduler/calendar'], ['class' => 'btn btn-danger']) ?>
     </div>    
 
-    <script type="text/javascript">
-        // servicesheduler-date
-        $(function(){
-            document.getElementById("servicesheduler-date").value = "<?= $_GET['date']; ?>";
-            // alert("<?= $_GET['date']; ?>");            
-        })
-    </script>
+<?php
+    if(isset($_GET['date'])){
+?>        
+        <script type="text/javascript">
+            $(function(){
+                document.getElementById("servicesheduler-date").value = "<?= $_GET['date']; ?>";
+            })
+        </script>
+<?php        
+    }
+?>
 
     <?= $form->errorSummary($model); ?>
 

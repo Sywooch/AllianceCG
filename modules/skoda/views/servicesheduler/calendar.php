@@ -59,9 +59,25 @@
 
         <?= Html::a(FA::icon('refresh') . Module::t('module', 'STATUS_REFRESH'), [''], ['class' => 'btn btn-primary', 'id' => 'refreshButton']) ?>
 
-        <?php Html::a(FA::icon('trash') . Module::t('module', 'STATUS_DELETE'), ['#'], ['class' => 'btn btn-danger', 'id' => 'MultipleDelete']) ?>  
+        <?php Html::a(FA::icon('trash') . Module::t('module', 'STATUS_DELETE'), ['#'], ['class' => 'btn btn-danger', 'id' => 'MultipleDelete']) ?>
 
     </p>
+
+<?php
+    Modal::begin([
+        'id' => 'skoda_servicesheduler_modal',
+        'header' => '',
+        'headerOptions' => ['id' => 'modal-header'],
+        'footer' => '',
+        'footerOptions' => ['id' => 'modal-footer'],
+    ]);
+    
+    echo '<div id=modal-body>';
+    echo '</div>';
+     
+    Modal::end();
+?>
+
 
 <script src='/js/jqfc/lib/jquery.min.js'></script>
 <script src='/js/jqfc/lib/moment.min.js'></script>
@@ -70,82 +86,7 @@
 <script src='/js/jqfc/fullcalendar.js'></script>
 <script src='/js/jqfc/lang/ru.js'></script>
 
-<!-- Modal Window View Record -->
-<div id="ViewCalEvent" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                <h4 id="modalTitle" class="modal-title"></h4>
-            </div>
-            <div id="modalBody" class="modal-body alert alert-success"></div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>
-                <button class="btn btn-success"><a id="eventUrl" target="_blank">К записи</a></button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Window View Info -->
-<div id="CalendarInfo" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                <h4 id="modalInfoTitle" class="modal-title"></h4>
-            </div>
-            <div id="modalInfoBody" class="modal-body alert alert-info"></div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Window Actions -->
-<!-- <div id="EventsActions" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                <h4 id="modalActionsTitle" class="modal-title"></h4>
-            </div>
-            <div id="modalActionsBody" class="modal-body"> -->
-                <!--  -->
-                <?php // $this->render('_form', [
-                    // 'model' => $model,
-                    // ]) 
-                ?>
-                <!--  -->
-<!--             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal"><?php // FA::icon('times') . Module::t('module', 'CALENDAR_CANCEL') ?></button>
-                <button type="button" class="btn btn-success" id="skoda_calendar_add" data-dismiss="modal"><?php // FA::icon('save') . Module::t('module', 'CALENDAR_SAVE') ?></button>
-            </div>
-        </div>
-    </div>
-</div> -->
-
 <script>
-
-    // $(function() {
-    //     $("button#skoda_calendar_add").click(function(){
-    //         $.ajax({
-    //             type: "POST",
-    //             url: "create",
-    //             dataType: "json",
-    //             data: $('#Skoda_calendar').serialize(),
-    //             success: function(){
-    //                 $("#EventsActions").modal('hide');
-    //                 $.skoda_calendar.fullCalendar('refetchEvents');
-    //             },
-                // error: function(){
-                //     alert("failure");
-                // }
-    //        });
-    //     });
-    // });
 
     $(document).ready(function() {
         $('#skoda_calendar').fullCalendar({
@@ -179,27 +120,30 @@
                   $(element).tooltip({title: event.title});             
             },
 			dayClick: function(date, calEvent, jsEvent, view, resourceObj) {            
-                if (moment().diff(date,'days') > 0){
-                    $('#modalInfoTitle').html('Дата: ' + jsEvent.start.format("DD/MM/YYYY"));
-                    $('#modalInfoBody').html('Выбранная дата меньше текущей! Не рекомендуется добавлять записи задним числом!');
-                    $('#CalendarInfo').modal();
+                if (moment().diff(date,'days') > 0){                    
+                    var modal_dismiss = '<button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>';
+                    var d = document.getElementById("modal-body");
+                    d.className = " alert alert-info";
+                    $('#modal-header').html('Дата: ' + jsEvent.start.format("DD/MM/YYYY"));
+                    $('#modal-body').html('Выбранная дата меньше текущей! Не рекомендуется добавлять записи задним числом!');
+                    $('#modal-footer').html(modal_dismiss);
+                    $('#skoda_servicesheduler_modal').modal();
                 } else{
                     var datesend = date.format();
                     window.location = 'create?date=' + datesend;
-                    // window.location.replace('create');
-                    // var today = new Date();
-                    // var curdate = today.getDate()+'/'+today.getMonth()+'/'+today.getFullYear();
-                    // document.getElementById("servicesheduler-date").value = date.format();
-                    // $('#modalActionsTitle').html(curdate + ' Добавить запись.');
-                    // $('#EventsActions').modal();                    
                 }        		
 			},
             eventClick: function(calEvent, jsEvent, view) {
                 if (calEvent.url) {
-                    // alert('Ответственный: ' + calEvent.title + '\r\nДата: ' + calEvent.start.format());
-                    $('#modalTitle').html('Дата: ' + calEvent.start.format("DD/MM/YYYY"));
-                    $('#modalBody').html('Мастер-консультант: ' + calEvent.title);
-                    $('#ViewCalEvent').modal();
+                    var link_to_record = '<a id="eventUrl" target="_blank class="btn btn-success" role="button">К записи</a>';                    
+                    var modal_dismiss = '<button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>';
+                    var d = document.getElementById("modal-body");
+                    d.className = " alert alert-success";
+                    $('#modal-header').html('Дата: ' + calEvent.start.format("DD/MM/YYYY"));
+                    $('#modal-body').html('Мастер-консультант: ' + calEvent.title);
+                    // $('#modal-footer').html(link_to_record + modal_dismiss);
+                    $('#modal-footer').html(modal_dismiss);
+                    $('#skoda_servicesheduler_modal').modal();                    
                     return false;
                 }             
             },
@@ -209,5 +153,4 @@
     });
 </script>
 
-<!-- <br/><br/><br/><br/> -->
 <div id='skoda_calendar'></div>

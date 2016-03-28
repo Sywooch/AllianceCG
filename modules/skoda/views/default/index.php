@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <script src='/js/highcharts/highcharts.js'></script>
 <script>
-$(function () {
+$(function () { 
 
         jQuery.extend({
             getValues: function(url) {

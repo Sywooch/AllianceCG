@@ -55,7 +55,7 @@ $(function () {
         });
 
         var serviceLoad = $.getValues("/skoda/skodaquery/statusmonitorgraph"); 
-        var workerLoad = $.getValues("/skoda/skodaquery/workerloadgraph");
+        var workerLoad = $.getValues("/skoda/skodaquery/workerloadgraph"); 
 
     $('#skoda').highcharts({
         chart: {

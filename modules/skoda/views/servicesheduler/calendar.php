@@ -88,8 +88,8 @@
             width: 600,
             lang: 'ru',
             events: {
-                url: "/src/skoda/servicesheduler_calendar/index.php",
-//                url: "<?php // $searchModel->calendarSearch(); ?>",
+//                url: "/src/skoda/servicesheduler_calendar/index.php",
+                url: "/skoda/servicesheduler/calendarsearch",
                 cache: true 
             },            
 			header: {

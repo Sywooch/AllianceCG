@@ -13,5 +13,13 @@ class QueryController extends \yii\web\Controller
             'model' => $model,
         ]);
     }
+    public function actionStatusmonitorgraph()
+    {    
+        $this->layout = false;    
+        $model = new DefaultSearch();
+        return $this->render('statusmonitorgraph', [
+            'model' => $model,
+        ]);
+    }
 
 }

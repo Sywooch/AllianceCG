@@ -54,7 +54,22 @@ class DefaultSearch extends Model
             $data_worker[] = [$row['worker'],(int)$row['carcount']];
         }
         return Json::encode($data_worker);
-//        return Json::encode($items);
+    }
+
+    /**
+     * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
+     * @return $items
+     */
+    public function statusmonitorquery()
+    {
+        $items = Yii::$app->db->createCommand("SELECT DATE_FORMAT(`to`, '%Y-%m-%d') as date, COUNT(`regnumber`) AS car FROM sk_statusmonitor WHERE MONTH(DATE_FORMAT(`to`, '%Y-%m-%d')) = MONTH(CURDATE()) GROUP BY date")->queryAll();
+        foreach ($items as $row){
+             $data_car[] = [$row['date'],(int)$row['car']];
+        }
+        return Json::encode($data_car);
     }
 
 

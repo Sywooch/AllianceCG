@@ -7,6 +7,7 @@ use Yii;
 use app\modules\skoda\models\MonitorSearch;
 use yii\filters\AccessControl;
 use app\modules\skoda\models\Servicesheduler;
+use app\modules\skoda\models\DefaultSearch;
 use app\modules\skoda\Module;
 
 /**
@@ -39,20 +40,6 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-
-        // $today = Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
-        // $wcs = Servicesheduler::find()
-        //     ->where(['date' => $today])
-        //     ->one();
-    
-        // if(empty($wcs->responsible))                
-        // {
-        //     \Yii::$app->getSession()->setFlash('danger', Module::t('module', 'MASTER_CONSULTANT_DOES_NOT_EXIST_TODAY'));
-        // }
-        // else
-        // {
-        //     \Yii::$app->getSession()->setFlash('success', Yii::$app->formatter->asDate($wcs->date, 'dd/MM/yyyy') . ' - ' . Module::t('module', 'CURRENT_MASTER_CONSULTANT') .' - '. $wcs->responsible);
-        // }   
         return $this->render('index');     
-    }
+    } 
 }

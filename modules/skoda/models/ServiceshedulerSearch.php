@@ -99,7 +99,6 @@ class ServiceshedulerSearch extends Servicesheduler
     
     public function calendarsearch(){
         $items = Yii::$app->db->createCommand("SELECT `id` AS id, `id` AS url, `date` AS start, `date` AS end, `responsible` AS title FROM `sk_servicesheduler`;")->queryAll();
-        // var_dump($items)
         return Json::encode($items);
     }
 }

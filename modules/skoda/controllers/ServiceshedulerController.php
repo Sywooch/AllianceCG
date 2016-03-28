@@ -186,11 +186,6 @@ class ServiceshedulerController extends Controller
 
         return $this->redirect(['index']);
 
-    }    
-
-    public function actionTest()
-    {
-        return $this->render('test');
     }
 
     /**

@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="admin-default-index center-block">
     <h1><?= Html::encode($this->title) ?></h1>
-
+    
     <p style="text-align: right">
         <?php 
             echo Nav::widget([
@@ -59,7 +59,7 @@ $(function () {
         });
 
         var serviceLoad = $.getValues("/src/skoda_statusmonitorgraph.php"); 
-        var workerLoad = $.getValues("/src/skoda_serviceworkerloadgraph.php");
+        var workerLoad = $.getValues("query/workerloadgraph");
 
     $('#skoda').highcharts({
         chart: {

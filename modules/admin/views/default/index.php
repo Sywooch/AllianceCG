@@ -59,10 +59,8 @@ $(function () {
             }
         });
 
-        var users_create = $.getValues("/src/admin_usercreategraph.php"); 
-        // var users_create = $.getValues("admin_usercreategraph.php"); 
-        
-        var users_by_company = $.getValues("/src/admin_companyusercountgraph.php");
+        var users_create = $.getValues("/admin/adminquery/userscreated"); 
+        var users_by_company = $.getValues("/admin/adminquery/companyusercount");
 
     $('#admin').highcharts({
         chart: {

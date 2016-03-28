@@ -2,16 +2,16 @@
 
     header("Content-type: application/javascript");
 
-	use yii\web\AssetBundle;
+    use yii\web\AssetBundle;
     use app\modules\skoda\Module;
     use yii\helpers\Html;
     use yii\widgets\ActiveForm;
-    use yii\bootstrap\Nav;
     use rmrevin\yii\fontawesome\FA;
     use yii\helpers\ArrayHelper;
     use yii\jui\DatePicker;
     use app\modules\admin\models\User;
     use yii\bootstrap\Modal;
+    use yii\helpers\Json;
 
     $this->title = Module::t('module', 'SERVICESHEDULER_INDEX');
     $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda']];
@@ -36,22 +36,9 @@
 
 <h1><span class="glyphicon glyphicon-wrench" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
     
-    <?php 
-        echo Nav::widget([
-            'options' => ['class' => 'nav navbar-left nav-pills'],
-            'encodeLabels' => false,
-            'items' => array_filter([
-                [
-                    'label' => FA::icon('calendar') . Module::t('module', 'SERVICESHEDULER_CALENDAR'),
-                    'url' => '/skoda/servicesheduler/calendar',
-                ],
-                [
-                    'label' => FA::icon('table') . Module::t('module', 'SERVICESHEDULER_TABLE'),
-                    'url' => '/skoda/servicesheduler',
-                ],
-            ]),
-        ]);
-    ?>
+    <?= $this->render('_submenu', [
+        'model' => $model,
+    ]) ?>
 
     <p style="text-align: right">
 
@@ -78,6 +65,9 @@
     Modal::end();
 ?>
 
+    <?php
+//        echo $searchModel->calendarSearch();
+    ?>
 
 <script src='/js/jqfc/lib/jquery.min.js'></script>
 <script src='/js/jqfc/lib/moment.min.js'></script>
@@ -98,7 +88,8 @@
             width: 600,
             lang: 'ru',
             events: {
-                url: "/src/skoda/servicesheduler_calendar/index.php",   
+                url: "/src/skoda/servicesheduler_calendar/index.php",
+//                url: "<?php // $searchModel->calendarSearch(); ?>",
                 cache: true 
             },            
 			header: {

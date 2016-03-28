@@ -23,4 +23,10 @@ $result = $dbcon->query($request) or die(print_r($dbcon->errorInfo()));
 // Отправка кодированного результата на страницу
 echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
 
+//use yii\helpers\Json;
+
+//$items = Yii::$app->db->createCommand("SELECT `id` AS id, `id` AS url, `date` AS start, `date` AS end, `responsible` AS title FROM `sk_servicesheduler`;")->queryAll();
+// var_dump($items)
+//echo Json::encode($items);
+
 ?>

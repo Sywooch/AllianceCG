@@ -79,6 +79,7 @@ class ServiceshedulerController extends Controller
     {
 
         $model = new Servicesheduler();
+        $searchModel = new ServiceshedulerSearch();
         $today = Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
         $wcs = Servicesheduler::find()
             ->where(['date' => $today])
@@ -95,6 +96,7 @@ class ServiceshedulerController extends Controller
                 
         return $this->render('calendar', [
             'model' => $model,
+            'searchModel' => $searchModel,
             'wcs' => $wcs,                
             ]);
     }
@@ -119,6 +121,10 @@ class ServiceshedulerController extends Controller
     public function actionCreate()
     {
         $model = new Servicesheduler();
+        
+        if (isset($_GET['date'])){
+            $model->date = $_GET['date'];
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

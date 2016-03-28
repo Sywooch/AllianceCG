@@ -8,6 +8,7 @@ use app\modules\skoda\Module;
 use yii\data\ActiveDataProvider;
 use yii\data\Sort;
 use app\modules\skoda\models\Servicesheduler;
+use yii\helpers\Json;
 
 /**
  * ServiceshedulerSearch represents the model behind the search form about `app\modules\skoda\models\Servicesheduler`.
@@ -94,5 +95,11 @@ class ServiceshedulerSearch extends Servicesheduler
             ->andFilterWhere(['like', 'date', $this->date]);
 
         return $dataProvider;
+    }
+    
+    public function calendarsearch(){
+        $items = Yii::$app->db->createCommand("SELECT `id` AS id, `id` AS url, `date` AS start, `date` AS end, `responsible` AS title FROM `sk_servicesheduler`;")->queryAll();
+        // var_dump($items)
+        return Json::encode($items);
     }
 }

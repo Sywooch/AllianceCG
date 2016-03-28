@@ -66,25 +66,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php endif; ?>
 
 <h1><span class="glyphicon glyphicon-wrench" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
-    
-    <?php // $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?php
-        echo Nav::widget([
-            'options' => ['class' => 'nav navbar-left nav-pills'],
-            'encodeLabels' => false,
-            'items' => array_filter([
-                [
-                    'label' => FA::icon('calendar') . Module::t('module', 'SERVICESHEDULER_CALENDAR'),
-                    'url' => '/skoda/servicesheduler/calendar',
-                ],
-                [
-                    'label' => FA::icon('table') . Module::t('module', 'SERVICESHEDULER_TABLE'),
-                    'url' => '/skoda/servicesheduler',
-                ],
-            ]),
-        ]);
-    ?>
+    <?= $this->render('_submenu') ?>
 
     <p style="text-align: right">
 

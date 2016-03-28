@@ -30,19 +30,7 @@ use yii\jui\DatePicker;
     <div class="form-group" style="text-align: right">
         <?= Html::submitButton($model->isNewRecord ? '<span class="glyphicon glyphicon-floppy-saved"></span>  ' . Module::t('module', 'STATUS_CREATE') : '<span class="glyphicon glyphicon-pencil"></span>  ' . Module::t('module', 'STATUS_UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         <?= Html::a('<span class="glyphicon glyphicon-floppy-remove"></span>  ' . Module::t('module', 'BUTTON_CANCEL'), ['/skoda/servicesheduler/calendar'], ['class' => 'btn btn-danger']) ?>
-    </div>    
-
-<?php
-    if(isset($_GET['date'])){
-?>        
-        <script type="text/javascript">
-            $(function(){
-                document.getElementById("servicesheduler-date").value = "<?= $_GET['date']; ?>";
-            })
-        </script>
-<?php        
-    }
-?>
+    </div>
 
     <?= $form->errorSummary($model); ?>
 

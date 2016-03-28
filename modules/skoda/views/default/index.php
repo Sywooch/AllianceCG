@@ -1,9 +1,5 @@
 <meta charset="UTF-8">
 
-<!-- <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js'></script> -->
-<!-- <link rel="stylesheet" href="/css/queryLoader.css" type="text/css" /> -->
-<!-- <script type='text/javascript' src='/js/queryLoader.js'></script> -->
-
 <?php
 
 use yii\helpers\Html;
@@ -58,8 +54,8 @@ $(function () {
             }
         });
 
-        var serviceLoad = $.getValues("query/statusmonitorgraph"); 
-        var workerLoad = $.getValues("query/workerloadgraph");
+        var serviceLoad = $.getValues("/skoda/skodaquery/statusmonitorgraph"); 
+        var workerLoad = $.getValues("/skoda/skodaquery/workerloadgraph");
 
     $('#skoda').highcharts({
         chart: {
@@ -198,9 +194,3 @@ $(function () {
 </script>
 
 <div class="col-lg-12" id="skoda"></div>
-
-
-
-<!--script type='text/javascript'>
-    QueryLoader.init();
-</script-->

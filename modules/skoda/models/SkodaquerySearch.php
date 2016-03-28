@@ -10,15 +10,12 @@ namespace app\modules\skoda\models;
 
 use Yii;
 use yii\base\Model;
-use yii\data\ActiveDataProvider;
-use yii\data\Sort;
-use app\modules\skoda\models\DefaultSearch;
 use yii\helpers\Json;
 
 /**
  * DefaultSearch represents the model behind the search form about `app\modules\status\models\DefaultSearch`.
  */
-class DefaultSearch extends Model
+class SkodaquerySearch extends Model
 {
 
     public $workerload;

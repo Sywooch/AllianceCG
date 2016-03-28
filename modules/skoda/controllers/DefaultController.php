@@ -4,10 +4,7 @@ namespace app\modules\skoda\controllers;
 
 use yii\web\Controller;
 use Yii;
-use app\modules\skoda\models\MonitorSearch;
 use yii\filters\AccessControl;
-use app\modules\skoda\models\Servicesheduler;
-use app\modules\skoda\models\DefaultSearch;
 use app\modules\skoda\Module;
 
 /**

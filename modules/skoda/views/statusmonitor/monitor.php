@@ -32,6 +32,10 @@ $this->registerJs($script);
 
 ?>
 
+<?php Pjax::begin(['id' => 'service_statusmonitor']) ?>
+
+<?= Html::a("", ['/skoda/statusmonitor/monitor'], ['class' => 'hidden_button', 'id' => 'service_statusmonitor_refresh']) ?>
+
 <div class="row">
 
     <?php
@@ -68,10 +72,6 @@ $this->registerJs($script);
 
     ?>
 </div>
-
-<?php Pjax::begin(['id' => 'service_statusmonitor']) ?>
-
-<?= Html::a("", ['/skoda/statusmonitor/monitor'], ['class' => 'hidden_button', 'id' => 'service_statusmonitor_refresh']) ?>
 
 <div class="col-lg-12" style="text-align: center">                
         <?php

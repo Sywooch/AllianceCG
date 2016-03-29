@@ -1,0 +1,1 @@
+<?= \bluezed\scrollTop\ScrollTop::widget() ?>

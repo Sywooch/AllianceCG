@@ -39,6 +39,8 @@ AppAsset::register($this);
     </div>
 </div>
 
+<?= $this->render('@app/modules/skoda/views/layouts/_scroll_to_top') ?>    
+    
 <?= $this->render('@app/modules/skoda/views/layouts/_footer') ?>
 
 <?php $this->endBody() ?>

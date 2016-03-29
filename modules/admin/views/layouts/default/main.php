@@ -39,6 +39,8 @@ AppAsset::register($this);
     </div>
 </div>
 
+<?= $this->render('@app/modules/admin/views/layouts/default/_scroll_to_top') ?> 
+    
 <?= $this->render('@app/modules/admin/views/layouts/default/_footer') ?>
 
 <?php $this->endBody() ?>

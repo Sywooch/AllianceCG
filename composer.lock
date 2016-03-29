@@ -4,133 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5ed35ca7e503b9b6a3113e2505720765",
-    "content-hash": "3aa15f8bee985dd49a2368b884bbb04f",
+    "hash": "9673b7870c4ad128f029025f7a2ac445",
+    "content-hash": "1bae2ff133e5cadfe9e011c81c45f9d9",
     "packages": [
-        {
-            "name": "2amigos/yii2-date-time-picker-widget",
-            "version": "1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/2amigos/yii2-date-time-picker-widget.git",
-                "reference": "1248491c959d7080ab45c5284429e3d9222ed282"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/2amigos/yii2-date-time-picker-widget/zipball/1248491c959d7080ab45c5284429e3d9222ed282",
-                "reference": "1248491c959d7080ab45c5284429e3d9222ed282",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/smalot-bootstrap-datetimepicker": "2.3.1",
-                "yiisoft/yii2": "~2.0",
-                "yiisoft/yii2-bootstrap": "~2.0.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.*",
-                "scrutinizer/ocular": "~1.1"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                },
-                "asset-installer-paths": {
-                    "bower-asset-library": "vendor/bower"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "dosamigos\\datetimepicker\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "2amigOS! Consulting Group",
-                    "email": "hola@2amigos.us",
-                    "homepage": "http://2amigos.us",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Bootstrap DateTimePicker widget for Yii2.",
-            "homepage": "http://yiiwheels.com/extension/bootstrap-datetimepicker",
-            "keywords": [
-                "2amigos",
-                "DateTimePicker",
-                "extension",
-                "widget",
-                "yii",
-                "yii 2",
-                "yii2"
-            ],
-            "time": "2015-04-02 10:59:30"
-        },
-        {
-            "name": "2amigos/yii2-highcharts-widget",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/2amigos/yii2-highcharts-widget.git",
-                "reference": "e820aa981335d0c7269706ad6cb2d0ae81da495b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/2amigos/yii2-highcharts-widget/zipball/e820aa981335d0c7269706ad6cb2d0ae81da495b",
-                "reference": "e820aa981335d0c7269706ad6cb2d0ae81da495b",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/highcharts-release": "4.1.4",
-                "yiisoft/yii2": "*"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.*",
-                "scrutinizer/ocular": "~1.1"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                },
-                "asset-installer-paths": {
-                    "bower-asset-library": "vendor/bower"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "dosamigos\\highcharts\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "2amigOS! Consulting Group",
-                    "email": "hola@2amigos.us",
-                    "homepage": "http://2amigos.us",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Highcharts JS widget for Yii2.",
-            "homepage": "http://yiiwheels.com/extension/highcharts-widget",
-            "keywords": [
-                "2amigos",
-                "chart",
-                "extension",
-                "highcharts",
-                "widget",
-                "yii",
-                "yii 2",
-                "yii2"
-            ],
-            "time": "2015-03-16 21:55:20"
-        },
         {
             "name": "2amigos/yii2-tinymce-widget",
             "version": "1.1.1",
@@ -190,6 +66,51 @@
                 "yii2"
             ],
             "time": "2015-03-28 21:53:43"
+        },
+        {
+            "name": "bluezed/yii2-scroll-top",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bluezed/yii2-scroll-top.git",
+                "reference": "5e220637a60fcd4b5a84cda45efaf35a8facf29b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bluezed/yii2-scroll-top/zipball/5e220637a60fcd4b5a84cda45efaf35a8facf29b",
+                "reference": "5e220637a60fcd4b5a84cda45efaf35a8facf29b",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "bluezed\\scrollTop\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Geppert",
+                    "email": "bluezed.apps@gmail.com"
+                }
+            ],
+            "description": "This Yii 2 widget adds a simple scroll-to-top button to your site.",
+            "keywords": [
+                "button",
+                "extension",
+                "scroll",
+                "scroll-to",
+                "scroll-to-top",
+                "top",
+                "yii2"
+            ],
+            "time": "2015-07-28 10:10:22"
         },
         {
             "name": "bower-asset/bootstrap",
@@ -276,84 +197,6 @@
                 "CC-BY-3.0"
             ],
             "description": "Font Awesome"
-        },
-        {
-            "name": "bower-asset/fullcalendar",
-            "version": "v2.6.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fullcalendar/fullcalendar.git",
-                "reference": "4a15df42d12edd56b6b9df24e18c90349c649f53"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fullcalendar/fullcalendar/zipball/4a15df42d12edd56b6b9df24e18c90349c649f53",
-                "reference": "4a15df42d12edd56b6b9df24e18c90349c649f53",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/jquery": ">=1.7.1",
-                "bower-asset/moment": ">=2.5.0"
-            },
-            "require-dev": {
-                "bower-asset/bootstrap": "~3.2.0",
-                "bower-asset/jasmine-fixture": "~1.2.0",
-                "bower-asset/jasmine-jquery": "~2.0.3",
-                "bower-asset/jquery-mockjax": "~1.5.4",
-                "bower-asset/jquery-simulate": "~1.0.1",
-                "bower-asset/jquery-ui": ">=1.11.1",
-                "bower-asset/moment-timezone": "~0.2.1"
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": [
-                    "dist/fullcalendar.js",
-                    "dist/fullcalendar.css"
-                ],
-                "bower-asset-ignore": [
-                    "*",
-                    "**/.*",
-                    "!/dist/**",
-                    "!/README.*",
-                    "!/LICENSE.*",
-                    "!/CHANGELOG.*",
-                    "!/CONTRIBUTING.*"
-                ]
-            },
-            "license": {
-                "type": "MIT",
-                "url": "https://github.com/fullcalendar/fullcalendar/blob/master/LICENSE.txt"
-            },
-            "description": "Full-sized drag & drop event calendar",
-            "keywords": [
-                "calendar",
-                "event",
-                "full-sized",
-                "jquery-plugin"
-            ]
-        },
-        {
-            "name": "bower-asset/highcharts-release",
-            "version": "v4.1.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/highcharts/highcharts-dist.git",
-                "reference": "8ec04ca0aa02fe7e9584dc24b6902e4338360763"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/highcharts/highcharts-dist/zipball/8ec04ca0aa02fe7e9584dc24b6902e4338360763",
-                "reference": "8ec04ca0aa02fe7e9584dc24b6902e4338360763",
-                "shasum": ""
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": [
-                    "highcharts.js",
-                    "highcharts-more.js",
-                    "modules/exporting.js"
-                ]
-            }
         },
         {
             "name": "bower-asset/html5shiv",
@@ -500,43 +343,6 @@
             ]
         },
         {
-            "name": "bower-asset/moment",
-            "version": "2.12.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moment/moment.git",
-                "reference": "b135bf1a6d58ff94287f0a21455bfa6a1ddc7226"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moment/moment/zipball/b135bf1a6d58ff94287f0a21455bfa6a1ddc7226",
-                "reference": "b135bf1a6d58ff94287f0a21455bfa6a1ddc7226",
-                "shasum": ""
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": "moment.js",
-                "bower-asset-ignore": [
-                    "**/.*",
-                    "benchmarks",
-                    "bower_components",
-                    "meteor",
-                    "node_modules",
-                    "scripts",
-                    "tasks",
-                    "test",
-                    "component.json",
-                    "composer.json",
-                    "CONTRIBUTING.md",
-                    "ender.js",
-                    "Gruntfile.js",
-                    "Moment.js.nuspec",
-                    "package.js",
-                    "package.json"
-                ]
-            }
-        },
-        {
             "name": "bower-asset/punycode",
             "version": "v1.3.2",
             "source": {
@@ -587,39 +393,6 @@
                 ]
             },
             "description": "Fast and lightweight polyfill for min/max-width CSS3 Media Queries (for IE 6-8, and more)"
-        },
-        {
-            "name": "bower-asset/smalot-bootstrap-datetimepicker",
-            "version": "2.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/smalot/bootstrap-datetimepicker.git",
-                "reference": "c893c91872d273bcea1bd806d03eb624c91a4cac"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/smalot/bootstrap-datetimepicker/zipball/c893c91872d273bcea1bd806d03eb624c91a4cac",
-                "reference": "c893c91872d273bcea1bd806d03eb624c91a4cac",
-                "shasum": ""
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": [
-                    "js/bootstrap-datetimepicker.min.js",
-                    "css/bootstrap-datetimepicker.min.css"
-                ],
-                "bower-asset-ignore": [
-                    "build",
-                    "sample in bootstrap v2",
-                    "sample in bootstrap v3",
-                    "screenshot",
-                    "tests",
-                    ".gitattributes",
-                    ".gitignore",
-                    ".travis.yml",
-                    "minify.sh"
-                ]
-            }
         },
         {
             "name": "bower-asset/yii2-pjax",
@@ -808,57 +581,6 @@
             "time": "2015-11-30 17:28:02"
         },
         {
-            "name": "kartik-v/yii2-field-range",
-            "version": "v1.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kartik-v/yii2-field-range.git",
-                "reference": "095d260eecb86ff2e78a70775011cec00a75df98"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-field-range/zipball/095d260eecb86ff2e78a70775011cec00a75df98",
-                "reference": "095d260eecb86ff2e78a70775011cec00a75df98",
-                "shasum": ""
-            },
-            "require": {
-                "kartik-v/yii2-krajee-base": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "kartik\\field\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD 3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Kartik Visweswaran",
-                    "email": "kartikv2@gmail.com",
-                    "homepage": "http://www.krajee.com/"
-                }
-            ],
-            "description": "Easily manage Yii 2 ActiveField ranges (from/to) with Bootstrap 3 addons markup and more",
-            "homepage": "https://github.com/kartik-v/yii2-field-range",
-            "keywords": [
-                "addon",
-                "bootstrap",
-                "bootstrap 3",
-                "date",
-                "extension",
-                "field-range",
-                "from",
-                "range",
-                "to",
-                "widget",
-                "yii2"
-            ],
-            "time": "2014-11-25 08:52:00"
-        },
-        {
             "name": "kartik-v/yii2-krajee-base",
             "version": "1.8.2",
             "source": {
@@ -903,60 +625,6 @@
                 "yii2"
             ],
             "time": "2016-01-10 12:26:29"
-        },
-        {
-            "name": "kartik-v/yii2-widget-datepicker",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kartik-v/yii2-widget-datepicker.git",
-                "reference": "bc22b97c342f9cbea25e5eee6ce7312ed0561cbd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/bc22b97c342f9cbea25e5eee6ce7312ed0561cbd",
-                "reference": "bc22b97c342f9cbea25e5eee6ce7312ed0561cbd",
-                "shasum": ""
-            },
-            "require": {
-                "kartik-v/yii2-krajee-base": "~1.7"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "kartik\\date\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Kartik Visweswaran",
-                    "email": "kartikv2@gmail.com",
-                    "homepage": "http://www.krajee.com/"
-                }
-            ],
-            "description": "Enhanced Yii2 wrapper for the bootstrap datepicker plugin (sub repo split from yii2-widgets).",
-            "homepage": "https://github.com/kartik-v/yii2-widget-datepicker",
-            "keywords": [
-                "date",
-                "extension",
-                "form",
-                "jquery",
-                "picker",
-                "plugin",
-                "select2",
-                "widget",
-                "yii2"
-            ],
-            "time": "2016-02-28 17:19:12"
         },
         {
             "name": "kartik-v/yii2-widget-datetimepicker",
@@ -1006,104 +674,6 @@
                 "yii2"
             ],
             "time": "2016-01-10 12:18:38"
-        },
-        {
-            "name": "kartik-v/yii2-widget-sidenav",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kartik-v/yii2-widget-sidenav.git",
-                "reference": "02ee4f142d7dfbb316f878e538cc7b946f4502d2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-sidenav/zipball/02ee4f142d7dfbb316f878e538cc7b946f4502d2",
-                "reference": "02ee4f142d7dfbb316f878e538cc7b946f4502d2",
-                "shasum": ""
-            },
-            "require": {
-                "kartik-v/yii2-krajee-base": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "kartik\\sidenav\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD 3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Kartik Visweswaran",
-                    "email": "kartikv2@gmail.com",
-                    "homepage": "http://www.krajee.com/"
-                }
-            ],
-            "description": "An enhanced side navigation menu styled for bootstrap (sub repo split from yii2-widgets)",
-            "homepage": "https://github.com/kartik-v/yii2-widget-sidenav",
-            "keywords": [
-                "bootstrap",
-                "extension",
-                "jquery",
-                "menu",
-                "navigation",
-                "plugin",
-                "sidenav",
-                "widget",
-                "yii2"
-            ],
-            "time": "2014-11-09 08:07:23"
-        },
-        {
-            "name": "philippfrenzel/yii2fullcalendar",
-            "version": "2.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/philippfrenzel/yii2fullcalendar.git",
-                "reference": "7b6d4f94e0a050ef3dcb013270207b49c27a9e56"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/philippfrenzel/yii2fullcalendar/zipball/7b6d4f94e0a050ef3dcb013270207b49c27a9e56",
-                "reference": "7b6d4f94e0a050ef3dcb013270207b49c27a9e56",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/fullcalendar": "2.*",
-                "php": ">=5.4.0",
-                "yiisoft/yii2": "*",
-                "yiisoft/yii2-jui": "*"
-            },
-            "require-dev": {
-                "codeception/codeception": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "yii2fullcalendar\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Philipp Frenzel",
-                    "email": "philipp@frenzel.net",
-                    "homepage": "http://www.frenzel.net/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Yii2 fullcalendar Widgets",
-            "homepage": "http://www.frenzel.net/",
-            "keywords": [
-                "fullcalendar",
-                "yii2"
-            ],
-            "time": "2015-12-28 07:25:32"
         },
         {
             "name": "rmrevin/yii2-fontawesome",
@@ -1209,52 +779,6 @@
                 "mailer"
             ],
             "time": "2015-06-06 14:19:39"
-        },
-        {
-            "name": "thiagotalma/yii2-fullcalendar",
-            "version": "2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thiagotalma/yii2-talma-fullcalendar-widget.git",
-                "reference": "f83c2766fc018b562e8378d3098830a485c4ee29"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thiagotalma/yii2-talma-fullcalendar-widget/zipball/f83c2766fc018b562e8378d3098830a485c4ee29",
-                "reference": "f83c2766fc018b562e8378d3098830a485c4ee29",
-                "shasum": ""
-            },
-            "require": {
-                "yiisoft/yii2": "*",
-                "yiisoft/yii2-jui": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "talma\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD 3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Thiago Talma",
-                    "email": "thiago@thiagomt.com",
-                    "homepage": "http://www.thiagomt.com/"
-                }
-            ],
-            "description": "Widget for Yii Framework 2.0 to use FullCalendar",
-            "homepage": "https://github.com/thiagotalma/yii2-talma-fullcalendar-widget",
-            "keywords": [
-                "calendar",
-                "extension",
-                "fullcalendar",
-                "widget",
-                "yii2"
-            ],
-            "time": "2014-11-07 11:32:05"
         },
         {
             "name": "tinymce/tinymce",
@@ -1903,9 +1427,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "kartik-v/yii2-widget-datepicker": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

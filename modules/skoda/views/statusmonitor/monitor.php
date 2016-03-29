@@ -1,5 +1,5 @@
 
-<meta http-equiv="Refresh" content="30" />
+<!--<meta http-equiv="Refresh" content="30" />-->
 
 <link rel="stylesheet" href="/css/queryLoader.css" type="text/css">
 <script type='text/javascript' src='/js/queryLoader.js'></script>
@@ -19,8 +19,16 @@ use yii\grid\GridView;
 use app\modules\skoda\Module;
 use yii\data\SqlDataProvider;
 use yii\bootstrap\Progress;
+use yii\widgets\Pjax;
 
 $this->title = Module::t('module', 'STATUSMONITOR_TITLE');
+
+$script = <<< JS
+$(document).ready(function() {
+    setInterval(function(){ $("#service_statusmonitor_refresh").click(); }, 5000);
+});
+JS;
+$this->registerJs($script);
 
 ?>
 
@@ -60,6 +68,11 @@ $this->title = Module::t('module', 'STATUSMONITOR_TITLE');
 
     ?>
 </div>
+
+<?php Pjax::begin(['id' => 'service_statusmonitor']) ?>
+
+<?= Html::a("", ['/skoda/statusmonitor/monitor'], ['class' => 'hidden_button', 'id' => 'service_statusmonitor_refresh']) ?>
+
 <div class="col-lg-12" style="text-align: center">                
         <?php
             $formatter = new \yii\i18n\Formatter;
@@ -141,6 +154,8 @@ $this->title = Module::t('module', 'STATUSMONITOR_TITLE');
     ],
     'tableOptions' =>['class' => 'table'],
 ]); ?>
+
+<?php Pjax::end() ?>
 
 <script>
     // QueryLoader.selectorPreload = "body";

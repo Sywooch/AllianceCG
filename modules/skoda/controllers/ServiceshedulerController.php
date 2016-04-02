@@ -36,21 +36,6 @@ class ServiceshedulerController extends Controller
         $searchModel = new ServiceshedulerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $events = Servicesheduler::find()->all();
-
-        $tasks = [];
-        foreach ($events as $eve) {
-            $event = new \yii2fullcalendar\models\Event();
-            $event->id = $eve->id;
-            $event->start = $eve->date.'T00:00:01';
-            $event->end = $eve->date.'T23:59:59';
-            $event->title = $eve->responsible;
-            $event->backgroundColor = '#4ba82e';
-            // $event->dayClick = 'http://google.com';
-            $event->allDay = true;
-            $tasks[] = $event;
-        }
-
         $today = Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
         $wcs = Servicesheduler::find()
             ->where(['date' => $today])
@@ -58,19 +43,16 @@ class ServiceshedulerController extends Controller
     
         if(empty($wcs->responsible))                
         {
-            // \Yii::$app->getSession()->setFlash('danger', Yii::t('app', 'MASTER_CONSULTANT_DOES_NOT_EXIST_TODAY'));
             Yii::$app->session->setFlash('masterConsultantDoesNotExistToday');
         }
         else
         {
-            // \Yii::$app->getSession()->setFlash('success', Yii::$app->formatter->asDate($wcs->date, 'dd/MM/yyyy') . ' - ' . Yii::t('app', 'CURRENT_MASTER_CONSULTANT') .' - '. $wcs->responsible);
             Yii::$app->session->setFlash('masterConsultantIs');
         }        
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'events' => $tasks, 
             'wcs' => $wcs,
         ]);
     }

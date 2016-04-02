@@ -103,7 +103,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'date',
                         'options' => ['class' => 'form-control']
                     ]),
-                'contentOptions'=>['style'=>'width: 100px;']
+                'contentOptions'=>['style'=>'width: 150px;']
             ],
             [
                 'class' => LinkColumn::className(),
@@ -113,19 +113,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => ActionColumn::className(),
-                'contentOptions'=>['style'=>'width: 20px;'],
-                'template' => '{update}',
-                'buttons' => [
-                    'update' => function ($url, $model) {
-                        $title = false;
-                        $options = [];
-                        $icon = '<span class="glyphicon glyphicon-pencil"></span>';
-                        $label = $icon;
-                        $url = Url::toRoute(['update', 'id' => $model->id]);
-                        $options['tabindex'] = '-1';
-                        return Html::a($label, $url, $options) .''. PHP_EOL;
-                    },
-                ],
+                'contentOptions'=>['style'=>'width: 80px;'],
             ],
         ],
     ]); ?>

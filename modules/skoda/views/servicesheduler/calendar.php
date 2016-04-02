@@ -65,10 +65,6 @@
     Modal::end();
 ?>
 
-    <?php
-//        echo $searchModel->calendarSearch();
-    ?>
-
 <script src='/js/jqfc/lib/jquery.min.js'></script>
 <script src='/js/jqfc/lib/moment.min.js'></script>
 <link rel='stylesheet' type='text/css' href='/css/jqfc/fullcalendar.css' />

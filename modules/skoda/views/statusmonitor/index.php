@@ -100,7 +100,7 @@ $this->registerJs('
     ]);
     
     echo '<div id=modal-body>';
-    echo 'lol!';
+//    echo id;
     echo '</div>';
      
     Modal::end();
@@ -124,7 +124,7 @@ $this->registerJs('
                     'contentOptions'=>['style'=>'width: 20px;']
                 ],    
                 [
-                    'class' => LinkColumn::className(),
+//                    'class' => LinkColumn::className(),
                     'attribute' => 'regnumber',
                     'format' => 'raw',
                     'filter' => AutoComplete::widget([   
@@ -137,6 +137,17 @@ $this->registerJs('
                                     'class'=>'form-control'
                                 ]
                             ]),
+                    'value' => function ($data) {
+//                        return Html::a(Html::encode($data->regnumber), Url::to(['view', 'id' => $data->id]));
+                        return Html::button(Html::encode($data->regnumber), [
+                                'data' => [
+                                    'toggle' => 'modal',
+                                    'target' => '#skoda_statusmonitor_modal',
+                                    'id' => $data->id,
+                                ],
+                                'class' => 'btn btn-link',
+                        ]);
+                    },
                      'contentOptions'=>['style'=>'width: 130px;'],
                 ],
                 [

@@ -32,13 +32,8 @@ use rmrevin\yii\fontawesome\FA;
 
     <?= $form->errorSummary($model); ?>
 
-
-    
-
     <?= $form->field($model, 'regnumber', ['template'=>' {label}<div class="input-group"><span class="input-group-addon">'. FA::icon('car') . '</span>{input}</div>{error}'] )->widget(\yii\widgets\MaskedInput::className(), ['mask' => 'a999aa/99[9][ RUS]',]) ?>       
     
-    <!--<br/><br/>-->
-
     <?= DateTimePicker::widget([
             'model' => $model,
             'attribute' => 'from',
@@ -64,10 +59,8 @@ use rmrevin\yii\fontawesome\FA;
             ]
         ]);
     ?>
-</div>    
-<br/>
 
     <?php ActiveForm::end(); ?>
 
 </div>
-</div
+</div>    

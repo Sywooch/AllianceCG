@@ -8,6 +8,7 @@ use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use app\modules\skoda\Module;
 use kartik\datetime\DateTimePicker;
+use rmrevin\yii\fontawesome\FA;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\skoda\models\Statusmonitor */
@@ -17,25 +18,26 @@ use kartik\datetime\DateTimePicker;
 <!-- <div class="user-form center-block"> -->
 <div>
 
+    <div class="input-group center-block" style="width: 60%;">
+        
     <?php $form = ActiveForm::begin(); ?>
 
-    <h1><span class="glyphicon glyphicon-piggy-bank" style='padding-right:10px;'></span><?= $model->isNewRecord ? Module::t('module', 'STATUS_CREATE_RN') : Module::t('module', 'STATUS_UPDATE_RN') . ' ' . $model->regnumber; ?></h1>
+    <h1><?= $model->isNewRecord ? FA::icon('car') . Module::t('module', 'STATUS_CREATE_RN') : FA::icon('car') . Module::t('module', 'STATUS_UPDATE_RN') . ' ' . $model->regnumber; ?></h1>
 
 
     <div class="form-group" style="text-align: right">
-        <?= Html::submitButton($model->isNewRecord ? '<span class="glyphicon glyphicon-floppy-saved"></span>  ' . Module::t('module', 'STATUS_CREATE') : '<span class="glyphicon glyphicon-pencil"></span>  ' . Module::t('module', 'STATUS_UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-        <?= Html::a('<span class="glyphicon glyphicon-floppy-remove"></span>  ' . Module::t('module', 'BUTTON_CANCEL'), ['/skoda/statusmonitor'], ['class' => 'btn btn-danger']) ?>
+        <?= Html::submitButton($model->isNewRecord ? FA::icon('floppy-o') . Module::t('module', 'STATUS_CREATE') : '<span class="glyphicon glyphicon-pencil"></span>  ' . Module::t('module', 'STATUS_UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::a(FA::icon('undo') . Module::t('module', 'BUTTON_CANCEL'), ['/skoda/statusmonitor'], ['class' => 'btn btn-danger']) ?>
     </div>
 
     <?= $form->errorSummary($model); ?>
 
 
-    <div class="input-group center-block" style="width: 60%;">
     
 
-    <?= $form->field($model, 'regnumber')->widget(\yii\widgets\MaskedInput::className(), ['mask' => 'a999aa/99[9][ RUS]',]) ?>       
+    <?= $form->field($model, 'regnumber', ['template'=>' {label}<div class="input-group"><span class="input-group-addon">'. FA::icon('car') . '</span>{input}</div>{error}'] )->widget(\yii\widgets\MaskedInput::className(), ['mask' => 'a999aa/99[9][ RUS]',]) ?>       
     
-    <br/><br/>
+    <!--<br/><br/>-->
 
     <?= DateTimePicker::widget([
             'model' => $model,
@@ -68,3 +70,4 @@ use kartik\datetime\DateTimePicker;
     <?php ActiveForm::end(); ?>
 
 </div>
+</div

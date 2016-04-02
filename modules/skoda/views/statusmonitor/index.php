@@ -15,6 +15,7 @@ use yii\bootstrap\Progress;
 use yii\helpers\ArrayHelper;
 use yii\jui\DatePicker;
 use yii\jui\AutoComplete;
+use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\status\models\StatusmonitorSearch */
@@ -83,6 +84,27 @@ $this->registerJs('
     </p>
 
     <?= Yii::$app->session->getFlash('error'); ?>    
+    
+<?php
+    Modal::begin([
+        'id' => 'skoda_statusmonitor_modal',
+        'header' => '',
+        'headerOptions' => ['id' => 'modal-header'],
+        'footer' => '',
+        'footerOptions' => ['id' => 'modal-footer'],
+//        'toggleButton' => [
+//            'tag' => 'button',
+//            'class' => 'btn btn-lg btn-block btn-info',
+//            'label' => 'Press!',
+//        ]
+    ]);
+    
+    echo '<div id=modal-body>';
+    echo 'lol!';
+    echo '</div>';
+     
+    Modal::end();
+?>    
 
     <?php // Pjax::begin(); ?>    
     <?= 
@@ -105,9 +127,11 @@ $this->registerJs('
                     'class' => LinkColumn::className(),
                     'attribute' => 'regnumber',
                     'format' => 'raw',
-                    'filter' => AutoComplete::widget([                
-                                    'clientOptions' => [
-                                    'source' => $searchModel->rnautocomplete(),
+                    'filter' => AutoComplete::widget([   
+                                'model' => $searchModel,
+                                'attribute' => 'regnumber',             
+                                'clientOptions' => [
+                                        'source' => $searchModel->rnautocomplete(),
                                 ],
                                 'options'=>[
                                     'class'=>'form-control'

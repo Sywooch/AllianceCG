@@ -13,8 +13,6 @@ use app\modules\skoda\models\Statusmonitor;
  */
 class StatusmonitorSearch extends Statusmonitor
 {
-
-
     public $carstatus;
 
     /**
@@ -24,7 +22,7 @@ class StatusmonitorSearch extends Statusmonitor
     {
         return [
             [['id'], 'integer'],
-            [['regnumber'], 'string', 'max' => 255],
+            ['regnumber', 'safe'],
             [['from', 'to', 'regnumber'], 'safe'],
         ];
     }
@@ -62,8 +60,13 @@ class StatusmonitorSearch extends Statusmonitor
             'defaultOrder' => ['to' => SORT_DESC],
             'attributes' => [
                 'id',
-                'regnumber',
                 'worker',
+                'regnumber' => [
+                    'asc' => ['regnumber' => SORT_ASC],
+                    'desc' => ['regnumber' => SORT_DESC],
+                    'label' => 'regnumber',
+                    'default' => SORT_ASC
+                ],
                 'from' => [
                     'asc' => ['from' => SORT_ASC],
                     'desc' => ['from' => SORT_DESC],
@@ -100,10 +103,7 @@ class StatusmonitorSearch extends Statusmonitor
         $query
             ->andFilterWhere(['like', 'regnumber', $this->regnumber])
             ->andFilterWhere(['like', 'from', $this->from])
-            ->andFilterWhere(['like', 'to', $this->to])
-            // ->andFilterWhere(['>=', 'from', $this->from ? strtotime($this->from . ' 00:00:00') : null])
-            // ->andFilterWhere(['<=', 'to', $this->to ? strtotime($this->to . ' 23:59:59') : null])
-            ->andFilterWhere(['like', 'regnumber', $this->regnumber]);
+            ->andFilterWhere(['like', 'to', $this->to]);
 
         return $dataProvider;
     }

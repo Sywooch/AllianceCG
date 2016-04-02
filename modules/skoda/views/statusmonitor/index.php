@@ -14,6 +14,7 @@ use app\modules\skoda\Module;
 use yii\bootstrap\Progress;
 use yii\helpers\ArrayHelper;
 use yii\jui\DatePicker;
+use yii\jui\AutoComplete;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\status\models\StatusmonitorSearch */
@@ -81,8 +82,7 @@ $this->registerJs('
 
     </p>
 
-    <?= Yii::$app->session->getFlash('error'); ?>
-
+    <?= Yii::$app->session->getFlash('error'); ?>    
 
     <?php // Pjax::begin(); ?>    
     <?= 
@@ -104,8 +104,16 @@ $this->registerJs('
                 [
                     'class' => LinkColumn::className(),
                     'attribute' => 'regnumber',
-                    'format' => 'raw',  
-                    // 'contentOptions'=>['style'=>'width: 100px;'],
+                    'format' => 'raw',
+                    'filter' => AutoComplete::widget([                
+                                    'clientOptions' => [
+                                    'source' => $searchModel->rnautocomplete(),
+                                ],
+                                'options'=>[
+                                    'class'=>'form-control'
+                                ]
+                            ]),
+                     'contentOptions'=>['style'=>'width: 130px;'],
                 ],
                 [
                     'attribute' => 'from',

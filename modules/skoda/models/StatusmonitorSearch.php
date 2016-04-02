@@ -37,6 +37,15 @@ class StatusmonitorSearch extends Statusmonitor
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
+    
+    public function rnautocomplete()
+    {
+        $listdata= Statusmonitor::find()
+            ->select(['regnumber as value', 'regnumber as label'])
+            ->asArray()
+            ->all();
+        return $listdata;
+    }
 
     /**
      * Creates data provider instance with search query applied
@@ -89,6 +98,7 @@ class StatusmonitorSearch extends Statusmonitor
         }
 
         $query
+            ->andFilterWhere(['like', 'regnumber', $this->regnumber])
             ->andFilterWhere(['like', 'from', $this->from])
             ->andFilterWhere(['like', 'to', $this->to])
             // ->andFilterWhere(['>=', 'from', $this->from ? strtotime($this->from . ' 00:00:00') : null])

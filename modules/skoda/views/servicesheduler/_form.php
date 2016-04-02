@@ -18,7 +18,7 @@ use yii\jui\DatePicker;
     <?php $form = ActiveForm::begin(
         [
             // 'action' => '/action',
-            'method'=>'get',
+//            'method'=>'get',
             'options' => [
                 'id' => 'Skoda_calendar',
              ]

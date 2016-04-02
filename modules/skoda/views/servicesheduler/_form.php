@@ -4,9 +4,9 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\modules\skoda\Module;
 use app\modules\admin\models\User;
-// use app\modules\user\models\User as UserName;
 use yii\helpers\ArrayHelper;
 use yii\jui\DatePicker;
+use rmrevin\yii\fontawesome\FA;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\skoda\models\Servicesheduler */
@@ -25,7 +25,7 @@ use yii\jui\DatePicker;
         ]); 
     ?>
 
-    <h1><span class="glyphicon glyphicon-piggy-bank" style='padding-right:10px;'></span><?= $model->isNewRecord ? Module::t('module', 'STATUS_CREATE') : Module::t('module', 'STATUS_UPDATE_RN') . ' ' . $model->date; ?></h1>
+    <h1><?= $model->isNewRecord ? FA::icon('bed') .' '. Module::t('module', 'STATUS_CREATE') : FA::icon('bed') .' '. Module::t('module', 'STATUS_UPDATE_RN') . ' ' . $model->date; ?></h1>
 
     <div class="form-group" style="text-align: right">
         <?= Html::submitButton($model->isNewRecord ? '<span class="glyphicon glyphicon-floppy-saved"></span>  ' . Module::t('module', 'STATUS_CREATE') : '<span class="glyphicon glyphicon-pencil"></span>  ' . Module::t('module', 'STATUS_UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

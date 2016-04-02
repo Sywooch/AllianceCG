@@ -32,7 +32,7 @@ $this->registerJs('
             if (PosId=="") {
                 alert("Нет отмеченных записей!", "Alert Dialog");
             }
-            else if (confirm("Are you sure you want to delete this?")) {
+            else if (confirm("Удалить отмеченные записи?")) {
               $.ajax({
                 type: \'POST\',
                 url : \'/skoda/statusmonitor/multipledelete\',
@@ -177,19 +177,7 @@ $this->registerJs('
                 ],
                 [
                     'class' => ActionColumn::className(),
-                    'contentOptions'=>['style'=>'width: 20px;'],
-                    'template' => '{update}',
-                    'buttons' => [
-                        'update' => function ($url, $model) {
-                            $title = false;
-                            $options = [];
-                            $icon = '<span class="glyphicon glyphicon-pencil"></span>';
-                            $label = $icon;
-                            $url = Url::toRoute(['update', 'id' => $model->id]);
-                            $options['tabindex'] = '-1';
-                            return Html::a($label, $url, $options) .''. PHP_EOL;
-                        },
-                    ],
+                    'template' => '{view}{update}{delete}',
                 ],
             ],
         ]); 

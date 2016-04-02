@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p style="text-align: right">
-        <?= Html::a('<span class="glyphicon glyphicon-tasks"></span>  ' . Module::t('module', 'SERVICESHEDULER_INDEX'), ['index'], ['class' => 'btn btn-warning', 'id' => 'refreshButton']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-tasks"></span>  ' . Module::t('module', 'SERVICESHEDULER_INDEX'), ['calendar'], ['class' => 'btn btn-warning', 'id' => 'refreshButton']) ?>
         <?= Html::a('<span class="glyphicon glyphicon-edit"></span>  ' . Module::t('module', 'STATUS_UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('<span class="glyphicon glyphicon-remove"></span>  ' . Module::t('module', 'STATUS_DELETE'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',

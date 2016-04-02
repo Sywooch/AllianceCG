@@ -19,6 +19,8 @@ class SkodaquerySearch extends Model
 {
 
     public $workerload;
+    public $data_worker;
+    public $cata_car;
     
     /**
      * @inheritdoc
@@ -50,7 +52,9 @@ class SkodaquerySearch extends Model
         foreach ($items as $row){
             $data_worker[] = [$row['worker'],(int)$row['carcount']];
         }
-        return Json::encode($data_worker);
+        if(!empty($data_worker)){
+            return Json::encode($data_worker);            
+        }
     }
 
     /**
@@ -66,7 +70,9 @@ class SkodaquerySearch extends Model
         foreach ($items as $row){
              $data_car[] = [$row['date'],(int)$row['car']];
         }
-        return Json::encode($data_car);
+        if(!empty($data_car)){
+            return Json::encode($data_car);
+        }
     }
 
 

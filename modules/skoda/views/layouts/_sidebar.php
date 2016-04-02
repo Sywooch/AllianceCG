@@ -11,16 +11,20 @@ $today = Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
 $wcs = Servicesheduler::find()
     ->where(['date' => $today])
     ->one();
-      
+
+//remove,check
+
 if(!empty($wcs->responsible)){
     $mcexist = '1';
     $label = "label label-pill label-success";
-    $icon = 'user';
+    $icon1 = 'user';
+    $icon2 = 'check';
 }
 else{
     $mcexist = '1';
     $label = "label label-pill label-danger";
-    $icon = 'user-times';    
+    $icon1 = 'user-times';
+    $icon2 = 'remove';    
 }
 
 $count = '1';
@@ -34,7 +38,7 @@ $count = '1';
                 'url' => '/skoda',
             ],
             [
-                'label' => '<h5>' . Module::t('module', 'SERVICESHEDULER') . ' <span class="' . $label. ' navbar-right">' . FA::icon('' . $icon . '') . '</span></h5>',
+                'label' => '<h5>' . Module::t('module', 'SERVICESHEDULER') . ' <span class="' . $label. ' navbar-right">' . FA::icon('' . $icon1 . '') .' ' . FA::icon('' . $icon2 . '') . '</span></h5>',
                 'url' => '/skoda/servicesheduler/calendar',
 //                'options' => ['class' => 'navbar-nav navbar-right'],
             ],

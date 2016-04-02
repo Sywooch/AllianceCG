@@ -16,13 +16,13 @@ $wcs = Servicesheduler::find()
 
 if(!empty($wcs->responsible)){
     $mcexist = '1';
-    $label = "label label-pill label-success";
+    $label = "label label-pill label-success nav-label";
     $icon1 = 'user';
     $icon2 = 'check';
 }
 else{
     $mcexist = '1';
-    $label = "label label-pill label-danger";
+    $label = "label label-pill label-danger nav-label";
     $icon1 = 'user-times';
     $icon2 = 'remove';    
 }
@@ -43,7 +43,7 @@ $count = '1';
 //                'options' => ['class' => 'navbar-nav navbar-right'],
             ],
             [
-                'label' => Module::t('module', 'STATUS_TITLE') . ' <span class="label label-pill label-success navbar-right">' . FA::icon('calculator') . ' ' . $count . '</span>',
+                'label' => Module::t('module', 'STATUS_TITLE') . ' <span class="label label-pill label-success navbar-right nav-label">' . FA::icon('calculator') . ' ' . $count . '</span>',
                 'url' => '/skoda/statusmonitor/',
             ],
         ]),

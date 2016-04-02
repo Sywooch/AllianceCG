@@ -36,7 +36,7 @@ else{
         'encodeLabels' => false,
         'items' => array_filter([
             [
-                'label' => 'ŠKODA',
+                'label' => 'ŠKODA <span class="label label-pill label-success navbar-right nav-label">'. FA::icon('pie-chart') . ' ' . FA::icon('area-chart') . '</span>',
                 'url' => '/skoda',
             ],
             [

@@ -45,16 +45,15 @@ $this->registerJs($script);
             ->where(['date' => $today])
             ->one();
 
+        echo '<div class="col-lg-12" style="text-align: center"><h1>';
+        echo Module::t('module', 'WELCOME_MSG');
+        echo '</h1></div>';
+                    
         if(!empty($master_cons_today->responsible)){
             $provider_top = new ActiveDataProvider([
                 'query' => User::find()->where(['full_name' => $master_cons_today->responsible])
-                    ]);                          
-    
-                    echo '<div class="col-lg-12" style="text-align: center"><h1>';
-                    echo Module::t('module', 'WELCOME_MSG');
-                    echo '</h1></div>';
-
-
+                    ]);
+            
                     echo '<div class="col-lg-12" style="text-align: center; margin-left: 40%;">';
                     echo ListView::widget([
                         'dataProvider' => $provider_top,
@@ -69,6 +68,24 @@ $this->registerJs($script);
                     ]);                
                     echo '</div>';
         }
+//        else {
+//            $provider_empty = new ActiveDataProvider([
+//                'query' => User::find()->where(['full_name' => ''])
+//                    ]);
+//                    echo '<div class="col-lg-12" style="text-align: center; margin-left: 40%;">';
+//                    echo ListView::widget([
+//                        'dataProvider' => $provider_empty,
+//                        'layout' => '{items}',
+//                        'summary' => false,
+//                        'options' => [
+//                            'tag' => 'div',
+//                            'class' => 'tipochegi',
+//                            'id' => 'list-tipochegi',
+//                        ],
+//                        'itemView' => '_mcempty',
+//                    ]);                
+//                    echo '</div>';            
+//        }
 
     ?>
 </div>

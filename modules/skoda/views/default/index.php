@@ -98,6 +98,24 @@ $(function () {
             text: '<b>ООО "СтрелаАвто"</b>',
             x: -20
         },
+        noData: {
+            // Custom positioning/aligning options
+            position: {	
+                align: 'right',
+                verticalAlign: 'bottom'
+            },
+            // Custom svg attributes
+            attr: {
+                'stroke-width': 1,
+                stroke: '#cccccc'
+            },
+            // Custom css
+            style: {                    
+                fontWeight: 'bold',     
+                fontSize: '15px',
+                color: '#202030'        
+            }
+        },
         plotOptions: {
             column: {
                 depth: 25

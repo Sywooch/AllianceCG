@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use app\modules\skoda\models\Statusmonitor;
+use app\modules\skoda\models\StatusmonitorSearch;
 use app\modules\skoda\models\Servicesheduler;
 use app\modules\admin\models\User;
 use yii\grid\GridView;
@@ -83,7 +84,7 @@ $this->registerJs('
 
     </p>
 
-    <?= Yii::$app->session->getFlash('error'); ?>    
+    <?= Yii::$app->session->getFlash('error'); ?>
     
 <?php
     Modal::begin([

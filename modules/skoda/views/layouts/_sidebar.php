@@ -5,6 +5,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use app\modules\skoda\Module;
 use rmrevin\yii\fontawesome\FA;
+use app\modules\skoda\models\StatusmonitorSearch;
 use app\modules\skoda\models\Servicesheduler;
 
 $today = Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
@@ -27,7 +28,8 @@ else{
     $icon2 = 'remove';    
 }
 
-$count = '1';
+    $count = StatusmonitorSearch::find()
+        ->count();
 
     echo Nav::widget([
         'options' => ['class' => 'nav nav-pills nav-stacked'],

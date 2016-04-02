@@ -78,7 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('<span class="glyphicon glyphicon-trash"></span>  ' . Module::t('module', 'STATUS_DELETE'), ['#'], ['class' => 'btn btn-danger', 'id' => 'MultipleDelete']) ?>  
 
     </p>
-
+    
 <?= Yii::$app->session->getFlash('error'); ?>    
 
     <?= GridView::widget([

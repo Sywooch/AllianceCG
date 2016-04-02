@@ -12,11 +12,10 @@ $wcs = Servicesheduler::find()
     ->where(['date' => $today])
     ->one();
       
-//$mcexist = !empty($wcs->responsible) ? '1' : '0';
 if(!empty($wcs->responsible)){
     $mcexist = '1';
     $label = "label label-pill label-success";
-    $icon = 'user-secret';
+    $icon = 'user';
 }
 else{
     $mcexist = '1';
@@ -35,11 +34,12 @@ $count = '1';
                 'url' => '/skoda',
             ],
             [
-                'label' => Module::t('module', 'SERVICESHEDULER') . ' <span style="text-align: right;" class="' . $label. '">' . FA::icon('' . $icon . '') . '</span>',
+                'label' => '<h5>' . Module::t('module', 'SERVICESHEDULER') . ' <span class="' . $label. ' navbar-right">' . FA::icon('' . $icon . '') . '</span></h5>',
                 'url' => '/skoda/servicesheduler/calendar',
+//                'options' => ['class' => 'navbar-nav navbar-right'],
             ],
             [
-                'label' => Module::t('module', 'STATUS_TITLE') . ' <span style="text-align: right;" class="label label-pill label-success">' . FA::icon('calculator') . ' ' . $count . '</span>',
+                'label' => Module::t('module', 'STATUS_TITLE') . ' <span class="label label-pill label-success navbar-right">' . FA::icon('calculator') . ' ' . $count . '</span>',
                 'url' => '/skoda/statusmonitor/',
             ],
         ]),

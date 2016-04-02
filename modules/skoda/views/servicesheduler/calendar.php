@@ -12,6 +12,7 @@
     use app\modules\admin\models\User;
     use yii\bootstrap\Modal;
     use yii\helpers\Json;
+    use yii\bootstrap\Alert;
 
     $this->title = Module::t('module', 'SERVICESHEDULER_INDEX');
     $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda']];
@@ -19,20 +20,24 @@
 ?>
 
 <?php if (Yii::$app->session->hasFlash('masterConsultantDoesNotExistToday')): ?>
+    
+<?= Alert::widget([
+        'options' => [
+            'class' => 'alert-danger'
+        ],
+        'body' => Yii::$app->formatter->asDate('now', 'dd/MM/yyyy') . ' - ' . Module::t('module', 'MASTER_CONSULTANT_DOES_NOT_EXIST_TODAY'),
+    ]);
 
-    <div class="alert alert-danger">
-        <?= Yii::$app->formatter->asDate('now', 'dd/MM/yyyy') . ' - ' . Module::t('module', 'MASTER_CONSULTANT_DOES_NOT_EXIST_TODAY') ?>
-    </div>
+elseif (Yii::$app->session->hasFlash('masterConsultantIs')) : ?>
+    
+<?= Alert::widget([
+        'options' => [
+            'class' => 'alert-success'
+        ],
+        'body' => Yii::$app->formatter->asDate($wcs->date, 'dd/MM/yyyy') . ' - ' . Module::t('module', 'CURRENT_MASTER_CONSULTANT') .' - '. $wcs->responsible,
+    ]);
 
-<?php //endif; ?>
-
-<?php elseif (Yii::$app->session->hasFlash('masterConsultantIs')) : ?>
-
-    <div class="alert alert-success">
-        <?= Yii::$app->formatter->asDate($wcs->date, 'dd/MM/yyyy') . ' - ' . Module::t('module', 'CURRENT_MASTER_CONSULTANT') .' - '. $wcs->responsible ?>
-    </div>
-
-<?php endif; ?>
+endif; ?>
 
 <h1><span class="glyphicon glyphicon-wrench" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
     

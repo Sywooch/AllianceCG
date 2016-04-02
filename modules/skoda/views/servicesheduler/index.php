@@ -11,6 +11,7 @@ use yii\jui\DatePicker;
 use yii\helpers\ArrayHelper;
 use app\modules\skoda\models\Servicesheduler;
 use rmrevin\yii\fontawesome\FA;
+use yii\bootstrap\Alert;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\skoda\models\ServiceshedulerSearch */
@@ -50,20 +51,24 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?php if (Yii::$app->session->hasFlash('masterConsultantDoesNotExistToday')): ?>
+    
+<?= Alert::widget([
+        'options' => [
+            'class' => 'alert-danger'
+        ],
+        'body' => Yii::$app->formatter->asDate('now', 'dd/MM/yyyy') . ' - ' . Module::t('module', 'MASTER_CONSULTANT_DOES_NOT_EXIST_TODAY'),
+    ]);
 
-    <div class="alert alert-danger">
-        <?= Yii::$app->formatter->asDate('now', 'dd/MM/yyyy') . ' - ' . Module::t('module', 'MASTER_CONSULTANT_DOES_NOT_EXIST_TODAY') ?>
-    </div>
+elseif (Yii::$app->session->hasFlash('masterConsultantIs')) : ?>
+    
+<?= Alert::widget([
+        'options' => [
+            'class' => 'alert-success'
+        ],
+        'body' => Yii::$app->formatter->asDate($wcs->date, 'dd/MM/yyyy') . ' - ' . Module::t('module', 'CURRENT_MASTER_CONSULTANT') .' - '. $wcs->responsible,
+    ]);
 
-<?php //endif; ?>
-
-<?php elseif (Yii::$app->session->hasFlash('masterConsultantIs')) : ?>
-
-    <div class="alert alert-success">
-        <?= Yii::$app->formatter->asDate($wcs->date, 'dd/MM/yyyy') . ' - ' . Module::t('module', 'CURRENT_MASTER_CONSULTANT') .' - '. $wcs->responsible ?>
-    </div>
-
-<?php endif; ?>
+endif; ?>
 
 <h1><span class="glyphicon glyphicon-wrench" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
 

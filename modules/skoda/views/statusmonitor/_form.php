@@ -30,7 +30,7 @@ use kartik\datetime\DateTimePicker;
     <?= $form->errorSummary($model); ?>
 
 
-<div class="input-group">
+    <div class="input-group center-block" style="width: 60%;">
     
 
     <?= $form->field($model, 'regnumber')->widget(\yii\widgets\MaskedInput::className(), ['mask' => 'a999aa/99[9][ RUS]',]) ?>       

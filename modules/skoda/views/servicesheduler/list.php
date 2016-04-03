@@ -17,6 +17,8 @@
     <?= $this->render('_submenu', [
         'model' => $dataProvider,
     ]) ?>
+    
+    <?php // $this->render('_search', ['model' => $dataProvider]); ?>
 
 <br/>
 <br/>
@@ -30,6 +32,8 @@
             'id' => 'list-wrapper',
         ],
         'layout' => "{summary}\n{items}\n{pager}",
+        'summary' => false,
+        'pager' => false,
         'itemView' => '_listitem',
     ]); 
 ?>

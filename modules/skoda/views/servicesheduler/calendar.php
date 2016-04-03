@@ -19,6 +19,7 @@
     use yii\bootstrap\Modal;
     use yii\helpers\Json;
     use yii\bootstrap\Alert;
+    use yii\jui\Dialog;
 
     $this->title = Module::t('module', 'SERVICESHEDULER_INDEX');
     $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda']];
@@ -40,18 +41,30 @@
     </p>
 
 <?php
-    Modal::begin([
-        'id' => 'skoda_servicesheduler_modal',
-        'header' => '',
-        'headerOptions' => ['id' => 'modal-header'],
-        'footer' => '',
-        'footerOptions' => ['id' => 'modal-footer'],
-    ]);
+//    Modal::begin([
+//        'id' => 'skoda_servicesheduler_modal',
+//        'header' => '',
+//        'headerOptions' => ['id' => 'modal-header'],
+//        'footer' => '',
+//        'footerOptions' => ['id' => 'modal-footer'],
+//    ]);
+//    
+//    echo '<div id=modal-body>';
+//    echo '</div>';
+//     
+//    Modal::end();
+?>
     
-    echo '<div id=modal-body>';
-    echo '</div>';
-     
-    Modal::end();
+<?php 
+//    Dialog::begin([
+//            'clientOptions' => [
+//                'modal' => true,
+//            ],
+//        ]);
+//
+//    echo 'Dialog contents here...';
+//
+//    Dialog::end();
 ?>
 
 <script src='/js/jqfc/lib/jquery.min.js'></script>
@@ -94,15 +107,16 @@
             eventRender: function(event, element) {
                   $(element).tooltip({title: event.title});             
             },
-			dayClick: function(date, calEvent, jsEvent, view, resourceObj) {            
-                if (moment().diff(date,'days') > 0){                    
-                    var modal_dismiss = '<button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>';
-                    var d = document.getElementById("modal-body");
-                    d.className = " alert alert-info";
-                    $('#modal-header').html('Дата: ' + jsEvent.start.format("DD/MM/YYYY"));
-                    $('#modal-body').html('Выбранная дата меньше текущей! Не рекомендуется добавлять записи задним числом!');
-                    $('#modal-footer').html(modal_dismiss);
-                    $('#skoda_servicesheduler_modal').modal();
+            dayClick: function(date, calEvent, jsEvent, view, resourceObj) {            
+                if (moment().diff(date,'days') > 0){
+                    alert('Выбранная дата меньше текущей! Не рекомендуется добавлять записи задним числом!');
+//                    var modal_dismiss = '<button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>';
+//                    var d = document.getElementById("modal-body");
+//                    d.className = " alert alert-info";
+//                    $('#modal-header').html('Дата: ' + jsEvent.start.format("DD/MM/YYYY"));
+//                    $('#modal-body').html('Выбранная дата меньше текущей! Не рекомендуется добавлять записи задним числом!');
+//                    $('#modal-footer').html(modal_dismiss);
+//                    $('#skoda_servicesheduler_modal').modal();
                 } else{
                     var datesend = date.format();
                     window.location = 'create?date=' + datesend;
@@ -110,17 +124,23 @@
 			},
             eventClick: function(calEvent, jsEvent, view) {
                 if (calEvent.url) {
-                    var link_to_record = '<a id="eventUrl" target="_blank class="btn btn-success" role="button">К записи</a>';                    
-                    var modal_dismiss = '<button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>';
-                    var d = document.getElementById("modal-body");
-                    d.className = " alert alert-success";
-                    $('#modal-header').html('Дата: ' + calEvent.start.format("DD/MM/YYYY"));
-                    $('#modal-body').html('Мастер-консультант: ' + calEvent.title);
-                    // $('#modal-footer').html(link_to_record + modal_dismiss);
-                    $('#modal-footer').html(modal_dismiss);
-                    $('#skoda_servicesheduler_modal').modal();                    
+                    alert('Дата: ' + calEvent.start.format("DD/MM/YYYY") + '\n\t' + 'Мастер-консультант: ' + calEvent.title);
+                    $(this).css('border-color', 'red');
                     return false;
-                }             
+                }
+                $(this).css('border-color', 'red');
+//                if (calEvent.url) {
+//                    var link_to_record = '<a id="eventUrl" target="_blank class="btn btn-success" role="button">К записи</a>';                    
+//                    var modal_dismiss = '<button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>';
+//                    var d = document.getElementById("modal-body");
+//                    d.className = " alert alert-success";
+//                    $('#modal-header').html('Дата: ' + calEvent.start.format("DD/MM/YYYY"));
+//                    $('#modal-body').html('Мастер-консультант: ' + calEvent.title);
+//                    // $('#modal-footer').html(link_to_record + modal_dismiss);
+//                    $('#modal-footer').html(modal_dismiss);
+//                    $('#skoda_servicesheduler_modal').modal();                    
+//                    return false;
+//                }             
             },
     		eventColor: '#4ba82e',
 

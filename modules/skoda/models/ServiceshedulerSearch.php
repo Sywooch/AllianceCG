@@ -101,4 +101,5 @@ class ServiceshedulerSearch extends Servicesheduler
         $items = Yii::$app->db->createCommand("SELECT `id` AS id, `id` AS url, `date` AS start, `date` AS end, `responsible` AS title FROM `sk_servicesheduler`;")->queryAll();
         return Json::encode($items);
     }
+    
 }

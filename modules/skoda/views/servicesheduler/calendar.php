@@ -18,38 +18,16 @@
     $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda']];
     $this->params['breadcrumbs'][] = $this->title;
 ?>
-
-<?php if (Yii::$app->session->hasFlash('masterConsultantDoesNotExistToday')): ?>
-    
-<?= Alert::widget([
-        'options' => [
-            'class' => 'alert-danger'
-        ],
-        'body' => Yii::$app->formatter->asDate('now', 'dd/MM/yyyy') . ' - ' . Module::t('module', 'MASTER_CONSULTANT_DOES_NOT_EXIST_TODAY'),
-    ]);
-
-elseif (Yii::$app->session->hasFlash('masterConsultantIs')) : ?>
-    
-<?= Alert::widget([
-        'options' => [
-            'class' => 'alert-success'
-        ],
-        'body' => Yii::$app->formatter->asDate($wcs->date, 'dd/MM/yyyy') . ' - ' . Module::t('module', 'CURRENT_MASTER_CONSULTANT') .' - '. $wcs->responsible,
-    ]);
-
-endif; ?>
-
-<h1><span class="glyphicon glyphicon-wrench" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
-    
+   
     <?= $this->render('_submenu', [
         'model' => $model,
     ]) ?>
 
     <p style="text-align: right">
 
-        <?= Html::a(FA::icon('plus') . Module::t('module', 'STATUS_CREATE'), ['create'], ['class' => 'btn btn-success', 'id' => 'refreshButton']) ?>
+        <?= Html::a(FA::icon('plus') . Module::t('module', 'STATUS_CREATE'), ['create'], ['class' => 'btn btn-success btn-sm', 'id' => 'refreshButton']) ?>
 
-        <?= Html::a(FA::icon('refresh') . Module::t('module', 'STATUS_REFRESH'), [''], ['class' => 'btn btn-primary', 'id' => 'refreshButton']) ?>
+        <?= Html::a(FA::icon('refresh') . Module::t('module', 'STATUS_REFRESH'), [''], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
 
         <?php Html::a(FA::icon('trash') . Module::t('module', 'STATUS_DELETE'), ['#'], ['class' => 'btn btn-danger', 'id' => 'MultipleDelete']) ?>
 
@@ -145,3 +123,10 @@ endif; ?>
 </script>
 
 <div id='skoda_calendar'></div>
+
+<script>
+    $(document).ready(function(){
+        var worker_today = "<?php echo $model->workerevent()?>";
+        alert(worker_today);
+    });
+</script>

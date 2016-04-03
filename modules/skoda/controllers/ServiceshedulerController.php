@@ -61,23 +61,9 @@ class ServiceshedulerController extends Controller
     {
 
         $model = new Servicesheduler();
-        $today = Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
-        $wcs = Servicesheduler::find()
-            ->where(['date' => $today])
-            ->one();
-    
-        if(empty($wcs->responsible))                
-        {
-            Yii::$app->session->setFlash('masterConsultantDoesNotExistToday');
-        }
-        else
-        {
-            Yii::$app->session->setFlash('masterConsultantIs');
-        }
                 
         return $this->render('calendar', [
-            'model' => $model,
-            'wcs' => $wcs,                
+            'model' => $model,         
             ]);
     }
     

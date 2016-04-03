@@ -54,4 +54,23 @@ class Servicesheduler extends \yii\db\ActiveRecord
         ];
     }
 
+    public function workerevent() {
+        $today = Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
+        $wcs = Servicesheduler::find()
+            ->where(['date' => $today])
+            ->one();
+    
+        if(empty($wcs->responsible))                
+        {            
+            $worker_result = Yii::$app->formatter->asDate('now', 'dd/MM/yyyy') . ' - ' . Module::t('module', 'MASTER_CONSULTANT_DOES_NOT_EXIST_TODAY');
+        }
+        else
+        {
+            $worker_result = Yii::$app->formatter->asDate($wcs->date, 'dd/MM/yyyy') . ' - ' . Module::t('module', 'CURRENT_MASTER_CONSULTANT') .' - '. $wcs->responsible;
+        }   
+        
+        return $worker_result;
+        
+    }    
+
 }

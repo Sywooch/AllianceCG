@@ -43,6 +43,16 @@ class ServiceshedulerController extends Controller
             'model' => $model,
         ]);
     }
+    
+    public function actionList()
+    {
+        $model = new ServiceshedulerSearch();
+        $dataProvider = $model->search(Yii::$app->request->queryParams);
+        
+        return $this->render('list', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
 
     public function actionCalendar()
     {

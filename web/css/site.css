@@ -272,6 +272,24 @@ a.desc:after {
   content: " ";
 }
 
+.statusmonitor-list {
+    margin-top: 30px;
+}
+
+.img-thumbnail img{
+    height: 10;
+    width: 10;
+}
+
+.thumbnail{        
+    width: 10px;
+    height: 10px;
+    overflow: auto;
+}
+
+.thumbnail img{
+}
+
 /** {
   -webkit-box-sizing: initial;
   -moz-box-sizing: content-box;

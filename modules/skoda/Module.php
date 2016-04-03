@@ -27,7 +27,7 @@ class Module extends \yii\base\Module
                         'roles' => ['?', '@'],
                     ],
                     [
-                        'actions'=>['index', 'create', 'view', 'update', 'calendar', 'calendarsearch', 'workerloadgraph', 'statusmonitorgraph', 'multipledelete'],
+                        'actions'=>['index', 'create', 'view', 'update', 'calendar', 'calendarsearch', 'workerloadgraph', 'statusmonitorgraph', 'multipledelete', 'list'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],

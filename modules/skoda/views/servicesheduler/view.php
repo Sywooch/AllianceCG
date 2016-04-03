@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use app\modules\skoda\Module;
 use app\modules\skoda\models\Servicesheduler;
+use rmrevin\yii\fontawesome\FA;
 
 
 /* @var $this yii\web\View */
@@ -19,10 +20,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p style="text-align: right">
-        <?= Html::a('<span class="glyphicon glyphicon-tasks"></span>  ' . Module::t('module', 'SERVICESHEDULER_INDEX'), ['calendar'], ['class' => 'btn btn-warning', 'id' => 'refreshButton']) ?>
-        <?= Html::a('<span class="glyphicon glyphicon-edit"></span>  ' . Module::t('module', 'STATUS_UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('<span class="glyphicon glyphicon-remove"></span>  ' . Module::t('module', 'STATUS_DELETE'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
+        <?= Html::a(FA::icon('tasks') . Module::t('module', 'SERVICESHEDULER_INDEX'), ['calendar'], ['class' => 'btn btn-warning btn-sm', 'id' => 'refreshButton']) ?>
+        <?= Html::a(FA::icon('edit') . Module::t('module', 'STATUS_UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(FA::icon('remove') . Module::t('module', 'STATUS_DELETE'), ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger btn-sm',
             'data' => [
                 'confirm' => Module::t('module', 'STATUS_CONFIRM_DELETE'),
                 'method' => 'post',

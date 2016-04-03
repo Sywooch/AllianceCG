@@ -54,7 +54,6 @@ class ServiceshedulerSearch extends Servicesheduler
     {
         $query = Servicesheduler::find();
 
-
         $sort = new Sort([
             'defaultOrder' => ['date' => SORT_DESC],
             'attributes' => [
@@ -68,7 +67,7 @@ class ServiceshedulerSearch extends Servicesheduler
             'query' => $query,
             'sort' => $sort,         
             'pagination' => [
-                'pageSize' => 10,
+//                'pageSize' => 10,
             ],
         ]);
 
@@ -79,13 +78,6 @@ class ServiceshedulerSearch extends Servicesheduler
             // $query->where('0=1');
             return $dataProvider;
         }
-
-        // $query->andFilterWhere([
-        //     'id' => $this->id,
-        //     'date' => $this->date,
-        //     'responsible' => $this->responsible,
-        // ]);
-
         $query
             ->andFilterWhere(['like', 'responsible', $this->responsible])
             ->andFilterWhere(['>=', 'date', $this->date_from])

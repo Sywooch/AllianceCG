@@ -33,27 +33,14 @@ class ServiceshedulerController extends Controller
      */
     public function actionIndex()
     {
+        $model = new Servicesheduler();
         $searchModel = new ServiceshedulerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        $today = Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
-        $wcs = Servicesheduler::find()
-            ->where(['date' => $today])
-            ->one();
-    
-        if(empty($wcs->responsible))                
-        {
-            Yii::$app->session->setFlash('masterConsultantDoesNotExistToday');
-        }
-        else
-        {
-            Yii::$app->session->setFlash('masterConsultantIs');
-        }        
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'wcs' => $wcs,
+            'model' => $model,
         ]);
     }
 

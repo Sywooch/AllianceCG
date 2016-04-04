@@ -101,6 +101,16 @@ endif; ?>
             'id' => 'statusmonitor-users-grid',
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
+            'rowOptions' => function($model){
+                $curdate = Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
+                $begindate = Yii::$app->formatter->asDate($model->from, 'yyyy-MM-dd');
+                if($begindate >= $curdate){
+                    return ['class' => 'success'];
+                }
+                else {
+                    return ['class' => 'danger'];
+                }
+            },
             // 'layout'=>"{pager}\n{summary}\n{items}\n{pager}",
             'columns' => [
                 [
@@ -198,3 +208,11 @@ endif; ?>
     
     <?php // Pjax::end(); ?>
     </div>
+    
+    
+<script>
+    $(document).ready(function(){
+        var worker_today = "<?php echo $model->workerevent()?>";
+        top.alert(worker_today);
+    });
+</script>

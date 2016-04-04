@@ -87,9 +87,9 @@ class StatusmonitorSearch extends Statusmonitor
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => $sort,           
-            'pagination' => [
-                'pageSize' => 10,
-            ],
+//            'pagination' => [
+//                'pageSize' => 10,
+//            ],
         ]);
 
         $this->load($params);

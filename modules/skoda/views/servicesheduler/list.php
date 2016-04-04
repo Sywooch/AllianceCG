@@ -21,7 +21,7 @@
     <?php // $this->render('_search', ['model' => $dataProvider]); ?>
 
 <br/>
-<?= Yii::$app->user->identity->userfullname; ?>
+<?php Yii::$app->user->identity->userfullname; ?>
 <br/>
 
 <?= 

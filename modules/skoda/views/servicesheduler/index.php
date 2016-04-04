@@ -68,6 +68,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'id' => 'servicesheduler-grid',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'rowOptions' => function($model){
+            $curdate = Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
+            if($model->date >= $curdate){
+                return ['class' => 'success'];
+            }
+            else {
+                return ['class' => 'danger'];
+            }
+        },
         'columns' => [
             [
                 'class' => 'yii\grid\SerialColumn',

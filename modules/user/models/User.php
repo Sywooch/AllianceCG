@@ -162,6 +162,14 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }    
 
+    public function getUserfullname()
+    {
+        $profile = User::find()->where(['id'=>$this->id])->one();
+        if ($profile !==null)
+            return $profile->full_name;
+        return false;
+    }
+    
     public function getStatusName()
     {
         return ArrayHelper::getValue(self::getStatusesArray(), $this->status);

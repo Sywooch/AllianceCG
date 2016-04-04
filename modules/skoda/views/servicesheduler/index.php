@@ -68,13 +68,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'id' => 'servicesheduler-grid',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'rowOptions' => function($model){
+        'showFooter' => true,
+        'rowOptions' => function($model, $key, $index, $grid){
             $curdate = Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
             if($model->date >= $curdate){
-                return ['class' => 'success'];
+                return [
+                    'class' => 'success',
+//                    'id' => $model['date'] . ' - ' . $model['responsible'],
+//                    'onclick' => 'alert(this.id);', 
+                ];
             }
             else {
-                return ['class' => 'danger'];
+                return [
+                    'class' => 'danger',
+//                    'id' => $model['date'] . ' - ' . $model['responsible'],
+//                    'onclick' => 'alert(this.id);',                    
+                ];
             }
         },
         'columns' => [
@@ -108,6 +117,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions'=>['style'=>'width: 80px;'],
             ],
         ],
+//        'rowOptions' => function ($model, $key, $index, $grid) {
+//            return [
+//                    'id' => $model['date'] . ' - ' . $model['responsible'],
+//                    'onclick' => 'alert(this.id);',
+//                ];
+//        },
 //Onclick alert        
 //        'rowOptions' => function ($model, $key, $index, $grid) {
 //             return ['id' => $model['id'], 'onclick' => 'alert(this.id);'];

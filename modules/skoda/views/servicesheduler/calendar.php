@@ -153,6 +153,6 @@
 <script>
     $(document).ready(function(){
         var worker_today = "<?php echo $model->workerevent()?>";
-        alert(worker_today);
+        top.alert(worker_today);
     });
 </script>

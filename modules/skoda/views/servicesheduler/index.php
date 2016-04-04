@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     
 <?= Yii::$app->session->getFlash('error'); ?>    
-
+    
     <?= GridView::widget([
         'id' => 'servicesheduler-grid',
         'dataProvider' => $dataProvider,
@@ -92,13 +92,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => LinkColumn::className(),
                 'attribute' => 'responsible',
                 'filter' => ArrayHelper::map(Servicesheduler::find()->asArray()->all(), 'responsible', 'responsible'),
-                'format' => 'raw',  
+                'format' => 'raw',
             ],
             [
                 'class' => ActionColumn::className(),
                 'contentOptions'=>['style'=>'width: 80px;'],
             ],
         ],
+//Onclick alert        
+//        'rowOptions' => function ($model, $key, $index, $grid) {
+//             return ['id' => $model['id'], 'onclick' => 'alert(this.id);'];
+//        },
+        
     ]); ?>
 
 <script>

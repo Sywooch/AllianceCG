@@ -17,18 +17,16 @@ use rmrevin\yii\fontawesome\FA;
 
     <?php $form = ActiveForm::begin(
         [
-            // 'action' => '/action',
-//            'method'=>'get',
             'options' => [
                 'id' => 'Skoda_calendar',
              ]
         ]); 
     ?>
 
-    <h1><?= $model->isNewRecord ? FA::icon('bed') .' '. Module::t('module', 'STATUS_CREATE') : FA::icon('bed') .' '. Module::t('module', 'STATUS_UPDATE_RN') . ' ' . $model->date; ?></h1>
+    <h1><?php $model->isNewRecord ? FA::icon('bed') .' '. Module::t('module', 'STATUS_CREATE') : FA::icon('bed') .' '. Module::t('module', 'STATUS_UPDATE_RN') . ' ' . $model->date; ?></h1>
 
     <div class="form-group" style="text-align: right">
-        <?= Html::submitButton($model->isNewRecord ? FA::icon('save') . Module::t('module', 'STATUS_CREATE') : '<span class="glyphicon glyphicon-pencil"></span>  ' . Module::t('module', 'STATUS_UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
+        <?= Html::submitButton($model->isNewRecord ? FA::icon('save') . Module::t('module', 'STATUS_CREATE') : FA::icon('edit') . Module::t('module', 'STATUS_UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
         <?= Html::a(FA::icon('remove') . Module::t('module', 'BUTTON_CANCEL'), ['/skoda/servicesheduler/calendar'], ['class' => 'btn btn-danger btn-sm']) ?>
     </div>
 
@@ -61,4 +59,3 @@ use rmrevin\yii\fontawesome\FA;
     <?php ActiveForm::end(); ?>
     
 </div>
-<!-- </div> -->

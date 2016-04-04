@@ -16,6 +16,7 @@ use yii\bootstrap\Progress;
 use yii\helpers\ArrayHelper;
 use yii\jui\DatePicker;
 use yii\jui\AutoComplete;
+use rmrevin\yii\fontawesome\FA;
 use yii\bootstrap\Modal;
 use yii\bootstrap\Alert;
 
@@ -71,7 +72,10 @@ elseif (Yii::$app->session->hasFlash('masterConsultantIs')) : ?>
 
 endif; ?>
 
-    <h1><span class="glyphicon glyphicon-wrench" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
+    <!--<h1>-->
+        <!--<span class="glyphicon glyphicon-wrench" style='padding-right:10px;'></span>-->
+            <?php Html::encode($this->title) ?>
+    <!--</h1>-->
     <?php // $this->render('_search', ['model' => $searchModel]); ?>
     
     <div class="user-index center-block">
@@ -79,39 +83,18 @@ endif; ?>
 
 
     <p style="text-align: right">
-        <?= Html::a('<span class="glyphicon glyphicon-plus"></span>  ' . Module::t('module', 'STATUS_CREATE'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(FA::icon('plus') . Module::t('module', 'STATUS_CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
         
-        <?= Html::a('<span class="glyphicon glyphicon-refresh"></span>  ' . Module::t('module', 'STATUS_REFRESH'), ['index'], ['class' => 'btn btn-primary', 'id' => 'refreshButton']) ?>
+        <?= Html::a(FA::icon('refresh') . Module::t('module', 'STATUS_REFRESH'), ['index'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
 
-        <?= Html::a('<span class="glyphicon glyphicon-trash"></span>  ' . Module::t('module', 'STATUS_DELETE'), ['#'], ['class' => 'btn btn-danger', 'id' => 'MultipleDelete']) ?>  
+        <?= Html::a(FA::icon('trash') . Module::t('module', 'STATUS_DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']) ?>  
 
-        <?= Html::a('<span class="glyphicon glyphicon-screenshot"></span>  ' . Module::t('module', 'STATUS_SHOW_MONITOR'), ['monitor'], ['class' => 'btn btn-info']) ?>
+        <?= Html::a(FA::icon('bar-chart') . Module::t('module', 'STATUS_SHOW_MONITOR'), ['monitor'], ['class' => 'btn btn-info btn-sm']) ?>
 
     </p>
 
     <?= Yii::$app->session->getFlash('error'); ?>
     
-<?php
-    Modal::begin([
-        'id' => 'skoda_statusmonitor_modal',
-        'header' => '',
-        'headerOptions' => ['id' => 'modal-header'],
-        'footer' => '',
-        'footerOptions' => ['id' => 'modal-footer'],
-//        'toggleButton' => [
-//            'tag' => 'button',
-//            'class' => 'btn btn-lg btn-block btn-info',
-//            'label' => 'Press!',
-//        ]
-    ]);
-    
-    echo '<div id=modal-body>';
-//    echo id;
-    echo '</div>';
-     
-    Modal::end();
-?>    
-
     <?php // Pjax::begin(); ?>    
     <?= 
         GridView::widget([
@@ -130,7 +113,7 @@ endif; ?>
                     'contentOptions'=>['style'=>'width: 20px;']
                 ],    
                 [
-//                    'class' => LinkColumn::className(),
+                    'class' => LinkColumn::className(),
                     'attribute' => 'regnumber',
                     'format' => 'raw',
                     'filter' => AutoComplete::widget([   
@@ -143,17 +126,6 @@ endif; ?>
                                     'class'=>'form-control'
                                 ]
                             ]),
-                    'value' => function ($data) {
-//                        return Html::a(Html::encode($data->regnumber), Url::to(['view', 'id' => $data->id]));
-                        return Html::button(Html::encode($data->regnumber), [
-                                'data' => [
-                                    'toggle' => 'modal',
-                                    'target' => '#skoda_statusmonitor_modal',
-                                    'id' => $data->id,
-                                ],
-                                'class' => 'btn btn-link',
-                        ]);
-                    },
                      'contentOptions'=>['style'=>'width: 130px;'],
                 ],
                 [

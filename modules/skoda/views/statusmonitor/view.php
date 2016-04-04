@@ -8,6 +8,7 @@ use app\components\grid\SetColumn;
 use app\modules\admin\models\User;
 use yii\bootstrap\Progress;
 use app\modules\skoda\models\Servicesheduler;
+use rmrevin\yii\fontawesome\FA;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\skoda\models\Statusmonitor */
@@ -19,13 +20,15 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="col-lg-12">
 
-    <h1><span class="glyphicon glyphicon-comment" style='padding-right:10px;'></span><?= Module::t('module', 'STATUS_VIEW') . ' ' . Html::encode($this->title) ?></h1>
+    <!--<h1><span class="glyphicon glyphicon-comment" style='padding-right:10px;'></span>-->
+        <?php Module::t('module', 'STATUS_VIEW') . ' ' . Html::encode($this->title) ?>
+    <!--</h1>-->
 
     <p style="text-align: right">
-        <?= Html::a('<span class="glyphicon glyphicon-tasks"></span>  ' . Module::t('module', 'STATUS_TITLE'), ['index'], ['class' => 'btn btn-warning', 'id' => 'refreshButton']) ?>
-        <?= Html::a('<span class="glyphicon glyphicon-edit"></span>  ' . Module::t('module', 'STATUS_UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('<span class="glyphicon glyphicon-remove"></span>  ' . Module::t('module', 'STATUS_DELETE'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
+        <?= Html::a(FA::icon('tasks') . Module::t('module', 'STATUS_TITLE'), ['index'], ['class' => 'btn btn-warning btn-sm', 'id' => 'refreshButton']) ?>
+        <?= Html::a(FA::icon('edit') . Module::t('module', 'STATUS_UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(FA::icon('remove') . Module::t('module', 'STATUS_DELETE'), ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger btn-sm',
             'data' => [
                 'confirm' => Module::t('module', 'STATUS_CONFIRM_DELETE'),
                 'method' => 'post',
@@ -33,20 +36,10 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-<?php
-    // $to_date = Yii::$app->formatter->asDate($model->to, 'yyyy-MM-dd');
-    // $wcs = Servicesheduler::find()
-    //     ->where(['date' => $to_date])
-    //     ->one();
-
-    // $exc = new \yii\web\NotFoundHttpException('User not found');
-    // $request = !empty($wcs->responsible) ? 'Yes' : $exc;
-    // echo $request;
-
-?>
     <?= DetailView::widget([
         'model' => $model,
-        'attributes' => [
+        'attributes' => [            
+            'regnumber',
             'from',
             'to',
             // 'responsible',

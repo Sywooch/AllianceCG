@@ -10,14 +10,18 @@ use rmrevin\yii\fontawesome\FA;
 /* @var $this yii\web\View */
 /* @var $model app\modules\skoda\models\Servicesheduler */
 
-$this->title = $model->date;
+
+$formatter = new \yii\i18n\Formatter;
+$formatter->dateFormat = 'php:d/m/Y';
+$this->title = $formatter->asDate($model->date);
+
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda']];
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'SERVICESHEDULER_INDEX'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="servicesheduler-view col-lg-12">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?php Html::encode($this->title) ?></h1>
 
     <p style="text-align: right">
         <?= Html::a(FA::icon('tasks') . Module::t('module', 'SERVICESHEDULER_INDEX'), ['calendar'], ['class' => 'btn btn-warning btn-sm', 'id' => 'refreshButton']) ?>
@@ -35,7 +39,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             // 'id',
-            'date',
+//            'date',
+            [
+                'attribute' => 'date',
+                'format' => ['date', 'php:d/m/Y'],
+            ],
             'responsible',
         ],
     ]) ?>

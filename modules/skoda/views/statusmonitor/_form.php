@@ -22,12 +22,12 @@ use rmrevin\yii\fontawesome\FA;
         
     <?php $form = ActiveForm::begin(); ?>
 
-    <h1><?= $model->isNewRecord ? FA::icon('car') . Module::t('module', 'STATUS_CREATE_RN') : FA::icon('car') . Module::t('module', 'STATUS_UPDATE_RN') . ' ' . $model->regnumber; ?></h1>
+    <h1><?php $model->isNewRecord ? FA::icon('car') . Module::t('module', 'STATUS_CREATE_RN') : FA::icon('car') . Module::t('module', 'STATUS_UPDATE_RN') . ' ' . $model->regnumber; ?></h1>
 
 
     <div class="form-group" style="text-align: right">
-        <?= Html::submitButton($model->isNewRecord ? FA::icon('floppy-o') . Module::t('module', 'STATUS_CREATE') : '<span class="glyphicon glyphicon-pencil"></span>  ' . Module::t('module', 'STATUS_UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-        <?= Html::a(FA::icon('undo') . Module::t('module', 'BUTTON_CANCEL'), ['/skoda/statusmonitor'], ['class' => 'btn btn-danger']) ?>
+        <?= Html::submitButton($model->isNewRecord ? FA::icon('floppy-o') . Module::t('module', 'STATUS_CREATE') : FA::icon('edit') . Module::t('module', 'STATUS_UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(FA::icon('undo') . Module::t('module', 'BUTTON_CANCEL'), ['/skoda/statusmonitor'], ['class' => 'btn btn-danger btn-sm']) ?>
     </div>
 
     <?= $form->errorSummary($model); ?>

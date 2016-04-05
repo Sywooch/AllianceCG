@@ -2,6 +2,8 @@
 
     use yii\widgets\ListView;
     use app\modules\skoda\Module;
+    use yii\helpers\Html;
+    use rmrevin\yii\fontawesome\FA;
 
 /* 
  * To change this license header, choose License Headers in Project Properties.
@@ -17,6 +19,14 @@
     <?= $this->render('_submenu', [
         'model' => $dataProvider,
     ]) ?>
+
+    <p style="text-align: right">
+
+        <?= Html::a(FA::icon('plus') . Module::t('module', 'STATUS_CREATE'), ['create'], ['class' => 'btn btn-success btn-sm', 'id' => 'refreshButton']) ?>
+
+        <?= Html::a(FA::icon('refresh') . Module::t('module', 'STATUS_REFRESH'), [''], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
+
+    </p>
     
     <?php // $this->render('_search', ['model' => $dataProvider]); ?>
 
@@ -28,7 +38,7 @@
     ListView::widget([
         'dataProvider' => $dataProvider,
         'options' => [
-            'tag' => 'div',
+            'tag' => 'ul',
             'class' => 'list-wrapper',
             'id' => 'list-wrapper',
         ],

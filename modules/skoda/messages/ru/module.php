@@ -24,6 +24,7 @@
 		'STATUSMONITOR_TITLE' => 'Монитор готовности',
 		'SERVICESHEDULER_CALENDAR' => 'Календарь',
 		'SERVICESHEDULER_TABLE' => 'Таблица',
+                'SERVICESHEDULER_LIST' => 'Список',
 		'WORKSHEDULER_DATE' => 'Дата',
 		'WORKSHEDULER_RESPONSIBLE' => 'Сотрудник',
 		'SERVICESHEDULER_INDEX' => 'График смен',

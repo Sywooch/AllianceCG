@@ -22,5 +22,9 @@
                 'label' => FA::icon('table') . Module::t('module', 'SERVICESHEDULER_TABLE'),
                 'url' => '/skoda/servicesheduler',
             ],
+            [
+                'label' => FA::icon('list') . Module::t('module', 'SERVICESHEDULER_LIST'),
+                'url' => '/skoda/servicesheduler/list',
+            ],
         ]),
     ]);

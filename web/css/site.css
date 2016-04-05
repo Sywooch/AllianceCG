@@ -172,6 +172,10 @@ a.desc:after {
     float: left;
 }
 
+.servicesheduler-list {
+    margin: 0 0 10px 0;
+    padding: 10px 0 10px 10%;
+}
 
 .statusmonitor-index {
     width: 75%;

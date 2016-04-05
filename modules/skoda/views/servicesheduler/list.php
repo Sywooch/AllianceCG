@@ -28,14 +28,13 @@
 
     </p>
     
-    <?php // $this->render('_search', ['model' => $dataProvider]); ?>
+    <?= $this->render('_search', ['model' => $model]); ?>
 
 <br/>
 <?php Yii::$app->user->identity->userfullname; ?>
 <br/>
 
-<?= 
-    ListView::widget([
+<?= ListView::widget([
         'dataProvider' => $dataProvider,
         'options' => [
             'tag' => 'ul',
@@ -48,3 +47,11 @@
         'itemView' => '_listitem',
     ]); 
 ?>
+
+
+<script>
+    $(document).ready(function(){
+        var worker_today = "<?php echo $model->workerevent()?>";
+        top.alert(worker_today);
+    });
+</script>

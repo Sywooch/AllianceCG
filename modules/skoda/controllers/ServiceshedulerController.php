@@ -51,6 +51,7 @@ class ServiceshedulerController extends Controller
         
         return $this->render('list', [
             'dataProvider' => $dataProvider,
+            'model' => $model,
         ]);
     }
 

@@ -11,21 +11,23 @@ use yii\helpers\ArrayHelper;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="servicesheduler-search">
+<!--<div class="servicesheduler-search">-->
 
     <?php $form = ActiveForm::begin([
-        'action' => ['list'],
+//        'action' => ['list'],
         'method' => 'get',
         'options' => [
-            'class' => 'servicesheduler-search-form'
+//            'class' => 'servicesheduler-search-form'
         ],        
     ]); ?>
 
-<h1><span class="glyphicon glyphicon-search" style='padding-right:10px;'></span> <?= Module::t('module', 'SERVICESHEDULER_SEARCH_TITLE') ?> </h1>       
+<!--<h1><span class="glyphicon glyphicon-search" style='padding-right:10px;'></span>-->
+    <?php Module::t('module', 'SERVICESHEDULER_SEARCH_TITLE') ?>
+<!--</h1>-->
 
 
     <?php 
-        echo $form->field($dataProvider, 'responsible') 
+        echo $form->field($model, 'responsible') 
     ?>
 
     <div class="form-group">
@@ -35,5 +37,5 @@ use yii\helpers\ArrayHelper;
 
     <?php ActiveForm::end(); ?>
 
-</div>
+<!--</div>-->
 

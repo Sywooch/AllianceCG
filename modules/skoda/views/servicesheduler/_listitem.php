@@ -16,19 +16,18 @@
     $model->date = Yii::$app->formatter->asDate($model->date , 'dd/MM/yyyy');
 ?>
 
-<?php
-echo DetailView::widget([
-    'model' => $model,
-    'attributes' => [
-        'responsible',
-        'date',
-    ],
-]);
+<?php DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            'responsible',
+            'date',
+        ],
+    ]);
 ?>
 
-<!--    <div class="col-lg-12">
-        <div class="servicesheduler-list">-->
-            <?php '<h4>' . FA::icon('user') . ' ' . $model->getAttributeLabel('responsible') . ' ' . HtmlPurifier::process($model->responsible) .'</h4>' ?>
-            <?php '<h5>' . FA::icon('calendar') . ' ' . HtmlPurifier::process($model->date) .'</h5>' ?>
-<!--        </div>
-    </div>-->
+    <div class="col-lg-12">
+        <div class="servicesheduler-list alert-success">
+            <?= '<h4>' . FA::icon('user') . ' ' . $model->getAttributeLabel('responsible') . ': ' . HtmlPurifier::process($model->responsible) .'</h4>' ?>
+            <?= '<h5>' . FA::icon('calendar') . ' ' . $model->getAttributeLabel('date') . ': ' . HtmlPurifier::process($model->date) .'</h5>' ?>
+        </div>
+    </div>

@@ -11,7 +11,9 @@ $this->title = Module::t('module', 'ADMIN');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="admin-default-index center-block">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <!--<h1>-->
+        <?php //. Html::encode($this->title) ?>
+    <!--</h1>-->
  
     <p style="text-align: right">
 

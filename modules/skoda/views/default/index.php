@@ -11,7 +11,9 @@ $this->params['breadcrumbs'][] = $this->title;
 // $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda']];
 ?>
 <div class="admin-default-index center-block">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <!--<h1>-->
+        <?php // Html::encode($this->title) ?>
+    <!--</h1>-->
     
     <p style="text-align: right">
         <?php 

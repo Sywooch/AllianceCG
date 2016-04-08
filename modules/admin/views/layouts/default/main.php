@@ -28,9 +28,6 @@ AppAsset::register($this);
 <?= $this->render('@app/modules/admin/views/layouts/default/_header') ?>
 
     <div class="container">
-        <!-- <div class="col-sm-2"> -->
-        <?php $this->render('@app/modules/admin/views/layouts/default/_sidebar') ?>
-        <!-- </div> -->
         <div class="col-sm-12">        
             <?= $this->render('@app/modules/admin/views/layouts/default/_breadcrumbs') ?>
             <?= Alert::widget() ?>

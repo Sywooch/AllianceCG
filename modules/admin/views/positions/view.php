@@ -20,9 +20,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <!--</h1>-->
 
     <p style="text-align: right;">
-        <?= Html::a(FA::icon('list') . Module::t('module', 'ADMIN_POSITIONS'), ['/admin/positions'], ['class' => 'btn btn-warning btn-sm']) ?>
-        <?= Html::a(FA::icon('edit') . Module::t('module', 'ADMIN_POSITIONS_UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
-        <?= Html::a(FA::icon('remove') . Module::t('module', 'ADMIN_POSITIONS_DELETE'), ['delete', 'id' => $model->id], [
+        <?= Html::a(FA::icon('list') . ' ' . Module::t('module', 'ADMIN_POSITIONS'), ['/admin/positions'], ['class' => 'btn btn-warning btn-sm']) ?>
+        <?= Html::a(FA::icon('edit') . ' ' . Module::t('module', 'ADMIN_POSITIONS_UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'ADMIN_POSITIONS_DELETE'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger btn-sm',
             'data' => [
                 'confirm' => Module::t('module', 'ADMIN_POSITIONS_REALY_DELETE?'),

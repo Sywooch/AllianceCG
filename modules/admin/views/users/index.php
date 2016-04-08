@@ -21,10 +21,14 @@ use app\modules\admin\Module;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Module::t('module', 'ADMIN_USERS');
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN'), 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-    <h1><span class="glyphicon glyphicon-user" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
+    <!--<h1>-->
+        <!--<span class="glyphicon glyphicon-user" style='padding-right:10px;'></span>-->
+            <?php // Html::encode($this->title) ?>
+    <!--</h1>-->
     <?php // $this->render('_search', ['model' => $searchModel]); ?>
 
     <!-- <div class="user-index col-lg-offset-5 col-centered"> -->
@@ -33,9 +37,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php //Pjax::begin(); ?>
 
     <p style="text-align: right">
-        <?= Html::a(FA::icon('plus') . Module::t('module', 'ADMIN_USERS_CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+        <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'ADMIN_USERS_CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
         
-        <?= Html::a(FA::icon('refresh') . Module::t('module', 'ADMIN_USERS_REFRESH'), ['index'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
+        <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'ADMIN_USERS_REFRESH'), ['index'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
     </p>
 
     <?= GridView::widget([

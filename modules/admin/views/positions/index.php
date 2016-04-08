@@ -15,7 +15,7 @@ use rmrevin\yii\fontawesome\FA;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Module::t('module', 'ADMIN_POSITIONS');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN'), 'url' => ['/admin']];
+$this->params['breadcrumbs'][] = ['label' => FA::icon('cog') . Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->registerJs(' 
@@ -51,11 +51,11 @@ $this->registerJs('
     <div class="positions-index center-block">
 
     <p style="text-align: right">
-        <?= Html::a(FA::icon('plus') . Module::t('module', 'ADMIN_CREATE_POSITIONS'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+        <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'ADMIN_CREATE_POSITIONS'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
         
-        <?= Html::a(FA::icon('refresh') . Module::t('module', 'ADMIN_USERS_REFRESH'), ['index'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
+        <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'ADMIN_USERS_REFRESH'), ['index'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
 
-        <?= Html::a(FA::icon('remove') . Module::t('module', 'ADMIN_USERS_DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']) ?>         
+        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'ADMIN_USERS_DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']) ?>         
     </p>
     <?= GridView::widget([
         'id' => 'admin-positions-grid',

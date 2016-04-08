@@ -46,7 +46,7 @@ $this->registerJs('
     });', \yii\web\View::POS_READY);
 
 $this->title = Module::t('module', 'SERVICESHEDULER_INDEX');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda']];
+$this->params['breadcrumbs'][] = ['label' => FA::icon('cog') . Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

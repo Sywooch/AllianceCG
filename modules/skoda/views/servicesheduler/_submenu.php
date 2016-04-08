@@ -15,15 +15,15 @@
         'encodeLabels' => false,
         'items' => array_filter([
             [
-                'label' => FA::icon('calendar') . Module::t('module', 'SERVICESHEDULER_CALENDAR'),
+                'label' => FA::icon('calendar') . ' ' . Module::t('module', 'SERVICESHEDULER_CALENDAR'),
                 'url' => '/skoda/servicesheduler/calendar',
             ],
             [
-                'label' => FA::icon('table') . Module::t('module', 'SERVICESHEDULER_TABLE'),
+                'label' => FA::icon('table') . ' ' . Module::t('module', 'SERVICESHEDULER_TABLE'),
                 'url' => '/skoda/servicesheduler',
             ],
             [
-                'label' => FA::icon('list') . Module::t('module', 'SERVICESHEDULER_LIST'),
+                'label' => FA::icon('list') . ' ' . Module::t('module', 'SERVICESHEDULER_LIST'),
                 'url' => '/skoda/servicesheduler/list',
             ],
         ]),

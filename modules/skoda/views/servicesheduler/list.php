@@ -22,29 +22,34 @@
 
     <p style="text-align: right">
 
-        <?= Html::a(FA::icon('plus') . Module::t('module', 'STATUS_CREATE'), ['create'], ['class' => 'btn btn-success btn-sm', 'id' => 'refreshButton']) ?>
+        <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'STATUS_CREATE'), ['create'], ['class' => 'btn btn-success btn-sm', 'id' => 'refreshButton']) ?>
 
-        <?= Html::a(FA::icon('refresh') . Module::t('module', 'STATUS_REFRESH'), [''], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
+        <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'STATUS_REFRESH'), [''], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
 
     </p>
     
     <?= $this->render('_search', ['model' => $model]); ?>
 
 <br/>
-<?php Yii::$app->user->identity->userfullname; ?>
+    <?php Yii::$app->user->identity->userfullname; ?>
 <br/>
 
 <?= ListView::widget([
         'dataProvider' => $dataProvider,
         'options' => [
             'tag' => 'ul',
-            'class' => 'list-wrapper',
+            'class' => 'list-wrapper col-lg-12',
             'id' => 'list-wrapper',
         ],
         'layout' => "{summary}\n{items}\n{pager}",
         'summary' => false,
         'pager' => false,
         'itemView' => '_listitem',
+        'itemOptions' => [
+            'tag' => 'ul',
+//            'class' => $model->date < Yii::$app->formatter->asDate('now', 'yyyy-MM-dd') ? $successclass : $dangerclass
+            'class' => $model->getListviewcssclass(),
+        ],
     ]); 
 ?>
 

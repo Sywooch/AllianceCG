@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\modules\skoda\Module;
+use rmrevin\yii\fontawesome\FA;
 use app\modules\admin\models\User;
 use yii\helpers\ArrayHelper;
 
@@ -14,26 +15,13 @@ use yii\helpers\ArrayHelper;
 <!--<div class="servicesheduler-search">-->
 
     <?php $form = ActiveForm::begin([
-//        'action' => ['list'],
         'method' => 'get',
         'options' => [
 //            'class' => 'servicesheduler-search-form'
         ],        
     ]); ?>
 
-<!--<h1><span class="glyphicon glyphicon-search" style='padding-right:10px;'></span>-->
-    <?php Module::t('module', 'SERVICESHEDULER_SEARCH_TITLE') ?>
-<!--</h1>-->
-
-
-    <?php 
-        echo $form->field($model, 'responsible') 
-    ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('<span class="glyphicon glyphicon-search"></span>  ' . Module::t('module', 'SERVICESHEDULER_SEARCH'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('<span class="glyphicon glyphicon-filter"></span>  ' . Module::t('module', 'SERVICESHEDULER_RESET'), ['index'], ['class' => 'btn btn-primary', 'id' => 'refreshButton']) ?>
-    </div>
+    <?= $form->field($model, 'responsible', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('th-large') . ' </span>{input}<span class="input-group-addon"> ' . Html::submitButton(FA::icon('search') . ' ' . Module::t('module', 'SERVICESHEDULER_SEARCH'), ['class' => 'btn-link']) . ' </span></div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'responsible' )])    ?>
 
     <?php ActiveForm::end(); ?>
 

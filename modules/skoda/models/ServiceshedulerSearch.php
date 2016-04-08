@@ -89,6 +89,20 @@ class ServiceshedulerSearch extends Servicesheduler
         return $dataProvider;
     }
     
+    public function getListviewcssclass(){
+        $datenow = Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
+        $successclass = 'alert-success';
+        $dangerclass = 'alert-danger';
+        if($this->date >= $datenow){
+            $cssclass = $successclass;
+        }
+        else
+        {
+            $cssclass = $dangerclass;
+        }
+        return $cssclass;
+    }
+    
     public function calendarsearch(){
         $items = Yii::$app->db->createCommand("SELECT `id` AS id, `id` AS url, `date` AS start, `date` AS end, `responsible` AS title FROM `sk_servicesheduler`;")->queryAll();
         return Json::encode($items);

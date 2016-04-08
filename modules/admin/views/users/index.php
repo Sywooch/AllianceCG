@@ -11,6 +11,7 @@ use app\components\grid\ActionColumn;
 use app\components\grid\SetColumn;
 use app\components\grid\LinkColumn;
 use yii\helpers\Url;
+use rmrevin\yii\fontawesome\FA;
 use yii\widgets\Pjax;
 use yii\helpers\ArrayHelper;
 use app\modules\admin\Module;
@@ -32,9 +33,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php //Pjax::begin(); ?>
 
     <p style="text-align: right">
-        <?= Html::a('<span class="glyphicon glyphicon-plus"></span>  ' . Module::t('module', 'ADMIN_USERS_CREATE'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(FA::icon('plus') . Module::t('module', 'ADMIN_USERS_CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
         
-        <?= Html::a('<span class="glyphicon glyphicon-refresh"></span>  ' . Module::t('module', 'ADMIN_USERS_REFRESH'), ['index'], ['class' => 'btn btn-primary', 'id' => 'refreshButton']) ?>
+        <?= Html::a(FA::icon('refresh') . Module::t('module', 'ADMIN_USERS_REFRESH'), ['index'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
     </p>
 
     <?= GridView::widget([

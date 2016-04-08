@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use app\modules\admin\models\Positions;
 use app\modules\admin\Module;
+use rmrevin\yii\fontawesome\FA;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\user\models\User */
@@ -18,10 +19,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::img($model->getImageUrl(),['height' => '80', 'class'=>'img-rounded']) . ' &nbsp; ' . Html::encode($model->getAllname()) ?></h1>
     
     <p style="text-align: right;">
-        <?= Html::a('<span class="glyphicon glyphicon-th-list"></span>  ' . Module::t('module', 'ADMIN_USERS'), ['/admin/users'], ['class' => 'btn btn-warning']) ?>
-        <?= Html::a('<span class="glyphicon glyphicon-edit"></span>  ' . Module::t('module', 'ADMIN_USER_UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('<span class="glyphicon glyphicon-remove"></span>  ' . Module::t('module', 'ADMIN_USER_DELETE'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
+        <?= Html::a(FA::icon('list-ol') . Module::t('module', 'ADMIN_USERS'), ['/admin/users'], ['class' => 'btn btn-warning btn-sm']) ?>
+        <?= Html::a(FA::icon('pencil') . Module::t('module', 'ADMIN_USER_UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(FA::icon('remove') . Module::t('module', 'ADMIN_USER_DELETE'), ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger btn-sm',
             'data' => [
                 'confirm' => Module::t('module', 'ADMIN_USER_DELETE_CONFIRM'),
                 'method' => 'post',

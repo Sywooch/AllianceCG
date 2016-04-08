@@ -81,13 +81,21 @@
 		'ADMIN_COMPANIES_DELETE' => 'Удалить',
 		'ADMIN_COMPANY_DELETE_CONFIRM' => 'Удалить организацию?',
 
-	    'NAV_HOME' => 'Главная',
-	    'NAV_CONTACT' => 'Связь',
-	    'NAV_LOGIN' => 'Вход',
-	    'NAV_SKODA' => 'ŠKODA',
-	    'NAV_ADMIN' => 'Администрирование',
-	    'NAV_PROFILE' => 'Профиль',
-	    'NAV_LOGOUT' => 'Выход',
+                'NAV_HOME' => 'Главная',
+                'NAV_CONTACT' => 'Связь',
+                'NAV_LOGIN' => 'Вход',
+                'NAV_SKODA' => 'ŠKODA',
+                'NAV_ADMIN' => 'Администрирование',
+                'NAV_PROFILE' => 'Профиль',
+                'NAV_LOGOUT' => 'Выход',
+            
+                'NAV_SKODA_DASHBOARD' => 'DASHBOARD',
+                'NAV_SKODA_SERVICESHEDULER' => 'Смены',
+                'NAV_SKODA_STATUSMONITOR' => 'Монитор готовности',
+                'NAV_ADMIN_DASHBOARD' => 'DASHBOARD',
+                'NAV_USERS' => 'Пользователи',
+                'NAV_COMPANIES' => 'Организации',
+                'NAV_POSITIONS' => 'Должности',
 
 
 	];

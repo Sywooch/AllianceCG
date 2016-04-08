@@ -49,11 +49,11 @@ $this->registerJs('
     <div class="user-index center-block">
 
     <p style="text-align: right">
-        <?= Html::a(FA::icon('plus') . Module::t('module', 'ADMIN_COMPANIES_CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+        <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'ADMIN_COMPANIES_CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
         
-        <?= Html::a(FA::icon('refresh') . Module::t('module', 'ADMIN_COMPANIES_REFRESH'), ['index'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
+        <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'ADMIN_COMPANIES_REFRESH'), ['index'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
         
-        <?= Html::a(FA::icon('remove') . Module::t('module', 'ADMIN_USERS_DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']) ?>    
+        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'ADMIN_USERS_DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']) ?>    
     </p>
 
     <?php

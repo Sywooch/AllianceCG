@@ -8,12 +8,14 @@ use yii\helpers\Url;
 use app\modules\admin\Module;
 use yii\helpers\ArrayHelper;
 use app\modules\admin\models\Positions;
+use rmrevin\yii\fontawesome\FA;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\admin\models\PositionsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Module::t('module', 'ADMIN_POSITIONS');
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN'), 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->registerJs(' 
@@ -24,7 +26,7 @@ $this->registerJs('
             if (PosId=="") {
                 alert("Нет отмеченных записей!", "Alert Dialog");
             }
-            else if (confirm("Are you sure you want to delete this?")) {
+            else if (confirm("Удалить запись?")) {
               $.ajax({
                 type: \'POST\',
                 url : \'/admin/positions/multipledelete\',
@@ -40,17 +42,20 @@ $this->registerJs('
 
 ?>
 
-    <h1><span class="glyphicon glyphicon-briefcase" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
+    <!--<h1>-->
+        <!--<span class="glyphicon glyphicon-briefcase" style='padding-right:10px;'></span>-->
+            <?php // Html::encode($this->title) ?>
+    <!--</h1>-->
     <?php // $this->render('_search', ['model' => $searchModel]); ?>
     
     <div class="positions-index center-block">
 
     <p style="text-align: right">
-        <?= Html::a('<span class="glyphicon glyphicon-plus"></span>  ' . Module::t('module', 'ADMIN_CREATE_POSITIONS'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(FA::icon('plus') . Module::t('module', 'ADMIN_CREATE_POSITIONS'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
         
-        <?= Html::a('<span class="glyphicon glyphicon-refresh"></span>  ' . Module::t('module', 'ADMIN_USERS_REFRESH'), ['index'], ['class' => 'btn btn-primary', 'id' => 'refreshButton']) ?>
+        <?= Html::a(FA::icon('refresh') . Module::t('module', 'ADMIN_USERS_REFRESH'), ['index'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
 
-        <?= Html::a('<span class="glyphicon glyphicon-trash"></span>  ' . Module::t('module', 'ADMIN_USERS_DELETE'), ['#'], ['class' => 'btn btn-danger', 'id' => 'MultipleDelete']) ?>         
+        <?= Html::a(FA::icon('remove') . Module::t('module', 'ADMIN_USERS_DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']) ?>         
     </p>
     <?= GridView::widget([
         'id' => 'admin-positions-grid',

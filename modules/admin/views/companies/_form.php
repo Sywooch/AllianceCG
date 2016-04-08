@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use dosamigos\tinymce\TinyMce;
 use app\modules\admin\Module;
+use rmrevin\yii\fontawesome\FA;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Companies */
@@ -15,36 +16,25 @@ use app\modules\admin\Module;
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-    <h1><span class="glyphicon glyphicon-user" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
+    <!--<h1>-->
+            <?php // FA::icon('institution') . Html::encode($this->title) ?>
+    <!--</h1>-->
            
     <div class="form-group" style="text-align: right;">
         <?= Html::submitButton(
-            $model->isNewRecord ? '<span class="glyphicon glyphicon-floppy-saved"></span>  ' . Module::t('module', 'ADMIN_CREATE_POSITIONS') : '<span class="glyphicon glyphicon-pencil"></span>  ' . Module::t('module', 'ADMIN_POSITIONS_BUTTON_UPDATE'),
-            ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']
+            $model->isNewRecord ? FA::icon('floppy-o') . Module::t('module', 'ADMIN_CREATE_POSITIONS') : FA::icon('edit') . Module::t('module', 'ADMIN_POSITIONS_BUTTON_UPDATE'),
+            ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']
         ) ?>
-        <?= Html::a('<span class="glyphicon glyphicon-floppy-remove"></span>  ' . Module::t('module', 'ADMIN_POSITIONS_BUTTON_CANCEL'), ['/admin/companies'], ['class' => 'btn btn-danger']) ?>
+        <?= Html::a(FA::icon('remove') . Module::t('module', 'ADMIN_POSITIONS_BUTTON_CANCEL'), ['/admin/companies'], ['class' => 'btn btn-danger btn-sm']) ?>
     </div>        
+   
+    <?= $form->field($model, 'company_name', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('institution') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'company_name' )]) ?>
+    
+    <?= $form->field($model, 'company_brand', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('institution') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'company_brand' )]) ?>
 
-    <?= $form->field($model, 'company_name')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'company_brand')->textInput(['maxlength' => true]) ?>
-
-    <?php
-        $preview = !empty($model->company_logo) ? $model->company_logo : false;
-    ?>        
-
-    <div class="col-lg-3">
-        <?php
-            // Html::img('/' . $preview, ['height'=>'50']); 
-        ?>
-    </div>
-    <div class="col-lg-9">
-        <?php
-            // $form->field($model, 'brandlogo')->fileInput() 
-        ?>
-    </div>
-
-    <?= $form->field($model, 'brandlogo')->fileInput() ?>
+    <?php $form->field($model, 'brandlogo')->fileInput() ?>
+    
+    <?= $form->field($model, 'brandlogo', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('photo') . ' </span>{input}</div>{error}'])->fileInput() ?>
 
     <?= $form->field($model, 'company_description')->widget(TinyMce::className(), [
     'options' => ['rows' => 10, 'cols' => 20],
@@ -57,11 +47,7 @@ use app\modules\admin\Module;
         ],
         'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
     ]
-]);?>    
-
-    <div class="form-group">
-        <?php Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
+]);?>
 
     <?php ActiveForm::end(); ?>
 

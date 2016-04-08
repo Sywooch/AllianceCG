@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use app\modules\admin\Module;
+use rmrevin\yii\fontawesome\FA;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Companies */
@@ -14,15 +15,15 @@ $this->params['breadcrumbs'][] = $this->title;
 <!-- <div class="companies-view col-lg-5 col-lg-offset-3"> -->
 <div class="companies-view col-lg-10 col-lg-offset-1">
 
-    <h1>
-        <?= $model->getLogoName(); ?>
-    </h1>
+    <!--<h1>-->
+        <?php // $model->getLogoName(); ?>
+    <!--</h1>-->
     
     <p style="text-align: right;">
-        <?= Html::a('<span class="glyphicon glyphicon-th-list"></span>  ' . Module::t('module', 'ADMIN_COMPANIES'), ['/admin/companies'], ['class' => 'btn btn-warning']) ?>
-        <?= Html::a('<span class="glyphicon glyphicon-edit"></span>  ' . Module::t('module', 'ADMIN_COMPANIES_UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('<span class="glyphicon glyphicon-remove"></span>  ' . Module::t('module', 'ADMIN_COMPANIES_DELETE'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
+        <?= Html::a(FA::icon('list') . Module::t('module', 'ADMIN_COMPANIES'), ['/admin/companies'], ['class' => 'btn btn-warning btn-sm']) ?>
+        <?= Html::a(FA::icon('edit') . Module::t('module', 'ADMIN_COMPANIES_UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(FA::icon('remove') . Module::t('module', 'ADMIN_COMPANIES_DELETE'), ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger btn-sm',
             'data' => [
                 'confirm' => Module::t('module', 'ADMIN_COMPANY_DELETE_CONFIRM'),
                 'method' => 'post',
@@ -34,11 +35,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'company_name',
             'company_brand',
-            // [
-            //     'attribute'=>'company_logo',
-            //     'value'=>$model->getSingleLogo(),
-            //     'format' => ['image',['height'=>'80']],
-            // ],
+             [
+                 'attribute'=>'company_logo',
+                 'value'=>$model->getSingleLogo(),
+                 'format' => ['image',['height'=>'80']],
+             ],
             [
                 'attribute' => 'company_description',
                 'format' => 'raw',

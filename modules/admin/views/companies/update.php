@@ -13,12 +13,6 @@ $this->params['breadcrumbs'][] = Module::t('module', 'ADMIN_COMPANIES_UPDATE');
 ?>
 <div class="companies-update">
 
-    <h1>
-    	<?php
-    		// Html::encode($this->title) 
-    	?>
-    </h1>
-
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>

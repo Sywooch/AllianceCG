@@ -7,12 +7,14 @@ use app\components\grid\ActionColumn;
 use yii\helpers\ArrayHelper;
 use app\modules\admin\models\Companies;
 use app\components\grid\LinkColumn;
+use rmrevin\yii\fontawesome\FA;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\admin\models\CompaniesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Module::t('module', 'ADMIN_COMPANIES_TITLE');
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN'), 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->registerJs(' 
@@ -37,18 +39,21 @@ $this->registerJs('
     });', \yii\web\View::POS_READY);
 ?>
 
-    <h1><span class="glyphicon glyphicon-user" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>
+    <!--<h1>-->
+        <!--<span class="glyphicon glyphicon-user" style='padding-right:10px;'></span>-->
+        <?php // Html::encode($this->title) ?>
+    <!--</h1>-->
 
     <?php // $this->render('_search', ['model' => $searchModel]); ?>
     
     <div class="user-index center-block">
 
     <p style="text-align: right">
-        <?= Html::a('<span class="glyphicon glyphicon-plus"></span>  ' . Module::t('module', 'ADMIN_COMPANIES_CREATE'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(FA::icon('plus') . Module::t('module', 'ADMIN_COMPANIES_CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
         
-        <?= Html::a('<span class="glyphicon glyphicon-refresh"></span>  ' . Module::t('module', 'ADMIN_COMPANIES_REFRESH'), ['index'], ['class' => 'btn btn-primary', 'id' => 'refreshButton']) ?>
+        <?= Html::a(FA::icon('refresh') . Module::t('module', 'ADMIN_COMPANIES_REFRESH'), ['index'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
         
-        <?= Html::a('<span class="glyphicon glyphicon-trash"></span>  ' . Module::t('module', 'ADMIN_USERS_DELETE'), ['#'], ['class' => 'btn btn-danger', 'id' => 'MultipleDelete']) ?>    
+        <?= Html::a(FA::icon('remove') . Module::t('module', 'ADMIN_USERS_DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']) ?>    
     </p>
 
     <?php

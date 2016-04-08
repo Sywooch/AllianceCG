@@ -16,6 +16,7 @@ return [
         'app\modules\admin\Bootstrap',
         'app\modules\main\Bootstrap',
         'app\modules\user\Bootstrap',
+        'app\modules\alliance\Bootstrap',
         'app\modules\skoda\Bootstrap',
         ],
     'modules' => [
@@ -27,6 +28,11 @@ return [
         'main' => [
             'class' => 'app\modules\main\Module',
             'layoutPath' => '@app/modules/main/views/layouts',
+            'layout' => 'main'
+        ],
+        'alliance' => [
+            'class' => 'app\modules\alliance\Module',
+            'layoutPath' => '@app/modules/alliance/views/layouts',
             'layout' => 'main'
         ],
         'skoda' => [

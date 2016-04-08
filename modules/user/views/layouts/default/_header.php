@@ -26,10 +26,25 @@ use app\modules\user\Module;
             ['label' => FA::icon('user') . Module::t('module', 'NAV_LOGIN'), 'url' => ['/user/default/login']] :
             false,
         !Yii::$app->user->isGuest ?
-            ['label' => FA::icon('wrench') . Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda/']] :
+            ['label' => FA::icon('wrench') . Module::t('module', 'NAV_SKODA'), 'items' => [
+                    ['label' => FA::icon('wrench') . Module::t('module', 'NAV_SKODA_DASHBOARD'), 'url' => ['/skoda/']],
+                    ['label' => FA::icon('wrench') . Module::t('module', 'NAV_SKODA_SERVICESHEDULER'), 'url' => ['/servicesheduler/calendar']],
+                    ['label' => FA::icon('wrench') . Module::t('module', 'NAV_SKODA_STATUSMONITOR'), 'url' => ['/skoda/statusmonitor']],
+                
+                ],
+            ] :
+//            ['label' => FA::icon('wrench') . Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda/']] :
             false,
         Yii::$app->user->can('admin') ?
-            ['label' => FA::icon('cog') . Module::t('module', 'NAV_ADMIN'), 'url' => ['/admin/default/index']] :
+            ['label' => FA::icon('cog') . Module::t('module', 'NAV_ADMIN'), 'items' => [
+                    ['label' => FA::icon('cog') . Module::t('module', 'NAV_ADMIN_DASHBOARD'), 'url' => ['/admin/']],
+                    ['label' => FA::icon('cog') . Module::t('module', 'NAV_USERS'), 'url' => ['/admin/users/']],
+                    ['label' => FA::icon('cog') . Module::t('module', 'NAV_COMPANIES'), 'url' => ['/admin/companies/']],
+                    ['label' => FA::icon('cog') . Module::t('module', 'NAV_POSITIONS'), 'url' => ['/admin/positions/']],
+                
+                ],
+            ] :
+//            ['label' => FA::icon('cog') . Module::t('module', 'NAV_ADMIN'), 'url' => ['//admin/default/index']] :
             false,
 //        !Yii::$app->user->isGuest ?
 //            ['label' => FA::icon('user') . Module::t('module', 'NAV_PROFILE'), 'url' => ['/user/profile']] :

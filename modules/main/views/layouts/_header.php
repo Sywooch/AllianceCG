@@ -31,11 +31,20 @@ use app\modules\main\Module;
         Yii::$app->user->can('admin') ?
             ['label' => FA::icon('cog') . Module::t('module', 'NAV_ADMIN'), 'url' => ['//admin/default/index']] :
             false,
+//        !Yii::$app->user->isGuest ?
+//            ['label' => FA::icon('user') . Module::t('module', 'NAV_PROFILE'), 'url' => ['/user/profile']] :
+//            false,
+//        !Yii::$app->user->isGuest ?
+//            ['label' => FA::icon('power-off') . Module::t('module', 'NAV_LOGOUT'), 'url' => ['/user/default/logout'], 'linkOptions' => ['data-method' => 'post']] :
+//            false,
         !Yii::$app->user->isGuest ?
-            ['label' => FA::icon('user') . Module::t('module', 'NAV_PROFILE'), 'url' => ['/user/profile']] :
-            false,
-        !Yii::$app->user->isGuest ?
-            ['label' => FA::icon('power-off') . Module::t('module', 'NAV_LOGOUT'), 'url' => ['/user/default/logout'], 'linkOptions' => ['data-method' => 'post']] :
+            ['label' => FA::icon('user') . Yii::$app->user->identity->userfullname, 'items' => [
+                ['label' => FA::icon('user') . Module::t('module', 'NAV_PROFILE'), 'url' => ['/user/profile']],
+                ['label' => FA::icon('power-off') . Module::t('module', 'NAV_LOGOUT'),
+                    'url' => ['/user/default/logout'],
+                    'linkOptions' => ['data-method' => 'post']]
+                ]
+            ] :
             false,
         ]),
     ]);

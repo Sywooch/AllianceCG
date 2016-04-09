@@ -18,10 +18,10 @@ use app\modules\skoda\Module;
         'options' => ['class' => 'navbar-nav navbar-right navbar-skoda'],
         'encodeLabels' => false,
         'items' => array_filter([
-        !Yii::$app->user->isGuest ?
-            ['label' => FA::icon('home') . ' ' . Module::t('module', 'NAV_HOME'), 'url' => ['/main/default/index']] :
-            false,
-        ['label' => FA::icon('at') . ' ' . Module::t('module', 'NAV_CONTACT'), 'url' => ['/main/contact/index']],
+//        !Yii::$app->user->isGuest ?
+//            ['label' => FA::icon('home') . ' ' . Module::t('module', 'NAV_HOME'), 'url' => ['/main/default/index']] :
+//            false,
+//        ['label' => FA::icon('at') . ' ' . Module::t('module', 'NAV_CONTACT'), 'url' => ['/main/contact/index']],
         Yii::$app->user->isGuest ?
             ['label' => FA::icon('user') . ' ' . Module::t('module', 'NAV_LOGIN'), 'url' => ['/user/default/login']] :
             false,

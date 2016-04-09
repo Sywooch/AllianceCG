@@ -31,7 +31,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 
-<?= $this->render('_search', ['model' => $model]); ?>
 
 <?php
 
@@ -47,13 +46,9 @@ if ($ds) {
     $r=ldap_bind($ds);
     
     $dn        = 'ou=addressbook,dc=mail,dc=gorodavto,dc=com';
-    if(!empty($model->searchfield)){                
-        $filter    = '(|(telephonenumber='. $model->searchfield .'*))';
-    }
-    else{                
-        $filter    = '(|(telephonenumber=*))';
-    }    
-//    $filter    = '(|(telephonenumber=*))';
+    
+    $filter    = '(|(telephonenumber=*))';
+    
     $justthese = array('ou', 'sn', 'cn', 'givenname', 'telephonenumber', 'title', 'mail', 'o');    
 
     $alians=ldap_search($ds, $dn, $filter, $justthese);
@@ -66,6 +61,8 @@ if ($ds) {
     // Количество записей
     echo "<b>Показаны записи: " . $alianskmv["count"] . "</b><br />";
 
+    print_r($ldap);
+    
     // Нумерация, начальное значение
     $row_alians = 1;
     

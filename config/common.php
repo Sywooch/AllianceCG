@@ -47,6 +47,16 @@ return [
         ],
     ],    
     'components' => [
+//        'ldap' => [
+//            'class' => 'app\components\ldap\Ldap',
+//            'ldaphost' => '10.18.123.17',
+//            'ldapport' => '389',
+//        ],
+        'ldap' => [
+            'class' => '',
+            'ldaphost' => '',
+            'ldapport' => '',
+        ],        
         'db' => [
             'class' => 'yii\db\Connection',
             'charset' => 'utf8',

@@ -16,10 +16,13 @@ class PhonebookController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout = false;
+        $ldap = Yii::$app->ldap->ldapconnect();
         $model = new PhonebookSearch();
         $searchModel = new PhonebookSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', [
+            'ldap' => $ldap,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'model' => $model,

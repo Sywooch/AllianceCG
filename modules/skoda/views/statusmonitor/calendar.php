@@ -27,9 +27,9 @@
 
     <p style="text-align: right">
 
-        <?= Html::a(FA::icon('plus') . Module::t('module', 'STATUS_CREATE'), ['create'], ['class' => 'btn btn-success btn-sm', 'id' => 'refreshButton']) ?>
+        <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'STATUS_CREATE'), ['create'], ['class' => 'btn btn-success btn-sm', 'id' => 'refreshButton']) ?>
 
-        <?= Html::a(FA::icon('refresh') . Module::t('module', 'STATUS_REFRESH'), [''], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
+        <?= Html::a(FA::icon('refresh')  . ' ' . Module::t('module', 'STATUS_REFRESH'), ['calendar'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
 
     </p>
     
@@ -48,6 +48,7 @@
             weekMode: 'liquid',
             eventLimit: true,            
             selectable: false,
+            draggable: false,
             height: 600,
             width: 600,
             lang: 'ru',
@@ -55,11 +56,11 @@
                 url: "/skoda/statusmonitor/calendarsearch",
                 cache: true 
             },            
-			header: {
-			    left: 'prev,today,next',
-			    center: 'title',
-			    right: 'month,agendaWeek,agendaDay'
-			},
+		header: {
+		    left: 'prev,today,next',
+		    center: 'title',
+		    right: 'month,agendaWeek,agendaDay'
+		},
 
             dayRender: function(date, cell){            
                 if (moment().diff(date,'days') > 0){
@@ -77,13 +78,13 @@
                 if (moment().diff(date,'days') > 0){
                     alert('Выбранная дата меньше текущей! Не рекомендуется добавлять записи задним числом!');
                 } else{
-                    var datesend = date.format();
-                    window.location = 'create?date=' + datesend;
+//                    var datesend = date.format("YYYY-MM-DD H:mm:ss");
+                    window.location = 'create';
                 }        		
 			},
             eventClick: function(calEvent, jsEvent, view) {
                 if (calEvent.url) {
-                    alert('Дата: ' + calEvent.start.format("DD/MM/YYYY") + '\n\t' + 'Мастер-консультант: ' + calEvent.title);
+                    alert('Дата: ' + calEvent.start.format("DD/MM/YYYY H:mm:ss") + '\n\t' + 'Гос. рег. номер: ' + calEvent.title);
                     $(this).css('border-color', 'red');
                     return false;
                 }

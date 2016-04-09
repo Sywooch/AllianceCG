@@ -59,5 +59,9 @@
                 'NAV_COMPANIES' => 'Организации',
                 'NAV_POSITIONS' => 'Должности',
             
+                'STATUSMONITOR_INDEX' => 'Монитор готовности',
+                'STATUSMONITOR_CALENDAR' => 'Календарь',
+                'STATUSMONITOR_TABLE' => 'Таблица',
+            
 	];
 	

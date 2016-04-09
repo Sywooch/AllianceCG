@@ -27,7 +27,7 @@ use rmrevin\yii\fontawesome\FA;
 
     <div class="form-group" style="text-align: right">
         <?= Html::submitButton($model->isNewRecord ? FA::icon('floppy-o') . Module::t('module', 'STATUS_CREATE') : FA::icon('edit') . Module::t('module', 'STATUS_UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
-        <?= Html::a(FA::icon('undo') . Module::t('module', 'BUTTON_CANCEL'), ['/skoda/statusmonitor'], ['class' => 'btn btn-danger btn-sm']) ?>
+        <?= Html::a(FA::icon('undo') . Module::t('module', 'BUTTON_CANCEL'), ['/skoda/statusmonitor/calendar'], ['class' => 'btn btn-danger btn-sm']) ?>
     </div>
 
     <?= $form->errorSummary($model); ?>

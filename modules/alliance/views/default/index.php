@@ -1,12 +1,30 @@
+<?php
+    use app\modules\alliance\Module;
+    use rmrevin\yii\fontawesome\FA;
+    use yii\bootstrap\Nav;
+    
+
+$this->title = Module::t('module', 'NAV_ALLIANCE');
+$this->params['breadcrumbs'][] = $this->title;    
+?>
+
 <div class="alliance-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
-    <p>
-        This is the view content for action "<?= $this->context->action->id ?>".
-        The action belongs to the controller "<?= get_class($this->context) ?>"
-        in the "<?= $this->context->module->id ?>" module.
-    </p>
-    <p>
-        You may customize this page by editing the following file:<br>
-        <code><?= __FILE__ ?></code>
-    </p>
+    <p style="text-align: right">
+        <?php 
+            echo Nav::widget([
+                'options' => ['class' => 'nav navbar-right nav-pills'],
+                'encodeLabels' => false,
+                'items' => array_filter([
+                    [
+                        'label' => FA::icon('phone') . ' ' . Module::t('module', 'NAV_ALLIANCE_PHONEBOOK'),
+                        'url' => '/alliance/phonebook/index',
+                    ],
+                    [
+                        'label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_DUTY'),
+                        'url' => '/alliance/dutygraph/',
+                    ],
+                ]),
+            ]);
+        ?>
+    </p>  
 </div>

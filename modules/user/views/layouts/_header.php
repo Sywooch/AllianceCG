@@ -28,7 +28,7 @@ use app\modules\user\Module;
         Yii::$app->user->can('admin') ?
             ['label' => FA::icon('building') . ' ' . Module::t('module', 'NAV_ALLIANCE'), 'items' => [
                     ['label' => FA::icon('pie-chart') . ' ' . Module::t('module', 'NAV_ALLIANCE_DASHBOARD'), 'url' => ['/alliance/']],
-                    ['label' => FA::icon('phone') . ' ' . Module::t('module', 'NAV_ALLIANCE_PHONEBOOK'), 'url' => ['/alliance/']],
+                    ['label' => FA::icon('phone') . ' ' . Module::t('module', 'NAV_ALLIANCE_PHONEBOOK'), 'url' => ['/alliance/phonebook']],
                     ['label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_DUTY'), 'url' => ['/alliance/']],
                 
                 ],

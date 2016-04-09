@@ -1,30 +1,27 @@
 <?php
 
 use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
+use rmrevin\yii\fontawesome\FA;;
+use app\modules\alliance\Module;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-    NavBar::begin([
-        // 'brandLabel' => getNavbarLogo(),
-        // 'brandUrl' => getNavbarBrandUrl(),
-        // 'options' => [
-        //     'class' => getNavbarCSS(),
-        // ],
-    ]);
     echo Nav::widget([
         'options' => ['class' => 'nav nav-pills nav-stacked'],
         'encodeLabels' => false,
         'items' => array_filter([
             [
-                'label' => 'Ссылка 1',
-                'url' => '#',
+                'label' => FA::icon('pie-chart') . ' ' . Module::t('module', 'NAV_ALLIANCE'),
+                'url' => '/alliance',                
             ],
             [
-                'label' => 'Ссылка 2',
-                'url' => '#',
+                'label' => FA::icon('phone') . ' ' . Module::t('module', 'NAV_ALLIANCE_PHONEBOOK'),
+                'url' => '/alliance/phonebook',
+            ],
+            [
+                'label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_DUTY'),
+                'url' => '/alliance/dutygraph/',
             ],
         ]),
     ]);
-    NavBar::end();
     ?>

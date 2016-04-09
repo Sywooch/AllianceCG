@@ -54,8 +54,13 @@ return [
 //        ],
         'ldap' => [
             'class' => '',
-            'ldaphost' => '',
-            'ldapport' => '',
+            'host' => '',
+            'port' => '',
+            'rdn' => '',
+            'password' => '',
+            'dn' => '',
+            'filter' => '',
+            'attributes' => '',
         ],        
         'db' => [
             'class' => 'yii\db\Connection',

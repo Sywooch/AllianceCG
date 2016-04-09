@@ -40,18 +40,29 @@ $ds = ldap_connect($model->ldaphost, $model->ldapport)
 
 if ($ds) {
     
+    $ldapuser = 'cn=root,dc=mail,dc=gorodavto,dc=com';
+    $ldappassword = 'Rjkj,jr1';
+    
     ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
     
     // Анонимная привязка, доступ только для чтения
-    $r=ldap_bind($ds);
+    $r=ldap_bind($ds, $ldapuser, $ldappassword);
     
     $dn        = 'ou=addressbook,dc=mail,dc=gorodavto,dc=com';
     
     $filter    = '(|(telephonenumber=*))';
     
-    $justthese = array('ou', 'sn', 'cn', 'givenname', 'telephonenumber', 'title', 'mail', 'o');    
+    $defaultfilter = '(|(cn=*))';
+    if (!empty($filter)){
+        $filterattr = $filter;
+    }
+    else{
+        $filterattr = $defaultfilter;
+    }
+    
+    $searchattr = ['ou', 'sn', 'cn', 'givenname', 'telephonenumber', 'title', 'mail', 'o'];    
 
-    $alians=ldap_search($ds, $dn, $filter, $justthese);
+    $alians=ldap_search($ds, $dn, $filterattr, $searchattr);
     
 //    ldap_sort($ds, $alians, 'sn');
     
@@ -61,7 +72,9 @@ if ($ds) {
     // Количество записей
     echo "<b>Показаны записи: " . $alianskmv["count"] . "</b><br />";
 
-    print_r($ldap);
+    print_r($ldapconnect);
+    echo '<br/>';
+    print_r($getldapentries);
     
     // Нумерация, начальное значение
     $row_alians = 1;

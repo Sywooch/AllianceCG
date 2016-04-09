@@ -6,7 +6,7 @@ use app\modules\alliance\models\PhonebookSearch;
 use yii\web\Controller;
 
 /**
- * Default controller for the `alliance` module
+ * Phonebook controller for the `alliance` module
  */
 class PhonebookController extends Controller
 {
@@ -17,12 +17,14 @@ class PhonebookController extends Controller
     public function actionIndex()
     {
         $this->layout = false;
-        $ldap = Yii::$app->ldap->ldapconnect();
+        $ldapconnect = Yii::$app->ldap->ldapconnect();
+        $getldapentries = Yii::$app->ldap->getldapentries();
         $model = new PhonebookSearch();
         $searchModel = new PhonebookSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', [
-            'ldap' => $ldap,
+            'ldapconnect' => $ldapconnect,
+            'getldapentries' => $getldapentries,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'model' => $model,

@@ -18,6 +18,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
+<?php 
+//    GridView::widget([
+//        'dataProvider' => $dataProvider,
+//        'columns' => [
+//            ['class' => 'yii\grid\SerialColumn'],
+// 
+// 
+//            ['class' => 'yii\grid\ActionColumn'],
+//        ],
+//    ]); 
+?>
+
+
 <?= $this->render('_search', ['model' => $model]); ?>
 
 <?php
@@ -51,7 +64,7 @@ if ($ds) {
     $alianskmv = ldap_get_entries($ds, $alians);
 
     // Количество записей
-    echo "<b>Показаны записи: " . $model->search() . "</b><br />";
+    echo "<b>Показаны записи: " . $alianskmv["count"] . "</b><br />";
 
     // Нумерация, начальное значение
     $row_alians = 1;

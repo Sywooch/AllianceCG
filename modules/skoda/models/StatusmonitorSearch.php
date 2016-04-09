@@ -7,6 +7,7 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\data\Sort;
 use app\modules\skoda\models\Statusmonitor;
+use yii\helpers\Json;
 
 /**
  * StatusmonitorSearch represents the model behind the search form about `app\modules\status\models\Statusmonitor`.
@@ -107,8 +108,11 @@ class StatusmonitorSearch extends Statusmonitor
 
         return $dataProvider;
     }
-
-
+    
+    public function calendarsearch(){
+        $items = Yii::$app->db->createCommand("SELECT `id` AS id, `id` AS url, `from` AS start, `to` AS end, `regnumber` AS title FROM `sk_statusmonitor`;")->queryAll();
+        return Json::encode($items);
+    }
 
     public function getCarWorkStatus() 
     {

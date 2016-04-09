@@ -64,6 +64,25 @@ class StatusmonitorController extends Controller
         ]);
     }
 
+    public function actionCalendar()
+    {
+
+        $model = new Statusmonitor();
+                
+        return $this->render('calendar', [
+            'model' => $model,         
+            ]);
+    }
+    
+    public function actionCalendarsearch()
+    {
+        $this->layout = false;
+        $model = new StatusmonitorSearch();
+        return $this->render('_calendarSearch', [
+            'model' => $model,
+        ]);
+    }
+
     public function actionMonitor()
     {
         $this->layout = '@app/modules/skoda/views/layouts/monitor/main';

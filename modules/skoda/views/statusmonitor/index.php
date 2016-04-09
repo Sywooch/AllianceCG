@@ -51,6 +51,11 @@ $this->registerJs('
 
 
 ?>
+   
+    <?= $this->render('_submenu', [
+        'model' => $model,
+    ]) ?>
+
 
 <?php if (Yii::$app->session->hasFlash('masterConsultantDoesNotExistToday')): ?>
     

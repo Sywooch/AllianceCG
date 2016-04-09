@@ -14,4 +14,10 @@
             'NAV_ALLIANCE_DASHBOARD' => 'DASHBOARD',
             'NAV_ALLIANCE_PHONEBOOK' => 'Телефонная книга',
             'NAV_ALLIANCE_DUTY' => 'График дежурств',
+            'PHONEBOOK_NUMBER' => '№',
+            'PHONEBOOK_FULLNAME' => 'Ф.И.О.',
+            'PHONEBOOK_DEPARTMENT' => 'Отдел',
+            'PHONEBOOK_POSITION' => 'Должность',
+            'PHONEBOOK_PHONE' => 'Тел.',
+            'PHONEBOOK_COMPANY' => 'Организация',
 	];

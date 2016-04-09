@@ -2,6 +2,7 @@
 
 namespace app\modules\alliance\controllers;
 
+use app\modules\alliance\models\PhonebookSearch;
 use yii\web\Controller;
 
 /**
@@ -15,6 +16,9 @@ class PhonebookController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $model = new PhonebookSearch();
+        return $this->render('index', [
+            'model' => $model,
+        ]);
     }
 }

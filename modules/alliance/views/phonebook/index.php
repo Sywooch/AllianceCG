@@ -1,5 +1,6 @@
 <?php
     use app\modules\alliance\Module;
+    use app\modules\alliance\models\PhonebookSearch;
     use rmrevin\yii\fontawesome\FA;
     use yii\grid\GridView;
 
@@ -28,9 +29,11 @@ if ($ds) {
     
     $dn        = 'ou=addressbook,dc=mail,dc=gorodavto,dc=com';
     $filter    = '(|(telephonenumber=*))';
-    $justthese = array('ou', 'sn', 'cn', 'givenname', 'telephonenumber', 'title', 'mail');    
+    $justthese = array('ou', 'sn', 'cn', 'givenname', 'telephonenumber', 'title', 'mail', 'o');    
 
     $alians=ldap_search($ds, $dn, $filter, $justthese);
+    
+//    ldap_sort($ds, $alians, 'sn');
     
     // Получение записей, согласно заданным выше критериям поиска и сортировки
     $alianskmv = ldap_get_entries($ds, $alians);
@@ -47,11 +50,12 @@ if ($ds) {
     // Таблица, заголовки таблицы
     echo '<table class="table table-striped">';
     echo '<thead>';
-    echo '<th><b>№</b></span></th>';
-    echo '<th><b> Ф.И.О </b></span></th>';
-    echo '<th><b> Отдел </b></span></th>';
-    echo '<th><b> Должность </b></span></th>';
-    echo '<th><b> Рабочий телефон </b></span></th>';
+    echo '<th><b>' . $model->getAttributeLabel( 'number' ) . '</b></span></th>';
+    echo '<th><b>' . $model->getAttributeLabel( 'fullname' ) . '</b></span></th>';
+    echo '<th><b>' . $model->getAttributeLabel( 'company' ) . '</b></span></th>';
+    echo '<th><b>' . $model->getAttributeLabel( 'department' ) . '</b></span></th>';
+    echo '<th><b>' . $model->getAttributeLabel( 'position' ) . '</b></span></th>';
+    echo '<th><b>' . $model->getAttributeLabel( 'phone' ) . '</b></span></th>';
     echo '</tr>';
     echo '</thead>';
     echo '<tbody>';     
@@ -64,6 +68,9 @@ if ($ds) {
         
         echo '<td>' . $rows . '.</td>';
         echo '<td>' . $alianskmv[$i]["cn"][0] . '</td>';
+        if(isset($alianskmv[$i]["o"][0])){
+            echo '<td>' . $alianskmv[$i]["o"][0] . '</td>';            
+        } 
         if(isset($alianskmv[$i]["ou"][0])){
             echo '<td>' . $alianskmv[$i]["ou"][0] . '</td>';            
         } 

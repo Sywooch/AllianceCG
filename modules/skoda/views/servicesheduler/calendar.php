@@ -93,15 +93,15 @@
 			    right: 'month,agendaWeek,agendaDay'
 			},
 
-            dayRender: function(date, cell){            
-                if (moment().diff(date,'days') > 0){
-                    cell.css("background-color","silver");
-                } else if (moment().diff(date,'days') < 0){
-                    cell.css("background-color","#ededed");
-                } else{
-                    cell.css("background-color","white");
-                }
-            },
+//            dayRender: function(date, cell){            
+//                if (moment().diff(date,'days') > 0){
+//                    cell.css("background-color","silver");
+//                } else if (moment().diff(date,'days') < 0){
+//                    cell.css("background-color","#ededed");
+//                } else{
+//                    cell.css("background-color","white");
+//                }
+//            },
             eventRender: function(event, element) {
                   $(element).tooltip({title: event.title});             
             },

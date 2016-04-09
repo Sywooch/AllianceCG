@@ -36,17 +36,17 @@ else{
         'encodeLabels' => false,
         'items' => array_filter([
             [
-                'label' => 'ŠKODA <span class="label label-pill label-success navbar-right nav-label">'. FA::icon('pie-chart') . ' ' . FA::icon('area-chart') . '</span>',
+                'label' => FA::icon('pie-chart') . '' . 'ŠKODA <span class="label label-pill label-success navbar-right nav-label">' . FA::icon('area-chart') . '</span>',
                 'url' => '/skoda',
             ],
             [
-                'label' => '<h5>' . Module::t('module', 'SERVICESHEDULER') . ' <span class="' . $label. ' navbar-right">' . FA::icon('' . $icon1 . '') .' ' . FA::icon('' . $icon2 . '') . '</span></h5>',
+                'label' => '<h5>' . FA::icon('user-secret') . '' . Module::t('module', 'SERVICESHEDULER') . ' <span class="' . $label. ' navbar-right">' . FA::icon('' . $icon2 . '') . '</span></h5>',
                 'url' => '/skoda/servicesheduler/calendar',
 //                'options' => ['class' => 'navbar-nav navbar-right'],
             ],
             [
-                'label' => Module::t('module', 'STATUS_TITLE') . ' <span class="label label-pill label-success navbar-right nav-label">' . FA::icon('calculator') . ' ' . $count . '</span>',
-                'url' => '/skoda/statusmonitor/',
+                'label' => FA::icon('calculator') . '' . Module::t('module', 'STATUS_TITLE') . ' <span class="label label-pill label-success navbar-right nav-label">' . $count . '</span>',
+                'url' => '/skoda/statusmonitor/calendar',
             ],
         ]),
                     'activateParents' => true

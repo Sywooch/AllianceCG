@@ -48,7 +48,7 @@
             weekMode: 'liquid',
             eventLimit: true,            
             selectable: false,
-            draggable: false,
+            editable: false,
             height: 600,
             width: 600,
             lang: 'ru',
@@ -62,15 +62,15 @@
 		    right: 'month,agendaWeek,agendaDay'
 		},
 
-            dayRender: function(date, cell){            
-                if (moment().diff(date,'days') > 0){
-                    cell.css("background-color","silver");
-                } else if (moment().diff(date,'days') < 0){
-                    cell.css("background-color","white");
-                } else{
-                    cell.css("background-color","white");
-                }
-            },
+//            dayRender: function(date, cell){            
+//                if (moment().diff(date,'days') > 0){
+//                    cell.css("background-color","silver");
+//                } else if (moment().diff(date,'days') < 0){
+//                    cell.css("background-color","white");
+//                } else{
+//                    cell.css("background-color","white");
+//                }
+//            },
             eventRender: function(event, element) {
                   $(element).tooltip({title: event.title});             
             },
@@ -85,10 +85,10 @@
             eventClick: function(calEvent, jsEvent, view) {
                 if (calEvent.url) {
                     alert('Дата: ' + calEvent.start.format("DD/MM/YYYY H:mm:ss") + '\n\t' + 'Гос. рег. номер: ' + calEvent.title);
-                    $(this).css('border-color', 'red');
+//                    $(this).css('border-color', 'red');
                     return false;
                 }
-                $(this).css('border-color', 'red');
+//                $(this).css('border-color', 'red');
             },
     		eventColor: '#4ba82e',
 

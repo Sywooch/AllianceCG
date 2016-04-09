@@ -19,6 +19,6 @@ $form = ActiveForm::begin([
     ]); ?>
 
     <?= $form->field($model, 'searchfield', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('th-large') . ' </span>{input}<span class="input-group-addon"> ' . Html::submitButton(FA::icon('search') . ' ' . Module::t('module', 'SERVICESHEDULER_SEARCH'), ['class' => 'btn-link']) . ' </span></div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'searchfield' )])    ?>
-    <?php $form->field($model, 'searchfield'); ?>
+    <?php // $form->field($model, 'searchfield'); ?>
 
     <?php ActiveForm::end(); ?>

@@ -11,7 +11,7 @@
                 'NAV_POSITIONS' => 'Должности',
     
             'NAV_ALLIANCE' => 'Альянс',
-            'NAV_ALLIANCE_DASHBOARD' => 'DASH',
+            'NAV_ALLIANCE_DASHBOARD' => 'DASHBOARD',
             'NAV_ALLIANCE_PHONEBOOK' => 'Телефонная книга',
             'NAV_ALLIANCE_DUTY' => 'График дежурств',
 	];

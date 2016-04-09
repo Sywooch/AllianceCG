@@ -13,11 +13,17 @@ $this->title = Module::t('module', 'NAV_ALLIANCE_PHONEBOOK');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_ALLIANCE'), 'url' => ['/alliance']];
 $this->params['breadcrumbs'][] = $this->title;    
 
-$ldaphost = "10.18.123.17";
-$ldapport = 389;
+//$ldaphost = "10.18.123.17";
+//$ldapport = 389;
+
+?>
+
+<?= $this->render('_search', ['model' => $model]); ?>
+
+<?php
 
 // Соединение с LDAP
-$ds = ldap_connect($ldaphost, $ldapport)
+$ds = ldap_connect($model->ldaphost, $model->ldapport)
           or die("Невозможно соединиться с $ldaphost");
 
 if ($ds) {
@@ -28,7 +34,13 @@ if ($ds) {
     $r=ldap_bind($ds);
     
     $dn        = 'ou=addressbook,dc=mail,dc=gorodavto,dc=com';
-    $filter    = '(|(telephonenumber=*))';
+    if(!empty($model->searchfield)){                
+        $filter    = '(|(telephonenumber='. $model->searchfield .'*))';
+    }
+    else{                
+        $filter    = '(|(telephonenumber=*))';
+    }    
+//    $filter    = '(|(telephonenumber=*))';
     $justthese = array('ou', 'sn', 'cn', 'givenname', 'telephonenumber', 'title', 'mail', 'o');    
 
     $alians=ldap_search($ds, $dn, $filter, $justthese);
@@ -39,7 +51,7 @@ if ($ds) {
     $alianskmv = ldap_get_entries($ds, $alians);
 
     // Количество записей
-    echo "<b>Записей: " . $alianskmv["count"] . "</b><br />";
+    echo "<b>Показаны записи: " . $model->search() . "</b><br />";
 
     // Нумерация, начальное значение
     $row_alians = 1;

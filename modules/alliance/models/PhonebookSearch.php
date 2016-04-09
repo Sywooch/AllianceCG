@@ -18,6 +18,10 @@ class PhonebookSearch extends \yii\db\ActiveRecord
     public $department;
     public $position;
     public $phone;
+    public $searchfield;
+    
+    public $ldaphost = "10.18.123.17";
+    public $ldapport = 389;
 
     /**
      * @inheritdoc
@@ -52,30 +56,40 @@ class PhonebookSearch extends \yii\db\ActiveRecord
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
-
-    /**
-     * Creates data provider instance with search query applied
-     *
-     * @param array $params
-     *
-     * @return ActiveDataProvider
-     */
-    public function search($params)
+    
+    public function search()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-            'sort' => $sort,
-        ]);
+        $ds = ldap_connect($this->ldaphost, $this->ldapport) or die("Невозможно соединиться с $this->ldapport");
 
-        $this->load($params);
+        if ($ds) {
 
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            $query->where('0=1');
-            return $dataProvider;
+            ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
+
+            // Анонимная привязка, доступ только для чтения
+            $r=ldap_bind($ds);
+
+            $dn        = 'ou=addressbook,dc=mail,dc=gorodavto,dc=com';
+            if(!empty($this->searchfield)){                
+                $filter    = '(|(telephonenumber='. $this->searchfield .'))';
+            }
+            else{                
+                $filter    = '(|(telephonenumber=*))';
+            }
+            $justthese = array('ou', 'sn', 'cn', 'givenname', 'telephonenumber', 'title', 'mail', 'o');    
+
+            $alians=ldap_search($ds, $dn, $filter, $justthese);
+
+            // Получение записей, согласно заданным выше критериям поиска и сортировки
+            $alianskmv = ldap_get_entries($ds, $alians);
+            
+            $totalItemCount = $alianskmv["count"];
+
+            ldap_close($ds);    
         }
+                
+//        $this->load($params);
 
-        return $dataProvider;
+        return $totalItemCount;
     }
 
 }

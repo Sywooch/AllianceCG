@@ -2,8 +2,8 @@
 
 use yii\db\Migration;
 
-class m160410_190149_create_master_consultant_position extends Migration
-{    
+class m160410_194028_create_default_positions extends Migration
+{   
     public function up()
     { 
         $table = Yii::$app->db->schema->getTableSchema('{{%positions}}');
@@ -15,7 +15,10 @@ class m160410_190149_create_master_consultant_position extends Migration
         if (!empty($table)) {
             $this->insert('{{%positions}}', [
                 'position' => 'Мастер-консультант',
-            ]);   
+            ]); 
+            $this->insert('{{%positions}}', [
+                'position' => 'Администратор',
+            ]);  
         }
         else
         {        
@@ -27,7 +30,10 @@ class m160410_190149_create_master_consultant_position extends Migration
 
             $this->insert('{{%positions}}', [
                 'position' => 'Мастер-консультант',
-            ]);            
+            ]); 
+            $this->insert('{{%positions}}', [
+                'position' => 'Администратор',
+            ]);             
         }
     }
 

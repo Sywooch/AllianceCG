@@ -29,8 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
 //        echo 'Hello, manager!';
 //    }
 
-$table = Yii::$app->db->schema->getTableSchema('all_positions1');
-print_r($table);
+//$table = Yii::$app->db->schema->getTableSchema('all_positions1');
+//if (!isset($table->columns['somecolumn'])) {
+//    // do something
+//}
+//print_r($table);
 
 ?>    
     

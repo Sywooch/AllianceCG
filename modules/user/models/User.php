@@ -100,7 +100,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 1],
             [['surname', 'name', 'patronymic', 'full_name', 'photo', 'position'], 'string', 'max' => 255],
             
-            [['surname', 'name', 'patronymic','position', 'email', 'role', 'company'], 'required'],
+//            [['surname', 'name', 'patronymic','position', 'email', 'role', 'company'], 'required'],
                
 
             // Simbol match in username-field

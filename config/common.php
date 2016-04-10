@@ -61,10 +61,10 @@ return [
             'class' => '',
             'defaultRoles' => [],
         ],        
-        'db' => [
-            'class' => 'yii\db\Connection',
-            'charset' => 'utf8',
-        ],
+//        'db' => [
+//            'class' => 'yii\db\Connection',
+//            'charset' => 'utf8',
+//        ],
         'i18n' => [
             'translations' => [
                 'app' => [

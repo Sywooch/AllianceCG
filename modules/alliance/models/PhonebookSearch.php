@@ -7,11 +7,12 @@ use Yii;
 use yii\base\Model;
 use yii\data\Sort;
 use yii\data\BaseDataProvider;
+use app\components\ldap\ldapDataProvider;
 
 /**
- * StatusmonitorSearch represents the model behind the search form about `app\modules\skoda\models\Statusmonitor`.
+ * PhonebookSearch
  */
-class PhonebookSearch extends \yii\db\ActiveRecord
+class PhonebookSearch extends Model
 {
     public $number;
     public $fullname;
@@ -20,11 +21,11 @@ class PhonebookSearch extends \yii\db\ActiveRecord
     public $position;
     public $phone;
     
-    public $ldaphost = "10.18.123.17";
-    public $ldapport = 389;
-    public $dn = 'ou=addressbook,dc=mail,dc=gorodavto,dc=com';
-    public $justthese = ['ou', 'sn', 'cn', 'givenname', 'telephonenumber', 'title', 'mail', 'o'];    
-    public $filter    = '(|(telephonenumber=*))';
+//    public $ldaphost = "10.18.123.17";
+//    public $ldapport = 389;
+//    public $dn = 'ou=addressbook,dc=mail,dc=gorodavto,dc=com';
+//    public $justthese = ['ou', 'sn', 'cn', 'givenname', 'telephonenumber', 'title', 'mail', 'o'];    
+//    public $filter    = '(|(telephonenumber=*))';
 
     /**
      * @inheritdoc
@@ -32,7 +33,9 @@ class PhonebookSearch extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-
+            [['number'], 'integer'],
+            [['fullname', 'company', 'department', 'position', 'phone'], 'string'],
+            [['fullname', 'company', 'department', 'position', 'phone'], 'safe'],
         ];
     }
 
@@ -61,29 +64,30 @@ class PhonebookSearch extends \yii\db\ActiveRecord
     }
     
     public function search()
-    {
-        $ds = ldap_connect($this->ldaphost, $this->ldapport) or die("Невозможно соединиться с $this->ldaphost");
-
-        if ($ds) {
-
-            ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
-
-            $r=ldap_bind($ds);
-
-            $alians=ldap_search($ds, $this->dn, $this->filter, $this->justthese);
-            
-            $alianskmv = ldap_get_entries($ds, $alians);
-            
-            ldap_close($ds);    
-        }
+    {        
+        $query = Yii::$app->ldap->ldapconnect();
+        $filter = Yii::$app->ldap->getFilterValue();
+        $attr = Yii::$app->ldap->getAttributesvalue();
+        $dn = Yii::$app->ldap->getDn();
         
-//        $dataProvider = new aseDataProvider([
-//            'query' => $alianskmv,
-//            'pagination' => false,
-//            'sort' => false,
-//        ]);        
-
-//        return $dataProvider;
+        
+        $isldapconnect = $query;
+        $r = $isldapconnect["0"];
+        $ds = $isldapconnect["1"];
+        if($isldapconnect){            
+            $query = ldap_search($ds, $dn, $filter, $attr);
+            $result = ldap_get_entries($ds, $query);
+        }          
+        
+//        return $result;
+        $dataProvider = new ldapDataProvider([
+            'query' => $result,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+            'sort' => false,
+        ]);
+        return $dataProvider;
     }
 
 }

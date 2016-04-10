@@ -48,10 +48,16 @@ class ldapDataProvider extends BaseDataProvider
     public $dn = '';
     public $attributes = '';
     public $filter = '';
+    public $query;
     public $defaultfilter = '(|(cn=*))';
     public $defaultport = '389';
     public $defaultattributes = ['cn'];
     
+    public function getDn()
+    {
+        return $this->dn;
+    }
+
     public function getFiltervalue()
     {
         return $filterattr = !empty($this->filter) ? $this->filter : $this->defaultfilter;
@@ -71,10 +77,9 @@ class ldapDataProvider extends BaseDataProvider
     {
         parent::init();
     }
-    
+
     public function ldapconnect()
-    {
-        
+    {        
 //        echo $this->host . '<br/>';
 //        echo $this->port . '<br/>';
 //        echo 'F: ' . $this->getPortvalue() . '<br/>';
@@ -84,45 +89,42 @@ class ldapDataProvider extends BaseDataProvider
 //        echo $this->filter . '<br/>';
 //        echo 'F: ' . $this->getFiltervalue() . '<br/>';
 //        print_r($this->attributes) . '<br/>';
-//        print_r($this->getAttributesvalue()) . '<br/>';        
-        
-        $ds = ldap_connect($this->host,$this->getPortvalue()) or die("Unable connect to: " . $this->host);
-        
-        ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
-        
-        $r = ldap_bind($ds, $this->rdn, $this->password);
-        
+//        print_r($this->getAttributesvalue()) . '<br/>';                
+        $ds = ldap_connect($this->host,$this->getPortvalue()) or die("Unable connect to: " . $this->host);        
+        ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);        
+        $r = ldap_bind($ds, $this->rdn, $this->password);        
         return [$r, $ds];
     }
     
-    public function ldapquery()
-    {
-        $isldapconnect = $this->ldapconnect();
-        $r = $isldapconnect["0"];
-        $ds = $isldapconnect["1"];
-        if($isldapconnect){
-            
-            $query = ldap_search($ds, $this->dn, $this->getFiltervalue(), $this->getAttributesvalue());
+//    public function ldapquery()
+//    {
+//        $isldapconnect = $this->ldapconnect();
+//        $r = $isldapconnect["0"];
+//        $ds = $isldapconnect["1"];
+//        if($isldapconnect){            
+//            $query = ldap_search($ds, $this->dn, $this->getFiltervalue(), $this->getAttributesvalue());
+//            $result = ldap_get_entries($ds, $query);
+//            $ldap_close = ldap_close($ds);
+//            return $result;
+//        }        
+//    }
 
-            $result = ldap_get_entries($ds, $query);
+    public function prepareKeys($models) {
 
-            $ldap_close = ldap_close($ds);
-
-            return $result;
-        }        
     }
-
-    protected function prepareKeys($models) {
-        
-    }
-
+    
     protected function prepareModels() {
-        
+        $models = [];
+        $pagination = $this->getPagination();
+        return $models;
+    }
+    
+    public function getPagination() {
+        parent::getPagination();
     }
 
     protected function prepareTotalCount() {
-        $res = $this->ldapquery();
-        $count = $res["count"];
+        
     }
-
+    
 }

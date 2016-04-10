@@ -34,10 +34,10 @@
 
 namespace app\components\ldap;
  
-use Yii;
+//use Yii;
 //use yii\base\Component;
 use yii\data\BaseDataProvider;
-use yii\base\InvalidConfigException;
+//use yii\base\InvalidConfigException;
  
 class ldapDataProvider extends BaseDataProvider
 {
@@ -69,6 +69,12 @@ class ldapDataProvider extends BaseDataProvider
     
     public function init()
     {
+        parent::init();
+    }
+    
+    public function ldapconnect()
+    {
+        
 //        echo $this->host . '<br/>';
 //        echo $this->port . '<br/>';
 //        echo 'F: ' . $this->getPortvalue() . '<br/>';
@@ -78,29 +84,32 @@ class ldapDataProvider extends BaseDataProvider
 //        echo $this->filter . '<br/>';
 //        echo 'F: ' . $this->getFiltervalue() . '<br/>';
 //        print_r($this->attributes) . '<br/>';
-//        print_r($this->getAttributesvalue()) . '<br/>';
-        
-        parent::init();
+//        print_r($this->getAttributesvalue()) . '<br/>';        
         
         $ds = ldap_connect($this->host,$this->getPortvalue()) or die("Unable connect to: " . $this->host);
         
         ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
         
         $r = ldap_bind($ds, $this->rdn, $this->password);
-                
-        if($r){            
+        
+        return [$r, $ds];
+    }
+    
+    public function ldapquery()
+    {
+        $isldapconnect = $this->ldapconnect();
+        $r = $isldapconnect["0"];
+        $ds = $isldapconnect["1"];
+        if($isldapconnect){
             
             $query = ldap_search($ds, $this->dn, $this->getFiltervalue(), $this->getAttributesvalue());
-            
+
             $result = ldap_get_entries($ds, $query);
-            
+
             $ldap_close = ldap_close($ds);
-            
-            return 'LDAPconnect: ' . $result["count"];
-        }
-        else{
-            return 'Error!';
-        }
+
+            return $result;
+        }        
     }
 
     protected function prepareKeys($models) {
@@ -112,7 +121,8 @@ class ldapDataProvider extends BaseDataProvider
     }
 
     protected function prepareTotalCount() {
-        
+        $res = $this->ldapquery();
+        $count = $res["count"];
     }
 
 }

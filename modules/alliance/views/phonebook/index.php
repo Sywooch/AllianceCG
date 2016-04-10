@@ -72,7 +72,7 @@ if ($ds) {
     // Количество записей
     echo "<b>Показаны записи: " . $alianskmv["count"] . "</b><br />";
 
-    print_r($ldap);
+//    print_r($ldap);
     
     // Нумерация, начальное значение
     $row_alians = 1;

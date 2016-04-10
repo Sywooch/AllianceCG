@@ -28,6 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
 //    elseif (Yii::$app->user->can('manager')) {
 //        echo 'Hello, manager!';
 //    }
+
+$table = Yii::$app->db->schema->getTableSchema('all_positions1');
+print_r($table);
+
 ?>    
     
     <h1>

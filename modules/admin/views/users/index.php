@@ -91,7 +91,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => SetColumn::className(),
                 'attribute' => 'role',
                 'filter' => User::getRolesArray(),
-                'name' => 'role',
+//                'value' => User::getRolesArray(),
+                'name' => 'rolesName',
                 'contentOptions'=>['style'=>'width: 50px;'],
                 'cssCLasses' => [
                     User::ROLE_MANAGER => 'default',

@@ -244,7 +244,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             self::ROLE_MANAGER => 'Менеджер',
-            self::ROLE_HEAD => 'Руководитель структурного подразделения',
+            self::ROLE_HEAD => 'Руководитель',
             self::ROLE_ADMIN => 'Администратор',
             self::ROLE_ROOT => 'Суперпользователь',
         ];

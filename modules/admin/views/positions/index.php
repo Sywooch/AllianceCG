@@ -15,7 +15,7 @@ use rmrevin\yii\fontawesome\FA;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Module::t('module', 'ADMIN_POSITIONS');
-$this->params['breadcrumbs'][] = ['label' => FA::icon('cog') . Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_ADMIN'), 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->registerJs(' 

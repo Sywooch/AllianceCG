@@ -35,10 +35,11 @@
 namespace app\components\ldap;
  
 use Yii;
-use yii\base\Component;
+//use yii\base\Component;
+use yii\data\BaseDataProvider;
 use yii\base\InvalidConfigException;
  
-class ldapDataProvider extends Component
+class ldapDataProvider extends BaseDataProvider
 {
     public $host = '';
     public $port = '';
@@ -47,7 +48,6 @@ class ldapDataProvider extends Component
     public $dn = '';
     public $attributes = '';
     public $filter = '';
-    public $ds;
     public $defaultfilter = '(|(cn=*))';
     public $defaultport = '389';
     public $defaultattributes = ['cn'];
@@ -82,8 +82,7 @@ class ldapDataProvider extends Component
         
         parent::init();
         
-        $ds = ldap_connect($this->host,$this->getPortvalue())
-            or die("Unable connect to: " . $this->host);
+        $ds = ldap_connect($this->host,$this->getPortvalue()) or die("Unable connect to: " . $this->host);
         
         ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
         
@@ -103,10 +102,17 @@ class ldapDataProvider extends Component
             return 'Error!';
         }
     }
-    
-    public function getCount()
-    {
+
+    protected function prepareKeys($models) {
         
     }
- 
+
+    protected function prepareModels() {
+        
+    }
+
+    protected function prepareTotalCount() {
+        
+    }
+
 }

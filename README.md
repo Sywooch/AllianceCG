@@ -41,6 +41,14 @@ Fill your DB connection information in config/common.php and execute migrations:
 php yii migrate
 ~~~
 
+After that need init RBAC for assign roles
+
+~~~
+php yii rbac/init
+~~~
+
+Default user/password - admin/admin
+
 Sign up or create first user manually
 
 ~~~

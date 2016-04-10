@@ -16,18 +16,18 @@ $this->params['breadcrumbs'][] = $this->title;
 <div>
 
 <?php
-    if (Yii::$app->user->can('root')) {
-        echo 'Hello, root!';
-    }
-    elseif (Yii::$app->user->can('admin')) {
-        echo 'Hello, admin!';
-    }
-    elseif (Yii::$app->user->can('head')) {
-        echo 'Hello, head!';
-    }
-    elseif (Yii::$app->user->can('manager')) {
-        echo 'Hello, manager!';
-    }
+//    if (Yii::$app->user->can('root')) {
+//        echo 'Hello, root!';
+//    }
+//    elseif (Yii::$app->user->can('admin')) {
+//        echo 'Hello, admin!';
+//    }
+//    elseif (Yii::$app->user->can('head')) {
+//        echo 'Hello, head!';
+//    }
+//    elseif (Yii::$app->user->can('manager')) {
+//        echo 'Hello, manager!';
+//    }
 ?>    
     
     <h1>

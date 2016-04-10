@@ -67,7 +67,7 @@ class Ldap extends Component
         return $attributesvalue = !empty($this->attributes) ? $this->attributes : $this->defaultattributes;
     }
     
-    public function ldapconnect()
+    public function init()
     {
 //        echo $this->host . '<br/>';
 //        echo $this->port . '<br/>';
@@ -80,17 +80,22 @@ class Ldap extends Component
 //        print_r($this->attributes) . '<br/>';
 //        print_r($this->getAttributesvalue()) . '<br/>';
         
+        parent::init();
+        
         $ds = ldap_connect($this->host,$this->getPortvalue())
             or die("Unable connect to: " . $this->host);
+        
+        ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
+        
+        $r = ldap_bind($ds, $this->rdn, $this->password);
                 
-        if($this->ldapconnect()){
-            ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
-            
-            $r=ldap_bind($ds, $this->rdn, $this->password);
+        if($r){            
             
             $query = ldap_search($ds, $this->dn, $this->getFiltervalue(), $this->getAttributesvalue());
             
             $result = ldap_get_entries($ds, $query);
+            
+            $ldap_close = ldap_close($ds);
             
             return 'LDAPconnect: ' . $result["count"];
         }

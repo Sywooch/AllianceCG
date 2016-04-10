@@ -73,8 +73,6 @@ if ($ds) {
     echo "<b>Показаны записи: " . $alianskmv["count"] . "</b><br />";
 
     print_r($ldapconnect);
-    echo '<br/>';
-    print_r($getldapentries);
     
     // Нумерация, начальное значение
     $row_alians = 1;

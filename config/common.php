@@ -47,11 +47,6 @@ return [
         ],
     ],    
     'components' => [
-//        'ldap' => [
-//            'class' => 'app\components\ldap\Ldap',
-//            'ldaphost' => '10.18.123.17',
-//            'ldapport' => '389',
-//        ],
         'ldap' => [
             'class' => '',
             'host' => '',
@@ -61,6 +56,10 @@ return [
             'dn' => '',
             'filter' => '',
             'attributes' => '',
+        ],
+        'authManager' => [
+            'class' => '',
+            'defaultRoles' => [],
         ],        
         'db' => [
             'class' => 'yii\db\Connection',

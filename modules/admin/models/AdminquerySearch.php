@@ -46,7 +46,7 @@ class AdminquerySearch extends Model
      */
     public function companyuserscount()
     {
-        $items = Yii::$app->db->createCommand("SELECT DISTINCT(company) as company, COUNT(id) AS users FROM all_user GROUP BY company")->queryAll();
+        $items = Yii::$app->db->createCommand("SELECT DISTINCT(company) as company, COUNT(id) AS users FROM {{%user}} GROUP BY company")->queryAll();
         foreach ($items as $row){
             $data_company[] = [$row['company'],(int)$row['users']];
         }
@@ -62,7 +62,7 @@ class AdminquerySearch extends Model
      */
     public function userscreated()
     {
-        $items = Yii::$app->db->createCommand("SELECT DISTINCT(DATE_FORMAT(FROM_UNIXTIME(created_at), '%Y-%m-%d')) AS date, COUNT(id) AS userscount FROM all_user GROUP BY date")->queryAll();
+        $items = Yii::$app->db->createCommand("SELECT DISTINCT(DATE_FORMAT(FROM_UNIXTIME(created_at), '%Y-%m-%d')) AS date, COUNT(id) AS userscount FROM {{%user}} GROUP BY date")->queryAll();
         foreach ($items as $row){
             $data_user[] = [$row['date'],(int)$row['userscount']];
         }

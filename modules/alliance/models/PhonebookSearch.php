@@ -6,7 +6,6 @@ use app\modules\alliance\Module;
 use Yii;
 use yii\base\Model;
 use yii\data\Sort;
-use yii\data\BaseDataProvider;
 use app\components\ldap\ldapDataProvider;
 
 /**
@@ -20,12 +19,6 @@ class PhonebookSearch extends Model
     public $department;
     public $position;
     public $phone;
-    
-//    public $ldaphost = "10.18.123.17";
-//    public $ldapport = 389;
-//    public $dn = 'ou=addressbook,dc=mail,dc=gorodavto,dc=com';
-//    public $justthese = ['ou', 'sn', 'cn', 'givenname', 'telephonenumber', 'title', 'mail', 'o'];    
-//    public $filter    = '(|(telephonenumber=*))';
 
     /**
      * @inheritdoc
@@ -35,7 +28,7 @@ class PhonebookSearch extends Model
         return [
             [['number'], 'integer'],
             [['fullname', 'company', 'department', 'position', 'phone'], 'string'],
-            [['fullname', 'company', 'department', 'position', 'phone'], 'safe'],
+            [['number', 'fullname', 'company', 'department', 'position', 'phone'], 'safe'],
         ];
     }
 
@@ -63,23 +56,24 @@ class PhonebookSearch extends Model
         return Model::scenarios();
     }
     
+    /**
+     * @inheritdoc
+     */    
     public function search()
     {        
         $query = Yii::$app->ldap->ldapconnect();
         $filter = Yii::$app->ldap->getFilterValue();
         $attr = Yii::$app->ldap->getAttributesvalue();
         $dn = Yii::$app->ldap->getDn();
-        
-        
+                
         $isldapconnect = $query;
         $r = $isldapconnect["0"];
         $ds = $isldapconnect["1"];
         if($isldapconnect){            
             $query = ldap_search($ds, $dn, $filter, $attr);
             $result = ldap_get_entries($ds, $query);
-        }          
+        }
         
-//        return $result;
         $dataProvider = new ldapDataProvider([
             'query' => $result,
             'pagination' => [
@@ -89,5 +83,4 @@ class PhonebookSearch extends Model
         ]);
         return $dataProvider;
     }
-
 }

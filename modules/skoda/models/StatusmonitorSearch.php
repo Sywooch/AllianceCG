@@ -110,7 +110,7 @@ class StatusmonitorSearch extends Statusmonitor
     }
     
     public function calendarsearch(){
-        $items = Yii::$app->db->createCommand("SELECT `id` AS id, `id` AS url, `from` AS start, `to` AS end, `regnumber` AS title FROM `sk_statusmonitor`;")->queryAll();
+        $items = Yii::$app->db->createCommand("SELECT `id` AS id, `id` AS url, `from` AS start, `to` AS end, `regnumber` AS title FROM {{%statusmonitor}};")->queryAll();
         return Json::encode($items);
     }
 

@@ -38,7 +38,7 @@ use Yii;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
  
-class Ldap extends Component
+class ldapDataProvider extends Component
 {
     public $host = '';
     public $port = '';
@@ -102,6 +102,11 @@ class Ldap extends Component
         else{
             return 'Error!';
         }
+    }
+    
+    public function getCount()
+    {
+        
     }
  
 }

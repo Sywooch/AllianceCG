@@ -132,6 +132,37 @@ class ServiceshedulerController extends Controller
         }
     }
 
+    public function actionImportExcel()
+    {
+        $inputFile = 'uploads/servicesheduler/servicesheduler.xlsx';
+        try{
+            $inputFileType = \PHPExcel_IOFactory::identify($inputFile);
+            $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
+            $objPHPExcel = $objReader->load($inputFile);
+        }catch(Exception $e){
+            die('Error');
+        }
+        $sheet = $objPHPExcel->getSheet(0);
+        $highestRow = $sheet->getHighestRow();
+        $highestColumn = $sheet->getHighestColumn();        
+        for($row = 1; $row <= $highestRow; $row++){
+            $rowData = $sheet->rangeToArray('A'.$row.':'.$highestColumn.$row,NULL,TRUE,FALSE);
+            if($row == 1)
+            {
+                continue;
+            }
+            
+            $rowData[0][0] = date("Y-m-d", strtotime(\PHPExcel_Shared_Date::ExcelToPHP($rowData[0][0])));
+            
+            $servicesheduler = new ServiceshedulerSearch();
+            $servicesheduler->date = $rowData[0][0];
+            $servicesheduler->responsible = $rowData[0][1];
+            $servicesheduler->save();
+            print_r($servicesheduler->getErrors());            
+        }        
+        die("okay");        
+    }
+    
     /**
      * Updates an existing Servicesheduler model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -170,7 +201,7 @@ class ServiceshedulerController extends Controller
 
         foreach ($pk as $key => $value) 
         {
-            $sql = "DELETE FROM sk_servicesheduler WHERE id = $value";
+            $sql = "DELETE FROM {{%servicesheduler}} WHERE id = $value";
             $query = Yii::$app->db->createCommand($sql)->execute();
         }
 

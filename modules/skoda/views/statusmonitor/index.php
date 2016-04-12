@@ -95,6 +95,8 @@ endif; ?>
         <?= Html::a(FA::icon('trash') . Module::t('module', 'STATUS_DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']) ?>  
 
         <?= Html::a(FA::icon('bar-chart') . Module::t('module', 'STATUS_SHOW_MONITOR'), ['monitor'], ['class' => 'btn btn-info btn-sm']) ?>
+        
+        <?= Html::a(FA::icon('file-excel-o') . Module::t('module', 'STATUS_EXPORT_EXCEL'), ['export'], ['class' => 'btn btn-warning btn-sm']) ?>
 
     </p>
 

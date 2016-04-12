@@ -63,6 +63,32 @@ class StatusmonitorController extends Controller
             'model' => $model,
         ]);
     }
+    
+    public function actionExport(){
+        $model = StatusmonitorSearch::find()->All();
+        $filename = 'Data-'.Date('YmdGis').'-statusmonitor.xls';
+        header("Content-type: application/vnd-ms-excel");
+        header("Content-Disposition: attachment; filename=".$filename);
+        echo '<table border="1" width="100%">
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Начало</th>
+                    <th>Окончание</th>
+                </tr>
+            </thead>';
+            foreach($model as $data){
+                echo '
+                    <tr>
+                        <td>'.$data['regnumber'].'</td>
+                        <td>'.$data['from'].'</td>
+                        <td>'.$data['to'].'</td>
+                    </tr>
+                ';
+            }
+        echo '</table>';
+
+    }    
 
     public function actionCalendar()
     {

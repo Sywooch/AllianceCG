@@ -34,6 +34,7 @@
 		'SERVICESHEDULER_CREATE' => 'Добавление',
 		'SERVICESHEDULER' => 'График смен',
 		'STATUSMONITOR' => 'Монитор готовности',
+                'STATUS_EXPORT_EXCEL' => 'Excel',
 		'STATUS_SHOW_MONITOR' => 'Просмотр',	
 		'NAV_SKODA' => 'ŠKODA',
 		'ERROR_WORKSHEDULER_DOES_NOT_EXIST_TO' => 'На дату окончания не назначен мастер-консультант',

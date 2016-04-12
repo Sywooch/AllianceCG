@@ -30,6 +30,8 @@
         <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'STATUS_CREATE'), ['create'], ['class' => 'btn btn-success btn-sm', 'id' => 'refreshButton']) ?>
 
         <?= Html::a(FA::icon('refresh')  . ' ' . Module::t('module', 'STATUS_REFRESH'), ['calendar'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
+        
+        <?= Html::a(FA::icon('file-excel-o') . Module::t('module', 'STATUS_EXPORT_EXCEL'), ['export'], ['class' => 'btn btn-warning btn-sm']) ?>
 
     </p>
     

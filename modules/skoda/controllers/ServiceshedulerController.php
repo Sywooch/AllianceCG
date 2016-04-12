@@ -44,6 +44,30 @@ class ServiceshedulerController extends Controller
         ]);
     }
     
+    public function actionExport(){
+        $model = ServiceshedulerSearch::find()->All();
+        $filename = 'Data-'.Date('YmdGis').'-statusmonitor.xls';
+        header("Content-type: application/vnd-ms-excel");
+        header("Content-Disposition: attachment; filename=".$filename);
+        echo '<table border="1" width="100%">
+            <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Мастер-консультант</th>
+                </tr>
+            </thead>';
+            foreach($model as $data){
+                echo '
+                    <tr>
+                        <td>'.$data['date'].'</td>
+                        <td>'.$data['responsible'].'</td>
+                    </tr>
+                ';
+            }
+        echo '</table>';
+
+    }       
+    
     public function actionList()
     {
         $model = new ServiceshedulerSearch();

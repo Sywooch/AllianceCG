@@ -46,7 +46,7 @@ class ServiceshedulerController extends Controller
     
     public function actionExport(){
         $model = ServiceshedulerSearch::find()->All();
-        $filename = 'Data-'.Date('YmdGis').'-statusmonitor.xls';
+        $filename = 'Servicesheduler-'.Date('Y-m-d-H-i-s').'.xls';
         header("Content-type: application/vnd-ms-excel");
         header("Content-Disposition: attachment; filename=".$filename);
         echo '<table border="1" width="100%">

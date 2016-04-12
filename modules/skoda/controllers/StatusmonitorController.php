@@ -66,7 +66,7 @@ class StatusmonitorController extends Controller
     
     public function actionExport(){
         $model = StatusmonitorSearch::find()->All();
-        $filename = 'Data-'.Date('YmdGis').'-statusmonitor.xls';
+        $filename = 'Statusmonitor-'.Date('Y-m-d-H-i-s').'.xls';
         header("Content-type: application/vnd-ms-excel");
         header("Content-Disposition: attachment; filename=".$filename);
         echo '<table border="1" width="100%">

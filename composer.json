@@ -22,7 +22,8 @@
 		"2amigos/yii2-tinymce-widget": "~1.1",
 		"FortAwesome/Font-Awesome": "*",
 		"rmrevin/yii2-fontawesome": "~2.12",
-        "bluezed/yii2-scroll-top": "*"
+                "bluezed/yii2-scroll-top": "*",
+                "phpoffice/phpexcel": "dev-develop"
 	},
 	"require-dev": {
 		"yiisoft/yii2-codeception": "*",

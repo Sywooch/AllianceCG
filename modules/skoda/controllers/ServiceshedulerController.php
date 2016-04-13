@@ -47,8 +47,12 @@ class ServiceshedulerController extends Controller
     public function actionExport(){
         $model = ServiceshedulerSearch::find()->All();
         $filename = 'Servicesheduler-'.Date('Y-m-d-H-i-s').'.xls';
-        header("Content-type: application/vnd-ms-excel");
+        echo '<meta http-equiv="Content-type" content="text/html; charset=utf-8" />';
+        header("Content-type: application/vnd-ms-excel; charset=utf-8");
+        header("Content-Transfer-Encoding: binary");
+//        header("Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         header("Content-Disposition: attachment; filename=".$filename);
+        header('Pragma: no-cache');
         echo '<table border="1" width="100%">
             <thead>
                 <tr>
@@ -152,7 +156,7 @@ class ServiceshedulerController extends Controller
                 continue;
             }
             
-            $dateRowData = date("Y-m-d", strtotime(\PHPExcel_Shared_Date::ExcelToPHP($rowData[0][0])));
+            $dateRowData = date($format = "Y-m-d", \PHPExcel_Shared_Date::ExcelToPHP($rowData[0][0])); 
             
             $servicesheduler = new ServiceshedulerSearch();
             $servicesheduler->date = $dateRowData;

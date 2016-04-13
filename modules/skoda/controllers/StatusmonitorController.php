@@ -199,14 +199,13 @@ class StatusmonitorController extends Controller
         }
     }
 
-
     public function actionMultipledelete()
     {
         $pk = Yii::$app->request->post('row_id');
 
         foreach ($pk as $key => $value) 
         {
-            $sql = "DELETE FROM sk_statusmonitor WHERE id = $value";
+            $sql = "DELETE FROM {{%statusmonitor}} WHERE id = $value";
             $query = Yii::$app->db->createCommand($sql)->execute();
         }
 

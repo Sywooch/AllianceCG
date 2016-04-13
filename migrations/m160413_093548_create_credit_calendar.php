@@ -24,6 +24,7 @@ class m160413_093548_create_credit_calendar extends Migration
             'is_repeat' => $this->boolean(),
             'author' => $this->string(255),
             'created_at' => $this->smallInteger()->notNull()->defaultValue(0),
+            'updated_at' => $this->smallInteger()->notNull()->defaultValue(0),
         ]);
     }
 

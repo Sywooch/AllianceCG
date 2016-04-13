@@ -23,7 +23,8 @@
 		"FortAwesome/Font-Awesome": "*",
 		"rmrevin/yii2-fontawesome": "~2.12",
                 "bluezed/yii2-scroll-top": "*",
-                "phpoffice/phpexcel": "dev-develop"
+                "phpoffice/phpexcel": "dev-develop",
+		"janisto/yii2-timepicker": "*"
 	},
 	"require-dev": {
 		"yiisoft/yii2-codeception": "*",

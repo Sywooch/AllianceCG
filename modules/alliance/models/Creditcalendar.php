@@ -1,6 +1,8 @@
 <?php
 
 namespace app\modules\alliance\models;
+use app\modules\alliance\Module;
+use yii\behaviors\TimestampBehavior;
 
 use Yii;
 
@@ -22,6 +24,11 @@ use Yii;
  */
 class Creditcalendar extends \yii\db\ActiveRecord
 {
+    
+    public $dateTimeFrom;
+    public $dateTimeTo;
+    
+    
     /**
      * @inheritdoc
      */
@@ -33,11 +40,33 @@ class Creditcalendar extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function behaviors()
     {
         return [
-            [['date_from', 'time_from', 'date_to', 'time_to'], 'safe'],
+            TimestampBehavior::className(),
+        ];
+    }
+    
+    public function getDateTimeFrom()
+    {
+        return $this->date_from . ' ' . $this->time_from;
+    }
+    
+    public function getDateTimeTo()
+    {
+        return $this->date_to . ' ' . $this->time_to;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [            
+//            ['status', 'default', 'value' => self::STATUS_ACTIVE], Yii::$app->user->identity->userfullname
+            [['date_from', 'time_from', 'date_to', 'time_to', 'dateTimeFrom', 'dateTimeTo'], 'safe'],
             [['description'], 'string'],
+            ['author', 'default', 'value' => Yii::$app->user->identity->userfullname],
             [['is_task', 'is_repeat', 'created_at'], 'integer'],
             [['title', 'location', 'author'], 'string', 'max' => 255],
         ];
@@ -49,18 +78,20 @@ class Creditcalendar extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'title' => Yii::t('app', 'Title'),
-            'date_from' => Yii::t('app', 'Date From'),
-            'time_from' => Yii::t('app', 'Time From'),
-            'date_to' => Yii::t('app', 'Date To'),
-            'time_to' => Yii::t('app', 'Time To'),
-            'description' => Yii::t('app', 'Description'),
-            'location' => Yii::t('app', 'Location'),
-            'is_task' => Yii::t('app', 'Is Task'),
-            'is_repeat' => Yii::t('app', 'Is Repeat'),
-            'author' => Yii::t('app', 'Author'),
-            'created_at' => Yii::t('app', 'Created At'),
+            'id' => Module::t('module', 'ID'),
+            'title' => Module::t('module', 'CREDITCALENDAR_TITLE'),
+            'date_from' => Module::t('module', 'CREDITCALENDAR_DATE_FROM'),
+            'time_from' => Module::t('module', 'CREDITCALENDAR_TIME_FROM'),
+            'date_to' => Module::t('module', 'CREDITCALENDAR_DATE_TO'),
+            'time_to' => Module::t('module', 'CREDITCALENDAR_TIME_TO'),
+            'description' => Module::t('module', 'CREDITCALENDAR_DESCRIPTION'),
+            'location' => Module::t('module', 'CREDITCALENDAR_LOCATION'),
+            'is_task' => Module::t('module', 'CREDITCALENDAR_IS_TASK'),
+            'is_repeat' => Module::t('module', 'CREDITCALENDAR_IS_REPEAT'),
+            'author' => Module::t('module', 'CREDITCALENDAR_AUTHOR'),
+            'created_at' => Module::t('module', 'CREDITCALENDAR_CREATED_AT'),
+            'dateTimeFrom' => 'От: ',
+            'dateTimeTo' => 'До: ',
         ];
     }
 }

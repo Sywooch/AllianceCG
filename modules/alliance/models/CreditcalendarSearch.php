@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\modules\alliance\models\Creditcalendar;
+use yii\data\Sort;
 
 /**
  * CreditcalendarSearch represents the model behind the search form about `app\modules\alliance\models\Creditcalendar`.
@@ -31,6 +32,24 @@ class CreditcalendarSearch extends Creditcalendar
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
+    
+    public function titleautocomplete()
+    {
+        $listdata= Creditcalendar::find()
+            ->select(['title as value', 'title as label'])
+            ->asArray()
+            ->all();
+        return $listdata;
+    }
+    
+    public function authorautocomplete()
+    {
+        $listdata= Creditcalendar::find()
+            ->select(['author as value', 'author as label'])
+            ->asArray()
+            ->all();
+        return $listdata;
+    }
 
     /**
      * Creates data provider instance with search query applied
@@ -45,8 +64,35 @@ class CreditcalendarSearch extends Creditcalendar
 
         // add conditions that should always apply here
 
+        $sort = new Sort([
+            'attributes' => [
+                'id',
+                'title',
+                'date_from',
+                'date_to',
+                'location',
+                'author',
+                'dateTimeFrom' => [
+                    'asc' => ['date_from' => SORT_ASC, 'time_from' => SORT_ASC],
+                    'desc' => ['date_from' => SORT_DESC, 'time_from' => SORT_DESC],
+                    'label' => 'dateTimeFrom',
+                    'default' => SORT_ASC
+                ],
+                'dateTimeTo' => [
+                    'asc' => ['date_to' => SORT_ASC, 'time_to' => SORT_ASC],
+                    'desc' => ['date_to' => SORT_DESC, 'time_to' => SORT_DESC],
+                    'label' => 'dateTimeTo',
+                    'default' => SORT_DESC,
+                ],
+            ],
+            'defaultOrder' => [
+                'dateTimeTo' => SORT_DESC,
+            ],
+        ]);                
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => $sort,
         ]);
 
         $this->load($params);

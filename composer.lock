@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e2c3d0aa68f437e4852c2b3264127e46",
-    "content-hash": "2a9bad5150d55eaf645b32b320390e54",
+    "hash": "fd6f65edadeb3f69fac65142df43a4fb",
+    "content-hash": "d837dc36110c332a199f1319116e1f0a",
     "packages": [
         {
             "name": "2amigos/yii2-tinymce-widget",
@@ -343,6 +343,29 @@
             ]
         },
         {
+            "name": "bower-asset/jqueryui-timepicker-addon",
+            "version": "v1.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/trentrichardson/jQuery-Timepicker-Addon.git",
+                "reference": "f66f23c9fb812a8cbe0435d714b8fd06973c18f9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/trentrichardson/jQuery-Timepicker-Addon/zipball/f66f23c9fb812a8cbe0435d714b8fd06973c18f9",
+                "reference": "f66f23c9fb812a8cbe0435d714b8fd06973c18f9",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "dist/jquery-ui-timepicker-addon.js",
+                    "dist/jquery-ui-timepicker-addon.css"
+                ],
+                "bower-asset-ignore": []
+            }
+        },
+        {
             "name": "bower-asset/punycode",
             "version": "v1.3.2",
             "source": {
@@ -579,6 +602,64 @@
                 "icon"
             ],
             "time": "2015-11-30 17:28:02"
+        },
+        {
+            "name": "janisto/yii2-timepicker",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/janisto/yii2-timepicker.git",
+                "reference": "91b3e8483404f0667eaa9fd73acf121a99494999"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/janisto/yii2-timepicker/zipball/91b3e8483404f0667eaa9fd73acf121a99494999",
+                "reference": "91b3e8483404f0667eaa9fd73acf121a99494999",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jqueryui-timepicker-addon": ">=1.5.2",
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-jui": ">=2.0.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.5",
+                "scrutinizer/ocular": "~1.1"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "asset-installer-paths": {
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "janisto\\timepicker\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "public domain"
+            ],
+            "authors": [
+                {
+                    "name": "Jani Mikkonen",
+                    "email": "janisto@php.net"
+                }
+            ],
+            "description": "Yii 2 widget for jQuery Timepicker Addon.",
+            "homepage": "https://github.com/janisto/yii2-timepicker",
+            "keywords": [
+                "date",
+                "datetime",
+                "extension",
+                "time",
+                "timepicker",
+                "widget",
+                "yii2"
+            ],
+            "time": "2015-11-12 10:16:09"
         },
         {
             "name": "kartik-v/yii2-krajee-base",

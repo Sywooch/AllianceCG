@@ -16,7 +16,7 @@ use yii\helpers\Url;
 //                'visible' => Yii::$app->user->can('admin')            
             ],
             [
-                'label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_CREDITCALENDAR'),
+                'label' => FA::icon('calendar') . ' ' . Module::t('module', 'ALLIANCE_CREDITCALENDAR'),
                 'url' => '/alliance/creditcalendar',    
                 'visible' => Yii::$app->user->can('admin')            
             ],

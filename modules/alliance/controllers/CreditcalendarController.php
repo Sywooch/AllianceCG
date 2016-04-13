@@ -35,10 +35,12 @@ class CreditcalendarController extends Controller
      */
     public function actionIndex()
     {
+        $model = new Creditcalendar();
         $searchModel = new CreditcalendarSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'model' => $model,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -63,7 +65,16 @@ class CreditcalendarController extends Controller
      */
     public function actionCreate()
     {
+        $formatter = new \yii\i18n\Formatter;
+        $formatter->timeZone = 'Europe/Minsk';
+        $formatter->dateFormat = 'php:Y-m-d';
+        $formatter->timeFormat = 'php:h:i';
+        $curdate = $formatter->asDate('now');        
+        $curtime = $formatter->asTime('now');
+        
         $model = new Creditcalendar();
+        $model->date_from = $curdate;
+        $model->time_from = $curtime;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -121,4 +132,18 @@ class CreditcalendarController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionMultipledelete()
+    {
+        $pk = Yii::$app->request->post('row_id');
+
+        foreach ($pk as $key => $value) 
+        {
+            $sql = "DELETE FROM {{%creditcalendar}} WHERE id = $value";
+            $query = Yii::$app->db->createCommand($sql)->execute();
+        }
+
+        return $this->redirect(['index']);
+
+    }    
 }

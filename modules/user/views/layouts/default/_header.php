@@ -27,10 +27,27 @@ use app\modules\user\Module;
             false,
         Yii::$app->user->can('admin') ?
             ['label' => FA::icon('building') . ' ' . Module::t('module', 'NAV_ALLIANCE'), 'items' => [
-                    ['label' => FA::icon('pie-chart') . ' ' . Module::t('module', 'NAV_ALLIANCE_DASHBOARD'), 'url' => ['/alliance/']],
-                    ['label' => FA::icon('phone') . ' ' . Module::t('module', 'NAV_ALLIANCE_PHONEBOOK'), 'url' => ['/alliance/phonebook']],
-                    ['label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_DUTY'), 'url' => ['/alliance/']],
-                
+                    [
+                        'label' => FA::icon('pie-chart') . ' ' . Module::t('module', 'NAV_ALLIANCE_DASHBOARD'),
+                        'url' => ['/alliance/'],
+//                        'visible' => Yii::$app->user->can('root')
+                    ],
+                    [
+                        'label' => FA::icon('phone') . ' ' . Module::t('module', 'NAV_ALLIANCE_PHONEBOOK'),
+                        'url' => ['/alliance/phonebook'],
+                        'visible' => Yii::$app->user->can('admin')
+                        
+                    ],
+                    [
+                        'label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_CREDITCALENDAR'),
+                        'url' => ['/alliance/creditcalendar/calendar'], 
+//                        'visible' => Yii::$app->user->can('admin')
+                    ],
+                    [
+                        'label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_DUTY'),
+                        'url' => ['/alliance/'], 
+                        'visible' => Yii::$app->user->can('admin')
+                    ],                
                 ],
             ] :
             false,

@@ -18,10 +18,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'label' => FA::icon('phone') . ' ' . Module::t('module', 'NAV_ALLIANCE_PHONEBOOK'),
                         'url' => '/alliance/phonebook/index',
+                        'visible' => Yii::$app->user->can('admin')
+                    ],
+                    [
+                        'label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_CREDITCALENDAR'),
+                        'url' => '/alliance/creditcalendar/calendar',
+                        'visible' => Yii::$app->user->can('admin')
                     ],
                     [
                         'label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_DUTY'),
                         'url' => '/alliance/dutygraph/',
+                        'visible' => Yii::$app->user->can('admin')
                     ],
                 ]),
             ]);

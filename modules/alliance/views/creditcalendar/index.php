@@ -8,6 +8,7 @@ use app\components\grid\SetColumn;
 use app\components\grid\LinkColumn;
 use yii\jui\AutoComplete;
 use app\modules\admin\models\Companies;
+use yii\jui\DatePicker;
 use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
@@ -106,6 +107,11 @@ $this->registerJs('
             [
                 'attribute' => 'dateTimeFrom',
                 'format' => ['date', 'php:H:i:s d/m/Y'],
+                'filter' => DatePicker::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'dateTimeFrom',
+                    'options' => ['class' => 'form-control']
+                ]),
                 'value' => function ($data) {
                     return $data->getDateTimeFrom();
                 },
@@ -113,6 +119,11 @@ $this->registerJs('
             [
                 'attribute' => 'dateTimeTo',
                 'format' => ['date', 'php:H:i:s d/m/Y'],
+                'filter' => DatePicker::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'dateTimeTo',
+                    'options' => ['class' => 'form-control']
+                ]),
                 'value' => function ($data) {
                     return $data->getdateTimeTo();
                 },

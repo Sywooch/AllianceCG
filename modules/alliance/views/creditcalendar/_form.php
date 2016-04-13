@@ -46,7 +46,7 @@ use janisto\timepicker\TimePicker;
         
     </div>
     
-    <div class="col-sm-3">
+    <div class="col-sm-2">
         
         <?=  TimePicker::widget([
                 'model' => $model,
@@ -69,7 +69,32 @@ use janisto\timepicker\TimePicker;
         
     </div>
     
-    <!--<div> - </div>-->
+    <div class="col-sm-2">
+        <div style="text-align: center">
+            <?= '-'; ?>
+        </div>
+    </div>
+    
+    <div class="col-sm-2">
+        
+        <?=  TimePicker::widget([
+                'model' => $model,
+                'attribute' => 'time_to',
+                'template' => '{input}',
+                'language' => 'ru',
+                'mode' => 'time',
+                'clientOptions'=>[
+                    'timeFormat' => 'HH:mm:ss',
+                    'showSecond' => false,                    
+                ],
+                'options' => [
+                    'class' => 'form-control',
+                    'placeholder' => $model->getAttributeLabel( 'time_to' ),
+                ],
+            ]);
+        ?>
+        
+    </div>
     
     <div class="col-sm-3">
         
@@ -86,27 +111,6 @@ use janisto\timepicker\TimePicker;
                 'options' => [
                     'class' => 'form-control',
                     'placeholder' => $model->getAttributeLabel( 'date_to' ),
-                ],
-            ]);
-        ?>
-        
-    </div>
-    
-    <div class="col-sm-3">
-        
-        <?=  TimePicker::widget([
-                'model' => $model,
-                'attribute' => 'time_to',
-                'template' => '{input}',
-                'language' => 'ru',
-                'mode' => 'time',
-                'clientOptions'=>[
-                    'timeFormat' => 'HH:mm:ss',
-                    'showSecond' => false,                    
-                ],
-                'options' => [
-                    'class' => 'form-control',
-                    'placeholder' => $model->getAttributeLabel( 'time_to' ),
                 ],
             ]);
         ?>

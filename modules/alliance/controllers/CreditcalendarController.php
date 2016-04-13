@@ -144,6 +144,43 @@ class CreditcalendarController extends Controller
         }
 
         return $this->redirect(['index']);
+    }
+    
+    public function actionExport(){
+        $model = Creditcalendar::find()->All();
+        $filename = 'Creditcalendar-'.Date('Y-m-d-H-i-s').'.xls';
+        echo '<meta http-equiv="Content-type" content="text/html; charset=utf-8" />';
+        header("Content-type: application/vnd-ms-excel; charset=utf-8");
+        header("Content-Transfer-Encoding: binary");
+        header("Content-Disposition: attachment; filename=".$filename);
+        header('Pragma: no-cache');
+        echo '<table border="1" width="100%">
+            <thead>
+                <tr>
+                    <th>Наименование</th>
+                    <th>От:</th>
+                    <th>До:</th>
+                    <th>Описание</th>
+                    <th>Месторасположение</th>
+                    <th>Автор</th>
+                    <th>Дата создания</th>
+                    
+                </tr>
+            </thead>';
+            foreach($model as $data){
+                echo '
+                    <tr>
+                        <td>'.$data['title'].'</td>
+                        <td>'.$data['dateTimeFrom'].'</td>
+                        <td>'.$data['dateTimeTo'].'</td>
+                        <td>'.$data['description'].'</td>
+                        <td>'.$data['location'].'</td>
+                        <td>'.$data['author'].'</td>
+                        <td>'.$data['created_at'].'</td>
+                    </tr>
+                ';
+            }
+        echo '</table>';
 
-    }    
+    }     
 }

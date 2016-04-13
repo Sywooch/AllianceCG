@@ -12,15 +12,23 @@ use yii\helpers\Url;
         'items' => array_filter([
             [
                 'label' => FA::icon('pie-chart') . ' ' . Module::t('module', 'NAV_ALLIANCE'),
-                'url' => '/alliance',                
+                'url' => '/alliance',    
+//                'visible' => Yii::$app->user->can('admin')            
+            ],
+            [
+                'label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_CREDITCALENDAR'),
+                'url' => '/alliance/creditcalendar',    
+                'visible' => Yii::$app->user->can('admin')            
             ],
             [
                 'label' => FA::icon('phone') . ' ' . Module::t('module', 'NAV_ALLIANCE_PHONEBOOK'),
-                'url' => '/alliance/phonebook',
+                'url' => '/alliance/phonebook',    
+                'visible' => Yii::$app->user->can('admin')            
             ],
             [
                 'label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_DUTY'),
-                'url' => '/alliance/dutygraph/',
+                'url' => '/alliance/dutygraph/',    
+                'visible' => Yii::$app->user->can('admin')            
             ],
         ]),
     ]);

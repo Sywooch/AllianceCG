@@ -28,33 +28,13 @@
         <!--</b></p>-->
 
 <div class="pull-right">
-    <?php $model = new ContactForm(); ?>
-
-    <?php
-        $form = ActiveForm::begin([
-                'method' => 'post',
-                'action' => Url::to(['//main/contact/index']),
-        ]);
-    ?>
-
-<div class="col-lg-3" style="width: 50%;">
-    <?= $form->field($model, 'name', ['template' => "{input}\n{hint}\n{error}"])->textInput(['placeholder' => $model->getAttributeLabel('name')]);  ?>
+            <?php
+                echo Html::img('@web/img/logo/logo.png', ['width'=>'36','height'=>'36'])
+            ?>
+            <b>
+            <?php
+                echo 'Монитор готовности Skoda';
+            ?> 
+        </b></p>    
 </div>
-
-<div class="col-lg-3" style="width: 50%;">
-    <?= $form->field($model, 'email', ['template' => "{input}\n{hint}\n{error}"])->textInput(['placeholder' => $model->getAttributeLabel('email')]);  ?>
-</div>
-<div class="col-lg-3" style="width: 100%;">
-    <?php echo $form->field($model, 'subject')->textInput(['maxlength' => 255, 'id' => 'contact_form', 'placeholder' => $model->getAttributeLabel('subject')])->label(false) ?>
-    <?= $form->field($model, 'body')->textArea(['rows' => 3, 'placeholder' => $model->getAttributeLabel('body')])->label(false) ?>
-    <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-        'captchaAction' => '/main/contact/captcha',
-        'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
-    ]) ?>                    
-    <div class="form-group" style="float: right">
-        <?= Html::submitButton(Module::t('module', 'BUTTON_SEND'), ['class' => 'btn btn-success', 'name' => 'contact-button']) ?>
-    </div>    
-    <?php ActiveForm::end(); ?>
-</div>                
-    </div>
 </footer>

@@ -75,5 +75,6 @@ return [
             'NAV_ALLIANCE_DASHBOARD' => 'DASHBOARD',
             'NAV_ALLIANCE_PHONEBOOK' => 'Телефонная книга',
             'NAV_ALLIANCE_DUTY' => 'График дежурств',
+            'NAV_ALLIANCE_CREDITCALENDAR' => 'ОК. Календарь',
 
 ];

@@ -20,4 +20,5 @@
             'PHONEBOOK_POSITION' => 'Должность',
             'PHONEBOOK_PHONE' => 'Тел.',
             'PHONEBOOK_COMPANY' => 'Организация',
+            'NAV_ALLIANCE_CREDITCALENDAR' => 'ОК. Календарь',
 	];

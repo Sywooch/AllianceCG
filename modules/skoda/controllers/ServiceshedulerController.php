@@ -152,10 +152,10 @@ class ServiceshedulerController extends Controller
                 continue;
             }
             
-            $rowData[0][0] = date("Y-m-d", strtotime(\PHPExcel_Shared_Date::ExcelToPHP($rowData[0][0])));
+            $dateRowData = date("Y-m-d", strtotime(\PHPExcel_Shared_Date::ExcelToPHP($rowData[0][0])));
             
             $servicesheduler = new ServiceshedulerSearch();
-            $servicesheduler->date = $rowData[0][0];
+            $servicesheduler->date = $dateRowData;
             $servicesheduler->responsible = $rowData[0][1];
             $servicesheduler->save();
             print_r($servicesheduler->getErrors());            

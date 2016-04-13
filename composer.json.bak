@@ -28,7 +28,8 @@
 		"philippfrenzel/yii2fullcalendar": "*",
 		"kartik-v/yii2-widget-sidenav": "*",
 		"FortAwesome/Font-Awesome": "*",
-		"rmrevin/yii2-fontawesome": "~2.12"
+		"rmrevin/yii2-fontawesome": "~2.12",
+                "phpoffice/phpexcel": "dev-develop"
 	},
 	"require-dev": {
 		"yiisoft/yii2-codeception": "*",

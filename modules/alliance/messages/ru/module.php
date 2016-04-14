@@ -2,13 +2,13 @@
 
 	return [
 
-                'NAV_SKODA_DASHBOARD' => 'DASHBOARD',
-                'NAV_SKODA_SERVICESHEDULER' => 'Смены',
-                'NAV_SKODA_STATUSMONITOR' => 'Монитор готовности',
-                'NAV_ADMIN_DASHBOARD' => 'DASHBOARD',
-                'NAV_USERS' => 'Пользователи',
-                'NAV_COMPANIES' => 'Организации',
-                'NAV_POSITIONS' => 'Должности',
+            'NAV_SKODA_DASHBOARD' => 'DASHBOARD',
+            'NAV_SKODA_SERVICESHEDULER' => 'Смены',
+            'NAV_SKODA_STATUSMONITOR' => 'Монитор готовности',
+            'NAV_ADMIN_DASHBOARD' => 'DASHBOARD',
+            'NAV_USERS' => 'Пользователи',
+            'NAV_COMPANIES' => 'Организации',
+            'NAV_POSITIONS' => 'Должности',
     
             'NAV_ALLIANCE' => 'Альянс',
             'NAV_ALLIANCE_DASHBOARD' => 'DASHBOARD',
@@ -35,10 +35,12 @@
             'CREDITCALENDAR_TIME_TO' => 'Время до:',
             'CREDITCALENDAR_DESCRIPTION' => 'Описание',
             'CREDITCALENDAR_LOCATION' => 'Месторасположение',
-            'CREDITCALENDAR_IS_TASK' => 'Задание',
+            'CREDITCALENDAR_IS_TASK' => 'Событие/Задание',
             'CREDITCALENDAR_IS_REPEAT' => 'Повторяющееся событие',
             'CREDITCALENDAR_AUTHOR' => 'Автор',
             'CREDITCALENDAR_CREATED_AT' => 'Дата создания',
             'CREDITCALENDAR_TABLE' => 'Расписание',
             'CREDITCALENDAR_CALENDAR' => 'Календарь',
+            'CREDITCALENDAR_EVENT' => 'Событие',
+            'CREDITCALENDAR_TASK' => 'Задача',
 	];

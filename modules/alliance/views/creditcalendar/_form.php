@@ -6,6 +6,7 @@ use rmrevin\yii\fontawesome\FA;
 use app\modules\alliance\Module;
 use yii\jui\DatePicker;
 use app\modules\admin\models\Companies;
+use app\modules\alliance\models\Creditcalendar;
 use yii\helpers\ArrayHelper;
 use janisto\timepicker\TimePicker;
 
@@ -149,9 +150,13 @@ use janisto\timepicker\TimePicker;
             'prompt' => '-- ' . $model->getAttributeLabel( 'location' ) . ' --',
         ];
         echo $form->field($model, 'location', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('institution') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
-    ?>        
+    ?>
+    
+    <?= $form->field($model, 'status', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('check-circle-o') . ' </span>{input}</div>{error}'])->dropDownList(Creditcalendar::getStatusesArray()) ?>
+    
+    <?php // $form->field($model, 'status')->textInput() ?>
 
-    <?= $form->field($model, 'is_task')->textInput() ?>
+    <?php // $form->field($model, 'is_task')->textInput() ?>
 
     <?php // $form->field($model, 'is_repeat')->textInput() ?>
 

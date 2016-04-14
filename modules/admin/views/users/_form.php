@@ -69,7 +69,7 @@ use yii\widgets\ActiveForm;
         
     <?= $form->field($model, 'file', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('photo') . ' </span>{input}</div>{error}'])->fileInput() ?>
 
-    <?=  $form->field($model, 'status', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('check-circle-o') . ' </span>{input}</div>{error}'])->dropDownList(User::getStatusesArray()) ?>
+    <?= $form->field($model, 'status', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('check-circle-o') . ' </span>{input}</div>{error}'])->dropDownList(User::getStatusesArray()) ?>
 
  
     <?php ActiveForm::end(); ?>

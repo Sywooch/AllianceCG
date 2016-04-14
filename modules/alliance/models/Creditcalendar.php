@@ -22,11 +22,17 @@ use Yii;
  * @property integer $is_repeat
  * @property string $author
  * @property integer $created_at
+ * @property integer $status
+ * @property integer $responsible
  */
 class Creditcalendar extends \yii\db\ActiveRecord
 {
     const IS_TASK_CALENDAR= 0;
     const IS_TASK_TASK = 1;
+    
+    const STATUS_ATWORK = 0;
+    const STATUS_CLARIFY = 1;
+    const STATUS_FINISHED = 2;
     
     public $dateTimeFrom;
     public $dateTimeTo;
@@ -50,6 +56,20 @@ class Creditcalendar extends \yii\db\ActiveRecord
         ];
     }
     
+    public function getStatuses()
+    {
+        return ArrayHelper::getValue(self::getStatusesArray(), $this->status);
+    }    
+    
+    public function getStatusesArray()
+    {
+        return[
+            self::STATUS_ATWORK => 'В работе',
+            self::STATUS_CLARIFY => 'Уточнение',
+            self::STATUS_FINISHED => 'Завершено',
+        ];
+    }
+    
     public function getIsTask()
     {
         return ArrayHelper::getValue(self::getTasksArray(), $this->is_task);
@@ -58,7 +78,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
     public static function getTasksArray()
     {
         return [
-            self::IS_TASK_CALENDAR => 'Календарь',
+            self::IS_TASK_CALENDAR => 'Событие',
             self::IS_TASK_TASK => 'Задание',
         ];
     }
@@ -95,10 +115,13 @@ class Creditcalendar extends \yii\db\ActiveRecord
     public function rules()
     {
         return [            
-//            ['status', 'default', 'value' => self::STATUS_ACTIVE], Yii::$app->user->identity->userfullname
+            ['status', 'default', 'value' => self::STATUS_ATWORK],
+//            Yii::$app->user->identity->userfullname
+            ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
             [['date_from', 'time_from', 'date_to', 'time_to', 'dateTimeFrom', 'dateTimeTo'], 'safe'],
             [['description'], 'string'],
             ['author', 'default', 'value' => Yii::$app->user->identity->userfullname],
+            ['is_task', 'in', 'range' => array_keys(self::getTasksArray())],
             [['is_task', 'is_repeat', 'created_at'], 'integer'],
             [['title', 'location', 'author'], 'string', 'max' => 255],
         ];

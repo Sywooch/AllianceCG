@@ -95,6 +95,11 @@ class CreditcalendarController extends Controller
         $model->time_from = $curtime;
         $model->date_to = $tomorrow;
         $model->time_to = $curtime;
+        
+        if(isset($_GET['is_task']))
+        {
+           $model->is_task = $_GET['is_task'];
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

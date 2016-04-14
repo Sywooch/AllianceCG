@@ -20,7 +20,7 @@ class CreditcalendarSearch extends Creditcalendar
     {
         return [
             [['id', 'is_task', 'is_repeat', 'created_at'], 'integer'],
-            [['title', 'date_from', 'time_from', 'date_to', 'time_to', 'description', 'location', 'author'], 'safe'],
+            [['title', 'date_from', 'time_from', 'date_to', 'time_to', 'description', 'location', 'author', 'status'], 'safe'],
         ];
     }
 
@@ -72,6 +72,7 @@ class CreditcalendarSearch extends Creditcalendar
                 'date_to',
                 'location',
                 'is_task',
+                'status',
                 'author',
                 'dateTimeFrom' => [
                     'asc' => ['date_from' => SORT_ASC, 'time_from' => SORT_ASC],
@@ -120,6 +121,7 @@ class CreditcalendarSearch extends Creditcalendar
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'location', $this->location])
             ->andFilterWhere(['like', 'author', $this->author])
+            ->andFilterWhere(['like', 'status', $this->status])
             ->andFilterWhere(['>=', 'date_from', $this->dateTimeFrom ? strtotime($this->date_from . ' ' . $this->time_from) : null])
             ->andFilterWhere(['<=', 'date_to', $this->dateTimeTo ? strtotime($this->date_to . ' ' . $this->time_to) : null])
                 ;

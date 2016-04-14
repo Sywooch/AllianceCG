@@ -4,6 +4,7 @@ namespace app\modules\alliance\models;
 use app\modules\alliance\Module;
 use yii\behaviors\TimestampBehavior;
 use rmrevin\yii\fontawesome\FA;
+use yii\helpers\ArrayHelper;
 
 use Yii;
 
@@ -145,6 +146,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
             'is_repeat' => Module::t('module', 'CREDITCALENDAR_IS_REPEAT'),
             'author' => Module::t('module', 'CREDITCALENDAR_AUTHOR'),
             'created_at' => Module::t('module', 'CREDITCALENDAR_CREATED_AT'),
+            'status' => Module::t('module', 'CREDITCALENDAR_STATUS'),
             'dateTimeFrom' => 'От: ',
             'dateTimeTo' => 'До: ',
         ];

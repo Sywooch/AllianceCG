@@ -12,6 +12,9 @@ use app\modules\alliance\models\Creditcalendar;
 use yii\jui\DatePicker;
 use yii\bootstrap\ButtonDropdown;
 use yii\helpers\ArrayHelper;
+use app\components\grid\ActionColumn;
+use yii\helpers\Url;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\alliance\models\CreditcalendarSearch */
@@ -20,6 +23,13 @@ use yii\helpers\ArrayHelper;
 $this->title = Module::t('module', 'ALLIANCE_CREDITCALENDAR');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_ALLIANCE'), 'url' => ['/alliance']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$script = <<< JS
+$(document).ready(function() {
+    setInterval(function(){ $("#creditcalendar_refresh").click(); }, 5000);
+});
+JS;
+$this->registerJs($script);
 
 $this->registerJs(' 
 
@@ -71,7 +81,10 @@ $this->registerJs('
         <?= Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'), ['export'], ['class' => 'btn btn-warning btn-sm']) ?>
                 
     </p>
-    <!--, 'id' => $model->id-->
+    
+    <?php Pjax::begin(); ?>
+    
+    <?= Html::a("", ['/alliance/creditcalendar/index'], ['class' => 'hidden_button', 'id' => 'creditcalendar_refresh']) ?>    
         
     <?= Yii::$app->session->getFlash('error'); ?>
     
@@ -149,19 +162,33 @@ $this->registerJs('
                 'format' => 'raw',
                 'filter' => ArrayHelper::map(Companies::find()->asArray()->all(), 'company_name', 'company_name'),
             ],
+//            [
+//                'attribute' => 'author',
+//                'format' => 'raw',
+//                'filter' => AutoComplete::widget([   
+//                        'model' => $searchModel,
+//                        'attribute' => 'author',             
+//                        'clientOptions' => [
+//                            'source' => $searchModel->authorautocomplete(),
+//                        ],
+//                        'options'=>[
+//                            'class'=>'form-control'
+//                        ]
+//                    ]),                
+//            ],
             [
-                'attribute' => 'author',
+                'class' => SetColumn::className(),
+                'attribute' => 'status',
                 'format' => 'raw',
-                'filter' => AutoComplete::widget([   
-                        'model' => $searchModel,
-                        'attribute' => 'author',             
-                        'clientOptions' => [
-                            'source' => $searchModel->authorautocomplete(),
-                        ],
-                        'options'=>[
-                            'class'=>'form-control'
-                        ]
-                    ]),                
+                'filter' => Creditcalendar::getStatusesArray(),
+                'value' => function ($data) {
+                    return $data->getStatuses();
+                },
+                'cssCLasses' => [
+                    Creditcalendar::STATUS_ATWORK => 'primary',
+                    Creditcalendar::STATUS_CLARIFY => 'warning',
+                    Creditcalendar::STATUS_FINISHED => 'success',
+                ],
             ],
 //            'dateTimeTo',
 //            'date_from',
@@ -175,7 +202,28 @@ $this->registerJs('
 //            'author',
 //            'created_at:datetime',
 
-            ['class' => 'yii\grid\ActionColumn'],
+//            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => ActionColumn::className(),
+                'contentOptions'=>['style'=>'width: 20px;'],
+                'template' => '{update}',
+                'buttons' => [
+                    'update' => function ($url, $model) {
+                        $title = false;
+                        $options = []; 
+                        $icon = '<span class="glyphicon glyphicon-pencil"></span>';
+                        $label = $icon;
+                        $url = Url::toRoute(['update', 'id' => $model->id]);
+                        $options['tabindex'] = '-1';
+                        return Html::a($label, $url, $options) .''. PHP_EOL;
+                    },
+                ],
+            ],
         ],
-    ]); ?>
+    ]);
+                    
+    Pjax::end(); 
+                    
+?>
+    
 </div>

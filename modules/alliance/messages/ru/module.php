@@ -43,4 +43,5 @@
             'CREDITCALENDAR_CALENDAR' => 'Календарь',
             'CREDITCALENDAR_EVENT' => 'Событие',
             'CREDITCALENDAR_TASK' => 'Задача',
+            'CREDITCALENDAR_STATUS' => 'Статус',
 	];

@@ -99,16 +99,6 @@ class Creditcalendar extends \yii\db\ActiveRecord
     {
         return $this->date_to . ' ' . $this->time_to;
     }
-    
-    public function getCurDateTime()
-    {        
-        $formatter = new \yii\i18n\Formatter;
-        $formatter->timeZone = 'Europe/Minsk';
-        $formatter->dateFormat = 'php:d/m/Y';
-        $formatter->timeFormat = 'php:h:i';
-        $curdatetime = $formatter->asDatetime('now');
-        return $curdatetime;
-    }
 
     /**
      * @inheritdoc

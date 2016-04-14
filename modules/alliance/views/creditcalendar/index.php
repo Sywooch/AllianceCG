@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $script = <<< JS
 $(document).ready(function() {
-    setInterval(function(){ $("#creditcalendar_refresh").click(); }, 5000);
+    setInterval(function(){ $("#creditcalendar_refresh").click(); }, 60000);
 });
 JS;
 $this->registerJs($script);
@@ -80,11 +80,11 @@ $this->registerJs('
         
         <?= Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'), ['export'], ['class' => 'btn btn-warning btn-sm']) ?>
                 
-    </p>
+    </p>    
     
     <?php Pjax::begin(); ?>
     
-    <?= Html::a("", ['/alliance/creditcalendar/index'], ['class' => 'hidden_button', 'id' => 'creditcalendar_refresh']) ?>    
+    <?= Html::a("", ['/alliance/creditcalendar/index'], ['class' => 'hidden_button', 'id' => 'creditcalendar_refresh']) ?>
         
     <?= Yii::$app->session->getFlash('error'); ?>
     
@@ -180,12 +180,14 @@ $this->registerJs('
                 'class' => SetColumn::className(),
                 'attribute' => 'status',
                 'format' => 'raw',
+                'name' => 'statuses',
+                'contentOptions'=>['style'=>'width: 50px;'],
                 'filter' => Creditcalendar::getStatusesArray(),
-                'value' => function ($data) {
-                    return $data->getStatuses();
-                },
+//                'value' => function ($data) {
+//                    return $data->getStatuses();
+//                },
                 'cssCLasses' => [
-                    Creditcalendar::STATUS_ATWORK => 'primary',
+                    Creditcalendar::STATUS_ATWORK => 'danger',
                     Creditcalendar::STATUS_CLARIFY => 'warning',
                     Creditcalendar::STATUS_FINISHED => 'success',
                 ],

@@ -44,4 +44,6 @@
             'CREDITCALENDAR_EVENT' => 'Событие',
             'CREDITCALENDAR_TASK' => 'Задача',
             'CREDITCALENDAR_STATUS' => 'Статус',
+            'CREDITCALENDAR_LINK_ERROR' => 'Переход совершен по неверной ссылке. Вернитесь на главную страницу и повторите переход',
+            'CREDITCALENDAR_CONFIRM_DELETE' => 'Удалить?',
 	];

@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\modules\alliance\models\Creditcalendar;
+use yii\helpers\Json;
 use yii\data\Sort;
 
 /**
@@ -49,6 +50,11 @@ class CreditcalendarSearch extends Creditcalendar
             ->asArray()
             ->all();
         return $listdata;
+    }
+    
+    public function calendarsearch(){
+        $items = Yii::$app->db->createCommand("SELECT `id` AS id, `id` AS url, concat(date_from,' ',time_from) AS start, concat(date_to,' ',time_to) AS `end`, concat(title,' (',author,')') AS title, CASE status WHEN '0' THEN 'red' WHEN '1' THEN 'primary' ELSE 'green' END as color FROM all_creditcalendar;;")->queryAll();
+        return Json::encode($items);
     }
 
     /**

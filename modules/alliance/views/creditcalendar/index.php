@@ -188,7 +188,7 @@ $this->registerJs('
 //                },
                 'cssCLasses' => [
                     Creditcalendar::STATUS_ATWORK => 'danger',
-                    Creditcalendar::STATUS_CLARIFY => 'warning',
+                    Creditcalendar::STATUS_CLARIFY => 'primary',
                     Creditcalendar::STATUS_FINISHED => 'success',
                 ],
             ],

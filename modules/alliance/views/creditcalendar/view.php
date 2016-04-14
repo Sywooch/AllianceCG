@@ -2,45 +2,69 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use rmrevin\yii\fontawesome\FA;
+use app\modules\alliance\Module;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\alliance\models\Creditcalendar */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Creditcalendars'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_ALLIANCE'), 'url' => ['/alliance']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ALLIANCE_CREDITCALENDAR'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+  
+    <?= $this->render('_submenu', [
+        'model' => $model,
+    ]) ?>
+
 <div class="creditcalendar-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
+    <p style="text-align: right">
+        <?= Html::a(FA::icon('edit') . ' ' . Module::t('module', 'CREDITCALENDAR_UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'CREDITCALENDAR_DELETE'), ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger btn-sm',
             'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                'confirm' => Module::t('module', 'CREDITCALENDAR_CONFIRM_DELETE'),
                 'method' => 'post',
             ],
         ]) ?>
     </p>
 
+<div class="panel panel-default">
+    <div class="panel-heading panel-info">
+        <?= $model->getIsTaskIcon() . ' ' . $model->author . ', ' . $model->location . ' ' . $model->created_at; ?>
+    </div>
+    <div class="panel-body">
+        <blockquote class="alert-info">
+            <h5>
+                <?= Html::encode($this->title) ?>
+            </h5>
+        </blockquote>
+        
+        <?= $model->description; ?>
+        
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'title',
-            'date_from',
-            'time_from',
-            'date_to',
-            'time_to',
-            'description:ntext',
-            'location',
-            'is_task',
-            'is_repeat',
-            'author',
-            'created_at',
+//            'id',
+//            'title',
+//            'date_from',
+//            'time_from',
+//            'date_to',
+//            'time_to',
+//            'description:ntext',
+//            'location',
+//            'is_task',
+//            'is_repeat',
+//            'author',
+//            'created_at',
         ],
-    ]) ?>
+    ]) ?>        
+        
+    </div>
+</div>    
+    
+
 
 </div>

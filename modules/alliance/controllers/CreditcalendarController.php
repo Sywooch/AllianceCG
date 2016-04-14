@@ -44,6 +44,14 @@ class CreditcalendarController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }    
+    public function actionCalendarsearch()
+    {
+        $this->layout = false;
+        $model = new CreditcalendarSearch();
+        return $this->render('_calendarSearch', [
+            'model' => $model,
+        ]);
     }
 
     /**

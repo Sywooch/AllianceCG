@@ -71,6 +71,7 @@ class CreditcalendarSearch extends Creditcalendar
                 'date_from',
                 'date_to',
                 'location',
+                'is_task',
                 'author',
                 'dateTimeFrom' => [
                     'asc' => ['date_from' => SORT_ASC, 'time_from' => SORT_ASC],

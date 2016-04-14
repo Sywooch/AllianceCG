@@ -47,6 +47,23 @@ class CreditcalendarController extends Controller
     }
 
     /**
+     * Lists all Creditcalendar models.
+     * @return mixed
+     */
+    public function actionCalendar()
+    {
+        $model = new Creditcalendar();
+        $searchModel = new CreditcalendarSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('calendar', [
+            'model' => $model,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
      * Displays a single Creditcalendar model.
      * @param integer $id
      * @return mixed
@@ -71,10 +88,13 @@ class CreditcalendarController extends Controller
         $formatter->timeFormat = 'php:h:i';
         $curdate = $formatter->asDate('now');        
         $curtime = $formatter->asTime('now');
+        $tomorrow = $formatter->asDate('now + 1 day'); 
         
         $model = new Creditcalendar();
         $model->date_from = $curdate;
         $model->time_from = $curtime;
+        $model->date_to = $tomorrow;
+        $model->time_to = $curtime;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

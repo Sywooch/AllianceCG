@@ -151,7 +151,7 @@ use janisto\timepicker\TimePicker;
         echo $form->field($model, 'location', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('institution') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
     ?>        
 
-    <?php // $form->field($model, 'is_task')->textInput() ?>
+    <?= $form->field($model, 'is_task')->textInput() ?>
 
     <?php // $form->field($model, 'is_repeat')->textInput() ?>
 

@@ -8,7 +8,9 @@ use app\components\grid\SetColumn;
 use app\components\grid\LinkColumn;
 use yii\jui\AutoComplete;
 use app\modules\admin\models\Companies;
+use app\modules\alliance\models\Creditcalendar;
 use yii\jui\DatePicker;
+use yii\bootstrap\ButtonDropdown;
 use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
@@ -55,7 +57,7 @@ $this->registerJs('
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p style="text-align: right">
-
+        
         <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREDITCALENDAR_CREATE'), ['create'], ['class' => 'btn btn-success btn-sm', 'id' => 'refreshButton']) ?>
 
         <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'CREDITCALENDAR_REFRESH'), ['index'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
@@ -129,6 +131,15 @@ $this->registerJs('
                 },
             ],
             [
+                'header' => FA::icon('calendar') . ' / ' . FA::icon('tasks'),
+                'attribute' => 'is_task',
+                'format' => 'raw',
+                'filter' => Creditcalendar::getTasksArray(),
+                'value' => function ($data) {
+                    return $data->getIsTaskIcon();
+                },
+            ],
+            [
                 'attribute' => 'location',
                 'format' => 'raw',
                 'filter' => ArrayHelper::map(Companies::find()->asArray()->all(), 'company_name', 'company_name'),
@@ -154,7 +165,7 @@ $this->registerJs('
 //            'time_to',
             // 'description:ntext',
 //            'location',
-            // 'is_task',
+//             'is_task',
             // 'is_repeat',
 //            'author',
 //            'created_at:datetime',

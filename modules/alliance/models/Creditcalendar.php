@@ -3,6 +3,7 @@
 namespace app\modules\alliance\models;
 use app\modules\alliance\Module;
 use yii\behaviors\TimestampBehavior;
+use rmrevin\yii\fontawesome\FA;
 
 use Yii;
 
@@ -24,6 +25,8 @@ use Yii;
  */
 class Creditcalendar extends \yii\db\ActiveRecord
 {
+    const IS_TASK_CALENDAR= 0;
+    const IS_TASK_TASK = 1;
     
     public $dateTimeFrom;
     public $dateTimeTo;
@@ -47,6 +50,25 @@ class Creditcalendar extends \yii\db\ActiveRecord
         ];
     }
     
+    public function getIsTask()
+    {
+        return ArrayHelper::getValue(self::getTasksArray(), $this->is_task);
+    }    
+ 
+    public static function getTasksArray()
+    {
+        return [
+            self::IS_TASK_CALENDAR => 'Календарь',
+            self::IS_TASK_TASK => 'Задание',
+        ];
+    }
+    
+    public function getIsTaskIcon()
+    {
+        $isTaskIcon = ($this->is_task == 0) ? FA::icon('calendar') : FA::icon('tasks');
+        return $isTaskIcon;
+    }
+    
     public function getDateTimeFrom()
     {
         return $this->date_from . ' ' . $this->time_from;
@@ -55,6 +77,16 @@ class Creditcalendar extends \yii\db\ActiveRecord
     public function getDateTimeTo()
     {
         return $this->date_to . ' ' . $this->time_to;
+    }
+    
+    public function getCurDateTime()
+    {        
+        $formatter = new \yii\i18n\Formatter;
+        $formatter->timeZone = 'Europe/Minsk';
+        $formatter->dateFormat = 'php:d/m/Y';
+        $formatter->timeFormat = 'php:h:i';
+        $curdatetime = $formatter->asDatetime('now');
+        return $curdatetime;
     }
 
     /**

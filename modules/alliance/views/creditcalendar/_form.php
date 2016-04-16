@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use rmrevin\yii\fontawesome\FA;
 use app\modules\alliance\Module;
 use yii\jui\Dialog;
+use yii\bootstrap\Modal;
 use yii\jui\DatePicker;
 use app\modules\admin\models\Companies;
 use app\modules\alliance\models\Creditcalendar;
@@ -15,6 +16,12 @@ use janisto\timepicker\TimePicker;
 /* @var $model app\modules\alliance\models\Creditcalendar */
 /* @var $form yii\widgets\ActiveForm */
 ?>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#thelink').click(function(){ $('repeatableEvents').dialog('open'); });
+    }
+</script>
 
 <div class="creditcalendar-form">
 
@@ -121,46 +128,44 @@ use janisto\timepicker\TimePicker;
     
     <br/><br/><br/>
   
-<?php Dialog::begin([
-        'clientOptions' => [
-            'modal' => true,
-            'autoOpen' => false,
-        ],
-    ]);
+    <!--<div style="text-align: center">-->    
+<?php 
 
-    echo 'Dialog contents here...';
-
-    Dialog::end();
+//    Modal::begin([
+//        'header' => Module::t('module', 'CREDITCALENDAR_ALLDAY'),
+//        'toggleButton' => [
+//            'tag' => 'button',
+//            'class' => 'btn btn-sm btn-primary',
+//            'label' => Module::t('module', 'CREDITCALENDAR_ALLDAY'),
+//        ]
+//    ]);
+//
+//        echo $form->field($model, 'allday')->checkbox(['label' => Module::t('module', 'CREDITCALENDAR_ALLDAY_CHECKBOX'),
+//                'labelOptions' => [
+//                    'style' => 'padding-left:20px;'
+//                ],
+//                'disabled' => false,
+//            ]);
+//
+//    Modal::end();
 ?>
+<!--    </div>
     
-    <?= $form->field($model, 'allday')
-    ->checkbox([
-        'label' => $model->getAttributeLabel( 'allday' ),
-        'labelOptions' => [
-            'style' => 'padding-left:20px;'
-        ],
-        'disabled' => false
-    ]);
+    <br/><br/>-->
     
+    <?= $form->field($model, 'allday')->checkbox(['label' => Module::t('module', 'CREDITCALENDAR_ALLDAY_CHECKBOX'),
+                'labelOptions' => [
+                    'style' => 'padding-left:20px;'
+                ],
+                'disabled' => false,
+            ]);
     ?>
     
+    <?= $form->field($model, 'dow')->checkBoxList($model->getWeekdaysArray()); ?>
+    
     <?= $form->field($model, 'title', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('flag') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'title' )]) ?>
-
-    <?php // $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-
-    <?php // $form->field($model, 'date_from')->textInput() ?>
-
-    <?php // $form->field($model, 'time_from')->textInput() ?>
-
-    <?php // $form->field($model, 'date_to')->textInput() ?>
-
-    <?php // $form->field($model, 'time_to')->textInput() ?>
-
-    <?php // $form->field($model, 'description')->textarea(['rows' => 4]) ?>
     
     <?= $form->field($model, 'description', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('flag') . ' </span>{input}</div>{error}'])->textArea(['rows' => 4, 'placeholder' => $model->getAttributeLabel( 'description' )]) ?>
-
-    <?php // $form->field($model, 'location')->textInput(['maxlength' => true]) ?>
     
     <?php
         $companies = Companies::find()->all();
@@ -178,22 +183,6 @@ use janisto\timepicker\TimePicker;
     
     <?= $form->field($model, 'status', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('check-circle-o') . ' </span>{input}</div>{error}'])->dropDownList($model->getStatusesArray()) ?>
     
-    <?php // $form->field($model, 'status', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('check-circle-o') . ' </span>{input}</div>{error}'])->dropDownList(Creditcalendar::getStatusesArray()) ?>
-    
-    <?php // $form->field($model, 'status')->textInput() ?>
-
-    <?php // $form->field($model, 'is_task')->textInput() ?>
-
-    <?php // $form->field($model, 'is_repeat')->textInput() ?>
-
-    <?php // $form->field($model, 'author')->textInput(['maxlength' => true]) ?>
-
-    <?php // $form->field($model, 'created_at')->textInput() ?>
-
-    <!--<div class="form-group">-->
-        <?php // Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    <!--</div>-->
-
     <?php ActiveForm::end(); ?>
 
 </div>

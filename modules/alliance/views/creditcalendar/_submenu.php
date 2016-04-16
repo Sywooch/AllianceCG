@@ -22,5 +22,9 @@
                 'label' => FA::icon('table') . ' ' . Module::t('module', 'CREDITCALENDAR_TABLE'),
                 'url' => '/alliance/creditcalendar',
             ],
+            [
+                'label' => FA::icon('pie-chart') . ' ' . Module::t('module', 'CREDITCALENDAR_GRAPH'),
+                'url' => '/alliance/creditcalendar/graph',
+            ],
         ]),
     ]);

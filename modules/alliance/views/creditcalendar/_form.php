@@ -161,7 +161,7 @@ use janisto\timepicker\TimePicker;
             ]);
     ?>
     
-    <?= $form->field($model, 'dow')->checkBoxList(ArrayHelper::map(\app\modules\alliance\models\Weekdays::find()->all(), 'daynumber', 'dayname')); ?>
+    <?php // $form->field($model, 'dow')->checkBoxList(ArrayHelper::map(\app\modules\alliance\models\Weekdays::find()->all(), 'daynumber', 'dayname')); ?>
 
 <!--ArrayHelper::map(Sprachen::find()->all(), 'name', 'name')-->
     

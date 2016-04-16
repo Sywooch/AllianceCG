@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use rmrevin\yii\fontawesome\FA;
 use app\modules\alliance\Module;
+use yii\jui\Dialog;
 use yii\jui\DatePicker;
 use app\modules\admin\models\Companies;
 use app\modules\alliance\models\Creditcalendar;
@@ -119,6 +120,18 @@ use janisto\timepicker\TimePicker;
     </div>
     
     <br/><br/><br/>
+  
+<?php Dialog::begin([
+        'clientOptions' => [
+            'modal' => true,
+            'autoOpen' => false,
+        ],
+    ]);
+
+    echo 'Dialog contents here...';
+
+    Dialog::end();
+?>
     
     <?= $form->field($model, 'allday')
     ->checkbox([

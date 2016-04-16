@@ -60,8 +60,8 @@ class CreditcalendarSearch extends Creditcalendar
                     `id` AS id,
                     `id` AS url,
                     CASE 
-                        WHEN CONCAT(date_from, ' ', time_from) IS NULL THEN time_from
-                        ELSE CONCAT(date_from, ' ', time_from)
+                        WHEN CONCAT(date_to, ' ', time_to) IS NULL THEN time_to
+                        ELSE CONCAT(date_to, ' ', time_to)
                         END AS `start`,
                     CASE
                         WHEN CONCAT(date_to, ' ', time_to) IS NULL THEN time_to

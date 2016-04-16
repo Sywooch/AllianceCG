@@ -113,10 +113,10 @@ class CreditcalendarController extends Controller
         $tomorrow = $formatter->asDate('now + 1 day'); 
         
         $model = new Creditcalendar();
-//        $model->date_from = $curdate;
-//        $model->time_from = $curtime;
-//        $model->date_to = $tomorrow;
-//        $model->time_to = $curtime;
+        $model->date_from = $curdate;
+        $model->time_from = $curtime;
+        $model->date_to = $tomorrow;
+        $model->time_to = $curtime;
         
         if(isset($_GET['is_task']))
         {

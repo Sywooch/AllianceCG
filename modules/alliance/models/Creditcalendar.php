@@ -23,7 +23,7 @@ use Yii;
  * @property integer $is_repeat
  * @property string $author
  * @property integer $created_at
- * @property integer $status
+ * @property integer $status    
  * @property integer $responsible
  */
 class Creditcalendar extends \yii\db\ActiveRecord
@@ -35,8 +35,17 @@ class Creditcalendar extends \yii\db\ActiveRecord
     const STATUS_CLARIFY = 1;
     const STATUS_FINISHED = 2;
     
+    const DAY_MON = 1;
+    const DAY_TUE = 2;
+    const DAY_WED = 3;
+    const DAY_THU = 4;
+    const DAY_FRI = 5;
+    const DAY_SAT = 6;
+    const DAY_SUN = 7;
+    
     public $dateTimeFrom;
     public $dateTimeTo;
+    public $week;
     
     
     /**
@@ -60,7 +69,25 @@ class Creditcalendar extends \yii\db\ActiveRecord
     public function getStatuses()
     {
         return ArrayHelper::getValue(self::getStatusesArray(), $this->status);
-    }    
+    }
+
+    public function getWeekDays()
+    {
+        return ArrayHelper::getValue(self::getWeekdaysArray(), $this->week);
+    }
+    
+    public function getWeekdaysArray()
+    {
+        return[
+            self::DAY_MON => 'Понедельник',
+            self::DAY_TUE => 'Вторник',
+            self::DAY_WED => 'Среда',
+            self::DAY_THU => 'Четверг',
+            self::DAY_FRI => 'Пятница',
+            self::DAY_SAT => 'Суббота',
+            self::DAY_SUN => 'Воскресенье',
+        ];
+    }
     
     public function getStatusesArray()
     {
@@ -109,10 +136,11 @@ class Creditcalendar extends \yii\db\ActiveRecord
             ['status', 'default', 'value' => self::STATUS_ATWORK],
 //            Yii::$app->user->identity->userfullname
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
-            [['date_from', 'time_from', 'date_to', 'time_to', 'dateTimeFrom', 'dateTimeTo'], 'safe'],
+            [['date_from', 'time_from', 'date_to', 'time_to', 'dateTimeFrom', 'dateTimeTo', 'week'], 'safe'],
             [['description'], 'string'],
             ['author', 'default', 'value' => Yii::$app->user->identity->userfullname],
             ['is_task', 'in', 'range' => array_keys(self::getTasksArray()), 'message' => Module::t('module', 'CREDITCALENDAR_LINK_ERROR')],
+            ['week', 'in', 'range' => array_keys(self::getWeekdaysArray()), 'message' => Module::t('module', 'CREDITCALENDAR_LINK_ERROR')],
             [['is_task', 'is_repeat', 'created_at'], 'integer'],
             [['title', 'location', 'author'], 'string', 'max' => 255],
         ];

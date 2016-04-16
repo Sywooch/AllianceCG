@@ -44,7 +44,21 @@ class CreditcalendarController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-    }    
+    }
+
+    /**
+     * Lists all Creditcalendar models.
+     * @return mixed
+     */
+    public function actionTest()
+    {
+        $model = new CreditcalendarSearch();
+        
+        return $this->render('test', [
+            'model' => $model,
+        ]);
+    }
+    
     public function actionCalendarsearch()
     {
         $this->layout = false;

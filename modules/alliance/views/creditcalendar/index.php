@@ -52,7 +52,6 @@ $this->registerJs('
     });
     });', \yii\web\View::POS_READY);
 
-
 ?>
    
     <?= $this->render('_submenu', [
@@ -182,10 +181,10 @@ $this->registerJs('
                 'format' => 'raw',
                 'name' => 'statuses',
                 'contentOptions'=>['style'=>'width: 50px;'],
-                'filter' => Creditcalendar::getStatusesArray(),
-//                'value' => function ($data) {
-//                    return $data->getStatuses();
-//                },
+//                'filter' => Creditcalendar::getStatusesArray(),
+                'value' => function ($data) {
+                    return $data->getStatuses();
+                },
                 'cssCLasses' => [
                     Creditcalendar::STATUS_ATWORK => 'danger',
                     Creditcalendar::STATUS_CLARIFY => 'primary',

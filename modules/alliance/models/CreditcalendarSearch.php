@@ -155,7 +155,7 @@ class CreditcalendarSearch extends Creditcalendar
             ->andFilterWhere(['like', 'author', $this->author])
             ->andFilterWhere(['like', 'status', $this->status])
             ->andFilterWhere(['>=', 'date_from', $this->dateTimeFrom ? strtotime($this->date_from) : null])
-            ->andFilterWhere(['<=', 'date_to', $this->dateTimeTo ? strtotime($this->date_to) : null])
+            ->andFilterWhere(['<=', 'date_to', $this->dateTimeTo ? strtotime($this->date_to . ' ' . $this->time_to) : null])
                 ;
 
         return $dataProvider;

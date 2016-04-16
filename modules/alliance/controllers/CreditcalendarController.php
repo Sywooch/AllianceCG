@@ -44,6 +44,11 @@ class CreditcalendarController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }    
+    
+    public function actionGraph()
+    {    	
+        return $this->render('graph');
     }
 
     /**

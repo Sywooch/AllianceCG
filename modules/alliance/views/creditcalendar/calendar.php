@@ -63,10 +63,17 @@ $this->params['breadcrumbs'][] = $this->title;
             height: 800,
             width: 600,
             lang: 'ru',
+//            events: [{
+//                title: "ololo",
+//                start: '10:00',
+//                end:   '27:00',
+////                dow: [1,2],
+//                allDay: true,
+//            }],
             events: {
                 url: "/alliance/creditcalendar/calendarsearch",
                 cache: true 
-            },            
+            },
             header: {
                 left: 'prev,today,next',
                 center: 'title',

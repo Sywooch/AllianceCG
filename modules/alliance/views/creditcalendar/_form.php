@@ -120,6 +120,17 @@ use janisto\timepicker\TimePicker;
     
     <br/><br/><br/>
     
+    <?= $form->field($model, 'allday')
+    ->checkbox([
+        'label' => $model->getAttributeLabel( 'allday' ),
+        'labelOptions' => [
+            'style' => 'padding-left:20px;'
+        ],
+        'disabled' => false
+    ]);
+    
+    ?>
+    
     <?= $form->field($model, 'title', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('flag') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'title' )]) ?>
 
     <?php // $form->field($model, 'title')->textInput(['maxlength' => true]) ?>

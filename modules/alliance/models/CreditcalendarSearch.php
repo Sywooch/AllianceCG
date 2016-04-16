@@ -53,7 +53,33 @@ class CreditcalendarSearch extends Creditcalendar
     }
     
     public function calendarsearch(){
-        $items = Yii::$app->db->createCommand("SELECT `id` AS id, `id` AS url, concat(date_from,' ',time_from) AS start, concat(date_to,' ',time_to) AS `end`, concat(title,' (',author,')') AS title, CASE status WHEN '0' THEN 'red' WHEN '1' THEN 'primary' ELSE 'green' END as color FROM all_creditcalendar;;")->queryAll();
+//        $items = Yii::$app->db->createCommand("SELECT `id` AS id, `id` AS url, concat(date_from,' ',time_from) AS start, concat(date_to,' ',time_to) AS `end`, concat(title,' (',author,')') AS title, CASE status WHEN '0' THEN 'red' WHEN '1' THEN 'primary' ELSE 'green' END as color FROM all_creditcalendar;;")->queryAll();
+//        $items = Yii::$app->db->createCommand("SELECT `id` AS id, `id` AS url, concat(IFNULL(date_from,''),' ',time_from) AS start, concat(IFNULL(date_to,''),' ',time_to) AS `end`, concat(title,' (',author,')') AS title, CASE status WHEN '0' THEN 'red' WHEN '1' THEN 'primary' ELSE 'green' END as color, CASE allday WHEN '0' THEN 'false' ELSE 'true' END AS allDay FROM all_creditcalendar;")->queryAll();
+        $items = Yii::$app->db->createCommand(
+                "SELECT
+                    `id` AS id,
+                    `id` AS url,
+                    CASE 
+                        WHEN CONCAT(date_from, ' ', time_from) IS NULL THEN time_from
+                        ELSE CONCAT(date_from, ' ', time_from)
+                        END AS `start`,
+                    CASE
+                        WHEN CONCAT(date_to, ' ', time_to) IS NULL THEN time_to
+                        ELSE CONCAT(date_to, ' ', time_to)
+                        END AS `end`,
+                    CONCAT(title,' (',author,')') AS title,
+                    CASE status
+                        WHEN '0' THEN 'red'
+                        WHEN '1' THEN 'primary'
+                        ELSE 'green'
+                        END as color,
+                    CASE allday
+                        WHEN '0' THEN 'false'
+                        ELSE 'true'
+                        END AS allday 
+                FROM {{%creditcalendar}};"
+            )->queryAll();
+        
         return Json::encode($items);
     }
 

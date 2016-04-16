@@ -23,6 +23,8 @@ class m160413_093548_create_credit_calendar extends Migration
             'responsible' => $this->string(255),
             'is_task' => $this->boolean()->notNull()->defaultValue(0),
             'is_repeat' => $this->boolean(),
+            'dow' => $this->string(255),
+            'allday' => $this->smallInteger()->notNull()->defaultValue(0),
             'author' => $this->string(255),
             'created_at' => $this->smallInteger()->notNull()->defaultValue(0),
             'updated_at' => $this->smallInteger()->notNull()->defaultValue(0),

@@ -22,6 +22,7 @@ use Yii;
  * @property integer $is_task
  * @property integer $is_repeat
  * @property string $author
+ * @property string $allday
  * @property integer $created_at
  * @property integer $status    
  * @property integer $responsible
@@ -62,7 +63,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+//            TimestampBehavior::className(),
         ];
     }
     
@@ -136,7 +137,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
             ['status', 'default', 'value' => self::STATUS_ATWORK],
 //            Yii::$app->user->identity->userfullname
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
-            [['date_from', 'time_from', 'date_to', 'time_to', 'dateTimeFrom', 'dateTimeTo', 'week'], 'safe'],
+            [['date_from', 'time_from', 'date_to', 'time_to', 'dateTimeFrom', 'dateTimeTo', 'allday'], 'safe'],
             [['description'], 'string'],
             ['author', 'default', 'value' => Yii::$app->user->identity->userfullname],
             ['is_task', 'in', 'range' => array_keys(self::getTasksArray()), 'message' => Module::t('module', 'CREDITCALENDAR_LINK_ERROR')],
@@ -165,6 +166,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
             'author' => Module::t('module', 'CREDITCALENDAR_AUTHOR'),
             'created_at' => Module::t('module', 'CREDITCALENDAR_CREATED_AT'),
             'status' => Module::t('module', 'CREDITCALENDAR_STATUS'),
+            'allday' => Module::t('module', 'CREDITCALENDAR_ALLDAY'),
             'dateTimeFrom' => 'От: ',
             'dateTimeTo' => 'До: ',
         ];

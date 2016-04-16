@@ -123,6 +123,19 @@ class CreditcalendarController extends Controller
            $model->is_task = $_GET['is_task'];
         }
 
+//        if ($model->load(Yii::$app->request->post())){
+//            $model->dow = explode(',',$model->dow);
+//            if($model->save()){
+//                return $this->redirect(['view', 'id' => $model->id]);
+//            }
+//        } 
+//        else {
+//            $model->dow = explode(',',$model->dow);
+//            return $this->render('create', [
+//                'model' => $model,
+//            ]);
+//        }        
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

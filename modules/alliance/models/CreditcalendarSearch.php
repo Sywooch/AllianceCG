@@ -60,8 +60,8 @@ class CreditcalendarSearch extends Creditcalendar
                     `id` AS id,
                     `id` AS url,
                     CASE 
-                        WHEN CONCAT(date_to, ' ', time_to) IS NULL THEN time_to
-                        ELSE CONCAT(date_to, ' ', time_to)
+                        WHEN CONCAT(date_from, ' ', time_from) IS NULL THEN time_to
+                        ELSE CONCAT(date_from, ' ', time_from)
                         END AS start,
                     CASE
                         WHEN CONCAT(date_to, ' ', time_to) IS NULL THEN time_to
@@ -154,8 +154,8 @@ class CreditcalendarSearch extends Creditcalendar
             ->andFilterWhere(['like', 'location', $this->location])
             ->andFilterWhere(['like', 'author', $this->author])
             ->andFilterWhere(['like', 'status', $this->status])
-            ->andFilterWhere(['>=', 'date_from', $this->dateTimeFrom ? strtotime($this->date_from . ' ' . $this->time_from) : null])
-            ->andFilterWhere(['<=', 'date_to', $this->dateTimeTo ? strtotime($this->date_to . ' ' . $this->time_to) : null])
+            ->andFilterWhere(['>=', 'date_from', $this->dateTimeFrom ? strtotime($this->date_from) : null])
+            ->andFilterWhere(['<=', 'date_to', $this->dateTimeTo ? strtotime($this->date_to) : null])
                 ;
 
         return $dataProvider;

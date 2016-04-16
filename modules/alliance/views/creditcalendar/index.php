@@ -181,7 +181,7 @@ $this->registerJs('
                 'format' => 'raw',
                 'name' => 'statuses',
                 'contentOptions'=>['style'=>'width: 50px;'],
-//                'filter' => Creditcalendar::getStatusesArray(),
+                'filter' => Creditcalendar::getStatusesArray(),
                 'value' => function ($data) {
                     return $data->getStatuses();
                 },

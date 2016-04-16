@@ -5,6 +5,7 @@ use app\modules\alliance\Module;
 use yii\behaviors\TimestampBehavior;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\ArrayHelper;
+use yii\db\Expression;
 
 use Yii;
 
@@ -62,8 +63,16 @@ class Creditcalendar extends \yii\db\ActiveRecord
      */
     public function behaviors()
     {
-        return [
+//        return [
 //            TimestampBehavior::className(),
+//        ];
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => ['created_at', 'updated_at'],
+                'updatedAtAttribute' => ['updated_at'],
+                'value' => new Expression('NOW()'),
+            ],
         ];
     }
     
@@ -80,13 +89,13 @@ class Creditcalendar extends \yii\db\ActiveRecord
     public function getWeekdaysArray()
     {
         return[
-            self::DAY_MON => 'Понедельник',
-            self::DAY_TUE => 'Вторник',
-            self::DAY_WED => 'Среда',
-            self::DAY_THU => 'Четверг',
-            self::DAY_FRI => 'Пятница',
-            self::DAY_SAT => 'Суббота',
-            self::DAY_SUN => 'Воскресенье',
+            self::DAY_MON => 'Пн',
+            self::DAY_TUE => 'Вт',
+            self::DAY_WED => 'Ср',
+            self::DAY_THU => 'Чт',
+            self::DAY_FRI => 'Пт',
+            self::DAY_SAT => 'Сб',
+            self::DAY_SUN => 'Вс',
         ];
     }
     

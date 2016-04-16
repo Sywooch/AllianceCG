@@ -26,8 +26,8 @@ class m160413_093548_create_credit_calendar extends Migration
             'dow' => $this->string(255),
             'allday' => $this->smallInteger()->notNull()->defaultValue(0),
             'author' => $this->string(255),
-            'created_at' => $this->smallInteger()->notNull()->defaultValue(0),
-            'updated_at' => $this->smallInteger()->notNull()->defaultValue(0),
+            'created_at' => $this->integer()->notNull(),
+            'updated_at' => $this->integer()->notNull(),
             'status' => $this->smallInteger()->notNull()->defaultValue(0),
         ]);
     }

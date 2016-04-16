@@ -161,7 +161,9 @@ use janisto\timepicker\TimePicker;
             ]);
     ?>
     
-    <?= $form->field($model, 'dow')->checkBoxList($model->getWeekdaysArray()); ?>
+    <?= $form->field($model, 'dow')->checkBoxList(ArrayHelper::map(\app\modules\alliance\models\Weekdays::find()->all(), 'daynumber', 'dayname')); ?>
+
+<!--ArrayHelper::map(Sprachen::find()->all(), 'name', 'name')-->
     
     <?= $form->field($model, 'title', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('flag') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'title' )]) ?>
     

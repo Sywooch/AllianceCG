@@ -33,17 +33,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="panel panel-default">
     <div class="panel-heading panel-info">
-        <?= $model->getIsTaskIcon() . ' ' . $model->author . ', ' . $model->location . ' ' . $model->created_at; ?>
+        <?= $model->getIsTaskIcon() . ' ' . $model->author . ', ' . $model->location . ', ' . \Yii::t('app', '{0, date}', $model->created_at); ?>
     </div>
     <div class="panel-body">
-        <blockquote class="alert-info">
-            <h5>
-                <?= Html::encode($this->title) ?>
-            </h5>
-        </blockquote>
+        <!--<blockquote class="alert-info">-->
+        <h3>
+            <?= Html::encode($this->title) ?>
+        </h3>
+        <!--</blockquote>-->
         
         <?= $model->description; ?>
         
+    </div>
+</div>    
+    
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -62,9 +66,5 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>        
         
-    </div>
-</div>    
-    
-
 
 </div>

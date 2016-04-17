@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace app\modules\admin\models;
+namespace app\modules\alliance\models;
 
 use Yii;
 use yii\base\Model;
@@ -44,13 +44,24 @@ class CreditcalendarquerySearch extends Model
      *
      * @return $items
      */
-    public function companyuserscount()
+    public function totalbystatus()
     {
-        $items = Yii::$app->db->createCommand("SELECT DISTINCT(company) as company, COUNT(id) AS users FROM {{%user}} GROUP BY company")->queryAll();
+        $items = Yii::$app->db->createCommand("
+                SELECT                 
+                    CASE status
+                        WHEN '0' THEN 'В работе'
+                        WHEN '1' THEN 'Уточнение'
+                        WHEN '2' THEN 'Завершено'
+                        ELSE 'Undefined'
+                        END as statuses,
+                    COUNT(id) AS statuscount
+                FROM {{%creditcalendar}}
+                GROUP BY status;
+            ")->queryAll();
         foreach ($items as $row){
-            $data_company[] = [$row['company'],(int)$row['users']];
+            $data_statuses[] = [$row['statuses'],(int)$row['statuscount']];
         }
-        return Json::encode($data_company);
+        return Json::encode($data_statuses);
     }
 
     /**

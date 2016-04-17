@@ -48,7 +48,10 @@ class CreditcalendarController extends Controller
     
     public function actionGraph()
     {    	
-        return $this->render('graph');
+        $model = new Creditcalendar();
+        return $this->render('graph', [
+            'model' => $model,
+        ]);
     }
     
     public function actionCalendarsearch()

@@ -11,27 +11,6 @@ use yii\web\View;
  * and open the template in the editor.
  */
 
-//$this->registerJs(' 
-//
-//    $(document).ready(function(){
-//    $(\'#MultipleDelete\').click(function(){
-//            var PosId = $(\'#creditcalendar-grid\').yiiGridView(\'getSelectedRows\');
-//            if (PosId=="") {
-//                alert("Нет отмеченных записей!", "Alert Dialog");
-//            }
-//            else if (confirm("Удалить отмеченные записи?")) {
-//              $.ajax({
-//                type: \'POST\',
-//                url : \'/alliance/creditcalendar/multipledelete\',
-//                data : {row_id: PosId},
-//                success : function() {
-//                    alert("successfully!!!");
-//                }
-//              });
-//            }
-//    });
-//    });', View::POS_READY);
-
 $upd = file_get_contents('js/modules/alliance/creditcalendar/gridViewMultipleDelete.js');
 $this->registerJs($upd, View::POS_END);
 
@@ -49,6 +28,10 @@ $this->registerJs($upd, View::POS_END);
             elseif(Yii::$app->controller->action->id == 'calendar')
             {
                 echo Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'CREDITCALENDAR_REFRESH'), ['calendar'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']);
+            }
+            elseif(Yii::$app->controller->action->id == 'graph')
+            {
+                echo Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'CREDITCALENDAR_REFRESH'), ['graph'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']);
             }
         ?> 
         <?php 

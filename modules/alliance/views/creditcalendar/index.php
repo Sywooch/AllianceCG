@@ -26,8 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 //Pjax Auto-update
 
-$upd = file_get_contents('js/modules/alliance/creditcalendar/updateIndexGridView.js');
-$this->registerJs($upd, View::POS_END);
+//$upd = file_get_contents('js/modules/alliance/creditcalendar/updateIndexGridView.js');
+//$this->registerJs($upd, View::POS_END);
 
 ?>
    

@@ -54,4 +54,5 @@
             'CREDITCALENDAR_ALLDAY_CHECKBOX' => 'Ежедневно',
             'CREDITCALENDAR_GRAPH' => 'График',
             'CREDITCALENDAR_RESPONSIBLE' => 'Ответственный',
+            'ALLIANCE_CREDITCALENDARCAL' => 'Календарь',
 	];

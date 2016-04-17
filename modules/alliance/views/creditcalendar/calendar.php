@@ -11,8 +11,9 @@ use rmrevin\yii\fontawesome\FA;
  * and open the template in the editor.
  */
 
-$this->title = Module::t('module', 'ALLIANCE_CREDITCALENDAR');
+$this->title = Module::t('module', 'ALLIANCE_CREDITCALENDARCAL');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_ALLIANCE'), 'url' => ['/alliance']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ALLIANCE_CREDITCALENDAR'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

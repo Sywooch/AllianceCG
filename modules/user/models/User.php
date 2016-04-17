@@ -172,6 +172,14 @@ class User extends ActiveRecord implements IdentityInterface
         return false;
     }
     
+    public function getUsercompany()
+    {
+        $profile = User::find()->where(['id'=>$this->id])->one();
+        if ($profile !==null)
+            return $profile->company;
+        return false;
+    }    
+    
     public function getStatusName()
     {
         return ArrayHelper::getValue(self::getStatusesArray(), $this->status);

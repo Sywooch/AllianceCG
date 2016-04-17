@@ -47,7 +47,6 @@ $this->registerJs('
             }
     });
     });', View::POS_READY);
-
 ?>
    
     <?= $this->render('_submenu', [

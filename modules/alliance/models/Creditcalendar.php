@@ -69,9 +69,10 @@ class Creditcalendar extends \yii\db\ActiveRecord
         return [
             [
                 'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => ['created_at', 'updated_at'],
-                'updatedAtAttribute' => ['updated_at'],
-                'value' => new Expression('NOW()'),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+//                'value' => new Expression('NOW()'),
+                'value' => function() { return date('U'); },
             ],
         ];
     }
@@ -151,7 +152,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
             ['author', 'default', 'value' => Yii::$app->user->identity->userfullname],
             ['is_task', 'in', 'range' => array_keys(self::getTasksArray()), 'message' => Module::t('module', 'CREDITCALENDAR_LINK_ERROR')],
             ['week', 'in', 'range' => array_keys(self::getWeekdaysArray()), 'message' => Module::t('module', 'CREDITCALENDAR_LINK_ERROR')],
-            [['is_task', 'is_repeat', 'created_at'], 'integer'],
+            [['is_task', 'is_repeat'], 'integer'],
             [['title', 'location', 'author'], 'string', 'max' => 255],
         ];
     }
@@ -180,4 +181,20 @@ class Creditcalendar extends \yii\db\ActiveRecord
             'dateTimeTo' => 'До: ',
         ];
     }
+    
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if (!empty($this->allday) && $this->allday == 1) {
+                $this->date_from = '';
+                $this->date_to = '';
+            }
+            else {
+                return parent::beforeSave($insert);
+            }
+            return true;
+        }
+        return false;
+    }    
+    
 }

@@ -31,7 +31,7 @@ class Positions extends \yii\db\ActiveRecord
             [['position'], 'required'],
             [['description'], 'string'],
             [['position'], 'string', 'max' => 255],
-            [['positions'], 'safe'],
+            [['position'], 'safe'],
         ];
     }
 

@@ -24,29 +24,11 @@ $this->title = Module::t('module', 'ALLIANCE_CREDITCALENDAR');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_ALLIANCE'), 'url' => ['/alliance']];
 $this->params['breadcrumbs'][] = $this->title;
 
+//Pjax Auto-update
+
 $upd = file_get_contents('js/modules/alliance/creditcalendar/updateIndexGridView.js');
 $this->registerJs($upd, View::POS_END);
 
-$this->registerJs(' 
-
-    $(document).ready(function(){
-    $(\'#MultipleDelete\').click(function(){
-            var PosId = $(\'#creditcalendar-grid\').yiiGridView(\'getSelectedRows\');
-            if (PosId=="") {
-                alert("Нет отмеченных записей!", "Alert Dialog");
-            }
-            else if (confirm("Удалить отмеченные записи?")) {
-              $.ajax({
-                type: \'POST\',
-                url : \'/alliance/creditcalendar/multipledelete\',
-                data : {row_id: PosId},
-                success : function() {
-                    alert("successfully!!!");
-                }
-              });
-            }
-    });
-    });', View::POS_READY);
 ?>
    
     <?= $this->render('_submenu', [

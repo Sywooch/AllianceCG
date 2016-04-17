@@ -25,21 +25,21 @@ AppAsset::register($this);
 
 <div class="wrap">
 
-<?= $this->render('@app/modules/main/views/layouts/_header') ?>
+<?= $this->render('@app/modules/alliance/views/layouts/_header') ?>
 
     <div class="container">
         <div class="col-sm-2"> 
         <?= $this->render('@app/modules/alliance/views/layouts/_sidebar') ?>
         </div>
         <div class="col-sm-10">         
-            <?= $this->render('@app/modules/main/views/layouts/_breadcrumbs') ?>
+            <?= $this->render('@app/modules/alliance/views/layouts/_breadcrumbs') ?>
             <?= Alert::widget() ?>
             <?= $content ?>
          </div> 
     </div>
 </div>
 
-<?= $this->render('@app/modules/main/views/layouts/_footer') ?>
+<?php // $this->render('@app/modules/alliance/views/layouts/_footer') ?>
 
 <?php $this->endBody() ?>
 </body>

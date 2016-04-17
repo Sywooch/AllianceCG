@@ -53,7 +53,7 @@ use app\modules\main\Module;
             ] :
             false,
 //        !Yii::$app->user->isGuest ?
-        Yii::$app->user->identity->usercompany == 'ООО "СтрелаАвто"' ?
+        Yii::$app->user->identity->usercompany == 'ООО "СтрелаАвто"' || Yii::$app->user->can('admin') ?
             ['label' => FA::icon('wrench') . ' ' . Module::t('module', 'NAV_SKODA'), 'items' => [
                     ['label' => FA::icon('wrench') . ' ' . Module::t('module', 'NAV_SKODA_DASHBOARD'), 'url' => ['/skoda/']],
                     ['label' => FA::icon('wrench') . ' ' . Module::t('module', 'NAV_SKODA_SERVICESHEDULER'), 'url' => ['/skoda/servicesheduler/calendar']],

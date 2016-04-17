@@ -35,35 +35,35 @@ $this->params['breadcrumbs'][] = $this->title;
         
         <?= Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'), ['export'], ['class' => 'btn btn-warning btn-sm']) ?>
                 
-    </p>    
+</p>    
     
     <?php Pjax::begin(); ?>
     
     <?= Html::a("", ['/alliance/creditcalendar/index'], ['class' => 'hidden_button', 'id' => 'creditcalendar_refresh']) ?>
   
-<?php
-    $this->registerCssFile('css/jqfc/fullcalendar_sk_statusmonitor.css', ['depends' => ['app\assets\AppAsset']]);
-    $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/jquery.min.js'), ['depends' => [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset'],
-    ]);
-    $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/moment.min.js'), ['depends' => [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset'],
-    ]);
-    $this->registerJsFile(Yii::getAlias('@web/js/jqfc/fullcalendar.js'), ['depends' => [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset'],
-    ]);
-    $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lang/ru.js'), ['depends' => [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset'],
-    ]);  
-    $this->registerJsFile(Yii::getAlias('@web/js/modules/alliance/creditcalendar/creditcalendar.js'), ['depends' => [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset'],
-    ]);    
-?>
+    <?php
+        $this->registerCssFile('@web/css/jqfc/fullcalendar_sk_statusmonitor.css', ['depends' => ['app\assets\AppAsset']]);    
+        $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/jquery.min.js'), ['depends' => [
+            'yii\web\YiiAsset',
+            'yii\bootstrap\BootstrapAsset'],
+        ]);
+        $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/moment.min.js'), ['depends' => [
+            'yii\web\YiiAsset',
+            'yii\bootstrap\BootstrapAsset'],
+        ]);
+        $this->registerJsFile(Yii::getAlias('@web/js/jqfc/fullcalendar.js'), ['depends' => [
+            'yii\web\YiiAsset',
+            'yii\bootstrap\BootstrapAsset'],
+        ]);
+        $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lang/ru.js'), ['depends' => [
+            'yii\web\YiiAsset',
+            'yii\bootstrap\BootstrapAsset'],
+        ]);  
+        $this->registerJsFile(Yii::getAlias('@web/js/modules/alliance/creditcalendar/creditcalendar.js'), ['depends' => [
+            'yii\web\YiiAsset',
+            'yii\bootstrap\BootstrapAsset'],
+        ]);    
+    ?>
     
 <div id='credit_calendar'></div>  
 

@@ -4,6 +4,8 @@
 
             'NAV_SKODA_DASHBOARD' => 'DASHBOARD',
             'NAV_SKODA' => 'ŠKODA',
+            'NAV_PROFILE' => 'Профиль',
+            'NAV_LOGOUT' => 'Выход',
             'NAV_ADMIN' => 'Администрирование',
             'NAV_SKODA_SERVICESHEDULER' => 'Смены',
             'NAV_SKODA_STATUSMONITOR' => 'Монитор готовности',

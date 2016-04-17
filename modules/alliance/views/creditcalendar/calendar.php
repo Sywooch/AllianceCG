@@ -40,6 +40,10 @@ $this->params['breadcrumbs'][] = $this->title;
                'yii\web\YiiAsset',
                'yii\bootstrap\BootstrapAsset'],
            ]);
+           $this->registerJsFile(Yii::getAlias('@web/js/jquery.qtip.min.js'), ['depends' => [
+               'yii\web\YiiAsset',
+               'yii\bootstrap\BootstrapAsset'],
+           ]);
            $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/moment.min.js'), ['depends' => [
                'yii\web\YiiAsset',
                'yii\bootstrap\BootstrapAsset'],

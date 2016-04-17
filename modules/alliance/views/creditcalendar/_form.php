@@ -9,6 +9,7 @@ use yii\bootstrap\Modal;
 use yii\jui\DatePicker;
 use app\modules\admin\models\Companies;
 use app\modules\alliance\models\Creditcalendar;
+use app\modules\admin\models\User;
 use yii\helpers\ArrayHelper;
 use janisto\timepicker\TimePicker;
 
@@ -160,7 +161,32 @@ use janisto\timepicker\TimePicker;
                 'disabled' => false,
             ]);
     ?>
+
+    <?php
+        echo '<br/>';
+
+        $cm = User::findAll([
+                'position' => 'Кредитный специалист',
+                ]            
+            );
+
+        foreach ($cm as $key => $value) {
+            $cmname = $value->name . ' ' . $value->surname;
+            $value->allname = $cmname;
+        }
     
+        $items = ArrayHelper::map($cm,'allname','allname');
+        $params = [
+            'prompt' => '-- ' . $model->getAttributeLabel( 'responsible' ) . ' --',
+            'disabled' => $model->getScenario() != 'createTask', 
+            'inline' => false,
+        ];
+
+        echo $form->field($model, 'responsible', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->dropDownList($items,$params,['class' => 'form-control input-sm radio', 'itemOptions' => ['class' => 'radio']])
+    ?> 
+    
+    <?php // $form->field($model, 'responsible', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->textInput(['disabled' => $model->getScenario() != 'createTask', 'placeholder' => $model->getAttributeLabel( 'responsible' )]); ?>
+
     <?php // $form->field($model, 'dow')->checkBoxList(ArrayHelper::map(\app\modules\alliance\models\Weekdays::find()->all(), 'daynumber', 'dayname')); ?>
 
 <!--ArrayHelper::map(Sprachen::find()->all(), 'name', 'name')-->

@@ -123,9 +123,26 @@ class CreditcalendarController extends Controller
         $model->date_to = $tomorrow;
         $model->time_to = $curtime;
         
+//        $model->scenario = User::SCENARIO_ADMIN_CREATE;
+        
         if(isset($_GET['is_task']))
         {
-           $model->is_task = $_GET['is_task'];
+            $model->is_task = $_GET['is_task'];
+            if($model->is_task == 0)
+            {
+                $model->scenario = Creditcalendar::SCENARIO_EVENT;
+            }
+            elseif($model->is_task == 1)
+            {
+                $model->scenario = Creditcalendar::SCENARIO_TASK;
+            }
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }           
         }
 
 //        if ($model->load(Yii::$app->request->post())){
@@ -141,13 +158,7 @@ class CreditcalendarController extends Controller
 //            ]);
 //        }        
         
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+
     }
 
     /**

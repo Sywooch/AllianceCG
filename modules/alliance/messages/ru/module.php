@@ -49,4 +49,5 @@
             'CREDITCALENDAR_ALLDAY' => 'Повторяющиеся задания',
             'CREDITCALENDAR_ALLDAY_CHECKBOX' => 'Ежедневно',
             'CREDITCALENDAR_GRAPH' => 'График',
+            'CREDITCALENDAR_RESPONSIBLE' => 'Ответственный',
 	];

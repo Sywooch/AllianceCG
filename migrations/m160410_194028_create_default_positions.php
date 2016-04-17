@@ -18,7 +18,28 @@ class m160410_194028_create_default_positions extends Migration
             ]); 
             $this->insert('{{%positions}}', [
                 'position' => 'Администратор',
+            ]); 
+            $this->insert('{{%positions}}', [
+                'position' => 'Кредитный специалист',
             ]);  
+            $this->insert('{{%positions}}', [
+                'position' => 'Руководитель отдела кредитования',
+            ]); 
+            $this->insert('{{%positions}}', [
+                'position' => 'Руководитель отдела сервиса',
+            ]);   
+            $this->insert('{{%positions}}', [
+                'position' => 'Директор',
+            ]);   
+            $this->insert('{{%positions}}', [
+                'position' => 'Ассистент сервиса',
+            ]);    
+            $this->insert('{{%positions}}', [
+                'position' => 'Системный администратор',
+            ]);   
+            $this->insert('{{%positions}}', [
+                'position' => 'Руководитель отдела IT',
+            ]);    
         }
         else
         {        
@@ -33,7 +54,28 @@ class m160410_194028_create_default_positions extends Migration
             ]); 
             $this->insert('{{%positions}}', [
                 'position' => 'Администратор',
-            ]);             
+            ]);
+            $this->insert('{{%positions}}', [
+                'position' => 'Кредитный специалист',
+            ]);  
+            $this->insert('{{%positions}}', [
+                'position' => 'Руководитель отдела кредитования',
+            ]);   
+            $this->insert('{{%positions}}', [
+                'position' => 'Руководитель отдела сервиса',
+            ]);   
+            $this->insert('{{%positions}}', [
+                'position' => 'Директор',
+            ]);   
+            $this->insert('{{%positions}}', [
+                'position' => 'Ассистент сервиса',
+            ]);    
+            $this->insert('{{%positions}}', [
+                'position' => 'Системный администратор',
+            ]);   
+            $this->insert('{{%positions}}', [
+                'position' => 'Руководитель отдела IT',
+            ]);                     
         }
     }
 

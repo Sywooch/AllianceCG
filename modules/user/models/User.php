@@ -47,6 +47,8 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_WAIT = 2;
     
     const ROLE_MANAGER = 'manager';
+    const ROLE_CREDITMANAGER = 'creditmanager';
+    const ROLE_CHIEFCREDIT = 'chiefcredit';
     const ROLE_HEAD = 'head';
     const ROLE_ADMIN = 'admin';
     const ROLE_ROOT = 'root';
@@ -247,6 +249,8 @@ class User extends ActiveRecord implements IdentityInterface
             self::ROLE_HEAD => 'Руководитель',
             self::ROLE_ADMIN => 'Администратор',
             self::ROLE_ROOT => 'Суперпользователь',
+            self::ROLE_CHIEFCREDIT => 'Руководитель ОКиС',
+            self::ROLE_CREDITMANAGER => 'Кредитный специалист',
         ];
     }    
 

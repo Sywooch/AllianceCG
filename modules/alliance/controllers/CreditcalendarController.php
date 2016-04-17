@@ -50,19 +50,6 @@ class CreditcalendarController extends Controller
     {    	
         return $this->render('graph');
     }
-
-    /**
-     * Lists all Creditcalendar models.
-     * @return mixed
-     */
-    public function actionTest()
-    {
-        $model = new CreditcalendarSearch();
-        
-        return $this->render('test', [
-            'model' => $model,
-        ]);
-    }
     
     public function actionCalendarsearch()
     {

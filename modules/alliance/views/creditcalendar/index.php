@@ -10,11 +10,11 @@ use yii\jui\AutoComplete;
 use app\modules\admin\models\Companies;
 use app\modules\alliance\models\Creditcalendar;
 use yii\jui\DatePicker;
-use yii\bootstrap\ButtonDropdown;
 use yii\helpers\ArrayHelper;
 use app\components\grid\ActionColumn;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
+use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\alliance\models\CreditcalendarSearch */
@@ -24,12 +24,8 @@ $this->title = Module::t('module', 'ALLIANCE_CREDITCALENDAR');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_ALLIANCE'), 'url' => ['/alliance']];
 $this->params['breadcrumbs'][] = $this->title;
 
-$script = <<< JS
-$(document).ready(function() {
-    setInterval(function(){ $("#creditcalendar_refresh").click(); }, 60000);
-});
-JS;
-$this->registerJs($script);
+$upd = file_get_contents('js/modules/alliance/creditcalendar/updateIndexGridView.js');
+$this->registerJs($upd, View::POS_END);
 
 $this->registerJs(' 
 
@@ -50,7 +46,7 @@ $this->registerJs('
               });
             }
     });
-    });', \yii\web\View::POS_READY);
+    });', View::POS_READY);
 
 ?>
    
@@ -58,33 +54,16 @@ $this->registerJs('
         'model' => $model,
     ]) ?>
 
+    <?= $this->render('_buttonmenu', [
+        'model' => $model,
+    ])?>
+
 <div class="creditcalendar-index">
 
-    <h1>
-        <?php // Html::encode($this->title) ?>
-    </h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p style="text-align: right">
-        
-        <?php // Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREDITCALENDAR_CREATE'), ['create'], ['class' => 'btn btn-success btn-sm', 'id' => 'refreshButton']) ?>
-        
-        <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREDITCALENDAR_EVENT'), ['create?is_task=0'], ['class' => 'btn btn-success btn-sm', 'id' => 'refreshButton']) ?>
-        
-        <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREDITCALENDAR_TASK'), ['create?is_task=1'], ['class' => 'btn btn-info btn-sm', 'id' => 'refreshButton']) ?>
-
-        <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'CREDITCALENDAR_REFRESH'), ['index'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
-
-        <?= Html::a(FA::icon('trash') . ' ' . Module::t('module', 'CREDITCALENDAR_DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']) ?>  
-        
-        <?= Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'), ['export'], ['class' => 'btn btn-warning btn-sm']) ?>
-                
-    </p>    
+    <?php Pjax::begin(['id' => 'creditcalendar']); ?>
     
-    <?php Pjax::begin(); ?>
-    
-    <?= Html::a("", ['/alliance/creditcalendar/index'], ['class' => 'hidden_button', 'id' => 'creditcalendar_refresh']) ?>
-        
     <?= Yii::$app->session->getFlash('error'); ?>
     
     <?= GridView::widget([
@@ -190,28 +169,12 @@ $this->registerJs('
                 'name' => 'statuses',
                 'contentOptions'=>['style'=>'width: 50px;'],
                 'filter' => $model->getStatusesArray(),
-//                'value' => function ($data) {
-//                    return $data->getStatuses();
-//                },
                 'cssCLasses' => [
                     Creditcalendar::STATUS_ATWORK => 'danger',
                     Creditcalendar::STATUS_CLARIFY => 'primary',
                     Creditcalendar::STATUS_FINISHED => 'success',
                 ],
             ],
-//            'dateTimeTo',
-//            'date_from',
-//            'time_from',
-//            'date_to',
-//            'time_to',
-            // 'description:ntext',
-//            'location',
-//             'is_task',
-            // 'is_repeat',
-//            'author',
-//            'created_at:datetime',
-
-//            ['class' => 'yii\grid\ActionColumn'],
             [
                 'class' => ActionColumn::className(),
                 'contentOptions'=>['style'=>'width: 20px;'],

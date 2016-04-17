@@ -3,6 +3,8 @@
 	return [
 
             'NAV_SKODA_DASHBOARD' => 'DASHBOARD',
+            'NAV_SKODA' => 'ŠKODA',
+            'NAV_ADMIN' => 'Администрирование',
             'NAV_SKODA_SERVICESHEDULER' => 'Смены',
             'NAV_SKODA_STATUSMONITOR' => 'Монитор готовности',
             'NAV_ADMIN_DASHBOARD' => 'DASHBOARD',

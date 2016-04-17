@@ -15,7 +15,7 @@
             eventLimit: true,            
             selectable: false,
             editable: false,
-            height: 800,
+            height: 600,
             width: 600,
             lang: 'ru',
             events: [{

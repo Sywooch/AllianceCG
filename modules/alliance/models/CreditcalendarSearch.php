@@ -67,7 +67,7 @@ class CreditcalendarSearch extends Creditcalendar
                         WHEN CONCAT(date_to, ' ', time_to) IS NULL THEN time_to
                         ELSE CONCAT(date_to, ' ', time_to)
                         END AS end,
-                    CONCAT(title,' (',author,')') AS title,
+                    `title` AS title,
                     CASE status
                         WHEN '0' THEN 'orange'
                         WHEN '1' THEN 'primary'

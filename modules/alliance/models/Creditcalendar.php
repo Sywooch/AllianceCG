@@ -109,6 +109,12 @@ class Creditcalendar extends \yii\db\ActiveRecord
         return $resp;
     }
     
+    public function getTaskresponsible()
+    {
+        $resp = !empty($this->responsible) ? ' => ' . $this->responsible : '';
+        return $resp;
+    }
+    
     public function getStatusesArray()
     {
         return[

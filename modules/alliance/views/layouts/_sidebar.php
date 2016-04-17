@@ -18,17 +18,17 @@ use yii\helpers\Url;
             [
                 'label' => FA::icon('calendar') . ' ' . Module::t('module', 'ALLIANCE_CREDITCALENDAR'),
                 'url' => '/alliance/creditcalendar',    
-                'visible' => Yii::$app->user->can('admin')            
+                'visible' => Yii::$app->user->can('admin'),            
             ],
             [
                 'label' => FA::icon('phone') . ' ' . Module::t('module', 'NAV_ALLIANCE_PHONEBOOK'),
                 'url' => '/alliance/phonebook',    
-                'visible' => Yii::$app->user->can('admin')            
+                'visible' => Yii::$app->user->can('root'),            
             ],
             [
                 'label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_DUTY'),
                 'url' => '/alliance/dutygraph/',    
-                'visible' => Yii::$app->user->can('admin')            
+                'visible' => Yii::$app->user->can('root'),            
             ],
         ]),
     ]);

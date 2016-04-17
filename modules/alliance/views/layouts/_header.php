@@ -5,7 +5,7 @@ use yii\bootstrap\NavBar;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use app\modules\main\Module;
+use app\modules\alliance\Module;
 
     NavBar::begin([
         'brandLabel' => Html::img('@web/img/logo/alliance_logo.png', ['height'=>'55']),
@@ -35,7 +35,7 @@ use app\modules\main\Module;
                     [
                         'label' => FA::icon('phone') . ' ' . Module::t('module', 'NAV_ALLIANCE_PHONEBOOK'),
                         'url' => ['/alliance/phonebook'],
-                        'visible' => Yii::$app->user->can('admin')
+                        'visible' => Yii::$app->user->can('root')
                         
                     ],
                     [
@@ -46,7 +46,7 @@ use app\modules\main\Module;
                     [
                         'label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_DUTY'),
                         'url' => ['/alliance/'], 
-                        'visible' => Yii::$app->user->can('admin')
+                        'visible' => Yii::$app->user->can('root')
                     ],                
                 ],
             ] :

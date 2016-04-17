@@ -21,10 +21,7 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
-//        'js/jqfc/lib/jquery.min.js',
-//        'js/jqfc/lib/moment.min.js',
-//        'js/jqfc/fullcalendar.js',
-//        'js/jqfc/lang/ru.js',
+        
     ];
     public $jsOptions = array(
         'position' => \yii\web\View::POS_HEAD

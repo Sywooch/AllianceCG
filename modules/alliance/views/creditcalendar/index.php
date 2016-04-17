@@ -157,6 +157,14 @@ $this->registerJs('
                 },
             ],
             [
+                'attribute' => 'responsible',
+                'format' => 'raw',
+                'filter' => ArrayHelper::map(Creditcalendar::find()->where(['not', ['responsible' => null]])->asArray()->all(), 'responsible', 'responsible'),
+                'value' => function ($data) {
+                    return $data->getResponsibles();
+                },
+            ],
+            [
                 'attribute' => 'location',
                 'format' => 'raw',
                 'filter' => ArrayHelper::map(Companies::find()->asArray()->all(), 'company_name', 'company_name'),
@@ -182,9 +190,9 @@ $this->registerJs('
                 'name' => 'statuses',
                 'contentOptions'=>['style'=>'width: 50px;'],
                 'filter' => $model->getStatusesArray(),
-                'value' => function ($data) {
-                    return $data->getStatuses();
-                },
+//                'value' => function ($data) {
+//                    return $data->getStatuses();
+//                },
                 'cssCLasses' => [
                     Creditcalendar::STATUS_ATWORK => 'danger',
                     Creditcalendar::STATUS_CLARIFY => 'primary',

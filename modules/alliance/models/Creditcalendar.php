@@ -30,7 +30,7 @@ use Yii;
  */
 class Creditcalendar extends \yii\db\ActiveRecord
 {
-    const IS_TASK_CALENDAR= 0;
+    const IS_TASK_CALENDAR = 0;
     const IS_TASK_TASK = 1;
     
     const STATUS_ATWORK = 0;
@@ -102,6 +102,12 @@ class Creditcalendar extends \yii\db\ActiveRecord
 //            self::DAY_SUN => 'Вс',
 //        ];
 //    }
+    
+    public function getResponsibles()
+    {
+        $resp = !empty($this->responsible) ? $this->responsible : FA::icon('remove');
+        return $resp;
+    }
     
     public function getStatusesArray()
     {

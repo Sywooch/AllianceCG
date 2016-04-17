@@ -21,7 +21,7 @@ class CreditcalendarSearch extends Creditcalendar
     {
         return [
             [['id', 'is_task', 'is_repeat', 'created_at'], 'integer'],
-            [['title', 'date_from', 'time_from', 'date_to', 'time_to', 'description', 'location', 'author', 'status'], 'safe'],
+            [['title', 'date_from', 'time_from', 'date_to', 'time_to', 'responsible', 'description', 'location', 'author', 'status'], 'safe'],
         ];
     }
 
@@ -104,6 +104,7 @@ class CreditcalendarSearch extends Creditcalendar
                 'date_to',
                 'location',
                 'is_task',
+                'responsible',  
                 'status',
                 'author',
                 'dateTimeFrom' => [
@@ -151,6 +152,7 @@ class CreditcalendarSearch extends Creditcalendar
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'responsible', $this->responsible])
             ->andFilterWhere(['like', 'location', $this->location])
             ->andFilterWhere(['like', 'author', $this->author])
             ->andFilterWhere(['like', 'status', $this->status])

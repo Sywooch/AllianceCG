@@ -33,15 +33,15 @@ class RbacController extends Controller
         $manager->ruleName = $groupRule->name;
         $auth->add($manager);
         
-        $head = $auth->createRole('creditmanager');
-        $head ->description = 'creditmanager ';
-        $head ->ruleName = $groupRule->name;
-        $auth->add($head);
+        $creditmanager = $auth->createRole('creditmanager');
+        $creditmanager ->description = 'creditmanager ';
+        $creditmanager ->ruleName = $groupRule->name;
+        $auth->add($creditmanager);
 
-        $head = $auth->createRole('chiefcredit');
-        $head ->description = 'chiefcredit ';
-        $head ->ruleName = $groupRule->name;
-        $auth->add($head);        
+        $chiefcredit = $auth->createRole('chiefcredit');
+        $chiefcredit->description = 'chiefcredit ';
+        $chiefcredit->ruleName = $groupRule->name;
+        $auth->add($chiefcredit);        
  
         $head = $auth->createRole('head');
         $head ->description = 'head ';

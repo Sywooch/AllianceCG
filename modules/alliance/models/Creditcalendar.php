@@ -6,6 +6,7 @@ use yii\behaviors\TimestampBehavior;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\ArrayHelper;
 use yii\db\Expression;
+use app\modules\alliance\models\CreditcalendarComments;
 
 use Yii;
 
@@ -30,6 +31,9 @@ use Yii;
  */
 class Creditcalendar extends \yii\db\ActiveRecord
 {
+    public $comment_author;
+    public $comment_text;    
+    
     const IS_TASK_CALENDAR = 0;
     const IS_TASK_TASK = 1;
     
@@ -59,6 +63,14 @@ class Creditcalendar extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return '{{%creditcalendar}}';
+    }    
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCreditcalendarcomments()
+    {
+        return $this->hasMany(Creditcalendar::className(), ['creditcalendar_id' => 'id']);
     }
 
     /**
@@ -66,15 +78,11 @@ class Creditcalendar extends \yii\db\ActiveRecord
      */
     public function behaviors()
     {
-//        return [
-//            TimestampBehavior::className(),
-//        ];
         return [
             [
                 'class' => TimestampBehavior::className(),
                 'createdAtAttribute' => 'created_at',
                 'updatedAtAttribute' => 'updated_at',
-//                'value' => new Expression('NOW()'),
                 'value' => function() { return date('U'); },
             ],
         ];
@@ -166,7 +174,8 @@ class Creditcalendar extends \yii\db\ActiveRecord
      */
     public function rules()
     {
-        return [
+        return [            
+            [['comment_author', 'comment_text'], 'safe'],
             [['responsible'], 'required', 'on' => self::SCENARIO_TASK],
             ['status', 'default', 'value' => self::STATUS_ATWORK],
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
@@ -203,6 +212,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
             'responsible' => Module::t('module', 'CREDITCALENDAR_RESPONSIBLE'),
             'dateTimeFrom' => 'От: ',
             'dateTimeTo' => 'До: ',
+            'creditcalendarcomments.comment_text' => Module::t('module', 'CREDITCALENDAR_COMMENTS'),
         ];
     }
     
@@ -220,5 +230,17 @@ class Creditcalendar extends \yii\db\ActiveRecord
         }
         return false;
     }    
+
+    public function afterSave($insert, $changedAttributes)
+     {
+         parent::afterSave($insert, $changedAttributes);
+//         if (!$insert) {
+            $creditcalendarComments = new Creditcalendarcomments();
+            $creditcalendarComments->creditcalendar_id = $this->id;
+            $creditcalendarComments->comment_text = $this->comment_text;
+            $creditcalendarComments->comment_author = $this->author;
+            $creditcalendarComments->save();
+//         }
+     }        
     
 }

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\widgets\ListView;   
 use rmrevin\yii\fontawesome\FA;
 use app\modules\alliance\Module;
 
@@ -46,11 +47,37 @@ $this->params['breadcrumbs'][] = $this->title;
         
     </div>
 </div>    
-    
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
+<?php $listSummary = '<blockquote class="alert-info">' . FA::icon('comments') . ' ' . Module::t('module', 'CREDITCALENDAR_COMMENTS') . ': {totalCount}</blockquote>'; ?>
+    
+<?= 
+    ListView::widget([
+        'dataProvider' => $listDataProvider,
+        'summary' => $listSummary,
+        'options' => [
+            'tag' => 'div',
+            'class' => 'list-wrapper',
+            'id' => 'list-wrapper',
+        ],
+        'layout' => "{summary}\n{items}\n{pager}",
+        'itemView' => '_commentsitem',
+        'itemOptions' => [
+            'tag' => false,
+        ],
+        'pager' => [
+            'firstPageLabel' => 'first',
+            'lastPageLabel' => 'last',
+            'nextPageLabel' => 'next',
+            'prevPageLabel' => 'previous',
+            'maxButtonCount' => 3,
+        ],
+    ]); 
+?>
+
+<?php
+//    DetailView::widget([
+//        'model' => $model,
+//        'attributes' => [
 //            'id',
 //            'title',
 //            'date_from',
@@ -63,8 +90,9 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'is_repeat',
 //            'author',
 //            'created_at',
-        ],
-    ]) ?>        
+//        ],
+//    ]) 
+?>        
         
 
 </div>

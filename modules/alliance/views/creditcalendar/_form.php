@@ -210,7 +210,9 @@ use janisto\timepicker\TimePicker;
     ?>
     
     <?= $form->field($model, 'status', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('check-circle-o') . ' </span>{input}</div>{error}'])->dropDownList($model->getStatusesArray()) ?>
-    
+
+    <?=$form->field($model, 'comment_text')->textArea(['rows' => 4, 'placeholder' => $model->getAttributeLabel( 'comment_text' )]); ?>
+
     <?php ActiveForm::end(); ?>
 
 </div>

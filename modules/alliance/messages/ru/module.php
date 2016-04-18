@@ -55,4 +55,6 @@
             'CREDITCALENDAR_GRAPH' => 'График',
             'CREDITCALENDAR_RESPONSIBLE' => 'Ответственный',
             'ALLIANCE_CREDITCALENDARCAL' => 'Календарь',
+            'ALLIANCE_CREDITCALENDARCOMMENTS' => 'ОКиС. Календарь. Комментарии',
+            'CREDITCALENDAR_COMMENTS' => 'Комментарии',
 	];

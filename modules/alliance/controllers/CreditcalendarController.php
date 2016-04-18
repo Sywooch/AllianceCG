@@ -5,6 +5,8 @@ namespace app\modules\alliance\controllers;
 use Yii;
 use app\modules\alliance\models\Creditcalendar;
 use app\modules\alliance\models\CreditcalendarSearch;
+use app\modules\alliance\models\CreditcalendarComments;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -87,8 +89,18 @@ class CreditcalendarController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        
+        $dataProvider = new ActiveDataProvider([
+            'query' => CreditcalendarComments::find()->where(['creditcalendar_id' => $model->id])->orderBy('id ASC'),
+            'pagination' => false,
+        ]);
+
+        
         return $this->render('view', [
-            'model' => $this->findModel($id),
+//            'model' => $this->findModel($id),
+            'model' => $model,
+            'listDataProvider' => $dataProvider,
         ]);
     }
 
@@ -112,8 +124,6 @@ class CreditcalendarController extends Controller
         $model->time_from = $curtime;
         $model->date_to = $tomorrow;
         $model->time_to = $curtime;
-        
-//        $model->scenario = User::SCENARIO_ADMIN_CREATE;
         
         if(isset($_GET['is_task']))
         {
@@ -159,7 +169,7 @@ class CreditcalendarController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($id);       
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

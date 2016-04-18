@@ -21,6 +21,11 @@ use yii\helpers\Url;
                 'visible' => Yii::$app->user->can('admin'),            
             ],
             [
+                'label' => FA::icon('calendar') . ' ' . Module::t('module', 'ALLIANCE_CREDITCALENDARCOMMENTS'),
+                'url' => '/alliance/creditcalendarcomments',    
+                'visible' => Yii::$app->user->can('admin'),            
+            ],
+            [
                 'label' => FA::icon('phone') . ' ' . Module::t('module', 'NAV_ALLIANCE_PHONEBOOK'),
                 'url' => '/alliance/phonebook',    
                 'visible' => Yii::$app->user->can('root'),            

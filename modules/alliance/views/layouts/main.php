@@ -39,7 +39,7 @@ AppAsset::register($this);
     </div>
 </div>
 
-<?php // $this->render('@app/modules/alliance/views/layouts/_footer') ?>
+<?= $this->render('@app/modules/alliance/views/layouts/_footer') ?>
 
 <?php $this->endBody() ?>
 </body>

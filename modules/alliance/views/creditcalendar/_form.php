@@ -4,8 +4,6 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use rmrevin\yii\fontawesome\FA;
 use app\modules\alliance\Module;
-use yii\jui\Dialog;
-use yii\bootstrap\Modal;
 use yii\jui\DatePicker;
 use app\modules\admin\models\Companies;
 use app\modules\alliance\models\Creditcalendar;
@@ -17,12 +15,6 @@ use janisto\timepicker\TimePicker;
 /* @var $model app\modules\alliance\models\Creditcalendar */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#thelink').click(function(){ $('repeatableEvents').dialog('open'); });
-    }
-</script>
 
 <div class="creditcalendar-form">
 
@@ -128,31 +120,6 @@ use janisto\timepicker\TimePicker;
     </div>
     
     <br/><br/><br/>
-  
-    <!--<div style="text-align: center">-->    
-<?php 
-
-//    Modal::begin([
-//        'header' => Module::t('module', 'CREDITCALENDAR_ALLDAY'),
-//        'toggleButton' => [
-//            'tag' => 'button',
-//            'class' => 'btn btn-sm btn-primary',
-//            'label' => Module::t('module', 'CREDITCALENDAR_ALLDAY'),
-//        ]
-//    ]);
-//
-//        echo $form->field($model, 'allday')->checkbox(['label' => Module::t('module', 'CREDITCALENDAR_ALLDAY_CHECKBOX'),
-//                'labelOptions' => [
-//                    'style' => 'padding-left:20px;'
-//                ],
-//                'disabled' => false,
-//            ]);
-//
-//    Modal::end();
-?>
-<!--    </div>
-    
-    <br/><br/>-->
     
     <?= $form->field($model, 'allday')->checkbox(['label' => Module::t('module', 'CREDITCALENDAR_ALLDAY_CHECKBOX'),
                 'labelOptions' => [
@@ -211,7 +178,12 @@ use janisto\timepicker\TimePicker;
     
     <?= $form->field($model, 'status', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('check-circle-o') . ' </span>{input}</div>{error}'])->dropDownList($model->getStatusesArray()) ?>
 
-    <?=$form->field($model, 'comment_text')->textArea(['rows' => 4, 'placeholder' => $model->getAttributeLabel( 'comment_text' )]); ?>
+    <?php
+        if(!$model->isNewRecord){
+//            echo $form->field($model, 'comment_text')->textArea(['rows' => 4, 'placeholder' => $model->getAttributeLabel( 'comment_text' )]); 
+            echo $form->field($model, 'comment_text', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('comment') . ' </span>{input}</div>{error}'])->textArea(['rows' => 4, 'placeholder' => $model->getAttributeLabel( 'comment_text' )]);
+        }
+     ?>
 
     <?php ActiveForm::end(); ?>
 

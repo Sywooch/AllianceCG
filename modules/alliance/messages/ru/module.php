@@ -57,4 +57,6 @@
             'ALLIANCE_CREDITCALENDARCAL' => 'Календарь',
             'ALLIANCE_CREDITCALENDARCOMMENTS' => 'ОКиС. Календарь. Комментарии',
             'CREDITCALENDAR_COMMENTS' => 'Комментарии',
+            'CREDITCALENDAR_COMMENTS_EMPTY' => 'Комментарии отсутствуют',
+            'CREDITCALENDAR_COMMENT' => 'Комментарий',
 	];

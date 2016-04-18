@@ -212,6 +212,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
             'responsible' => Module::t('module', 'CREDITCALENDAR_RESPONSIBLE'),
             'dateTimeFrom' => 'От: ',
             'dateTimeTo' => 'До: ',
+            'comment_text' => Module::t('module', 'CREDITCALENDAR_COMMENT'),
             'creditcalendarcomments.comment_text' => Module::t('module', 'CREDITCALENDAR_COMMENTS'),
         ];
     }
@@ -234,13 +235,13 @@ class Creditcalendar extends \yii\db\ActiveRecord
     public function afterSave($insert, $changedAttributes)
      {
          parent::afterSave($insert, $changedAttributes);
-//         if (!$insert) {
+         if (!$insert) {
             $creditcalendarComments = new Creditcalendarcomments();
             $creditcalendarComments->creditcalendar_id = $this->id;
             $creditcalendarComments->comment_text = $this->comment_text;
-            $creditcalendarComments->comment_author = $this->author;
+            $creditcalendarComments->comment_author = Yii::$app->user->identity->userfullname;
             $creditcalendarComments->save();
-//         }
+         }
      }        
     
 }

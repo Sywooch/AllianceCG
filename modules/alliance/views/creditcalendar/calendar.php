@@ -20,27 +20,23 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= $this->render('_submenu', [
     'model' => $model,
-]) ?> 
+]) 
+?> 
 
 <?= $this->render('_buttonmenu', [
     'model' => $model,
-])?>
+])
+?>
 
 <div class="creditcalendar-index">
     
-    <?php Pjax::begin(); ?>
-        <?= Html::a("", ['/alliance/creditcalendar/index'], ['class' => 'hidden_button', 'id' => 'creditcalendar_refresh']) ?>
+    <?php  Pjax::begin(); ?>
         <?php 
-   //        $this->registerCssFile('@web/css/jqfc/fullcalendar_sk_statusmonitor.css', ['depends' => ['app\assets\AppAsset']]);    
            $this->registerCssFile('@web/css/calendars/calendars.css', ['depends' => ['app\assets\AppAsset']]);    
            $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/jquery.min.js'), ['depends' => [
                'yii\web\YiiAsset',
                'yii\bootstrap\BootstrapAsset'],
-           ]);
-           $this->registerJsFile(Yii::getAlias('@web/js/jquery.qtip.min.js'), ['depends' => [
-               'yii\web\YiiAsset',
-               'yii\bootstrap\BootstrapAsset'],
-           ]);
+           ]);          
            $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/moment.min.js'), ['depends' => [
                'yii\web\YiiAsset',
                'yii\bootstrap\BootstrapAsset'],
@@ -58,7 +54,10 @@ $this->params['breadcrumbs'][] = $this->title;
                'yii\bootstrap\BootstrapAsset'],
            ]);    
        ?>
-    
-<div id='credit_calendar'></div>  
+     
+<div id='credit_calendar'> </div>  
+
+   <?php  Pjax::end(); ?>
+
 
 </div>

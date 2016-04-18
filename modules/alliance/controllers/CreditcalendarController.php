@@ -95,10 +95,8 @@ class CreditcalendarController extends Controller
             'query' => CreditcalendarComments::find()->where(['creditcalendar_id' => $model->id])->orderBy('id ASC'),
             'pagination' => false,
         ]);
-
         
         return $this->render('view', [
-//            'model' => $this->findModel($id),
             'model' => $model,
             'listDataProvider' => $dataProvider,
         ]);

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\widgets\ActiveForm;
 use yii\widgets\ListView;   
 use rmrevin\yii\fontawesome\FA;
 use app\modules\alliance\Module;
@@ -31,29 +32,31 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
+    
 <div class="panel panel-default">
+   
     <div class="panel-heading panel-info">
         <?= $model->getIsTaskIcon() . ' ' . $model->author . '' . $model->getTaskresponsible() . ', ' . $model->location . ', ' . \Yii::t('app', '{0, date}', $model->created_at); ?>
     </div>
     <div class="panel-body">
-        <!--<blockquote class="alert-info">-->
+        
         <h3>
             <?= Html::encode($this->title) ?>
-        </h3>
-        <!--</blockquote>-->
-        
-        <?= $model->description; ?>
-        
+        </h3>        
+            <?= $model->description; ?>        
     </div>
-</div>    
+</div>
 
-<?php $listSummary = '<blockquote class="alert-info">' . FA::icon('comments') . ' ' . Module::t('module', 'CREDITCALENDAR_COMMENTS') . ': {totalCount}</blockquote>'; ?>
-    
+<?php 
+    $listSummary = '<blockquote class="alert-info">' . FA::icon('comments') . ' ' . Module::t('module', 'CREDITCALENDAR_COMMENTS') . ': {totalCount}</blockquote>'; 
+    $emptyText = '<blockquote class="alert-info">' . FA::icon('comments') . ' ' . Module::t('module', 'CREDITCALENDAR_COMMENTS_EMPTY') . '</blockquote>'; 
+?>
+
 <?= 
     ListView::widget([
         'dataProvider' => $listDataProvider,
         'summary' => $listSummary,
+        'emptyText' => $emptyText,
         'options' => [
             'tag' => 'div',
             'class' => 'list-wrapper',
@@ -74,25 +77,20 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); 
 ?>
 
-<?php
-//    DetailView::widget([
-//        'model' => $model,
-//        'attributes' => [
-//            'id',
-//            'title',
-//            'date_from',
-//            'time_from',
-//            'date_to',
-//            'time_to',
-//            'description:ntext',
-//            'location',
-//            'is_task',
-//            'is_repeat',
-//            'author',
-//            'created_at',
-//        ],
-//    ]) 
-?>        
-        
-
+<?php 
+    $form = ActiveForm::begin([
+            'options' => [
+                    'enctype' => 'multipart/form-data'
+                ],
+            'action' => '',
+            'method' => 'post',
+        ]); 
+    
+    echo $form->field($model, 'comment_text', [
+        'template' => '<div class="input-group"><span class="input-group-addon"> ' . FA::icon('comment') . ' </span>{input}<span class="input-group-addon">'.
+            '<a class="btn btn-lg btn-default">Go!</button></span></div>',
+    ])->textArea(['rows' => 4, 'placeholder' => $model->getAttributeLabel( 'comment_text' )]);
+    
+    ActiveForm::end(); 
+?>
 </div>

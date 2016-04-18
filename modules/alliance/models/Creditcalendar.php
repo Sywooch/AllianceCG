@@ -232,16 +232,16 @@ class Creditcalendar extends \yii\db\ActiveRecord
         return false;
     }    
 
-    public function afterSave($insert, $changedAttributes)
-     {
-         parent::afterSave($insert, $changedAttributes);
-         if (!$insert) {
-            $creditcalendarComments = new Creditcalendarcomments();
-            $creditcalendarComments->creditcalendar_id = $this->id;
-            $creditcalendarComments->comment_text = $this->comment_text;
-            $creditcalendarComments->comment_author = Yii::$app->user->identity->userfullname;
-            $creditcalendarComments->save();
-         }
-     }        
+//    public function afterSave($insert, $changedAttributes)
+//     {
+//         parent::afterSave($insert, $changedAttributes);
+//         if (!$insert) {
+//            $creditcalendarComments = new Creditcalendarcomments();
+//            $creditcalendarComments->creditcalendar_id = $this->id;
+//            $creditcalendarComments->comment_text = $this->comment_text;
+//            $creditcalendarComments->comment_author = Yii::$app->user->identity->userfullname;
+//            $creditcalendarComments->save();
+//         }
+//     }        
     
 }

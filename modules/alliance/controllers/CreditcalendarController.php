@@ -91,6 +91,17 @@ class CreditcalendarController extends Controller
     {
         $model = $this->findModel($id);
         
+        if ($model->load(Yii::$app->request->post()) && $model->save())
+        {
+            $creditcalendarComments = new Creditcalendarcomments();
+            $creditcalendarComments->creditcalendar_id = $model->id;
+            $creditcalendarComments->comment_text = $model->comment_text;
+            $creditcalendarComments->comment_author = Yii::$app->user->identity->userfullname;
+            $creditcalendarComments->save();
+            $model = new Creditcalendar();
+//            return $this->redirect(['view', 'id' => $model->id]);
+        }        
+        
         $dataProvider = new ActiveDataProvider([
             'query' => CreditcalendarComments::find()->where(['creditcalendar_id' => $model->id])->orderBy('id ASC'),
             'pagination' => false,
@@ -176,6 +187,14 @@ class CreditcalendarController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+    
+    public function actionComment($id)
+    {
+        $model = $this->findModel($id);
+//        return $this->render('view', [
+//            'model' => $model,
+//        ]);        
     }
 
     /**

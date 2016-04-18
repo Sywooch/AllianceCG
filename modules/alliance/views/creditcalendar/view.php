@@ -6,6 +6,8 @@ use yii\widgets\ActiveForm;
 use yii\widgets\ListView;   
 use rmrevin\yii\fontawesome\FA;
 use app\modules\alliance\Module;
+use yii\helpers\Url;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\alliance\models\Creditcalendar */
@@ -47,11 +49,13 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 </div>
 
+<?php Pjax::begin(['id' => 'comments']) ?>    
+    
 <?php 
     $listSummary = '<blockquote class="alert-info">' . FA::icon('comments') . ' ' . Module::t('module', 'CREDITCALENDAR_COMMENTS') . ': {totalCount}</blockquote>'; 
     $emptyText = '<blockquote class="alert-info">' . FA::icon('comments') . ' ' . Module::t('module', 'CREDITCALENDAR_COMMENTS_EMPTY') . '</blockquote>'; 
 ?>
-
+    
 <?= 
     ListView::widget([
         'dataProvider' => $listDataProvider,
@@ -76,21 +80,11 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); 
 ?>
-
-<?php 
-    $form = ActiveForm::begin([
-            'options' => [
-                    'enctype' => 'multipart/form-data'
-                ],
-            'action' => '',
-            'method' => 'post',
-        ]); 
     
-    echo $form->field($model, 'comment_text', [
-        'template' => '<div class="input-group"><span class="input-group-addon"> ' . FA::icon('comment') . ' </span>{input}<span class="input-group-addon">'.
-            '<a class="btn btn-lg btn-default">Go!</button></span></div>',
-    ])->textArea(['rows' => 4, 'placeholder' => $model->getAttributeLabel( 'comment_text' )]);
+<?php Pjax::end() ?>
+  
+    <?= $this->render('_commentForm', [
+        'model' => $model,
+    ]) ?>    
     
-    ActiveForm::end(); 
-?>
 </div>

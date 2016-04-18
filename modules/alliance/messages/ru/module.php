@@ -59,4 +59,5 @@
             'CREDITCALENDAR_COMMENTS' => 'Комментарии',
             'CREDITCALENDAR_COMMENTS_EMPTY' => 'Комментарии отсутствуют',
             'CREDITCALENDAR_COMMENT' => 'Комментарий',
+            'CREDITCALENDAR_COMMENT_BUTTON' => 'OK',
 	];

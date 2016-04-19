@@ -276,7 +276,7 @@ class CreditcalendarController extends Controller
         $model = Creditcalendar::find()->All();
         $headmodel = new Creditcalendar();
         $filename = 'Creditcalendar-'.Date('Y-m-d-H-i-s').'.xls';
-        echo '<meta http-equiv="Content-type" content="text/html; charset=utf-8" />';
+        echo '<meta http-equiv="Content-type" content="application/vnd-ms-excel; charset=utf-8" />';
         header("Content-type: application/vnd-ms-excel; charset=utf-8");
         header("Content-Transfer-Encoding: binary");
         header("Content-Disposition: attachment; filename=".$filename);
@@ -285,12 +285,12 @@ class CreditcalendarController extends Controller
             <thead>
                 <tr>
                     <th>'. $headmodel->getAttributeLabel( 'title' ) .'</th>
-                    <th>От:</th>
-                    <th>До:</th>
-                    <th>Описание</th>
-                    <th>Месторасположение</th>
-                    <th>Автор</th>
-                    <th>Дата создания</th>
+                    <th>'. $headmodel->getAttributeLabel( 'dateTimeFrom' ) .'</th>
+                    <th>'. $headmodel->getAttributeLabel( 'dateTimeTo' ) .'</th>
+                    <th>'. $headmodel->getAttributeLabel( 'description' ) .'</th>
+                    <th>'. $headmodel->getAttributeLabel( 'location' ) .'</th>
+                    <th>'. $headmodel->getAttributeLabel( 'author' ) .'</th>
+                    <th>'. $headmodel->getAttributeLabel( 'status' ) .'</th>
                     
                 </tr>
             </thead>';
@@ -298,13 +298,12 @@ class CreditcalendarController extends Controller
                 echo '
                     <tr>
                         <td>'.$data['title'].'</td>
-                        <td>'.$data['dateTimeFrom'].'</td>
-                        <td>'.$data['dateTimeTo'].'</td>
+                        <td>'.$data['date_from']. ' ' .$data['time_from'].'</td>
+                        <td>'.$data['date_to']. ' ' .$data['time_to'].'</td>
                         <td>'.$data['description'].'</td>
                         <td>'.$data['location'].'</td>
                         <td>'.$data['author'].'</td>
-                        <td>'.$data['created_at'].'</td>
-                        <td>'.$data['created_at'].'</td>
+                        <td>'.$data['status'].'</td>
                     </tr>
                 ';
             }

@@ -54,6 +54,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
     
     public $dateTimeFrom;
     public $dateTimeTo;
+    public $responsible;
     
     
     /**
@@ -110,17 +111,17 @@ class Creditcalendar extends \yii\db\ActiveRecord
 //        ];
 //    }
     
-    public function getResponsibles()
-    {
-        $resp = !empty($this->responsible) ? $this->responsible : FA::icon('remove');
-        return $resp;
-    }
+//    public function getResponsibles()
+//    {
+//        $resp = !empty($this->responsible) ? $this->responsible : FA::icon('remove');
+//        return $resp;
+//    }
     
-    public function getTaskresponsible()
-    {
-        $resp = !empty($this->responsible) ? ' => ' . $this->responsible : '';
-        return $resp;
-    }
+//    public function getTaskresponsible()
+//    {
+//        $resp = !empty($this->responsible) ? ' => ' . $this->responsible : '';
+//        return $resp;
+//    }
     
     public function getStatusesArray()
     {

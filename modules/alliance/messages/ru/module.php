@@ -62,5 +62,6 @@
             'CREDITCALENDAR_COMMENT_BUTTON' => 'OK',
             'CREDITCALENDAR_ISCHIEFTASK' => 'Личная запись',
             'ONLY_CHIEFCREDIT_CAN_DO_THERE' => 'Данная запись доступна только сотрудникам с ролью Руководитель Отдела Кредитования и страхования',
-            'CREDITCALENDAR_NEW_TASK' => 'Календарь ОКиС. Новое задание '
+            'CREDITCALENDAR_NEW_TASK' => 'Календарь ОКиС. Новое задание ',
+            'ALLIANCE_CREDITCALENDARRESPONSIBLES' => 'ОКиС Календарь. Ответственные',
 	];

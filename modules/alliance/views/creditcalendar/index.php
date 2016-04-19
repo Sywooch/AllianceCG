@@ -116,14 +116,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->getIsTaskIcon();
                 },
             ],
-            [
-                'attribute' => 'responsible',
-                'format' => 'raw',
-                'filter' => ArrayHelper::map(Creditcalendar::find()->where(['not', ['responsible' => null]])->asArray()->all(), 'responsible', 'responsible'),
-                'value' => function ($data) {
-                    return $data->getResponsibles();
-                },
-            ],
+//            [
+//                'attribute' => 'responsible',
+//                'format' => 'raw',
+//                'filter' => ArrayHelper::map(Creditcalendar::find()->where(['not', ['responsible' => null]])->asArray()->all(), 'responsible', 'responsible'),
+//                'value' => function ($data) {
+//                    return $data->getResponsibles();
+//                },
+//            ],
             [
                 'attribute' => 'location',
                 'format' => 'raw',

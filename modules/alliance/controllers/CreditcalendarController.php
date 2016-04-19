@@ -150,7 +150,8 @@ class CreditcalendarController extends Controller
             {
                 $model->scenario = Creditcalendar::SCENARIO_EVENT;
             }
-            elseif($model->is_task == 1 && Yii::$app->user->can('chiefcredit'))
+//            elseif($model->is_task == 1 && Yii::$app->user->can('chiefcredit'))
+            elseif($model->is_task == 1 && (Yii::$app->user->can('chiefcredit') || (Yii::$app->user->can('admin'))))
             {
                 $model->scenario = Creditcalendar::SCENARIO_TASK;
             }

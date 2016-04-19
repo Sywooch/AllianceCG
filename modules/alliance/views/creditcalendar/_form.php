@@ -142,12 +142,13 @@ use janisto\timepicker\TimePicker;
     ?>
 
     <?php 
-        if(Yii::$app->user->can('chiefcredit'))
+        if(Yii::$app->user->can('chiefcredit') || Yii::$app->user->can('admin'))
         {  
             echo '<br/>';
 
             $cm = User::findAll([
                     'position' => 'Кредитный специалист',
+                    'status' => '1',
                     ]            
                 );
 

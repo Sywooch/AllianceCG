@@ -8,7 +8,7 @@ $params = ArrayHelper::merge(
 );
  
 return [
-    'name' => 'Монитор готовности Skoda',
+    'name' => 'ГК "Альянс"',
     'language' => 'ru',
     'basePath' => dirname(__DIR__),
     'bootstrap' => [

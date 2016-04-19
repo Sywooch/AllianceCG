@@ -129,35 +129,42 @@ use janisto\timepicker\TimePicker;
             ]);
     ?>
     
-    <?= $form->field($model, 'is_chief_task')->checkbox(['label' => Module::t('module', 'CREDITCALENDAR_ISCHIEFTASK'),
-                'labelOptions' => [
-                    'style' => 'padding-left:20px;'
-                ],
-                'disabled' => false,
-            ]);
+    <?php 
+        if(Yii::$app->user->can('chiefcredit'))
+        {   
+            $form->field($model, 'is_chief_task')->checkbox(['label' => Module::t('module', 'CREDITCALENDAR_ISCHIEFTASK'),
+                    'labelOptions' => [
+                        'style' => 'padding-left:20px;'
+                    ],
+                    'disabled' => false,
+                ]);
+        }
     ?>
 
-    <?php
-        echo '<br/>';
+    <?php 
+        if(Yii::$app->user->can('chiefcredit'))
+        {  
+            echo '<br/>';
 
-        $cm = User::findAll([
-                'position' => 'Кредитный специалист',
-                ]            
-            );
+            $cm = User::findAll([
+                    'position' => 'Кредитный специалист',
+                    ]            
+                );
 
-        foreach ($cm as $key => $value) {
-            $cmname = $value->name . ' ' . $value->surname;
-            $value->allname = $cmname;
+            foreach ($cm as $key => $value) {
+                $cmname = $value->name . ' ' . $value->surname;
+                $value->allname = $cmname;
+            }
+
+            $items = ArrayHelper::map($cm,'allname','allname');
+            $params = [
+                'prompt' => '-- ' . $model->getAttributeLabel( 'responsible' ) . ' --',
+                'disabled' => $model->getScenario() != 'createTask', 
+                'inline' => false,
+            ];
+
+            echo $form->field($model, 'responsible', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->dropDownList($items,$params,['class' => 'form-control input-sm radio', 'itemOptions' => ['class' => 'radio']]);
         }
-    
-        $items = ArrayHelper::map($cm,'allname','allname');
-        $params = [
-            'prompt' => '-- ' . $model->getAttributeLabel( 'responsible' ) . ' --',
-            'disabled' => $model->getScenario() != 'createTask', 
-            'inline' => false,
-        ];
-
-        echo $form->field($model, 'responsible', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->dropDownList($items,$params,['class' => 'form-control input-sm radio', 'itemOptions' => ['class' => 'radio']])
     ?> 
     
     <?php // $form->field($model, 'responsible', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->textInput(['disabled' => $model->getScenario() != 'createTask', 'placeholder' => $model->getAttributeLabel( 'responsible' )]); ?>

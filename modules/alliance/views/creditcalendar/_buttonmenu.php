@@ -18,7 +18,12 @@ $this->registerJs($upd, View::POS_END);
     
 <p style="text-align: right">
         <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREDITCALENDAR_EVENT'), ['create?is_task=0'], ['class' => 'btn btn-success btn-sm', 'id' => 'refreshButton']) ?>
-        <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREDITCALENDAR_TASK'), ['create?is_task=1'], ['class' => 'btn btn-info btn-sm', 'id' => 'refreshButton']) ?>
+        <?php
+            if(Yii::$app->user->can('chiefcredit'))
+            {
+                echo Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREDITCALENDAR_TASK'), ['create?is_task=1'], ['class' => 'btn btn-info btn-sm', 'id' => 'refreshButton']);
+            }
+        ?>
         <?php 
             if(Yii::$app->controller->action->id == 'index')
             {

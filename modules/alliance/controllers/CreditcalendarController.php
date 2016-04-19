@@ -10,6 +10,8 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\HttpException;
+use app\modules\alliance\Module;
 
 /**
  * CreditcalendarController implements the CRUD actions for Creditcalendar model.
@@ -90,7 +92,7 @@ class CreditcalendarController extends Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        
+                
         if ($model->load(Yii::$app->request->post()) && $model->save())
         {
             $creditcalendarComments = new Creditcalendarcomments();
@@ -99,7 +101,6 @@ class CreditcalendarController extends Controller
             $creditcalendarComments->comment_author = Yii::$app->user->identity->userfullname;
             $creditcalendarComments->save();
             $model = new Creditcalendar();
-//            return $this->redirect(['view', 'id' => $model->id]);
         }        
         
         $dataProvider = new ActiveDataProvider([
@@ -107,10 +108,18 @@ class CreditcalendarController extends Controller
             'pagination' => false,
         ]);
         
-        return $this->render('view', [
-            'model' => $model,
-            'listDataProvider' => $dataProvider,
-        ]);
+        if($model->is_chief_task == 1 && !Yii::$app->user->can('chiefcredit'))
+        {
+            throw new HttpException(403, Module::t('module', 'ONLY_CHIEFCREDIT_CAN_DO_THERE'));
+        }
+        else
+        {
+            return $this->render('view', [
+                'model' => $model,
+                'listDataProvider' => $dataProvider,
+            ]);            
+        }
+        
     }
 
     /**

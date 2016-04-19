@@ -20,7 +20,8 @@ class CreditcalendarSearch extends Creditcalendar
     public function rules()
     {
         return [
-            [['id', 'is_task', 'is_repeat', 'created_at'], 'integer'],
+//            [['id', 'is_task', 'is_repeat', 'created_at'], 'integer'],
+            [['id', 'is_task', 'created_at'], 'integer'],
             [['title', 'date_from', 'time_from', 'date_to', 'time_to', 'responsible', 'description', 'location', 'author', 'status'], 'safe'],
         ];
     }
@@ -55,7 +56,12 @@ class CreditcalendarSearch extends Creditcalendar
     public function calendarsearch(){
 //        $items = Yii::$app->db->createCommand("SELECT `id` AS id, `id` AS url, concat(date_from,' ',time_from) AS start, concat(date_to,' ',time_to) AS `end`, concat(title,' (',author,')') AS title, CASE status WHEN '0' THEN 'red' WHEN '1' THEN 'primary' ELSE 'green' END as color FROM all_creditcalendar;;")->queryAll();
 //        $items = Yii::$app->db->createCommand("SELECT `id` AS id, `id` AS url, concat(IFNULL(date_from,''),' ',time_from) AS start, concat(IFNULL(date_to,''),' ',time_to) AS `end`, concat(title,' (',author,')') AS title, CASE status WHEN '0' THEN 'red' WHEN '1' THEN 'primary' ELSE 'green' END as color, CASE allday WHEN '0' THEN 'false' ELSE 'true' END AS allDay FROM all_creditcalendar;")->queryAll();
-        $items = Yii::$app->db->createCommand(
+
+        
+        
+        if(Yii::$app->user->can('chiefcredit'))
+        {        
+            $items = Yii::$app->db->createCommand(
                 "SELECT
                     `id` AS id,
                     `id` AS url,
@@ -79,6 +85,34 @@ class CreditcalendarSearch extends Creditcalendar
                         END AS allday 
                 FROM {{%creditcalendar}};"
             )->queryAll();
+        }
+        else
+        {        
+            $items = Yii::$app->db->createCommand(
+                "SELECT
+                    `id` AS id,
+                    `id` AS url,
+                    CASE 
+                        WHEN CONCAT(date_from, ' ', time_from) IS NULL THEN time_to
+                        ELSE CONCAT(date_from, ' ', time_from)
+                        END AS start,
+                    CASE
+                        WHEN CONCAT(date_to, ' ', time_to) IS NULL THEN time_to
+                        ELSE CONCAT(date_to, ' ', time_to)
+                        END AS end,
+                    `title` AS title,
+                    CASE status
+                        WHEN '0' THEN 'orange'
+                        WHEN '1' THEN 'primary'
+                        ELSE 'green'
+                        END as color,
+                    CASE allday
+                        WHEN '0' THEN 'false'
+                        ELSE 'true'
+                        END AS allday 
+                FROM {{%creditcalendar}} WHERE `is_chief_task` <> '1';"
+            )->queryAll();
+        }        
         
         return Json::encode($items);
     }
@@ -91,8 +125,16 @@ class CreditcalendarSearch extends Creditcalendar
      * @return ActiveDataProvider
      */
     public function search($params)
-    {
-        $query = Creditcalendar::find();
+    {        
+        if(Yii::$app->user->can('chiefcredit'))
+        {
+            $query = Creditcalendar::find();
+        }
+        else
+        {
+            $query = Creditcalendar::find()->where(['<>','is_chief_task', 1]);
+        }
+                
 
         // add conditions that should always apply here
 
@@ -146,7 +188,6 @@ class CreditcalendarSearch extends Creditcalendar
             'date_to' => $this->date_to,
             'time_to' => $this->time_to,
             'is_task' => $this->is_task,
-            'is_repeat' => $this->is_repeat,
             'created_at' => $this->created_at,
         ]);
 

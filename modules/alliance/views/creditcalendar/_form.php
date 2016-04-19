@@ -128,6 +128,14 @@ use janisto\timepicker\TimePicker;
                 'disabled' => false,
             ]);
     ?>
+    
+    <?= $form->field($model, 'is_chief_task')->checkbox(['label' => Module::t('module', 'CREDITCALENDAR_ISCHIEFTASK'),
+                'labelOptions' => [
+                    'style' => 'padding-left:20px;'
+                ],
+                'disabled' => false,
+            ]);
+    ?>
 
     <?php
         echo '<br/>';
@@ -178,12 +186,7 @@ use janisto\timepicker\TimePicker;
     
     <?= $form->field($model, 'status', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('check-circle-o') . ' </span>{input}</div>{error}'])->dropDownList($model->getStatusesArray()) ?>
 
-    <?php
-        if(!$model->isNewRecord){
-//            echo $form->field($model, 'comment_text')->textArea(['rows' => 4, 'placeholder' => $model->getAttributeLabel( 'comment_text' )]); 
-            echo $form->field($model, 'comment_text', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('comment') . ' </span>{input}</div>{error}'])->textArea(['rows' => 4, 'placeholder' => $model->getAttributeLabel( 'comment_text' )]);
-        }
-     ?>
+    <?php // $form->field($model, 'status')->radioList($model->getStatusesArray()) ?>
 
     <?php ActiveForm::end(); ?>
 

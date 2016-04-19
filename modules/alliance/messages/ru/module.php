@@ -60,4 +60,6 @@
             'CREDITCALENDAR_COMMENTS_EMPTY' => 'Комментарии отсутствуют',
             'CREDITCALENDAR_COMMENT' => 'Комментарий',
             'CREDITCALENDAR_COMMENT_BUTTON' => 'OK',
+            'CREDITCALENDAR_ISCHIEFTASK' => 'Личная запись',
+            'ONLY_CHIEFCREDIT_CAN_DO_THERE' => 'Данная запись доступна только сотрудникам с ролью Руководитель Отдела Кредитования и страхования'
 	];

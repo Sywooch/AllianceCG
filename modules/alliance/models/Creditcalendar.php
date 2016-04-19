@@ -175,7 +175,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
     public function rules()
     {
         return [            
-            [['comment_author', 'comment_text'], 'safe'],
+            [['comment_author', 'comment_text', 'is_chief_task'], 'safe'],
             [['responsible'], 'required', 'on' => self::SCENARIO_TASK],
             ['status', 'default', 'value' => self::STATUS_ATWORK],
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
@@ -184,7 +184,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
             ['author', 'default', 'value' => Yii::$app->user->identity->userfullname],
             ['is_task', 'in', 'range' => array_keys(self::getTasksArray()), 'message' => Module::t('module', 'CREDITCALENDAR_LINK_ERROR')],
 //            ['week', 'in', 'range' => array_keys(self::getWeekdaysArray()), 'message' => Module::t('module', 'CREDITCALENDAR_LINK_ERROR')],
-            [['is_task', 'is_repeat'], 'integer'],
+            [['is_task'], 'integer'],
             [['title', 'location', 'author'], 'string', 'max' => 255],
         ];
     }
@@ -204,7 +204,6 @@ class Creditcalendar extends \yii\db\ActiveRecord
             'description' => Module::t('module', 'CREDITCALENDAR_DESCRIPTION'),
             'location' => Module::t('module', 'CREDITCALENDAR_LOCATION'),
             'is_task' => Module::t('module', 'CREDITCALENDAR_IS_TASK'),
-            'is_repeat' => Module::t('module', 'CREDITCALENDAR_IS_REPEAT'),
             'author' => Module::t('module', 'CREDITCALENDAR_AUTHOR'),
             'created_at' => Module::t('module', 'CREDITCALENDAR_CREATED_AT'),
             'status' => Module::t('module', 'CREDITCALENDAR_STATUS'),
@@ -212,6 +211,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
             'responsible' => Module::t('module', 'CREDITCALENDAR_RESPONSIBLE'),
             'dateTimeFrom' => 'От: ',
             'dateTimeTo' => 'До: ',
+            'is_chief_task' => Module::t('module', 'CREDITCALENDAR_ISCHIEFTASK'),
             'comment_text' => Module::t('module', 'CREDITCALENDAR_COMMENT'),
             'creditcalendarcomments.comment_text' => Module::t('module', 'CREDITCALENDAR_COMMENTS'),
         ];

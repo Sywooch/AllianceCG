@@ -93,7 +93,7 @@ return [
             'class' => 'yii\swiftmailer\Mailer',
              'transport' => [
                  'class' => 'Swift_SmtpTransport',
-                 'host' => 'mail.gorodavto.com',  // e.g. smtp.mandrillapp.com or smtp.gmail.com
+                 'host' => '10.18.123.17',  // e.g. smtp.mandrillapp.com or smtp.gmail.com
                  'username' => 'it.service@alians-kmv.ru',
                  'password' => 'As12zx',
                  'port' => '25', // Port 25 is a very common port too

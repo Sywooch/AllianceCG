@@ -54,7 +54,6 @@ class Creditcalendar extends \yii\db\ActiveRecord
     
     public $dateTimeFrom;
     public $dateTimeTo;
-//    public $week;
     
     
     /**

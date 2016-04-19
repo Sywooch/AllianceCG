@@ -155,6 +155,21 @@ class CreditcalendarController extends Controller
                 $model->scenario = Creditcalendar::SCENARIO_TASK;
             }
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                
+                if($model->getScenario() === 'createTask')
+                {
+                    
+//                Yii::$app->mail->compose(['html' => '@app/mail-templates/html-email-01', 'text' => '@app/mail-templates/text-email-01'], [/*Some params for the view */])
+
+                Yii::$app->mailer->compose()
+                    ->setTo('it.service@alians-kmv.ru')
+                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                    ->setReplyTo('it@alians-kmv.ru')
+                    ->setSubject('огогого')
+                    ->setTextBody('огогого')
+                    ->send();                                   
+                }
+                
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {
                 return $this->render('create', [

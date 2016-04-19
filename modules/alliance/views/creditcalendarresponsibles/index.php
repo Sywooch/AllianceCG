@@ -26,6 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'creditcalendar_id',
+            'responsible',
             'created_at',
             'updated_at',
 

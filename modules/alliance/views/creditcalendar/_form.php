@@ -164,7 +164,8 @@ use janisto\timepicker\TimePicker;
                 'inline' => false,
             ];
 
-            echo $form->field($model, 'responsible', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->dropDownList($items,$params,['class' => 'form-control input-sm radio', 'itemOptions' => ['class' => 'radio']]);
+//            echo $form->field($model, 'responsible', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->dropDownList($items,$params,['class' => 'form-control input-sm radio', 'itemOptions' => ['class' => 'radio']]);
+            echo $form->field($model, 'responsible')->checkboxList($items,$params,['class' => 'form-control input-sm radio', 'itemOptions' => ['class' => 'radio']]);
         }
     ?> 
     

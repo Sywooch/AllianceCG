@@ -6,6 +6,7 @@ use Yii;
 use app\modules\alliance\models\Creditcalendar;
 use app\modules\alliance\models\CreditcalendarSearch;
 use app\modules\alliance\models\CreditcalendarComments;
+use app\modules\alliance\models\CreditcalendarResponsibles;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -108,6 +109,7 @@ class CreditcalendarController extends Controller
             'pagination' => false,
         ]);
         
+        
         if($model->is_chief_task == 1 && !Yii::$app->user->can('chiefcredit'))
         {
             throw new HttpException(403, Module::t('module', 'ONLY_CHIEFCREDIT_CAN_DO_THERE'));
@@ -170,14 +172,23 @@ class CreditcalendarController extends Controller
 //        $mail->setTo($receiver)
 //            ->send();
 //    }
+
+                foreach ($model->responsible as $responsibles) {
+                    $creditcalendarResponsibles = new CreditcalendarResponsibles();
+                    $creditcalendarResponsibles->creditcalendar_id = $model->id;
+                    $creditcalendarResponsibles->responsible = $responsibles;
+                    $creditcalendarResponsibles->save();
+                }
                     
-                Yii::$app->mailer->compose()
-                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
-                    ->setReplyTo(Yii::$app->params['supportEmail'])
-                    ->setSubject(date('d/m/Y H:i:s') . '. ' . Module::t('module', 'CREDITCALENDAR_NEW_TASK'))
-                    ->setTextBody($model->description)
-                    ->setTo('it.service@alians-kmv.ru')
-                    ->send();                                   
+                    //Temporary commented
+                    
+//                Yii::$app->mailer->compose()
+//                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+//                    ->setReplyTo(Yii::$app->params['supportEmail'])
+//                    ->setSubject(date('d/m/Y H:i:s') . '. ' . Module::t('module', 'CREDITCALENDAR_NEW_TASK'))
+//                    ->setTextBody($model->description)
+//                    ->setTo('it.service@alians-kmv.ru')
+//                    ->send();                                   
                 }
                 
                 return $this->redirect(['view', 'id' => $model->id]);

@@ -30,6 +30,7 @@ class m160413_093548_create_credit_calendar extends Migration
             'updated_at' => $this->integer()->notNull(),
             'status' => $this->smallInteger()->notNull()->defaultValue(0),
             'is_chief_task' => $this->smallInteger()->notNull()->defaultValue(0),
+            'calendar_type' => $this->integer()->notNull()->defaultValue(0),
         ]);
     }
 

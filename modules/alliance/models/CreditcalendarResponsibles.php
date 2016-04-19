@@ -1,6 +1,7 @@
 <?php
 
 namespace app\modules\alliance\models;
+use yii\behaviors\TimestampBehavior;
 
 use Yii;
 
@@ -27,11 +28,27 @@ class CreditcalendarResponsibles extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => function() { return date('U'); },
+            ],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
-            [['creditcalendar_id'], 'required'],
+//            [['creditcalendar_id'], 'required'],
             [['creditcalendar_id', 'created_at', 'updated_at'], 'integer'],
+            [['creditcalendar_id', 'created_at', 'updated_at', 'responsible'], 'safe'],
             [['creditcalendar_id'], 'exist', 'skipOnError' => true, 'targetClass' => Creditcalendar::className(), 'targetAttribute' => ['creditcalendar_id' => 'id']],
         ];
     }
@@ -46,6 +63,7 @@ class CreditcalendarResponsibles extends \yii\db\ActiveRecord
             'creditcalendar_id' => Yii::t('app', 'Creditcalendar ID'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
+            'responsible' => Yii::t('app', 'Responsible'),
         ];
     }
 

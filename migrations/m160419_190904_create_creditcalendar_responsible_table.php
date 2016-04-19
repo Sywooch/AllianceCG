@@ -14,6 +14,7 @@ class m160419_190904_create_creditcalendar_responsible_table extends Migration
         $this->createTable('{{%creditcalendar_responsibles}}', [
             'id' => $this->primaryKey(),
             'creditcalendar_id' => $this->integer()->notNull(),
+            'responsible' => $this->string(),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
         ], $tableOptions);

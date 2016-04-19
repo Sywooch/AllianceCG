@@ -7,6 +7,7 @@ use rmrevin\yii\fontawesome\FA;
 use yii\helpers\ArrayHelper;
 use yii\db\Expression;
 use app\modules\alliance\models\CreditcalendarComments;
+use app\modules\alliance\models\CreditcalendarResponsibles;
 
 use Yii;
 
@@ -70,7 +71,12 @@ class Creditcalendar extends \yii\db\ActiveRecord
      */
     public function getCreditcalendarcomments()
     {
-        return $this->hasMany(Creditcalendar::className(), ['creditcalendar_id' => 'id']);
+        return $this->hasMany(CreditcalendarComments::className(), ['creditcalendar_id' => 'id']);
+    }
+    
+    public function getCreditcalendarresponsibles()
+    {
+        return $this->hasMany(CreditcalendarResponsibles::className(), ['creditcalendar_id' => 'id']);
     }
 
     /**
@@ -113,8 +119,15 @@ class Creditcalendar extends \yii\db\ActiveRecord
     
 //    public function getResponsibles()
 //    {
-//        $resp = !empty($this->responsible) ? $this->responsible : FA::icon('remove');
-//        return $resp;
+//        $respquery = CreditcalendarResponsibles::find()
+//            ->where(['creditcalendar_id' => $this->id])
+//            ->all();
+//                
+//        foreach ($respquery as $responsible){
+//                $resp = $responsible->responsible;
+//            }
+//        return '<span class="label label-success">' . $resp . '</span> ';        
+//        
 //    }
     
 //    public function getTaskresponsible()
@@ -235,13 +248,14 @@ class Creditcalendar extends \yii\db\ActiveRecord
 //    public function afterSave($insert, $changedAttributes)
 //     {
 //         parent::afterSave($insert, $changedAttributes);
-//         if (!$insert) {
-//            $creditcalendarComments = new Creditcalendarcomments();
-//            $creditcalendarComments->creditcalendar_id = $this->id;
-//            $creditcalendarComments->comment_text = $this->comment_text;
-//            $creditcalendarComments->comment_author = Yii::$app->user->identity->userfullname;
-//            $creditcalendarComments->save();
-//         }
+////         if ($this->isNewRecord) {
+//            $creditcalendarResponsibles = new CreditcalendarResponsibles();
+//            foreach ($this->responsible as $responsibles) {
+//                $creditcalendarResponsibles->creditcalendar_id = $this->id;
+//                $creditcalendarResponsibles->responsible = $responsibles;
+//            }
+//            $creditcalendarResponsibles->save();
+////         }
 //     }        
     
 }

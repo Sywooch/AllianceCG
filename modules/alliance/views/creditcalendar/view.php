@@ -8,6 +8,9 @@ use rmrevin\yii\fontawesome\FA;
 use app\modules\alliance\Module;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
+use app\modules\alliance\models\CreditcalendarResponsibles;
+use yii\data\ActiveDataProvider;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\alliance\models\Creditcalendar */
@@ -38,14 +41,28 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="panel panel-default">
    
     <div class="panel-heading panel-info">
-        <?= $model->getIsTaskIcon() . ' ' . $model->author . '' . $model->getTaskresponsible() . ', ' . $model->location . ', ' . \Yii::t('app', '{0, date}', $model->created_at); ?>
+        <?= $model->getIsTaskIcon() . ' ' . $model->author . ', ' . $model->location . ', ' . \Yii::t('app', '{0, date}', $model->created_at); ?>
     </div>
     <div class="panel-body">
         
         <h3>
             <?= Html::encode($this->title) ?>
         </h3>        
-            <?= $model->description; ?>        
+            <?= $model->description; ?>
+        <div>
+            <?php // $model->getResponsibles(); ?>
+            
+            <?php 
+                $respquery = CreditcalendarResponsibles::find()
+                    ->where(['creditcalendar_id' => $model->id])
+                    ->all();
+                
+                foreach ($respquery as $responsible){
+                    echo '<span class="label label-success">'. $responsible->responsible . '</span> ';
+                }
+            ?>
+            
+        </div>
     </div>
 </div>
 
@@ -53,7 +70,7 @@ $this->params['breadcrumbs'][] = $this->title;
     
 <?php 
     $listSummary = '<blockquote class="alert-info">' . FA::icon('comments') . ' ' . Module::t('module', 'CREDITCALENDAR_COMMENTS') . ': {totalCount}</blockquote>'; 
-    $emptyText = '<blockquote class="alert-info">' . FA::icon('comments') . ' ' . Module::t('module', 'CREDITCALENDAR_COMMENTS_EMPTY') . '</blockquote>'; 
+    $emptyText = '<blockquote class="alert-success">' . FA::icon('comments') . ' ' . Module::t('module', 'CREDITCALENDAR_COMMENTS_EMPTY') . '</blockquote>'; 
 ?>
     
 <?= 

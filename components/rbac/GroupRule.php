@@ -27,14 +27,17 @@ class GroupRule extends Rule
                 return $role === $item->name;
             } elseif ($item->name === 'admin') {
                 return $role === $item->name || $role === 'root';
-            } elseif ($item->name === 'head') {
+            } 
+            elseif ($item->name === 'chiefcredit') {
+                return $role === $item->name || $role === 'root' || $role === 'admin';
+            }
+            elseif ($item->name === 'creditmanager') {
+                return $role === $item->name || $role === 'root' || $role === 'admin';
+            }
+            elseif ($item->name === 'head') {
                 return $role === $item->name || $role === 'root' || $role === 'admin';
             } elseif ($item->name === 'manager') {
                 return $role === $item->name || $role === 'root' || $role === 'admin' || $role === 'head';
-            } elseif ($item->name === 'chiefcredit') {
-                return $role === $item->name || $role === 'root' || $role === 'admin' || $role === 'head' || $role === 'manager';
-            } elseif ($item->name === 'creditmanager') {
-                return $role === $item->name || $role === 'root' || $role === 'admin' || $role === 'head' || $role === 'manager' || $role === 'chiefcredit';
             }
         }
         return false;

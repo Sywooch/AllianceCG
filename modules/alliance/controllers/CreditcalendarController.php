@@ -158,15 +158,24 @@ class CreditcalendarController extends Controller
                 
                 if($model->getScenario() === 'createTask')
                 {
-                    
-//                Yii::$app->mail->compose(['html' => '@app/mail-templates/html-email-01', 'text' => '@app/mail-templates/text-email-01'], [/*Some params for the view */])
+//                Yii::$app->mailer->compose(['html' => '@app/modules/user/mails/passwordReset'], ['user' => $user])
+//                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+//                    ->setTo($this->email)
+//                    ->setSubject(Module::t('module', 'PASSWORD_RESET_FOR') . Yii::$app->name)
+//                    ->send();
 
+                    
+//    foreach(self::$_to as $receiver){
+//        $mail->setTo($receiver)
+//            ->send();
+//    }
+                    
                 Yii::$app->mailer->compose()
-                    ->setTo('it.service@alians-kmv.ru')
                     ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
-                    ->setReplyTo('it@alians-kmv.ru')
-                    ->setSubject('огогого')
-                    ->setTextBody('огогого')
+                    ->setReplyTo(Yii::$app->params['supportEmail'])
+                    ->setSubject(date('d/m/Y H:i:s') . '. ' . Module::t('module', 'CREDITCALENDAR_NEW_TASK'))
+                    ->setTextBody($model->description)
+                    ->setTo('it.service@alians-kmv.ru')
                     ->send();                                   
                 }
                 
@@ -265,6 +274,7 @@ class CreditcalendarController extends Controller
     
     public function actionExport(){
         $model = Creditcalendar::find()->All();
+        $headmodel = new Creditcalendar();
         $filename = 'Creditcalendar-'.Date('Y-m-d-H-i-s').'.xls';
         echo '<meta http-equiv="Content-type" content="text/html; charset=utf-8" />';
         header("Content-type: application/vnd-ms-excel; charset=utf-8");
@@ -274,7 +284,7 @@ class CreditcalendarController extends Controller
         echo '<table border="1" width="100%">
             <thead>
                 <tr>
-                    <th>Наименование</th>
+                    <th>'. $headmodel->getAttributeLabel( 'title' ) .'</th>
                     <th>От:</th>
                     <th>До:</th>
                     <th>Описание</th>
@@ -293,6 +303,7 @@ class CreditcalendarController extends Controller
                         <td>'.$data['description'].'</td>
                         <td>'.$data['location'].'</td>
                         <td>'.$data['author'].'</td>
+                        <td>'.$data['created_at'].'</td>
                         <td>'.$data['created_at'].'</td>
                     </tr>
                 ';

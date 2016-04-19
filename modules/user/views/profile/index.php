@@ -28,7 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
     elseif (Yii::$app->user->can('manager')) {
         echo 'Hello, manager!';
     }
-
+    echo '<br/>';
+    echo date('d/m/Y H:i:s');
 //$table = Yii::$app->db->schema->getTableSchema('all_positions1');
 //if (!isset($table->columns['somecolumn'])) {
 //    // do something

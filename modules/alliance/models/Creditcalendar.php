@@ -127,7 +127,23 @@ class Creditcalendar extends \yii\db\ActiveRecord
             $resps[] = $responsible->responsible;
         }
         if(!empty($resps)){
-            return $resps;            
+            
+            $users = User::find()
+                ->where(['IN', 'id', $resps])
+                ->all();
+            return $users;            
+        }
+    }
+    
+    public function getResponsibleemails()
+    {
+        if($this->getResponsibleList())
+        {
+            $rsp = $this->getResponsibleList();
+            foreach ($rsp as $emails) {
+                $mail[] = $emails->email;
+            }
+            return $mail;
         }
     }
     
@@ -135,12 +151,8 @@ class Creditcalendar extends \yii\db\ActiveRecord
     {
         if($this->getResponsibleList())
         {
-            $rsp = $this->getResponsibleList();
-            $users = User::find()
-                ->where(['IN', 'id', $rsp])
-                ->all();
-                    
-            foreach ($users as $user) {
+            $rsp = $this->getResponsibleList();                    
+            foreach ($rsp as $user) {
                    echo '<span class="label label-success">' . $user->full_name . '</span> ';
                 }
         }       

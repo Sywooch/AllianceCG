@@ -172,22 +172,24 @@ class CreditcalendarController extends Controller
 //        $mail->setTo($receiver)
 //            ->send();
                     
-                    //Temporary commented
-                    
-//                Yii::$app->mailer->compose()
-//                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
-//                    ->setReplyTo(Yii::$app->params['supportEmail'])
-//                    ->setSubject(date('d/m/Y H:i:s') . '. ' . Module::t('module', 'CREDITCALENDAR_NEW_TASK'))
-//                    ->setTextBody($model->description)
-//                    ->setTo('it.service@alians-kmv.ru')
-//                    ->send();  
+                    //Temporary commented getResponsibleemails
+                       
+                    $rspemail = $model->getResponsibleList(); 
+                    Yii::$app->mailer->compose()
+                        ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                        ->setReplyTo(Yii::$app->params['supportEmail'])
+                        ->setSubject(date('d/m/Y H:i:s') . '. ' . Module::t('module', 'CREDITCALENDAR_NEW_TASK'))
+                        ->setTextBody($model->description)
+//                        ->setTo(['creditford@gorodavto.com', 'creditaudi@gorodavto.com'])
+                        ->setTo($rspemail)
+                        ->send();
 
-                foreach ($model->responsible as $responsibles) {
-                        $creditcalendarResponsibles = new CreditcalendarResponsibles();
-                        $creditcalendarResponsibles->creditcalendar_id = $model->id;
-                        $creditcalendarResponsibles->responsible = $responsibles;
-                        $creditcalendarResponsibles->save();
-                    }                                 
+                    foreach ($model->responsible as $responsibles) {
+                            $creditcalendarResponsibles = new CreditcalendarResponsibles();
+                            $creditcalendarResponsibles->creditcalendar_id = $model->id;
+                            $creditcalendarResponsibles->responsible = $responsibles;
+                            $creditcalendarResponsibles->save();
+                        }                                 
                 }
                 
                 return $this->redirect(['view', 'id' => $model->id]);

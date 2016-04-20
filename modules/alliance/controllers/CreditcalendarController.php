@@ -174,14 +174,19 @@ class CreditcalendarController extends Controller
                     
                     //Temporary commented getResponsibleemails
                        
-                    $rspemail = $model->getResponsibleList(); 
+//                    $emails = $model->getResponsibleList();
+//                    foreach ($model->getResponsibleList() as $key=>$value)
+//                    {
+//                        $singlemail[] = $value->email;
+//                    }
+                    
                     Yii::$app->mailer->compose()
                         ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
                         ->setReplyTo(Yii::$app->params['supportEmail'])
                         ->setSubject(date('d/m/Y H:i:s') . '. ' . Module::t('module', 'CREDITCALENDAR_NEW_TASK'))
                         ->setTextBody($model->description)
 //                        ->setTo(['creditford@gorodavto.com', 'creditaudi@gorodavto.com'])
-                        ->setTo($rspemail)
+                        ->setTo($model->getResponsibleemails())
                         ->send();
 
                     foreach ($model->responsible as $responsibles) {

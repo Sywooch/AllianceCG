@@ -142,7 +142,8 @@ class Creditcalendar extends \yii\db\ActiveRecord
             $rsp = $this->getResponsibleList();
             foreach ($rsp as $emails) {
                 $mail[] = $emails->email;
-            }
+            }            
+            $mail = implode(', ', $mail);
             return $mail;
         }
     }

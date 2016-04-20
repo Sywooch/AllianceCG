@@ -8,6 +8,7 @@ use yii\helpers\ArrayHelper;
 use yii\db\Expression;
 use app\modules\alliance\models\CreditcalendarComments;
 use app\modules\alliance\models\CreditcalendarResponsibles;
+use app\modules\admin\models\User;
 
 use Yii;
 
@@ -117,18 +118,34 @@ class Creditcalendar extends \yii\db\ActiveRecord
 //        ];
 //    }
     
-//    public function getResponsibles()
-//    {
-//        $respquery = CreditcalendarResponsibles::find()
-//            ->where(['creditcalendar_id' => $this->id])
-//            ->all();
-//                
-//        foreach ($respquery as $responsible){
-//                $resp = $responsible->responsible;
-//            }
-//        return '<span class="label label-success">' . $resp . '</span> ';        
-//        
-//    }
+    public function getResponsibleList()
+    {        
+        $respquery = CreditcalendarResponsibles::find()
+            ->where(['creditcalendar_id' => $this->id])
+            ->all();
+        foreach ($respquery as $responsible){
+            $resps[] = $responsible->responsible;
+        }
+        if(!empty($resps)){
+            return $resps;            
+        }
+    }
+    
+    public function getResponsibles()
+    {
+        if($this->getResponsibleList())
+        {
+            $rsp = $this->getResponsibleList();
+            $users = User::find()
+                ->where(['IN', 'id', $rsp])
+                ->all();
+                    
+            foreach ($users as $user) {
+                   echo '<span class="label label-success">' . $user->full_name . '</span> ';
+                }
+        }       
+        
+    }
     
 //    public function getTaskresponsible()
 //    {

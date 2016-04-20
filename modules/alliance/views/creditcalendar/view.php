@@ -1,15 +1,16 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
-use yii\widgets\ActiveForm;
+//use yii\widgets\DetailView;
+//use yii\widgets\ActiveForm;
 use yii\widgets\ListView;   
 use rmrevin\yii\fontawesome\FA;
 use app\modules\alliance\Module;
-use yii\helpers\Url;
+//use yii\helpers\Url;
 use yii\widgets\Pjax;
-use app\modules\alliance\models\CreditcalendarResponsibles;
-use yii\data\ActiveDataProvider;
+//use app\modules\alliance\models\CreditcalendarResponsibles;
+//use app\modules\admin\models\User;
+//use yii\data\ActiveDataProvider;
 
 
 /* @var $this yii\web\View */
@@ -47,20 +48,13 @@ $this->params['breadcrumbs'][] = $this->title;
         
         <h3>
             <?= Html::encode($this->title) ?>
-        </h3>        
-            <?= $model->description; ?>
+        </h3>
         <div>
-            <?php // $model->getResponsibles(); ?>
-            
-            <?php 
-                $respquery = CreditcalendarResponsibles::find()
-                    ->where(['creditcalendar_id' => $model->id])
-                    ->all();
-                
-                foreach ($respquery as $responsible){
-                    echo '<span class="label label-success">'. $responsible->responsible . '</span> ';
-                }
-            ?>
+            <?= $model->description; ?>            
+        </div>
+        <div>
+          
+            <?= $model->getResponsibles(); ?>
             
         </div>
     </div>

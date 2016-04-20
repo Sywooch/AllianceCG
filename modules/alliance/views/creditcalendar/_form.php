@@ -87,7 +87,8 @@ use janisto\timepicker\TimePicker;
                 'mode' => 'time',
                 'clientOptions'=>[
                     'timeFormat' => 'HH:mm:ss',
-                    'showSecond' => false,                    
+                    'showSecond' => false,     
+                    'timeInput' => true,                  
                 ],
                 'options' => [
                     'class' => 'form-control',
@@ -142,7 +143,7 @@ use janisto\timepicker\TimePicker;
     ?>
 
     <?php 
-        if(Yii::$app->user->can('chiefcredit') || Yii::$app->user->can('admin'))
+        if((Yii::$app->user->can('chiefcredit') || Yii::$app->user->can('admin')) && $model->getScenario() === 'createTask')
         {  
             echo '<br/>';
 
@@ -157,7 +158,8 @@ use janisto\timepicker\TimePicker;
                 $value->allname = $cmname;
             }
 
-            $items = ArrayHelper::map($cm,'allname','allname');
+//            $items = ArrayHelper::map($cm,'allname','allname');
+            $items = ArrayHelper::map($cm,'id','allname');
             $params = [
                 'prompt' => '-- ' . $model->getAttributeLabel( 'responsible' ) . ' --',
                 'disabled' => $model->getScenario() != 'createTask', 
@@ -173,7 +175,7 @@ use janisto\timepicker\TimePicker;
 
     <?php // $form->field($model, 'dow')->checkBoxList(ArrayHelper::map(\app\modules\alliance\models\Weekdays::find()->all(), 'daynumber', 'dayname')); ?>
 
-<!--ArrayHelper::map(Sprachen::find()->all(), 'name', 'name')-->
+    <!--ArrayHelper::map(Sprachen::find()->all(), 'name', 'name')-->
     
     <?= $form->field($model, 'title', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('flag') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'title' )]) ?>
     

@@ -46,12 +46,12 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_ACTIVE = 1;
     const STATUS_WAIT = 2;
     
-    const ROLE_MANAGER = 'manager';
-    const ROLE_CREDITMANAGER = 'creditmanager';
-    const ROLE_CHIEFCREDIT = 'chiefcredit';
-    const ROLE_HEAD = 'head';
-    const ROLE_ADMIN = 'admin';
-    const ROLE_ROOT = 'root';
+    // const ROLE_MANAGER = 'skassistant';
+    // const ROLE_CREDITMANAGER = 'creditmanager';
+    // const ROLE_CHIEFCREDIT = 'chiefcredit';
+    // const ROLE_HEAD = 'head';
+    // const ROLE_ADMIN = 'admin';
+    // const ROLE_ROOT = 'root';
 
     // public function scenarios()
     // {
@@ -129,7 +129,7 @@ class User extends ActiveRecord implements IdentityInterface
 
             // Status value in function "getStatusesArray"
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
-            ['role', 'in', 'range' => array_keys(self::getRolesArray())],
+            // ['role', 'in', 'range' => array_keys(self::getRolesArray())],
             [['fullname', 'avatar'], 'safe'],
             [['mcname', 'role', 'company'], 'safe'],
 
@@ -185,10 +185,24 @@ class User extends ActiveRecord implements IdentityInterface
         return ArrayHelper::getValue(self::getStatusesArray(), $this->status);
     }
 
-    public function getRolesName()
+    // public function getRolesName()
+    // {
+    //     return ArrayHelper::getValue(self::getRolesArray(), $this->role);
+    // }
+
+    public function getRoleName()
     {
-        return ArrayHelper::getValue(self::getRolesArray(), $this->role);
-    }
+        $roles = Yii::$app->authManager->getRolesByUser($this->id);
+        if (!$roles) {
+            return null;
+        }
+
+        reset($roles);
+        /* @var $role \yii\rbac\Role */
+        $role = current($roles);
+
+        return $role->description;
+    }    
 
     public function getFullName()
     {
@@ -250,17 +264,17 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
-    public static function getRolesArray()
-    {
-        return [
-            self::ROLE_MANAGER => 'Менеджер',
-            self::ROLE_HEAD => 'Руководитель',
-            self::ROLE_ADMIN => 'Администратор',
-            self::ROLE_ROOT => 'Суперпользователь',
-            self::ROLE_CHIEFCREDIT => 'Руководитель ОКиС',
-            self::ROLE_CREDITMANAGER => 'Кредитный специалист',
-        ];
-    }    
+    // public static function getRolesArray()
+    // {
+    //     return [
+    //         self::ROLE_MANAGER => 'Менеджер',
+    //         self::ROLE_HEAD => 'Руководитель',
+    //         self::ROLE_ADMIN => 'Администратор',
+    //         self::ROLE_ROOT => 'Суперпользователь',
+    //         self::ROLE_CHIEFCREDIT => 'Руководитель ОКиС',
+    //         self::ROLE_CREDITMANAGER => 'Кредитный специалист',
+    //     ];
+    // }    
 
     /**
      * @inheritdoc

@@ -15,21 +15,35 @@ $this->params['breadcrumbs'][] = $this->title;
 <!-- <div class="user-profile col-lg-6 col-lg-offset-3"> -->
 <div>
 
+<?= Yii::$app->user->identity->getRoleName() ?>
+
 <?php
-    if (Yii::$app->user->can('root')) {
-        echo 'Hello, root!';
-    }
-    elseif (Yii::$app->user->can('admin')) {
-        echo 'Hello, admin!';
-    }
-    elseif (Yii::$app->user->can('head')) {
-        echo 'Hello, head!';
-    }
-    elseif (Yii::$app->user->can('manager')) {
-        echo 'Hello, manager!';
-    }
-    echo '<br/>';
-    echo date('d/m/Y H:i:s');
+    // if (Yii::$app->user->can('root')) {
+    //     echo 'Hello, root!';
+    // }
+    // elseif (Yii::$app->user->can('admin')) {
+    //     echo 'Hello, admin!';
+    // }
+    // elseif (Yii::$app->user->can('skassistant')) {
+    //     echo 'Hello, skassistant!';
+    // }
+    // elseif (Yii::$app->user->can('skmastercons')) {
+    //     echo 'Hello, skmastercons!';
+    // }
+    // elseif (Yii::$app->user->can('skservicehead')) {
+    //     echo 'Hello, skservicehead!';
+    // }
+    // elseif (Yii::$app->user->can('skdirector')) {
+    //     echo 'Hello, skdirector!';
+    // }
+    // elseif (Yii::$app->user->can('creditmanager')) {
+    //     echo 'Hello, creditmanager!';
+    // }
+    // elseif (Yii::$app->user->can('chiefcredit')) {
+    //     echo 'Hello, chiefcredit!';
+    // }
+    // echo '<br/>';
+    // echo date('d/m/Y H:i:s');
 //$table = Yii::$app->db->schema->getTableSchema('all_positions1');
 //if (!isset($table->columns['somecolumn'])) {
 //    // do something

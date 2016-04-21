@@ -3,6 +3,7 @@
 // namespace app\components\grid;
 
 use app\modules\admin\models\User;
+use app\modules\admin\models\Userroles;
 use app\modules\user\models\User as Users;
 use kartik\date\DatePicker;
 use yii\helpers\Html;
@@ -88,18 +89,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter'=>ArrayHelper::map(User::find()->asArray()->all(), 'position', 'position'),
             ],
             [
-                'class' => SetColumn::className(),
+                // 'class' => SetColumn::className(),
                 'attribute' => 'role',
-                'filter' => User::getRolesArray(),
-//                'value' => User::getRolesArray(),
-                'name' => 'rolesName',
-                'contentOptions'=>['style'=>'width: 50px;'],
-                'cssCLasses' => [
-                    User::ROLE_MANAGER => 'default',
-                    User::ROLE_HEAD => 'success',
-                    User::ROLE_ADMIN => 'warning',
-                    User::ROLE_ROOT => 'danger',
-                ],
+                'filter'=>ArrayHelper::map(Userroles::find()->asArray()->all(), 'role', 'role_description'),
+                // 'name' => 'rolesName',
+                'contentOptions'=>['style'=>'width: 50px;'],  
+                // 'value' => function ($data) {
+                //     return Yii::$app->user->identity->getRoleName();
+                // },
             ],
             [
                 'class' => SetColumn::className(),

@@ -1,6 +1,7 @@
 <?php
 
 use app\modules\admin\models\User;
+use app\modules\admin\models\Userroles;
 use app\modules\admin\Module;
 use app\modules\admin\models\Positions;
 use app\modules\admin\models\Companies;
@@ -59,7 +60,19 @@ use yii\widgets\ActiveForm;
         echo $form->field($model, 'company', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('institution') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
     ?>    
 
-    <?=  $form->field($model, 'role', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('briefcase') . ' </span>{input}</div>{error}'])->dropDownList(User::getRolesArray(),['prompt'=>'-- ' . $model->getAttributeLabel( 'role' ) . ' --']); ?>
+
+
+    <?php
+        $userroles = Userroles::find()->all();
+    
+        $items = ArrayHelper::map($userroles,'role','role_description');
+        $params = [
+            'prompt' => '-- ' . $model->getAttributeLabel( 'role' ) . ' --',
+        ];
+        echo $form->field($model, 'role', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('briefcase') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
+    ?>   
+
+    <?php //  $form->field($model, 'role', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('briefcase') . ' </span>{input}</div>{error}'])->dropDownList(User::getRolesArray(),['prompt'=>'-- ' . $model->getAttributeLabel( 'role' ) . ' --']); ?>
 
     <?= $form->field($model, 'email', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('inbox') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'email' )]) ?>
 

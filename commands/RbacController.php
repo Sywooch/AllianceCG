@@ -28,35 +28,47 @@ class RbacController extends Controller
         $auth->add($groupRule);
  
         // Roles
-        $manager = $auth->createRole('manager');
-        $manager->description = 'Manager';
-        $manager->ruleName = $groupRule->name;
-        $auth->add($manager);
+        $skassistant = $auth->createRole('skassistant');
+        $skassistant->description = 'Skoda. Ассистент сервиса';
+        $skassistant->ruleName = $groupRule->name;
+        $auth->add($skassistant);     
+ 
+        $skmastercons = $auth->createRole('skmastercons');
+        $skmastercons ->description = 'Skoda. Мастер-консультант';
+        $skmastercons ->ruleName = $groupRule->name;
+        $auth->add($skmastercons);
+        // $auth->addChild($head, $manager); 
+ 
+        $skservicehead = $auth->createRole('skservicehead');
+        $skservicehead ->description = 'Skoda. Руководитель отдела сервиса';
+        $skservicehead ->ruleName = $groupRule->name;
+        $auth->add($skservicehead);
+        // $auth->addChild($head, $manager); 
+ 
+        $skdirector = $auth->createRole('skdirector');
+        $skdirector ->description = 'Skoda. Директор дилерского центра';
+        $skdirector ->ruleName = $groupRule->name;
+        $auth->add($skdirector);
+        // $auth->addChild($head, $manager);
         
         $creditmanager = $auth->createRole('creditmanager');
-        $creditmanager ->description = 'creditmanager ';
+        $creditmanager ->description = 'Кредитный специалист';
         $creditmanager ->ruleName = $groupRule->name;
         $auth->add($creditmanager);
 
         $chiefcredit = $auth->createRole('chiefcredit');
-        $chiefcredit->description = 'chiefcredit ';
+        $chiefcredit->description = 'Руководитель ОКиС';
         $chiefcredit->ruleName = $groupRule->name;
-        $auth->add($chiefcredit);        
- 
-        $head = $auth->createRole('head');
-        $head ->description = 'head ';
-        $head ->ruleName = $groupRule->name;
-        $auth->add($head);
-        // $auth->addChild($head, $manager);
+        $auth->add($chiefcredit);   
  
         $admin = $auth->createRole('admin');
-        $admin->description = 'Admin';
+        $admin->description = 'Администратор';
         $admin->ruleName = $groupRule->name;
         $auth->add($admin);
         // $auth->addChild($admin, $head);
  
         $root = $auth->createRole('root');
-        $root->description = 'root';
+        $root->description = 'Superuser';
         $root->ruleName = $groupRule->name;
         $auth->add($root);
         // $auth->addChild($root, $admin);

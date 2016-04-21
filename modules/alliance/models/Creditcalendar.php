@@ -224,11 +224,11 @@ class Creditcalendar extends \yii\db\ActiveRecord
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
             [['date_from', 'time_from', 'date_to', 'time_to', 'dateTimeFrom', 'dateTimeTo', 'allday'], 'safe'],
             [['description'], 'string'],
-            ['author', 'default', 'value' => Yii::$app->user->identity->userfullname],
+            ['author', 'default', 'value' => Yii::$app->user->getId()],
             ['is_task', 'in', 'range' => array_keys(self::getTasksArray()), 'message' => Module::t('module', 'CREDITCALENDAR_LINK_ERROR')],
 //            ['week', 'in', 'range' => array_keys(self::getWeekdaysArray()), 'message' => Module::t('module', 'CREDITCALENDAR_LINK_ERROR')],
             [['is_task'], 'integer'],
-            [['title', 'location', 'author'], 'string', 'max' => 255],
+            [['title', 'location'], 'string', 'max' => 255],
         ];
     }
 

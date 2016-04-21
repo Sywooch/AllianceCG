@@ -17,6 +17,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= Yii::$app->user->identity->getRoleName() ?>
 
+<?php if(Yii::$app->user->can('updateOwn')){
+        echo '1';
+    }
+    else{
+        echo '0';
+        } 
+?>
+
 <?php
     // if (Yii::$app->user->can('root')) {
     //     echo 'Hello, root!';

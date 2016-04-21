@@ -10,6 +10,7 @@ use app\modules\alliance\models\CreditcalendarResponsibles;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 use yii\web\HttpException;
 use app\modules\alliance\Module;
@@ -229,15 +230,20 @@ class CreditcalendarController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);       
+        $model = $this->findModel($id);   
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
+        // if (!\Yii::$app->user->can('updateOwn', ['post' => $model])) {
+        //     throw new ForbiddenHttpException('Access denied');
+        // }
+        // else{
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
+        // }
     }
     
     public function actionComment($id)

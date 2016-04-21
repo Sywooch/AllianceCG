@@ -72,6 +72,14 @@ class RbacController extends Controller
         $root->ruleName = $groupRule->name;
         $auth->add($root);
         // $auth->addChild($root, $admin);
+
+
+        $updateOwn = $auth->createPermission('updateOwn');
+        $updateOwn->description = 'User can update own records';
+        $auth->add($updateOwn);
+
+        $auth->addChild($chiefcredit, $updateOwn);
+
  
         // Superadmin assignments
         if ($id !== null) {

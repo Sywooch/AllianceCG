@@ -5,6 +5,7 @@ namespace app\commands;
 use Yii;
 use yii\console\Controller;
 use app\components\rbac\GroupRule;
+use app\components\rbac\AuthorRule;
 use yii\rbac\DbManager;
  
 /**
@@ -23,9 +24,11 @@ class RbacController extends Controller
  
         $auth->removeAll(); 
 
-        $groupRule = new GroupRule();
- 
+        $groupRule = new GroupRule(); 
         $auth->add($groupRule);
+
+        // $authorRule = new AuthorRule();
+        // $auth->add($authorRule);
  
         // Roles
         $skassistant = $auth->createRole('skassistant');
@@ -72,13 +75,16 @@ class RbacController extends Controller
         $root->ruleName = $groupRule->name;
         $auth->add($root);
         // $auth->addChild($root, $admin);
-
+        
+        // add "author" role and give this role the "createPost" permission
+        $author = $auth->createRole('author');
+        $auth->add($author);
+        // $auth->addChild($author, $createPost);
 
         $updateOwn = $auth->createPermission('updateOwn');
         $updateOwn->description = 'User can update own records';
         $auth->add($updateOwn);
-
-        $auth->addChild($chiefcredit, $updateOwn);
+        $auth->addChild($author, $updateOwn);
 
  
         // Superadmin assignments

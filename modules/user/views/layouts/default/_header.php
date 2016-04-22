@@ -15,7 +15,7 @@ use app\modules\user\Module;
         ],
     ]);
 
-    echo $this->render('@app/modules/alliance/views/layouts/_shared_header');
+    echo $this->render('@app/modules/main/views/layouts/_shared_header');
     
     NavBar::end();
     ?>

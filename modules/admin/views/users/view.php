@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'role',
-                'value' => Yii::$app->user->identity->getRoleName(),
+                // 'value' => Yii::$app->user->identity->getRoleName(),
             ],
             [
                 'attribute' => 'status',

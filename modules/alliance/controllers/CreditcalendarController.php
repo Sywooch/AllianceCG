@@ -232,10 +232,10 @@ class CreditcalendarController extends Controller
     {
         $model = $this->findModel($id);   
 
-        // if (!\Yii::$app->user->can('updateOwn', ['post' => $model])) {
-        //     throw new ForbiddenHttpException('Access denied');
-        // }
-        // else{
+        if (!\Yii::$app->user->can('updateOwn', ['model' => $model])) {
+            throw new ForbiddenHttpException('Access denied');
+        }
+        else{
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {
@@ -243,15 +243,7 @@ class CreditcalendarController extends Controller
                     'model' => $model,
                 ]);
             }
-        // }
-    }
-    
-    public function actionComment($id)
-    {
-        $model = $this->findModel($id);
-//        return $this->render('view', [
-//            'model' => $model,
-//        ]);        
+        }
     }
 
     /**

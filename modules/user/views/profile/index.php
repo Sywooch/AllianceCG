@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= Yii::$app->user->identity->getRoleName() ?>
 
-<?php if(Yii::$app->user->can('updateOwn')){
+<?php if(Yii::$app->user->can('author') && Yii::$app->user->can('updateOwn')){
         echo '1';
     }
     else{

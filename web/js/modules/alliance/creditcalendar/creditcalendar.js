@@ -71,13 +71,16 @@
 
 //            Tooltip/QTip:
 //            
-            eventRender: function(event, element) {
-                    $(element).tooltip({title: event.title});   
+//            eventRender: function(event, element) {
+//                    $(element).tooltip({title: event.title});   
 //                    QTIP:
 //                    $(element).qtip({
 //                        content: event.event
 //                    });          
-            },
+//            },
+            // eventRender: function eventRender( event, element, view ) {
+            //     return ['all', event.location].indexOf($('#location_selector').val())
+            // },
             eventClick: function(calEvent, jsEvent, view) {
                 if (calEvent.url) {
                     window.open(calEvent.url);
@@ -91,4 +94,12 @@
             },
         });
     });
+
+
+    $('#location_selector').on('change',function(){
+        $('#credit_calendar').fullCalendar('rerenderEvents');
+    })
+      
+
+
 //</script>

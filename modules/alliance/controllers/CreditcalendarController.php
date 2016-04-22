@@ -173,7 +173,9 @@ class CreditcalendarController extends Controller
     //                    {
     //                        $singlemail[] = $value->email;
     //                    }
-                        $model->dow = implode(',',$model->dow);
+                        if(!empty($model->dow)){
+                            $model->dow = implode(',',$model->dow);                            
+                        }
                         $model->save();
 
                         if($model->responsible){
@@ -229,18 +231,20 @@ class CreditcalendarController extends Controller
     public function actionUpdate($id)
     {        
         $model = $this->findModel($id); 
+        $model->dow = explode(',',  $model->dow);
 
         if (!Yii::$app->user->can('updateCreditcalendarPost', ['creditcalendar' => $model])) {
             throw new ForbiddenHttpException(Module::t('module', 'ONLY_AUTHOR_CAN_UPDATE_THIS_RECORD'));
         }
         else
         {  
-            if ($model->load(Yii::$app->request->post())) {
+            if ($model->load(Yii::$app->request->post())) {   
                     $model->dow = implode(',',$model->dow);
                     $model->save();
-                return $this->redirect(['view', 'id' => $model->id]);
+                    // if($model->save()){
+                        return $this->redirect(['view', 'id' => $model->id]);                        
+                    // }
             } else {
-                $model->dow = explode(',',  $model->dow);
                 return $this->render('update', [
                     'model' => $model,
                 ]);

@@ -61,6 +61,7 @@ class CreditcalendarSearch extends Creditcalendar
                 "SELECT
                     `id` AS id,
                     `id` AS url,
+                    `location` AS location,
                     CASE 
                         WHEN CONCAT(date_from, ' ', time_from) IS NULL THEN time_to
                         ELSE CONCAT(date_from, ' ', time_from)

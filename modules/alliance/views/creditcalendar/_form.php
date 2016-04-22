@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+// use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 use rmrevin\yii\fontawesome\FA;
 use app\modules\alliance\Module;
 use yii\jui\DatePicker;
@@ -25,8 +26,10 @@ use janisto\timepicker\TimePicker;
     <div class="bs-callout bs-callout-info">
 
     <?= '<h4>' . FA::icon('list-alt') . ' ' . Module::t('module', 'CREDITCALENDAR_EVENTS_RANGE') . '</h4>' ?>
+
+    <div class="col-sm-6">
         
-    <div class="col-sm-3">
+    <div class="col-sm-7">
         
         <?=  TimePicker::widget([
                 'model' => $model,
@@ -47,7 +50,7 @@ use janisto\timepicker\TimePicker;
         
     </div>
     
-    <div class="col-sm-2">
+    <div class="col-sm-5">
         
         <?=  TimePicker::widget([
                 'model' => $model,
@@ -69,14 +72,18 @@ use janisto\timepicker\TimePicker;
         ?>
         
     </div>
-    
-    <div class="col-sm-2">
-        <div style="text-align: center">
-            <?= '-'; ?>
-        </div>
+
     </div>
     
-    <div class="col-sm-2">
+    <!-- <div class="col-sm-2"> -->
+        <!-- <div style="text-align: center"> -->
+            <?php // '-'; ?>
+        <!-- </div> -->
+    <!-- </div> -->
+    
+    <div class="col-sm-6">
+
+    <div class="col-sm-5">
         
         <?=  TimePicker::widget([
                 'model' => $model,
@@ -98,7 +105,7 @@ use janisto\timepicker\TimePicker;
         
     </div>
     
-    <div class="col-sm-3">
+    <div class="col-sm-7">
         
         <?=  TimePicker::widget([
                 'model' => $model,
@@ -118,23 +125,27 @@ use janisto\timepicker\TimePicker;
         ?>
         
     </div>
+
+    </div>
     
     <br/><br/><br/>
 
      <?= '<h4>' . FA::icon('calendar') . ' ' . Module::t('module', 'CREDITCALENDAR_REPEAT_OPTIONS') . '</h4>' ?>
     
-    <?= $form->field($model, 'allday')->checkbox(['label' => Module::t('module', 'CREDITCALENDAR_ALLDAY_CHECKBOX'),
-                'labelOptions' => [
-                    'style' => 'padding-left:20px;'
-                ],
-                'disabled' => false,
+    <?= $form->field($model, 'allday')->checkbox(
+                [
+                    'label' => Module::t('module', 'CREDITCALENDAR_ALLDAY_CHECKBOX'),
             ]);
     ?>
+
+    <?php // $form->field($model, 'week')->checkboxList([$model->getWeekDays()]); ?>
+    <?= $form->field($model, 'dow')->inline(true)->checkboxList($model->getWeekDaysArray()) ?>
     
     <?php 
         if(Yii::$app->user->can('chiefcredit'))
         {   
-            echo $form->field($model, 'is_chief_task', ['template'=>'<h4>' . FA::icon('user-secret') . ' {label}</h4>{input}{error}'])->checkbox(
+            echo '<h4>' . FA::icon('user-secret') . ' ' . Module::t('module', 'CREDITCALENDAR_ISCHIEFTASK') . '</h4>';
+            echo $form->field($model, 'is_chief_task', ['template'=>'{input}{error}'])->checkbox(
                 [
                     'label' => Module::t('module', 'CREDITCALENDAR_ISCHIEFTASK'),
                 ])->label(Module::t('module', 'CREDITCALENDAR_ISCHIEFTASK'));
@@ -177,6 +188,8 @@ use janisto\timepicker\TimePicker;
     
 
     <div class="bs-callout bs-callout-warning">
+
+    <?= '<h4>' . FA::icon('book') . ' ' . Module::t('module', 'CREDITCALENDAR_CONTENT') . '</h4>' ?>
     
     <?= $form->field($model, 'title', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('flag') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'title' )]) ?>
     
@@ -196,7 +209,11 @@ use janisto\timepicker\TimePicker;
         echo $form->field($model, 'location', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('institution') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
     ?>
     
-    <?= $form->field($model, 'status', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('check-circle-o') . ' </span>{input}</div>{error}'])->dropDownList($model->getStatusesArray()) ?>
+    <?= '<h4>' . FA::icon('check-square') . ' ' . $model->getAttributeLabel('status') . '</h4>' ?>
+
+    <?= $form->field($model, 'status', ['template'=>'{input}{error}'])->radioList($model->getStatusesArray()) ?>
+    
+    <?php // $form->field($model, 'status', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('check-circle-o') . ' </span>{input}</div>{error}'])->dropDownList($model->getStatusesArray()) ?>
 
     </div>
     

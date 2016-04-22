@@ -151,7 +151,7 @@ class CreditcalendarController extends Controller
             $model->date_to = $tomorrow;
             $model->time_to = $curtime;
 
-                if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                if ($model->load(Yii::$app->request->post())) {
                     
                     // if($model->getScenario() === 'createTask')
                     // {
@@ -173,10 +173,11 @@ class CreditcalendarController extends Controller
     //                    {
     //                        $singlemail[] = $value->email;
     //                    }
+                        $model->dow = implode(',',$model->dow);
+                        $model->save();
 
                         if($model->responsible){
-                            // $model->scenario = Creditcalendar::SCENARIO_TASK;
-                            $model->is_task == '1';
+                            // $model->is_task == '1';
                             foreach ($model->responsible as $responsibles) {
                                     $creditcalendarResponsibles = new CreditcalendarResponsibles();
                                     $creditcalendarResponsibles->creditcalendar_id = $model->id;
@@ -234,9 +235,12 @@ class CreditcalendarController extends Controller
         }
         else
         {  
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($model->load(Yii::$app->request->post())) {
+                    $model->dow = implode(',',$model->dow);
+                    $model->save();
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {
+                $model->dow = explode(',',  $model->dow);
                 return $this->render('update', [
                     'model' => $model,
                 ]);

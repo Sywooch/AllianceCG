@@ -54,10 +54,6 @@ class CreditcalendarSearch extends Creditcalendar
     }
     
     public function calendarsearch(){
-//        $items = Yii::$app->db->createCommand("SELECT `id` AS id, `id` AS url, concat(date_from,' ',time_from) AS start, concat(date_to,' ',time_to) AS `end`, concat(title,' (',author,')') AS title, CASE status WHEN '0' THEN 'red' WHEN '1' THEN 'primary' ELSE 'green' END as color FROM all_creditcalendar;;")->queryAll();
-//        $items = Yii::$app->db->createCommand("SELECT `id` AS id, `id` AS url, concat(IFNULL(date_from,''),' ',time_from) AS start, concat(IFNULL(date_to,''),' ',time_to) AS `end`, concat(title,' (',author,')') AS title, CASE status WHEN '0' THEN 'red' WHEN '1' THEN 'primary' ELSE 'green' END as color, CASE allday WHEN '0' THEN 'false' ELSE 'true' END AS allDay FROM all_creditcalendar;")->queryAll();
-
-        
         
         if(Yii::$app->user->can('chiefcredit'))
         {        
@@ -79,6 +75,10 @@ class CreditcalendarSearch extends Creditcalendar
                         WHEN '1' THEN 'primary'
                         ELSE 'green'
                         END as color,
+                    CASE dow
+                        WHEN dow IS NULL THEN false
+                        ELSE dow
+                        END AS dow,
                     CASE allday
                         WHEN '0' THEN 'false'
                         ELSE 'true'
@@ -106,6 +106,10 @@ class CreditcalendarSearch extends Creditcalendar
                         WHEN '1' THEN 'primary'
                         ELSE 'green'
                         END as color,
+                    CASE dow
+                        WHEN dow IS NULL THEN false
+                        ELSE dow
+                        END AS dow,
                     CASE allday
                         WHEN '0' THEN 'false'
                         ELSE 'true'

@@ -15,7 +15,7 @@
             eventLimit: true,            
             selectable: false,
             editable: false,
-            height: 900,
+            height: 600,
             width: 900,
             lang: 'ru',
             
@@ -23,13 +23,13 @@
 //            Аттрибут allDay - повторять ежедневно
 //            Аттрибут dow - повторять по дням недели (№ дня недели)
 //                    
-//            events: [{
-//                title: "ololo",
-//                start: '2016-04-16 10:00',
-//                end:   '2016-04-17 23:00',
-//                dow: [],
-//                allDay: true,
-//            }],
+           // events: [{
+           //     title: "ololo",
+           //     start: '10:00',
+           //     end:   '23:00',
+           //     dow: [1,4],
+           //     // allDay: true,
+           // }],
 //            
 //          Статичный цвет события
 //           

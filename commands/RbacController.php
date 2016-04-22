@@ -28,34 +28,47 @@ class RbacController extends Controller
         $auth->add($groupRule);
 
 
-        // Creditcalendar правило проверки автора записи
+        // CREDITCALENDAR RULE TO CHECK AUTOR OF RECORDS
         $creditcalendarAuthorRule = new CreditcalendarAuthorRule();
         $auth->add($creditcalendarAuthorRule);
 
 
-        // Permissions
+        // PERMISSIONS
 
-        // Разрешение "createCreditcalendarPost"
+        // ===  CREDITCALENDAR_BEGIN  ===
+
+        // PERMISSION "createCreditcalendarPost"
         $createCreditcalendarPost = $auth->createPermission('createCreditcalendarPost');
         $createCreditcalendarPost->description = 'Alliance Creditcalendar Create Post';
         $auth->add($createCreditcalendarPost);
 
-        // Разрешение "updateCreditcalendarPost"
+        // PERMISSION "creditcalendarIsVisible"
+        $creditcalendarIsVisible = $auth->createPermission('creditcalendarIsVisible');
+        $creditcalendarIsVisible->description = 'Alliance Creditcalendar Is Visible Permission';
+        $auth->add($creditcalendarIsVisible);
+
+        // PERMISSION "creditcalendarSetResponsibles"
+        $creditcalendarSetResponsibles = $auth->createPermission('creditcalendarSetResponsibles');
+        $creditcalendarSetResponsibles->description = 'Alliance Creditcalendar Set Responsibles';
+        $auth->add($creditcalendarSetResponsibles);
+
+        // PERMISSION "updateCreditcalendarPost"
         $updateCreditcalendarPost = $auth->createPermission('updateCreditcalendarPost');
         $updateCreditcalendarPost->description = 'Alliance Creditcalendar Update post';
         $auth->add($updateCreditcalendarPost);        
 
 
-        // Разрешение редактирования собственных записей в Контроллере Creditcalendar.
-
-        // добавляем разрешение "updateCreditcalendarOwnPost" и привязываем к нему правило.
+        // PERMISSION TO EDIT OWN RECORDS FOR CREDITCALENDAR CONTROLLER
+        // ADDED PERMISSION "updateCreditcalendarOwnPost" RELATED WITH CREDITCALENDAR AUTHOR RULE.
         $updateCreditcalendarOwnPost = $auth->createPermission('updateCreditcalendarOwnPost');
         $updateCreditcalendarOwnPost->description = 'Update own post in Creditcalendar';
         $updateCreditcalendarOwnPost->ruleName = $creditcalendarAuthorRule->name;
         $auth->add($updateCreditcalendarOwnPost);
 
-        // "updateCreditcalendarOwnPost" используется из "updateCreditcalendarPost"
-        $auth->addChild($updateCreditcalendarOwnPost, $updateCreditcalendarPost);        
+        // PERMISSION "updateCreditcalendarOwnPost" USED FROM "updateCreditcalendarPost"
+        $auth->addChild($updateCreditcalendarOwnPost, $updateCreditcalendarPost);
+
+        // ===  CREDITCALENDAR_END  ===        
  
         // Roles
         $skassistant = $auth->createRole('skassistant');
@@ -80,28 +93,38 @@ class RbacController extends Controller
         $skdirector ->ruleName = $groupRule->name;
         $auth->add($skdirector);
         $auth->addChild($skdirector, $skservicehead);
+
+        // ===   CREDIT_DEPARTMENT_BEGIN   ===
         
-        // Кредитный специалист
+        // CREDIT MANAGER
         $creditmanager = $auth->createRole('creditmanager');
-        $creditmanager ->description = 'Кредитный специалист';
+        $creditmanager ->description = 'Credit Manager';
         $creditmanager ->ruleName = $groupRule->name;
         $auth->add($creditmanager);
-        // Разрешение редактирования собственных записей
+        // ALLOW TO UPDATE OWN RECORDS IN CREDITCALENDAR CONTROLLER
         $auth->addChild($creditmanager, $updateCreditcalendarOwnPost);
-        // Разрешение создания записей
+        // ALLOW TO CREATE RECORDS
         $auth->addChild($creditmanager, $createCreditcalendarPost);
+        // PERMISSION TO VIEW CREDITCALENDAR COMPONENTS
+        $auth->addChild($creditmanager, $creditcalendarIsVisible);
 
-        // Руководитель ОКиС
+        // CHIEF OF CREDIT DEPARTMENT
         $chiefcredit = $auth->createRole('chiefcredit');
-        $chiefcredit->description = 'Руководитель ОКиС';
+        $chiefcredit->description = 'Chief of Credit Department';
         $chiefcredit->ruleName = $groupRule->name;
         $auth->add($chiefcredit);
-        // Наследование от роли "Кредитный специалист"
+        // INHERITANCE FROM creditmanager ROLE
         $auth->addChild($chiefcredit, $creditmanager);
-        // Наследование разрешения создания записей контроллера Creditcalendar
+        // INHERITANCE PERMISSION TO CREATE RECORDS IN Creditcalendar
         $auth->addChild($chiefcredit, $createCreditcalendarPost);
-        // Наследование разрешения редактирования записей контроллера Creditcalendar
+        // INHERITANCE PERMISSION TO UPDATE RECORDS IN Creditcalendar
         $auth->addChild($chiefcredit, $updateCreditcalendarPost);
+        // PERMISSION TO SET RESPONSIBLE IN CREDITCALENDAR
+        $auth->addChild($chiefcredit, $creditcalendarSetResponsibles);
+        // PERMISSION TO VIEW CREDITCALENDAR COMPONENTS
+        $auth->addChild($chiefcredit, $creditcalendarIsVisible);
+
+        // ===   CREDIT_DEPARTMENT_END   ===
  
         $admin = $auth->createRole('admin');
         $admin->description = 'Администратор';

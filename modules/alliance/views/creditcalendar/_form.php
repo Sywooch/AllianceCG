@@ -142,8 +142,9 @@ use janisto\timepicker\TimePicker;
         }
     ?>
 
-    <?php 
-        if((Yii::$app->user->can('chiefcredit') || Yii::$app->user->can('admin')) && $model->getScenario() === 'createTask')
+    <div class="bs-callout bs-callout-danger">
+    <?php
+        if(Yii::$app->user->can('creditcalendarSetResponsibles'))
         {  
             echo '<br/>';
 
@@ -166,16 +167,11 @@ use janisto\timepicker\TimePicker;
                 'inline' => false,
             ];
 
-//            echo $form->field($model, 'responsible', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->dropDownList($items,$params,['class' => 'form-control input-sm radio', 'itemOptions' => ['class' => 'radio']]);
-            echo $form->field($model, 'responsible')->checkboxList($items,$params,['class' => 'form-control input-sm radio', 'itemOptions' => ['class' => 'radio']]);
+            echo $form->field($model, 'responsible', ['template'=>'<h4>' . FA::icon('user') . ' {label}</h4>{input}</div>{error}'])->checkboxList($items,$params,['class' => 'form-control input-sm radio', 'itemOptions' => ['class' => 'radio']]);
         }
     ?> 
-    
-    <?php // $form->field($model, 'responsible', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->textInput(['disabled' => $model->getScenario() != 'createTask', 'placeholder' => $model->getAttributeLabel( 'responsible' )]); ?>
 
-    <?php // $form->field($model, 'dow')->checkBoxList(ArrayHelper::map(\app\modules\alliance\models\Weekdays::find()->all(), 'daynumber', 'dayname')); ?>
-
-    <!--ArrayHelper::map(Sprachen::find()->all(), 'name', 'name')-->
+    </div>
     
     <?= $form->field($model, 'title', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('flag') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'title' )]) ?>
     

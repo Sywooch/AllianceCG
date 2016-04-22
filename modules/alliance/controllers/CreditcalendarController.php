@@ -151,22 +151,22 @@ class CreditcalendarController extends Controller
             $model->date_to = $tomorrow;
             $model->time_to = $curtime;
             
-            if(isset($_GET['is_task']))
-            {
-                $model->is_task = $_GET['is_task'];
-                if($model->is_task == 0)
-                {
-                    $model->scenario = Creditcalendar::SCENARIO_EVENT;
-                }
-    //            elseif($model->is_task == 1 && Yii::$app->user->can('chiefcredit'))
-                elseif($model->is_task == 1 && (Yii::$app->user->can('chiefcredit') || (Yii::$app->user->can('admin'))))
-                {
-                    $model->scenario = Creditcalendar::SCENARIO_TASK;
-                }
+            // if(isset($_GET['is_task']))
+            // {
+    //             $model->is_task = $_GET['is_task'];
+    //             if($model->is_task == 0)
+    //             {
+    //                 $model->scenario = Creditcalendar::SCENARIO_EVENT;
+    //             }
+    // //            elseif($model->is_task == 1 && Yii::$app->user->can('chiefcredit'))
+    //             elseif($model->is_task == 1 && (Yii::$app->user->can('chiefcredit') || (Yii::$app->user->can('admin'))))
+    //             {
+    //                 $model->scenario = Creditcalendar::SCENARIO_TASK;
+    //             }
                 if ($model->load(Yii::$app->request->post()) && $model->save()) {
                     
-                    if($model->getScenario() === 'createTask')
-                    {
+                    // if($model->getScenario() === 'createTask')
+                    // {
     //                Yii::$app->mailer->compose(['html' => '@app/modules/user/mails/passwordReset'], ['user' => $user])
     //                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
     //                    ->setTo($this->email)
@@ -201,7 +201,7 @@ class CreditcalendarController extends Controller
                                 $creditcalendarResponsibles->responsible = $responsibles;
                                 $creditcalendarResponsibles->save();
                             }                                 
-                    }
+                    // }
                     
                     return $this->redirect(['view', 'id' => $model->id]);
                 } else {
@@ -209,7 +209,7 @@ class CreditcalendarController extends Controller
                         'model' => $model,
                     ]);
                 }           
-            }
+            // }
 
         }
 

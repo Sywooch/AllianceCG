@@ -15,17 +15,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <!-- <div class="user-profile col-lg-6 col-lg-offset-3"> -->
 <div>
 
-<?= Yii::$app->user->identity->getRoleName() ?>
-
-<?php if(Yii::$app->user->can('author') && Yii::$app->user->can('updateOwn')){
-        echo '1';
-    }
-    else{
-        echo '0';
-        } 
-?>
-
 <?php
+
+    echo Yii::$app->user->getId();
+
     // if (Yii::$app->user->can('root')) {
     //     echo 'Hello, root!';
     // }
@@ -78,6 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'username',
             'position',
+            'role',
             'email',
             'company',
             'created_at:datetime'

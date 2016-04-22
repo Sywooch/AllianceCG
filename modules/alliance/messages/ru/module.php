@@ -65,4 +65,5 @@
             'CREDITCALENDAR_NEW_TASK' => 'Календарь ОКиС. Новое задание ',
             'ALLIANCE_CREDITCALENDARRESPONSIBLES' => 'ОКиС Календарь. Ответственные',
             'CREDITCALENDAR_RESPONSIBLES' => 'Ответственные: ',
+            'ONLY_AUTHOR_CAN_UPDATE_THIS_RECORD' => 'Только автор записи имеет право на редактирование',
 	];

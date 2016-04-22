@@ -132,78 +132,85 @@ class CreditcalendarController extends Controller
      */
     public function actionCreate()
     {
-        $formatter = new \yii\i18n\Formatter;
-        $formatter->timeZone = 'Europe/Minsk';
-        $formatter->dateFormat = 'php:Y-m-d';
-        $formatter->timeFormat = 'php:h:i';
-        $curdate = $formatter->asDate('now');        
-        $curtime = $formatter->asTime('now');
-        $tomorrow = $formatter->asDate('now + 1 day'); 
-        
-        $model = new Creditcalendar();
-        $model->date_from = $curdate;
-        $model->time_from = $curtime;
-        $model->date_to = $tomorrow;
-        $model->time_to = $curtime;
-        
-        if(isset($_GET['is_task']))
+        if (!Yii::$app->user->can('createCreditcalendarPost')) {
+            throw new ForbiddenHttpException('Access denied');
+        }
+        else
         {
-            $model->is_task = $_GET['is_task'];
-            if($model->is_task == 0)
+            $formatter = new \yii\i18n\Formatter;
+            $formatter->timeZone = 'Europe/Minsk';
+            $formatter->dateFormat = 'php:Y-m-d';
+            $formatter->timeFormat = 'php:h:i';
+            $curdate = $formatter->asDate('now');        
+            $curtime = $formatter->asTime('now');
+            $tomorrow = $formatter->asDate('now + 1 day'); 
+            
+            $model = new Creditcalendar();
+            $model->date_from = $curdate;
+            $model->time_from = $curtime;
+            $model->date_to = $tomorrow;
+            $model->time_to = $curtime;
+            
+            if(isset($_GET['is_task']))
             {
-                $model->scenario = Creditcalendar::SCENARIO_EVENT;
-            }
-//            elseif($model->is_task == 1 && Yii::$app->user->can('chiefcredit'))
-            elseif($model->is_task == 1 && (Yii::$app->user->can('chiefcredit') || (Yii::$app->user->can('admin'))))
-            {
-                $model->scenario = Creditcalendar::SCENARIO_TASK;
-            }
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                
-                if($model->getScenario() === 'createTask')
+                $model->is_task = $_GET['is_task'];
+                if($model->is_task == 0)
                 {
-//                Yii::$app->mailer->compose(['html' => '@app/modules/user/mails/passwordReset'], ['user' => $user])
-//                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
-//                    ->setTo($this->email)
-//                    ->setSubject(Module::t('module', 'PASSWORD_RESET_FOR') . Yii::$app->name)
-//                    ->send();
-
-                    
-//    foreach(self::$_to as $receiver){
-//        $mail->setTo($receiver)
-//            ->send();
-                    
-                    //Temporary commented getResponsibleemails
-                       
-//                    $emails = $model->getResponsibleList();
-//                    foreach ($model->getResponsibleList() as $key=>$value)
-//                    {
-//                        $singlemail[] = $value->email;
-//                    }
-                    
-                    Yii::$app->mailer->compose()
-                        ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
-                        ->setReplyTo(Yii::$app->params['supportEmail'])
-                        ->setSubject(date('d/m/Y H:i:s') . '. ' . Module::t('module', 'CREDITCALENDAR_NEW_TASK'))
-                        ->setTextBody($model->description)
-//                        ->setTo(['creditford@gorodavto.com', 'creditaudi@gorodavto.com'])
-                        ->setTo($model->getResponsibleemails())
-                        ->send();
-
-                    foreach ($model->responsible as $responsibles) {
-                            $creditcalendarResponsibles = new CreditcalendarResponsibles();
-                            $creditcalendarResponsibles->creditcalendar_id = $model->id;
-                            $creditcalendarResponsibles->responsible = $responsibles;
-                            $creditcalendarResponsibles->save();
-                        }                                 
+                    $model->scenario = Creditcalendar::SCENARIO_EVENT;
                 }
-                
-                return $this->redirect(['view', 'id' => $model->id]);
-            } else {
-                return $this->render('create', [
-                    'model' => $model,
-                ]);
-            }           
+    //            elseif($model->is_task == 1 && Yii::$app->user->can('chiefcredit'))
+                elseif($model->is_task == 1 && (Yii::$app->user->can('chiefcredit') || (Yii::$app->user->can('admin'))))
+                {
+                    $model->scenario = Creditcalendar::SCENARIO_TASK;
+                }
+                if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                    
+                    if($model->getScenario() === 'createTask')
+                    {
+    //                Yii::$app->mailer->compose(['html' => '@app/modules/user/mails/passwordReset'], ['user' => $user])
+    //                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+    //                    ->setTo($this->email)
+    //                    ->setSubject(Module::t('module', 'PASSWORD_RESET_FOR') . Yii::$app->name)
+    //                    ->send();
+
+                        
+    //    foreach(self::$_to as $receiver){
+    //        $mail->setTo($receiver)
+    //            ->send();
+                        
+                        //Temporary commented getResponsibleemails
+                           
+    //                    $emails = $model->getResponsibleList();
+    //                    foreach ($model->getResponsibleList() as $key=>$value)
+    //                    {
+    //                        $singlemail[] = $value->email;
+    //                    }
+                        
+                        Yii::$app->mailer->compose()
+                            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                            ->setReplyTo(Yii::$app->params['supportEmail'])
+                            ->setSubject(date('d/m/Y H:i:s') . '. ' . Module::t('module', 'CREDITCALENDAR_NEW_TASK'))
+                            ->setTextBody($model->description)
+    //                        ->setTo(['creditford@gorodavto.com', 'creditaudi@gorodavto.com'])
+                            ->setTo($model->getResponsibleemails())
+                            ->send();
+
+                        foreach ($model->responsible as $responsibles) {
+                                $creditcalendarResponsibles = new CreditcalendarResponsibles();
+                                $creditcalendarResponsibles->creditcalendar_id = $model->id;
+                                $creditcalendarResponsibles->responsible = $responsibles;
+                                $creditcalendarResponsibles->save();
+                            }                                 
+                    }
+                    
+                    return $this->redirect(['view', 'id' => $model->id]);
+                } else {
+                    return $this->render('create', [
+                        'model' => $model,
+                    ]);
+                }           
+            }
+
         }
 
 //        if ($model->load(Yii::$app->request->post())){
@@ -229,13 +236,14 @@ class CreditcalendarController extends Controller
      * @return mixed
      */
     public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);   
+    {        
+        $model = $this->findModel($id); 
 
-        if (!\Yii::$app->user->can('updateOwn', ['model' => $model])) {
-            throw new ForbiddenHttpException('Access denied');
+        if (!Yii::$app->user->can('updateCreditcalendarPost', ['creditcalendar' => $model])) {
+            throw new ForbiddenHttpException(Module::t('module', 'ONLY_AUTHOR_CAN_UPDATE_THIS_RECORD'));
         }
-        else{
+        else
+        {  
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {
@@ -243,7 +251,9 @@ class CreditcalendarController extends Controller
                     'model' => $model,
                 ]);
             }
+
         }
+
     }
 
     /**

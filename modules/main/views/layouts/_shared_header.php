@@ -13,7 +13,6 @@ use app\modules\alliance\Module;
         Yii::$app->user->isGuest ?
             ['label' => FA::icon('user') . ' ' . Module::t('module', 'NAV_LOGIN'), 'url' => ['/user/default/login']] :
             false,
-        Yii::$app->user->can('admin') ?
             ['label' => FA::icon('building') . ' ' . Module::t('module', 'NAV_ALLIANCE'), 'items' => [
                     [
                         'label' => FA::icon('pie-chart') . ' ' . Module::t('module', 'NAV_ALLIANCE_DASHBOARD'),
@@ -36,8 +35,7 @@ use app\modules\alliance\Module;
                         'visible' => Yii::$app->user->can('root')
                     ],                
                 ],
-            ] :
-            false,
+            ],
         !Yii::$app->user->isGuest ?
             ['label' => FA::icon('wrench') . Module::t('module', 'NAV_SKODA'), 'items' => [
                     ['label' => FA::icon('wrench') . ' ' . Module::t('module', 'NAV_SKODA_DASHBOARD'), 'url' => ['/skoda/']],

@@ -104,12 +104,10 @@ class User extends \app\modules\user\models\User
          $auth = Yii::$app->authManager;
          $name = $this->role ? $this->role : self::ROLE_USER;
          $role = $auth->getRole($name);
-         $authorRole = $auth->getRole('author');
          if (!$insert) {
              $auth->revokeAll($this->id);
          }
          $auth->assign($role, $this->id);
-         $auth->assign($authorRole, $this->id);
      }    
     
 }

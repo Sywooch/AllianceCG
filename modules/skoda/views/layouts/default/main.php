@@ -29,12 +29,12 @@ AppAsset::register($this);
 
 
     <div class="container">
-    	<?= $this->render('@app/modules/skoda/views/layouts/default/_breadcrumbs') ?>
+    	<?= $this->render('@app/modules/main/views/layouts/_breadcrumbs') ?>
         <?= $content ?>
     </div>
 </div>
 
-<?= $this->render('@app/modules/skoda/views/layouts/default/_scroll_to_top') ?>    
+<?= $this->render('@app/modules/main/views/layouts/_scroll_to_top') ?>    
     
 <?php echo $this->render('@app/modules/skoda/views/layouts/default/_footer') ?>
 

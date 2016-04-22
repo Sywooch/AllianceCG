@@ -29,14 +29,14 @@ AppAsset::register($this);
 
     <div class="container">
         <div class="col-sm-12">        
-            <?= $this->render('@app/modules/admin/views/layouts/default/_breadcrumbs') ?>
+            <?= $this->render('@app/modules/main/views/layouts/_breadcrumbs') ?>
             <?= Alert::widget() ?>
             <?= $content ?>
         </div>
     </div>
 </div>
 
-<?= $this->render('@app/modules/admin/views/layouts/default/_scroll_to_top') ?> 
+<?= $this->render('@app/modules/main/views/layouts/_scroll_to_top') ?> 
     
 <?= $this->render('@app/modules/admin/views/layouts/default/_footer') ?>
 

@@ -32,14 +32,14 @@ AppAsset::register($this);
         <?= $this->render('@app/modules/skoda/views/layouts/_sidebar') ?>
         </div>
         <div class="col-sm-10">        
-            <?= $this->render('@app/modules/skoda/views/layouts/_breadcrumbs') ?>
+            <?= $this->render('@app/modules/main/views/layouts/_breadcrumbs') ?>
             <?= Alert::widget() ?>
             <?= $content ?>
         </div>
     </div>
 </div>
 
-<?= $this->render('@app/modules/skoda/views/layouts/_scroll_to_top') ?>    
+<?= $this->render('@app/modules/main/views/layouts/_scroll_to_top') ?>    
     
 <?= $this->render('@app/modules/skoda/views/layouts/_footer') ?>
 

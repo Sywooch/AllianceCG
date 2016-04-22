@@ -18,4 +18,4 @@ $this->title = Yii::$app->name;;
     <div class="col-md-4"></div>
 </div>
 
-<?= Yii::$app->user->identity->usercompany; ?>
+<?php // Yii::$app->user->identity->usercompany; ?>

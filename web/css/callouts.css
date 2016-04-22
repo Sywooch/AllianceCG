@@ -8,6 +8,9 @@ border-radius: 3px;
 .bs-callout-danger {
 border-left-color: #d9534f;
 }
+.bs-callout-success {
+border-left-color: #4cae4c;
+}
 .bs-callout-warning {
 border-left-color: #f0ad4e;
 }
@@ -17,6 +20,9 @@ border-left-color: #5bc0de;
 .bs-callout h4 {
 margin-top: 0;
 margin-bottom: 5px;
+}
+.bs-callout-success h4 {
+color: #4cae4c;
 }
 .bs-callout-danger h4 {
 color: #d9534f;

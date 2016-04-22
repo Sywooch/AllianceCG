@@ -218,7 +218,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
     public function rules()
     {
         return [            
-            [['comment_author', 'comment_text', 'is_chief_task'], 'safe'],
+            [['comment_author', 'comment_text', 'is_chief_task', 'responsible'], 'safe'],
             [['responsible'], 'required', 'on' => self::SCENARIO_TASK],
             ['status', 'default', 'value' => self::STATUS_ATWORK],
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],

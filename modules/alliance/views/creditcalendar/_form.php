@@ -21,11 +21,10 @@ use janisto\timepicker\TimePicker;
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->errorSummary($model); ?>
-    
-    <div class="form-group" style="text-align: right">
-        <?= Html::submitButton($model->isNewRecord ? FA::icon('save') . ' ' . Module::t('module', 'CREDITCALENDAR_CREATE') : FA::icon('edit') . ' ' . Module::t('module', 'CREDITCALENDAR_UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
-        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'CREDITCALENDAR_CANCEL'), ['/alliance/creditcalendar/calendar'], ['class' => 'btn btn-danger btn-sm']) ?>
-    </div>    
+
+    <div class="bs-callout bs-callout-info">
+
+    <?= '<h4>' . FA::icon('list-alt') . ' ' . Module::t('module', 'CREDITCALENDAR_EVENTS_RANGE') . '</h4>' ?>
         
     <div class="col-sm-3">
         
@@ -121,6 +120,8 @@ use janisto\timepicker\TimePicker;
     </div>
     
     <br/><br/><br/>
+
+     <?= '<h4>' . FA::icon('calendar') . ' ' . Module::t('module', 'CREDITCALENDAR_REPEAT_OPTIONS') . '</h4>' ?>
     
     <?= $form->field($model, 'allday')->checkbox(['label' => Module::t('module', 'CREDITCALENDAR_ALLDAY_CHECKBOX'),
                 'labelOptions' => [
@@ -133,20 +134,21 @@ use janisto\timepicker\TimePicker;
     <?php 
         if(Yii::$app->user->can('chiefcredit'))
         {   
-            $form->field($model, 'is_chief_task')->checkbox(['label' => Module::t('module', 'CREDITCALENDAR_ISCHIEFTASK'),
-                    'labelOptions' => [
-                        'style' => 'padding-left:20px;'
-                    ],
-                    'disabled' => false,
-                ]);
+            echo $form->field($model, 'is_chief_task', ['template'=>'<h4>' . FA::icon('user-secret') . ' {label}</h4>{input}{error}'])->checkbox(
+                [
+                    'label' => Module::t('module', 'CREDITCALENDAR_ISCHIEFTASK'),
+                ])->label(Module::t('module', 'CREDITCALENDAR_ISCHIEFTASK'));
         }
     ?>
 
-    <div class="bs-callout bs-callout-danger">
+    </div>
+
+    
+
     <?php
         if(Yii::$app->user->can('creditcalendarSetResponsibles'))
         {  
-            echo '<br/>';
+            echo '<div class="bs-callout bs-callout-danger">';
 
             $cm = User::findAll([
                     'position' => 'Кредитный специалист',
@@ -167,11 +169,14 @@ use janisto\timepicker\TimePicker;
                 'inline' => false,
             ];
 
-            echo $form->field($model, 'responsible', ['template'=>'<h4>' . FA::icon('user') . ' {label}</h4>{input}</div>{error}'])->checkboxList($items,$params,['class' => 'form-control input-sm radio', 'itemOptions' => ['class' => 'radio']]);
+            echo $form->field($model, 'responsible', ['template'=>'<h4>' . FA::icon('user') . ' {label}</h4>{input}{error}'])->checkboxList($items,$params,['class' => 'form-control input-sm radio', 'itemOptions' => ['class' => 'radio']]);
+            echo '</div>';
         }
     ?> 
 
-    </div>
+    
+
+    <div class="bs-callout bs-callout-warning">
     
     <?= $form->field($model, 'title', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('flag') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'title' )]) ?>
     
@@ -193,7 +198,12 @@ use janisto\timepicker\TimePicker;
     
     <?= $form->field($model, 'status', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('check-circle-o') . ' </span>{input}</div>{error}'])->dropDownList($model->getStatusesArray()) ?>
 
-    <?php // $form->field($model, 'status')->radioList($model->getStatusesArray()) ?>
+    </div>
+    
+    <div class="form-group" style="text-align: right">
+        <?= Html::submitButton($model->isNewRecord ? FA::icon('save') . ' ' . Module::t('module', 'CREDITCALENDAR_CREATE') : FA::icon('edit') . ' ' . Module::t('module', 'CREDITCALENDAR_UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'CREDITCALENDAR_CANCEL'), ['/alliance/creditcalendar/calendar'], ['class' => 'btn btn-danger btn-sm']) ?>
+    </div>    
 
     <?php ActiveForm::end(); ?>
 

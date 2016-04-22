@@ -150,19 +150,7 @@ class CreditcalendarController extends Controller
             $model->time_from = $curtime;
             $model->date_to = $tomorrow;
             $model->time_to = $curtime;
-            
-            // if(isset($_GET['is_task']))
-            // {
-    //             $model->is_task = $_GET['is_task'];
-    //             if($model->is_task == 0)
-    //             {
-    //                 $model->scenario = Creditcalendar::SCENARIO_EVENT;
-    //             }
-    // //            elseif($model->is_task == 1 && Yii::$app->user->can('chiefcredit'))
-    //             elseif($model->is_task == 1 && (Yii::$app->user->can('chiefcredit') || (Yii::$app->user->can('admin'))))
-    //             {
-    //                 $model->scenario = Creditcalendar::SCENARIO_TASK;
-    //             }
+
                 if ($model->load(Yii::$app->request->post()) && $model->save()) {
                     
                     // if($model->getScenario() === 'createTask')
@@ -185,31 +173,33 @@ class CreditcalendarController extends Controller
     //                    {
     //                        $singlemail[] = $value->email;
     //                    }
-                        
-                        Yii::$app->mailer->compose()
-                            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
-                            ->setReplyTo(Yii::$app->params['supportEmail'])
-                            ->setSubject(date('d/m/Y H:i:s') . '. ' . Module::t('module', 'CREDITCALENDAR_NEW_TASK'))
-                            ->setTextBody($model->description)
-    //                        ->setTo(['creditford@gorodavto.com', 'creditaudi@gorodavto.com'])
-                            ->setTo($model->getResponsibleemails())
-                            ->send();
 
-                        foreach ($model->responsible as $responsibles) {
-                                $creditcalendarResponsibles = new CreditcalendarResponsibles();
-                                $creditcalendarResponsibles->creditcalendar_id = $model->id;
-                                $creditcalendarResponsibles->responsible = $responsibles;
-                                $creditcalendarResponsibles->save();
-                            }                                 
-                    // }
+                        if($model->responsible){
+                            // $model->scenario = Creditcalendar::SCENARIO_TASK;
+                            $model->is_task == '1';
+                            foreach ($model->responsible as $responsibles) {
+                                    $creditcalendarResponsibles = new CreditcalendarResponsibles();
+                                    $creditcalendarResponsibles->creditcalendar_id = $model->id;
+                                    $creditcalendarResponsibles->responsible = $responsibles;
+                                    $creditcalendarResponsibles->save();
+                                }  
+                        }
+
+    //                     Yii::$app->mailer->compose()
+    //                         ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+    //                         ->setReplyTo(Yii::$app->params['supportEmail'])
+    //                         ->setSubject(date('d/m/Y H:i:s') . '. ' . Module::t('module', 'CREDITCALENDAR_NEW_TASK'))
+    //                         ->setTextBody($model->description)
+    // //                        ->setTo(['creditford@gorodavto.com', 'creditaudi@gorodavto.com'])
+    //                         ->setTo($model->getResponsibleemails())
+    //                         ->send();   
                     
                     return $this->redirect(['view', 'id' => $model->id]);
                 } else {
                     return $this->render('create', [
                         'model' => $model,
                     ]);
-                }           
-            // }
+                } 
 
         }
 

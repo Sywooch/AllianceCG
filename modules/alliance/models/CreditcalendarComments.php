@@ -3,6 +3,7 @@
 namespace app\modules\alliance\models;
 use app\modules\alliance\models\Creditcalendar;
 use yii\behaviors\TimestampBehavior;
+use app\modules\admin\models\User;
 
 use Yii;
 
@@ -55,7 +56,7 @@ class CreditcalendarComments extends \yii\db\ActiveRecord
 //            [['creditcalendar_id', 'comment_author', 'created_at', 'updated_at'], 'required'],
             [['creditcalendar_id', 'created_at', 'updated_at'], 'integer'],
             [['comment_text'], 'string'],
-            [['comment_author'], 'string', 'max' => 255],
+            [['comment_author'], 'integer'],
             [['creditcalendar_id'], 'exist', 'skipOnError' => true, 'targetClass' => Creditcalendar::className(), 'targetAttribute' => ['creditcalendar_id' => 'id']],
         ];
     }
@@ -81,5 +82,19 @@ class CreditcalendarComments extends \yii\db\ActiveRecord
     public function getCreditcalendar()
     {
         return $this->hasOne(Creditcalendar::className(), ['id' => 'creditcalendar_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'comment_author']);
+    }
+
+    public function getDisplayUser()
+    {
+        $displayUser = isset($this->user->full_name) ? $this->user->full_name : FA::icon('remove');
+        return $displayUser;
     }
 }

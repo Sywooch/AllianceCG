@@ -28,6 +28,9 @@ $this->params['breadcrumbs'][] = $this->title;
             [
             'attribute' => 'title',
             'value' => 'creditcalendar.title'
+            ],
+            [
+                'attribute' => 'user.surname',
             ],            
             'creditcalendar_id',
             'comment_author',

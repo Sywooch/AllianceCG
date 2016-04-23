@@ -19,7 +19,7 @@ use rmrevin\yii\fontawesome\FA;
     <div class="panel panel-default">
 
         <div class="panel-heading panel-info">
-            <?= FA::icon('comment') . ' ' . $model->comment_author . ', ' . \Yii::t('app', '{0, date}', $model->created_at); ?>
+            <?= FA::icon('comment') . ' ' . $model->getDisplayUser() . ', ' . \Yii::t('app', '{0, date}', $model->created_at); ?>
         </div>
 
         <div class="panel-body">

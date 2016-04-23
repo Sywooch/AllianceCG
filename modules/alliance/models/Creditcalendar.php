@@ -80,6 +80,17 @@ class Creditcalendar extends \yii\db\ActiveRecord
     {
         return $this->hasMany(CreditcalendarResponsibles::className(), ['creditcalendar_id' => 'id']);
     }
+    
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'author']);
+    }
+
+    public function getDisplayUser()
+    {
+        $displayUser = isset($this->user->full_name) ? $this->user->full_name : FA::icon('remove');
+        return $displayUser;
+    }
 
     /**
      * @inheritdoc
@@ -221,7 +232,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
     {
         return [            
             [['comment_author', 'comment_text', 'is_chief_task', 'responsible', 'dow'], 'safe'],
-            [['comment_text'], 'required', 'on' => self::SCENARIO_COMMENT],
+            // [['comment_text'], 'required', 'on' => self::SCENARIO_COMMENT],
             ['status', 'default', 'value' => self::STATUS_ATWORK],
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
             [['date_from', 'time_from', 'date_to', 'time_to', 'dateTimeFrom', 'dateTimeTo', 'allday'], 'safe'],
@@ -231,7 +242,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
             ['dow', 'in', 'range' => array_keys(self::getWeekdaysArray()), 'message' => Module::t('module', 'CREDITCALENDAR_LINK_ERROR')],
             [['is_task'], 'integer'],
             [['title', 'location'], 'string', 'max' => 255],
-            [['date_from', 'date_to', 'time_from', 'time_to', 'title', 'description', 'location', 'status'], 'required', 'on' => self::SCENARIO_EVENT],
+            // [['date_from', 'date_to', 'time_from', 'time_to', 'title', 'description', 'location', 'status'], 'required', 'on' => self::SCENARIO_EVENT],
         ];
     }
 

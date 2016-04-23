@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="panel panel-default">
    
     <div class="panel-heading panel-info">
-        <?= $model->getIsTaskIcon() . ' ' . $model->author . ', ' . $model->location . ', ' . \Yii::t('app', '{0, date}', $model->created_at); ?>
+        <?= $model->getIsTaskIcon() . ' ' . $model->getDisplayUser() . ', ' . $model->location . ', ' . \Yii::t('app', '{0, date}', $model->created_at); ?>
     </div>
     <div class="panel-body">
         

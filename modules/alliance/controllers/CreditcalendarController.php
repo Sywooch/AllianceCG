@@ -97,11 +97,11 @@ class CreditcalendarController extends Controller
                 
         if ($model->load(Yii::$app->request->post()) && $model->save())
         {
-            $model->scenario = Creditcalendar::SCENARIO_COMMENT;
+            // $model->scenario = Creditcalendar::SCENARIO_COMMENT;
             $creditcalendarComments = new Creditcalendarcomments();
             $creditcalendarComments->creditcalendar_id = $model->id;
             $creditcalendarComments->comment_text = $model->comment_text;
-            $creditcalendarComments->comment_author = Yii::$app->user->identity->userfullname;
+            $creditcalendarComments->comment_author = Yii::$app->user->getId();
             $creditcalendarComments->save();
             $model = new Creditcalendar();
         }        

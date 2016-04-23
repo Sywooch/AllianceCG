@@ -15,8 +15,8 @@
             eventLimit: true,            
             selectable: false,
             editable: false,
-            height: 600,
-            width: 900,
+            height: 800,
+            width: 800,
             lang: 'ru',
             
 //            Статичное событие

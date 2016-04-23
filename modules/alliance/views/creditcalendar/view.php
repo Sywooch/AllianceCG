@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-    
+
 <div class="panel panel-default">
    
     <div class="panel-heading panel-info">

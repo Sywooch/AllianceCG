@@ -180,6 +180,16 @@ class CreditcalendarController extends Controller
                         $model->save();
 
                         if($model->responsible){
+
+                            Yii::$app->mailer->compose()
+                                ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                                ->setReplyTo(Yii::$app->params['supportEmail'])
+                                ->setSubject(date('d/m/Y H:i:s') . '. ' . Module::t('module', 'CREDITCALENDAR_NEW_TASK'))
+                                ->setTextBody($model->description)
+        //                        ->setTo(['creditford@gorodavto.com', 'creditaudi@gorodavto.com'])
+                                ->setTo($model->getResponsibleemails())
+                                ->send(); 
+                                                         
                             // $model->is_task == '1';
                             foreach ($model->responsible as $responsibles) {
                                     $creditcalendarResponsibles = new CreditcalendarResponsibles();
@@ -189,14 +199,7 @@ class CreditcalendarController extends Controller
                                 }  
                         }
 
-    //                     Yii::$app->mailer->compose()
-    //                         ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
-    //                         ->setReplyTo(Yii::$app->params['supportEmail'])
-    //                         ->setSubject(date('d/m/Y H:i:s') . '. ' . Module::t('module', 'CREDITCALENDAR_NEW_TASK'))
-    //                         ->setTextBody($model->description)
-    // //                        ->setTo(['creditford@gorodavto.com', 'creditaudi@gorodavto.com'])
-    //                         ->setTo($model->getResponsibleemails())
-    //                         ->send();   
+ 
                     
                     return $this->redirect(['view', 'id' => $model->id]);
                 } else {

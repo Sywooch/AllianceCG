@@ -76,9 +76,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions'=>['style'=>'width: 20px;']
             ],
             [
-                'attribute' => 'user.surname',
-            ],
-            [
                 'class' => LinkColumn::className(),
                 'attribute' => 'title',
                 'format' => 'raw',
@@ -96,7 +93,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'dateTimeFrom',
-                'format' => ['date', 'php:H:i:s d/m/Y'],
                 'filter' => DatePicker::widget([
                     'model' => $searchModel,
                     'attribute' => 'dateTimeFrom',
@@ -108,7 +104,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'dateTimeTo',
-                'format' => ['date', 'php:H:i:s d/m/Y'],
+                // 'format' => ['date', 'php:H:i:s d/m/Y'],
                 'filter' => DatePicker::widget([
                     'model' => $searchModel,
                     'attribute' => 'dateTimeTo',

@@ -208,12 +208,37 @@ class Creditcalendar extends \yii\db\ActiveRecord
     
     public function getDateTimeFrom()
     {
-        return $this->date_from . ' ' . $this->time_from;
+        $dtfrom = '';
+        if(!empty($this->date_from) && $this->date_from !== '0000-00-00') {
+            $dt_from = $this->date_from . ' ' . $this->time_from;
+            $dtfrom = Yii::$app->formatter->asDateTime($dt_from, 'php:H:i:s d/m/Y');
+        }
+        elseif(isset($this->allday) && $this->allday == 1) {
+            $dt_from = $this->time_from;
+            $dtfrom = Yii::$app->formatter->asTime($dt_from, 'php:H:i:s'). ' ' . Module::t('module', 'ALLDAYEVENT');
+        }
+        elseif(isset($this->dow)) {
+            $dtfrom = $this->dow . ' ' . Module::t('module', 'DAY_OF_WEEK');
+        }
+        return $dtfrom;
     }
     
     public function getDateTimeTo()
     {
         return $this->date_to . ' ' . $this->time_to;
+        // $dtto = '';
+        // if(!empty($this->date_to) && $this->date_to !== '0000-00-00') {
+        //     $dt_to = $this->date_to . ' ' . $this->time_to;
+        //     $dtto = Yii::$app->formatter->asDateTime($dt_to, 'php:H:i:s d/m/Y');
+        // }
+        // elseif(isset($this->allday) && $this->allday == 1) {
+        //     $dt_to = $this->time_to;
+        //     $dtto = Yii::$app->formatter->asTime($dt_to, 'php:H:i:s'). ' ' . Module::t('module', 'ALLDAYEVENT');
+        // }
+        // elseif(isset($this->dow)) {
+        //     $dtto = $this->dow . ' ' . Module::t('module', 'DAY_OF_WEEK');
+        // }
+        // return $dtto;        
     }    
     
     public function scenarios()
@@ -279,12 +304,15 @@ class Creditcalendar extends \yii\db\ActiveRecord
     {
         if (parent::beforeSave($insert)) {
             if (!empty($this->allday) && $this->allday == 1) {
-                $this->date_from = '';
-                $this->date_to = '';
+                $this->date_from = 'NULL';
+                $this->date_to = 'NULL';
+                $this->dow = 'NULL';
+
             }
             elseif (!empty($this->dow)) {
-                $this->date_from = '';
-                $this->date_to = '';
+                $this->date_from = 'NULL';
+                $this->date_to = 'NULL';
+                $this->allday = '0';
             }
             else {
                 return parent::beforeSave($insert);

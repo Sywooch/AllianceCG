@@ -45,14 +45,15 @@ class Creditcalendar extends \yii\db\ActiveRecord
     
     const SCENARIO_EVENT = 'createEvent';
     const SCENARIO_TASK = 'createTask';
+    const SCENARIO_COMMENT = 'comment';
     
-   const DAY_MON = 1;
-   const DAY_TUE = 2;
-   const DAY_WED = 3;
-   const DAY_THU = 4;
-   const DAY_FRI = 5;
-   const DAY_SAT = 6;
-   const DAY_SUN = 7;
+    const DAY_MON = 1;
+    const DAY_TUE = 2;
+    const DAY_WED = 3;
+    const DAY_THU = 4;
+    const DAY_FRI = 5;
+    const DAY_SAT = 6;
+    const DAY_SUN = 7;
     
     public $dateTimeFrom;
     public $dateTimeTo;
@@ -209,6 +210,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
         $scenarios = parent::scenarios();
         $scenarios[self::SCENARIO_EVENT] = ['date_from', 'date_to', 'time_from', 'time_to', 'allday', 'author', 'title', 'description', 'location', 'status'];
         $scenarios[self::SCENARIO_TASK] = ['date_from', 'date_to', 'time_from', 'time_to', 'allday', 'author', 'title', 'description', 'location', 'status', 'responsible'];
+        $scenarios[self::SCENARIO_COMMENT] = ['date_from', 'date_to', 'time_from', 'time_to', 'allday', 'author', 'title', 'description', 'location', 'status', 'responsible', 'dow'];
         return $scenarios;
     }
 
@@ -219,7 +221,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
     {
         return [            
             [['comment_author', 'comment_text', 'is_chief_task', 'responsible', 'dow'], 'safe'],
-            // [['responsible'], 'required', 'on' => self::SCENARIO_TASK],
+            [['comment_text'], 'required', 'on' => self::SCENARIO_COMMENT],
             ['status', 'default', 'value' => self::STATUS_ATWORK],
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
             [['date_from', 'time_from', 'date_to', 'time_to', 'dateTimeFrom', 'dateTimeTo', 'allday'], 'safe'],
@@ -229,7 +231,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
             ['dow', 'in', 'range' => array_keys(self::getWeekdaysArray()), 'message' => Module::t('module', 'CREDITCALENDAR_LINK_ERROR')],
             [['is_task'], 'integer'],
             [['title', 'location'], 'string', 'max' => 255],
-            [['date_from', 'date_to', 'time_from', 'time_to', 'title', 'description', 'location', 'status'], 'required'],
+            [['date_from', 'date_to', 'time_from', 'time_to', 'title', 'description', 'location', 'status'], 'required', 'on' => self::SCENARIO_EVENT],
         ];
     }
 

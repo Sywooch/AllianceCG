@@ -28,6 +28,8 @@ use yii\widgets\Pjax;
         ]); 
     ?>
 
+    <?= $form->errorSummary($model); ?>
+    
     <?= $form->field($model, 'comment_text', [
                 'template' => '<div class="input-group"><span class="input-group-addon"> ' . FA::icon('comment') . ' </span>{input}<span class="input-group-addon"> ' . Html::submitButton(Module::t('module', 'CREDITCALENDAR_COMMENT_BUTTON'), ['class' => 'btn-link']) . ' </span></div>',
         ])->textArea([

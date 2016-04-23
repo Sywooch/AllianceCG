@@ -125,18 +125,29 @@ class RbacController extends Controller
         $auth->addChild($chiefcredit, $creditcalendarIsVisible);
 
         // ===   CREDIT_DEPARTMENT_END   ===
+        
+        // ===   APPLICATION_ADMINITSRATION   ===
  
         $admin = $auth->createRole('admin');
         $admin->description = 'Администратор';
         $admin->ruleName = $groupRule->name;
         $auth->add($admin);
-        // $auth->addChild($admin, $head);
+        // INHERITANCE PERMISSION TO CREATE RECORDS IN Creditcalendar
+        $auth->addChild($admin, $createCreditcalendarPost);
+        // INHERITANCE PERMISSION TO UPDATE RECORDS IN Creditcalendar
+        $auth->addChild($admin, $updateCreditcalendarPost);
+        // PERMISSION TO SET RESPONSIBLE IN CREDITCALENDAR
+        $auth->addChild($admin, $creditcalendarSetResponsibles);
+        // PERMISSION TO VIEW CREDITCALENDAR COMPONENTS
+        $auth->addChild($admin, $creditcalendarIsVisible);
  
         $root = $auth->createRole('root');
         $root->description = 'Superuser';
         $root->ruleName = $groupRule->name;
         $auth->add($root);
         $auth->addChild($root, $admin);
+        
+        // ===   APPLICATION_ADMINITSRATION   ===
  
         // Superadmin assignments
         if ($id !== null) {

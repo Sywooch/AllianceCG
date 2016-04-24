@@ -137,7 +137,10 @@ class CreditcalendarSearch extends Creditcalendar
         }
         else
         {
-            $query = Creditcalendar::find()->where(['<>','is_chief_task', 1]);
+            $query = Creditcalendar::find()
+                ->where(['<>','is_chief_task', 1])
+                // ->andWhere(['author' => Yii::$app->user->getID()])
+                ;
         }
                 
 

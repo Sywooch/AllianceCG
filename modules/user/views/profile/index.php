@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php
 
-    echo Yii::$app->user->getId();
+    // echo Yii::$app->user->getId();
 
     // if (Yii::$app->user->can('root')) {
     //     echo 'Hello, root!';

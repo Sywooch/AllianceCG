@@ -37,7 +37,7 @@ class UserSearch extends Model
     public function rules()
     {
         return [
-            [['id', 'status'], 'integer'],
+            // [['id', 'status'], 'integer'],
             [['username', 'email', 'name', 'surname', 'patronymic', 'fullname', 'photo', 'position', 'role'], 'safe'],
             [['date_from', 'date_to'], 'date', 'format' => 'php:Y-m-d'],
             [['fullname', 'company'], 'safe'],
@@ -81,7 +81,7 @@ class UserSearch extends Model
      */
     public function search($params)
     {
-        $query = User::find();
+        $query = User::find()->where(['<>','role', 'root']);
 
         $sort = new Sort([
             'attributes' => [

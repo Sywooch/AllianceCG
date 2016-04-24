@@ -124,6 +124,24 @@ class RbacController extends Controller
         // PERMISSION TO VIEW CREDITCALENDAR COMPONENTS
         $auth->addChild($chiefcredit, $creditcalendarIsVisible);
 
+        // SENIOR CREDIT SPECIALIST
+        $seniorcreditspesialist = $auth->createRole('seniorcreditspesialist');
+        $seniorcreditspesialist->description = 'SENIOR CREDIT SPECIALIST';
+        $seniorcreditspesialist->ruleName = $groupRule->name;
+        $auth->add($seniorcreditspesialist);
+        // INHERITANCE FROM creditmanager ROLE
+        $auth->addChild($seniorcreditspesialist, $creditmanager);
+        // INHERITANCE FROM chiefcredit ROLE
+        $auth->addChild($seniorcreditspesialist, $chiefcredit);
+        // INHERITANCE PERMISSION TO CREATE RECORDS IN Creditcalendar
+        $auth->addChild($seniorcreditspesialist, $createCreditcalendarPost);
+        // INHERITANCE PERMISSION TO UPDATE RECORDS IN Creditcalendar
+        $auth->addChild($seniorcreditspesialist, $updateCreditcalendarPost);
+        // PERMISSION TO SET RESPONSIBLE IN CREDITCALENDAR
+        $auth->addChild($seniorcreditspesialist, $creditcalendarSetResponsibles);
+        // PERMISSION TO VIEW CREDITCALENDAR COMPONENTS
+        $auth->addChild($seniorcreditspesialist, $creditcalendarIsVisible);        
+
         // ===   CREDIT_DEPARTMENT_END   ===
         
         // ===   APPLICATION_ADMINITSRATION   ===

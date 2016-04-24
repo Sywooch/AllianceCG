@@ -103,7 +103,18 @@ class CreditcalendarController extends Controller
             $creditcalendarComments->comment_text = $model->comment_text;
             $creditcalendarComments->comment_author = Yii::$app->user->getId();
             $creditcalendarComments->save();
+
+            // if($model->is_chief_task) {
+                    Yii::$app->mailer->compose()
+                        ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                        ->setReplyTo(Yii::$app->params['supportEmail'])
+                        ->setSubject(date('d/m/Y H:i:s') . '. ' . Module::t('module', 'NEW_CREDITCALENDAR_COMMENT_FOR') . ' ' . $model->title)
+                        ->setTextBody($model->comment_text)
+                        ->setTo($model->getResponsibleemails())
+                        ->send();
+            // }
             $model = new Creditcalendar();
+
         }        
         
         $dataProvider = new ActiveDataProvider([

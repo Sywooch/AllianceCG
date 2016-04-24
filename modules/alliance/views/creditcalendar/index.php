@@ -76,6 +76,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions'=>['style'=>'width: 20px;']
             ],
             [
+                'attribute' => 'creditcalendarresponsibles.responsible',
+            ],
+            [
                 'class' => LinkColumn::className(),
                 'attribute' => 'title',
                 'format' => 'raw',

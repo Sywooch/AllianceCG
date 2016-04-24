@@ -135,7 +135,9 @@ use janisto\timepicker\TimePicker;
     <?= $form->field($model, 'allday')->checkbox(
                 [
                     'label' => Module::t('module', 'CREDITCALENDAR_ALLDAY_CHECKBOX'),
-            ]);
+                    // 'id' => 'allday-events',
+                    'labelOptions'=>['id' => 'allday-events'],
+            	]);
     ?>
 
     <?php // $form->field($model, 'week')->checkboxList([$model->getWeekDays()]); ?>

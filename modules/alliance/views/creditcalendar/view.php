@@ -54,8 +54,12 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $model->description; ?>            
         </div>
         <div>
-          
+            <?php $list = ['creditford@gorodavto.com', 'creditaudi@gorodavto.com']; ?>
             <?= $model->getResponsibles(); ?>
+            <?= '<br/>'; ?>
+            <?php var_dump($model->getResponsibleemails()); ?>
+            <?= '<br/>'; ?>
+            <?php var_dump($list); ?>
             
         </div>
     </div>

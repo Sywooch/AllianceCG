@@ -152,77 +152,38 @@ class CreditcalendarController extends Controller
             $model->date_to = $tomorrow;
             $model->time_to = $curtime;
 
-                if ($model->load(Yii::$app->request->post())) {
-                    
-                    // if($model->getScenario() === 'createTask')
-                    // {
-    //                Yii::$app->mailer->compose(['html' => '@app/modules/user/mails/passwordReset'], ['user' => $user])
-    //                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
-    //                    ->setTo($this->email)
-    //                    ->setSubject(Module::t('module', 'PASSWORD_RESET_FOR') . Yii::$app->name)
-    //                    ->send();
+            if ($model->load(Yii::$app->request->post())) {
+                if(!empty($model->dow)){
+                    $model->dow = implode(',',$model->dow);
+                }
+                $model->save();
 
-                        
-    //    foreach(self::$_to as $receiver){
-    //        $mail->setTo($receiver)
-    //            ->send();
-                        
-                        //Temporary commented getResponsibleemails
-                           
-    //                    $emails = $model->getResponsibleList();
-    //                    foreach ($model->getResponsibleList() as $key=>$value)
-    //                    {
-    //                        $singlemail[] = $value->email;
-    //                    }
-                        if(!empty($model->dow)){
-                            $model->dow = implode(',',$model->dow);                            
-                        }
-                        $model->save();
+                if($model->responsible){
+                    foreach ($model->responsible as $responsibles) {
+                        $creditcalendarResponsibles = new CreditcalendarResponsibles();
+                        $creditcalendarResponsibles->creditcalendar_id = $model->id;
+                        $creditcalendarResponsibles->responsible = $responsibles;
+                        $creditcalendarResponsibles->save();
+                    } 
 
-                        if($model->responsible){
+                    Yii::$app->mailer->compose()
+                        ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                        ->setReplyTo(Yii::$app->params['supportEmail'])
+                        ->setSubject(date('d/m/Y H:i:s') . '. ' . Module::t('module', 'CREDITCALENDAR_NEW_TASK'))
+                        ->setTextBody($model->description)
+                        ->setTo($model->getResponsibleemails())
+                        ->send();
+                }
 
-                            Yii::$app->mailer->compose()
-                                ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
-                                ->setReplyTo(Yii::$app->params['supportEmail'])
-                                ->setSubject(date('d/m/Y H:i:s') . '. ' . Module::t('module', 'CREDITCALENDAR_NEW_TASK'))
-                                ->setTextBody($model->description)
-        //                        ->setTo(['creditford@gorodavto.com', 'creditaudi@gorodavto.com'])
-                                ->setTo($model->getResponsibleemails())
-                                ->send(); 
-                                                         
-                            // $model->is_task == '1';
-                            foreach ($model->responsible as $responsibles) {
-                                    $creditcalendarResponsibles = new CreditcalendarResponsibles();
-                                    $creditcalendarResponsibles->creditcalendar_id = $model->id;
-                                    $creditcalendarResponsibles->responsible = $responsibles;
-                                    $creditcalendarResponsibles->save();
-                                }  
-                        }
-
- 
-                    
-                    return $this->redirect(['view', 'id' => $model->id]);
-                } else {
-                    return $this->render('create', [
-                        'model' => $model,
-                    ]);
-                } 
-
-        }
-
-//        if ($model->load(Yii::$app->request->post())){
-//            $model->dow = explode(',',$model->dow);
-//            if($model->save()){
-//                return $this->redirect(['view', 'id' => $model->id]);
-//            }
-//        } 
-//        else {
-//            $model->dow = explode(',',$model->dow);
-//            return $this->render('create', [
-//                'model' => $model,
-//            ]);
-//        }        
-        
+                return $this->redirect(['view', 'id' => $model->id]);
+            } 
+            else 
+            {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
+        }        
 
     }
 

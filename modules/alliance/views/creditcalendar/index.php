@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="creditcalendar-index">
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?php Pjax::begin(['id' => 'creditcalendar']); ?>
     
@@ -74,9 +74,6 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => 'yii\grid\CheckboxColumn',
                 'contentOptions'=>['style'=>'width: 20px;']
-            ],
-            [
-                'attribute' => 'creditcalendarresponsibles.responsible',
             ],
             [
                 'class' => LinkColumn::className(),
@@ -117,15 +114,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->getdateTimeTo();
                 },
             ],
-            [
-                'header' => FA::icon('calendar') . ' / ' . FA::icon('tasks'),
-                'attribute' => 'is_task',
-                'format' => 'raw',
-                'filter' => Creditcalendar::getTasksArray(),
-                'value' => function ($data) {
-                    return $data->getIsTaskIcon();
-                },
-            ],
+            // [
+            //     'header' => FA::icon('calendar') . ' / ' . FA::icon('tasks'),
+            //     'attribute' => 'is_task',
+            //     'format' => 'raw',
+            //     'filter' => Creditcalendar::getTasksArray(),
+            //     'value' => function ($data) {
+            //         return $data->getIsTaskIcon();
+            //     },
+            // ],
 //            [
 //                'attribute' => 'responsible',
 //                'format' => 'raw',

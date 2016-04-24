@@ -72,7 +72,7 @@ class CreditcalendarSearch extends Creditcalendar
                         END AS end,
                     `title` AS title,
                     CASE status
-                        WHEN '0' THEN 'orange'
+                        WHEN '0' THEN 'red'
                         WHEN '1' THEN 'primary'
                         ELSE 'green'
                         END as color,
@@ -103,7 +103,7 @@ class CreditcalendarSearch extends Creditcalendar
                         END AS end,
                     `title` AS title,
                     CASE status
-                        WHEN '0' THEN 'orange'
+                        WHEN '0' THEN 'red'
                         WHEN '1' THEN 'primary'
                         ELSE 'green'
                         END as color,

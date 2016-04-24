@@ -203,8 +203,10 @@ class CreditcalendarController extends Controller
         }
         else
         {  
-            if ($model->load(Yii::$app->request->post())) {   
-                    $model->dow = implode(',',$model->dow);
+            if ($model->load(Yii::$app->request->post())) {
+                    if(!empty($model->dow)){
+                        $model->dow = implode(',',$model->dow);
+                    }
                     $model->save();
                     // if($model->save()){
                         return $this->redirect(['view', 'id' => $model->id]);                        

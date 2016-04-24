@@ -4,6 +4,7 @@ namespace app\modules\alliance\models;
 use app\modules\alliance\models\Creditcalendar;
 use yii\behaviors\TimestampBehavior;
 use app\modules\admin\models\User;
+use rmrevin\yii\fontawesome\FA;
 
 use Yii;
 

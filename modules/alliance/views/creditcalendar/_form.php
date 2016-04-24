@@ -155,9 +155,7 @@ use janisto\timepicker\TimePicker;
     ?>
 
     </div>
-
     
-
     <?php
         if(Yii::$app->user->can('creditcalendarSetResponsibles'))
         {  

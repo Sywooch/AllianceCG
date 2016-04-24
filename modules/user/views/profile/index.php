@@ -17,6 +17,24 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php
 
+    if(Yii::$app->user->can('seniorcreditspesialist')) {
+        echo 'seniorcreditspesialist';
+    }
+    else {
+        echo 'not seniorcreditspesialist';
+    }
+
+    echo '<br/>';
+
+    if(Yii::$app->user->can('viewCreditcalendarOwnPost')) {
+        echo 'viewCreditcalendarOwnPost';
+    }
+    else {
+        echo 'not viewCreditcalendarOwnPost';
+    }
+
+
+
     // echo Yii::$app->user->getId();
 
     // if (Yii::$app->user->can('root')) {

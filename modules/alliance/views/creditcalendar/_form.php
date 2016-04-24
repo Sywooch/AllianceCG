@@ -144,7 +144,7 @@ use janisto\timepicker\TimePicker;
     <?= $form->field($model, 'dow')->inline(true)->checkboxList($model->getWeekDaysArray()) ?>
     
     <?php 
-        if(Yii::$app->user->can('chiefcredit'))
+        if(Yii::$app->user->can('seniorcreditspesialist'))
         {   
             echo '<h4>' . FA::icon('user-secret') . ' ' . Module::t('module', 'CREDITCALENDAR_ISCHIEFTASK') . '</h4>';
             echo $form->field($model, 'is_chief_task', ['template'=>'{input}{error}'])->checkbox(

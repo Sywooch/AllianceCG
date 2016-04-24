@@ -123,7 +123,7 @@ class CreditcalendarController extends Controller
         ]);
         
         
-        if($model->is_chief_task == 1 && !Yii::$app->user->can('chiefcredit'))
+        if($model->is_chief_task == 1 && !Yii::$app->user->can('viewCreditcalendarOwnPost', ['creditcalendar' => $model]))
         {
             throw new HttpException(403, Module::t('module', 'ONLY_CHIEFCREDIT_CAN_DO_THERE'));
         }

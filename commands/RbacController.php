@@ -55,7 +55,19 @@ class RbacController extends Controller
         // PERMISSION "updateCreditcalendarPost"
         $updateCreditcalendarPost = $auth->createPermission('updateCreditcalendarPost');
         $updateCreditcalendarPost->description = 'Alliance Creditcalendar Update post';
-        $auth->add($updateCreditcalendarPost);        
+        $auth->add($updateCreditcalendarPost);  
+
+        // PERMISSION "viewCreditcalendarPost"
+        $viewCreditcalendarPost = $auth->createPermission('viewCreditcalendarPost');
+        $viewCreditcalendarPost->description = 'Alliance Creditcalendar View post';
+        $auth->add($viewCreditcalendarPost);  
+
+        // PERMISSION TO VIEW OWN RECORDS FOR CREDITCALENDAR CONTROLLER
+        // ADDED PERMISSION "viewCreditcalendarOwnPost" RELATED WITH CREDITCALENDAR AUTHOR RULE.
+        $viewCreditcalendarOwnPost = $auth->createPermission('viewCreditcalendarOwnPost');
+        $viewCreditcalendarOwnPost->description = 'View own post in Creditcalendar';
+        $viewCreditcalendarOwnPost->ruleName = $creditcalendarAuthorRule->name;
+        $auth->add($viewCreditcalendarOwnPost);     
 
 
         // PERMISSION TO EDIT OWN RECORDS FOR CREDITCALENDAR CONTROLLER
@@ -138,9 +150,11 @@ class RbacController extends Controller
         // INHERITANCE PERMISSION TO UPDATE RECORDS IN Creditcalendar
         $auth->addChild($seniorcreditspesialist, $updateCreditcalendarPost);
         // PERMISSION TO SET RESPONSIBLE IN CREDITCALENDAR
-        $auth->addChild($seniorcreditspesialist, $creditcalendarSetResponsibles);
+        $auth->addChild($seniorcreditspesialist, $creditcalendarSetResponsibles);   
+        // INHERITANCE PERMISSION TO VIEW OWN RECORDS IN Creditcalendar
+        $auth->addChild($seniorcreditspesialist, $viewCreditcalendarOwnPost);   
         // PERMISSION TO VIEW CREDITCALENDAR COMPONENTS
-        $auth->addChild($seniorcreditspesialist, $creditcalendarIsVisible);        
+        $auth->addChild($seniorcreditspesialist, $creditcalendarIsVisible);
 
         // ===   CREDIT_DEPARTMENT_END   ===
         

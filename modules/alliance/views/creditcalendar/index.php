@@ -62,10 +62,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'rowOptions' => function($model){
             $curdate = Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd h:i:s');
             $dtTo = Yii::$app->formatter->asDateTime($model->getDateTimeTo(), 'yyyy-MM-dd h:i:s');
-            if($dtTo < $curdate){
+            if($model->status == Creditcalendar::STATUS_CLARIFY){
+                return ['class' => 'info'];
+            }
+            elseif($model->status == Creditcalendar::STATUS_ATWORK) {
                 return ['class' => 'danger'];
             }
-            else {
+            elseif($model->status == Creditcalendar::STATUS_FINISHED) {
                 return ['class' => 'success'];
             }
         },

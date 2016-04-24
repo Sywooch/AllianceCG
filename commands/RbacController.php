@@ -67,7 +67,12 @@ class RbacController extends Controller
         $viewCreditcalendarOwnPost = $auth->createPermission('viewCreditcalendarOwnPost');
         $viewCreditcalendarOwnPost->description = 'View own post in Creditcalendar';
         $viewCreditcalendarOwnPost->ruleName = $creditcalendarAuthorRule->name;
-        $auth->add($viewCreditcalendarOwnPost);     
+        $auth->add($viewCreditcalendarOwnPost);   
+
+        // PERMISSION "viewCreditcalendarPost"
+        $deleteCreditcalendarPost = $auth->createPermission('deleteCreditcalendarPost');
+        $deleteCreditcalendarPost->description = 'Alliance Creditcalendar Delete post';
+        $auth->add($deleteCreditcalendarPost);    
 
 
         // PERMISSION TO EDIT OWN RECORDS FOR CREDITCALENDAR CONTROLLER
@@ -135,6 +140,8 @@ class RbacController extends Controller
         $auth->addChild($chiefcredit, $creditcalendarSetResponsibles);
         // PERMISSION TO VIEW CREDITCALENDAR COMPONENTS
         $auth->addChild($chiefcredit, $creditcalendarIsVisible);
+        // PERMISSION TO DELETE CREDITCALENDAR COMPONENTS
+        $auth->addChild($chiefcredit, $deleteCreditcalendarPost);
 
         // SENIOR CREDIT SPECIALIST
         $seniorcreditspesialist = $auth->createRole('seniorcreditspesialist');
@@ -155,6 +162,8 @@ class RbacController extends Controller
         $auth->addChild($seniorcreditspesialist, $viewCreditcalendarOwnPost);   
         // PERMISSION TO VIEW CREDITCALENDAR COMPONENTS
         $auth->addChild($seniorcreditspesialist, $creditcalendarIsVisible);
+        // PERMISSION TO DELETE CREDITCALENDAR COMPONENTS
+        $auth->addChild($seniorcreditspesialist, $deleteCreditcalendarPost);
 
         // ===   CREDIT_DEPARTMENT_END   ===
         

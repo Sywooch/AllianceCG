@@ -240,9 +240,13 @@ class CreditcalendarController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        if (!Yii::$app->user->can('deleteCreditcalendarPost')) {
+            throw new ForbiddenHttpException(Module::t('module', 'ONLY_CHIEFCREDIT_CAN_DELETE_THERE'));
+        }
+        else {
+            $this->findModel($id)->delete();
+            return $this->redirect(['index']);            
+        }
     }
 
     /**
@@ -263,15 +267,19 @@ class CreditcalendarController extends Controller
 
     public function actionMultipledelete()
     {
-        $pk = Yii::$app->request->post('row_id');
-
-        foreach ($pk as $key => $value) 
-        {
-            $sql = "DELETE FROM {{%creditcalendar}} WHERE id = $value";
-            $query = Yii::$app->db->createCommand($sql)->execute();
+        if (!Yii::$app->user->can('deleteCreditcalendarPost')) {
+            throw new ForbiddenHttpException(Module::t('module', 'ONLY_CHIEFCREDIT_CAN_DELETE_THERE'));
         }
+        else {
+            $pk = Yii::$app->request->post('row_id');
+            foreach ($pk as $key => $value) 
+            {
+                $sql = "DELETE FROM {{%creditcalendar}} WHERE id = $value";
+                $query = Yii::$app->db->createCommand($sql)->execute();
+            }
 
-        return $this->redirect(['index']);
+            return $this->redirect(['index']);
+        }
     }
     
     public function actionExport(){

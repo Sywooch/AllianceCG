@@ -60,8 +60,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'class' => 'table table-striped table-bordered creditcalendargridview'
         ],
         'rowOptions' => function($model){
-            $curdate = Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd h:i:s');
-            $dtTo = Yii::$app->formatter->asDateTime($model->getDateTimeTo(), 'yyyy-MM-dd h:i:s');
             if($model->status == Creditcalendar::STATUS_CLARIFY){
                 return ['class' => 'info'];
             }

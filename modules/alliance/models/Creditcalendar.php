@@ -225,20 +225,19 @@ class Creditcalendar extends \yii\db\ActiveRecord
     
     public function getDateTimeTo()
     {
-        return $this->date_to . ' ' . $this->time_to;
-        // $dtto = '';
-        // if(!empty($this->date_to) && $this->date_to !== '0000-00-00') {
-        //     $dt_to = $this->date_to . ' ' . $this->time_to;
-        //     $dtto = Yii::$app->formatter->asDateTime($dt_to, 'php:H:i:s d/m/Y');
-        // }
-        // elseif(isset($this->allday) && $this->allday == 1) {
-        //     $dt_to = $this->time_to;
-        //     $dtto = Yii::$app->formatter->asTime($dt_to, 'php:H:i:s'). ' ' . Module::t('module', 'ALLDAYEVENT');
-        // }
-        // elseif(isset($this->dow)) {
-        //     $dtto = $this->dow . ' ' . Module::t('module', 'DAY_OF_WEEK');
-        // }
-        // return $dtto;        
+        $dtto = '';
+        if(!empty($this->date_from) && $this->date_from !== '0000-00-00') {
+            $dt_to = $this->date_from . ' ' . $this->time_from;
+            $dtto = Yii::$app->formatter->asDateTime($dt_to, 'php:H:i:s d/m/Y');
+        }
+        elseif(isset($this->allday) && $this->allday == 1) {
+            $dt_to = $this->time_from;
+            $dtto = Yii::$app->formatter->asTime($dt_to, 'php:H:i:s'). ' ' . Module::t('module', 'ALLDAYEVENT');
+        }
+        elseif(isset($this->dow)) {
+            $dtto = $this->dow . ' ' . Module::t('module', 'DAY_OF_WEEK');
+        }
+        return $dtto; 
     }    
     
     public function scenarios()

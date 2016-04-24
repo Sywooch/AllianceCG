@@ -131,7 +131,7 @@ class CreditcalendarSearch extends Creditcalendar
      */
     public function search($params)
     {        
-        if(Yii::$app->user->can('chiefcredit'))
+        if(Yii::$app->user->can('seniorcreditspesialist'))
         {
             $query = Creditcalendar::find();
         }
@@ -139,7 +139,7 @@ class CreditcalendarSearch extends Creditcalendar
         {
             $query = Creditcalendar::find()
                 ->where(['<>','is_chief_task', 1])
-                // ->andWhere(['author' => Yii::$app->user->getID()])
+                // ->andWhere(['<>','author', Yii::$app->user->getID()])
                 ;
         }
                 

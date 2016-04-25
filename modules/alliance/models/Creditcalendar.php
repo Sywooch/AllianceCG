@@ -241,12 +241,6 @@ class Creditcalendar extends \yii\db\ActiveRecord
         }
         return $dtto; 
     }
-
-    public function getDow()
-    {
-        $tmp = explode(',', $this->dow);
-        return $tmp;
-    }    
     
     public function scenarios()
     {
@@ -271,7 +265,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
             [['description'], 'string'],
             ['author', 'default', 'value' => Yii::$app->user->getId()],
             ['is_task', 'in', 'range' => array_keys(self::getTasksArray()), 'message' => Module::t('module', 'CREDITCALENDAR_LINK_ERROR')],
-            ['dow', 'in', 'range' => array_keys(self::getWeekdaysArray()), 'message' => Module::t('module', 'CREDITCALENDAR_LINK_ERROR')],
+            // ['dow', 'in', 'range' => array_keys(self::getWeekdaysArray()), 'message' => Module::t('module', 'CREDITCALENDAR_LINK_ERROR')],
             [['is_task'], 'integer'],
             [['title', 'location'], 'string', 'max' => 255],
             // [['date_from', 'date_to', 'time_from', 'time_to', 'title', 'description', 'location', 'status'], 'required', 'on' => self::SCENARIO_EVENT],

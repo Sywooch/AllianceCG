@@ -158,6 +158,7 @@ class CreditcalendarController extends Controller
             $tomorrow = $formatter->asDate('now + 1 day'); 
             
             $model = new Creditcalendar();
+            $resp = new CreditcalendarResponsibles();
             $model->date_from = $curdate;
             $model->time_from = $curtime;
             $model->date_to = $tomorrow;
@@ -197,6 +198,7 @@ class CreditcalendarController extends Controller
             {
                 return $this->render('create', [
                     'model' => $model,
+                    'resp' => $resp
                 ]);
             }
         }        

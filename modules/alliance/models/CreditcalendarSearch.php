@@ -55,7 +55,7 @@ class CreditcalendarSearch extends Creditcalendar
     
     public function calendarsearch(){
         
-        if(Yii::$app->user->can('chiefcredit'))
+        if(Yii::$app->user->can('seniorcreditspesialist'))
         {        
             $items = Yii::$app->db->createCommand(
                 "SELECT

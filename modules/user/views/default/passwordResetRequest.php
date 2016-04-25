@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?= $form->field($model, 'email', ['template'=>' <div class="input-group"><span class="input-group-addon">'. FA::icon('envelope') .'</span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'email' )]) ?>
             <div class="form-group" style="text-align: right">
-                <?= Html::submitButton(FA::icon('send') . Module::t('module', 'BUTTON_SEND'), ['class' => 'btn btn-primary', 'name' => 'reset-button']) ?>
+                <?= Html::submitButton(FA::icon('send') . ' ' . Module::t('module', 'BUTTON_SEND'), ['class' => 'btn btn-primary', 'name' => 'reset-button']) ?>
             </div>
             <?php ActiveForm::end(); ?>
         </div>

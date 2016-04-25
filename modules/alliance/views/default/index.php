@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_CREDITCALENDAR'),
                         'url' => '/alliance/creditcalendar/calendar',
-                        'visible' => Yii::$app->user->can('admin')
+                        'visible' => Yii::$app->user->can('creditcalendarIsVisible')
                     ],
                     [
                         'label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_DUTY'),

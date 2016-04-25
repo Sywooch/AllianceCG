@@ -17,21 +17,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php
 
-    if(Yii::$app->user->can('seniorcreditspesialist')) {
-        echo 'seniorcreditspesialist';
-    }
-    else {
-        echo 'not seniorcreditspesialist';
-    }
+    // if(Yii::$app->user->can('seniorcreditspesialist')) {
+    //     echo 'seniorcreditspesialist';
+    // }
+    // else {
+    //     echo 'not seniorcreditspesialist';
+    // }
 
-    echo '<br/>';
+    // echo '<br/>';
 
-    if(Yii::$app->user->can('viewCreditcalendarOwnPost')) {
-        echo 'viewCreditcalendarOwnPost';
-    }
-    else {
-        echo 'not viewCreditcalendarOwnPost';
-    }
+    // if(Yii::$app->user->can('viewCreditcalendarOwnPost')) {
+    //     echo 'viewCreditcalendarOwnPost';
+    // }
+    // else {
+    //     echo 'not viewCreditcalendarOwnPost';
+    // }
 
 
 

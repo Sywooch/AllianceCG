@@ -86,30 +86,61 @@ class RbacController extends Controller
         $auth->addChild($updateCreditcalendarOwnPost, $updateCreditcalendarPost);
 
         // ===  CREDITCALENDAR_END  ===        
+
+        // ===  SKODA_BEGIN ===
+
+        // PERMISSION "skodaIsVisible"
+        $skodaIsVisible = $auth->createPermission('skodaIsVisible');
+        $skodaIsVisible->description = 'Skoda Module Is Visible Permission';
+        $auth->add($skodaIsVisible);
+
+        // ===  SKODA_END ===
+
+        // ===  ADMIN_BEGIN ===
+
+        // PERMISSION "adminIsVisible"
+        $adminIsVisible = $auth->createPermission('adminIsVisible');
+        $adminIsVisible->description = 'Admin Module Is Visible Permission';
+        $auth->add($adminIsVisible);
+
+        // ===  ADMIN_END ===
  
         // Roles
+        $authGuest = $auth->createRole('authGuest');
+        $authGuest->description = 'Default Auth Role';
+        $authGuest->ruleName = $groupRule->name;
+        $auth->add($authGuest); 
+
         $skassistant = $auth->createRole('skassistant');
         $skassistant->description = 'Skoda. Ассистент сервиса';
         $skassistant->ruleName = $groupRule->name;
         $auth->add($skassistant);     
+        // PERMISSION TO VIEW SKODA MODULE
+        $auth->addChild($skassistant, $skodaIsVisible);
  
         $skmastercons = $auth->createRole('skmastercons');
         $skmastercons ->description = 'Skoda. Мастер-консультант';
         $skmastercons ->ruleName = $groupRule->name;
         $auth->add($skmastercons);
         $auth->addChild($skmastercons, $skassistant);
+        // PERMISSION TO VIEW SKODA MODULE
+        $auth->addChild($skmastercons, $skodaIsVisible);
  
         $skservicehead = $auth->createRole('skservicehead');
         $skservicehead ->description = 'Skoda. Руководитель отдела сервиса';
         $skservicehead ->ruleName = $groupRule->name;
         $auth->add($skservicehead);
         $auth->addChild($skservicehead, $skmastercons);
+        // PERMISSION TO VIEW SKODA MODULE
+        $auth->addChild($skservicehead, $skodaIsVisible);
  
         $skdirector = $auth->createRole('skdirector');
         $skdirector ->description = 'Skoda. Директор дилерского центра';
         $skdirector ->ruleName = $groupRule->name;
         $auth->add($skdirector);
         $auth->addChild($skdirector, $skservicehead);
+        // PERMISSION TO VIEW SKODA MODULE
+        $auth->addChild($skdirector, $skodaIsVisible);
 
         // ===   CREDIT_DEPARTMENT_BEGIN   ===
         
@@ -181,6 +212,10 @@ class RbacController extends Controller
         $auth->addChild($admin, $creditcalendarSetResponsibles);
         // PERMISSION TO VIEW CREDITCALENDAR COMPONENTS
         $auth->addChild($admin, $creditcalendarIsVisible);
+        // PERMISSION TO VIEW ADMIN COMPONENTS
+        $auth->addChild($admin, $adminIsVisible);
+        // PERMISSION TO VIEW SKODA MODULE
+        $auth->addChild($admin, $skodaIsVisible);
  
         $root = $auth->createRole('root');
         $root->description = 'Superuser';

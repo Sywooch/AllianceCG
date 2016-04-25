@@ -35,9 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <div style="color:#999;margin:1em 0;text-align: right;">
                 <?php // Html::a('<span class="glyphicon glyphicon-refresh"></span>  ' . Module::t('module', 'LINK_SIGNUP'), ['signup']) ?>
                 &nbsp&nbsp&nbsp&nbsp            
-                <?= Html::a(FA::icon('refresh') . Module::t('module', 'LINK_PASSWORD_RESET'), ['password-reset-request']) ?>
+                <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'LINK_PASSWORD_RESET'), ['password-reset-request']) ?>
                 &nbsp&nbsp&nbsp&nbsp
-                <?= Html::submitButton(FA::icon('sign-in') . Module::t('module', 'USER_BUTTON_LOGIN'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                <?= Html::submitButton(FA::icon('sign-in') . ' ' . Module::t('module', 'USER_BUTTON_LOGIN'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
             
 

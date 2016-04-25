@@ -11,6 +11,7 @@ class User extends \app\modules\user\models\User
 {
     const SCENARIO_ADMIN_CREATE = 'adminCreate';
     const SCENARIO_ADMIN_UPDATE = 'adminUpdate';
+    const ROLE_USER = 'authGuest';
  
     public $newPassword;
     public $newPasswordRepeat;

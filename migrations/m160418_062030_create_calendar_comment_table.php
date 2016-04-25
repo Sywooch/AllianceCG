@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m160418_062030_create_creditcalendar_comment_table extends Migration
+class m160418_062030_create_calendar_comment_table extends Migration
 {
     public function up()
     {
@@ -11,21 +11,21 @@ class m160418_062030_create_creditcalendar_comment_table extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
         }
         
-        $this->createTable('{{%creditcalendar_comments}}', [
+        $this->createTable('{{%calendar_comments}}', [
             'id' => $this->primaryKey(),
-            'creditcalendar_id' => $this->integer()->notNull(),
+            'calendar_id' => $this->integer()->notNull(),
             'comment_author' => $this->string(),
             'comment_text' => $this->text(),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
         ], $tableOptions);
         
-        $this->createIndex('idx_creditcalendar_id', '{{%creditcalendar_comments}}', 'creditcalendar_id');
-        $this->addForeignKey('creditcalendar_id', '{{%creditcalendar_comments}}', 'creditcalendar_id', '{{%creditcalendar}}', 'id','CASCADE','CASCADE');
+        $this->createIndex('idx_calendar_id', '{{%calendar_comments}}', 'calendar_id');
+        $this->addForeignKey('calendar_id', '{{%calendar_comments}}', 'calendar_id', '{{%calendar}}', 'id','CASCADE','CASCADE');
     }
 
     public function down()
     {
-        $this->dropTable('{{%creditcalendar_comments}}');
+        $this->dropTable('{{%calendar_comments}}');
     }
 }

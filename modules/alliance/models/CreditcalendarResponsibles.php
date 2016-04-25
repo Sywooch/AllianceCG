@@ -22,7 +22,7 @@ class CreditcalendarResponsibles extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%creditcalendar_responsibles}}';
+        return '{{%calendar_responsibles}}';
     }
 
     /**
@@ -46,10 +46,10 @@ class CreditcalendarResponsibles extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-//            [['creditcalendar_id'], 'required'],
-            [['creditcalendar_id', 'created_at', 'updated_at'], 'integer'],
-            [['creditcalendar_id', 'created_at', 'updated_at', 'responsible'], 'safe'],
-            [['creditcalendar_id'], 'exist', 'skipOnError' => true, 'targetClass' => Creditcalendar::className(), 'targetAttribute' => ['creditcalendar_id' => 'id']],
+//            [['calendar_id'], 'required'],
+            [['calendar_id', 'created_at', 'updated_at'], 'integer'],
+            [['calendar_id', 'created_at', 'updated_at', 'responsible_id'], 'safe'],
+            [['calendar_id'], 'exist', 'skipOnError' => true, 'targetClass' => Creditcalendar::className(), 'targetAttribute' => ['calendar_id' => 'id']],
         ];
     }
 
@@ -63,7 +63,7 @@ class CreditcalendarResponsibles extends \yii\db\ActiveRecord
             'creditcalendar_id' => Yii::t('app', 'Creditcalendar ID'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
-            'responsible' => Yii::t('app', 'Responsible'),
+            'responsible_id' => Yii::t('app', 'Responsible'),
         ];
     }
 
@@ -72,6 +72,6 @@ class CreditcalendarResponsibles extends \yii\db\ActiveRecord
      */
     public function getCreditcalendar()
     {
-        return $this->hasOne(Creditcalendar::className(), ['id' => 'creditcalendar_id']);
+        return $this->hasOne(Creditcalendar::className(), ['id' => 'calendar_id']);
     }
 }

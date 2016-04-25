@@ -23,7 +23,7 @@ use Yii;
  * @property string $time_to
  * @property string $description
  * @property string $location
- * @property integer $is_task
+ * @property integer $type
  * @property integer $is_repeat
  * @property string $author
  * @property string $allday
@@ -66,7 +66,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%creditcalendar}}';
+        return '{{%calendar}}';
     }    
 
     /**
@@ -74,12 +74,12 @@ class Creditcalendar extends \yii\db\ActiveRecord
      */
     public function getCreditcalendarcomments()
     {
-        return $this->hasMany(CreditcalendarComments::className(), ['creditcalendar_id' => 'id']);
+        return $this->hasMany(CreditcalendarComments::className(), ['calendar_id' => 'id']);
     }
     
     public function getCreditcalendarresponsibles()
     {
-        return $this->hasMany(CreditcalendarResponsibles::className(), ['creditcalendar_id' => 'id']);
+        return $this->hasMany(CreditcalendarResponsibles::className(), ['calendar_id' => 'id']);
     }
     
     public function getUser()
@@ -134,10 +134,10 @@ class Creditcalendar extends \yii\db\ActiveRecord
     public function getResponsibleList()
     {        
         $respquery = CreditcalendarResponsibles::find()
-            ->where(['creditcalendar_id' => $this->id])
+            ->where(['calendar_id' => $this->id])
             ->all();
         foreach ($respquery as $responsible){
-            $resps[] = $responsible->responsible;
+            $resps[] = $responsible->responsible_id;
         }
         if(!empty($resps)){
             
@@ -190,7 +190,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
     
     public function getIsTask()
     {
-        return ArrayHelper::getValue(self::getTasksArray(), $this->is_task);
+        return ArrayHelper::getValue(self::getTasksArray(), $this->type);
     }    
  
     public static function getTasksArray()
@@ -203,7 +203,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
     
     public function getIsTaskIcon()
     {
-        $isTaskIcon = ($this->is_task == 0) ? FA::icon('calendar') : FA::icon('tasks');
+        $isTaskIcon = ($this->type == 0) ? FA::icon('calendar') : FA::icon('tasks');
         return $isTaskIcon;
     }
     
@@ -217,9 +217,6 @@ class Creditcalendar extends \yii\db\ActiveRecord
         elseif(isset($this->allday) && $this->allday == 1) {
             $dt_from = $this->time_from;
             $dtfrom = Yii::$app->formatter->asTime($dt_from, 'php:H:i'). ' ' . Module::t('module', 'ALLDAYEVENT');
-        }
-        elseif(isset($this->dow)) {
-            $dtfrom = $this->dow . ' ' . Module::t('module', 'DAY_OF_WEEK');
         }
         return $dtfrom;
     }
@@ -235,10 +232,6 @@ class Creditcalendar extends \yii\db\ActiveRecord
             $dt_to = $this->time_from;
             $dtto = Yii::$app->formatter->asTime($dt_to, 'php:H:i'). ' ' . Module::t('module', 'ALLDAYEVENT');
         }
-        elseif(isset($this->dow)) {
-            $dtto = $this->dow . ' ' . Module::t('module', 'DAY_OF_WEEK');            
-            $this->dow = explode(',',  $this->dow);
-        }
         return $dtto; 
     }
     
@@ -247,7 +240,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
         $scenarios = parent::scenarios();
         $scenarios[self::SCENARIO_EVENT] = ['date_from', 'date_to', 'time_from', 'time_to', 'allday', 'author', 'title', 'description', 'location', 'status'];
         $scenarios[self::SCENARIO_TASK] = ['date_from', 'date_to', 'time_from', 'time_to', 'allday', 'author', 'title', 'description', 'location', 'status', 'responsible'];
-        $scenarios[self::SCENARIO_COMMENT] = ['date_from', 'date_to', 'time_from', 'time_to', 'allday', 'author', 'title', 'description', 'location', 'status', 'responsible', 'dow'];
+        $scenarios[self::SCENARIO_COMMENT] = ['date_from', 'date_to', 'time_from', 'time_to', 'allday', 'author', 'title', 'description', 'location', 'status', 'responsible'];
         return $scenarios;
     }
 
@@ -256,17 +249,17 @@ class Creditcalendar extends \yii\db\ActiveRecord
      */
     public function rules()
     {
-        return [            
-            [['comment_author', 'comment_text', 'is_chief_task', 'responsible', 'dow'], 'safe'],
+        return [ 
+            ['responsibles', 'safe'],
+            [['comment_author', 'comment_text', 'private', 'responsible'], 'safe'],
             // [['comment_text'], 'required', 'on' => self::SCENARIO_COMMENT],
             ['status', 'default', 'value' => self::STATUS_ATWORK],
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
             [['date_from', 'time_from', 'date_to', 'time_to', 'dateTimeFrom', 'dateTimeTo', 'allday'], 'safe'],
             [['description'], 'string'],
             ['author', 'default', 'value' => Yii::$app->user->getId()],
-            ['is_task', 'in', 'range' => array_keys(self::getTasksArray()), 'message' => Module::t('module', 'CREDITCALENDAR_LINK_ERROR')],
-            // ['dow', 'in', 'range' => array_keys(self::getWeekdaysArray()), 'message' => Module::t('module', 'CREDITCALENDAR_LINK_ERROR')],
-            [['is_task'], 'integer'],
+            ['type', 'in', 'range' => array_keys(self::getTasksArray()), 'message' => Module::t('module', 'CREDITCALENDAR_LINK_ERROR')],
+            [['type'], 'integer'],
             [['title', 'location'], 'string', 'max' => 255],
             // [['date_from', 'date_to', 'time_from', 'time_to', 'title', 'description', 'location', 'status'], 'required', 'on' => self::SCENARIO_EVENT],
         ];
@@ -286,7 +279,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
             'time_to' => Module::t('module', 'CREDITCALENDAR_TIME_TO'),
             'description' => Module::t('module', 'CREDITCALENDAR_DESCRIPTION'),
             'location' => Module::t('module', 'CREDITCALENDAR_LOCATION'),
-            'is_task' => Module::t('module', 'CREDITCALENDAR_IS_TASK'),
+            'type' => Module::t('module', 'CREDITCALENDAR_IS_TASK'),
             'author' => Module::t('module', 'CREDITCALENDAR_AUTHOR'),
             'created_at' => Module::t('module', 'CREDITCALENDAR_CREATED_AT'),
             'status' => Module::t('module', 'CREDITCALENDAR_STATUS'),
@@ -294,10 +287,9 @@ class Creditcalendar extends \yii\db\ActiveRecord
             'responsible' => Module::t('module', 'CREDITCALENDAR_RESPONSIBLE'),
             'dateTimeFrom' => 'От: ',
             'dateTimeTo' => 'До: ',
-            'is_chief_task' => Module::t('module', 'CREDITCALENDAR_ISCHIEFTASK'),
+            'private' => Module::t('module', 'CREDITCALENDAR_ISCHIEFTASK'),
             'comment_text' => Module::t('module', 'CREDITCALENDAR_COMMENT'),
             'creditcalendarcomments.comment_text' => Module::t('module', 'CREDITCALENDAR_COMMENTS'),
-            'dow' => Module::t('module', 'CREDITCALENDAR_DOW'),
         ];
     }
     
@@ -305,15 +297,9 @@ class Creditcalendar extends \yii\db\ActiveRecord
     {
         if (parent::beforeSave($insert)) {
             if (!empty($this->allday) && $this->allday == 1) {
-                $this->date_from = 'NULL';
-                $this->date_to = 'NULL';
-                $this->dow = 'NULL';
+                $this->date_from = '';
+                $this->date_to = '';
 
-            }
-            elseif (!empty($this->dow)) {
-                $this->date_from = 'NULL';
-                $this->date_to = 'NULL';
-                $this->allday = '0';
             }
             else {
                 return parent::beforeSave($insert);
@@ -321,7 +307,34 @@ class Creditcalendar extends \yii\db\ActiveRecord
             return true;
         }
         return false;
-    }    
+    }   
+
+/**
+ * Список тэгов, закреплённых за постом.
+ * @var array
+ */
+protected $responsibles = [];
+ 
+/**
+ * Устанавлиает тэги поста.
+ * @param $tagsId
+ */
+public function setTags($responsiblesId)
+{
+    $this->responsibles = (array) $responsiblesId;
+}
+ 
+/**
+ * Возвращает массив идентификаторов тэгов.
+ */
+public function getTags()
+{
+    return ArrayHelper::getColumn(
+        $this->getCreditcalendarresponsibles()->all(), 'responsibe_id'
+    );
+}
+
+
 
 //    public function afterSave($insert, $changedAttributes)
 //     {

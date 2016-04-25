@@ -18,7 +18,7 @@ class CreditcalendarCommentsSearch extends CreditcalendarComments
     public function rules()
     {
         return [
-            [['id', 'creditcalendar_id', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'calendar_id', 'created_at', 'updated_at'], 'integer'],
             [['comment_author', 'comment_text'], 'safe'],
         ];
     }
@@ -60,7 +60,7 @@ class CreditcalendarCommentsSearch extends CreditcalendarComments
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'creditcalendar_id' => $this->creditcalendar_id,
+            'calendar_id' => $this->calendar_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);

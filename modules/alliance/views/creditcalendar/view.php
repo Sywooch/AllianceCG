@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-//use yii\widgets\DetailView;
+use yii\widgets\DetailView;
 //use yii\widgets\ActiveForm;
 use yii\widgets\ListView;   
 use rmrevin\yii\fontawesome\FA;
@@ -22,13 +22,28 @@ $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ALLIANCE_CREDI
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+
+
+    <?php
+    DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            'id',
+            'title',
+            'description',
+            'created_at',
+            'updated_at',
+        ],
+    ]) 
+    ?>
+
 <?php 
 
     $submodel = CreditcalendarResponsibles::find()
-        ->where(['creditcalendar_id' => $model->id])
+        ->where(['calendar_id' => $model->id])
         ->all();
         foreach ($submodel as $value) {
-            echo $value->responsible;
+            echo $value->responsible_id;
         }
 
 ?>

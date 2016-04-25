@@ -55,7 +55,7 @@ class CreditcalendarquerySearch extends Model
                         ELSE 'Undefined'
                         END as statuses,
                     COUNT(id) AS statuscount
-                FROM {{%creditcalendar}}
+                FROM {{%calendar}}
                 GROUP BY status;
             ";
         $items = Yii::$app->db->createCommand($sqlQuery)->queryAll();
@@ -78,7 +78,7 @@ class CreditcalendarquerySearch extends Model
                 SELECT
                     DISTINCT(FROM_UNIXTIME(`created_at`, '%d/%m/%Y')) AS `date`,
                     COUNT(`id`) AS `eventcount`
-                FROM `all_creditcalendar`
+                FROM `{{%calendar}}`
                 GROUP BY `date`;
             ";
         $items = Yii::$app->db->createCommand($sqlQuery)->queryAll();
@@ -101,7 +101,7 @@ class CreditcalendarquerySearch extends Model
                 SELECT
                     DISTINCT(`location`) AS `location`,
                     COUNT(`id`) AS `location_count`
-                FROM `all_creditcalendar`
+                FROM `{{%creditcalendar}}`
                 GROUP BY `location`;
             ";
         $items = Yii::$app->db->createCommand($sqlQuery)->queryAll();

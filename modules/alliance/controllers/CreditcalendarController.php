@@ -99,12 +99,12 @@ class CreditcalendarController extends Controller
         {
             // $model->scenario = Creditcalendar::SCENARIO_COMMENT;
             $creditcalendarComments = new Creditcalendarcomments();
-            $creditcalendarComments->creditcalendar_id = $model->id;
+            $creditcalendarComments->calendar_id = $model->id;
             $creditcalendarComments->comment_text = $model->comment_text;
             $creditcalendarComments->comment_author = Yii::$app->user->getId();
             $creditcalendarComments->save();
 
-            // if($model->is_chief_task) {
+            // if($model->private) {
                     Yii::$app->mailer->compose()
                         ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
                         ->setReplyTo(Yii::$app->params['supportEmail'])
@@ -118,12 +118,12 @@ class CreditcalendarController extends Controller
         }        
         
         $dataProvider = new ActiveDataProvider([
-            'query' => CreditcalendarComments::find()->where(['creditcalendar_id' => $model->id])->orderBy('id ASC'),
+            'query' => CreditcalendarComments::find()->where(['calendar_id' => $model->id])->orderBy('id ASC'),
             'pagination' => false,
         ]);
         
         
-        if($model->is_chief_task == 1 && !Yii::$app->user->can('viewCreditcalendarOwnPost', ['creditcalendar' => $model]))
+        if($model->private == 1 && !Yii::$app->user->can('viewCreditcalendarOwnPost', ['creditcalendar' => $model]))
         {
             throw new HttpException(403, Module::t('module', 'ONLY_CHIEFCREDIT_CAN_DO_THERE'));
         }
@@ -158,16 +158,15 @@ class CreditcalendarController extends Controller
             $tomorrow = $formatter->asDate('now + 1 day'); 
             
             $model = new Creditcalendar();
-            $resp = new CreditcalendarResponsibles();
             $model->date_from = $curdate;
             $model->time_from = $curtime;
             $model->date_to = $tomorrow;
             $model->time_to = $curtime;
 
             if ($model->load(Yii::$app->request->post())) {
-                if(!empty($model->dow)){
-                    $model->dow = implode(',',$model->dow);
-                }
+                // if(!empty($model->dow)){
+                //     $model->dow = implode(',',$model->dow);
+                // }
                 $model->save();
 
                 if($model->responsible){
@@ -178,8 +177,8 @@ class CreditcalendarController extends Controller
 
                     foreach ($model->responsible as $responsibles) {
                         $creditcalendarResponsibles = new CreditcalendarResponsibles();
-                        $creditcalendarResponsibles->creditcalendar_id = $model->id;
-                        $creditcalendarResponsibles->responsible = $responsibles;
+                        $creditcalendarResponsibles->calendar_id = $model->id;
+                        $creditcalendarResponsibles->responsible_id = $responsibles;
                         $creditcalendarResponsibles->save();
                     } 
 
@@ -198,7 +197,6 @@ class CreditcalendarController extends Controller
             {
                 return $this->render('create', [
                     'model' => $model,
-                    'resp' => $resp
                 ]);
             }
         }        
@@ -214,7 +212,7 @@ class CreditcalendarController extends Controller
     public function actionUpdate($id)
     {        
         $model = $this->findModel($id);     
-        $model->dow = explode(',',  $model->dow);
+        // $model->dow = explode(',',  $model->dow);
 
         if (!Yii::$app->user->can('updateCreditcalendarPost', ['creditcalendar' => $model])) {
             throw new ForbiddenHttpException(Module::t('module', 'ONLY_AUTHOR_CAN_UPDATE_THIS_RECORD'));
@@ -222,9 +220,9 @@ class CreditcalendarController extends Controller
         else
         {  
             if ($model->load(Yii::$app->request->post())) {
-                    if(!empty($model->dow)){
-                        $model->dow = implode(',',$model->dow);
-                    }
+                    // if(!empty($model->dow)){
+                    //     $model->dow = implode(',',$model->dow);
+                    // }
                     $model->save();
                     // if($model->save()){
                         return $this->redirect(['view', 'id' => $model->id]);                        
@@ -281,7 +279,7 @@ class CreditcalendarController extends Controller
             $pk = Yii::$app->request->post('row_id');
             foreach ($pk as $key => $value) 
             {
-                $sql = "DELETE FROM {{%creditcalendar}} WHERE id = $value";
+                $sql = "DELETE FROM {{%calendar}} WHERE id = $value";
                 $query = Yii::$app->db->createCommand($sql)->execute();
             }
 

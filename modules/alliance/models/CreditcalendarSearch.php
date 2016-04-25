@@ -20,8 +20,8 @@ class CreditcalendarSearch extends Creditcalendar
     public function rules()
     {
         return [
-//            [['id', 'is_task', 'is_repeat', 'created_at'], 'integer'],
-            [['id', 'is_task', 'created_at'], 'integer'],
+//            [['id', 'type', 'is_repeat', 'created_at'], 'integer'],
+            [['id', 'type', 'created_at'], 'integer'],
             [['title', 'date_from', 'time_from', 'date_to', 'time_to', 'responsible', 'description', 'location', 'author', 'status'], 'safe'],
         ];
     }
@@ -61,7 +61,7 @@ class CreditcalendarSearch extends Creditcalendar
                 "SELECT
                     `id` AS id,
                     `id` AS url,
-                    `location` AS location,
+                    -- `location` AS location,
                     CASE 
                         WHEN CONCAT(date_from, ' ', time_from) IS NULL THEN time_to
                         ELSE CONCAT(date_from, ' ', time_from)
@@ -84,7 +84,7 @@ class CreditcalendarSearch extends Creditcalendar
                         WHEN '0' THEN 'false'
                         ELSE 'true'
                         END AS allday 
-                FROM {{%creditcalendar}};"
+                FROM {{%calendar}};"
             )->queryAll();
         }
         else
@@ -115,7 +115,7 @@ class CreditcalendarSearch extends Creditcalendar
                         WHEN '0' THEN 'false'
                         ELSE 'true'
                         END AS allday 
-                FROM {{%creditcalendar}} WHERE `is_chief_task` <> '1';"
+                FROM {{%calendar}} WHERE `private` <> '1';"
             )->queryAll();
         }        
         
@@ -138,7 +138,7 @@ class CreditcalendarSearch extends Creditcalendar
         else
         {
             $query = Creditcalendar::find()
-                ->where(['<>','is_chief_task', 1])
+                ->where(['<>','private', 1])
                 // ->andWhere(['<>','author', Yii::$app->user->getID()])
                 ;
         }
@@ -153,7 +153,7 @@ class CreditcalendarSearch extends Creditcalendar
                 'date_from',
                 'date_to',
                 'location',
-                'is_task',
+                'type',
                 'responsible',  
                 'status',
                 'author',
@@ -195,7 +195,7 @@ class CreditcalendarSearch extends Creditcalendar
             'time_from' => $this->time_from,
             'date_to' => $this->date_to,
             'time_to' => $this->time_to,
-            'is_task' => $this->is_task,
+            'type' => $this->type,
             'created_at' => $this->created_at,
         ]);
 

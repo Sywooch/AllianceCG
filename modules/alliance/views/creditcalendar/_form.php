@@ -141,13 +141,13 @@ use janisto\timepicker\TimePicker;
     ?>
 
     <?php // $form->field($model, 'week')->checkboxList([$model->getWeekDays()]); ?>
-    <?= $form->field($model, 'dow')->inline(true)->checkboxList($model->getWeekDaysArray()) ?>
+    <?php // $form->field($model, 'dow')->inline(true)->checkboxList($model->getWeekDaysArray()) ?>
     
     <?php 
         if(Yii::$app->user->can('seniorcreditspesialist'))
         {   
             echo '<h4>' . FA::icon('user-secret') . ' ' . Module::t('module', 'CREDITCALENDAR_ISCHIEFTASK') . '</h4>';
-            echo $form->field($model, 'is_chief_task', ['template'=>'{input}{error}'])->checkbox(
+            echo $form->field($model, 'private', ['template'=>'{input}{error}'])->checkbox(
                 [
                     'label' => Module::t('module', 'CREDITCALENDAR_ISCHIEFTASK'),
                 ])->label(Module::t('module', 'CREDITCALENDAR_ISCHIEFTASK'));

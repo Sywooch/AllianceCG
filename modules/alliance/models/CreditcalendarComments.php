@@ -30,7 +30,7 @@ class CreditcalendarComments extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%creditcalendar_comments}}';
+        return '{{%calendar_comments}}';
     }
 
     /**
@@ -54,11 +54,11 @@ class CreditcalendarComments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-//            [['creditcalendar_id', 'comment_author', 'created_at', 'updated_at'], 'required'],
-            [['creditcalendar_id', 'created_at', 'updated_at'], 'integer'],
+//            [['calendar_id', 'comment_author', 'created_at', 'updated_at'], 'required'],
+            [['calendar_id', 'created_at', 'updated_at'], 'integer'],
             [['comment_text'], 'string'],
             [['comment_author'], 'integer'],
-            [['creditcalendar_id'], 'exist', 'skipOnError' => true, 'targetClass' => Creditcalendar::className(), 'targetAttribute' => ['creditcalendar_id' => 'id']],
+            [['calendar_id'], 'exist', 'skipOnError' => true, 'targetClass' => Creditcalendar::className(), 'targetAttribute' => ['calendar_id' => 'id']],
         ];
     }
 
@@ -69,7 +69,7 @@ class CreditcalendarComments extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'creditcalendar_id' => Yii::t('app', 'Creditcalendar ID'),
+            'calendar_id' => Yii::t('app', 'Creditcalendar ID'),
             'comment_author' => Yii::t('app', 'Comment Author'),
             'comment_text' => Yii::t('app', 'Comment Text'),
             'created_at' => Yii::t('app', 'Created At'),
@@ -82,7 +82,7 @@ class CreditcalendarComments extends \yii\db\ActiveRecord
      */
     public function getCreditcalendar()
     {
-        return $this->hasOne(Creditcalendar::className(), ['id' => 'creditcalendar_id']);
+        return $this->hasOne(Creditcalendar::className(), ['id' => 'calendar_id']);
     }
 
     /**

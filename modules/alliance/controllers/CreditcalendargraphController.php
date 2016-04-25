@@ -13,4 +13,22 @@ class CreditcalendargraphController extends \yii\web\Controller
             'model' => $model,
         ]);
     }
+
+    public function actionCreatestats()
+    {
+        $this->layout = false;
+        $model = new CreditcalendarquerySearch();
+        return $this->render('_createstats', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionLocations()
+    {
+        $this->layout = false;
+        $model = new CreditcalendarquerySearch();
+        return $this->render('_locations', [
+            'model' => $model,
+        ]);
+    }
 }

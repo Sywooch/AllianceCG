@@ -22,7 +22,8 @@ $(function () {
         });
 
         var creditcalendar_statuses = $.getValues("/alliance/creditcalendargraph/totalbystatus"); 
-//        var users_by_company = $.getValues("/admin/adminquery/companyusercount");
+        var creditcalendar_events_create = $.getValues("/alliance/creditcalendargraph/createstats");
+        var creditcalendar_events_locations = $.getValues("/alliance/creditcalendargraph/locations");
 
     $('#creditcalendar_graph').highcharts({
         chart: {
@@ -92,8 +93,8 @@ $(function () {
                         lineWidth: 1
                     }
                 },
-                // threshold: 0,
-                // softThreshold: false,
+                threshold: 0,
+                softThreshold: false,
             },
             pie: {
                 allowPointSelect: true,
@@ -113,7 +114,7 @@ $(function () {
             },
             categories: [],
                 labels: {
-                    style: { color: '#4ba82e' }
+                    style: { color: '#000' }
             },
         },
         yAxis: {
@@ -138,35 +139,55 @@ $(function () {
             borderWidth: 0
         },
         series: [
-//        {
-//            name: 'График регистрации пользователей',
-//            data: users_create,
-//            // color: '#4ba82e',
-//            dataLabels: {
-//                enabled: true,
-//                // rotation: -90,
-//                // color: '#4ba82e',
-//                // align: 'right',
-//                x: 5,
-//                y: -5,
-//                style: {
-//                    fontSize: '13px',
-//                    fontFamily: 'Verdana, sans-serif',
-//                    // textShadow: '0 0 3px black'
-//                }
-//            }
-//        },
-        {
-            type: 'pie',
-            name: 'Кол-во',
-            data: creditcalendar_statuses,
-            center: [200, 30],
-            size: 100,
-            showInLegend: true,
-            dataLabels: {
-                enabled: true,
+            {
+                type: 'column',
+                name: 'Статистика локализации событий',
+                data: creditcalendar_events_locations,
+                color: '#4cae4c',
+                dataLabels: {
+                    enabled: true,
+                    // rotation: -90,
+                    color: '#fff',
+                    align: 'right',
+                    x: 5,
+                    y: -5,
+                    style: {
+                        fontSize: '13px',
+                        fontFamily: 'Verdana, sans-serif',
+                        textShadow: '0 0 3px black'
+                    }
+                }
+            },
+            {
+                type: 'spline',
+                name: 'Статистика добавления событий',
+                data: creditcalendar_events_create,
+                // color: '#fff',
+                dataLabels: {
+                    enabled: true,
+                    // rotation: -90,
+                    color: '#fff',
+                    align: 'right',
+                    x: 5,
+                    y: -5,
+                    style: {
+                        fontSize: '13px',
+                        fontFamily: 'Verdana, sans-serif',
+                        textShadow: '0 0 3px black'
+                    }
+                }
+            },
+            {
+                type: 'pie',
+                name: 'Кол-во',
+                data: creditcalendar_statuses,
+                center: [200, 30],
+                size: 100,
+                showInLegend: true,
+                dataLabels: {
+                    enabled: true,
+                }
             }
-        }
         ]
     });
 });

@@ -46,7 +46,7 @@ class CreditcalendarquerySearch extends Model
      */
     public function totalbystatus()
     {
-        $items = Yii::$app->db->createCommand("
+        $sqlQuery = "
                 SELECT                 
                     CASE status
                         WHEN '0' THEN 'В работе'
@@ -57,7 +57,8 @@ class CreditcalendarquerySearch extends Model
                     COUNT(id) AS statuscount
                 FROM {{%creditcalendar}}
                 GROUP BY status;
-            ")->queryAll();
+            ";
+        $items = Yii::$app->db->createCommand($sqlQuery)->queryAll();
         foreach ($items as $row){
             $data_statuses[] = [$row['statuses'],(int)$row['statuscount']];
         }
@@ -71,11 +72,41 @@ class CreditcalendarquerySearch extends Model
      *
      * @return $items
      */
-    public function userscreated()
+    public function createstats()
     {
-        $items = Yii::$app->db->createCommand("SELECT DISTINCT(DATE_FORMAT(FROM_UNIXTIME(created_at), '%Y-%m-%d')) AS date, COUNT(id) AS userscount FROM {{%user}} GROUP BY date")->queryAll();
+        $sqlQuery = "
+                SELECT
+                    DISTINCT(FROM_UNIXTIME(`created_at`, '%d/%m/%Y')) AS `date`,
+                    COUNT(`id`) AS `eventcount`
+                FROM `all_creditcalendar`
+                GROUP BY `date`;
+            ";
+        $items = Yii::$app->db->createCommand($sqlQuery)->queryAll();
         foreach ($items as $row){
-            $data_user[] = [$row['date'],(int)$row['userscount']];
+            $data_user[] = [$row['date'],(int)$row['eventcount']];
+        }
+        return Json::encode($data_user);
+    }
+
+    /**
+     * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
+     * @return $items
+     */
+    public function locations()
+    {
+        $sqlQuery = "
+                SELECT
+                    DISTINCT(`location`) AS `location`,
+                    COUNT(`id`) AS `location_count`
+                FROM `all_creditcalendar`
+                GROUP BY `location`;
+            ";
+        $items = Yii::$app->db->createCommand($sqlQuery)->queryAll();
+        foreach ($items as $row){
+            $data_user[] = [$row['location'],(int)$row['location_count']];
         }
         return Json::encode($data_user);
     }

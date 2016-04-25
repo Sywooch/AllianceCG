@@ -58,6 +58,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
     public $dateTimeFrom;
     public $dateTimeTo;
     public $responsible;
+    public $dateTimeRange;
     
     
     /**
@@ -211,11 +212,11 @@ class Creditcalendar extends \yii\db\ActiveRecord
         $dtfrom = '';
         if(!empty($this->date_from) && $this->date_from !== '0000-00-00') {
             $dt_from = $this->date_from . ' ' . $this->time_from;
-            $dtfrom = Yii::$app->formatter->asDateTime($dt_from, 'php:H:i:s d/m/Y');
+            $dtfrom = Yii::$app->formatter->asDateTime($dt_from, 'php:H:i d/m/Y');
         }
         elseif(isset($this->allday) && $this->allday == 1) {
             $dt_from = $this->time_from;
-            $dtfrom = Yii::$app->formatter->asTime($dt_from, 'php:H:i:s'). ' ' . Module::t('module', 'ALLDAYEVENT');
+            $dtfrom = Yii::$app->formatter->asTime($dt_from, 'php:H:i'). ' ' . Module::t('module', 'ALLDAYEVENT');
         }
         elseif(isset($this->dow)) {
             $dtfrom = $this->dow . ' ' . Module::t('module', 'DAY_OF_WEEK');
@@ -228,16 +229,23 @@ class Creditcalendar extends \yii\db\ActiveRecord
         $dtto = '';
         if(!empty($this->date_from) && $this->date_from !== '0000-00-00') {
             $dt_to = $this->date_from . ' ' . $this->time_from;
-            $dtto = Yii::$app->formatter->asDateTime($dt_to, 'php:H:i:s d/m/Y');
+            $dtto = Yii::$app->formatter->asDateTime($dt_to, 'php:H:i d/m/Y');
         }
         elseif(isset($this->allday) && $this->allday == 1) {
             $dt_to = $this->time_from;
-            $dtto = Yii::$app->formatter->asTime($dt_to, 'php:H:i:s'). ' ' . Module::t('module', 'ALLDAYEVENT');
+            $dtto = Yii::$app->formatter->asTime($dt_to, 'php:H:i'). ' ' . Module::t('module', 'ALLDAYEVENT');
         }
         elseif(isset($this->dow)) {
-            $dtto = $this->dow . ' ' . Module::t('module', 'DAY_OF_WEEK');
+            $dtto = $this->dow . ' ' . Module::t('module', 'DAY_OF_WEEK');            
+            $this->dow = explode(',',  $this->dow);
         }
         return $dtto; 
+    }
+
+    public function getDow()
+    {
+        $tmp = explode(',', $this->dow);
+        return $tmp;
     }    
     
     public function scenarios()

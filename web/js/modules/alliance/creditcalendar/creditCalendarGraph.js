@@ -126,7 +126,7 @@ $(function () {
             // startOnTick: false,
             // endOnTick: false,
             title: {
-                text: '<b>График регистрации пользователей</b>'
+                text: '<b>Статистика ОКиС</b>'
             },
             tickInterval: 1,
             min: 0,

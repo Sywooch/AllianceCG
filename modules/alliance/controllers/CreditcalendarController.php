@@ -170,6 +170,11 @@ class CreditcalendarController extends Controller
                 $model->save();
 
                 if($model->responsible){
+
+                    // $creditcalendarResponsibles = new CreditcalendarResponsibles();
+                    // $creditcalendarResponsibles->load(Yii::$app->request->post());
+                    // $model->link('creditcalendarresponsibles', $creditcalendarResponsibles);
+
                     foreach ($model->responsible as $responsibles) {
                         $creditcalendarResponsibles = new CreditcalendarResponsibles();
                         $creditcalendarResponsibles->creditcalendar_id = $model->id;
@@ -206,7 +211,7 @@ class CreditcalendarController extends Controller
      */
     public function actionUpdate($id)
     {        
-        $model = $this->findModel($id); 
+        $model = $this->findModel($id);     
         $model->dow = explode(',',  $model->dow);
 
         if (!Yii::$app->user->can('updateCreditcalendarPost', ['creditcalendar' => $model])) {
@@ -283,41 +288,56 @@ class CreditcalendarController extends Controller
     }
     
     public function actionExport(){
-        $model = Creditcalendar::find()->All();
-        $headmodel = new Creditcalendar();
-        $filename = 'Creditcalendar-'.Date('Y-m-d-H-i-s').'.xls';
-        echo '<meta http-equiv="Content-type" content="application/vnd-ms-excel; charset=utf-8" />';
-        header("Content-type: application/vnd-ms-excel; charset=utf-8");
-        header("Content-Transfer-Encoding: binary");
-        header("Content-Disposition: attachment; filename=".$filename);
-        header('Pragma: no-cache');
-        echo '<table border="1" width="100%">
-            <thead>
-                <tr>
-                    <th>'. $headmodel->getAttributeLabel( 'title' ) .'</th>
-                    <th>'. $headmodel->getAttributeLabel( 'dateTimeFrom' ) .'</th>
-                    <th>'. $headmodel->getAttributeLabel( 'dateTimeTo' ) .'</th>
-                    <th>'. $headmodel->getAttributeLabel( 'description' ) .'</th>
-                    <th>'. $headmodel->getAttributeLabel( 'location' ) .'</th>
-                    <th>'. $headmodel->getAttributeLabel( 'author' ) .'</th>
-                    <th>'. $headmodel->getAttributeLabel( 'status' ) .'</th>
-                    
-                </tr>
-            </thead>';
-            foreach($model as $data){
-                echo '
+
+        // if (Yii::$app->request->post()) {
+            // $pk = Yii::$app->request->post('ids');
+            $model = Creditcalendar::find()
+                // ->where([
+                //     'id' => explode(', ',$pk),
+                // ])
+                // ->where(['IN', 'id', $pk])
+                ->all();
+            $headmodel = new Creditcalendar();
+
+            // if($pk) {
+            //     var_dump($pk);
+            // }
+
+            $filename = 'Creditcalendar-'.Date('Y-m-d-H-i-s').'.xls';
+            echo '<meta http-equiv="Content-type" content="application/vnd-ms-excel; charset=utf-8" />';
+            header("Content-type: application/vnd-ms-excel; charset=utf-8");
+            header("Content-Transfer-Encoding: binary");
+            header("Content-Disposition: attachment; filename=".$filename);
+            header('Pragma: no-cache');
+            echo '<table border="1" width="100%">
+                <thead>
                     <tr>
-                        <td>'.$data['title'].'</td>
-                        <td>'.$data['date_from']. ' ' .$data['time_from'].'</td>
-                        <td>'.$data['date_to']. ' ' .$data['time_to'].'</td>
-                        <td>'.$data['description'].'</td>
-                        <td>'.$data['location'].'</td>
-                        <td>'.$data['author'].'</td>
-                        <td>'.$data['status'].'</td>
+                        <th>'. $headmodel->getAttributeLabel( 'title' ) .'</th>
+                        <th>'. $headmodel->getAttributeLabel( 'dateTimeFrom' ) .'</th>
+                        <th>'. $headmodel->getAttributeLabel( 'dateTimeTo' ) .'</th>
+                        <th>'. $headmodel->getAttributeLabel( 'description' ) .'</th>
+                        <th>'. $headmodel->getAttributeLabel( 'location' ) .'</th>
+                        <th>'. $headmodel->getAttributeLabel( 'author' ) .'</th>
+                        <th>'. $headmodel->getAttributeLabel( 'status' ) .'</th>
+                        
                     </tr>
-                ';
-            }
-        echo '</table>';
+                </thead>';
+                foreach($model as $data){
+                    echo '
+                        <tr>
+                            <td>'.$data['title'].'</td>
+                            <td>'.$data['date_from']. ' ' .$data['time_from'].'</td>
+                            <td>'.$data['date_to']. ' ' .$data['time_to'].'</td>
+                            <td>'.$data['description'].'</td>
+                            <td>'.$data['location'].'</td>
+                            <td>'.$data['author'].'</td>
+                            <td>'.$data['status'].'</td>
+                        </tr>
+                    ';
+                }
+            echo '</table>';
+            // return $this->redirect('export');
+        // }
 
     }     
 }

@@ -8,7 +8,7 @@ use rmrevin\yii\fontawesome\FA;
 use app\modules\alliance\Module;
 //use yii\helpers\Url;
 use yii\widgets\Pjax;
-//use app\modules\alliance\models\CreditcalendarResponsibles;
+use app\modules\alliance\models\CreditcalendarResponsibles;
 //use app\modules\admin\models\User;
 //use yii\data\ActiveDataProvider;
 
@@ -22,6 +22,16 @@ $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ALLIANCE_CREDI
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+<?php 
+
+    $submodel = CreditcalendarResponsibles::find()
+        ->where(['creditcalendar_id' => $model->id])
+        ->all();
+        foreach ($submodel as $value) {
+            echo $value->responsible;
+        }
+
+?>
   
     <?= $this->render('_submenu', [
         'model' => $model,

@@ -11,8 +11,11 @@ use yii\web\View;
  * and open the template in the editor.
  */
 
-$upd = file_get_contents('js/modules/alliance/creditcalendar/gridViewMultipleDelete.js');
-$this->registerJs($upd, View::POS_END);
+$multipleDelete = file_get_contents('js/modules/alliance/creditcalendar/gridViewMultipleDelete.js');
+$this->registerJs($multipleDelete, View::POS_END);
+
+$exportExcel = file_get_contents('js/modules/alliance/creditcalendar/gridViewExcelExport.js');
+$this->registerJs($exportExcel, View::POS_END);
 
 ?>
     
@@ -47,4 +50,22 @@ $this->registerJs($upd, View::POS_END);
             }
         ?>  
         <?= Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'), ['export'], ['class' => 'btn btn-warning btn-sm']) ?>
+
+        <?php         
+            // echo Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'), ['#'], ['class' => 'btn btn-warning btn-sm', 'id' => 'ExportExcel']);
+        ?>
+
+        <?php 
+             Html::a('Name', ['/alliance/creditcalendar/export'], [
+                'class'=>'classname',
+                'data'=>[
+                    'method'=>'post',
+                    'confirm'=>'Are you sure? OK to continue Retract..',
+                    'params'=>[
+                        'ids' => ['36', '35', '32']
+                    ],
+                ]
+            ]);
+        ?>
+
 </p> 

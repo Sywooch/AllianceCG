@@ -70,5 +70,7 @@
             'CREDITCALENDAR_EVENTS_RANGE' => 'Период',
             'CREDITCALENDAR_CONTENT' => 'Содержание',
             'CREDITCALENDAR_DOW' => 'По дням недели',
+            'ALLDAYEVENT' => 'Ежедневно',
+            'DAY_OF_WEEK' => 'День недели',
 
 	];

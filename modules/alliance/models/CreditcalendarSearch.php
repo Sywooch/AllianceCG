@@ -76,10 +76,10 @@ class CreditcalendarSearch extends Creditcalendar
                         WHEN '1' THEN 'primary'
                         ELSE 'green'
                         END as color,
-                    CASE dow
-                        WHEN dow IS NULL THEN false
-                        ELSE dow
-                        END AS dow,
+                    -- CASE dow
+                    --     WHEN dow IS NULL THEN false
+                    --     ELSE dow
+                    --     END AS dow,
                     CASE allday
                         WHEN '0' THEN 'false'
                         ELSE 'true'
@@ -107,10 +107,10 @@ class CreditcalendarSearch extends Creditcalendar
                         WHEN '1' THEN 'primary'
                         ELSE 'green'
                         END as color,
-                    CASE dow
-                        WHEN dow IS NULL THEN false
-                        ELSE dow
-                        END AS dow,
+                    -- CASE dow
+                    --     WHEN dow IS NULL THEN false
+                    --     ELSE dow
+                    --     END AS dow,
                     CASE allday
                         WHEN '0' THEN 'false'
                         ELSE 'true'

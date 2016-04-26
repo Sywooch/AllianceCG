@@ -8,6 +8,7 @@ use yii\helpers\ArrayHelper;
 use janisto\timepicker\TimePicker;
 use app\modules\alliance\Module;
 use yii\jui\DatePicker;
+use app\modules\admin\models\User;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\alliance\models\Creditcalendar */
@@ -127,6 +128,8 @@ use yii\jui\DatePicker;
 
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'user_id')->checkboxList(User::find()->select(['full_name', 'id'])->where(['position' => 'Кредитный специалист'])->indexBy('id')->column()) ?>
 
     <?= $form->field($model, 'location')->textInput(['maxlength' => true]) ?>
 

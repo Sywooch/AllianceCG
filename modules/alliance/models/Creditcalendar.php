@@ -108,4 +108,19 @@ class Creditcalendar extends \yii\db\ActiveRecord
     {
         return new \app\modules\alliance\models\query\CalendarQuery(get_called_class());
     }
+
+    // Write to relation model
+
+    private $_useridArray
+
+    public function getUsersArray()
+    {
+        return $this->getCalendarResponsibles()->select('id')->column();
+    }
+
+    public function setUsersArray($value)
+    {
+        return $this->getCalendarResponsibles()->select('id')->column();
+    }
+
 }

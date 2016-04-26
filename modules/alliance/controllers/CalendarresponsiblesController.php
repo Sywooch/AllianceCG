@@ -3,16 +3,16 @@
 namespace app\modules\alliance\controllers;
 
 use Yii;
-use app\modules\alliance\models\Creditcalendar;
+use app\modules\alliance\models\CalendarResponsibles;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CreditcalendarController implements the CRUD actions for Creditcalendar model.
+ * CalendarresponsiblesController implements the CRUD actions for CalendarResponsibles model.
  */
-class CreditcalendarController extends Controller
+class CalendarresponsiblesController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,13 +30,13 @@ class CreditcalendarController extends Controller
     }
 
     /**
-     * Lists all Creditcalendar models.
+     * Lists all CalendarResponsibles models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Creditcalendar::find(),
+            'query' => CalendarResponsibles::find(),
         ]);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class CreditcalendarController extends Controller
     }
 
     /**
-     * Displays a single Creditcalendar model.
+     * Displays a single CalendarResponsibles model.
      * @param integer $id
      * @return mixed
      */
@@ -57,39 +57,25 @@ class CreditcalendarController extends Controller
     }
 
     /**
-     * Creates a new Creditcalendar model.
+     * Creates a new CalendarResponsibles model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Creditcalendar();
+        $model = new CalendarResponsibles();
 
-//        $values = $this->initValues($model);
-        $post = Yii::$app->request->post();
-//        if ($model->load($post) && $model->save() && Model::loadMultiple($values, $post)) {
-        if ($model->load($post) && $model->save()) {
-//                $this->processValues($values, $model);
-                return $this->redirect(['view', 'id' => $model->id]);
-            } else {
-                return $this->render('create', [
-                    'model' => $model,
-//                    'values' => $values,
-                ]);
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         }
-
-//        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-//            return $this->redirect(['view', 'id' => $model->id]);
-//        } else {
-//            return $this->render('create', [
-//                'model' => $model,
-//            ]);
-//        }
-//    }
+    }
 
     /**
-     * Updates an existing Creditcalendar model.
+     * Updates an existing CalendarResponsibles model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -108,7 +94,7 @@ class CreditcalendarController extends Controller
     }
 
     /**
-     * Deletes an existing Creditcalendar model.
+     * Deletes an existing CalendarResponsibles model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -121,15 +107,15 @@ class CreditcalendarController extends Controller
     }
 
     /**
-     * Finds the Creditcalendar model based on its primary key value.
+     * Finds the CalendarResponsibles model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Creditcalendar the loaded model
+     * @return CalendarResponsibles the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Creditcalendar::findOne($id)) !== null) {
+        if (($model = CalendarResponsibles::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

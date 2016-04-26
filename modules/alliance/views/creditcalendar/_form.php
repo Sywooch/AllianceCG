@@ -19,7 +19,9 @@ use app\modules\admin\models\User;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?php // $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->errorSummary($model); ?>
+
+    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?php // $form->field($model, 'date_from')->textInput() ?>
 
@@ -129,7 +131,7 @@ use app\modules\admin\models\User;
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'user_id')->checkboxList(User::find()->select(['full_name', 'id'])->where(['position' => 'Кредитный специалист'])->indexBy('id')->column()) ?>
+    <?= $form->field($model, 'useridArray')->checkboxList(User::find()->select(['full_name', 'id'])->where(['position' => 'Кредитный специалист'])->indexBy('id')->column()) ?>
 
     <?= $form->field($model, 'location')->textInput(['maxlength' => true]) ?>
 

@@ -3,6 +3,8 @@
 namespace app\modules\alliance\models;
 
 use Yii;
+use app\modules\admin\models\User;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%calendar}}".
@@ -40,13 +42,29 @@ class Creditcalendar extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => function() { return date('U'); },
+            ],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
             [['date_from', 'time_from', 'date_to', 'time_to'], 'safe'],
+            ['useridArray', 'each', 'rule' => ['integer']],
             [['description'], 'string'],
             [['type', 'allday', 'created_at', 'updated_at', 'status', 'private', 'calendar_type'], 'integer'],
-            [['created_at', 'updated_at'], 'required'],
+//            [['created_at', 'updated_at'], 'required'],
             [['title', 'location', 'author'], 'string', 'max' => 255],
         ];
     }
@@ -111,16 +129,48 @@ class Creditcalendar extends \yii\db\ActiveRecord
 
     // Write to relation model
 
-    private $_useridArray
+    private $_useridArray;
 
-    public function getUsersArray()
+    public function getUseridArray()
     {
         return $this->getCalendarResponsibles()->select('id')->column();
     }
 
-    public function setUsersArray($value)
+    public function setUseridArray($value)
     {
-        return $this->getCalendarResponsibles()->select('id')->column();
+//        return $this->getCalendarResponsibles()->select('id')->column();
+        $this->_useridArray = (array)$value;
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        $this->updateCreditcalendarResponsibles();
+        parent::afterSave($insert, $changedAttributes);
+    }
+
+    /**
+     *
+     */
+    private function updateCreditcalendarResponsibles()
+    {
+        $currentIds = $this->getUsers()->select('id')->column();
+        $newIds = $this->getUseridArray();
+
+        foreach (array_filter(array_diff($newIds, $currentIds)) as $responsibleId) {
+            /** @var calendar_id $responsible **/
+            if ($responsible = CreditcalendarResponsibles::findOne($responsibleId)) {
+                $this->link('calendarResponsibles', $responsible);
+            }
+        }
+
+        foreach (array_filter(array_diff($currentIds, $newIds)) as $responsibleId) {
+            /** @var calendar_id $responsible **/
+            if($responsible = CreditcalendarResponsibles::findOne($responsibleId)) {
+                $this->unlink('calendarResponsibles', $responsible, true);
+            }
+        }
+
+
     }
 
 }

@@ -3,6 +3,7 @@
 namespace app\modules\alliance\models;
 
 use Yii;
+use app\modules\admin\models\User;
 
 /**
  * This is the model class for table "{{%calendar_responsibles}}".
@@ -30,10 +31,10 @@ class CalendarResponsibles extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['calendar_id', 'user_id'], 'required'],
-            [['calendar_id', 'user_id'], 'integer'],
-            [['calendar_id'], 'exist', 'skipOnError' => true, 'targetClass' => Calendar::className(), 'targetAttribute' => ['calendar_id' => 'id']],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+//            [['calendar_id', 'user_id'], 'required'],
+//            [['calendar_id', 'user_id'], 'integer'],
+//            [['calendar_id'], 'exist', 'skipOnError' => true, 'targetClass' => Creditcalendar::className(), 'targetAttribute' => ['calendar_id' => 'id']],
+//            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 

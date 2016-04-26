@@ -163,45 +163,60 @@ class CreditcalendarController extends Controller
             $model->date_to = $tomorrow;
             $model->time_to = $curtime;
 
-            if ($model->load(Yii::$app->request->post())) {
+            // $responsibles = $this->initValues($model);
+
+            $post = Yii::$app->request->post();
+            if ($model->load($post) && $model->save()) {
+             // && Model::loadMultiple($responsibles, $post)
+             
+                // $this->processValues($responsibles, $model);
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                    // 'responsibles' => $responsibles,
+                ]);
+            } 
+        }        
+
+    }           
+
+            // if ($model->load(Yii::$app->request->post())) {
                 // if(!empty($model->dow)){
                 //     $model->dow = implode(',',$model->dow);
                 // }
-                $model->save();
+                // $model->save();
 
-                if($model->responsible){
+                // if($model->responsible){
 
                     // $creditcalendarResponsibles = new CreditcalendarResponsibles();
                     // $creditcalendarResponsibles->load(Yii::$app->request->post());
                     // $model->link('creditcalendarresponsibles', $creditcalendarResponsibles);
 
-                    foreach ($model->responsible as $responsibles) {
-                        $creditcalendarResponsibles = new CreditcalendarResponsibles();
-                        $creditcalendarResponsibles->calendar_id = $model->id;
-                        $creditcalendarResponsibles->responsible_id = $responsibles;
-                        $creditcalendarResponsibles->save();
-                    } 
+                    // foreach ($model->responsible as $responsibles) {
+                    //     $creditcalendarResponsibles = new CreditcalendarResponsibles();
+                    //     $creditcalendarResponsibles->calendar_id = $model->id;
+                    //     $creditcalendarResponsibles->responsible_id = $responsibles;
+                    //     $creditcalendarResponsibles->save();
+                    // } 
 
-                    Yii::$app->mailer->compose()
-                        ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
-                        ->setReplyTo(Yii::$app->params['supportEmail'])
-                        ->setSubject(date('d/m/Y H:i:s') . '. ' . Module::t('module', 'CREDITCALENDAR_NEW_TASK'))
-                        ->setTextBody($model->description)
-                        ->setTo($model->getResponsibleemails())
-                        ->send();
-                }
+                    // Yii::$app->mailer->compose()
+                    //     ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                    //     ->setReplyTo(Yii::$app->params['supportEmail'])
+                    //     ->setSubject(date('d/m/Y H:i:s') . '. ' . Module::t('module', 'CREDITCALENDAR_NEW_TASK'))
+                    //     ->setTextBody($model->description)
+                    //     ->setTo($model->getResponsibleemails())
+                    //     ->send();
+                // }
 
-                return $this->redirect(['view', 'id' => $model->id]);
-            } 
-            else 
-            {
-                return $this->render('create', [
-                    'model' => $model,
-                ]);
-            }
-        }        
-
-    }
+            //     return $this->redirect(['view', 'id' => $model->id]);
+            // } 
+            // else 
+            // {
+            //     return $this->render('create', [
+            //         'model' => $model,
+            //     ]);
+            // }
 
     /**
      * Updates an existing Creditcalendar model.
@@ -269,6 +284,24 @@ class CreditcalendarController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     * @param Creditcalendar $model
+     * @return responsible[]
+     */
+    // private function initResponsible(Calendar $model)
+    // {
+    //     /** @var Value[] $values */
+    //     $values = $model->getValues()->with('productAttribute')->indexBy('attribute_id')->all();
+    //     $attributes = Attribute::find()->indexBy('id')->all();
+    //     foreach (array_diff_key($attributes, $values) as $attribute) {
+    //         $values[$attribute->id] = new Value(['attribute_id' => $attribute->id]);
+    //     }
+    //     foreach ($values as $value) {
+    //         $value->setScenario(Value::SCENARIO_TABULAR);
+    //     }
+    //     return $values;
+    // }
 
     public function actionMultipledelete()
     {

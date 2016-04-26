@@ -157,35 +157,35 @@ use janisto\timepicker\TimePicker;
     </div>
     
     <?php
-        if(Yii::$app->user->can('creditcalendarSetResponsibles'))
-        {  
-            echo '<div class="bs-callout bs-callout-danger">';
+//         if(Yii::$app->user->can('creditcalendarSetResponsibles'))
+//         {  
+//             echo '<div class="bs-callout bs-callout-danger">';
 
-            $cm = User::findAll([
-                    'position' => 'Кредитный специалист',
-                    'status' => '1',
-                    ]            
-                );
+//             $cm = User::findAll([
+//                     'position' => 'Кредитный специалист',
+//                     'status' => '1',
+//                     ]            
+//                 );
 
-            foreach ($cm as $key => $value) {
-                $cmname = $value->name . ' ' . $value->surname;
-                $value->allname = $cmname;
-            }
+//             foreach ($cm as $key => $value) {
+//                 $cmname = $value->name . ' ' . $value->surname;
+//                 $value->allname = $cmname;
+//             }
 
-//            $items = ArrayHelper::map($cm,'allname','allname');
-            $items = ArrayHelper::map($cm,'id','allname');
-            $params = [
-                'prompt' => '-- ' . $model->getAttributeLabel( 'responsible' ) . ' --',
-                'disabled' => $model->getScenario() != 'createTask', 
-                'inline' => false,
-            ];
+// //            $items = ArrayHelper::map($cm,'allname','allname');
+//             $items = ArrayHelper::map($cm,'id','allname');
+//             $params = [
+//                 'prompt' => '-- ' . $model->getAttributeLabel( 'responsible' ) . ' --',
+//                 'disabled' => $model->getScenario() != 'createTask', 
+//                 'inline' => false,
+//             ];
 
-            echo $form->field($model, 'responsible', ['template'=>'<h4>' . FA::icon('user') . ' {label}</h4>{input}{error}'])->checkboxList($items,$params,['class' => 'form-control input-sm radio', 'itemOptions' => ['class' => 'radio']]);
-            echo '</div>';
-        }
+//             echo $form->field($model, 'responsible', ['template'=>'<h4>' . FA::icon('user') . ' {label}</h4>{input}{error}'])->checkboxList($items,$params,['class' => 'form-control input-sm radio', 'itemOptions' => ['class' => 'radio']]);
+//             echo '</div>';
+//         }
     ?> 
 
-    
+    <?= $form->field($model, 'responsiblesArray')->checkboxList(User::find()->where(['position' => 'Кредитный специалист'])->select(['full_name', 'id'])->indexBy('id')->column()) ?>
 
     <div class="bs-callout bs-callout-warning">
 

@@ -18,7 +18,7 @@ class CreditcalendarResponsiblesSearch extends CreditcalendarResponsibles
     public function rules()
     {
         return [
-            [['id', 'creditcalendar_id', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'calendar_id', 'user_id'], 'integer'],
         ];
     }
 
@@ -59,9 +59,8 @@ class CreditcalendarResponsiblesSearch extends CreditcalendarResponsibles
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'creditcalendar_id' => $this->creditcalendar_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'calendar_id' => $this->calendar_id,
+            'user_id' => $this->user_id,
         ]);
 
         return $dataProvider;

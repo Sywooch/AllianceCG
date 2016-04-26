@@ -14,14 +14,17 @@ class m160418_062030_create_calendar_comment_table extends Migration
         $this->createTable('{{%calendar_comments}}', [
             'id' => $this->primaryKey(),
             'calendar_id' => $this->integer()->notNull(),
-            'comment_author' => $this->string(),
-            'comment_text' => $this->text(),
+            'user_id' => $this->integer()->notNull(),
+            'comment_text' => $this->text()->notNull(),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
         ], $tableOptions);
         
-        $this->createIndex('idx_calendar_id', '{{%calendar_comments}}', 'calendar_id');
-        $this->addForeignKey('calendar_id', '{{%calendar_comments}}', 'calendar_id', '{{%calendar}}', 'id','CASCADE','CASCADE');
+        $this->createIndex('idx-com-calid', '{{%calendar_comments}}', 'calendar_id');
+        $this->createIndex('idx-com-caluserid', '{{%calendar_comments}}', 'user_id');
+
+        $this->addForeignKey('fk-com-calid', '{{%calendar_comments}}', 'calendar_id', '{{%calendar}}', 'id','RESTRICT','RESTRICT');
+        $this->addForeignKey('fk-com-caluserid', '{{%calendar_comments}}', 'user_id', '{{%user}}', 'id','RESTRICT','RESTRICT');
     }
 
     public function down()

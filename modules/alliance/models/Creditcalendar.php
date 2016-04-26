@@ -309,30 +309,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
         return false;
     }   
 
-/**
- * Список тэгов, закреплённых за постом.
- * @var array
- */
-protected $responsibles = [];
- 
-/**
- * Устанавлиает тэги поста.
- * @param $tagsId
- */
-public function setTags($responsiblesId)
-{
-    $this->responsibles = (array) $responsiblesId;
-}
- 
-/**
- * Возвращает массив идентификаторов тэгов.
- */
-public function getTags()
-{
-    return ArrayHelper::getColumn(
-        $this->getCreditcalendarresponsibles()->all(), 'responsibe_id'
-    );
-}
+
 
 
 
@@ -347,6 +324,5 @@ public function getTags()
 //            }
 //            $creditcalendarResponsibles->save();
 ////         }
-//     }        
-    
+//     }            
 }

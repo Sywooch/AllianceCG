@@ -14,13 +14,14 @@ class m160419_190904_create_calendar_responsible_table extends Migration
         $this->createTable('{{%calendar_responsibles}}', [
             'id' => $this->primaryKey(),
             'calendar_id' => $this->integer()->notNull(),
-            'responsible_id' => $this->string(),
-            'created_at' => $this->integer(),
-            'updated_at' => $this->integer(),
+            'user_id' => $this->integer()->notNull(),
         ], $tableOptions);
         
-        $this->createIndex('idx_calendar_responsible_id', '{{%calendar_responsibles}}', 'calendar_id');
-        $this->addForeignKey('calendar_responsible_id', '{{%calendar_responsibles}}', 'calendar_id', '{{%calendar}}', 'id','CASCADE','CASCADE');
+        $this->createIndex('idx-resp-calid', '{{%calendar_responsibles}}', 'calendar_id');
+        $this->createIndex('idx-resp-caluserid', '{{%calendar_responsibles}}', 'user_id');
+
+        $this->addForeignKey('fk-resp-calid', '{{%calendar_responsibles}}', 'calendar_id', '{{%calendar}}', 'id','CASCADE','RESTRICT');
+        $this->addForeignKey('fk-resp-caluserid', '{{%calendar_responsibles}}', 'user_id', '{{%user}}', 'id','RESTRICT','RESTRICT');
     }
 
     public function down()

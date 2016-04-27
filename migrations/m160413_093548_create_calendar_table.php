@@ -22,7 +22,7 @@ class m160413_093548_create_calendar_table extends Migration
             'date_to' => $this->date(),
             'time_to' => $this->time(),
             'description' => $this->text(),
-            'location' => $this->string(255),
+//            'location' => $this->string(255),
 //            'responsible' => $this->string(255),
             'type' => $this->boolean()->notNull()->defaultValue(0),
 //            'is_repeat' => $this->boolean(),

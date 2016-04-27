@@ -2,6 +2,7 @@
 
 namespace app\modules\alliance\models;
 
+use app\modules\admin\models\Companies;
 use Yii;
 use yii\helpers\ArrayHelper;
 use app\modules\admin\models\User;
@@ -32,6 +33,10 @@ use yii\behaviors\TimestampBehavior;
  */
 class Creditcalendar extends \yii\db\ActiveRecord
 {
+    const STATUS_ATWORK = 0;
+    const STATUS_CLARIFY = 1;
+    const STATUS_FINISHED = 2;
+
     /**
      * @inheritdoc
      */
@@ -64,9 +69,11 @@ class Creditcalendar extends \yii\db\ActiveRecord
             [['date_from', 'time_from', 'date_to', 'time_to'], 'safe'],
             ['userids', 'safe'],
             [['description'], 'string'],
+            ['author', 'default', 'value' => Yii::$app->user->getId()],
             [['type', 'allday', 'created_at', 'updated_at', 'status', 'private', 'calendar_type'], 'integer'],
 //            [['created_at', 'updated_at'], 'required'],
-            [['title', 'location', 'author'], 'string', 'max' => 255],
+            [['title'], 'string', 'max' => 255],
+            ['author', 'integer'],
         ];
     }
 
@@ -95,6 +102,39 @@ class Creditcalendar extends \yii\db\ActiveRecord
         ];
     }
 
+
+    /**
+     * @return mixed
+     */
+    public function getStatuses()
+    {
+        return ArrayHelper::getValue(self::getStatusesArray(), $this->status);
+    }
+
+    /**
+     * @return array
+     */
+    public function getStatusesArray()
+    {
+        return[
+            self::STATUS_ATWORK => 'В работе',
+            self::STATUS_CLARIFY => 'Уточнение',
+            self::STATUS_FINISHED => 'Завершено',
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getPeriod()
+    {
+
+        $dateTimeFrom = \Yii::$app->formatter->asDatetime($this->date_from . ' ' . $this->time_from, "php:Y/m/d H:i");
+        $dateTimeTo = \Yii::$app->formatter->asDatetime($this->date_to . ' ' . $this->time_to, "php:Y/m/d H:i");
+        $period = $dateTimeFrom . ' - ' . $dateTimeTo;
+        return $period;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -114,9 +154,33 @@ class Creditcalendar extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getCalendarLocations()
+    {
+        return $this->hasMany(CalendarLocations::className(), ['calendar_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAuthorname()
+    {
+        return $this->hasOne(User::className(), ['id' => 'author']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getUsers()
     {
         return $this->hasMany(User::className(), ['id' => 'user_id'])->viaTable('{{%calendar_responsibles}}', ['calendar_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLocations()
+    {
+        return $this->hasMany(Companies::className(), ['id' => 'company_id'])->viaTable('{{%calendar_locations}}', ['calendar_id' => 'id']);
     }
 
     /**
@@ -131,6 +195,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
     // Write to relation model
 
     private $userids;
+    private $locationids;
 
     /**
      * @return array
@@ -155,13 +220,14 @@ class Creditcalendar extends \yii\db\ActiveRecord
      */
     public function afterSave($insert, $changedAttributes)
     {
-        CalendarResponsibles::deleteAll(['calendar_id' => $this->id]);
-        $values = [];
-        foreach ($this->userids as $id) {
-            $values[] = [$this->id, $id];
-        }
-        self::getDb()->createCommand()
-            ->batchInsert(CalendarResponsibles::tableName(), ['calendar_id', 'user_id'], $values)->execute();
+            CalendarResponsibles::deleteAll(['calendar_id' => $this->id]);
+            $values = [];
+            foreach ($this->userids as $id) {
+                $values[] = [$this->id, $id];
+            }
+
+            self::getDb()->createCommand()
+                    ->batchInsert(CalendarResponsibles::tableName(), ['calendar_id', 'user_id'], $values)->execute();
 
         parent::afterSave($insert, $changedAttributes);
     }

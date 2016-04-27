@@ -32,24 +32,31 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
 //            'id',
             'title',
-            'date_from',
-            'time_from',
-            'date_to',
-            'time_to',
+//            'date_from',
+//            'time_from',
+//            'date_to',
+//            'time_to',
             'description:ntext',
-            'location',
-            'type',
-            'allday',
-            'author',
+//            'location',
+//            'type',
+//            'allday',
+            [
+                'attribute' => 'author',
+                'value' => $model->authorname->full_name,
+            ],
             'created_at:datetime',
             'updated_at:datetime',
             'status',
-            'private',
-            'calendar_type',
+//            'private',
+//            'calendar_type',
+            [
+                'attribute' => 'period',
+            ],
             [
                 'label' => 'responsibles',
                 'value' => implode(', ', ArrayHelper::map($model->users, 'id', 'full_name')),
             ],
+
         ],
     ]) ?>
 

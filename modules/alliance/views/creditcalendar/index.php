@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'date_to',
             'time_to',
             // 'description:ntext',
-            'location',
+//            'location',
             // 'type',
             // 'allday',
             // 'author',

@@ -31,10 +31,10 @@ class CalendarResponsibles extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-//            [['calendar_id', 'user_id'], 'required'],
-//            [['calendar_id', 'user_id'], 'integer'],
-//            [['calendar_id'], 'exist', 'skipOnError' => true, 'targetClass' => Creditcalendar::className(), 'targetAttribute' => ['calendar_id' => 'id']],
-//            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [['calendar_id', 'user_id'], 'required'],
+            [['calendar_id', 'user_id'], 'integer'],
+            [['calendar_id'], 'exist', 'skipOnError' => true, 'targetClass' => Creditcalendar::className(), 'targetAttribute' => ['calendar_id' => 'id']],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 

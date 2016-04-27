@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\alliance\models\Creditcalendar */
@@ -45,35 +46,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'status',
             'private',
             'calendar_type',
+            [
+                'label' => 'responsibles',
+                'value' => implode(', ', ArrayHelper::map($model->users, 'id', 'full_name')),
+            ],
         ],
     ]) ?>
-
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            // 'id',
-//            'user_id',
-            'user.full_name',
-//            'date_from',
-//            'time_from',
-//            'date_to',
-//            'time_to',
-            // 'description:ntext',
-//            'location',
-            // 'type',
-            // 'allday',
-            // 'author',
-            // 'created_at',
-            // 'updated_at',
-//            'status',
-            // 'private',
-            // 'calendar_type',
-
-//            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
 
 </div>

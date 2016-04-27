@@ -23,6 +23,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
             // 'id',
             'title',
+//            'calendarResponsibles.user_id',
+
+//            [
+//                'label' => 'user_id',
+//                'value' => implode(', ', ArrayHelper::map($model->users, 'id', 'full_name')),
+//            ],
+
             'date_from',
             'time_from',
             'date_to',

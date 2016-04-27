@@ -36,8 +36,10 @@ class CreditcalendarController extends Controller
      */
     public function actionIndex()
     {
+        $query = Creditcalendar::find();
+
         $dataProvider = new ActiveDataProvider([
-            'query' => Creditcalendar::find(),
+            'query' => $query,
         ]);
 
         return $this->render('index', [
@@ -53,15 +55,9 @@ class CreditcalendarController extends Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        $query = CalendarResponsibles::find()->where(['calendar_id' => $id]);
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
 
         return $this->render('view', [
             'model' => $model,
-            'dataProvider' => $dataProvider,
         ]);
     }
 

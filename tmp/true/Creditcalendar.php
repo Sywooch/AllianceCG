@@ -138,7 +138,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
     public function getUserids()
     {
         return ArrayHelper::getColumn(
-            $this->getCalendarResponsibles()->all(), 'user_id'
+            $this->getCalendarResponsibles()->all(), 'calendar_id'
         );
     }
 

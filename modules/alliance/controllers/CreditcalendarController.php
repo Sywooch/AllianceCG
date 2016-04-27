@@ -2,6 +2,7 @@
 
 namespace app\modules\alliance\controllers;
 
+use app\modules\alliance\models\CalendarResponsibles;
 use Yii;
 use app\modules\alliance\models\Creditcalendar;
 use yii\data\ActiveDataProvider;
@@ -51,8 +52,16 @@ class CreditcalendarController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $query = CalendarResponsibles::find()->where(['calendar_id' => $id]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -65,28 +74,14 @@ class CreditcalendarController extends Controller
     {
         $model = new Creditcalendar();
 
-//        $values = $this->initValues($model);
-        $post = Yii::$app->request->post();
-//        if ($model->load($post) && $model->save() && Model::loadMultiple($values, $post)) {
-        if ($model->load($post) && $model->save()) {
-//                $this->processValues($values, $model);
-                return $this->redirect(['view', 'id' => $model->id]);
-            } else {
-                return $this->render('create', [
-                    'model' => $model,
-//                    'values' => $values,
-                ]);
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         }
-
-//        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-//            return $this->redirect(['view', 'id' => $model->id]);
-//        } else {
-//            return $this->render('create', [
-//                'model' => $model,
-//            ]);
-//        }
-//    }
+    }
 
     /**
      * Updates an existing Creditcalendar model.
@@ -97,6 +92,7 @@ class CreditcalendarController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->userids = $model->getCalendarResponsibles();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

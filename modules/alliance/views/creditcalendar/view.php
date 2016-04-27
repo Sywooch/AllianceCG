@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\alliance\models\Creditcalendar */
@@ -28,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+//            'id',
             'title',
             'date_from',
             'time_from',
@@ -39,12 +40,40 @@ $this->params['breadcrumbs'][] = $this->title;
             'type',
             'allday',
             'author',
-            'created_at',
-            'updated_at',
+            'created_at:datetime',
+            'updated_at:datetime',
             'status',
             'private',
             'calendar_type',
         ],
     ]) ?>
+
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            // 'id',
+//            'user_id',
+            'user.full_name',
+//            'date_from',
+//            'time_from',
+//            'date_to',
+//            'time_to',
+            // 'description:ntext',
+//            'location',
+            // 'type',
+            // 'allday',
+            // 'author',
+            // 'created_at',
+            // 'updated_at',
+//            'status',
+            // 'private',
+            // 'calendar_type',
+
+//            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
 
 </div>

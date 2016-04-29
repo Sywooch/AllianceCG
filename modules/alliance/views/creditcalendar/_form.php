@@ -136,13 +136,11 @@ use app\modules\admin\models\Companies;
         <?= $form->field($model, 'userids')->checkboxList(User::find()->select(['full_name', 'id'])->where(['position' => 'Кредитный специалист'])->indexBy('id')->column()) ?>
     </div>
     <div class="col-md-4">
-        <?php // $form->field($model, 'location')->checkboxList(Companies::find()->select(['company_name', 'id'])->indexBy('id')->column()) ?>
+        <?= $form->field($model, 'locationids')->checkboxList(Companies::find()->select(['company_name', 'id'])->indexBy('id')->column()) ?>
     </div>
     <div class="col-md-4">
         <?= $form->field($model, 'status', ['template'=>'{label}{input}{error}'])->radioList($model->getStatusesArray()) ?>
     </div>
-
-<?php var_dump($model->getUserids()); ?>
 
 
 

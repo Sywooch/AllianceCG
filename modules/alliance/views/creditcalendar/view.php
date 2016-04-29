@@ -40,13 +40,6 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'location',
 //            'type',
 //            'allday',
-            [
-                'attribute' => 'author',
-                'value' => $model->authorname->full_name,
-            ],
-            'created_at:datetime',
-            'updated_at:datetime',
-            'status',
 //            'private',
 //            'calendar_type',
             [
@@ -56,6 +49,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'responsibles',
                 'value' => implode(', ', ArrayHelper::map($model->users, 'id', 'full_name')),
             ],
+            [
+                'label' => 'locations',
+                'value' => implode(', ', ArrayHelper::map($model->locations, 'id', 'company_name')),
+            ],
+            [
+                'attribute' => 'author',
+                'value' => $model->authorname->full_name,
+            ],
+            'created_at:datetime',
+            [
+                'attribute' => 'updated_at',
+                'visible' => ($model->updated_at !== $model->created_at) ? true : false,
+            ],
+//            'updated_at:datetime',
+            'status',
 
         ],
     ]) ?>

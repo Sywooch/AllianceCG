@@ -25,8 +25,8 @@ class m160427_202141_create_calendar_location_table extends Migration
         $this->createIndex('idx-loc-calid', '{{%calendar_locations}}', 'calendar_id');
         $this->createIndex('idx-loc-callocid', '{{%calendar_locations}}', 'company_id');
 
-        $this->addForeignKey('fk-loc-calid', '{{%calendar_locations}}', 'calendar_id', '{{%calendar}}', 'id','CASCADE','RESTRICT');
-        $this->addForeignKey('fk-oc-callocid', '{{%calendar_locations}}', 'company_id', '{{%companies}}', 'id','RESTRICT','RESTRICT');
+        $this->addForeignKey('fk-loc-calendarid', '{{%calendar_locations}}', 'calendar_id', '{{%calendar}}', 'id','CASCADE','RESTRICT');
+        $this->addForeignKey('fk-loc-callocid', '{{%calendar_locations}}', 'company_id', '{{%companies}}', 'id','CASCADE','RESTRICT');
     }
 
     /**

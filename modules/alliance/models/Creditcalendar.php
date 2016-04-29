@@ -68,6 +68,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
         return [
             [['date_from', 'time_from', 'date_to', 'time_to'], 'safe'],
             ['userids', 'safe'],
+            ['locationids', 'safe'],
             [['description'], 'string'],
             ['author', 'default', 'value' => Yii::$app->user->getId()],
             [['type', 'allday', 'created_at', 'updated_at', 'status', 'private', 'calendar_type'], 'integer'],
@@ -216,6 +217,24 @@ class Creditcalendar extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public function getLocationids()
+    {
+        return ArrayHelper::getColumn(
+            $this->getCalendarLocations()->all(), 'company_id'
+        );
+    }
+
+    /**
+     * @param $value
+     */
+    public function setLocationids($value)
+    {
+        $this->locationids = (array)$value;
+    }
+
+    /**
      * @inheritdoc
      */
     public function afterSave($insert, $changedAttributes)
@@ -229,6 +248,17 @@ class Creditcalendar extends \yii\db\ActiveRecord
 
             self::getDb()->createCommand()
                 ->batchInsert(CalendarResponsibles::tableName(), ['calendar_id', 'user_id'], $values)->execute();
+        }
+
+        if(!empty(array_filter($this->locationids))) {
+            CalendarLocations::deleteAll(['calendar_id' => $this->id]);
+            $values = [];
+            foreach ($this->locationids as $id) {
+                $values[] = [$this->id, $id];
+            }
+
+            self::getDb()->createCommand()
+                ->batchInsert(CalendarLocations::tableName(), ['calendar_id', 'company_id'], $values)->execute();
         }
         parent::afterSave($insert, $changedAttributes);
     }

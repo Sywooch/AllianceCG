@@ -7,6 +7,7 @@ use Yii;
 use yii\helpers\ArrayHelper;
 use app\modules\admin\models\User;
 use yii\behaviors\TimestampBehavior;
+use app\modules\alliance\Module;
 
 /**
  * This is the model class for table "{{%calendar}}".
@@ -90,23 +91,28 @@ class Creditcalendar extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'title' => Yii::t('app', 'Title'),
-            'date_from' => Yii::t('app', 'Date From'),
-            'time_from' => Yii::t('app', 'Time From'),
-            'date_to' => Yii::t('app', 'Date To'),
-            'time_to' => Yii::t('app', 'Time To'),
-            'description' => Yii::t('app', 'Description'),
-            'location' => Yii::t('app', 'Location'),
-            'type' => Yii::t('app', 'Type'),
-            'allday' => Yii::t('app', 'Allday'),
-            'priority' => Yii::t('app', 'Priority'),
-            'author' => Yii::t('app', 'Author'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'status' => Yii::t('app', 'Status'),
-            'private' => Yii::t('app', 'Private'),
-            'calendar_type' => Yii::t('app', 'Calendar Type'),
+            'id' => Module::t('module', 'ID'),
+            'title' => Module::t('module', 'CALENDAR_TITLE'),
+            'date_from' => Module::t('module', 'Date From'),
+            'time_from' => Module::t('module', 'Time From'),
+            'date_to' => Module::t('module', 'Date To'),
+            'time_to' => Module::t('module', 'Time To'),
+            'description' => Module::t('module', 'CALENDAR_DESCRIPTION'),
+            'location' => Module::t('module', 'CALENDAR_LOCATION'),
+            'type' => Module::t('module', 'CALENDAR_TYPE'),
+            'allday' => Module::t('module', 'CREDITCALENDAR_ALLDAY'),
+            'priority' => Module::t('module', 'CREDITCALENDAR_PRIORITY'),
+            'author' => Module::t('module', 'CREDITCALENDAR_AUTHOR'),
+            'created_at' => Module::t('module', 'CREATED_AT'),
+            'updated_at' => Module::t('module', 'UPDATED_AT'),
+            'status' => Module::t('module', 'CREDITCALENADR_STATUS'),
+            'private' => Module::t('module', 'Private'),
+            'calendar_type' => Module::t('module', 'Calendar Type'),
+            'period' => Module::t('module', 'CALENDAR_EVENT_PERIOD'),
+            'locations' => Module::t('module', 'CALENDAR_EVENT_LOCATIONS'),
+            'responsibles' => Module::t('module', 'CALENDAR_EVENT_RESPONSIBLES'),
+            'userids' => Module::t('module', 'CALENDAR_EVENT_RESPONSIBLES'),
+            'locationids' => Module::t('module', 'CALENDAR_EVENT_LOCATIONS'),
         ];
     }
 
@@ -198,6 +204,16 @@ class Creditcalendar extends \yii\db\ActiveRecord
     public function getUsers()
     {
         return $this->hasMany(User::className(), ['id' => 'user_id'])->viaTable('{{%calendar_responsibles}}', ['calendar_id' => 'id']);
+    }
+
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCommentAuthors()
+    {
+        return $this->hasMany(User::className(), ['id' => 'user_id'])->viaTable('{{%calendar_comments}}', ['calendar_id' => 'id']);
     }
 
     /**

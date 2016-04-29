@@ -22,7 +22,7 @@ class AppAsset extends AssetBundle
         'css/callouts.css',
     ];
     public $js = [
-        
+        'js/main.js',
     ];
     public $jsOptions = array(
         'position' => \yii\web\View::POS_HEAD

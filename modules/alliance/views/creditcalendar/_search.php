@@ -6,6 +6,7 @@ use yii\helpers\ArrayHelper;
 use app\modules\alliance\models\Creditcalendar;
 use yii\jui\AutoComplete;
 use rmrevin\yii\fontawesome\FA;
+use app\modules\alliance\Module;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\alliance\models\CreditcalendarSearch */
@@ -13,7 +14,7 @@ use rmrevin\yii\fontawesome\FA;
 ?>
 
 <div class="creditcalendar-search">
-    <div class="bs-callout bs-callout-success">
+    <div class="bs-callout bs-callout-info">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -90,8 +91,8 @@ use rmrevin\yii\fontawesome\FA;
     <?php // echo $form->field($model, 'calendar_type') ?>
 
     <div class="form-group" style="text-align: right;">
-        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton(FA::icon('search') . ' ' . Module::t('module', 'SEARCH'), ['class' => 'btn btn-primary btn-sm']) ?>
+        <?php // Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

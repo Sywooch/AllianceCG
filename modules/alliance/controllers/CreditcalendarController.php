@@ -2,6 +2,7 @@
 
 namespace app\modules\alliance\controllers;
 
+use app\modules\alliance\models\CalendarComments;
 use Yii;
 use app\modules\alliance\models\Creditcalendar;
 use app\modules\alliance\models\CreditcalendarSearch;
@@ -53,9 +54,35 @@ class CreditcalendarController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+//        $searchModel = CalendarComments::findOne($id);
+//        $dataProvider = $searchModel;
+
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+//            'searchModel' => $searchModel,
+            'model' => $model,
+//            'dataProvider' => $dataProvider,
         ]);
+    }
+
+    public function actionComment($id)
+    {
+        $model = $this->findModel($id);
+        $commentModel = new CalendarComments();
+
+        if ($commentModel->load(Yii::$app->request->post())) {
+            $commentModel->calendar_id = $model->id;
+            $commentModel->user_id = Yii::$app->user->getId();
+            $commentModel->save();
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->renderAjax('comment', [
+                'model' => $model,
+                'commentModel' => $commentModel,
+            ]);
+        }
+
     }
 
     /**

@@ -142,7 +142,7 @@ use app\modules\admin\models\Companies;
         <?= $form->field($model, 'status', ['template'=>'{label}{input}{error}'])->radioList($model->getStatusesArray()) ?>
     </div>
 
-
+<?php var_dump($model->getUserids()); ?>
 
 
 

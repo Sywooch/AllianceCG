@@ -220,6 +220,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
      */
     public function afterSave($insert, $changedAttributes)
     {
+        if(!empty(array_filter($this->userids))) {
             CalendarResponsibles::deleteAll(['calendar_id' => $this->id]);
             $values = [];
             foreach ($this->userids as $id) {
@@ -227,8 +228,8 @@ class Creditcalendar extends \yii\db\ActiveRecord
             }
 
             self::getDb()->createCommand()
-                    ->batchInsert(CalendarResponsibles::tableName(), ['calendar_id', 'user_id'], $values)->execute();
-
+                ->batchInsert(CalendarResponsibles::tableName(), ['calendar_id', 'user_id'], $values)->execute();
+        }
         parent::afterSave($insert, $changedAttributes);
     }
 

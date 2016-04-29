@@ -28,6 +28,7 @@ class m160413_093548_create_calendar_table extends Migration
 //            'is_repeat' => $this->boolean(),
             // 'dow' => $this->string(255),
             'allday' => $this->smallInteger()->notNull()->defaultValue(0),
+            'priority' => $this->smallInteger()->notNull()->defaultValue(0),
             'author' => $this->string(255),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),

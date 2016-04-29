@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
@@ -30,18 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-//            'id',
             'title',
-//            'date_from',
-//            'time_from',
-//            'date_to',
-//            'time_to',
             'description:ntext',
-//            'location',
-//            'type',
-//            'allday',
-//            'private',
-//            'calendar_type',
             [
                 'attribute' => 'period',
             ],
@@ -62,8 +51,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'updated_at',
                 'visible' => ($model->updated_at !== $model->created_at) ? true : false,
             ],
-//            'updated_at:datetime',
-            'status',
+            [
+                'attribute' => 'status',
+                'value' => $model->getStatuses(),
+            ],
 
         ],
     ]) ?>

@@ -23,7 +23,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'time_from') ?>
 
-    <?= $form->field($model, 'date_to') ?>
+    <?php // $form->field($model, 'date_to') ?>
+
+    <?= $form->field($model, 'status') ?>
 
     <?php // echo $form->field($model, 'time_to') ?>
 

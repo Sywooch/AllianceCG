@@ -22,14 +22,6 @@ use app\modules\admin\models\Companies;
 
     <?= $form->errorSummary($model); ?>
 
-    <?php // $form->field($model, 'date_from')->textInput() ?>
-
-    <?php // $form->field($model, 'time_from')->textInput() ?>
-
-    <?php // $form->field($model, 'date_to')->textInput() ?>
-
-    <?php // $form->field($model, 'time_to')->textInput() ?>
-
 <div class="col-sm-6">
         
     <div class="col-sm-7">
@@ -127,45 +119,50 @@ use app\modules\admin\models\Companies;
     
     <br/><br/><br/>
 
-
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-
-    <div class="col-md-4">
+    <div class="col-sm-6">
+        <?= $form->field($model, 'allday')->checkbox(
+            [
+                'label' => Module::t('module', 'CREDITCALENDAR_ALLDAY_CHECKBOX'),
+            ]);
+        ?>
+    </div>
+    <div class="col-sm-6">
+        <?= $form->field($model, 'private')->checkbox(
+            [
+                'label' => Module::t('module', 'CREDITCALENDAR_PRIVATE_CHECKBOX'),
+            ]);
+        ?>
+    </div>
+    <div class="col-sm-6">
         <?= $form->field($model, 'userids')->checkboxList(User::find()->select(['full_name', 'id'])->where(['position' => 'Кредитный специалист'])->indexBy('id')->column()) ?>
     </div>
-    <div class="col-md-4">
+    <div class="col-sm-6">
         <?= $form->field($model, 'locationids')->checkboxList(Companies::find()->select(['company_name', 'id'])->indexBy('id')->column()) ?>
     </div>
-    <div class="col-md-4">
-        <?= $form->field($model, 'status', ['template'=>'{label}{input}{error}'])->radioList($model->getStatusesArray()) ?>
+
+    <div class="col-sm-12">
+    <?= $form->field($model, 'title', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('bookmark') . ' </span>{input}</div>{error}'])->textInput(['maxlength' => true,'placeholder' => $model->getAttributeLabel('title')]) ?>
+
+    <?= $form->field($model, 'description', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('file-text') . ' </span>{input}</div>{error}'])->textarea(['rows' => 6, 'placeholder' => $model->getAttributeLabel('description')]) ?>
+
+    <div class="col-sm-6">
+        <?= $form->field($model, 'status', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('check') . ' </span>{input}</div>{error}'])->dropDownList($model->getStatusesArray()) ?>
+    </div>
+
+    <div class="col-sm-6">
+        <?= $form->field($model, 'priority', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('balance-scale') . ' </span>{input}</div>{error}'])->dropDownList($model->getPrioritiesArray()) ?>
     </div>
 
 
 
-    <?php // $form->field($model, 'location')->textInput(['maxlength' => true]) ?>
-
-    <?php // $form->field($model, 'type')->textInput() ?>
-
-    <?= $form->field($model, 'allday')->textInput() ?>
-
-    <?php // $form->field($model, 'author')->textInput(['maxlength' => true]) ?>
-
-    <?php // $form->field($model, 'created_at')->textInput() ?>
-
-    <?php // $form->field($model, 'updated_at')->textInput() ?>
-
-    <?php // $form->field($model, 'status')->textInput() ?>
 
 
+    </div>
 
-    <?php // $form->field($model, 'private')->textInput() ?>
-
-    <?php // $form->field($model, 'calendar_type')->textInput() ?>
-
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    <div class="col-sm-12">
+        <div class="form-group">
+            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>

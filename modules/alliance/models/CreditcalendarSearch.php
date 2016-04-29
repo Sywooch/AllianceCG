@@ -35,6 +35,15 @@ class CreditcalendarSearch extends Creditcalendar
         return Model::scenarios();
     }
 
+    public function titleautocomplete()
+    {
+        $listdata= Creditcalendar::find()
+            ->select(['title as value', 'title as label'])
+            ->asArray()
+            ->all();
+        return $listdata;
+    }
+
     /**
      * Creates data provider instance with search query applied
      *
@@ -45,6 +54,7 @@ class CreditcalendarSearch extends Creditcalendar
     public function search($params)
     {
         $query = Creditcalendar::find();
+        $query->joinWith(['users', 'locations']);
 
         // add conditions that should always apply here
 
@@ -79,7 +89,7 @@ class CreditcalendarSearch extends Creditcalendar
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'author', $this->author]);
-        
+
 
         return $dataProvider;
     }

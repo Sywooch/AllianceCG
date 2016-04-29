@@ -37,6 +37,10 @@ class Creditcalendar extends \yii\db\ActiveRecord
     const STATUS_CLARIFY = 1;
     const STATUS_FINISHED = 2;
 
+    const PRIORITY_BASIC = 0;
+    const PRIORITY_HIGH = 1;
+    const PRIORITY_LOW = 2;
+
     /**
      * @inheritdoc
      */
@@ -55,7 +59,9 @@ class Creditcalendar extends \yii\db\ActiveRecord
                 'class' => TimestampBehavior::className(),
                 'createdAtAttribute' => 'created_at',
                 'updatedAtAttribute' => 'updated_at',
-                'value' => function() { return date('U'); },
+                'value' => function () {
+                    return date('U');
+                },
             ],
         ];
     }
@@ -66,12 +72,12 @@ class Creditcalendar extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['date_from', 'time_from', 'date_to', 'time_to'], 'safe'],
+            [['date_from', 'time_from', 'date_to', 'time_to', 'priority'], 'safe'],
             ['userids', 'safe'],
             ['locationids', 'safe'],
             [['description'], 'string'],
             ['author', 'default', 'value' => Yii::$app->user->getId()],
-            [['type', 'allday', 'created_at', 'updated_at', 'status', 'private', 'calendar_type'], 'integer'],
+            [['type', 'allday', 'created_at', 'updated_at', 'status', 'private', 'calendar_type', 'priority'], 'integer'],
 //            [['created_at', 'updated_at'], 'required'],
             [['title'], 'string', 'max' => 255],
             ['author', 'integer'],
@@ -94,6 +100,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
             'location' => Yii::t('app', 'Location'),
             'type' => Yii::t('app', 'Type'),
             'allday' => Yii::t('app', 'Allday'),
+            'priority' => Yii::t('app', 'Priority'),
             'author' => Yii::t('app', 'Author'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
@@ -110,6 +117,23 @@ class Creditcalendar extends \yii\db\ActiveRecord
     public function getStatuses()
     {
         return ArrayHelper::getValue(self::getStatusesArray(), $this->status);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPriorities()
+    {
+        return ArrayHelper::getValue(self::getPrioritiesArray(), $this->priority);
+    }
+
+    public function getPrioritiesArray()
+    {
+        return[
+            self::PRIORITY_BASIC => 'Обычная',
+            self::PRIORITY_HIGH => 'Высокая',
+            self::PRIORITY_LOW => 'Низкая',
+        ];
     }
 
     /**

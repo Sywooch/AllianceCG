@@ -35,11 +35,13 @@ class CreditcalendarController extends Controller
      */
     public function actionIndex()
     {
+        $model = new Creditcalendar();
         $searchModel = new CreditcalendarSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
+            'model' => $model,
             'dataProvider' => $dataProvider,
         ]);
     }

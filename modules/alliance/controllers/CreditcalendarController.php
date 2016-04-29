@@ -2,10 +2,9 @@
 
 namespace app\modules\alliance\controllers;
 
-use app\modules\alliance\models\CalendarResponsibles;
 use Yii;
 use app\modules\alliance\models\Creditcalendar;
-use yii\data\ActiveDataProvider;
+use app\modules\alliance\models\CreditcalendarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -36,13 +35,11 @@ class CreditcalendarController extends Controller
      */
     public function actionIndex()
     {
-        $query = Creditcalendar::find();
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
+        $searchModel = new CreditcalendarSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -54,10 +51,8 @@ class CreditcalendarController extends Controller
      */
     public function actionView($id)
     {
-        $model = $this->findModel($id);
-
         return $this->render('view', [
-            'model' => $model,
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -88,7 +83,6 @@ class CreditcalendarController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->userids = $model->getCalendarResponsibles();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

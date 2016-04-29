@@ -9,6 +9,7 @@ use janisto\timepicker\TimePicker;
 use app\modules\alliance\Module;
 use yii\jui\DatePicker;
 use app\modules\admin\models\User;
+use app\modules\admin\models\Companies;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\alliance\models\Creditcalendar */
@@ -20,8 +21,6 @@ use app\modules\admin\models\User;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->errorSummary($model); ?>
-
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?php // $form->field($model, 'date_from')->textInput() ?>
 
@@ -129,23 +128,37 @@ use app\modules\admin\models\User;
     <br/><br/><br/>
 
 
+    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'userids')->checkboxList(User::find()->select(['full_name', 'id'])->where(['position' => 'Кредитный специалист'])->indexBy('id')->column()) ?>
+    <div class="col-md-4">
+        <?= $form->field($model, 'userids')->checkboxList(User::find()->select(['full_name', 'id'])->where(['position' => 'Кредитный специалист'])->indexBy('id')->column()) ?>
+    </div>
+    <div class="col-md-4">
+        <?= $form->field($model, 'locationids')->checkboxList(Companies::find()->select(['company_name', 'id'])->indexBy('id')->column()) ?>
+    </div>
+    <div class="col-md-4">
+        <?= $form->field($model, 'status', ['template'=>'{label}{input}{error}'])->radioList($model->getStatusesArray()) ?>
+    </div>
 
-    <?= $form->field($model, 'location')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'type')->textInput() ?>
+
+    <?php // $form->field($model, 'location')->textInput(['maxlength' => true]) ?>
+
+    <?php // $form->field($model, 'type')->textInput() ?>
 
     <?= $form->field($model, 'allday')->textInput() ?>
 
-    <?= $form->field($model, 'author')->textInput(['maxlength' => true]) ?>
+    <?php // $form->field($model, 'author')->textInput(['maxlength' => true]) ?>
 
     <?php // $form->field($model, 'created_at')->textInput() ?>
 
     <?php // $form->field($model, 'updated_at')->textInput() ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?php // $form->field($model, 'status')->textInput() ?>
+
+
 
     <?php // $form->field($model, 'private')->textInput() ?>
 

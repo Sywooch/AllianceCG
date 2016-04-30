@@ -16,7 +16,7 @@ use app\modules\admin\models\Companies;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="creditcalendar-form">
+<div class="creditcalendar-form" style="width: 70%; margin: auto;">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -133,12 +133,15 @@ use app\modules\admin\models\Companies;
             <?= $form->field($model, 'priority', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('balance-scale') . ' </span>{input}</div>{error}'])->dropDownList($model->getPrioritiesArray()) ?>
         </div>
 
+        <?php if(Yii::$app->user->can('chiefcredit')) { ?>
         <div class="col-sm-6">
             <?= $form->field($model, 'userids')->checkboxList(User::find()->select(['full_name', 'id'])->where(['position' => 'Кредитный специалист'])->indexBy('id')->column()) ?>
         </div>
         <div class="col-sm-6">
             <?= $form->field($model, 'locationids')->checkboxList(Companies::find()->select(['company_name', 'id'])->indexBy('id')->column()) ?>
         </div>
+
+        <?php } ?>
 
     </div>
 

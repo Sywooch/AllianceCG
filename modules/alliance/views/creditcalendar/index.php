@@ -9,6 +9,8 @@ use app\components\grid\LinkColumn;
 use yii\jui\AutoComplete;
 use rmrevin\yii\fontawesome\FA;
 use app\modules\alliance\Module;
+use yii\grid\ActionColumn;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -125,11 +127,45 @@ $this->params['breadcrumbs'][] = $this->title;
                                 Creditcalendar::STATUS_FINISHED => 'success',
                             ],
                         ],
-
                         [
+                            'class' => ActionColumn::className(),
                             'header' => 'Действия',
-                            'class' => 'yii\grid\ActionColumn'
+                            'contentOptions'=>['style'=>'width: 150px;'],
+                            'template' => '{view}{update}{delete}',
+                            'buttons' => [
+                                'view' => function ($url, $model) {
+                                    $title = false;
+                                    $options = [];
+                                    $icon = '<span class="btn btn-sm btn-warning">'.FA::icon("play-circle").'</span>';
+                                    $label = $icon;
+                                    $url = Url::toRoute(['view', 'id' => $model->id]);
+                                    $options['tabindex'] = '-1';
+                                    return Html::a($label, $url, $options) .''. PHP_EOL;
+                                },
+                                'update' => function ($url, $model) {
+                                    $title = false;
+                                    $options = [];
+                                    $icon = '<span class="btn btn-sm btn-primary">'.FA::icon("edit").'</span>';
+                                    $label = $icon;
+                                    $url = Url::toRoute(['update', 'id' => $model->id]);
+                                    $options['tabindex'] = '-1';
+                                    return Html::a($label, $url, $options) .''. PHP_EOL;
+                                },
+                                'delete' => function ($url, $model, $key) {
+                                    return Html::a('<span class="btn btn-sm btn-danger">'.FA::icon("trash").'</span>', $url, [
+                                        'title' => false,
+                                        'data-confirm' => Module::t('module', 'DELETE_CONFIRMATION'),
+                                        'data-method' => 'post',
+                                        'data-pjax' => '0',
+                                    ]);
+                                },
+                            ],
                         ],
+
+//                        [
+//                            'header' => 'Действия',
+//                            'class' => 'yii\grid\ActionColumn'
+//                        ],
                     ],
                 ]); ?>
             </div>

@@ -24,11 +24,13 @@ use app\modules\alliance\Module;
 
 
     <?php
-        $statusItems = Creditcalendar::getStatusesArray();
+//        $statusItems = Creditcalendar::getStatusesArray();
+        $statusItems = $model->getStatusesArray();
         $statusParams = [
             'prompt' => '-- ' . $model->getAttributeLabel( 'status' ) . ' --',
         ];
-        $priorityItems = Creditcalendar::getPrioritiesArray();
+//        $priorityItems = Creditcalendar::getPrioritiesArray();
+        $priorityItems = $model->getPrioritiesArray();
         $priorityParams = [
             'prompt' => '-- ' . $model->getAttributeLabel('priority') . ' --',
         ];

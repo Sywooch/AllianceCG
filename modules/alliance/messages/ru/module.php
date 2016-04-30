@@ -15,7 +15,7 @@ return [
     'CREATE' => 'Добавить',
     'UPDATE' => 'Редактировать',
     'DELETE' => 'Удалить',
-    'REFRESH' => 'Обносить',
+    'REFRESH' => 'Обновить',
     'DELETE_CONFIRMATION' => 'Удалить?',
     'SEARCH' => 'Поиск',
     'CALENDAR_TITLE' => 'Заголовок',

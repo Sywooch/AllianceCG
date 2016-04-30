@@ -12,6 +12,8 @@ use app\modules\alliance\models\Creditcalendar;
  */
 class CreditcalendarSearch extends Creditcalendar
 {
+    public $locations;
+
     /**
      * @inheritdoc
      */
@@ -23,6 +25,7 @@ class CreditcalendarSearch extends Creditcalendar
         return [
             [['id', 'type', 'allday', 'created_at', 'updated_at', 'status', 'private', 'calendar_type'], 'integer'],
             [['title', 'date_from', 'time_from', 'date_to', 'time_to', 'description', 'author', 'globalSearch'], 'safe'],
+            ['locations', 'safe'],
         ];
     }
 
@@ -53,14 +56,25 @@ class CreditcalendarSearch extends Creditcalendar
      */
     public function search($params)
     {
-        $query = Creditcalendar::find()->joinWith(['users', 'locations']);
-//        $query->with(['users', 'locations']);
+        $query = Creditcalendar::find();
+        $query->joinWith(['locations', 'users']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['locations'] = [
+            'asc' => ['{{%companies}}.company_name' => SORT_ASC],
+            'desc' => ['{{%companies}}.company_name' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['responsibles'] = [
+            'asc' => ['{{%user}}.full_name' => SORT_ASC],
+            'desc' => ['{{%user}}.full_name' => SORT_DESC],
+        ];
+
 
         $this->load($params);
 

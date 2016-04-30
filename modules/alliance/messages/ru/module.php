@@ -31,5 +31,5 @@ return [
     'CREDITCALENDAR_ALLDAY_CHECKBOX' => 'Ежедневно',
     'CREDITCALENDAR_PRIVATE_CHECKBOX' => 'Личная запись',
     'COMMENTS' => 'Комментарии',
-    'COMMENT' => 'Добавить комментраий',
+    'COMMENT' => 'Добавить комментарий',
 ];

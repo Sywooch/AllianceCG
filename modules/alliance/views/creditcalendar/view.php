@@ -140,7 +140,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]);
 
                 Modal::begin([
-                    'header' => Module::t('module', 'COMMENT'),
+                    'header' => '<h4>' . Module::t('module', 'COMMENT') .'</h4>',
                     'id' => 'modal',
                     'size' => 'modal-lg'
                 ]);

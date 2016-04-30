@@ -11,6 +11,7 @@ use rmrevin\yii\fontawesome\FA;
 use app\modules\alliance\Module;
 use yii\grid\ActionColumn;
 use yii\helpers\Url;
+use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -18,6 +19,10 @@ use yii\helpers\Url;
 $this->title = Module::t('module', 'CREDITCALENDARS');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_ALLIANCE'), 'url' => ['/alliance']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$multipleDelete = file_get_contents('js/modules/alliance/creditcalendar/gridViewMultipleDelete.js');
+$this->registerJs($multipleDelete, View::POS_END);
+
 ?>
 <div class="creditcalendar-index">
 
@@ -39,6 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <p style="text-align: right">
                 <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
                 <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'REFRESH'), ['index'], ['class' => 'btn btn-info btn-sm']) ?>
+                <?= Html::a(FA::icon('trash') . ' ' . Module::t('module', 'DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']); ?>
             </p>
 
             <?php echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -53,8 +59,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="bs-callout bs-callout-success">
                 <?= GridView::widget([
                     'dataProvider' => $dataProvider,
-//        'filterModel' => $searchModel,
-//                    'layout'=>"{sorter}\n{pager}\n{summary}\n{items}",
+//                  'filterModel' => $searchModel,
+//                  'layout'=>"{sorter}\n{pager}\n{summary}\n{items}",
+                    'id' => 'creditcalendar-grid',
                     'tableOptions' =>[
                         'class' => 'table table-striped table-bordered creditcalendargridview'
                     ],

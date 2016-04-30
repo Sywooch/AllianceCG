@@ -136,6 +136,28 @@ class CreditcalendarController extends Controller
     }
 
     /**
+     * @return \yii\web\Response
+     * @throws ForbiddenHttpException
+     * @throws \yii\db\Exception
+     */
+    public function actionMultipledelete()
+    {
+//        if (!Yii::$app->user->can('deleteCreditcalendarPost')) {
+//            throw new ForbiddenHttpException(Module::t('module', 'ONLY_CHIEFCREDIT_CAN_DELETE_THERE'));
+//        }
+//        else {
+            $pk = Yii::$app->request->post('row_id');
+            foreach ($pk as $key => $value)
+            {
+                $sql = "DELETE FROM {{%calendar}} WHERE id = $value";
+                $query = Yii::$app->db->createCommand($sql)->execute();
+            }
+
+            return $this->redirect(['index']);
+//        }
+    }
+
+    /**
      * Finds the Creditcalendar model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id

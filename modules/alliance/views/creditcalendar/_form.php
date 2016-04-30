@@ -89,11 +89,6 @@ use app\modules\admin\models\Companies;
             ?>            
         </div>
 
-    </div>
-    
-    <br/><br/><br/>
-
-    <div class="col-sm-12 bs-callout bs-callout-danger">
         <div class="col-sm-6" style="text-align: right">
             <?= $form->field($model, 'allday')->checkbox(
                 [
@@ -102,13 +97,20 @@ use app\modules\admin\models\Companies;
             ?>
         </div>
         <div class="col-sm-6" style="text-align: left">
-            <?= $form->field($model, 'private')->checkbox(
-                [
-                    'label' => Module::t('module', 'CREDITCALENDAR_PRIVATE_CHECKBOX'),
-                ]);
+            <?php
+                if(!Yii::$app->user->can('creditmanager')){
+                    echo $form->field($model, 'private')->checkbox(
+                            [
+                                'label' => Module::t('module', 'CREDITCALENDAR_PRIVATE_CHECKBOX'),
+                            ]);
+                }
             ?>
-        </div>        
+        </div>          
+
     </div>
+    
+    <br/><br/><br/>
+
     </div>
 
     <div class="col-sm-12">

@@ -36,4 +36,5 @@ return [
     'DATE_FROM' => 'Дата от: ',
     'TIME_FROM' => 'Время от: ',
     'TIME_TO' => 'Время до: ',
+    'CREDITCALENDAR' => 'Календарь',
 ];

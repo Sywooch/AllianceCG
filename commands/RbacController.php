@@ -216,6 +216,8 @@ class RbacController extends Controller
         $auth->addChild($admin, $adminIsVisible);
         // PERMISSION TO VIEW SKODA MODULE
         $auth->addChild($admin, $skodaIsVisible);
+        // CHILD TO CHIEFCREDIT ROLE
+        $auth->addChild($admin, $chiefcredit);
  
         $root = $auth->createRole('root');
         $root->description = 'Superuser';

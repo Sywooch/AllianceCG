@@ -6,6 +6,8 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\modules\alliance\models\Creditcalendar;
+use yii\helpers\Json;
+use yii\data\Sort;
 
 /**
  * CreditcalendarSearch represents the model behind the search form about `app\modules\alliance\models\Creditcalendar`.
@@ -46,6 +48,72 @@ class CreditcalendarSearch extends Creditcalendar
             ->all();
         return $listdata;
     }
+
+public function calendarsearch(){
+
+        $creditmanagerquery = 
+                "SELECT
+                    `id` AS id,
+                    `id` AS url,
+                    CASE 
+                        WHEN CONCAT(date_from, ' ', time_from) IS NULL THEN time_to
+                        ELSE CONCAT(date_from, ' ', time_from)
+                        END AS start,
+                    CASE
+                        WHEN CONCAT(date_to, ' ', time_to) IS NULL THEN time_to
+                        ELSE CONCAT(date_to, ' ', time_to)
+                        END AS end,
+                    `title` AS title,
+                    CASE status
+                        WHEN '0' THEN 'red'
+                        WHEN '1' THEN 'primary'
+                        ELSE 'green'
+                        END as color,
+                    -- CASE dow
+                    --     WHEN dow IS NULL THEN false
+                    --     ELSE dow
+                    --     END AS dow,
+                    CASE allday
+                        WHEN '0' THEN 'false'
+                        ELSE 'true'
+                        END AS allday 
+                FROM {{%calendar}} WHERE `private` <> '1';";
+
+        $chiefcreditquery = 
+                "SELECT
+                    `id` AS id,
+                    `id` AS url,
+                    -- `location` AS location,
+                    CASE 
+                        WHEN CONCAT(date_from, ' ', time_from) IS NULL THEN time_to
+                        ELSE CONCAT(date_from, ' ', time_from)
+                        END AS start,
+                    CASE
+                        WHEN CONCAT(date_to, ' ', time_to) IS NULL THEN time_to
+                        ELSE CONCAT(date_to, ' ', time_to)
+                        END AS end,
+                    `title` AS title,
+                    CASE status
+                        WHEN '0' THEN 'red'
+                        WHEN '1' THEN 'primary'
+                        ELSE 'green'
+                        END as color,
+                    -- CASE dow
+                    --     WHEN dow IS NULL THEN false
+                    --     ELSE dow
+                    --     END AS dow,
+                    CASE allday
+                        WHEN '0' THEN 'false'
+                        ELSE 'true'
+                        END AS allday 
+                FROM {{%calendar}};";
+        
+        $query = !Yii::$app->user->can('creditmanager') ? $chiefcreditquery : $creditmanagerquery;
+
+        $items = Yii::$app->db->createCommand($query)->queryAll();       
+        
+        return Json::encode($items);
+    }    
 
     /**
      * Creates data provider instance with search query applied

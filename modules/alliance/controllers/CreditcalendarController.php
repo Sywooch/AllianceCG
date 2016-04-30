@@ -46,6 +46,32 @@ class CreditcalendarController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+    
+    public function actionCalendarsearch()
+    {
+        $this->layout = false;
+        $model = new CreditcalendarSearch();
+        return $this->render('_calendarSearch', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Lists all Creditcalendar models.
+     * @return mixed
+     */
+    public function actionCalendar()
+    {
+        $model = new Creditcalendar();
+        $searchModel = new CreditcalendarSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('calendar', [
+            'model' => $model,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }    
 
     /**
      * Displays a single Creditcalendar model.

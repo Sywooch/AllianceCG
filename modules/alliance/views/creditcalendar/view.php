@@ -62,10 +62,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'responsibles',
                         'value' => implode(', ', ArrayHelper::map($model->users, 'id', 'full_name')),
+                        'visible' => (!empty($model->users)) ? true : false,
                     ],
                     [
                         'attribute' => 'locations',
                         'value' => implode(', ', ArrayHelper::map($model->locations, 'id', 'company_name')),
+                        'visible' => (!empty($model->locations)) ? true : false,
                     ],
                     [
                         'attribute' => 'status',
@@ -116,6 +118,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php
                 echo GridView::widget([
                     'dataProvider' => new ActiveDataProvider(['query' => $model->getCalendarComments()]),
+                    'showOnEmpty' => true,
+                    'emptyText' => 'Комментарии отсутствуют',
                     'tableOptions' =>[
                         'class' => 'table table-striped table-bordered creditcalendargridview'
                     ],

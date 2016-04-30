@@ -122,7 +122,22 @@ class CreditcalendarController extends Controller
      */
     public function actionCreate()
     {
+
+        $formatter = new \yii\i18n\Formatter;
+        $formatter->timeZone = 'Europe/Minsk';
+        $formatter->dateFormat = 'php:Y-m-d';
+        $formatter->timeFormat = 'php:h:i';
+
+        $curdate = $formatter->asDate('now');        
+        $curtime = $formatter->asTime('now');
+        $tomorrow = $formatter->asDate('now + 1 day'); 
+        
         $model = new Creditcalendar();
+        
+        $model->date_from = $curdate;
+        $model->time_from = $curtime;
+        $model->date_to = $tomorrow;
+        $model->time_to = $curtime;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

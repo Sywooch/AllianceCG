@@ -1,20 +1,23 @@
 <?php
 
 use yii\helpers\Html;
+use app\modules\alliance\Module;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\alliance\models\Creditcalendar */
 
-$this->title = Yii::t('app', 'Update {modelClass}: ', [
+$this->title = Module::t('module', 'UPDATE {modelClass}: ', [
     'modelClass' => 'Creditcalendar',
 ]) . $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Creditcalendars'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'CREDITCALENDARS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+$this->params['breadcrumbs'][] = Module::t('module', 'UPDATE');
 ?>
 <div class="creditcalendar-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <!-- <h1> -->
+    	<?php // Html::encode($this->title) ?>
+    <!-- </h1> -->
 
     <?= $this->render('_form', [
         'model' => $model,

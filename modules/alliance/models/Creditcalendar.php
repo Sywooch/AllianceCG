@@ -274,6 +274,23 @@ class Creditcalendar extends \yii\db\ActiveRecord
         $this->locationids = (array)$value;
     }
 
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if (!empty($this->allday) && $this->allday == 1) {
+                $this->date_from = '';
+                $this->date_to = '';
+
+            }
+            else {
+                return parent::beforeSave($insert);
+            }
+            return true;
+        }
+        return false;
+    }       
+
     /**
      * @inheritdoc
      */

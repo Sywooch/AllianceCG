@@ -102,6 +102,8 @@ class CreditcalendarSearch extends Creditcalendar
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['>=', 'date_from', $this->date_from])
+            ->andFilterWhere(['>=', 'date_to', $this->date_to])
             ->andFilterWhere(['like', 'author', $this->author]);
 
 

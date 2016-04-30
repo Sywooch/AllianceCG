@@ -93,9 +93,9 @@ class Creditcalendar extends \yii\db\ActiveRecord
         return [
             'id' => Module::t('module', 'ID'),
             'title' => Module::t('module', 'CALENDAR_TITLE'),
-            'date_from' => Module::t('module', 'Date From'),
+            'date_from' => Module::t('module', 'DATE_FROM'),
             'time_from' => Module::t('module', 'Time From'),
-            'date_to' => Module::t('module', 'Date To'),
+            'date_to' => Module::t('module', 'DATE_TO'),
             'time_to' => Module::t('module', 'Time To'),
             'description' => Module::t('module', 'CALENDAR_DESCRIPTION'),
             'location' => Module::t('module', 'CALENDAR_LOCATION'),

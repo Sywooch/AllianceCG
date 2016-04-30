@@ -44,7 +44,11 @@ $this->registerJs($multipleDelete, View::POS_END);
             <p style="text-align: right">
                 <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
                 <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'REFRESH'), ['index'], ['class' => 'btn btn-info btn-sm']) ?>
-                <?= Html::a(FA::icon('trash') . ' ' . Module::t('module', 'DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']); ?>
+                <?php
+                    if (!Yii::$app->user->can('deleteCreditcalendarPost')) {
+                        echo Html::a(FA::icon('trash') . ' ' . Module::t('module', 'DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']);
+                    }
+                ?>
             </p>
 
             <?php echo $this->render('_search', ['model' => $searchModel]); ?>

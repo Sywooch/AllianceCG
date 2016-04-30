@@ -8,6 +8,7 @@ use app\modules\admin\models\User;
 use yii\jui\AutoComplete;
 use rmrevin\yii\fontawesome\FA;
 use app\modules\alliance\Module;
+use janisto\timepicker\TimePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\alliance\models\CreditcalendarSearch */
@@ -56,8 +57,43 @@ use app\modules\alliance\Module;
             ?>
         </div>
         <div class="col-md-3">
-            <?php // $form->field($model, 'author', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'author' )]) ?>
-            <?php // $form->field($model, 'author')->dropDownList(User::find()->select(['full_name', 'id'])->where(['IN', 'id', $model->author])->indexBy('id')->column()) ?>
+            <?= $form->field($model, 'author', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'author' )]) ?>
+        </div>
+
+
+        <div class="col-md-3">
+            <?= $form->field($model, 'date_from')->widget(\janisto\timepicker\TimePicker::className(), [
+            'language' => 'ru',
+            'mode' => 'date',
+            'clientOptions' => [
+                'dateFormat' => 'yy-mm-dd',
+            ],
+            'options' => [
+                'class' => 'form-control',
+                'placeholder' => $model->getAttributeLabel( 'date_from' ),
+            ],
+        ]);
+            ?>            
+        </div>
+
+        <div class="col-md-3">
+            <?= $form->field($model, 'date_to')->widget(\janisto\timepicker\TimePicker::className(), [
+            'language' => 'ru',
+            'mode' => 'date',
+            'clientOptions' => [
+                'dateFormat' => 'yy-mm-dd',
+
+            ],
+            'options' => [
+                'class' => 'form-control',
+                'placeholder' => $model->getAttributeLabel( 'date_to' ),
+            ],
+        ]);
+            ?>            
+        </div>
+
+        <div class="col-md-3">
+            
         </div>
 
     <?php // echo $form->field($model, 'location', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('institution') . ' </span>{input}</div>{error}'])->dropDownList($items,$params); ?>

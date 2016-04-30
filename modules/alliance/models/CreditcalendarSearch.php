@@ -125,6 +125,9 @@ public function calendarsearch(){
     public function search($params)
     {
         $query = Creditcalendar::find();
+        if(Yii::$app->user->can('creditmanager')){        
+            $query->where(['<>','private', 1]);            
+        }
         $query->joinWith(['locations', 'users']);
 
         // add conditions that should always apply here

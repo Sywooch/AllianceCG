@@ -288,6 +288,19 @@ class Creditcalendar extends \yii\db\ActiveRecord
 
             self::getDb()->createCommand()
                 ->batchInsert(CalendarResponsibles::tableName(), ['calendar_id', 'user_id'], $values)->execute();
+
+            $emails = User::find()->where(['IN', 'id', $this->userids])->all();
+            foreach($emails as $email)
+            {
+                $mail[] = $email->email;
+            }
+            Yii::$app->mailer->compose()
+                ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                ->setReplyTo(Yii::$app->params['supportEmail'])
+                ->setSubject(date('d/m/Y H:i:s') . '. ' . Module::t('module', 'NEW_CREDITCALENDAR_COMMENT_FOR') . ' ' . $this->title)
+                ->setTextBody($this->description)
+                ->setTo($mail)
+                ->send();
         }
 
         if(!empty(array_filter($this->locationids))) {

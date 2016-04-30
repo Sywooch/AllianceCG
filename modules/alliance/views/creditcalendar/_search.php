@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\modules\alliance\models\Creditcalendar;
+use app\modules\admin\models\User;
 use yii\jui\AutoComplete;
 use rmrevin\yii\fontawesome\FA;
 use app\modules\alliance\Module;
@@ -55,7 +56,8 @@ use app\modules\alliance\Module;
             ?>
         </div>
         <div class="col-md-3">
-            <?= $form->field($model, 'author', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'author' )]) ?>
+            <?php // $form->field($model, 'author', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'author' )]) ?>
+            <?php // $form->field($model, 'author')->dropDownList(User::find()->select(['full_name', 'id'])->where(['IN', 'id', $model->author])->indexBy('id')->column()) ?>
         </div>
 
     <?php // echo $form->field($model, 'location', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('institution') . ' </span>{input}</div>{error}'])->dropDownList($items,$params); ?>

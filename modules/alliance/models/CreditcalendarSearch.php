@@ -53,8 +53,8 @@ class CreditcalendarSearch extends Creditcalendar
      */
     public function search($params)
     {
-        $query = Creditcalendar::find();
-        $query->joinWith(['users', 'locations']);
+        $query = Creditcalendar::find()->joinWith(['users', 'locations']);
+//        $query->with(['users', 'locations']);
 
         // add conditions that should always apply here
 

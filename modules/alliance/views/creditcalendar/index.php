@@ -43,14 +43,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
+            <?php
+                $countRecords = '<span class="label label-success">{count}</span>' ;
+                $beginRecords = '<span class="label label-success">{begin}</span>' ;
+                $endRecords = '<span class="label label-success">{end}</span>' ;
+                $events = '<h3>События:</h3>';
+            ?>
 
             <div class="bs-callout bs-callout-success">
                 <?= GridView::widget([
                     'dataProvider' => $dataProvider,
 //        'filterModel' => $searchModel,
+//                    'layout'=>"{sorter}\n{pager}\n{summary}\n{items}",
                     'tableOptions' =>[
                         'class' => 'table table-striped table-bordered creditcalendargridview'
                     ],
+                    'summary' => " <h4>События: $beginRecords - $endRecords из $countRecords </h4><br/>",
                     'rowOptions' => function($model){
                         if($model->status == Creditcalendar::STATUS_CLARIFY){
                             return ['class' => 'info'];
@@ -130,7 +138,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                             'class' => ActionColumn::className(),
                             'header' => 'Действия',
-                            'contentOptions'=>['style'=>'width: 150px;'],
+                            'contentOptions'=>['style'=>'width: 130px;'],
                             'template' => '{view}{update}{delete}',
                             'buttons' => [
                                 'view' => function ($url, $model) {

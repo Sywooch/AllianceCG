@@ -8,7 +8,9 @@ use app\modules\alliance\models\Creditcalendar;
 use app\modules\alliance\models\CreditcalendarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\HttpException;
 use yii\filters\VerbFilter;
+use app\modules\alliance\Module;
 
 /**
  * CreditcalendarController implements the CRUD actions for Creditcalendar model.
@@ -80,16 +82,18 @@ class CreditcalendarController extends Controller
      */
     public function actionView($id)
     {
-        $model = $this->findModel($id);
-//        $searchModel = CalendarComments::findOne($id);
-//        $dataProvider = $searchModel;
+        $model = $this->findModel($id);        
 
-
-        return $this->render('view', [
-//            'searchModel' => $searchModel,
-            'model' => $model,
-//            'dataProvider' => $dataProvider,
-        ]);
+        if($model->private == 1 && !Yii::$app->user->can('viewCreditcalendarOwnPost', ['creditcalendar' => $model]))
+        {
+            throw new HttpException(403, Module::t('module', 'ONLY_CHIEFCREDIT_CAN_DO_THERE'));
+        }
+        else
+        {
+            return $this->render('view', [
+                'model' => $model,
+            ]);
+        }
     }
 
     public function actionComment($id)

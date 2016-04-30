@@ -20,7 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="creditcalendar-index">
 
-
     <div class="panel panel-default">
 
         <div class="panel-heading panel-info">
@@ -28,7 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
         <div class="panel-body">
-
 
             <?= $this->render('_menu', [
                 'model' => $model,
@@ -71,9 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
           <?php  Pjax::end(); ?>
 
         </div>
+
     </div>  
     
-
-
-
 </div>

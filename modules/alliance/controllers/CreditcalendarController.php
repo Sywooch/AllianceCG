@@ -142,10 +142,10 @@ class CreditcalendarController extends Controller
      */
     public function actionMultipledelete()
     {
-//        if (!Yii::$app->user->can('deleteCreditcalendarPost')) {
-//            throw new ForbiddenHttpException(Module::t('module', 'ONLY_CHIEFCREDIT_CAN_DELETE_THERE'));
-//        }
-//        else {
+        if (!Yii::$app->user->can('deleteCreditcalendarPost')) {
+            throw new ForbiddenHttpException(Module::t('module', 'ONLY_CHIEFCREDIT_CAN_DELETE_THERE'));
+        }
+        else {
             $pk = Yii::$app->request->post('row_id');
             foreach ($pk as $key => $value)
             {
@@ -154,7 +154,7 @@ class CreditcalendarController extends Controller
             }
 
             return $this->redirect(['index']);
-//        }
+        }
     }
 
     /**

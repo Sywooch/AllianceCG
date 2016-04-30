@@ -62,7 +62,7 @@ use janisto\timepicker\TimePicker;
 
 
         <div class="col-md-3">
-            <?= $form->field($model, 'date_from')->widget(\janisto\timepicker\TimePicker::className(), [
+            <?= $form->field($model, 'date_from', ['template' => '{input}{error}{hint}'])->widget(TimePicker::className(), [
             'language' => 'ru',
             'mode' => 'date',
             'clientOptions' => [
@@ -77,18 +77,18 @@ use janisto\timepicker\TimePicker;
         </div>
 
         <div class="col-md-3">
-            <?= $form->field($model, 'date_to')->widget(\janisto\timepicker\TimePicker::className(), [
-            'language' => 'ru',
-            'mode' => 'date',
-            'clientOptions' => [
-                'dateFormat' => 'yy-mm-dd',
+            <?= $form->field($model, 'date_to', ['template' => '{input}{error}{hint}'])->widget(TimePicker::className(), [
+                    'language' => 'ru',
+                    'mode' => 'date',
+                    'clientOptions' => [
+                        'dateFormat' => 'yy-mm-dd',
 
-            ],
-            'options' => [
-                'class' => 'form-control',
-                'placeholder' => $model->getAttributeLabel( 'date_to' ),
-            ],
-        ]);
+                    ],
+                    'options' => [
+                        'class' => 'form-control',
+                        'placeholder' => $model->getAttributeLabel( 'date_to' ),
+                    ],
+                ]);
             ?>            
         </div>
 
@@ -96,39 +96,9 @@ use janisto\timepicker\TimePicker;
             
         </div>
 
-    <?php // echo $form->field($model, 'location', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('institution') . ' </span>{input}</div>{error}'])->dropDownList($items,$params); ?>
-
-    <?php // $form->field($model, 'globalSearch') ?>
-
-    <?php // $form->field($model, 'id') ?>
-
-    <?php // $form->field($model, 'title') ?>
-
-    <?php // $form->field($model, 'date_from') ?>
-
-    <?php // $form->field($model, 'time_from') ?>
-
-    <?php // $form->field($model, 'date_to') ?>
-
-    <?php // echo $form->field($model, 'time_to') ?>
-
-    <?php // echo $form->field($model, 'description') ?>
-
-    <?php // echo $form->field($model, 'type') ?>
-
-    <?php // echo $form->field($model, 'allday') ?>
-
-    <?php // echo $form->field($model, 'author') ?>
-
-    <?php // echo $form->field($model, 'created_at') ?>
-
-    <?php // echo $form->field($model, 'updated_at') ?>
-
-    <?php // echo $form->field($model, 'status') ?>
-
-    <?php // echo $form->field($model, 'private') ?>
-
-    <?php // echo $form->field($model, 'calendar_type') ?>
+        <div class="col-md-3">
+            
+        </div>
 
     <div class="form-group" style="text-align: right;">
         <?= Html::submitButton(FA::icon('search') . ' ' . Module::t('module', 'SEARCH'), ['class' => 'btn btn-primary btn-sm']) ?>

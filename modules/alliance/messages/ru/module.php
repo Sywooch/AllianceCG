@@ -32,4 +32,8 @@ return [
     'CREDITCALENDAR_PRIVATE_CHECKBOX' => 'Личная запись',
     'COMMENTS' => 'Комментарии',
     'COMMENT' => 'Добавить комментарий',
+    'DATE_TO' => 'Дата до: ',
+    'DATE_FROM' => 'Дата от: ',
+    'TIME_FROM' => 'Время от: ',
+    'TIME_TO' => 'Время до: ',
 ];

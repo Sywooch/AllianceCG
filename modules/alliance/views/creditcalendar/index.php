@@ -91,6 +91,9 @@ $this->registerJs($multipleDelete, View::POS_END);
                             'contentOptions'=>['style'=>'width: 20px;']
                         ],
                         [
+                            'attribute' => 'period'
+                        ],
+                        [
                             'class' => LinkColumn::className(),
                             'attribute' => 'title',
                             'format' => 'raw',
@@ -105,9 +108,6 @@ $this->registerJs($multipleDelete, View::POS_END);
                                 ]
                             ]),
                             'contentOptions'=>['style'=>'width: 130px;'],
-                        ],
-                        [
-                            'attribute' => 'period'
                         ],
                         [
                             'attribute' => 'locations',

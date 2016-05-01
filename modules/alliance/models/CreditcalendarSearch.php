@@ -94,7 +94,6 @@ public function calendarsearch(){
                 "SELECT
                     `id` AS id,
                     `id` AS url,
-                    -- `location` AS location,
                     CASE 
                         WHEN CONCAT(date_from, ' ', time_from) IS NULL THEN time_to
                         ELSE CONCAT(date_from, ' ', time_from)
@@ -109,15 +108,14 @@ public function calendarsearch(){
                         WHEN '1' THEN 'primary'
                         ELSE 'green'
                         END as color,
-                    -- CASE dow
-                    --     WHEN dow IS NULL THEN false
-                    --     ELSE dow
-                    --     END AS dow,
                     CASE allday
                         WHEN '0' THEN 'false'
                         ELSE 'true'
                         END AS allday 
-                FROM {{%calendar}};";
+                FROM {{%calendar}}
+                WHERE 
+                    IF(`private` = '1' AND `author` = '".Yii::$app->user->getId()."', 1, 0) 
+                    OR `private`=0;";
         
         $query = !Yii::$app->user->can('creditmanager') ? $chiefcreditquery : $creditmanagerquery;
 
@@ -140,6 +138,11 @@ public function calendarsearch(){
             $query->where(['<>','private', 1]);
             $query->andWhere(['like', 'user_id', Yii::$app->user->getId()]);
             $query->orFilterWhere(['author' => Yii::$app->user->getId()]);
+        }
+        else {
+            $query->where(['private' => 1]);
+            $query->andWhere(['author' => Yii::$app->user->getId()]);
+            $query->orWhere(['private' => 0]);
         }
         $query->joinWith(['locations', 'users']);
 

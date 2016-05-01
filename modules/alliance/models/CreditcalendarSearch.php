@@ -53,31 +53,42 @@ public function calendarsearch(){
 
         $creditmanagerquery = 
                 "SELECT
-                    `id` AS id,
-                    `id` AS url,
+                    {{%calendar}}.id AS id,
+                    {{%calendar}}.id AS url,
                     CASE 
-                        WHEN CONCAT(date_from, ' ', time_from) IS NULL THEN time_to
-                        ELSE CONCAT(date_from, ' ', time_from)
+                        WHEN CONCAT({{%calendar}}.date_from, ' ', {{%calendar}}.time_from) IS NULL THEN {{%calendar}}.time_to
+                        ELSE CONCAT({{%calendar}}.date_from, ' ', {{%calendar}}.time_from)
                         END AS start,
                     CASE
-                        WHEN CONCAT(date_to, ' ', time_to) IS NULL THEN time_to
-                        ELSE CONCAT(date_to, ' ', time_to)
+                        WHEN CONCAT({{%calendar}}.date_to, ' ', {{%calendar}}.time_to) IS NULL THEN {{%calendar}}.time_to
+                        ELSE CONCAT({{%calendar}}.date_to, ' ', {{%calendar}}.time_to)
                         END AS end,
-                    `title` AS title,
-                    CASE status
+                    {{%calendar}}.title AS title,
+                    CASE {{%calendar}}.status
                         WHEN '0' THEN 'red'
                         WHEN '1' THEN 'primary'
                         ELSE 'green'
                         END as color,
-                    -- CASE dow
-                    --     WHEN dow IS NULL THEN false
-                    --     ELSE dow
-                    --     END AS dow,
-                    CASE allday
+                    CASE {{%calendar}}.allday
                         WHEN '0' THEN 'false'
                         ELSE 'true'
-                        END AS allday 
-                FROM {{%calendar}} WHERE `private` <> '1';";
+                        END AS allday   
+                FROM
+                    {{%calendar}} 
+                LEFT JOIN
+                    {{%calendar_responsibles}} 
+                ON 
+                    {{%calendar_responsibles}}.calendar_id = {{%calendar}}.id
+                LEFT JOIN 
+                    all_user 
+                ON
+                    {{%calendar_responsibles}}.user_id = {{%user}}.id 
+                WHERE 
+                    author = 51 
+                OR 
+                    {{%calendar_responsibles}}.user_id LIKE 51
+                AND 
+                    {{%calendar}}.private <> 1;";
 
         $chiefcreditquery = 
                 "SELECT

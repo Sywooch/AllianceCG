@@ -17,12 +17,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php
 
-    // if(Yii::$app->user->can('seniorcreditspesialist')) {
-    //     echo 'seniorcreditspesialist';
-    // }
-    // else {
-    //     echo 'not seniorcreditspesialist';
-    // }
+// var_dump(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()));
+
+    if(Yii::$app->user->can('updateCreditcalendarPost')) {
+        echo 'chiefcredit';
+    }
+    else {
+        echo 'not chiefcredit';
+    }
 
     // echo '<br/>';
 

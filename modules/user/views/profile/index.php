@@ -19,12 +19,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
 // var_dump(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()));
 
-    if(Yii::$app->user->can('updateCreditcalendarPost')) {
-        echo 'chiefcredit';
-    }
-    else {
-        echo 'not chiefcredit';
-    }
+    // if(Yii::$app->user->can('updateCreditcalendarPost')) {
+    //     echo 'chiefcredit';
+    // }
+    // else {
+    //     echo 'not chiefcredit';
+    // }
+
+    // Yii::$app->user->getId()
 
     // echo '<br/>';
 

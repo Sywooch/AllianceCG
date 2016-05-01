@@ -84,9 +84,9 @@ public function calendarsearch(){
                 ON
                     {{%calendar_responsibles}}.user_id = {{%user}}.id 
                 WHERE 
-                    author = 51 
+                    author = '".Yii::$app->user->getId()."'
                 OR 
-                    {{%calendar_responsibles}}.user_id LIKE 51
+                    {{%calendar_responsibles}}.user_id LIKE '".Yii::$app->user->getId()."'
                 AND 
                     {{%calendar}}.private <> 1;";
 
@@ -137,7 +137,8 @@ public function calendarsearch(){
     {
         $query = Creditcalendar::find();
         if(Yii::$app->user->can('creditmanager')){        
-            $query->where(['<>','private', 1]);            
+            $query->where(['<>','private', 1]);
+            // $query->andWhere(['']);            
         }
         $query->joinWith(['locations', 'users']);
 

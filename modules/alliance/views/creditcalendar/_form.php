@@ -133,7 +133,7 @@ use app\modules\admin\models\Companies;
             <?= $form->field($model, 'priority', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('balance-scale') . ' </span>{input}</div>{error}'])->dropDownList($model->getPrioritiesArray()) ?>
         </div>
 
-        <?php //if(Yii::$app->user->can('chiefcredit')) { ?>
+        <?php if(!Yii::$app->user->can('creditmanager')) { ?>
         <div class="col-sm-6">
             <?= $form->field($model, 'userids')->checkboxList(User::find()->select(['full_name', 'id'])->where(['position' => 'Кредитный специалист'])->indexBy('id')->column()) ?>
         </div>
@@ -141,7 +141,7 @@ use app\modules\admin\models\Companies;
             <?= $form->field($model, 'locationids')->checkboxList(Companies::find()->select(['company_name', 'id'])->indexBy('id')->column()) ?>
         </div>
 
-        <?php //} ?>
+        <?php } ?>
 
     </div>
 

@@ -9,6 +9,7 @@ use app\modules\alliance\models\CreditcalendarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\HttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 use app\modules\alliance\Module;
 
@@ -158,12 +159,19 @@ class CreditcalendarController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        if (!Yii::$app->user->can('updateCreditcalendarPost', ['creditcalendar' => $model])) {
+            throw new ForbiddenHttpException(Module::t('module', 'ONLY_AUTHOR_CAN_UPDATE_THIS_RECORD'));
+        }
+        else
+        {
+
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
         }
     }
 
@@ -175,9 +183,13 @@ class CreditcalendarController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        if (!Yii::$app->user->can('deleteCreditcalendarPost')) {
+            throw new ForbiddenHttpException(Module::t('module', 'ONLY_CHIEFCREDIT_CAN_DELETE_THERE'));
+        }
+        else {
+            $this->findModel($id)->delete();
+            return $this->redirect(['index']);
+        }
     }
 
     /**

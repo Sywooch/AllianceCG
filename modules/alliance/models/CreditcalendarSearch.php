@@ -138,7 +138,8 @@ public function calendarsearch(){
         $query = Creditcalendar::find();
         if(Yii::$app->user->can('creditmanager')){        
             $query->where(['<>','private', 1]);
-            // $query->andWhere(['']);            
+            $query->andWhere(['like', 'user_id', Yii::$app->user->getId()]);
+            $query->orFilterWhere(['author' => Yii::$app->user->getId()]);
         }
         $query->joinWith(['locations', 'users']);
 

@@ -296,7 +296,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
      */
     public function afterSave($insert, $changedAttributes)
     {
-        if(!empty(array_filter($this->userids))) {
+        if(isset($this->userids) && !empty(array_filter($this->userids))) {
             CalendarResponsibles::deleteAll(['calendar_id' => $this->id]);
             $values = [];
             foreach ($this->userids as $id) {
@@ -320,7 +320,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
                 ->send();
         }
 
-        if(!empty(array_filter($this->locationids))) {
+        if(isset($this->locationids) && !empty(array_filter($this->locationids))) {
             CalendarLocations::deleteAll(['calendar_id' => $this->id]);
             $values = [];
             foreach ($this->locationids as $id) {

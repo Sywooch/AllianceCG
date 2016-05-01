@@ -1,0 +1,6 @@
+SELECT 
+	*
+FROM {{%calendar}}
+WHERE 
+	IF(`private` = '1' AND `author` = '".Yii::$app->user->getId()."', 1, 0)
+    OR `private`=0

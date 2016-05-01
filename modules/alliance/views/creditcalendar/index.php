@@ -45,7 +45,7 @@ $this->registerJs($multipleDelete, View::POS_END);
                 <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
                 <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'REFRESH'), ['index'], ['class' => 'btn btn-info btn-sm']) ?>
                 <?php
-                    if (!Yii::$app->user->can('deleteCreditcalendarPost')) {
+                    if (Yii::$app->user->can('deleteCreditcalendarPost')) {
                         echo Html::a(FA::icon('trash') . ' ' . Module::t('module', 'DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']);
                     }
                 ?>
@@ -171,12 +171,14 @@ $this->registerJs($multipleDelete, View::POS_END);
                                     return Html::a($label, $url, $options) .''. PHP_EOL;
                                 },
                                 'delete' => function ($url, $model, $key) {
-                                    return Html::a('<span class="btn btn-sm btn-danger">'.FA::icon("trash").'</span>', $url, [
-                                        'title' => false,
-                                        'data-confirm' => Module::t('module', 'DELETE_CONFIRMATION'),
-                                        'data-method' => 'post',
-                                        'data-pjax' => '0',
-                                    ]);
+                                    if(!Yii::$app->user->can('creditmanager')){
+                                        return Html::a('<span class="btn btn-sm btn-danger">'.FA::icon("trash").'</span>', $url, [
+                                            'title' => false,
+                                            'data-confirm' => Module::t('module', 'DELETE_CONFIRMATION'),
+                                            'data-method' => 'post',
+                                            'data-pjax' => '0',
+                                        ]);
+                                    }
                                 },
                             ],
                         ],

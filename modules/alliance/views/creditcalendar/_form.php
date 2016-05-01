@@ -135,7 +135,7 @@ use app\modules\admin\models\Companies;
 
         <?php if(!Yii::$app->user->can('creditmanager')) { ?>
         <div class="col-sm-6">
-            <?= $form->field($model, 'userids')->checkboxList(User::find()->select(['full_name', 'id'])->where(['position' => 'Кредитный специалист'])->indexBy('id')->column()) ?>
+            <?= $form->field($model, 'userids')->checkboxList(User::find()->select(['full_name', 'id'])->where(['position' => 'Кредитный специалист'])->andWhere(['status' => 1])->indexBy('id')->column()) ?>
         </div>
         <div class="col-sm-6">
             <?= $form->field($model, 'locationids')->checkboxList(Companies::find()->select(['company_name', 'id'])->indexBy('id')->column()) ?>

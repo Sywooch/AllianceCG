@@ -173,6 +173,8 @@ class RbacController extends Controller
         $auth->addChild($chiefcredit, $creditcalendarIsVisible);
         // PERMISSION TO DELETE CREDITCALENDAR COMPONENTS
         $auth->addChild($chiefcredit, $deleteCreditcalendarPost);
+        // INHERITANCE PERMISSION TO VIEW OWN RECORDS IN Creditcalendar
+        $auth->addChild($chiefcredit, $viewCreditcalendarOwnPost);   
 
         // SENIOR CREDIT SPECIALIST
         $seniorcreditspesialist = $auth->createRole('seniorcreditspesialist');

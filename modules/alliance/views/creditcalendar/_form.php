@@ -23,7 +23,7 @@ use app\modules\admin\models\Companies;
     <?= $form->errorSummary($model); ?>
 
     <div class="col-sm-12">
-    <div class="col-sm-12 bs-callout bs-callout-danger">
+    <div class="col-sm-12 bs-callout bs-callout-success">
         <div class="col-sm-3">
             <?= $form->field($model, 'date_from', ['template' => '{input}{error}{hint}'])->widget(TimePicker::className(), [
                      'language' => 'ru',
@@ -115,7 +115,7 @@ use app\modules\admin\models\Companies;
 
     <div class="col-sm-12">
 
-    <div class="col-sm-12 bs-callout bs-callout-danger">
+    <div class="col-sm-12 bs-callout bs-callout-info">
 
         <?= $form->field($model, 'title', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('bookmark') . ' </span>{input}</div>{error}'])->textInput(['maxlength' => true,'placeholder' => $model->getAttributeLabel('title')]) ?>
 
@@ -150,6 +150,7 @@ use app\modules\admin\models\Companies;
     <div class="col-sm-12">
         <div class="form-group" style="text-align: right">
             <?= Html::submitButton($model->isNewRecord ? FA::icon('plus') . ' ' . Module::t('module', 'CREATE') : FA::icon('edit') . ' ' . Module::t('module', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            <?= Html::submitButton(FA::icon('remove') . ' ' . Module::t('module', 'CANCEL'), ['class' => 'btn btn-danger']) ?>
         </div>
     </div>
 

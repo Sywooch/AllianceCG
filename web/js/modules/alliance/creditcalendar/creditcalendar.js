@@ -8,6 +8,8 @@
 //<script>
 
     $(document).ready(function() {
+        var source = "/alliance/creditcalendar/calendarsearch";
+        var filter = document.getElementById('autor_selector')
         $('#credit_calendar').fullCalendar({
             editable: true,
             weekMode: 'liquid',
@@ -60,27 +62,25 @@
 //              
 
             events: {
-                url: "/alliance/creditcalendar/calendarsearch",
+                // url: "/alliance/creditcalendar/calendarsearch",
+                url: source,
                 cache: true 
             },
             header: {
                 left: 'prev,today,next',
-                center: 'title',
+                center: 'title,filter',
                 right: 'month,agendaWeek,agendaDay'
             },
 
+            eventRender: function eventRender( event, element, view ) {
+                return ['all', event.author].indexOf($('#autor_selector').val()) >= 0
+            },
+            
 //            Tooltip/QTip:
 //            
 //            eventRender: function(event, element) {
-//                    $(element).tooltip({title: event.title});   
-//                    QTIP:
-//                    $(element).qtip({
-//                        content: event.event
-//                    });          
+//                    $(element).tooltip({title: event.title});          
 //            },
-            // eventRender: function eventRender( event, element, view ) {
-            //     return ['all', event.location].indexOf($('#location_selector').val())
-            // },
 
             eventClick: function(calEvent, jsEvent, view) {
                 if (calEvent.url) {
@@ -90,5 +90,9 @@
             },
         });
     });
+
+    $('#autor_selector').on('change',function(){
+    $('#credit_calendar').fullCalendar('rerenderEvents');
+})
 
 //</script>

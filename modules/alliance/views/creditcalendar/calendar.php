@@ -58,12 +58,20 @@ $this->params['breadcrumbs'][] = $this->title;
                        'yii\web\YiiAsset',
                        'yii\bootstrap\BootstrapAsset'],
                    ]);  
+                   $this->registerJsFile(Yii::getAlias('@web/js/jquery.qtip.min.js'), ['depends' => [
+                       'yii\web\YiiAsset',
+                       'yii\bootstrap\BootstrapAsset'],
+                   ]);
                    $this->registerJsFile(Yii::getAlias('@web/js/modules/alliance/creditcalendar/creditcalendar.js'), ['depends' => [
                        'yii\web\YiiAsset',
                        'yii\bootstrap\BootstrapAsset'],
                    ]);    
                ?>
-             
+          <select id="autor_selector">
+            <option value="all"><?= Module::t('module', 'CREDITCALENDAR_TABLE_ALL') ?></a>
+            <option value=<?= Yii::$app->user->getId(); ?>><?= Module::t('module', 'CREDITCALENDAR_TABLE_PRIVATE') ?></a>
+          </select>   
+
           <div id='credit_calendar'> </div>  
 
           <?php  Pjax::end(); ?>

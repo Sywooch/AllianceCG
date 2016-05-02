@@ -55,6 +55,7 @@ public function calendarsearch(){
                 "SELECT
                     {{%calendar}}.id AS id,
                     {{%calendar}}.id AS url,
+                    {{%calendar}}.author AS author,
                     CASE 
                         WHEN CONCAT({{%calendar}}.date_from, ' ', {{%calendar}}.time_from) IS NULL THEN {{%calendar}}.time_to
                         ELSE CONCAT({{%calendar}}.date_from, ' ', {{%calendar}}.time_from)
@@ -94,6 +95,7 @@ public function calendarsearch(){
                 "SELECT
                     `id` AS id,
                     `id` AS url,
+                    {{%calendar}}.author AS author,
                     CASE 
                         WHEN CONCAT(date_from, ' ', time_from) IS NULL THEN time_to
                         ELSE CONCAT(date_from, ' ', time_from)

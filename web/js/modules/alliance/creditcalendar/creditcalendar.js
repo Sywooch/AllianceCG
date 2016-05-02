@@ -81,25 +81,14 @@
             // eventRender: function eventRender( event, element, view ) {
             //     return ['all', event.location].indexOf($('#location_selector').val())
             // },
+
             eventClick: function(calEvent, jsEvent, view) {
                 if (calEvent.url) {
                     window.open(calEvent.url);
-                      
-//                    Alert при клике, изменить цвет события
-//                    
-//                    alert('Дата: ' + calEvent.start.format("DD/MM/YYYY H:mm:ss") + '\n\t' + 'Гос. рег. номер: ' + calEvent.title);
-//                    $(this).css('border-color', 'red');
                     return false;
                 }
             },
         });
     });
-
-
-    $('#location_selector').on('change',function(){
-        $('#credit_calendar').fullCalendar('rerenderEvents');
-    })
-      
-
 
 //</script>

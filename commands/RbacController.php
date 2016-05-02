@@ -42,6 +42,12 @@ class RbacController extends Controller
         $createCreditcalendarPost->description = 'Alliance Creditcalendar Create Post';
         $auth->add($createCreditcalendarPost);
 
+
+        // PERMISSION "createCreditcalendarPost"
+        $privateCreditcalendarPost = $auth->createPermission('privateCreditcalendarPost');
+        $privateCreditcalendarPost->description = 'Alliance Creditcalendar Create Private Post';
+        $auth->add($privateCreditcalendarPost);
+
         // PERMISSION "creditcalendarIsVisible"
         $creditcalendarIsVisible = $auth->createPermission('creditcalendarIsVisible');
         $creditcalendarIsVisible->description = 'Alliance Creditcalendar Is Visible Permission';
@@ -174,7 +180,9 @@ class RbacController extends Controller
         // PERMISSION TO DELETE CREDITCALENDAR COMPONENTS
         $auth->addChild($chiefcredit, $deleteCreditcalendarPost);
         // INHERITANCE PERMISSION TO VIEW OWN RECORDS IN Creditcalendar
-        $auth->addChild($chiefcredit, $viewCreditcalendarOwnPost);   
+        $auth->addChild($chiefcredit, $viewCreditcalendarOwnPost); 
+        // PERMISSION TO CREATE PRIVATE RECORDS IN Creditcalendar
+        $auth->addChild($chiefcredit, $privateCreditcalendarPost);
 
         // SENIOR CREDIT SPECIALIST
         $seniorcreditspesialist = $auth->createRole('seniorcreditspesialist');
@@ -197,6 +205,8 @@ class RbacController extends Controller
         $auth->addChild($seniorcreditspesialist, $creditcalendarIsVisible);
         // PERMISSION TO DELETE CREDITCALENDAR COMPONENTS
         $auth->addChild($seniorcreditspesialist, $deleteCreditcalendarPost);
+        // PERMISSION TO CREATE PRIVATE RECORDS IN Creditcalendar
+        $auth->addChild($seniorcreditspesialist, $privateCreditcalendarPost);
 
         // ===   CREDIT_DEPARTMENT_END   ===
         

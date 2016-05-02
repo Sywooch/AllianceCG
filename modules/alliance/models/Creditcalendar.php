@@ -78,8 +78,8 @@ class Creditcalendar extends \yii\db\ActiveRecord
             ['locationids', 'safe'],
             [['description'], 'string'],
             ['author', 'default', 'value' => Yii::$app->user->getId()],
+            ['private', 'default', 'value' => 0],
             [['type', 'allday', 'created_at', 'updated_at', 'status', 'private', 'calendar_type', 'priority'], 'integer'],
-//            [['created_at', 'updated_at'], 'required'],
             [['title'], 'string', 'max' => 255],
             ['author', 'integer'],
         ];

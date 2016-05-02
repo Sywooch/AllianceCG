@@ -98,7 +98,7 @@ use app\modules\admin\models\Companies;
         </div>
         <div class="col-sm-6" style="text-align: left">
             <?php
-                if(!Yii::$app->user->can('creditmanager')){
+                if(Yii::$app->user->can('privateCreditcalendarPost')){
                     echo $form->field($model, 'private')->checkbox(
                             [
                                 'label' => Module::t('module', 'CREDITCALENDAR_PRIVATE_CHECKBOX'),

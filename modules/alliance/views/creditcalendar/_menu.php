@@ -23,6 +23,22 @@ echo Nav::widget([
         [
             'label' => FA::icon('table') . ' ' . Module::t('module', 'CREDITCALENDAR_TABLE'),
             'url' => '/alliance/creditcalendar',
+            'visible' => !Yii::$app->user->can('privateCreditcalendarPost'),
+        ],
+        [
+            'label' => FA::icon('table') . ' ' . Module::t('module', 'CREDITCALENDAR_TABLE'),
+            'visible' => Yii::$app->user->can('privateCreditcalendarPost'),
+            'items' => [
+                    [
+                        'label' => FA::icon('table') . ' ' . Module::t('module', 'CREDITCALENDAR_TABLE_ALL'),
+                        'url' => ['/alliance/creditcalendar'],
+                    ],
+                    [
+                        'label' => FA::icon('table') . ' ' . Module::t('module', 'CREDITCALENDAR_TABLE_PRIVATE'),
+                        'url' => ['/alliance/creditcalendar/private'],
+                        
+                    ],                    
+                ],
         ],
         [
             'label' => FA::icon('pie-chart') . ' ' . Module::t('module', 'CREDITCALENDAR_GRAPH'),

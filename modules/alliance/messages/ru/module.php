@@ -41,4 +41,6 @@ return [
     'ONLY_CHIEFCREDIT_CAN_DO_THERE' => 'Только пользователь с ролью "Руководитель ОКиС" может просматривать данную запись',
     'ONLY_CHIEFCREDIT_CAN_DELETE_THERE' => 'Только пользователь с ролью "Руководитель ОКиС" может удалить данную запись',
     'CANCEL' => 'Отмена',
+    'CREDITCALENDAR_TABLE_ALL' => 'Все события',
+    'CREDITCALENDAR_TABLE_PRIVATE' => 'Мои события',
 ];

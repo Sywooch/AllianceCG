@@ -73,7 +73,7 @@
             },
 
             eventRender: function eventRender( event, element, view ) {
-                return ['all', event.author].indexOf($('#autor_selector').val()) >= 0
+                return ['all', event.author].indexOf($('#author_selector').val()) >= 0
             },
             
 //            Tooltip/QTip:
@@ -91,8 +91,12 @@
         });
     });
 
-    $('#autor_selector').on('change',function(){
-    $('#credit_calendar').fullCalendar('rerenderEvents');
-})
+    // $('#status_selector').on('change',function(){
+    //     $('#credit_calendar').fullCalendar('rerenderEvents');
+    // });
+
+    $('#author_selector').on('change',function(){
+        $('#credit_calendar').fullCalendar('rerenderEvents');
+    });
 
 //</script>

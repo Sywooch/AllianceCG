@@ -12,6 +12,7 @@ use app\modules\alliance\Module;
 use yii\grid\ActionColumn;
 use yii\helpers\Url;
 use yii\web\View;
+use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -49,7 +50,20 @@ $this->registerJs($multipleDelete, View::POS_END);
                         echo Html::a(FA::icon('trash') . ' ' . Module::t('module', 'DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']);
                     }
                 ?>
+                <?= Html::button(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['value' => Url::to(['create']), 'class' => 'btn btn-info btn-sm', 'id' => 'modalButton']);?>
             </p>
+
+            <?php
+                Modal::begin([
+                    'header' => '<h4>' . Module::t('module', 'COMMENT') .'</h4>',
+                    'id' => 'modal',
+                    'size' => 'modal-lg'
+                ]);
+
+                echo "<div id='modalContent'></div>";
+
+                Modal::end();
+            ?>
 
             <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 

@@ -39,18 +39,16 @@ $this->registerJs($multipleDelete, View::POS_END);
         <div class="panel-body">
 
 <?php
-        // $mod = CreditcalendarSearch::find()
-        //     ->with(['locations'])
-        //     ->all();
+      // $m = new Creditcalendar();
+      //   $sm = new CreditcalendarSearch();
+      //   $d = $sm->search(Yii::$app->request->queryParams);
 
-        //     // var_dump($mod);
-
-        // foreach ($mod as $d) {
-        //     echo $d->title;
-        //     echo '<br/>';
-        //     echo implode(', ', ArrayHelper::map($mod->locations, 'id', 'company_name'));
-        //     echo '<br/>';
-        // }
+      //   foreach ($d->models as $ex) {
+      //       echo $ex->title;
+      //       echo '<br/>';
+      //       echo implode(', ', ArrayHelper::map($ex->locations, 'id', 'company_name'));
+      //       echo '<br/>';
+      //   }
 ?>
 
             <?= $this->render('_menu', [

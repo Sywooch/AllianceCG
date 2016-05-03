@@ -43,6 +43,7 @@ echo Nav::widget([
         [
             'label' => FA::icon('pie-chart') . ' ' . Module::t('module', 'CREDITCALENDAR_GRAPH'),
             'url' => '/alliance/creditcalendar/graph',
+            'visible' => Yii::$app->user->can('root')
         ],
     ]),
 ]);

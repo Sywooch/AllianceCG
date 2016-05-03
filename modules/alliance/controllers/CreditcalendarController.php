@@ -6,12 +6,14 @@ use app\modules\alliance\models\CalendarComments;
 use Yii;
 use app\modules\alliance\models\Creditcalendar;
 use app\modules\alliance\models\CreditcalendarSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\HttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 use app\modules\alliance\Module;
+use yii\helpers\ArrayHelper;
 
 /**
  * CreditcalendarController implements the CRUD actions for Creditcalendar model.
@@ -258,18 +260,14 @@ class CreditcalendarController extends Controller
         $row=4;
 
         // № строки заголовка
-        $titleNumber=1;      
-
+        $titleNumber=1;   
 
         $objPHPExcel->setActiveSheetIndex($sheet);
-        
-        // № Модель получения заголовков и функций
-        $labelModel = new Creditcalendar();
 
-        // Запрос данных
-        $model = CreditcalendarSearch::find()
-            ->where(['<>','private', 1])
-            ->all();
+        // Запрос данных      
+        $model = new Creditcalendar();
+        $searchModel = new CreditcalendarSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
                  
         // Размер листа, ориентация
         $objPHPExcel->getActiveSheet()
@@ -279,43 +277,50 @@ class CreditcalendarController extends Controller
             ->getPageSetup()
             ->setPaperSize(\PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4);
         
+        // Автофильтр
+        $objPHPExcel->getActiveSheet()->setAutoFilter('A'.($row-1).':H'.($row-1));
+
         // Слияние ячеек в заголовке таблицы
-        $objPHPExcel->getActiveSheet()->mergeCells('A'.$titleNumber.':F'.$titleNumber);
+        $objPHPExcel->getActiveSheet()->mergeCells('A'.$titleNumber.':H'.$titleNumber);
 
         // Жирный шрифт в заголовке
-        $objPHPExcel->getActiveSheet()->getStyle('A'.($row-1).':F'.($row-1))->getFont()->setBold(true);
+        $objPHPExcel->getActiveSheet()->getStyle('A'.($row-1).':H'.($row-1))->getFont()->setBold(true);
 
         // Жирный шрифт в заголовках колонок
         $objPHPExcel->getActiveSheet()->getStyle('A'.$titleNumber)->getFont()->setBold(true);
 
         // Заголовки колонок
-        $objPHPExcel->getActiveSheet()->setTitle('Календарь ОКиС')                     
-            ->setCellValue('A'.($row-1), $labelModel->getAttributeLabel('title'))
-            ->setCellValue('B'.($row-1), $labelModel->getAttributeLabel('date_from'))
-            ->setCellValue('C'.($row-1), $labelModel->getAttributeLabel('date_to'))
-            ->setCellValue('D'.($row-1), $labelModel->getAttributeLabel('description'))
-            ->setCellValue('E'.($row-1), $labelModel->getAttributeLabel('status'))
-            ->setCellValue('F'.($row-1), $labelModel->getAttributeLabel('priority'));
+        $objPHPExcel->getActiveSheet()->setTitle(Module::t('module','CREDITCALENDAR_EXCEL_TITLE').date("d-m-Y-H-i"))                
+            ->setCellValue('A'.($row-1), $model->getAttributeLabel('title'))
+            ->setCellValue('B'.($row-1), $model->getAttributeLabel('date_from'))
+            ->setCellValue('C'.($row-1), $model->getAttributeLabel('date_to'))
+            ->setCellValue('D'.($row-1), $model->getAttributeLabel('author'))
+            ->setCellValue('E'.($row-1), $model->getAttributeLabel('responsibles'))
+            ->setCellValue('F'.($row-1), $model->getAttributeLabel('locations'))
+            ->setCellValue('G'.($row-1), $model->getAttributeLabel('status'))
+            ->setCellValue('H'.($row-1), $model->getAttributeLabel('priority'));
 
         // Данные из запроса
-        foreach ($model as $exportrows) {
-                    $objPHPExcel->getActiveSheet()->setCellValue('A'.$row,$exportrows->title); 
-                    $objPHPExcel->getActiveSheet()->setCellValue('B'.$row,$exportrows->date_from . ' ' . $exportrows->time_from); 
-                    $objPHPExcel->getActiveSheet()->setCellValue('C'.$row,$exportrows->date_to . ' ' . $exportrows->time_to); 
-                    $objPHPExcel->getActiveSheet()->setCellValue('D'.$row,$exportrows->description);
-                    $objPHPExcel->getActiveSheet()->setCellValue('E'.$row,$labelModel->getStatusesArray()[$exportrows->status]);
-                    $objPHPExcel->getActiveSheet()->setCellValue('F'.$row,$labelModel->getPrioritiesArray()[$exportrows->status]);
-                    $row++ ;
-                }  
+        foreach ($dataProvider->models as $exportrows) {
+            $objPHPExcel->getActiveSheet()->setCellValue('A'.$row,$exportrows->title); 
+            $objPHPExcel->getActiveSheet()->setCellValue('B'.$row,$exportrows->date_from . ' ' . $exportrows->time_from); 
+            $objPHPExcel->getActiveSheet()->setCellValue('C'.$row,$exportrows->date_to . ' ' . $exportrows->time_to); 
+            $objPHPExcel->getActiveSheet()->setCellValue('D'.$row,$exportrows->authorname->full_name); 
+            $objPHPExcel->getActiveSheet()->setCellValue('E'.$row,implode(', ', ArrayHelper::map($exportrows->users, 'id', 'full_name')));
+            $objPHPExcel->getActiveSheet()->setCellValue('F'.$row,implode(', ', ArrayHelper::map($exportrows->locations, 'id', 'company_name')));
+            $objPHPExcel->getActiveSheet()->setCellValue('G'.$row,$model->getStatusesArray()[$exportrows->status]);
+            $objPHPExcel->getActiveSheet()->setCellValue('H'.$row,$model->getPrioritiesArray()[$exportrows->status]);
+            $row++ ;
+        }  
 
         // Excel list header
         $objPHPExcel->getActiveSheet()
             ->getHeaderFooter()
-            ->setOddHeader('&L&BКалендарь отдела кредитования, страхования и лизинга ГК "Альянс"');
+            ->setOddHeader('&R&BКалендарь отдела кредитования, страхования и лизинга ГК "Альянс"');
 
         // Excel list footer
         $objPHPExcel->getActiveSheet()
-            ->getHeaderFooter()->setOddFooter('&L&F Стр. &P / &N');
+            ->getHeaderFooter()->setOddFooter('&R&F Стр. &P / &N');
         $objPHPExcel->getActiveSheet()
             ->getHeaderFooter()->setEvenFooter('&L&F Стр. &P / &N'); 
 
@@ -337,33 +342,75 @@ class CreditcalendarController extends Controller
             'alignment' => [
                 'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
             ]
-        ];        
+        ]; 
 
-        $objPHPExcel->getActiveSheet()->getStyle("A3:F".($rowNumber))->applyFromArray($border_thin);
+        // Цвет ячеек таблицы
+        $colors = [
+                'fill' => [
+                    'type' => \PHPExcel_Style_Fill::FILL_SOLID,
+                    'color' => ['rgb' => 'EDEDED']  // 1E90FF
+                ]
+            ];
+
+        // Цвет ячеек заголовков
+        $headercolors = [
+                'fill' => [
+                    'type' => \PHPExcel_Style_Fill::FILL_SOLID,
+                    'color' => ['rgb' => '5cb85c']  // EDEDED
+                ]
+            ];
+
+        // Цвет текста
+        $fontheadercolors = [
+            'font'  => [
+                'bold'  => true,
+                'color' => ['rgb' => 'FFFFFF'],
+                'size'  => 10,
+                'name'  => 'Verdana'
+            ]];
+
+        $tablefont = [
+            'font'  => [
+                'bold'  => true,
+                'color' => ['rgb' => '000000'],
+                'size'  => 8,
+                'name'  => 'Verdana'
+            ]];
+
+
+        $objPHPExcel->getActiveSheet()->getStyle('A3:H'.($row-1))->applyFromArray($headercolors);
+        $objPHPExcel->getActiveSheet()->getStyle('A3:H3')->applyFromArray($fontheadercolors);
+
+        $objPHPExcel->getActiveSheet()->getStyle('A4:H'.($row-1))->applyFromArray($colors);
+        $objPHPExcel->getActiveSheet()->getStyle('A4:H'.($row-1))->applyFromArray($tablefont);
+
+
+        $objPHPExcel->getActiveSheet()->getStyle("A3:H".($rowNumber))->applyFromArray($border_thin);
         unset($styleArray);
 
         // Ширина колонок таблицы
-        $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(18);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(18);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(30);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(13);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(10);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(20);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(20);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(13);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(13);
 
         // Заголовок по центру
-        $objPHPExcel->getActiveSheet()->getStyle('A'.$titleNumber.':F'.$titleNumber)->applyFromArray($centered);
+        $objPHPExcel->getActiveSheet()->getStyle('A'.$titleNumber.':H'.$titleNumber)->applyFromArray($centered);
 
         // Текст заголовка
-        $objPHPExcel->getActiveSheet()->setCellValue('A'.$titleNumber, 'События календаря отдела страхования, кредитования и лизинга');
+        $objPHPExcel->getActiveSheet()->setCellValue('A'.$titleNumber, Module::t('module', 'CREDITCALENDAR_EXCEL_TABLEHEADER') . date("d.m.Y H:i"));
         // $objPHPExcel->getActiveSheet()->setCellValue('A'.($titleNumber+1), $rowNumber);
 
         // Тип выгружаемого файла
         header('Content-Type: application/vnd.ms-excel');
 
         // Имя выгружаемого файла
-        $filename = "Календарь_ОКиС_".date("d-m-Y-H-i-s").".xls";
+        $filename = Module::t('module','CREDITCALENDAR_EXCEL_TITLE').date("d-m-Y-H-i-s").".xls";
 
-        
         header('Content-Disposition: attachment;filename='.$filename .' ');
         header('Cache-Control: max-age=0');
         $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');

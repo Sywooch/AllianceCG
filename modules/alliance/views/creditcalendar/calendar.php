@@ -37,7 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <p style="text-align: right">
                 <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
                 <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'REFRESH'), ['calendar'], ['class' => 'btn btn-info btn-sm']) ?>
-                <?= Html::button(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['value' => Url::to(['create']), 'class' => 'btn btn-info btn-sm', 'id' => 'modalButton']);?>
             </p>
 
             <!-- <br/><br/><br/> -->

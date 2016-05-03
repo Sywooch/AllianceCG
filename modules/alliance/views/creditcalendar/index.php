@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use app\modules\alliance\models\Creditcalendar;
+use app\modules\alliance\models\CreditcalendarSearch;
 use app\components\grid\SetColumn;
 use yii\helpers\ArrayHelper;
 use app\components\grid\LinkColumn;
@@ -12,7 +13,6 @@ use app\modules\alliance\Module;
 use yii\grid\ActionColumn;
 use yii\helpers\Url;
 use yii\web\View;
-use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -38,6 +38,21 @@ $this->registerJs($multipleDelete, View::POS_END);
         </div>
         <div class="panel-body">
 
+<?php
+        // $mod = CreditcalendarSearch::find()
+        //     ->with(['locations'])
+        //     ->all();
+
+        //     // var_dump($mod);
+
+        // foreach ($mod as $d) {
+        //     echo $d->title;
+        //     echo '<br/>';
+        //     echo implode(', ', ArrayHelper::map($mod->locations, 'id', 'company_name'));
+        //     echo '<br/>';
+        // }
+?>
+
             <?= $this->render('_menu', [
                 'model' => $model,
             ]) ?>
@@ -50,20 +65,8 @@ $this->registerJs($multipleDelete, View::POS_END);
                         echo Html::a(FA::icon('trash') . ' ' . Module::t('module', 'DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']);
                     }
                 ?>
-                <?= Html::button(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['value' => Url::to(['create']), 'class' => 'btn btn-info btn-sm', 'id' => 'modalButton']);?>
+                <?= Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'), ['export'], ['class' => 'btn btn-warning btn-sm']) ?>
             </p>
-
-            <?php
-                Modal::begin([
-                    'header' => '<h4>' . Module::t('module', 'COMMENT') .'</h4>',
-                    'id' => 'modal',
-                    'size' => 'modal-lg'
-                ]);
-
-                echo "<div id='modalContent'></div>";
-
-                Modal::end();
-            ?>
 
             <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 

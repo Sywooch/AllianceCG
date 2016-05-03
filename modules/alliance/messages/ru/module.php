@@ -43,4 +43,5 @@ return [
     'CANCEL' => 'Отмена',
     'CREDITCALENDAR_TABLE_ALL' => 'Все события',
     'CREDITCALENDAR_TABLE_PRIVATE' => 'Мои события',
+    'CREDITCALENDAR_EXPORT_EXCEL' => 'Export Excel',
 ];

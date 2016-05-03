@@ -246,4 +246,90 @@ class CreditcalendarController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionExport(){
+
+        $objPHPExcel = new \PHPExcel();
+         
+        $sheet=0;
+          
+        $objPHPExcel->setActiveSheetIndex($sheet);
+
+        $labelModel = new Creditcalendar();
+
+        $model = CreditcalendarSearch::find()
+            ->where(['<>','private', 1])
+            ->all();
+                 
+        $objPHPExcel->getActiveSheet()
+            ->getPageSetup()
+            ->setOrientation(\PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+        $objPHPExcel->getActiveSheet()
+            ->getPageSetup()
+            ->setPaperSize(\PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4);
+
+        
+        // $objPHPExcel->getActiveSheet()->getColumnDimensionByColumn('A2:F2')->setAutoSize(true);
+        $objPHPExcel->getActiveSheet()->mergeCells('A1:F1');
+        $objPHPExcel->getActiveSheet()->getStyle('A2:F2')->getFont()->setBold(true);
+        $objPHPExcel->getActiveSheet()->setTitle('xxx')                     
+            ->setCellValue('A2', $labelModel->getAttributeLabel('title'))
+            ->setCellValue('B2', $labelModel->getAttributeLabel('date_from'))
+            ->setCellValue('C2', $labelModel->getAttributeLabel('date_to'))
+            ->setCellValue('D2', $labelModel->getAttributeLabel('description'))
+            ->setCellValue('E2', $labelModel->getAttributeLabel('status'))
+            ->setCellValue('F2', $labelModel->getAttributeLabel('priority'));
+
+        $objPHPExcel->getActiveSheet()
+            ->getHeaderFooter()
+            ->setOddHeader('&L&BКалендарь отдела кредитования, страхования и лизинга ГК "Альянс"');
+        $objPHPExcel->getActiveSheet()
+            ->getHeaderFooter()
+            ->setOddFooter('&L&B' . $objPHPExcel->getProperties()->getTitle() );   
+
+        // $rowNumber = 8;
+        // $rowNumber = $objPHPExcel->setActiveSheetIndex()->getHighestRow();
+        $rowNumber = $objPHPExcel->setActiveSheetIndex()->getHighestRow();  
+
+        $styleArray = [
+          'borders' => [
+            'allborders' => [
+              'style' => \PHPExcel_Style_Border::BORDER_THIN
+            ]
+          ]
+        ];
+
+        $objPHPExcel->getActiveSheet()->getStyle("A2:F".($rowNumber+1))->applyFromArray($styleArray);
+        unset($styleArray);
+
+        $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(20);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(18);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(18);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(30);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(13);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(10);
+                 
+        $row=3;
+                                
+        foreach ($model as $exportrows) {
+
+            $objPHPExcel->getActiveSheet()->setCellValue('A'.$row,$exportrows->title); 
+            $objPHPExcel->getActiveSheet()->setCellValue('B'.$row,$exportrows->date_from . ' ' . $exportrows->time_from); 
+            $objPHPExcel->getActiveSheet()->setCellValue('C'.$row,$exportrows->date_to . ' ' . $exportrows->time_to); 
+            $objPHPExcel->getActiveSheet()->setCellValue('D'.$row,$exportrows->description);
+            // $objPHPExcel->getActiveSheet()->setCellValue('E'.$row,$exportrows->status);
+            $objPHPExcel->getActiveSheet()->setCellValue('E'.$row,$labelModel->getStatusesArray()[$exportrows->status]);
+            // $objPHPExcel->getActiveSheet()->setCellValue('F'.$row,$exportrows->priority);
+            $objPHPExcel->getActiveSheet()->setCellValue('F'.$row,$labelModel->getPrioritiesArray()[$exportrows->status]);
+            $row++ ;
+        }  
+                        
+        header('Content-Type: application/vnd.ms-excel');
+        $filename = "Календарь_ОКиС_".date("d-m-Y-H-i-s").".xls";
+        header('Content-Disposition: attachment;filename='.$filename .' ');
+        header('Cache-Control: max-age=0');
+        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        $objWriter->save('php://output'); 
+    }     
+
 }

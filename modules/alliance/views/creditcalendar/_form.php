@@ -144,7 +144,7 @@ use app\modules\admin\models\Companies;
 
     <div class="row" style="margin-bottom: 8px">
         <div class="col-sm-6">
-            <?= $form->field($model, 'userids')->checkboxList(User::find()->select(['full_name', 'id'])->where(['position' => 'Кредитный специалист'])->andWhere(['status' => 1])->indexBy('id')->column()) ?>
+            <?= $form->field($model, 'userids', ['template' => '<div class="input-group"{label}{input}</div>{error}'])->checkboxList(User::find()->select(['full_name', 'id'])->where(['position' => 'Кредитный специалист'])->andWhere(['status' => 1])->indexBy('id')->column()) ?>
         </div>
         <div class="col-sm-6">
             <?= $form->field($model, 'locationids')->checkboxList(Companies::find()->select(['company_name', 'id'])->indexBy('id')->column()) ?>

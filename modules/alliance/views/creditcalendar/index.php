@@ -31,16 +31,16 @@ $this->registerJs($multipleDelete, View::POS_END);
 ?>
 <div class="creditcalendar-index">
 
-    <div class="panel panel-default">
+    <!-- <div class="panel panel-default"> -->
 
-        <div class="panel-heading panel-info">
+        <!-- <div class="panel-heading panel-info"> -->
 
-            <h4>
-                <?php echo FA::icon('calendar') . ' ' . Html::encode($this->title) ?>
-            </h4>
+            <!-- <h4> -->
+                <?php // FA::icon('calendar') . ' ' . Html::encode($this->title) ?>
+            <!-- </h4> -->
             
-        </div>
-        <div class="panel-body">
+        <!-- </div> -->
+        <!-- <div class="panel-body"> -->
 
 <?php
       // $m = new Creditcalendar();
@@ -78,36 +78,36 @@ $this->registerJs($multipleDelete, View::POS_END);
                 ?>
             </p>
 
-            <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
             <?php
-                $countRecords = '<span class="label label-success">{count}</span>' ;
-                $beginRecords = '<span class="label label-success">{begin}</span>' ;
-                $endRecords = '<span class="label label-success">{end}</span>' ;
-                $events = '<h3>События:</h3>';
+                // $countRecords = '<span class="label label-success">{count}</span>' ;
+                // $beginRecords = '<span class="label label-success">{begin}</span>' ;
+                // $endRecords = '<span class="label label-success">{end}</span>' ;
+                // $events = '<h3>События:</h3>';
             ?>
 
-            <div class="bs-callout bs-callout-success">
+            <!-- <div class="bs-callout bs-callout-success"> -->
                 <?= GridView::widget([
                     'dataProvider' => $dataProvider,
-//                  'filterModel' => $searchModel,
+                    'filterModel' => $searchModel,
 //                  'layout'=>"{sorter}\n{pager}\n{summary}\n{items}",
                     'id' => 'creditcalendar-grid',
                     'tableOptions' =>[
                         'class' => 'table table-striped table-bordered creditcalendargridview'
                     ],
-                    'summary' => " <h4>События: $beginRecords - $endRecords из $countRecords </h4><br/>",
-                    'rowOptions' => function($model){
-                        if($model->status == Creditcalendar::STATUS_CLARIFY){
-                            return ['class' => 'info'];
-                        }
-                        elseif($model->status == Creditcalendar::STATUS_ATWORK) {
-                            return ['class' => 'danger'];
-                        }
-                        elseif($model->status == Creditcalendar::STATUS_FINISHED) {
-                            return ['class' => 'success'];
-                        }
-                    },
+                    // 'summary' => " <h4>События: $beginRecords - $endRecords из $countRecords </h4><br/>",
+                    // 'rowOptions' => function($model){
+                    //     if($model->status == Creditcalendar::STATUS_CLARIFY){
+                    //         return ['class' => 'info'];
+                    //     }
+                    //     elseif($model->status == Creditcalendar::STATUS_ATWORK) {
+                    //         return ['class' => 'danger'];
+                    //     }
+                    //     elseif($model->status == Creditcalendar::STATUS_FINISHED) {
+                    //         return ['class' => 'success'];
+                    //     }
+                    // },
                     'columns' => [
                         [
                             'header' => '№',
@@ -173,53 +173,53 @@ $this->registerJs($multipleDelete, View::POS_END);
                                 Creditcalendar::STATUS_FINISHED => 'success',
                             ],
                         ],
-                        [
-                            'class' => ActionColumn::className(),
-                            'header' => 'Действия',
-                            'contentOptions'=>['style'=>'width: 130px;'],
-                            'template' => '{view}{update}{delete}',
-                            'buttons' => [
-                                'view' => function ($url, $model) {
-                                    $title = false;
-                                    $options = [];
-                                    $icon = '<span class="btn btn-sm btn-warning">'.FA::icon("play-circle").'</span>';
-                                    $label = $icon;
-                                    $url = Url::toRoute(['view', 'id' => $model->id]);
-                                    $options['tabindex'] = '-1';
-                                    return Html::a($label, $url, $options) .''. PHP_EOL;
-                                },
-                                'update' => function ($url, $model) {
-                                    $title = false;
-                                    $options = [];
-                                    $icon = '<span class="btn btn-sm btn-primary">'.FA::icon("edit").'</span>';
-                                    $label = $icon;
-                                    $url = Url::toRoute(['update', 'id' => $model->id]);
-                                    $options['tabindex'] = '-1';
-                                    return Html::a($label, $url, $options) .''. PHP_EOL;
-                                },
-                                'delete' => function ($url, $model, $key) {
-                                    if(!Yii::$app->user->can('creditmanager')){
-                                        return Html::a('<span class="btn btn-sm btn-danger">'.FA::icon("trash").'</span>', $url, [
-                                            'title' => false,
-                                            'data-confirm' => Module::t('module', 'DELETE_CONFIRMATION'),
-                                            'data-method' => 'post',
-                                            'data-pjax' => '0',
-                                        ]);
-                                    }
-                                },
-                            ],
-                        ],
+                        // [
+                        //     'class' => ActionColumn::className(),
+                        //     'header' => 'Действия',
+                        //     'contentOptions'=>['style'=>'width: 130px;'],
+                        //     'template' => '{view}{update}{delete}',
+                        //     'buttons' => [
+                        //         'view' => function ($url, $model) {
+                        //             $title = false;
+                        //             $options = [];
+                        //             $icon = '<span class="btn btn-sm btn-warning">'.FA::icon("play-circle").'</span>';
+                        //             $label = $icon;
+                        //             $url = Url::toRoute(['view', 'id' => $model->id]);
+                        //             $options['tabindex'] = '-1';
+                        //             return Html::a($label, $url, $options) .''. PHP_EOL;
+                        //         },
+                        //         'update' => function ($url, $model) {
+                        //             $title = false;
+                        //             $options = [];
+                        //             $icon = '<span class="btn btn-sm btn-primary">'.FA::icon("edit").'</span>';
+                        //             $label = $icon;
+                        //             $url = Url::toRoute(['update', 'id' => $model->id]);
+                        //             $options['tabindex'] = '-1';
+                        //             return Html::a($label, $url, $options) .''. PHP_EOL;
+                        //         },
+                        //         'delete' => function ($url, $model, $key) {
+                        //             if(!Yii::$app->user->can('creditmanager')){
+                        //                 return Html::a('<span class="btn btn-sm btn-danger">'.FA::icon("trash").'</span>', $url, [
+                        //                     'title' => false,
+                        //                     'data-confirm' => Module::t('module', 'DELETE_CONFIRMATION'),
+                        //                     'data-method' => 'post',
+                        //                     'data-pjax' => '0',
+                        //                 ]);
+                        //             }
+                        //         },
+                        //     ],
+                        // ],
 
-//                        [
-//                            'header' => 'Действия',
-//                            'class' => 'yii\grid\ActionColumn'
-//                        ],
+                       [
+                           'header' => 'Действия',
+                           'class' => 'yii\grid\ActionColumn'
+                       ],
                     ],
                 ]); ?>
-            </div>
-        </div>
+            <!-- </div> -->
+<!--         </div>
 
-        </div>
+        </div> -->
     </div>
 
 

@@ -24,6 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
 $multipleDelete = file_get_contents('js/modules/alliance/creditcalendar/gridViewMultipleDelete.js');
 $this->registerJs($multipleDelete, View::POS_END);
 
+$ExportExcel = file_get_contents('js/modules/alliance/creditcalendar/gridViewExcelExport.js');
+$this->registerJs($ExportExcel, View::POS_END);
+
 ?>
 <div class="creditcalendar-index">
 
@@ -64,6 +67,11 @@ $this->registerJs($multipleDelete, View::POS_END);
                     }
                 ?>
                 <?= Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'), ['export'], ['class' => 'btn btn-warning btn-sm']) ?>
+                <?php
+                    // if (Yii::$app->user->can('deleteCreditcalendarPost')) {
+                    //     echo Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'ExportExcel']);
+                    // }
+                ?>
             </p>
 
             <?php echo $this->render('_search', ['model' => $searchModel]); ?>

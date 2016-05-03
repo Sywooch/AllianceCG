@@ -266,8 +266,14 @@ class CreditcalendarController extends Controller
 
         // Запрос данных      
         $model = new Creditcalendar();
-        $searchModel = new CreditcalendarSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        // $searchModel = new CreditcalendarSearch();
+        // $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $query = Creditcalendar::find();      
+        $query->where(['<>','private', 1]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
                  
         // Размер листа, ориентация
         $objPHPExcel->getActiveSheet()

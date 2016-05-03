@@ -34,7 +34,7 @@ use app\modules\admin\models\Companies;
 
                      ],
                      'options' => [
-                         'class' => 'form-control',
+                         'class' => 'form-control picker',
                          'placeholder' => $model->getAttributeLabel( 'date_from' ),
                      ],
                  ]);
@@ -54,7 +54,7 @@ use app\modules\admin\models\Companies;
                         'controlType' => 'select',
                         ],
                      'options' => [
-                         'class' => 'form-control',
+                         'class' => 'form-control picker',
                          'placeholder' => $model->getAttributeLabel( 'time_from' ),
                      ],
                  ]);

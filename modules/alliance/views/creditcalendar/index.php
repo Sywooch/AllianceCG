@@ -60,7 +60,9 @@ $this->registerJs($multipleDelete, View::POS_END);
             ]) ?>
 
             <p style="text-align: right">
-                <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+                <?php // Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+
+                <?=  Html::button(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['value' => Url::to(['create']), 'class' => 'btn btn-primary btn-sm', 'id' => 'modalButton']);?>
                 <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'REFRESH'), ['index'], ['class' => 'btn btn-info btn-sm']) ?>
                 <?php
                     if (Yii::$app->user->can('deleteCreditcalendarPost')) {
@@ -68,8 +70,6 @@ $this->registerJs($multipleDelete, View::POS_END);
                     }
                 ?>
                 <?= Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'), ['export'], ['class' => 'btn btn-warning btn-sm']) ?>
-
-                <?=  Html::button(FA::icon('comment') . ' ' . Module::t('module', 'COMMENT'), ['value' => Url::to(['create']), 'class' => 'btn btn-info btn-sm', 'id' => 'modalButton']);?>
 
                 <?php
                     // if (Yii::$app->user->can('deleteCreditcalendarPost')) {

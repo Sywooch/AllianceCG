@@ -41,6 +41,10 @@ body {
     font-style: italic;
 }
 
+.form-control {
+    z-index: 9999;
+}
+
 /* add sorting icons to gridview sort links */
 a.asc:after, a.desc:after {
     position: relative;

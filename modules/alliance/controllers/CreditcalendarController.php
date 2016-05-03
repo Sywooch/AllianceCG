@@ -265,7 +265,7 @@ class CreditcalendarController extends Controller
         $objPHPExcel->setActiveSheetIndex($sheet);
 
         // Запрос данных
-        $pk = Yii::$app->request->post('row_id');      
+        // $pk = Yii::$app->request->post('row_id');      
         $model = new Creditcalendar();
         // $searchModel = new CreditcalendarSearch();
         // $dataProvider = $searchModel->search(Yii::$app->request->queryParams);

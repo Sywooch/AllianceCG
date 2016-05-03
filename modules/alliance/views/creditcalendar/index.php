@@ -24,8 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
 $multipleDelete = file_get_contents('js/modules/alliance/creditcalendar/gridViewMultipleDelete.js');
 $this->registerJs($multipleDelete, View::POS_END);
 
-$ExportExcel = file_get_contents('js/modules/alliance/creditcalendar/gridViewExcelExport.js');
-$this->registerJs($ExportExcel, View::POS_END);
+// $ExportExcel = file_get_contents('js/modules/alliance/creditcalendar/gridViewExcelExport.js');
+// $this->registerJs($ExportExcel, View::POS_END);
 
 ?>
 <div class="creditcalendar-index">

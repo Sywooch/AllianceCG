@@ -12,6 +12,7 @@ use rmrevin\yii\fontawesome\FA;
 use app\modules\alliance\Module;
 use yii\grid\ActionColumn;
 use yii\helpers\Url;
+use yii\bootstrap\Modal;
 use yii\web\View;
 
 /* @var $this yii\web\View */
@@ -67,6 +68,9 @@ $this->registerJs($multipleDelete, View::POS_END);
                     }
                 ?>
                 <?= Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'), ['export'], ['class' => 'btn btn-warning btn-sm']) ?>
+
+                <?=  Html::button(FA::icon('comment') . ' ' . Module::t('module', 'COMMENT'), ['value' => Url::to(['create']), 'class' => 'btn btn-info btn-sm', 'id' => 'modalButton']);?>
+
                 <?php
                     // if (Yii::$app->user->can('deleteCreditcalendarPost')) {
                     //     echo Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'ExportExcel']);
@@ -217,3 +221,16 @@ $this->registerJs($multipleDelete, View::POS_END);
 
         </div>
     </div>
+
+
+<?php
+    Modal::begin([
+        'header' => '<h4>' . Module::t('module', 'CREATE') .'</h4>',
+        'id' => 'modal',
+        'size' => 'modal-lg'
+    ]);
+
+    echo "<div id='modalContent'></div>";
+
+    Modal::end();
+?>

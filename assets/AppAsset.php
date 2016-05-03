@@ -25,7 +25,7 @@ class AppAsset extends AssetBundle
         'js/main.js',
     ];
     public $jsOptions = array(
-        'position' => \yii\web\View::POS_HEAD
+        // 'position' => \yii\web\View::POS_HEAD
     );
     public $depends = [
         'yii\web\YiiAsset',

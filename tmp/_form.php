@@ -22,10 +22,9 @@ use app\modules\admin\models\Companies;
 
     <?= $form->errorSummary($model); ?>
 
-    <div class="row" style="margin-bottom: 8px">
-
+    <div class="col-sm-12">
+    <div class="col-sm-12 bs-callout bs-callout-success">
         <div class="col-sm-3">
-
             <?= $form->field($model, 'date_from', ['template' => '{input}{error}{hint}'])->widget(TimePicker::className(), [
                      'language' => 'ru',
                      'mode' => 'date',
@@ -39,11 +38,8 @@ use app\modules\admin\models\Companies;
                      ],
                  ]);
             ?>
-
         </div>
-
         <div class="col-sm-3">
-
             <?= $form->field($model, 'time_from', ['template' => '{input}{error}{hint}'])->widget(TimePicker::className(), [
                      'language' => 'ru',
                      'mode' => 'time',
@@ -59,11 +55,8 @@ use app\modules\admin\models\Companies;
                      ],
                  ]);
             ?>
-
         </div>
-
         <div class="col-sm-3">
-
             <?= $form->field($model, 'time_to', ['template' => '{input}{error}{hint}'])->widget(TimePicker::className(), [
                      'language' => 'ru',
                      'mode' => 'time',
@@ -79,11 +72,8 @@ use app\modules\admin\models\Companies;
                      ],
                  ]);
             ?>
-
         </div>
-
         <div class="col-sm-3">
-
             <?= $form->field($model, 'date_to', ['template' => '{input}{error}{hint}'])->widget(TimePicker::className(), [
                      'language' => 'ru',
                      'mode' => 'date',
@@ -96,21 +86,17 @@ use app\modules\admin\models\Companies;
                          'placeholder' => $model->getAttributeLabel( 'date_to' ),
                      ],
                  ]);
-            ?>    
-
+            ?>            
         </div>
 
-    </div>
-
-    <div class="row" style="margin-bottom: 8px">
-        <div class="col-sm-6" style="text-align: right;">
+        <div class="col-sm-6" style="text-align: right">
             <?= $form->field($model, 'allday')->checkbox(
                 [
                     'label' => Module::t('module', 'CREDITCALENDAR_ALLDAY_CHECKBOX'),
                 ]);
             ?>
         </div>
-        <div class="col-sm-6" style="text-align: left;">
+        <div class="col-sm-6" style="text-align: left">
             <?php
                 if(Yii::$app->user->can('privateCreditcalendarPost')){
                     echo $form->field($model, 'private')->checkbox(
@@ -119,44 +105,54 @@ use app\modules\admin\models\Companies;
                             ]);
                 }
             ?>
-        </div>
+        </div>          
+
     </div>
+    
+    <br/><br/><br/>
+
+    </div>
+
+    <div class="col-sm-12">
+
+    <div class="col-sm-12 bs-callout bs-callout-info">
 
         <?= $form->field($model, 'title', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('bookmark') . ' </span>{input}</div>{error}'])->textInput(['maxlength' => true,'placeholder' => $model->getAttributeLabel('title')]) ?>
 
         <?= $form->field($model, 'description', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('file-text') . ' </span>{input}</div>{error}'])->textarea(['rows' => 6, 'placeholder' => $model->getAttributeLabel('description')]) ?>
 
-    <div class="row" style="margin-bottom: 8px">
+    </div>
+
+    <div class="col-sm-12 bs-callout bs-callout-danger">
 
         <div class="col-sm-6">
-
             <?= $form->field($model, 'status', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('check') . ' </span>{input}</div>{error}'])->dropDownList($model->getStatusesArray()) ?>
-
         </div>
 
         <div class="col-sm-6">
-
             <?= $form->field($model, 'priority', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('balance-scale') . ' </span>{input}</div>{error}'])->dropDownList($model->getPrioritiesArray()) ?>
-
         </div>
 
-<?php if(!Yii::$app->user->can('creditmanager')) { ?>
-
-    <div class="row" style="margin-bottom: 8px">
+        <?php if(!Yii::$app->user->can('creditmanager')) { ?>
         <div class="col-sm-6">
             <?= $form->field($model, 'userids')->checkboxList(User::find()->select(['full_name', 'id'])->where(['position' => 'Кредитный специалист'])->andWhere(['status' => 1])->indexBy('id')->column()) ?>
         </div>
         <div class="col-sm-6">
             <?= $form->field($model, 'locationids')->checkboxList(Companies::find()->select(['company_name', 'id'])->indexBy('id')->column()) ?>
         </div>
+
+        <?php } ?>
+
     </div>
 
-<?php } ?>
+    </div>
 
+    <div class="col-sm-12">
         <div class="form-group" style="text-align: right">
             <?= Html::submitButton($model->isNewRecord ? FA::icon('plus') . ' ' . Module::t('module', 'CREATE') : FA::icon('edit') . ' ' . Module::t('module', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
             <?= Html::submitButton(FA::icon('remove') . ' ' . Module::t('module', 'CANCEL'), ['class' => 'btn btn-danger']) ?>
         </div>
+    </div>
 
     <?php ActiveForm::end(); ?>
 

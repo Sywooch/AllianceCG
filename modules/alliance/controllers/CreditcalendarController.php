@@ -264,7 +264,8 @@ class CreditcalendarController extends Controller
 
         $objPHPExcel->setActiveSheetIndex($sheet);
 
-        // Запрос данных      
+        // Запрос данных
+        $pk = Yii::$app->request->post('row_id');      
         $model = new Creditcalendar();
         // $searchModel = new CreditcalendarSearch();
         // $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -322,7 +323,7 @@ class CreditcalendarController extends Controller
         // Excel list header
         $objPHPExcel->getActiveSheet()
             ->getHeaderFooter()
-            ->setOddHeader('&R&BКалендарь отдела кредитования, страхования и лизинга ГК "Альянс"');
+            ->setOddHeader('&R&B'.Module::t('module', 'CREDITCALENDAR_HEADER_TEXT'));
 
         // Excel list footer
         $objPHPExcel->getActiveSheet()

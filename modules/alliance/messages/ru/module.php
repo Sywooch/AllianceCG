@@ -46,4 +46,5 @@ return [
     'CREDITCALENDAR_EXPORT_EXCEL' => 'Export Excel',
     'CREDITCALENDAR_EXCEL_TITLE' => 'ОКиС-',
     'CREDITCALENDAR_EXCEL_TABLEHEADER' => 'События календаря отдела страхования, кредитования и лизинга от ',
+    'CREDITCALENDAR_HEADER_TEXT' => 'Календарь отдела кредитования, страхования и лизинга ГК "Альянс" ',
 ];

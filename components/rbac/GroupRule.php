@@ -51,7 +51,7 @@ class GroupRule extends Rule
                 return $role === $item->name;
             } 
             elseif ($item->name === 'seniorcreditspesialist') {
-                return $role === $item->name || $role === 'chiefcredit';
+                return $role === $item->name;
             }
             elseif ($item->name === 'creditmanager') {
                 return $role === $item->name;

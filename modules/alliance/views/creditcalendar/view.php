@@ -20,6 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="creditcalendar-view">
 
+<?php // $model->authorname->role; ?>
+
 <!--    <h1>-->
         <?php // ehocHtml::encode($this->title) ?>
 <!--    </h1>-->

@@ -112,19 +112,23 @@ use app\modules\admin\models\Companies;
         </div>
         <div class="col-sm-6" style="text-align: left;">
             <?php
-                if(Yii::$app->user->can('privateCreditcalendarPost')){
+                // if(Yii::$app->user->can('privateCreditcalendarPost')){
                     echo $form->field($model, 'private')->checkbox(
                             [
                                 'label' => Module::t('module', 'CREDITCALENDAR_PRIVATE_CHECKBOX'),
+                                'disabled' => Yii::$app->user->can('creditmanager'),
                             ]);
-                }
+                // }
             ?>
         </div>
     </div>
 
+    <div class="row" style="margin-bottom: 8px">
+
         <?= $form->field($model, 'title', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('bookmark') . ' </span>{input}</div>{error}'])->textInput(['maxlength' => true,'placeholder' => $model->getAttributeLabel('title')]) ?>
 
         <?= $form->field($model, 'description', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('file-text') . ' </span>{input}</div>{error}'])->textarea(['rows' => 6, 'placeholder' => $model->getAttributeLabel('description')]) ?>
+    </div>
 
     <div class="row" style="margin-bottom: 8px">
 

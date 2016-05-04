@@ -103,7 +103,7 @@ class User extends \app\modules\user\models\User
          parent::afterSave($insert, $changedAttributes);
          // установка роли пользователя
          $auth = Yii::$app->authManager;
-         $name = $this->role ? $this->role : self::ROLE_USER;
+         $name = $this->role ? $this->role : 'authGuest';
          $role = $auth->getRole($name);
          if (!$insert) {
              $auth->revokeAll($this->id);

@@ -69,7 +69,11 @@ $this->registerJs($multipleDelete, View::POS_END);
                         echo Html::a(FA::icon('trash') . ' ' . Module::t('module', 'DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']);
                     }
                 ?>
-                <?= Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'), ['export'], ['class' => 'btn btn-warning btn-sm']) ?>
+                <?php 
+                    if(!Yii::$app->user->can('creditmanager')){
+                        echo Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'), ['export'], ['class' => 'btn btn-warning btn-sm']) ;
+                    }
+                ?>
 
                 <?php
                     // if (Yii::$app->user->can('deleteCreditcalendarPost')) {
@@ -96,7 +100,7 @@ $this->registerJs($multipleDelete, View::POS_END);
                     'tableOptions' =>[
                         'class' => 'table table-striped table-bordered creditcalendargridview'
                     ],
-                    'summary' => false,
+                    // 'summary' => false,
                     // 'summary' => " <h4>События: $beginRecords - $endRecords из $countRecords </h4><br/>",
                     // 'rowOptions' => function($model){
                     //     if($model->status == Creditcalendar::STATUS_CLARIFY){
@@ -175,6 +179,15 @@ $this->registerJs($multipleDelete, View::POS_END);
                                 Creditcalendar::STATUS_CLARIFY => 'primary',
                                 Creditcalendar::STATUS_FINISHED => 'success',
                             ],
+                        ],
+                        [
+                            'attribute' => 'calendarcommentscount',
+                            'format' => 'html',
+                            'filter' => false,
+                            'value' => function($model) {
+                                return '<span class="label label-primary">' . Module::t('module', 'COMMENTS') . ': ' . $model->calendarcommentscount . '</span>';
+                            },   
+                            'contentOptions' => ['class'=>'success;'],
                         ],
                         // [
                         //     'class' => ActionColumn::className(),

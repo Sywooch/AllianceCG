@@ -28,7 +28,7 @@ class CreditcalendarSearch extends Creditcalendar
         return [
             [['id', 'type', 'allday', 'created_at', 'updated_at', 'status', 'private', 'calendar_type'], 'integer'],
             [['title', 'date_from', 'time_from', 'date_to', 'time_to', 'description', 'author', 'priority'], 'safe'],
-            [['locations', 'responsibles'], 'safe'],
+            [['locations', 'responsibles', 'calendarcommentscount'], 'safe'],
         ];
     }
 
@@ -153,6 +153,7 @@ public function calendarsearch(){
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => false,
         ]);
 
         $dataProvider->sort->attributes['locations'] = [
@@ -222,6 +223,7 @@ public function calendarsearch(){
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => false,
         ]);
 
         $dataProvider->sort->attributes['locations'] = [
@@ -233,7 +235,6 @@ public function calendarsearch(){
             'asc' => ['{{%user}}.full_name' => SORT_ASC],
             'desc' => ['{{%user}}.full_name' => SORT_DESC],
         ];
-
 
         $this->load($params);
 

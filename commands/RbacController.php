@@ -172,7 +172,7 @@ class RbacController extends Controller
         // INHERITANCE PERMISSION TO CREATE RECORDS IN Creditcalendar
         $auth->addChild($chiefcredit, $createCreditcalendarPost);
         // INHERITANCE PERMISSION TO UPDATE RECORDS IN Creditcalendar
-        $auth->addChild($chiefcredit, $updateCreditcalendarPost);
+        $auth->addChild($chiefcredit, $updateCreditcalendarOwnPost);
         // PERMISSION TO SET RESPONSIBLE IN CREDITCALENDAR
         $auth->addChild($chiefcredit, $creditcalendarSetResponsibles);
         // PERMISSION TO VIEW CREDITCALENDAR COMPONENTS
@@ -183,8 +183,6 @@ class RbacController extends Controller
         $auth->addChild($chiefcredit, $viewCreditcalendarOwnPost); 
         // PERMISSION TO CREATE PRIVATE RECORDS IN Creditcalendar
         $auth->addChild($chiefcredit, $privateCreditcalendarPost);
-        // PERMISSION TO DELETE CREDITCALENDAR COMPONENTS
-        $auth->addChild($seniorcreditspesialist, $deleteCreditcalendarPost);
 
         // SENIOR CREDIT SPECIALIST
         $seniorcreditspesialist = $auth->createRole('seniorcreditspesialist');
@@ -198,7 +196,7 @@ class RbacController extends Controller
         // INHERITANCE PERMISSION TO CREATE RECORDS IN Creditcalendar
         $auth->addChild($seniorcreditspesialist, $createCreditcalendarPost);
         // INHERITANCE PERMISSION TO UPDATE RECORDS IN Creditcalendar
-        $auth->addChild($seniorcreditspesialist, $updateCreditcalendarPost);
+        $auth->addChild($seniorcreditspesialist, $updateCreditcalendarOwnPost);
         // PERMISSION TO SET RESPONSIBLE IN CREDITCALENDAR
         $auth->addChild($seniorcreditspesialist, $creditcalendarSetResponsibles);   
         // INHERITANCE PERMISSION TO VIEW OWN RECORDS IN Creditcalendar

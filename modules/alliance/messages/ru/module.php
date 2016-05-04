@@ -48,4 +48,5 @@ return [
     'CREDITCALENDAR_EXCEL_TABLEHEADER' => 'События календаря отдела страхования, кредитования и лизинга от ',
     'CREDITCALENDAR_HEADER_TEXT' => 'Календарь отдела кредитования, страхования и лизинга ГК "Альянс" ',
     'NAV_ALLIANCE_CREDITCALENDAR' => 'Календарь ОКиС',
+    'CALENDAR_COMMENTS_COUNT' => 'Комментарии',
 ];

@@ -113,6 +113,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
             'responsibles' => Module::t('module', 'CALENDAR_EVENT_RESPONSIBLES'),
             'userids' => Module::t('module', 'CALENDAR_EVENT_RESPONSIBLES'),
             'locationids' => Module::t('module', 'CALENDAR_EVENT_LOCATIONS'),
+            'calendarcommentscount' => Module::t('module', 'CALENDAR_COMMENTS_COUNT'),
         ];
     }
 
@@ -174,6 +175,12 @@ class Creditcalendar extends \yii\db\ActiveRecord
         return $this->hasMany(CalendarComments::className(), ['calendar_id' => 'id']);
     }
 
+    public function getCalendarcommentscount()
+    {
+        // Customer has_many Order via Order.customer_id -> id
+        return $this->hasMany(CalendarComments::className(), ['calendar_id' => 'id'])->count();
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -205,8 +212,6 @@ class Creditcalendar extends \yii\db\ActiveRecord
     {
         return $this->hasMany(User::className(), ['id' => 'user_id'])->viaTable('{{%calendar_responsibles}}', ['calendar_id' => 'id']);
     }
-
-
 
     /**
      * @return \yii\db\ActiveQuery

@@ -186,7 +186,7 @@ use app\modules\admin\models\Companies;
 
         <div class="form-group" style="text-align: right; margin-top: 30;">
             <?= Html::submitButton($model->isNewRecord ? FA::icon('plus') . ' ' . Module::t('module', 'CREATE') : FA::icon('edit') . ' ' . Module::t('module', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success btn-menu' : 'btn btn-primary btn-menu']) ?>
-            <?= Html::submitButton(FA::icon('remove') . ' ' . Module::t('module', 'CANCEL'), ['class' => 'btn btn-danger btn-menu']) ?>
+            <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'CANCEL'), 'index', ['class' => 'btn btn-danger btn-menu']) ?>
         </div>
 </div>
 

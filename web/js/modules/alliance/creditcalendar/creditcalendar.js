@@ -61,6 +61,12 @@
 //              }, 
 //              
 
+           dayClick: function(date, calEvent, jsEvent, view, resourceObj) {
+                   var datesend = date.format("YYYY-MM-DD H:mm:ss");
+                   if (confirm('Добавить новую запись?'))window.location = 'create';
+             }, 
+
+
             events: {
                 // url: "/alliance/creditcalendar/calendarsearch",
                 url: source,

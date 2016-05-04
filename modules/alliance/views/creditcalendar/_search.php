@@ -23,9 +23,11 @@ use janisto\timepicker\TimePicker;
         'method' => 'get',
     ]); ?>
 
-        <!-- <div class="col-md-3"> -->
-            <?php // $form->field($model, 'author', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'author' )]) ?>
-        <!-- </div> -->
+    <!-- <div class="col-md-3"> -->
+    
+    <?php // $form->field($model, 'authorname', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'author' )]) ?>
+    
+    <!-- </div> -->
 
 
         <div class="col-md-3">

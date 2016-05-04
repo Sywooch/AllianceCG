@@ -49,4 +49,5 @@ return [
     'CREDITCALENDAR_HEADER_TEXT' => 'Календарь отдела кредитования, страхования и лизинга ГК "Альянс" ',
     'NAV_ALLIANCE_CREDITCALENDAR' => 'Календарь ОКиС',
     'CALENDAR_COMMENTS_COUNT' => 'Комментарии',
+    'CHECK_ALL' => 'Отметить все',
 ];

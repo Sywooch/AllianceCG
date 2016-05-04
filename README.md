@@ -13,6 +13,7 @@ MODULES STRUCTURE
       main/               contains main, error, login and logout actions
       user/               contains Identity interface, view, update profile, change password actions
       admin/              contains User, Companies and Positions administration CRUD actions
+      alliance/			  contains Creditcalendar CRUD action
       skoda/              contains Service Sheduler, Statusmonitor actions for Skoda StrelaAvto
 
 INSTALLATION
@@ -21,7 +22,7 @@ INSTALLATION
 Clone the repository for pull command availability:
 
 ~~~
-git clone https://github.com/m-ishchenko/skoda.git project
+git clone https://github.com/m-ishchenko/AllianceCG.git project
 cd project
 composer global require "fxp/composer-asset-plugin:~1.0.0"
 composer install

@@ -4,7 +4,6 @@ use app\modules\alliance\Module;
 use yii\widgets\Pjax;
 use yii\helpers\Html;
 use rmrevin\yii\fontawesome\FA;
-use yii\bootstrap\Modal;
 use yii\helpers\Url;
 
 /* 
@@ -32,19 +31,6 @@ $this->params['breadcrumbs'][] = $this->title;
             </p>
 
             <!-- <br/><br/><br/> -->
-            <?php
-                Modal::begin([
-                    'header' => '<h4>' . Module::t('module', 'COMMENT') .'</h4>',
-                    'id' => 'modal',
-                    'size' => 'modal-lg'
-                ]);
-
-                echo "<div id='modalContent'></div>";
-
-                Modal::end();
-            ?>
-
-
 
             <?php  Pjax::begin(); ?>
                 <?php 

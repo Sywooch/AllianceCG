@@ -62,14 +62,14 @@ $this->registerJs($multipleDelete, View::POS_END);
             <p style="text-align: right">
                 <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
 
-                <?=  Html::button(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['value' => Url::to(['create']), 'class' => 'btn btn-primary btn-sm', 'id' => 'modalButton']);?>
+                <?php // Html::button(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['value' => Url::to(['create']), 'class' => 'btn btn-primary btn-sm', 'id' => 'modalButton']);?>
                 <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'REFRESH'), ['index'], ['class' => 'btn btn-info btn-sm']) ?>
                 <?php
                     if (Yii::$app->user->can('deleteCreditcalendarPost')) {
                         echo Html::a(FA::icon('trash') . ' ' . Module::t('module', 'DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']);
                     }
                 ?>
-                <?php // Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'), ['export'], ['class' => 'btn btn-warning btn-sm']) ?>
+                <?= Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'), ['export'], ['class' => 'btn btn-warning btn-sm']) ?>
 
                 <?php
                     // if (Yii::$app->user->can('deleteCreditcalendarPost')) {
@@ -96,6 +96,7 @@ $this->registerJs($multipleDelete, View::POS_END);
                     'tableOptions' =>[
                         'class' => 'table table-striped table-bordered creditcalendargridview'
                     ],
+                    'summary' => false,
                     // 'summary' => " <h4>События: $beginRecords - $endRecords из $countRecords </h4><br/>",
                     // 'rowOptions' => function($model){
                     //     if($model->status == Creditcalendar::STATUS_CLARIFY){
@@ -140,13 +141,15 @@ $this->registerJs($multipleDelete, View::POS_END);
                             'attribute' => 'locations',
                             'value' => function($model) {
                                 return implode(', ', ArrayHelper::map($model->locations, 'id', 'company_name'));
-                            }
+                            },
+                            'visible' => !Yii::$app->user->can('creditmanager') ? true : false,
                         ],
                         [
                             'attribute' => 'responsibles',
                             'value' => function($model) {
                                 return implode(', ', ArrayHelper::map($model->users, 'id', 'full_name'));
-                            }
+                            },
+                            'visible' => !Yii::$app->user->can('creditmanager') ? true : false,
                         ],
                         [
                             'class' => SetColumn::className(),

@@ -25,15 +25,15 @@ $this->params['breadcrumbs'][] = $this->title;
 <!--    </h1>-->
 
 
-    <div class="panel panel-default">
+<!--     <div class="panel panel-default">
 
         <div class="panel-heading">
-            <h4>
-                <?= FA::icon('calendar') . ' ' . Html::encode($this->title) ?>
-            </h4>
+            <h4> -->
+                <?php // FA::icon('calendar') . ' ' . Html::encode($this->title) ?>
+<!--             </h4>
         </div>
 
-        <div class="panel-body">
+        <div class="panel-body"> -->
 
             <?= $this->render('_menu', [
                 'model' => $model,
@@ -50,7 +50,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]) ?>
             </p>
 
-            <div class="bs-callout bs-callout-success">
             <?= DetailView::widget([
                 'model' => $model,
                 'attributes' => [
@@ -90,10 +89,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 ],
             ]) ?>
-            </div>
 
-        </div>
-    </div>
+<!--         </div>
+    </div> -->
 
 
 
@@ -114,7 +112,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 echo Html::button(FA::icon('comment') . ' ' . Module::t('module', 'COMMENT'), ['value' => Url::to(['comment', 'id' => $model->id]), 'class' => 'btn btn-info btn-sm', 'id' => 'modalButton']);
                 echo "</p>";
             ?>
-            <div class="bs-callout bs-callout-info">
+
                 <?php
                 echo GridView::widget([
                     'dataProvider' => new ActiveDataProvider(['query' => $model->getCalendarComments()]),
@@ -153,8 +151,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 Modal::end();
                 ?>
-            </div>
-
 
         </div>
     </div>

@@ -183,6 +183,8 @@ class RbacController extends Controller
         $auth->addChild($chiefcredit, $viewCreditcalendarOwnPost); 
         // PERMISSION TO CREATE PRIVATE RECORDS IN Creditcalendar
         $auth->addChild($chiefcredit, $privateCreditcalendarPost);
+        // PERMISSION TO DELETE CREDITCALENDAR COMPONENTS
+        $auth->addChild($seniorcreditspesialist, $deleteCreditcalendarPost);
 
         // SENIOR CREDIT SPECIALIST
         $seniorcreditspesialist = $auth->createRole('seniorcreditspesialist');

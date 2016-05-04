@@ -19,39 +19,31 @@ use app\modules\main\Module;
                     [
                         'label' => FA::icon('pie-chart') . ' ' . Module::t('module', 'NAV_ALLIANCE_DASHBOARD'),
                         'url' => ['/alliance/'],
-//                        'visible' => Yii::$app->user->can('root')
-                    ],
-                    [
-                        'label' => FA::icon('phone') . ' ' . Module::t('module', 'NAV_ALLIANCE_PHONEBOOK'),
-                        'url' => ['/alliance/phonebook'],
-                        'visible' => Yii::$app->user->can('root')
-                        
+//                      'visible' => Yii::$app->user->can('root')
                     ],
                     [
                         'label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_CREDITCALENDAR'),
                         'url' => ['/alliance/creditcalendar/calendar'], 
                         'visible' => Yii::$app->user->can('creditcalendarIsVisible')
-                    ],
-                    [
-                        'label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_DUTY'),
-                        'url' => ['/alliance/'], 
-                        'visible' => Yii::$app->user->can('root')
-                    ],                
+                    ],             
                 ],
                 'visible' => Yii::$app->user->can('creditcalendarIsVisible')
             ],
-        !Yii::$app->user->isGuest ?
+        Yii::$app->user->can('skodaIsVisible') ?
             [
                 'label' => FA::icon('wrench') . Module::t('module', 'NAV_SKODA'),
                 'items' => [
                     [
-                        'label' => FA::icon('wrench') . ' ' . Module::t('module', 'NAV_SKODA_DASHBOARD'), 'url' => ['/skoda/']
+                        'label' => FA::icon('wrench') . ' ' . Module::t('module', 'NAV_SKODA_DASHBOARD'), 'url' => ['/skoda/'],
+                'visible' => Yii::$app->user->can('skodaIsVisible')
                     ],
                     [
-                        'label' => FA::icon('wrench') . ' ' . Module::t('module', 'NAV_SKODA_SERVICESHEDULER'), 'url' => ['/skoda/servicesheduler/calendar']
+                        'label' => FA::icon('wrench') . ' ' . Module::t('module', 'NAV_SKODA_SERVICESHEDULER'), 'url' => ['/skoda/servicesheduler/calendar'],
+                        'visible' => Yii::$app->user->can('skodaIsVisible')
                     ],
                     [
-                        'label' => FA::icon('wrench') . ' ' . Module::t('module', 'NAV_SKODA_STATUSMONITOR'), 'url' => ['/skoda/statusmonitor']
+                        'label' => FA::icon('wrench') . ' ' . Module::t('module', 'NAV_SKODA_STATUSMONITOR'), 'url' => ['/skoda/statusmonitor'],
+                        'visible' => Yii::$app->user->can('skodaIsVisible')
                     ],                                    
                 ],
                 'visible' => Yii::$app->user->can('skodaIsVisible')

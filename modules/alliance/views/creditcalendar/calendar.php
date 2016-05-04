@@ -22,14 +22,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="creditcalendar-index">
 
-    <div class="panel panel-default">
-
-        <div class="panel-heading panel-info">
-            <?php echo FA::icon('calendar') . ' ' . Html::encode($this->title) ?>
-        </div>
-
-        <div class="panel-body">
-
             <?= $this->render('_menu', [
                 'model' => $model,
             ]) ?>
@@ -94,9 +86,5 @@ $this->params['breadcrumbs'][] = $this->title;
           <div id='credit_calendar'> </div>  
 
           <?php  Pjax::end(); ?>
-
-        </div>
-
-    </div>  
     
 </div>

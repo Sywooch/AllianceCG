@@ -15,6 +15,7 @@ use yii\data\Sort;
 class CreditcalendarSearch extends Creditcalendar
 {
     public $locations;
+    public $responsibles;
 
     /**
      * @inheritdoc
@@ -26,8 +27,8 @@ class CreditcalendarSearch extends Creditcalendar
     {
         return [
             [['id', 'type', 'allday', 'created_at', 'updated_at', 'status', 'private', 'calendar_type'], 'integer'],
-            [['title', 'date_from', 'time_from', 'date_to', 'time_to', 'description', 'author', 'globalSearch'], 'safe'],
-            ['locations', 'safe'],
+            [['title', 'date_from', 'time_from', 'date_to', 'time_to', 'description', 'author', 'priority'], 'safe'],
+            [['locations', 'responsibles'], 'safe'],
         ];
     }
 
@@ -193,7 +194,9 @@ public function calendarsearch(){
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['>=', 'date_from', $this->date_from])
             ->andFilterWhere(['>=', 'date_to', $this->date_to])
-            ->andFilterWhere(['like', 'author', $this->author]);
+            ->andFilterWhere(['like', 'author', $this->author])
+            ->andFilterWhere(['like', '{{%user}}.full_name', $this->responsibles])
+            ->andFilterWhere(['like', '{{%companies}}.company_name', $this->locations]);
 
 
         return $dataProvider;

@@ -51,4 +51,10 @@ return [
     'CALENDAR_COMMENTS_COUNT' => 'Комментарии',
     'CHECK_ALL' => 'Отметить все',
     'UNCHECK_ALL' => 'Снять выделение',
+    'NEW_CREDITCALENDAR_EVENT' => 'ОКиС Календарь. Новое событие: ',
+    'FOR_VIEW_EVENT_PLEASE_GO' => 'Просмотр события доступен по ссылке: ',
+    'NEW_CREDITCALENDAR_EVENT_TITLE' => 'Новое событие с темой: ',
+    'TIME_TO_WORK' => 'Сроки исполнения',
+    'EVENT_DESCRIPTION' => 'Описание события: ',
+
 ];

@@ -316,10 +316,21 @@ class Creditcalendar extends \yii\db\ActiveRecord
             {
                 $mail[] = $email->email;
             }
-            Yii::$app->mailer->compose()
+            // Yii::$app->mailer->compose()
+            // Yii::$app->mail->compose(['html' => '@app/mail-templates/html-email-01', 'text' => '@app/mail-templates/mail'], [/*Some params for the view */])
+            // $model = new Creditcalendar;
+            Yii::$app->mailer->compose(['html' => '@app/modules/alliance/mails/creditcalendar/newCreditCalendarEvent'], [
+                    'id' => $this->id,
+                    'title' => $this->title,
+                    'dateTimeFrom' => $this->date_from . ' ' . $this->time_from,
+                    'dateTimeTo' => $this->date_to . ' ' . $this->time_to,
+                    'description' => $this->description,
+                    'priority' => $this->priority,
+                    'author' => $this->author,
+                ])
                 ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
                 ->setReplyTo(Yii::$app->params['supportEmail'])
-                ->setSubject(date('d/m/Y H:i:s') . '. ' . Module::t('module', 'NEW_CREDITCALENDAR_COMMENT_FOR') . ' ' . $this->title)
+                ->setSubject(date('d/m/Y H:i:s') . '. ' . Module::t('module', 'NEW_CREDITCALENDAR_EVENT') . ' ' . $this->title)
                 ->setTextBody($this->description)
                 ->setTo($mail)
                 ->send();

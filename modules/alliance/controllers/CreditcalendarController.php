@@ -39,23 +39,6 @@ class CreditcalendarController extends Controller
      * Lists all Creditcalendar models.
      * @return mixed
      */
-    public function actionTable()
-    {
-        $model = new Creditcalendar();
-        $searchModel = new CreditcalendarSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('table', [
-            'searchModel' => $searchModel,
-            'model' => $model,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * Lists all Creditcalendar models.
-     * @return mixed
-     */
     public function actionIndex()
     {
         $model = new Creditcalendar();

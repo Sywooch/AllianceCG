@@ -52,6 +52,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]) ?>
             </p>
 
+            <?php 
+                // foreach($model->users as $tmp) {
+                //     echo $tmp->email;
+                //     echo '<br/>';
+                // }
+            ?>
+
             <?= DetailView::widget([
                 'model' => $model,
                 'attributes' => [

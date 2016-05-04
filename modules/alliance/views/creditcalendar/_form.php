@@ -16,6 +16,7 @@ use app\modules\admin\models\Companies;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
+
 <div class="creditcalendar-form" style="width: 70%; margin: auto;">
 
     <?php $form = ActiveForm::begin(); ?>
@@ -151,26 +152,59 @@ use app\modules\admin\models\Companies;
     <div class="row" style="margin-bottom: 8px">
         <div class="col-sm-6">
 
-            <?= $form->field($model, 'userids')->checkboxList(User::find()->select(['full_name', 'id'])->where(['position' => 'Кредитный специалист'])->orWhere(['position' => 'Страховой специалист'])->andWhere(['status' => 1])->indexBy('id')->column()) ?>
+            <?= $form->field($model, 'userids')->checkboxList(User::find()->select(['full_name', 'id'])->where(['position' => 'Кредитный специалист'])->orWhere(['position' => 'Страховой специалист'])->andWhere(['status' => 1])->indexBy('id')->column(), ['id' => 'respid']) ?>
 
-            <?= Html::checkbox(null, false, [
-                    'label' => Module::t('module', 'CHECK_ALL'),
-                    'class' => 'check-all',
-                ]);
+            <a href="#" onclick="checkByParent('respid', true); return false;"><?= Module::t('module', 'CHECK_ALL') ?></a>
+            /
+            <a href="#" onclick="checkByParent('respid', false); return false;"><?= Module::t('module', 'UNCHECK_ALL') ?></a>
+
+            <?php
+             // Html::checkbox(null, false, [
+             //        'label' => Module::t('module', 'CHECK_ALL'),
+             //        'class' => 'check-all',
+             //    ]);
             ?>            
         </div>
         <div class="col-sm-6">
-            <?= $form->field($model, 'locationids')->checkboxList(Companies::find()->select(['company_name', 'id'])->indexBy('id')->column()) ?>
+            <?= $form->field($model, 'locationids')->checkboxList(Companies::find()->select(['company_name', 'id'])->indexBy('id')->column(), ['id' => 'locid']) ?>
+        
+            <a href="#" onclick="checkByParent('locid', true); return false;"><?= Module::t('module', 'CHECK_ALL') ?></a>
+            /
+            <a href="#" onclick="checkByParent('locid', false); return false;"><?= Module::t('module', 'UNCHECK_ALL') ?></a>
+
         </div>
     </div>
 
 <?php } ?>
 
-        <div class="form-group" style="text-align: right">
-            <?= Html::submitButton($model->isNewRecord ? FA::icon('plus') . ' ' . Module::t('module', 'CREATE') : FA::icon('edit') . ' ' . Module::t('module', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-            <?= Html::submitButton(FA::icon('remove') . ' ' . Module::t('module', 'CANCEL'), ['class' => 'btn btn-danger']) ?>
+        <div class="form-group" style="text-align: right; margin-top: 30;">
+            <?= Html::submitButton($model->isNewRecord ? FA::icon('plus') . ' ' . Module::t('module', 'CREATE') : FA::icon('edit') . ' ' . Module::t('module', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success btn-menu' : 'btn btn-primary btn-menu']) ?>
+            <?= Html::submitButton(FA::icon('remove') . ' ' . Module::t('module', 'CANCEL'), ['class' => 'btn btn-danger btn-menu']) ?>
         </div>
 </div>
 
     <?php ActiveForm::end(); ?>
 
+<script type="text/javascript">
+
+    function checkByParent(aId, aChecked) {
+        var collection = document.getElementById(aId).getElementsByTagName('INPUT');
+        for (var x=0; x<collection.length; x++) {
+            if (collection[x].type.toUpperCase()=='CHECKBOX')
+                collection[x].checked = aChecked;
+        }
+    }
+    checkByParent('respid', false);
+</script>
+
+<script type="text/javascript">
+
+    function locationsCheck(aId, aChecked) {
+        var collection = document.getElementById(aId).getElementsByTagName('INPUT');
+        for (var x=0; x<collection.length; x++) {
+            if (collection[x].type.toUpperCase()=='CHECKBOX')
+                collection[x].checked = aChecked;
+        }
+    }
+    locationsCheck('locid', false);
+</script>

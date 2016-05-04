@@ -12,7 +12,6 @@ use rmrevin\yii\fontawesome\FA;
 use app\modules\alliance\Module;
 use yii\grid\ActionColumn;
 use yii\helpers\Url;
-use yii\bootstrap\Modal;
 use yii\web\View;
 
 /* @var $this yii\web\View */
@@ -31,222 +30,175 @@ $this->registerJs($multipleDelete, View::POS_END);
 ?>
 <div class="creditcalendar-index">
 
-    <!-- <div class="panel panel-default"> -->
+<?= $this->render('_menu', [
+    'model' => $model,
+]) ?>
 
-        <!-- <div class="panel-heading panel-info"> -->
+<p style="text-align: right">
+    <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
 
-            <!-- <h4> -->
-                <?php // FA::icon('calendar') . ' ' . Html::encode($this->title) ?>
-            <!-- </h4> -->
-            
-        <!-- </div> -->
-        <!-- <div class="panel-body"> -->
+    <?php // Html::button(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['value' => Url::to(['create']), 'class' => 'btn btn-primary btn-sm', 'id' => 'modalButton']);?>
+    <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'REFRESH'), ['index'], ['class' => 'btn btn-info btn-sm']) ?>
+    <?php
+        if (Yii::$app->user->can('deleteCreditcalendarPost')) {
+            echo Html::a(FA::icon('trash') . ' ' . Module::t('module', 'DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']);
+        }
+    ?>
+    <?php 
+        if(!Yii::$app->user->can('creditmanager')){
+            echo Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'), ['export'], ['class' => 'btn btn-warning btn-sm']) ;
+        }
+    ?>
 
-<?php
-      // $m = new Creditcalendar();
-      //   $sm = new CreditcalendarSearch();
-      //   $d = $sm->search(Yii::$app->request->queryParams);
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
-      //   foreach ($d->models as $ex) {
-      //       echo $ex->title;
-      //       echo '<br/>';
-      //       echo implode(', ', ArrayHelper::map($ex->locations, 'id', 'company_name'));
-      //       echo '<br/>';
-      //   }
-?>
+    <?php
+        // $countRecords = '<span class="label label-success">{count}</span>' ;
+        // $beginRecords = '<span class="label label-success">{begin}</span>' ;
+        // $endRecords = '<span class="label label-success">{end}</span>' ;
+        // $events = '<h3>События:</h3>';
+    ?>
 
-            <?= $this->render('_menu', [
-                'model' => $model,
-            ]) ?>
-
-            <p style="text-align: right">
-                <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
-
-                <?php // Html::button(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['value' => Url::to(['create']), 'class' => 'btn btn-primary btn-sm', 'id' => 'modalButton']);?>
-                <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'REFRESH'), ['index'], ['class' => 'btn btn-info btn-sm']) ?>
-                <?php
-                    if (Yii::$app->user->can('deleteCreditcalendarPost')) {
-                        echo Html::a(FA::icon('trash') . ' ' . Module::t('module', 'DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']);
-                    }
-                ?>
-                <?php 
-                    if(!Yii::$app->user->can('creditmanager')){
-                        echo Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'), ['export'], ['class' => 'btn btn-warning btn-sm']) ;
-                    }
-                ?>
-
-                <?php
-                    // if (Yii::$app->user->can('deleteCreditcalendarPost')) {
-                    //     echo Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'ExportExcel']);
-                    // }
-                ?>
-            </p>
-
-            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-            <?php
-                // $countRecords = '<span class="label label-success">{count}</span>' ;
-                // $beginRecords = '<span class="label label-success">{begin}</span>' ;
-                // $endRecords = '<span class="label label-success">{end}</span>' ;
-                // $events = '<h3>События:</h3>';
-            ?>
-
-            <!-- <div class="bs-callout bs-callout-success"> -->
-                <?= GridView::widget([
-                    'dataProvider' => $dataProvider,
-                    'filterModel' => $searchModel,
-//                  'layout'=>"{sorter}\n{pager}\n{summary}\n{items}",
-                    'id' => 'creditcalendar-grid',
-                    'tableOptions' =>[
-                        'class' => 'table table-striped table-bordered creditcalendargridview'
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+//          'layout'=>"{sorter}\n{pager}\n{summary}\n{items}",
+            'id' => 'creditcalendar-grid',
+            'tableOptions' =>[
+                'class' => 'table table-striped table-bordered creditcalendargridview'
+            ],
+            // 'summary' => false,
+            // 'summary' => " <h4>События: $beginRecords - $endRecords из $countRecords </h4><br/>",
+            // 'rowOptions' => function($model){
+            //     if($model->status == Creditcalendar::STATUS_CLARIFY){
+            //         return ['class' => 'info'];
+            //     }
+            //     elseif($model->status == Creditcalendar::STATUS_ATWORK) {
+            //         return ['class' => 'danger'];
+            //     }
+            //     elseif($model->status == Creditcalendar::STATUS_FINISHED) {
+            //         return ['class' => 'success'];
+            //     }
+            // },
+            'columns' => [
+                [
+                    'header' => '№',
+                    'class' => 'yii\grid\SerialColumn'
+                ],
+                [
+                    'class' => 'yii\grid\CheckboxColumn',
+                    'contentOptions'=>['style'=>'width: 20px;']
+                ],
+                [
+                    'attribute' => 'period'
+                ],
+                [
+                    'class' => LinkColumn::className(),
+                    'attribute' => 'title',
+                    'format' => 'raw',
+                    'filter' => AutoComplete::widget([
+                        'model' => $searchModel,
+                        'attribute' => 'title',
+                        'clientOptions' => [
+                            'source' => $searchModel->titleautocomplete(),
+                        ],
+                        'options'=>[
+                            'class'=>'form-control'
+                        ]
+                    ]),
+                    'contentOptions'=>['style'=>'width: 130px;'],
+                ],
+                [
+                    'attribute' => 'locations',
+                    'value' => function($model) {
+                        return implode(', ', ArrayHelper::map($model->locations, 'id', 'company_name'));
+                    },
+                    'visible' => !Yii::$app->user->can('creditmanager') ? true : false,
+                ],
+                [
+                    'attribute' => 'responsibles',
+                    'value' => function($model) {
+                        return implode(', ', ArrayHelper::map($model->users, 'id', 'full_name'));
+                    },
+                    'visible' => !Yii::$app->user->can('creditmanager') ? true : false,
+                ],
+                [
+                    'class' => SetColumn::className(),
+                    'attribute' => 'priority',
+                    'name' => 'priorities',
+                    'format' => 'raw',
+                    'filter' => $searchModel->getPrioritiesArray(),
+                    'cssCLasses' => [
+                        Creditcalendar::PRIORITY_BASIC => 'success',
+                        Creditcalendar::PRIORITY_LOW => 'info',
+                        Creditcalendar::PRIORITY_HIGH => 'danger',
                     ],
-                    // 'summary' => false,
-                    // 'summary' => " <h4>События: $beginRecords - $endRecords из $countRecords </h4><br/>",
-                    // 'rowOptions' => function($model){
-                    //     if($model->status == Creditcalendar::STATUS_CLARIFY){
-                    //         return ['class' => 'info'];
-                    //     }
-                    //     elseif($model->status == Creditcalendar::STATUS_ATWORK) {
-                    //         return ['class' => 'danger'];
-                    //     }
-                    //     elseif($model->status == Creditcalendar::STATUS_FINISHED) {
-                    //         return ['class' => 'success'];
-                    //     }
-                    // },
-                    'columns' => [
-                        [
-                            'header' => '№',
-                            'class' => 'yii\grid\SerialColumn'
-                        ],
-                        [
-                            'class' => 'yii\grid\CheckboxColumn',
-                            'contentOptions'=>['style'=>'width: 20px;']
-                        ],
-                        [
-                            'attribute' => 'period'
-                        ],
-                        [
-                            'class' => LinkColumn::className(),
-                            'attribute' => 'title',
-                            'format' => 'raw',
-                            'filter' => AutoComplete::widget([
-                                'model' => $searchModel,
-                                'attribute' => 'title',
-                                'clientOptions' => [
-                                    'source' => $searchModel->titleautocomplete(),
-                                ],
-                                'options'=>[
-                                    'class'=>'form-control'
-                                ]
-                            ]),
-                            'contentOptions'=>['style'=>'width: 130px;'],
-                        ],
-                        [
-                            'attribute' => 'locations',
-                            'value' => function($model) {
-                                return implode(', ', ArrayHelper::map($model->locations, 'id', 'company_name'));
-                            },
-                            'visible' => !Yii::$app->user->can('creditmanager') ? true : false,
-                        ],
-                        [
-                            'attribute' => 'responsibles',
-                            'value' => function($model) {
-                                return implode(', ', ArrayHelper::map($model->users, 'id', 'full_name'));
-                            },
-                            'visible' => !Yii::$app->user->can('creditmanager') ? true : false,
-                        ],
-                        [
-                            'class' => SetColumn::className(),
-                            'attribute' => 'priority',
-                            'name' => 'priorities',
-                            'format' => 'raw',
-                            'filter' => $searchModel->getPrioritiesArray(),
-                            'cssCLasses' => [
-                                Creditcalendar::PRIORITY_BASIC => 'success',
-                                Creditcalendar::PRIORITY_LOW => 'info',
-                                Creditcalendar::PRIORITY_HIGH => 'danger',
-                            ],
-                        ],
-                        [
-                            'class' => SetColumn::className(),
-                            'attribute' => 'status',
-                            'format' => 'raw',
-                            'name' => 'statuses',
-                            'contentOptions'=>['style'=>'width: 50px;'],
-                            'filter' => $searchModel->getStatusesArray(),
-                            'cssCLasses' => [
-                                Creditcalendar::STATUS_ATWORK => 'danger',
-                                Creditcalendar::STATUS_CLARIFY => 'primary',
-                                Creditcalendar::STATUS_FINISHED => 'success',
-                            ],
-                        ],
-                        [
-                            'attribute' => 'calendarcommentscount',
-                            'format' => 'html',
-                            'filter' => false,
-                            'value' => function($model) {
-                                return '<span class="label label-primary">' . Module::t('module', 'COMMENTS') . ': ' . $model->calendarcommentscount . '</span>';
-                            },   
-                            'contentOptions' => ['class'=>'success;'],
-                        ],
-                        // [
-                        //     'class' => ActionColumn::className(),
-                        //     'header' => 'Действия',
-                        //     'contentOptions'=>['style'=>'width: 130px;'],
-                        //     'template' => '{view}{update}{delete}',
-                        //     'buttons' => [
-                        //         'view' => function ($url, $model) {
-                        //             $title = false;
-                        //             $options = [];
-                        //             $icon = '<span class="btn btn-sm btn-warning">'.FA::icon("play-circle").'</span>';
-                        //             $label = $icon;
-                        //             $url = Url::toRoute(['view', 'id' => $model->id]);
-                        //             $options['tabindex'] = '-1';
-                        //             return Html::a($label, $url, $options) .''. PHP_EOL;
-                        //         },
-                        //         'update' => function ($url, $model) {
-                        //             $title = false;
-                        //             $options = [];
-                        //             $icon = '<span class="btn btn-sm btn-primary">'.FA::icon("edit").'</span>';
-                        //             $label = $icon;
-                        //             $url = Url::toRoute(['update', 'id' => $model->id]);
-                        //             $options['tabindex'] = '-1';
-                        //             return Html::a($label, $url, $options) .''. PHP_EOL;
-                        //         },
-                        //         'delete' => function ($url, $model, $key) {
-                        //             if(!Yii::$app->user->can('creditmanager')){
-                        //                 return Html::a('<span class="btn btn-sm btn-danger">'.FA::icon("trash").'</span>', $url, [
-                        //                     'title' => false,
-                        //                     'data-confirm' => Module::t('module', 'DELETE_CONFIRMATION'),
-                        //                     'data-method' => 'post',
-                        //                     'data-pjax' => '0',
-                        //                 ]);
-                        //             }
-                        //         },
-                        //     ],
-                        // ],
-
-                       [
-                           'header' => 'Действия',
-                           'class' => 'yii\grid\ActionColumn'
-                       ],
+                ],
+                [
+                    'class' => SetColumn::className(),
+                    'attribute' => 'status',
+                    'format' => 'raw',
+                    'name' => 'statuses',
+                    'contentOptions'=>['style'=>'width: 50px;'],
+                    'filter' => $searchModel->getStatusesArray(),
+                    'cssCLasses' => [
+                        Creditcalendar::STATUS_ATWORK => 'danger',
+                        Creditcalendar::STATUS_CLARIFY => 'primary',
+                        Creditcalendar::STATUS_FINISHED => 'success',
                     ],
-                ]); ?>
-            <!-- </div> -->
-<!--         </div>
+                ],
+                [
+                    'attribute' => 'calendarcommentscount',
+                    'format' => 'html',
+                    'filter' => false,
+                    'value' => function($model) {
+                        return '<span class="label label-primary">' . Module::t('module', 'COMMENTS') . ': ' . $model->calendarcommentscount . '</span>';
+                    },   
+                    'contentOptions' => ['class'=>'success;'],
+                ],
+                // [
+                //     'class' => ActionColumn::className(),
+                //     'header' => 'Действия',
+                //     'contentOptions'=>['style'=>'width: 130px;'],
+                //     'template' => '{view}{update}{delete}',
+                //     'buttons' => [
+                //         'view' => function ($url, $model) {
+                //             $title = false;
+                //             $options = [];
+                //             $icon = '<span class="btn btn-sm btn-warning">'.FA::icon("play-circle").'</span>';
+                //             $label = $icon;
+                //             $url = Url::toRoute(['view', 'id' => $model->id]);
+                //             $options['tabindex'] = '-1';
+                //             return Html::a($label, $url, $options) .''. PHP_EOL;
+                //         },
+                //         'update' => function ($url, $model) {
+                //             $title = false;
+                //             $options = [];
+                //             $icon = '<span class="btn btn-sm btn-primary">'.FA::icon("edit").'</span>';
+                //             $label = $icon;
+                //             $url = Url::toRoute(['update', 'id' => $model->id]);
+                //             $options['tabindex'] = '-1';
+                //             return Html::a($label, $url, $options) .''. PHP_EOL;
+                //         },
+                //         'delete' => function ($url, $model, $key) {
+                //             if(!Yii::$app->user->can('creditmanager')){
+                //                 return Html::a('<span class="btn btn-sm btn-danger">'.FA::icon("trash").'</span>', $url, [
+                //                     'title' => false,
+                //                     'data-confirm' => Module::t('module', 'DELETE_CONFIRMATION'),
+                //                     'data-method' => 'post',
+                //                     'data-pjax' => '0',
+                //                 ]);
+                //             }
+                //         },
+                //     ],
+                // ],
 
-        </div> -->
-    </div>
+               [
+                   'header' => 'Действия',
+                   'class' => 'yii\grid\ActionColumn'
+               ],
+            ],
+        ]); 
+    ?>
 
-
-<?php
-    Modal::begin([
-        'header' => '<h4>' . Module::t('module', 'CREATE') .'</h4>',
-        'id' => 'modal',
-        'size' => 'modal-lg'
-    ]);
-
-    echo "<div id='modalContent'></div>";
-
-    Modal::end();
-?>
+</div>

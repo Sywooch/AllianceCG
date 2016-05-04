@@ -42,10 +42,8 @@
 <script src='/js/jqfc/fullcalendar.js'></script>
 <script src='/js/jqfc/lang/ru.js'></script> -->
 
-
-
 <?php 
-   $this->registerCssFile('@web/css/calendars/calendars.css', ['depends' => ['app\assets\AppAsset']]);    
+   $this->registerCssFile('@web/css/jqfc/fullcalendar_sk_statusmonitor.css', ['depends' => ['app\assets\AppAsset']]);    
    $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/jquery.min.js'), ['depends' => [
        'yii\web\YiiAsset',
        'yii\bootstrap\BootstrapAsset'],

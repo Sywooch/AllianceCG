@@ -144,11 +144,13 @@ use app\modules\admin\models\Companies;
 
         </div>
 
+    </div>
+
 <?php if(!Yii::$app->user->can('creditmanager')) { ?>
 
     <div class="row" style="margin-bottom: 8px">
         <div class="col-sm-6">
-            <?= $form->field($model, 'userids', ['template' => '<div class="input-group"{label}{input}</div>{error}'])->checkboxList(User::find()->select(['full_name', 'id'])->where(['position' => 'Кредитный специалист'])->andWhere(['status' => 1])->indexBy('id')->column()) ?>
+            <?= $form->field($model, 'userids', ['template' => '<div class="input-group"{label}{input}</div>{error}'])->checkboxList(User::find()->select(['full_name', 'id'])->where(['position' => 'Кредитный специалист'])->orWhere(['position' => 'Страховой специалист'])->andWhere(['status' => 1])->indexBy('id')->column()) ?>
         </div>
         <div class="col-sm-6">
             <?= $form->field($model, 'locationids')->checkboxList(Companies::find()->select(['company_name', 'id'])->indexBy('id')->column()) ?>
@@ -161,7 +163,7 @@ use app\modules\admin\models\Companies;
             <?= Html::submitButton($model->isNewRecord ? FA::icon('plus') . ' ' . Module::t('module', 'CREATE') : FA::icon('edit') . ' ' . Module::t('module', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
             <?= Html::submitButton(FA::icon('remove') . ' ' . Module::t('module', 'CANCEL'), ['class' => 'btn btn-danger']) ?>
         </div>
+</div>
 
     <?php ActiveForm::end(); ?>
 
-</div>

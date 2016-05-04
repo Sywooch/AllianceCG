@@ -84,7 +84,7 @@
 
             eventClick: function(calEvent, jsEvent, view) {
                 if (calEvent.url) {
-                    window.open(calEvent.url);
+                    if (confirm('Перейти на страницу записи "' + calEvent.title + '"?'))window.open(calEvent.url);
                     return false;
                 }
             },

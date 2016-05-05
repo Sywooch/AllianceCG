@@ -8,18 +8,14 @@ use app\modules\alliance\Module;
 $gotoLink = Yii::$app->urlManager->createAbsoluteUrl('alliance/creditcalendar/'.$id);
 ?>
  
-<?= Module::t('module', 'NEW_CREDITCALENDAR_EVENT_TITLE') . $title ?>
+<?= Module::t('module', 'NEW_CREDITCALENDAR_COMMENT') .' "'. $title . '"' ?>
 
 <?= '<br/>' ?>
 
-<?= Module::t('module', 'TIME_TO_WORK') . $dateTimeFrom . ' - ' . $dateTimeTo ?>
+<?= Module::t('module', 'NEW_COMMENT_TEXT') . ': ' . $comment_text ?>
 
 <?= '<br/>' ?>
 
-<?= Module::t('module', 'EVENT_DESCRIPTION') . $description ?>
-
-<?= '<br/>' ?>
-
-<?= Module::t('module', 'FOR_VIEW_EVENT_PLEASE_GO') ?>
+<?= Module::t('module', 'FOR_FULLVIEW_EVENT_PLEASE_GO') ?>
  
 <?= Html::a(Html::encode($gotoLink), $gotoLink) ?>

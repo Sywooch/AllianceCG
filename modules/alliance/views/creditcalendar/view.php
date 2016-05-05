@@ -9,6 +9,7 @@ use app\modules\alliance\Module;
 use yii\data\ActiveDataProvider;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
+use app\modules\admin\models\User;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\alliance\models\Creditcalendar */
@@ -57,6 +58,28 @@ $this->params['breadcrumbs'][] = $this->title;
                 //     echo $tmp->email;
                 //     echo '<br/>';
                 // }
+                
+            // $emails = User::find()->where(['IN', 'id', $this->userids])->all();
+            
+            // $credit_heads = User::find()->where(['role' => 'chiefcredit'])->orWhere(['role' => 'seniorcreditspesialist'])->all();
+            
+            // foreach($credit_heads as $head){
+            //     $head_email[] = $head->email;
+            // }
+
+
+            // //TRUE
+            // $head_email[] = $model->authorname->email;
+
+            // foreach($model->users as $email)
+            // {
+            //     $mail[] = $email->email;
+            // }
+
+            // $summaryEmails = ArrayHelper::merge($head_email, $mail);
+
+            // var_dump($summaryEmails);
+
             ?>
 
             <?= DetailView::widget([

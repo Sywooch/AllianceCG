@@ -126,6 +126,29 @@ class CreditcalendarController extends Controller
             $commentModel->user_id = Yii::$app->user->getId();
             $commentModel->save();
             return $this->redirect(['view', 'id' => $model->id]);
+
+            if($commentModel->save()){
+                $author_email[] = $model->authorname->email;
+                foreach($model->users as $email)
+                {
+                    $responsibles_mail[] = $email->email;
+                }
+                $summaryEmails = ArrayHelper::merge($author_email, $responsibles_mail);
+
+                Yii::$app->mailer->compose(['html' => '@app/modules/alliance/mails/creditcalendar/newCreditCalendarComment'], [
+                        'id' => $model->id,
+                        'title' => $model->title,
+                        'comment_text' => $commentModel->comment_text,
+                    ])
+                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                    ->setReplyTo(Yii::$app->params['supportEmail'])
+                    ->setSubject(date('d/m/Y H:i:s') . '. ' . Module::t('module', 'NEW_CREDITCALENDAR_COMMENT') . ' ' . $model->title)
+                    ->setTextBody($commentModel->comment_text)
+                    ->setTo($summaryEmails)
+                    ->send();
+
+             }
+
         } else {
             return $this->renderAjax('comment', [
                 'model' => $model,

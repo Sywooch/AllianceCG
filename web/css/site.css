@@ -26,6 +26,11 @@ body {
     padding-top: 20px;
 }
 
+.counters {
+    height: 160px;
+    padding-top: 20px;
+}
+
 .jumbotron {
     text-align: center;
     background-color: transparent;

@@ -1,0 +1,56 @@
+#dateCounter { 
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bold;
+    color: #4288bb;
+    /*4288bb*/
+}
+
+#coffeeCounter { 
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bold;
+    color: #4288bb;
+    /*4288bb*/
+}
+
+#codeStringsCounter { 
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bold;
+    color: #4288bb;
+    /*4288bb*/
+}
+
+#dateText { 
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    color: #000;
+    /*4288bb*/
+}
+
+#codeStringsText { 
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    color: #000;
+    /*4288bb*/
+}
+#coffeeText { 
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    color: #000;
+    /*4288bb*/
+}
+
+#centerFA {
+	text-align: center;
+}
+
+.counters {	
+    /*background: url(/img/site/laptop_bi.jpg);*/
+    /*background-size: 512px 160px;*/
+    /*background-repeat: no-repeat;	*/
+}

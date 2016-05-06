@@ -24,33 +24,48 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-default-login">
 
     <div class="row">
-        <div class="col-lg-5 col-lg-offset-3" id="slick-login">
+        <!-- <div class="col-lg-5 col-lg-offset-3" id="slick-login"> -->
+        <div class="col-md-7"></div>
 
+        <div class="col-md-5">
             <h1><?= Html::encode($this->title) ?></h1>
-
             
-            <p><?= Module::t('module', 'PLEASE_FILL_FOR_LOGIN') ?></p>
+            <!-- <p> -->
+                <?php// Module::t('module', 'PLEASE_FILL_FOR_LOGIN') ?>
+            <!-- </p> -->
 
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
             <?= $form->field($model, 'username', ['template'=>' <div class="input-group"><span class="input-group-addon">'. FA::icon('user') . '</span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'username' )]) ?>
 
             <?= $form->field($model, 'password', ['template'=>' <div class="input-group"><span class="input-group-addon">'. FA::icon('briefcase') . '</span>{input}</div>{error}'])->passwordInput(['placeholder' => $model->getAttributeLabel( 'password' )]) ?>
             
-            <!-- <div class="alert alert-danger"> -->
-                <?php Module::t('module', 'LOGIN_INFO') ?>
-            <!-- </div>             -->
+            <?php Module::t('module', 'LOGIN_INFO') ?>
             
-            <?= $form->field($model, 'rememberMe')->checkbox() ?>
+                <div class="col-md-4" style="text-align: left">
+                    <?= $form->field($model, 'rememberMe')->checkbox() ?>
+                </div>
+            <div class="login-buttons">
+                <div class="col-md-5" style="padding-top: 8px;">
+                    <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'LINK_PASSWORD_RESET'), ['password-reset-request']) ?>
+                </div>
+                <div class="col-md-3">
+                    <?= Html::submitButton(FA::icon('sign-in') . ' ' . Module::t('module', 'USER_BUTTON_LOGIN'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                </div>
+            </div>
+
+
+
+            
             <div style="color:#999;margin:1em 0;text-align: right;">
-                <?php // Html::a('<span class="glyphicon glyphicon-refresh"></span>  ' . Module::t('module', 'LINK_SIGNUP'), ['signup']) ?>
+
                 &nbsp&nbsp&nbsp&nbsp            
-                <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'LINK_PASSWORD_RESET'), ['password-reset-request']) ?>
+                
                 &nbsp&nbsp&nbsp&nbsp
-                <?= Html::submitButton(FA::icon('sign-in') . ' ' . Module::t('module', 'USER_BUTTON_LOGIN'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
             
 
             <?php ActiveForm::end(); ?>
         </div>
+        <!-- </div> -->
     </div>
 </div>

@@ -31,7 +31,7 @@ function counters() {
 	var timeDiff = Math.abs(today.getTime() - startdate.getTime());
 	var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 	var coffeePerDay = 8;
-	var codeStringsPerDay = 100;
+	var codeStringsPerDay = 121;
 	
   	setValue(dateCounter, diffDays, true, 1, 5);
   	setValue(coffeeCounter, diffDays*coffeePerDay, true, coffeePerDay, 5);

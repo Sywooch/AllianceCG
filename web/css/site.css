@@ -36,6 +36,10 @@ body {
     background-color: transparent;
 }
 
+.login-buttons {
+    text-align: right;
+}
+
 .jumbotron .btn {
     font-size: 21px;
     padding: 14px 24px;

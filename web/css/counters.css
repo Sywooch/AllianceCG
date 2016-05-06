@@ -49,6 +49,14 @@
 	text-align: center;
 }
 
+.module-links {
+	text-align: center;
+    font-size: large;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 30px;
+}
+
 .counters {	
     /*background: url(/img/site/laptop_bi.jpg);*/
     /*background-size: 512px 160px;*/

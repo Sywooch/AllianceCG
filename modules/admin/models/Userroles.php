@@ -54,6 +54,14 @@ class Userroles extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsersbyrole()
+    {
+        return $this->hasMany(User::className(), ['role' => 'role']);
+    }
+
+    /**
      * @inheritdoc
      */
     public function attributeLabels()

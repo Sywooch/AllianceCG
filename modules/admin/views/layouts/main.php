@@ -28,14 +28,14 @@ AppAsset::register($this);
 <?= $this->render('@app/modules/admin/views/layouts/_header') ?>
 
     <div class="container">
-        <div class="col-sm-2 sidebar-admin">
-        <?= $this->render('@app/modules/admin/views/layouts/_sidebar') ?>
-        </div>
-        <div class="col-sm-10 main-admin">        
+        <!-- <div class="col-sm-2 sidebar-admin"> -->
+        <?php // $this->render('@app/modules/admin/views/layouts/_sidebar') ?>
+        <!-- </div>
+        <div class="col-sm-10 main-admin">         -->
             <?= $this->render('@app/modules/main/views/layouts/_breadcrumbs') ?>
             <?= Alert::widget() ?>
             <?= $content ?>
-        </div>
+        <!-- </div> -->
     </div>
 </div>
 

@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\modules\admin\models\User;
+use yii\data\ActiveDataProvider;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Userroles */
@@ -35,6 +38,25 @@ $this->params['breadcrumbs'][] = $this->title;
             'updated_at',
             'author',
         ],
-    ]) ?>
+    ]); 
+
+    echo GridView::widget([
+        'dataProvider' => new ActiveDataProvider(['query' => $model->getUsersbyrole()]),
+        'showOnEmpty' => true,
+        'tableOptions' =>[
+            'class' => 'table table-striped table-bordered creditcalendargridview'
+        ],
+        'columns' => [
+            [
+                'header' => '№',
+                'class' => 'yii\grid\SerialColumn'
+            ],
+            [
+                'attribute' => 'fullname',
+                'value' => 'full_name',
+            ],
+        ],
+    ]);    
+?>
 
 </div>

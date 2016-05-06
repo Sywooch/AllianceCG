@@ -88,15 +88,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions'=>['style'=>'width: 150px;'],
                 'filter'=>ArrayHelper::map(User::find()->asArray()->all(), 'position', 'position'),
             ],
+            // [
+            //     'attribute' => 'role',
+            //     'filter'=>ArrayHelper::map(Userroles::find()->asArray()->all(), 'role', 'role_description'),
+            //     'contentOptions'=>['style'=>'width: 50px;'],  
+            // ],
             [
-                // 'class' => SetColumn::className(),
-                'attribute' => 'role',
-                'filter'=>ArrayHelper::map(Userroles::find()->asArray()->all(), 'role', 'role_description'),
-                // 'name' => 'rolesName',
-                'contentOptions'=>['style'=>'width: 50px;'],  
-                // 'value' => function ($data) {
-                //     return Yii::$app->user->identity->getRoleName();
-                // },
+                'attribute' => 'user_roles',
+                'value' => 'userroles.role_description',
+                'filter'=>ArrayHelper::map(Userroles::find()->asArray()->all(), 'role_description', 'role_description'),                
             ],
             [
                 'class' => SetColumn::className(),

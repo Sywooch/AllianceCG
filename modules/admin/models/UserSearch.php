@@ -33,6 +33,7 @@ class UserSearch extends Model
     public $photo;
     public $file;
     public $role;
+    public $user_roles;
 
     public function rules()
     {
@@ -40,7 +41,7 @@ class UserSearch extends Model
             // [['id', 'status'], 'integer'],
             [['username', 'email', 'name', 'surname', 'patronymic', 'fullname', 'photo', 'position', 'role'], 'safe'],
             [['date_from', 'date_to'], 'date', 'format' => 'php:Y-m-d'],
-            [['fullname', 'company'], 'safe'],
+            [['fullname', 'company', 'user_roles'], 'safe'],
             ['photo', 'safe'],
         ];
     }
@@ -60,6 +61,7 @@ class UserSearch extends Model
             'username' => Module::t('module', 'USER_USERNAME'),
             'email' => Module::t('module', 'USER_EMAIL'),
             'status' => Module::t('module', 'USER_STATUS'),
+            'user_roles' => Module::t('module', 'ADMIN_USERS_ROLE'),
         ];
     }
 
@@ -81,7 +83,8 @@ class UserSearch extends Model
      */
     public function search($params)
     {
-        $query = User::find()->where(['<>','role', 'root']);
+        $query = User::find()->where(['<>','{{%user}}.role', 'root']);        
+        $query->joinWith(['userroles']);
 
         $sort = new Sort([
             'attributes' => [
@@ -115,6 +118,13 @@ class UserSearch extends Model
             // ]
         ]);
 
+    $dataProvider->sort->attributes['user_roles'] = [
+        // The tables are the ones our relation are configured to
+        // in my case they are prefixed with "tbl_"
+        'asc' => ['{{%userroles}}.role_description' => SORT_ASC],
+        'desc' => ['{{%userroles}}.role_description' => SORT_DESC],
+    ];        
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -132,6 +142,7 @@ class UserSearch extends Model
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['>=', 'created_at', $this->date_from ? strtotime($this->date_from . ' 00:00:00') : null])
             ->andFilterWhere(['<=', 'created_at', $this->date_to ? strtotime($this->date_to . ' 23:59:59') : null])
+            ->andFilterWhere(['like', '{{%userroles}}.role_description', $this->user_roles])
 //            ->andWhere('surname LIKE "%' . $this->fullname . '%" ' . 'OR name LIKE "%' . $this->fullname . '%" ' . 'OR patronymic LIKE "%' . $this->fullname . '%" '
 //            )
             ;

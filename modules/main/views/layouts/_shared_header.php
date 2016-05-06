@@ -60,11 +60,14 @@ use app\modules\main\Module;
                             'label' => FA::icon('cog') . ' ' . Module::t('module', 'NAV_USERS'), 'url' => ['/admin/users/']
                         ],
                         [
+                            'label' => FA::icon('cog') . ' ' . Module::t('module', 'NAV_USERROLES'), 'url' => ['/admin/userroles/']
+                        ],     
+                        [
                             'label' => FA::icon('cog') . ' ' . Module::t('module', 'NAV_COMPANIES'), 'url' => ['/admin/companies/']
                         ],
                         [
                             'label' => FA::icon('cog') . ' ' . Module::t('module', 'NAV_POSITIONS'), 'url' => ['/admin/positions/']
-                        ],                
+                        ],             
                     ],
                 'visible' => Yii::$app->user->can('adminIsVisible')
             ] :

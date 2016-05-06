@@ -19,3 +19,43 @@ $this->title = Yii::$app->name;;
 </div>
 
 <?php // Yii::$app->user->identity->usercompany; ?>
+
+<div id="dateCounter"></div>
+
+<script type="text/javascript">
+
+var setValue = function(elem, value, inc, shift, speed) {
+  var interval = false;
+  if (inc) {
+    interval = setInterval(function() {
+      if (elem.innerHTML * 1 + shift >= value) {
+        elem.innerHTML = value;
+        clearInterval(interval);
+      } else {
+        elem.innerHTML = elem.innerHTML * 1 + shift;
+      }
+    }, speed);
+  } else {
+    interval = setInterval(function() {
+      if (elem.innerHTML * 1 - shift <= value) {
+        elem.innerHTML = value;
+        clearInterval(interval);
+      } else {
+        elem.innerHTML = elem.innerHTML * 1 - shift;
+      }
+    }, speed);
+  }
+};
+function counters() {
+	var result = document.getElementById("dateCounter");
+	var startdate = new Date("4/1/2016");
+	var today = new Date();
+	var timeDiff = Math.abs(today.getTime() - startdate.getTime());
+	var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+	
+  	setValue(result, diffDays, true, 1, 5);
+}
+window.onload = function() {
+   counters();
+}
+</script>

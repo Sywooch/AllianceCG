@@ -57,8 +57,17 @@
     margin-bottom: 30px;
 }
 
-.counters {	
-    /*background: url(/img/site/laptop_bi.jpg);*/
-    /*background-size: 512px 160px;*/
-    /*background-repeat: no-repeat;	*/
+@mixin vertical-align($position: relative) {
+  position: $position;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.counters {
+  @include vertical-align();
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;  
 }

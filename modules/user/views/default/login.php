@@ -11,11 +11,20 @@ use rmrevin\yii\fontawesome\FA;
 
 $this->title = Module::t('module', 'TITLE_LOGIN');
 $this->params['breadcrumbs'][] = $this->title;
+
+    // $this->registerCssFile('@web/css/login.css', ['depends' => ['app\assets\AppAsset']]);      
+    // $this->registerJsFile(Yii::getAlias('@web/js/modules/main/login/placeholder.js'), ['depends' => [
+    //     'yii\web\YiiAsset',
+    //     'yii\bootstrap\BootstrapAsset'],
+    // ]); 
+
 ?>
+    <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> -->
+
 <div class="user-default-login">
 
     <div class="row">
-        <div class="col-lg-5 col-lg-offset-3">
+        <div class="col-lg-5 col-lg-offset-3" id="slick-login">
 
             <h1><?= Html::encode($this->title) ?></h1>
 

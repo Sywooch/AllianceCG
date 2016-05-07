@@ -4,25 +4,30 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use app\modules\admin\models\User;
 use yii\data\ActiveDataProvider;
+use app\modules\admin\Module;
 use yii\grid\GridView;
+use rmrevin\yii\fontawesome\FA;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Userroles */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Userroles'), 'url' => ['index']];
+$this->title = $model->role_description;
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN'), 'url' => ['/admin']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_USERROLES'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="userroles-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <!-- <h1> -->
+        <?php // echo  Html::encode($this->title) ?>
+    <!-- </h1> -->
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
+    <p style="text-align: right">
+        <?= Html::a(FA::icon('pencil') . ' ' . Module::t('module', 'UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(FA::icon('trash') . ' ' . Module::t('module', 'DELETE'), ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger btn-sm',
             'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                'confirm' => Module::t('module', 'REALLY_DELETE'),
                 'method' => 'post',
             ],
         ]) ?>
@@ -31,11 +36,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            // 'id',
             'role',
             'role_description:ntext',
-            'created_at',
-            'updated_at',
+            'created_at:datetime',
+            'updated_at:datetime',
             'author',
         ],
     ]); 

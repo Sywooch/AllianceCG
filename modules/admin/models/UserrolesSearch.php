@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\modules\admin\models\Userroles;
+use app\modules\admin\models\User;
 
 /**
  * UserrolesSearch represents the model behind the search form about `app\modules\admin\models\Userroles`.
@@ -44,7 +45,15 @@ class UserrolesSearch extends Userroles
      */
     public function search($params)
     {
-        $query = Userroles::find();
+        $query = Userroles::find()
+            // ->select([
+            //     '{{%userroles}}.*',
+            //     'COUNT({{%user}}.id) AS usersCount'
+            // ])
+            // ->joinWith('user')
+            // ->groupBy('{{%userroles}}.id')
+            // ->all()
+            ;        
 
         // add conditions that should always apply here
 

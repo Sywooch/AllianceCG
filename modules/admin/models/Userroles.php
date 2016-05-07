@@ -20,6 +20,7 @@ class Userroles extends \yii\db\ActiveRecord
 {
 
     public $globalSearch;
+    public $userroles_count;
 
     /**
      * @inheritdoc
@@ -54,7 +55,7 @@ class Userroles extends \yii\db\ActiveRecord
             [['role_description'], 'string'],
             [['created_at', 'updated_at'], 'integer'],
             [['role', 'author'], 'string', 'max' => 255],
-            [['globalSearch'], 'safe'],
+            [['globalSearch', 'userroles_count'], 'safe'],
         ];
     }
 
@@ -62,6 +63,20 @@ class Userroles extends \yii\db\ActiveRecord
      * @return \yii\db\ActiveQuery
      */
     public function getUsersbyrole()
+    {
+        return $this->hasMany(User::className(), ['role' => 'role']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserrolescount()
+    {
+        // Customer has_many Order via Order.customer_id -> id
+        return $this->hasMany(User::className(), ['role' => 'role'])->count();
+    }    
+
+    public function getUser()
     {
         return $this->hasMany(User::className(), ['role' => 'role']);
     }
@@ -75,10 +90,11 @@ class Userroles extends \yii\db\ActiveRecord
             'id' => Module::t('module', 'ID'),
             'role' => Module::t('module', 'ROLE_NAME'),
             'role_description' => Module::t('module', 'ROLE_DESCRIPTION'),
-            'created_at' => Module::t('module', 'Created At'),
-            'updated_at' => Module::t('module', 'Updated At'),
-            'author' => Module::t('module', 'Author'),
+            'created_at' => Module::t('module', 'CREATED_AT'),
+            'updated_at' => Module::t('module', 'UPDATED_AT'),
+            'author' => Module::t('module', 'AUTHOR'),
             'globalSearch' => Module::t('module', 'SEARCH'),
+            'userroles_count' => Module::t('module', 'USERROLESCOUNT'),
         ];
     }
 }

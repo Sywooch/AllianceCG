@@ -23,10 +23,12 @@ var setValue = function(elem, value, inc, shift, speed) {
   }
 };
 function counters() {
+  var beginDate = "4/1/2016";
 	var dateCounter = document.getElementById("dateCounter");
 	var coffeeCounter = document.getElementById("coffeeCounter");
 	var codeCounter = document.getElementById("codeStringsCounter");
-	var startdate = new Date("4/1/2016");
+	// var startdate = new Date("4/1/2016");
+  var startdate = new Date(beginDate);
 	var today = new Date();
 	var timeDiff = Math.abs(today.getTime() - startdate.getTime());
 	var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));

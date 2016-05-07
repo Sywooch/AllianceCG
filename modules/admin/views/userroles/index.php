@@ -4,6 +4,9 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use app\modules\admin\Module;
+use app\components\grid\ActionColumn;
+use app\components\grid\SetColumn;
+use app\components\grid\LinkColumn;
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\admin\models\UserrolesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -34,8 +37,32 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             // 'id',
-            'role',
+            // 'role',
+
+            [
+                'class' => LinkColumn::className(),
+                'attribute' => 'role',
+                'format' => 'raw', 
+            ],            
             'role_description:ntext',
+            // [
+            //     'attribute' => 'userrolescount',
+            //     'format' => 'html',
+            //     'filter' => false,
+            //     'value' => function($model) {
+            //         return '<span class="label label-primary">' . Module::t('module', 'COUNTUSERS') . ': ' . $model->userrolescount . '</span>';
+            //     },   
+            //     'contentOptions' => ['class'=>'success;'],
+            // ],
+            [
+                'attribute' => 'userroles_count',
+                'format' => 'html',
+                'filter' => false,
+                'value' => function($model) {
+                    return '<span class="label label-primary">' . Module::t('module', 'COUNTUSERS') . ': ' . $model->userrolescount . '</span>';
+                },   
+                'contentOptions' => ['class'=>'success;'],
+            ],
             // 'created_at',
             // 'updated_at',
             // 'author',

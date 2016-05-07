@@ -31,8 +31,22 @@ class Positions extends \yii\db\ActiveRecord
             [['position'], 'required'],
             [['description'], 'string'],
             [['position'], 'string', 'max' => 255],
-            [['position'], 'safe'],
+            [['position', 'userscount'], 'safe'], 
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserscount()
+    {
+        // Customer has_many Order via Order.customer_id -> id
+        return $this->hasMany(User::className(), ['position' => 'id'])->count();
+    }    
+
+    public function getUser()
+    {
+        return $this->hasMany(User::className(), ['position' => 'id']);
     }
 
     /**
@@ -46,7 +60,8 @@ class Positions extends \yii\db\ActiveRecord
             // 'description' => Yii::t('app', 'ADMIN_POSITIONS_DESCRIPTION'),
             'id' => Module::t('module', 'ID'),
             'position' => Module::t('module', 'ADMIN_POSITIONS_POSITION'),
-            'description' => Module::t('module', 'ADMIN_POSITIONS_DESCRIPTION'),            
+            'description' => Module::t('module', 'ADMIN_POSITIONS_DESCRIPTION'), 
+            'userscount' => Module::t('module', 'COUNTUSERS'),           
         ];
     }
 }

@@ -4,11 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use app\modules\admin\Module;
 use rmrevin\yii\fontawesome\FA;
+use yii\data\ActiveDataProvider;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Positions */
 
 $this->title = $model->position;
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN'), 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN_POSITIONS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -25,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'ADMIN_POSITIONS_DELETE'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger btn-sm',
             'data' => [
-                'confirm' => Module::t('module', 'ADMIN_POSITIONS_REALY_DELETE?'),
+                'confirm' => Module::t('module', 'ADMIN_POSITIONS_REALY_DELETE'),
                 'method' => 'post',
             ],
         ]) ?>
@@ -42,6 +45,23 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
             ],
         ],
-    ]) ?>
+    ]); 
 
+    echo GridView::widget([
+          'dataProvider' => new ActiveDataProvider(['query' => $model->getUser()]),
+          'showOnEmpty' => true,
+          'tableOptions' =>[
+              'class' => 'table table-striped table-bordered creditcalendargridview'
+          ],
+          'columns' => [
+              [
+                  'header' => '№',
+                  'class' => 'yii\grid\SerialColumn'
+              ],
+              [
+                  'attribute' => 'fullname',
+                  'value' => 'full_name',
+              ],
+          ],
+      ]);   ?> 
 <!--</div>-->

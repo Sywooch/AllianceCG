@@ -5,10 +5,12 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\modules\admin\Module;
 use rmrevin\yii\fontawesome\FA;
+use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\UserSearch */
 /* @var $form yii\widgets\ActiveForm */
+
 ?>
 
 <div class="user-search">

@@ -117,5 +117,6 @@
             'CREATED_AT' => 'Дата создания',
             'UPDATED_AT' => 'Дата редактирования',
             'AUTHOR' => 'Автор',
+            'ADMIN_POSITIONS_REALY_DELETE' => 'Удалить запись?',
             
 	];

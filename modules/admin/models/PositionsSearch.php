@@ -16,6 +16,10 @@ use app\modules\admin\Module;
  */
 class PositionsSearch extends \yii\db\ActiveRecord
 {
+
+    public $userscount;
+    public $globalSearch;
+
     /**
      * @inheritdoc
      */
@@ -33,6 +37,7 @@ class PositionsSearch extends \yii\db\ActiveRecord
             // ['position', 'unique', 'targetClass' => Positions::className(), 'message' => Module::t('module', 'ADMIN_POSITIONS_ERROR_RECORD_EXIST')],
             [['description'], 'string'],
             [['position'], 'string', 'max' => 255],
+            [['userscount', 'globalSearch'], 'safe'],
         ];
     }
 
@@ -44,7 +49,9 @@ class PositionsSearch extends \yii\db\ActiveRecord
         return [
             'id' => Module::t('module', 'ID'),
             'position' => Module::t('module', 'ADMIN_POSITIONS_POSITION'),
-            'description' => Module::t('module', 'ADMIN_POSITIONS_DESCRIPTION'),         
+            'description' => Module::t('module', 'ADMIN_POSITIONS_DESCRIPTION'),   
+            'userscount' => Module::t('module', 'ADMIN_USERS_COUNT'), 
+            'globalSearch' => Module::t('module', 'SEARCH'),
         ];
     }
     
@@ -58,6 +65,7 @@ class PositionsSearch extends \yii\db\ActiveRecord
     public function search($params)
     {
         $query = Positions::find();
+        $query -> joinWith(['user']);
 
         $sort = new Sort([
             'attributes' => [
@@ -70,11 +78,8 @@ class PositionsSearch extends \yii\db\ActiveRecord
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => $sort,
-            // 'sort' => [
-            //     'defaultOrder' => ['id' => SORT_DESC],
-            //     // 'attributes' => ['username','email','status'],
-            // ]
         ]);
+
 
         $this->load($params);
 
@@ -85,7 +90,7 @@ class PositionsSearch extends \yii\db\ActiveRecord
         }
 
         $query
-            ->andFilterWhere(['like', 'position', $this->position]);
+            ->andFilterWhere(['like', '{{%positions}}.position', $this->globalSearch]);
 
         return $dataProvider;
     }

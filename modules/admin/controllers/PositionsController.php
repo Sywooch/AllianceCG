@@ -128,7 +128,7 @@ class PositionsController extends Controller
 
         foreach ($pk as $key => $value) 
         {
-            $sql = "DELETE FROM sk_positions WHERE id = $value";
+            $sql = "DELETE FROM {{%positions}} WHERE id = $value";
             $query = Yii::$app->db->createCommand($sql)->execute();
         }
 

@@ -13,6 +13,7 @@ use yii\web\UploadedFile;
 use app\modules\admin\models\Positions;
 use app\modules\user\Module;
 use app\modules\admin\models\Companies;
+use app\modules\admin\models\Userroles;
 
 /**
  * This is the model class for table "{{%user}}".
@@ -161,6 +162,7 @@ class User extends ActiveRecord implements IdentityInterface
             'photo' => Module::t('module', 'USER_PHOTO'),
             'file' => Module::t('module', 'USER_PHOTO'),
             'company' => Module::t('module', 'USER_COMPANY'),
+            'role' => Module::t('module', 'USER_ROLE'),
             'companies' => Module::t('module', 'USER_COMPANY'),
             'positions' => Module::t('module', 'USER_POSITION'),
         ];
@@ -231,6 +233,30 @@ class User extends ActiveRecord implements IdentityInterface
             ->where(['id' => $this->position])
             ->one();
         return $userposition->position;        
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserroles()
+    {
+        return $this->hasOne(Userroles::className(), ['role' => 'role']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPositions()
+    {
+        return $this->hasOne(Positions::className(), ['id' => 'position']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCompanies()
+    {
+        return $this->hasOne(Companies::className(), ['id' => 'company']);
     }
 
     public function getAllName()

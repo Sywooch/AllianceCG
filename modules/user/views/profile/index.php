@@ -92,10 +92,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'username',
-            'position',
-            'role',
-            'email',
-            'company',
+            // 'position',
+            // 'role',
+            [
+                'attribute' => 'role',
+                'value' => $model->userroles->role_description,
+            ],
+            [
+                'attribute' => 'position',
+                'value' => $model->positions->position,
+            ],
+            [
+                'attribute' => 'company',
+                'value' => $model->companies->company_name,
+            ],
+            'email:email',
+            // 'company',
             'created_at:datetime'
         ],
     ]) ?>

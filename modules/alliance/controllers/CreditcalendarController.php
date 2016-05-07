@@ -30,6 +30,7 @@ class CreditcalendarController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                    'export' => ['post'],
                 ],
             ],
         ];
@@ -288,15 +289,15 @@ class CreditcalendarController extends Controller
             $titleNumber=1;   
 
             $objPHPExcel->setActiveSheetIndex($sheet);
-
-            // Запрос данных
-            // $pk = Yii::$app->request->post('row_id');      
+     
             $model = new Creditcalendar();
-            // $searchModel = new CreditcalendarSearch();
-            // $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+            $keyList = Yii::$app->request->post('keyList');
+            $keyListArray = explode(',', $keyList);
 
             $query = Creditcalendar::find();      
-            $query->where(['<>','private', 1]);
+            // $query->where(['<>','private', 1]);
+            $query->where(['id' => $keyListArray]);
             $dataProvider = new ActiveDataProvider([
                 'query' => $query,
             ]);

@@ -24,8 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
 $multipleDelete = file_get_contents('js/modules/alliance/creditcalendar/gridViewMultipleDelete.js');
 $this->registerJs($multipleDelete, View::POS_END);
 
-// $ExportExcel = file_get_contents('js/modules/alliance/creditcalendar/gridViewExcelExport.js');
-// $this->registerJs($ExportExcel, View::POS_END);
+$ExportExcel = file_get_contents('js/modules/alliance/creditcalendar/gridViewExcelExport.js');
+$this->registerJs($ExportExcel, View::POS_END);
 
 ?>
 <div class="creditcalendar-index">
@@ -45,10 +45,34 @@ $this->registerJs($multipleDelete, View::POS_END);
         }
     ?>
     <?php 
-        if(!Yii::$app->user->can('creditmanager')){
-            echo Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'), ['export'], ['class' => 'btn btn-warning btn-sm']) ;
-        }
+        // if(!Yii::$app->user->can('creditmanager')){
+        //     echo Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'), ['export'], ['class' => 'btn btn-warning btn-sm']) ;
+        // }
     ?>
+
+    <?= Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'  ), ['export'], [
+            'id' => 'Excel',
+            'class' => 'btn btn-warning btn-sm',
+            'onclick' => 'setParams()',
+            'data' => [
+                'method' => 'post',
+                'confirm' => 'Выгрузить выбранные элементы?',
+            ]
+         ]);
+    ?>     
+
+<?php
+// $script = "
+//         function setParams(){
+//             var keyList = $('#creditcalendar-grid').yiiGridView('getSelectedRows');
+//             if(keyList != '') {
+//                 $('#btn-multi-del').attr('data-params', JSON.stringify({keyList}));
+//             } else {
+//                 $('#btn-multi-del').removeAttr('data-params');
+//             }
+//         };";
+// $this->registerJs($script, yii\web\View::POS_BEGIN);
+?>    
 
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -58,6 +82,8 @@ $this->registerJs($multipleDelete, View::POS_END);
         // $endRecords = '<span class="label label-success">{end}</span>' ;
         // $events = '<h3>События:</h3>';
     ?>
+
+   
 
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
@@ -83,7 +109,7 @@ $this->registerJs($multipleDelete, View::POS_END);
             'columns' => [
                 [
                     'header' => '№',
-                    'class' => 'yii\grid\SerialColumn'
+                    'class' => 'yii\grid\SerialColumn',
                 ],
                 [
                     'class' => 'yii\grid\CheckboxColumn',

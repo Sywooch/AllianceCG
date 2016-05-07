@@ -159,18 +159,12 @@ use app\modules\admin\models\Companies;
     <div class="row" style="margin-bottom: 8px">
         <div class="col-sm-6">
 
-            <?= $form->field($model, 'userids')->checkboxList(User::find()->select(['full_name', 'id'])->where(['position' => 'Кредитный специалист'])->orWhere(['position' => 'Страховой специалист'])->andWhere(['status' => 1])->indexBy('id')->column(), ['id' => 'respid']) ?>
+            <?= $form->field($model, 'userids')->checkboxList(User::find()->select(['full_name', 'id'])->where(['role' => 'creditmanager'])->andWhere(['status' => 1])->indexBy('id')->column(), ['id' => 'respid']) ?>
 
             <a href="#" onclick="checkByParent('respid', true); return false;"><?= Module::t('module', 'CHECK_ALL') ?></a>
             /
             <a href="#" onclick="checkByParent('respid', false); return false;"><?= Module::t('module', 'UNCHECK_ALL') ?></a>
-
-            <?php
-             // Html::checkbox(null, false, [
-             //        'label' => Module::t('module', 'CHECK_ALL'),
-             //        'class' => 'check-all',
-             //    ]);
-            ?>            
+     
         </div>
         <div class="col-sm-6">
             <?= $form->field($model, 'locationids')->checkboxList(Companies::find()->select(['company_name', 'id'])->indexBy('id')->column(), ['id' => 'locid']) ?>

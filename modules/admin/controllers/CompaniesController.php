@@ -185,7 +185,7 @@ class CompaniesController extends Controller
 
         foreach ($pk as $key => $value) 
         {
-            $sql = "DELETE FROM sk_companies WHERE id = $value";
+            $sql = "DELETE FROM {{%companies}} WHERE id = $value";
             $query = Yii::$app->db->createCommand($sql)->execute();
         }
 

@@ -17,26 +17,26 @@ $this->title = Module::t('module', 'ADMIN_COMPANIES_TITLE');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN'), 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = $this->title;
 
-$this->registerJs(' 
+// $this->registerJs(' 
 
-    $(document).ready(function(){
-    $(\'#MultipleDelete\').click(function(){
-            var PosId = $(\'#companies-positions-grid\').yiiGridView(\'getSelectedRows\');
-            if (PosId=="") {
-                alert("Нет отмеченных записей!", "Alert Dialog");
-            }
-            else if (confirm("Удалить?")) {
-              $.ajax({
-                type: \'POST\',
-                url : \'/admin/companies/multipledelete\',
-                data : {row_id: PosId},
-                success : function() {
-                    alert("successfully!!!");
-                }
-              });
-            }
-    });
-    });', \yii\web\View::POS_READY);
+//     $(document).ready(function(){
+//     $(\'#MultipleDelete\').click(function(){
+//             var PosId = $(\'#companies-positions-grid\').yiiGridView(\'getSelectedRows\');
+//             if (PosId=="") {
+//                 alert("Нет отмеченных записей!", "Alert Dialog");
+//             }
+//             else if (confirm("Удалить?")) {
+//               $.ajax({
+//                 type: \'POST\',
+//                 url : \'/admin/companies/multipledelete\',
+//                 data : {row_id: PosId},
+//                 success : function() {
+//                     alert("successfully!!!");
+//                 }
+//               });
+//             }
+//     });
+//     });', \yii\web\View::POS_READY);
 ?>
 
     <!--<h1>-->
@@ -44,17 +44,9 @@ $this->registerJs('
         <?php // Html::encode($this->title) ?>
     <!--</h1>-->
 
-    <?php // $this->render('_search', ['model' => $searchModel]); ?>
+    <?= $this->render('_search', ['model' => $searchModel]); ?>
     
     <div class="user-index center-block">
-
-    <p style="text-align: right">
-        <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'ADMIN_COMPANIES_CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
-        
-        <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'ADMIN_COMPANIES_REFRESH'), ['index'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
-        
-        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'ADMIN_USERS_DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']) ?>    
-    </p>
 
     <?php
         // bootstrap label of summary widget
@@ -68,8 +60,9 @@ $this->registerJs('
     <?= GridView::widget([
         'id' => 'companies-positions-grid',
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        // 'filterModel' => $searchModel,
         'layout'=>"{pager}\n{summary}\n{items}",
+        'summary' => false,
         // Виджет суммарных результатов с использованием bootstrap label
         // 'summary' => "Показаны записи $begin_end из $count . Всего $totalCount . Стр. $page из $pageCount" . '<br/><br/>',
         'columns' => [
@@ -96,6 +89,15 @@ $this->registerJs('
                 'format' => 'raw',  
                 // 'contentOptions'=>['style'=>'width: 100px;'],
             ],
+            [
+                'attribute' => 'userscount',
+                'format' => 'html',
+                'filter' => false,
+                'value' => function($model) {
+                    return '<span class="label label-primary">' . Module::t('module', 'COUNTUSERS'  ) . ': ' . $model->userscount . '</span>';
+                },   
+                'contentOptions' => ['class'=>'success;'],
+            ], 
             [
                 'class' => ActionColumn::className(),
                 'contentOptions'=>['style'=>'width: 20px;'],

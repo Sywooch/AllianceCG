@@ -14,6 +14,9 @@ class CompaniesSearch extends Companies
 {
 
     public $brandlogo;
+    public $globalSearch;
+    public $user;
+    public $usercount;
 
     /**
      * @inheritdoc
@@ -24,6 +27,7 @@ class CompaniesSearch extends Companies
             [['id'], 'integer'],
             [['brandlogo'], 'safe'],
             [['company_name', 'company_brand', 'company_logo', 'company_description', 'brandlogo'], 'safe'],
+            [['globalSearch', 'user', 'usercount'], 'safe'],
         ];
     }
 
@@ -63,10 +67,17 @@ class CompaniesSearch extends Companies
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'company_name', $this->company_name])
-            ->andFilterWhere(['like', 'company_brand', $this->company_brand])
-            ->andFilterWhere(['like', 'company_logo', $this->company_logo])
-            ->andFilterWhere(['like', 'company_description', $this->company_description]);
+        $query
+            ->orFilterWhere(['like', 'company_name', $this->globalSearch])
+            ->orFilterWhere(['like', 'company_brand', $this->globalSearch])
+            ->orFilterWhere(['like', 'company_logo', $this->globalSearch])
+            ->orFilterWhere(['like', 'company_description', $this->globalSearch])
+        ;
+
+        // $query->andFilterWhere(['like', 'company_name', $this->company_name])
+        //     ->andFilterWhere(['like', 'company_brand', $this->company_brand])
+        //     ->andFilterWhere(['like', 'company_logo', $this->company_logo])
+        //     ->andFilterWhere(['like', 'company_description', $this->company_description]);
 
         return $dataProvider;
     }

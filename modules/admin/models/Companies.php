@@ -59,7 +59,22 @@ class Companies extends \yii\db\ActiveRecord
             'company_logo' => Module::t('module', 'ADMIN_COMPANY_LOGO'),
             'brandlogo' => Module::t('module', 'ADMIN_COMPANY_LOGO'),
             'company_description' => Module::t('module', 'ADMIN_COMPANY_DESCRIPTION'),
+            'userscount' => Module::t('module', 'COUNTUSERS'),           
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserscount()
+    {
+        // Customer has_many Order via Order.customer_id -> id
+        return $this->hasMany(User::className(), ['company' => 'id'])->count();
+    }    
+
+    public function getUser()
+    {
+        return $this->hasMany(User::className(), ['company' => 'id']);
     }
 
     public function getLogoName()

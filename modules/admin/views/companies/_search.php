@@ -3,10 +3,16 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\modules\admin\Module;
+use rmrevin\yii\fontawesome\FA;
+use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\CompaniesSearch */
 /* @var $form yii\widgets\ActiveForm */
+
+$multipleDelete = file_get_contents('js/modules/admin/companies/multipleDelete.js');
+$this->registerJs($multipleDelete, View::POS_END);
+
 ?>
 
 <div class="companies-search" id="companies_search">
@@ -19,25 +25,21 @@ use app\modules\admin\Module;
         ],
     ]); ?>
 
-<!-- <h1> -->
-    <!-- <span class="glyphicon glyphicon-search" style='padding-right:10px;'></span> -->
-        <?php // echo Module::t('module', 'ADMIN_SEARCH_TITLE') ?> 
-<!-- </h1> -->
+    <div class="col-sm-8">
 
-<div class="col-ld-6">
-    <?= $form->field($model, 'company_name', ['template'=>' <div class="input-group"><span class="input-group-addon" style="width: 0;"><span class="glyphicon glyphicon-tent"></span></span>{input}'])->textInput(['placeholder' => $model->getAttributeLabel( 'company_name' )]) . '</div>' ?>
+    <?= $form->field($model, 'globalSearch', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('search') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'globalSearch' )]) ?>
+    
+    </div>
 
-</div>
+    <div class="form-group col-sm-4" style="text-align: right">
+        <?= Html::submitButton(FA::icon('search') . ' ' . Module::t('module', 'SEARCH'), ['class' => 'btn btn-primary btn-sm']) ?>
 
-<div class="col-ld-6">
+        <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'ADMIN_USERS_CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+        
+        <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'ADMIN_USERS_REFRESH'), ['index'], ['class' => 'btn btn-info btn-sm', 'id' => 'refreshButton']) ?>
 
-    <?= $form->field($model, 'company_brand', ['template'=>' <div class="input-group"><span class="input-group-addon" style="width: 0;"><span class="glyphicon glyphicon-tent"></span></span>{input}'])->textInput(['placeholder' => $model->getAttributeLabel( 'company_brand' )]) . '</div>' ?>   
-
-</div>
-
-    <div class="form-group">
-        <?= Html::submitButton('<span class="glyphicon glyphicon-search"></span>  ' . Module::t('module', 'ADMIN_POSITION_SEARCH'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('<span class="glyphicon glyphicon-filter"></span>  ' . Module::t('module', 'ADMIN_POSITION_RESET'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'ADMIN_USERS_DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']) ?> 
+    
     </div>
 
     <?php ActiveForm::end(); ?>

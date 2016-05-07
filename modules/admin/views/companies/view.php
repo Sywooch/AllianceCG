@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use app\modules\admin\Module;
 use rmrevin\yii\fontawesome\FA;
+use yii\data\ActiveDataProvider;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Companies */
@@ -31,21 +33,41 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>        
     </p>    
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'company_name',
-            'company_brand',
-             [
-                 'attribute'=>'company_logo',
-                 'value'=>$model->getSingleLogo(),
-                 'format' => ['image',['height'=>'80']],
-             ],
-            [
-                'attribute' => 'company_description',
-                'format' => 'raw',
-            ],
+<?= DetailView::widget([
+    'model' => $model,
+    'attributes' => [
+        'company_name',
+        'company_brand',
+         [
+             'attribute'=>'company_logo',
+             'value'=>$model->getSingleLogo(),
+             'format' => ['image',['height'=>'80']],
+         ],
+        [
+            'attribute' => 'company_description',
+            'format' => 'raw',
         ],
-    ]) ?>
+    ],
+]); 
+
+    echo GridView::widget([
+          'dataProvider' => new ActiveDataProvider(['query' => $model->getUser()]),
+          'showOnEmpty' => true,
+          'tableOptions' =>[
+              'class' => 'table table-striped table-bordered creditcalendargridview'
+          ],
+          'columns' => [
+              [
+                  'header' => '№',
+                  'class' => 'yii\grid\SerialColumn'
+              ],
+              [
+                  'attribute' => 'fullname',
+                  'value' => 'full_name',
+              ],
+          ],
+      ]); 
+
+?>
 
 </div>

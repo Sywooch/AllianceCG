@@ -42,8 +42,16 @@ $this->params['breadcrumbs'][] = $this->title;
                  'format' => ['image',['height'=>'80']],
              ],
             'username',
-            'position',
-            'company',
+            // 'position',
+            [
+                'attribute' => 'position',
+                'value' => $model->positions->position,
+            ],
+            [
+                'attribute' => 'company',
+                'value' => $model->companies->company_name,
+            ],
+            // 'company',
             [
                 'attribute' => 'email',
                 'format' => 'email',
@@ -51,6 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'role',
+                'value' => $model->userroles->role_description,
                 // 'value' => Yii::$app->user->identity->getRoleName(),
             ],
             [

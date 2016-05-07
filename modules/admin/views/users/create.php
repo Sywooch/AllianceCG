@@ -8,6 +8,7 @@ use app\modules\admin\Module;
 /* @var $model app\modules\user\models\User */
 
 $this->title = Module::t('module', 'ADMIN_USER_CREATE');
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN'), 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN_USERS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

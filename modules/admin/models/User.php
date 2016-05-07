@@ -106,6 +106,22 @@ class User extends \app\modules\user\models\User
     {
         return $this->hasOne(Userroles::className(), ['role' => 'role']);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPositions()
+    {
+        return $this->hasOne(Positions::className(), ['id' => 'position']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCompanies()
+    {
+        return $this->hasOne(Companies::className(), ['id' => 'company']);
+    }
     
     public function afterSave($insert, $changedAttributes)
      {

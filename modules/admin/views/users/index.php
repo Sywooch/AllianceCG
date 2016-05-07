@@ -30,26 +30,22 @@ $this->params['breadcrumbs'][] = $this->title;
         <!--<span class="glyphicon glyphicon-user" style='padding-right:10px;'></span>-->
             <?php // Html::encode($this->title) ?>
     <!--</h1>-->
-    <?php // $this->render('_search', ['model' => $searchModel]); ?>
+    <?= $this->render('_search', ['model' => $searchModel]); ?>
 
     <!-- <div class="user-index col-lg-offset-5 col-centered"> -->
     <div class="user-index center-block">
 
     <?php //Pjax::begin(); ?>
 
-    <p style="text-align: right">
-        <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'ADMIN_USERS_CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
-        
-        <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'ADMIN_USERS_REFRESH'), ['index'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
-    </p>
 
     <?= GridView::widget([
         'id' => 'admin-users-grid',
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        // 'filterModel' => $searchModel,
         // 'summary'=> "{begin} - {end} {count} {totalCount} {page} {pageCount}",
         'showFooter'=>true,
         'showHeader' => true,
+        'summary' => false,
         'layout'=>"{summary}\n{items}\n{pager}",
         'columns' => [
             [
@@ -78,15 +74,23 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->getFullname();
                 },
             ],
+            // [
+            //     'attribute' => 'company',
+            //     'contentOptions'=>['style'=>'width: 150px;'],
+            //     'filter'=>ArrayHelper::map(User::find()->asArray()->all(), 'company', 'company'),
+            // ],
             [
                 'attribute' => 'company',
-                'contentOptions'=>['style'=>'width: 150px;'],
-                'filter'=>ArrayHelper::map(User::find()->asArray()->all(), 'company', 'company'),
+                'value' => 'companies.company_name',
             ],
+            // [
+            //     'attribute' => 'position',
+            //     'contentOptions'=>['style'=>'width: 150px;'],
+            //     'filter'=>ArrayHelper::map(User::find()->asArray()->all(), 'position', 'position'),
+            // ],
             [
                 'attribute' => 'position',
-                'contentOptions'=>['style'=>'width: 150px;'],
-                'filter'=>ArrayHelper::map(User::find()->asArray()->all(), 'position', 'position'),
+                'value' => 'positions.position',
             ],
             // [
             //     'attribute' => 'role',
@@ -94,9 +98,12 @@ $this->params['breadcrumbs'][] = $this->title;
             //     'contentOptions'=>['style'=>'width: 50px;'],  
             // ],
             [
+                'class' => SetColumn::className(),
                 'attribute' => 'user_roles',
                 'value' => 'userroles.role_description',
-                'filter'=>ArrayHelper::map(Userroles::find()->asArray()->all(), 'role_description', 'role_description'),                
+                'contentOptions'=>['style'=>'width: 50px;'],
+                'filter'=>ArrayHelper::map(Userroles::find()->asArray()->all(), 'role_description', 'role_description'),    
+                'cssCLasses' => 'success',
             ],
             [
                 'class' => SetColumn::className(),

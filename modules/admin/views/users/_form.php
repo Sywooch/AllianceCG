@@ -18,16 +18,6 @@ use yii\widgets\ActiveForm;
 <div class="user-form center-block">
  
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>    
-
-    <h1><span class="glyphicon glyphicon-user" style='padding-right:10px;'></span><?= Html::encode($this->title) ?></h1>    
-
-    <div class="form-group" style="text-align: right;">
-        <?= Html::submitButton(
-            $model->isNewRecord ? FA::icon('floppy-o') . ' ' . Module::t('module', 'BUTTON_CREATE') : FA::icon('pencil') . ' ' . Module::t('module', 'ADMIN_USERS_BUTTON_UPDATE'),
-            ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']
-        ) ?>
-        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'ADMIN_USERS_BUTTON_CANCEL'), ['/admin/users'], ['class' => 'btn btn-danger btn-sm']) ?>
-    </div>
     
     <?= $form->field($model, 'surname', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'surname' )]) ?>
 
@@ -38,7 +28,7 @@ use yii\widgets\ActiveForm;
     <?php
         $pos = Positions::find()->all();
     
-        $items = ArrayHelper::map($pos,'position','position');
+        $items = ArrayHelper::map($pos,'id','position');
         $params = [
             'prompt' => '-- ' . $model->getAttributeLabel( 'position' ) . ' --',
         ];
@@ -53,7 +43,7 @@ use yii\widgets\ActiveForm;
             $arr->merge_companies = $arr->company_name . ' (' . $arr->company_brand . ')';
         }
     
-        $items = ArrayHelper::map($companies,'company_name','merge_companies');
+        $items = ArrayHelper::map($companies,'id','merge_companies');
         $params = [
             'prompt' => '-- ' . $model->getAttributeLabel( 'company' ) . ' --',
         ];
@@ -83,6 +73,16 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'file', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('photo') . ' </span>{input}</div>{error}'])->fileInput() ?>
 
     <?= $form->field($model, 'status', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('check-circle-o') . ' </span>{input}</div>{error}'])->dropDownList(User::getStatusesArray()) ?>
+
+
+
+    <div class="form-group" style="text-align: right;">
+        <?= Html::submitButton(
+            $model->isNewRecord ? FA::icon('floppy-o') . ' ' . Module::t('module', 'BUTTON_CREATE') : FA::icon('pencil') . ' ' . Module::t('module', 'ADMIN_USERS_BUTTON_UPDATE'),
+            ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']
+        ) ?>
+        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'ADMIN_USERS_BUTTON_CANCEL'), ['/admin/users'], ['class' => 'btn btn-danger btn-sm']) ?>
+    </div>
 
  
     <?php ActiveForm::end(); ?>

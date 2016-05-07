@@ -34,6 +34,7 @@ class UserSearch extends Model
     public $file;
     public $role;
     public $user_roles;
+    public $globalSearch;
 
     public function rules()
     {
@@ -41,7 +42,7 @@ class UserSearch extends Model
             // [['id', 'status'], 'integer'],
             [['username', 'email', 'name', 'surname', 'patronymic', 'fullname', 'photo', 'position', 'role'], 'safe'],
             [['date_from', 'date_to'], 'date', 'format' => 'php:Y-m-d'],
-            [['fullname', 'company', 'user_roles'], 'safe'],
+            [['fullname', 'company', 'user_roles', 'globalSearch'], 'safe'],
             ['photo', 'safe'],
         ];
     }
@@ -62,6 +63,7 @@ class UserSearch extends Model
             'email' => Module::t('module', 'USER_EMAIL'),
             'status' => Module::t('module', 'USER_STATUS'),
             'user_roles' => Module::t('module', 'ADMIN_USERS_ROLE'),
+            'globalSearch' => Module::t('module', 'SEARCH'),
         ];
     }
 
@@ -129,20 +131,32 @@ class UserSearch extends Model
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
-            $query->where('0=1');
+            // $query->where('0=1');
             return $dataProvider;
         }
         
-        $query
-            ->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'position', $this->position])
-            ->andFilterWhere(['like', 'company', $this->company])
-            ->andFilterWhere(['like', 'status', $this->status])
-            ->andFilterWhere(['like', 'role', $this->role])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['>=', 'created_at', $this->date_from ? strtotime($this->date_from . ' 00:00:00') : null])
-            ->andFilterWhere(['<=', 'created_at', $this->date_to ? strtotime($this->date_to . ' 23:59:59') : null])
-            ->andFilterWhere(['like', '{{%userroles}}.role_description', $this->user_roles])
+        $query            
+            ->orFilterWhere(['like', 'username', $this->globalSearch])
+            ->orFilterWhere(['like', 'name', $this->globalSearch])
+            ->orFilterWhere(['like', 'surname', $this->globalSearch])
+            ->orFilterWhere(['like', 'patronymic', $this->globalSearch])
+            ->orFilterWhere(['like', 'position', $this->globalSearch])
+            ->orFilterWhere(['like', 'company', $this->globalSearch])
+            ->orFilterWhere(['like', '{{%user}}.role', $this->globalSearch])
+            ->orFilterWhere(['like', 'email', $this->globalSearch])
+            ->orFilterWhere(['like', 'status', $this->globalSearch])
+            ->orFilterWhere(['like', '{{%userroles}}.role_description', $this->user_roles])
+
+
+            // ->andFilterWhere(['like', 'username', $this->username])
+            // ->andFilterWhere(['like', 'position', $this->position])
+            // ->andFilterWhere(['like', 'company', $this->company])
+            // ->andFilterWhere(['like', 'status', $this->status])
+            // ->andFilterWhere(['like', 'role', $this->role])
+            // ->andFilterWhere(['like', 'email', $this->email])
+            // ->andFilterWhere(['>=', 'created_at', $this->date_from ? strtotime($this->date_from . ' 00:00:00') : null])
+            // ->andFilterWhere(['<=', 'created_at', $this->date_to ? strtotime($this->date_to . ' 23:59:59') : null])
+            // ->andFilterWhere(['like', '{{%userroles}}.role_description', $this->user_roles])
 //            ->andWhere('surname LIKE "%' . $this->fullname . '%" ' . 'OR name LIKE "%' . $this->fullname . '%" ' . 'OR patronymic LIKE "%' . $this->fullname . '%" '
 //            )
             ;

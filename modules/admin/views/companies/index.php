@@ -16,46 +16,11 @@ use rmrevin\yii\fontawesome\FA;
 $this->title = Module::t('module', 'ADMIN_COMPANIES_TITLE');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN'), 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = $this->title;
-
-// $this->registerJs(' 
-
-//     $(document).ready(function(){
-//     $(\'#MultipleDelete\').click(function(){
-//             var PosId = $(\'#companies-positions-grid\').yiiGridView(\'getSelectedRows\');
-//             if (PosId=="") {
-//                 alert("Нет отмеченных записей!", "Alert Dialog");
-//             }
-//             else if (confirm("Удалить?")) {
-//               $.ajax({
-//                 type: \'POST\',
-//                 url : \'/admin/companies/multipledelete\',
-//                 data : {row_id: PosId},
-//                 success : function() {
-//                     alert("successfully!!!");
-//                 }
-//               });
-//             }
-//     });
-//     });', \yii\web\View::POS_READY);
 ?>
-
-    <!--<h1>-->
-        <!--<span class="glyphicon glyphicon-user" style='padding-right:10px;'></span>-->
-        <?php // Html::encode($this->title) ?>
-    <!--</h1>-->
 
     <?= $this->render('_search', ['model' => $searchModel]); ?>
     
     <div class="user-index center-block">
-
-    <?php
-        // bootstrap label of summary widget
-        // $begin_end = '<span class="label label-success">{begin} - {end}</span>';
-        // $count = '<span class="label label-danger">{count}</span>';
-        // $totalCount = '<span class="label label-primary">{totalCount}</span>';
-        // $page = '<span class="label label-primary">{page}</span>';
-        // $pageCount = '<span class="label label-primary">{pageCount}</span>';
-    ?>
 
     <?= GridView::widget([
         'id' => 'companies-positions-grid',
@@ -63,8 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
         // 'filterModel' => $searchModel,
         'layout'=>"{pager}\n{summary}\n{items}",
         'summary' => false,
-        // Виджет суммарных результатов с использованием bootstrap label
-        // 'summary' => "Показаны записи $begin_end из $count . Всего $totalCount . Стр. $page из $pageCount" . '<br/><br/>',
         'columns' => [
             [
                 'class' => 'yii\grid\SerialColumn',
@@ -87,7 +50,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'company_name',
                 'filter' => ArrayHelper::map(Companies::find()->asArray()->all(), 'company_name', 'company_name'),
                 'format' => 'raw',  
-                // 'contentOptions'=>['style'=>'width: 100px;'],
             ],
             [
                 'attribute' => 'userscount',

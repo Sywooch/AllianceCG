@@ -56,7 +56,7 @@ $this->registerJs($ExportExcel, View::POS_END);
             'onclick' => 'setParams()',
             'data' => [
                 'method' => 'post',
-                'confirm' => 'Выгрузить выбранные элементы?',
+                'confirm' => Module::t('module', 'CREDITCALENDAR_EXPORT_CONFIRM'),
             ]
          ]);
     ?>     

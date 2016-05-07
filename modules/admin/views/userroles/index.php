@@ -3,24 +3,33 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use app\modules\admin\Module;
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\admin\models\UserrolesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Userroles');
+$this->title = Module::t('module', 'NAV_USERROLES');
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN'), 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="userroles-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <!-- <h1> -->
+        <?php // ehco Html::encode($this->title) ?>
+    <!-- </h1> -->
+    
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Userroles'), ['create'], ['class' => 'btn btn-success']) ?>
+    <p style="text-align: right;">
+        <?php // Html::a(Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+
+<?php Pjax::begin(); ?>
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        'summary' => false,
+        // 'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 

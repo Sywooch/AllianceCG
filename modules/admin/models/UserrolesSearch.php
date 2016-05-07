@@ -12,6 +12,8 @@ use app\modules\admin\models\Userroles;
  */
 class UserrolesSearch extends Userroles
 {
+    public $globalSearch;
+
     /**
      * @inheritdoc
      */
@@ -20,6 +22,7 @@ class UserrolesSearch extends Userroles
         return [
             [['id', 'created_at', 'updated_at'], 'integer'],
             [['role', 'role_description', 'author'], 'safe'],
+            [['globalSearch'], 'safe'],
         ];
     }
 
@@ -64,9 +67,12 @@ class UserrolesSearch extends Userroles
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'role', $this->role])
-            ->andFilterWhere(['like', 'role_description', $this->role_description])
-            ->andFilterWhere(['like', 'author', $this->author]);
+        $query
+            ->orFilterWhere(['like', 'role', $this->globalSearch])
+            ->orFilterWhere(['like', 'role_description', $this->globalSearch]);
+            // ->andFilterWhere(['like', 'role', $this->role])
+            // ->andFilterWhere(['like', 'role_description', $this->role_description])
+            // ->andFilterWhere(['like', 'author', $this->author]);
 
         return $dataProvider;
     }

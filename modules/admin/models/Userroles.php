@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\models;
 use yii\behaviors\TimestampBehavior;
+use app\modules\admin\Module;
 
 use Yii;
 
@@ -17,6 +18,9 @@ use Yii;
  */
 class Userroles extends \yii\db\ActiveRecord
 {
+
+    public $globalSearch;
+
     /**
      * @inheritdoc
      */
@@ -46,10 +50,11 @@ class Userroles extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['role'], 'required'],
+            [['role', 'role_description'], 'required'],
             [['role_description'], 'string'],
             [['created_at', 'updated_at'], 'integer'],
             [['role', 'author'], 'string', 'max' => 255],
+            [['globalSearch'], 'safe'],
         ];
     }
 
@@ -67,12 +72,13 @@ class Userroles extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'role' => Yii::t('app', 'Role'),
-            'role_description' => Yii::t('app', 'Role Description'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'author' => Yii::t('app', 'Author'),
+            'id' => Module::t('module', 'ID'),
+            'role' => Module::t('module', 'ROLE_NAME'),
+            'role_description' => Module::t('module', 'ROLE_DESCRIPTION'),
+            'created_at' => Module::t('module', 'Created At'),
+            'updated_at' => Module::t('module', 'Updated At'),
+            'author' => Module::t('module', 'Author'),
+            'globalSearch' => Module::t('module', 'SEARCH'),
         ];
     }
 }

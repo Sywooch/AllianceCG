@@ -125,7 +125,6 @@ class CreditcalendarController extends Controller
             $commentModel->calendar_id = $model->id;
             $commentModel->user_id = Yii::$app->user->getId();
             $commentModel->save();
-            return $this->redirect(['view', 'id' => $model->id]);
 
             if($commentModel->save()){
                 $author_email[] = $model->authorname->email;
@@ -146,8 +145,8 @@ class CreditcalendarController extends Controller
                     ->setTextBody($commentModel->comment_text)
                     ->setTo($summaryEmails)
                     ->send();
-
-             }
+                }
+            return $this->redirect(['view', 'id' => $model->id]);
 
         } else {
             return $this->renderAjax('comment', [

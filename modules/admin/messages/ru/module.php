@@ -102,5 +102,11 @@
             'NAV_ALLIANCE_PHONEBOOK' => 'Телефонная книга',
             'NAV_ALLIANCE_DUTY' => 'График дежурств',
             'NAV_ALLIANCE_CREDITCALENDAR' => 'ОК. Календарь',
+            'ROLE_NAME' => 'Роль',
+            'ROLE_DESCRIPTION' => 'Описание роли',
+            'NAV_USERROLES' => 'Роли пользователей',
+            'SEARCH' => 'Поиск',
+            'CREATE' => 'Добавить',
+            'REFRESH' => 'Обновить',
             
 	];

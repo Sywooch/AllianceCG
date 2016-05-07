@@ -7,7 +7,7 @@ use yii\helpers\Url;
 use app\modules\main\Module;
 
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right navbar-primary'],
+        'options' => ['class' => 'navbar-nav navbar-right'],
         'id' => 'navigation_menu',
         'encodeLabels' => false,
         'items' => array_filter([

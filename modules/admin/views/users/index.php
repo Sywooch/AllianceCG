@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //     'filter'=>ArrayHelper::map(User::find()->asArray()->all(), 'company', 'company'),
             // ],
             [
-                'attribute' => 'company',
+                'attribute' => 'companies',
                 'value' => 'companies.company_name',
             ],
             // [
@@ -89,7 +89,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //     'filter'=>ArrayHelper::map(User::find()->asArray()->all(), 'position', 'position'),
             // ],
             [
-                'attribute' => 'position',
+                'attribute' => 'positions',
                 'value' => 'positions.position',
             ],
             // [
@@ -99,10 +99,10 @@ $this->params['breadcrumbs'][] = $this->title;
             // ],
             [
                 'class' => SetColumn::className(),
-                'attribute' => 'user_roles',
+                'attribute' => 'userroles',
                 'value' => 'userroles.role_description',
                 'contentOptions'=>['style'=>'width: 50px;'],
-                'filter'=>ArrayHelper::map(Userroles::find()->asArray()->all(), 'role_description', 'role_description'),    
+                // 'filter'=>ArrayHelper::map(Userroles::find()->asArray()->all(), 'role_description', 'role_description'),    
                 'cssCLasses' => 'success',
             ],
             [

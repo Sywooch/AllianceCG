@@ -33,8 +33,10 @@ class UserSearch extends Model
     public $photo;
     public $file;
     public $role;
-    public $user_roles;
+    public $userroles;
     public $globalSearch;
+    public $positions;
+    public $companies;
 
     public function rules()
     {
@@ -42,7 +44,7 @@ class UserSearch extends Model
             // [['id', 'status'], 'integer'],
             [['username', 'email', 'name', 'surname', 'patronymic', 'fullname', 'photo', 'position', 'role'], 'safe'],
             [['date_from', 'date_to'], 'date', 'format' => 'php:Y-m-d'],
-            [['fullname', 'company', 'user_roles', 'globalSearch'], 'safe'],
+            [['fullname', 'company', 'userroles', 'globalSearch', 'positions', 'companies'], 'safe'],
             ['photo', 'safe'],
         ];
     }
@@ -62,7 +64,7 @@ class UserSearch extends Model
             'username' => Module::t('module', 'USER_USERNAME'),
             'email' => Module::t('module', 'USER_EMAIL'),
             'status' => Module::t('module', 'USER_STATUS'),
-            'user_roles' => Module::t('module', 'ADMIN_USERS_ROLE'),
+            'userroles' => Module::t('module', 'ADMIN_USERS_ROLE'),
             'globalSearch' => Module::t('module', 'SEARCH'),
         ];
     }
@@ -86,7 +88,8 @@ class UserSearch extends Model
     public function search($params)
     {
         $query = User::find()->where(['<>','{{%user}}.role', 'root']);        
-        $query->joinWith(['userroles']);
+        $query->joinWith(['userroles', 'positions', 'companies']);
+
 
         $sort = new Sort([
             'attributes' => [
@@ -109,7 +112,7 @@ class UserSearch extends Model
                     'default' => SORT_DESC,
                 ],
             ],
-        ]);        
+        ]);   
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -118,14 +121,24 @@ class UserSearch extends Model
             //     'defaultOrder' => ['id' => SORT_DESC],
             //     // 'attributes' => ['username','email','status'],
             // ]
-        ]);
+        ]);   
 
-    $dataProvider->sort->attributes['user_roles'] = [
-        // The tables are the ones our relation are configured to
-        // in my case they are prefixed with "tbl_"
-        'asc' => ['{{%userroles}}.role_description' => SORT_ASC],
-        'desc' => ['{{%userroles}}.role_description' => SORT_DESC],
-    ];        
+        $dataProvider->sort->attributes['positions'] = [
+            'asc' => ['{{%positions}}.position' => SORT_ASC],
+            'desc' => ['{{%positions}}.position' => SORT_DESC],
+        ];   
+        
+        $dataProvider->sort->attributes['companies'] = [
+            'asc' => ['{{%companies}}.company_name' => SORT_ASC],
+            'desc' => ['{{%companies}}.company_name' => SORT_DESC],
+        ];    
+
+        $dataProvider->sort->attributes['userroles'] = [
+            // The tables are the ones our relation are configured to
+            // in my case they are prefixed with "tbl_"
+            'asc' => ['{{%userroles}}.role_description' => SORT_ASC],
+            'desc' => ['{{%userroles}}.role_description' => SORT_DESC],
+        ];        
 
         $this->load($params);
 
@@ -145,7 +158,7 @@ class UserSearch extends Model
             ->orFilterWhere(['like', '{{%user}}.role', $this->globalSearch])
             ->orFilterWhere(['like', 'email', $this->globalSearch])
             ->orFilterWhere(['like', 'status', $this->globalSearch])
-            ->orFilterWhere(['like', '{{%userroles}}.role_description', $this->user_roles])
+            ->orFilterWhere(['like', '{{%userroles}}.role_description', $this->userroles])
 
 
             // ->andFilterWhere(['like', 'username', $this->username])

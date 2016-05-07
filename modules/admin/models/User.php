@@ -43,7 +43,7 @@ class User extends \app\modules\user\models\User
             'newPassword' => Module::t('module', 'ADMIN_USER_NEW_PASSWORD'),
             'newPasswordRepeat' => Module::t('module', 'ADMIN_USER_REPEAT_PASSWORD'),
             'role' => Module::t('module', 'ADMIN_USERS_ROLE'),
-            'user_roles' => Module::t('module', 'ADMIN_USERS_ROLE'),
+            'userroles' => Module::t('module', 'ADMIN_USERS_ROLE'),
         ]);
     }
 

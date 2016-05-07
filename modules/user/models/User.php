@@ -161,6 +161,8 @@ class User extends ActiveRecord implements IdentityInterface
             'photo' => Module::t('module', 'USER_PHOTO'),
             'file' => Module::t('module', 'USER_PHOTO'),
             'company' => Module::t('module', 'USER_COMPANY'),
+            'companies' => Module::t('module', 'USER_COMPANY'),
+            'positions' => Module::t('module', 'USER_POSITION'),
         ];
     }    
 

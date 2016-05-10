@@ -57,5 +57,6 @@ return [
     'NEW_CREDITCALENDAR_EVENT_TITLE' => 'Новое событие с темой: ',
     'TIME_TO_WORK' => 'Сроки исполнения: ',
     'EVENT_DESCRIPTION' => 'Описание события: ',
+    'RESPONSIBLES_DOES_NOT_EXIST' => 'Ответственные не назначены',
 
 ];

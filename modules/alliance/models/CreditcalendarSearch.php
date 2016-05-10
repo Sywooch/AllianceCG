@@ -8,6 +8,8 @@ use yii\data\ActiveDataProvider;
 use app\modules\alliance\models\Creditcalendar;
 use yii\helpers\Json;
 use yii\data\Sort;
+use app\modules\alliance\Module;
+use yii\helpers\ArrayHelper;
 
 /**
  * CreditcalendarSearch represents the model behind the search form about `app\modules\alliance\models\Creditcalendar`.
@@ -204,8 +206,6 @@ public function calendarsearch(){
 
         return $dataProvider;
     }
-
-  
 
     /**
      * Creates data provider instance with search query applied

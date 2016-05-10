@@ -27,6 +27,9 @@ $this->registerJs($multipleDelete, View::POS_END);
 $ExportExcel = file_get_contents('js/modules/alliance/creditcalendar/gridViewExcelExport.js');
 $this->registerJs($ExportExcel, View::POS_END);
 
+$toggleSearch = file_get_contents('js/modules/alliance/creditcalendar/toggleSearch.js');
+$this->registerJs($toggleSearch, View::POS_END);
+
 ?>
 <div class="creditcalendar-index">
 
@@ -37,17 +40,11 @@ $this->registerJs($ExportExcel, View::POS_END);
 <p style="text-align: right">
     <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
 
-    <?php // Html::button(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['value' => Url::to(['create']), 'class' => 'btn btn-primary btn-sm', 'id' => 'modalButton']);?>
     <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'REFRESH'), ['index'], ['class' => 'btn btn-info btn-sm']) ?>
     <?php
-        if (Yii::$app->user->can('deleteCreditcalendarPost')) {
+        if (Yii::$app->user->can('deleteCreditcalendarPost') || Yii::$app->user->can('admin')) {
             echo Html::a(FA::icon('trash') . ' ' . Module::t('module', 'DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']);
         }
-    ?>
-    <?php 
-        // if(!Yii::$app->user->can('creditmanager')){
-        //     echo Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'), ['export'], ['class' => 'btn btn-warning btn-sm']) ;
-        // }
     ?>
 
     <?= Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'  ), ['export'], [
@@ -61,45 +58,9 @@ $this->registerJs($ExportExcel, View::POS_END);
          ]);
     ?>
 
-    <?= Html::button(FA::icon('search') . ' ' . Module::t('module', 'SEARCH'), ['class' => 'btn btn-link', 'id' => 'advancedSearch']) ?>
-
-    <script type="text/javascript">
-        var button = document.getElementById('advancedSearch');
-
-        button.onclick = function() {
-            var div = document.getElementById('creditcalendar-search');
-            if (div.style.display !== 'none') {
-                div.style.display = 'none';
-            }
-            else {
-                div.style.display = 'block';
-            }
-        };
-    </script>
-
-<?php
-// $script = "
-//         function setParams(){
-//             var keyList = $('#creditcalendar-grid').yiiGridView('getSelectedRows');
-//             if(keyList != '') {
-//                 $('#btn-multi-del').attr('data-params', JSON.stringify({keyList}));
-//             } else {
-//                 $('#btn-multi-del').removeAttr('data-params');
-//             }
-//         };";
-// $this->registerJs($script, yii\web\View::POS_BEGIN);
-?>    
+    <?= Html::button(FA::icon('search') . ' ' . Module::t('module', 'SEARCH'), ['class' => 'btn-link', 'id' => 'advancedSearch']) ?>
 
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?php
-        // $countRecords = '<span class="label label-success">{count}</span>' ;
-        // $beginRecords = '<span class="label label-success">{begin}</span>' ;
-        // $endRecords = '<span class="label label-success">{end}</span>' ;
-        // $events = '<h3>События:</h3>';
-    ?>
-
-   
 
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
@@ -160,7 +121,7 @@ $this->registerJs($ExportExcel, View::POS_END);
                 [
                     'attribute' => 'responsibles',
                     'value' => function($model) {
-                        return implode(', ', ArrayHelper::map($model->users, 'id', 'full_name'));
+                        return !empty($model->users) ? implode(', ', ArrayHelper::map($model->users, 'id', 'full_name')) : Module::t('module', 'RESPONSIBLES_DOES_NOT_EXIST');
                     },
                     'visible' => !Yii::$app->user->can('creditmanager') ? true : false,
                 ],

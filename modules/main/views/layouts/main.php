@@ -28,10 +28,10 @@ AppAsset::register($this);
 <?= $this->render('@app/modules/main/views/layouts/_header') ?>
 
     <div class="container">
-        <div class="col-sm-3">
+        <div class="col-sm-2">
         <?= $this->render('@app/modules/main/views/layouts/_sidebar') ?>
         </div>
-        <div class="col-sm-9">        
+        <div class="col-sm-10">        
             <?= $this->render('@app/modules/main/views/layouts/_breadcrumbs') ?>
             <?= Alert::widget() ?>
             <?= $content ?>

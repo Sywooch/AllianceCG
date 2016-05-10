@@ -58,7 +58,7 @@
 }
 
 @mixin vertical-align($position: relative) {
-  position: $position;
+  /*position: $position;*/
   top: 50%;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
@@ -68,6 +68,6 @@
 .counters {
   @include vertical-align();
   margin: auto;
-  position: absolute;
+  /*position: absolute;*/
   top: 0; left: 0; bottom: 0; right: 0;  
 }

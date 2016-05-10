@@ -45,11 +45,11 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'position',
             [
                 'attribute' => 'position',
-                'value' => $model->positions->position,
+                'value' => isset($model->positions->position) ? $model->positions->position : false,
             ],
             [
                 'attribute' => 'company',
-                'value' => $model->companies->company_name,
+                'value' => isset($model->companies->company_name) ? $model->companies->company_name : false,
             ],
             // 'company',
             [
@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'role',
-                'value' => $model->userroles->role_description,
+                'value' => isset($model->userroles->role_description) ? $model->userroles->role_description : false,
                 // 'value' => Yii::$app->user->identity->getRoleName(),
             ],
             [

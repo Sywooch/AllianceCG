@@ -32,6 +32,7 @@ function setParams(){
     if (keyList=="") {
         $('#Excel').removeAttr('data-params');
         alert("Нет отмеченных записей! Выгруженная таблица будет пуста!");
+        return false;
         // window.location.reload();
     }
     else {

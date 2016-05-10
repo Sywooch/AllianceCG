@@ -94,6 +94,7 @@ class UserSearch extends Model
         $sort = new Sort([
             'attributes' => [
                 'id',
+                'full_name',
                 'created_at',
                 'username',
                 'position',
@@ -144,21 +145,22 @@ class UserSearch extends Model
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+            $query->where('0=1');
             return $dataProvider;
         }
         
         $query            
-            ->orFilterWhere(['like', 'username', $this->globalSearch])
             ->orFilterWhere(['like', 'name', $this->globalSearch])
-            ->orFilterWhere(['like', 'surname', $this->globalSearch])
-            ->orFilterWhere(['like', 'patronymic', $this->globalSearch])
-            ->orFilterWhere(['like', 'position', $this->globalSearch])
-            ->orFilterWhere(['like', 'company', $this->globalSearch])
-            ->orFilterWhere(['like', '{{%user}}.role', $this->globalSearch])
-            ->orFilterWhere(['like', 'email', $this->globalSearch])
-            ->orFilterWhere(['like', 'status', $this->globalSearch])
-            ->orFilterWhere(['like', '{{%userroles}}.role_description', $this->userroles])
+            // ->orFilterWhere(['like', 'name', $this->globalSearch])
+            // ->orFilterWhere(['like', 'surname', $this->globalSearch])
+            // ->orFilterWhere(['like', 'patronymic', $this->globalSearch])
+            // ->orFilterWhere(['like', '{{%user}}.position', $this->globalSearch])
+            // ->orFilterWhere(['like', 'company', $this->globalSearch])
+            // ->orFilterWhere(['like', '{{%user}}.role', $this->globalSearch])
+            // ->orFilterWhere(['like', 'email', $this->globalSearch])
+            // ->orFilterWhere(['like', 'status', $this->globalSearch])
+            // ->orFilterWhere(['like', '{{%userroles}}.role_description', $this->userroles])
+            ;
 
 
             // ->andFilterWhere(['like', 'username', $this->username])
@@ -172,7 +174,7 @@ class UserSearch extends Model
             // ->andFilterWhere(['like', '{{%userroles}}.role_description', $this->user_roles])
 //            ->andWhere('surname LIKE "%' . $this->fullname . '%" ' . 'OR name LIKE "%' . $this->fullname . '%" ' . 'OR patronymic LIKE "%' . $this->fullname . '%" '
 //            )
-            ;
+            // ;
 
         return $dataProvider;
     }

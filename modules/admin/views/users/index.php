@@ -68,11 +68,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => LinkColumn::className(),
-                'attribute' => 'fullname',
+                'attribute' => 'full_name',
                 'format' => 'raw',    
-                'value' => function ($data) {
-                    return $data->getFullname();
-                },
+                // 'value' => function ($data) {
+                //     return $data->getFullname();
+                // },
             ],
             // [
             //     'attribute' => 'company',
@@ -119,7 +119,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => ActionColumn::className(),
-               'contentOptions'=>['style'=>'width: 20px;'],
+                'contentOptions'=>['style'=>'width: 20px;'],
                 'template' => '{update}',
                 'buttons' => [
                     'update' => function ($url, $model) {

@@ -134,13 +134,13 @@ $this->registerJs($ExportExcel, View::POS_END);
                     ]),
                     'contentOptions'=>['style'=>'width: 130px;'],
                 ],
-                [
-                    'attribute' => 'locations',
-                    'value' => function($model) {
-                        return implode(', ', ArrayHelper::map($model->locations, 'id', 'company_name'));
-                    },
-                    'visible' => !Yii::$app->user->can('creditmanager') ? true : false,
-                ],
+                // [
+                //     'attribute' => 'locations',
+                //     'value' => function($model) {
+                //         return implode(', ', ArrayHelper::map($model->locations, 'id', 'company_name'));
+                //     },
+                //     'visible' => !Yii::$app->user->can('creditmanager') ? true : false,
+                // ],
                 [
                     'attribute' => 'responsibles',
                     'value' => function($model) {
@@ -219,10 +219,10 @@ $this->registerJs($ExportExcel, View::POS_END);
                 //     ],
                 // ],
 
-               [
-                   'header' => 'Действия',
-                   'class' => 'yii\grid\ActionColumn'
-               ],
+               // [
+               //     'header' => 'Действия',
+               //     'class' => 'yii\grid\ActionColumn'
+               // ],
             ],
         ]); 
     ?>

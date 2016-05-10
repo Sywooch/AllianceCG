@@ -22,7 +22,7 @@ return [
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin\Module',
-            'layoutPath' => '@app/modules/admin/views/layouts',
+            'layoutPath' => '@app/modules/main/views/layouts',
             'layout' => 'main'
         ],    
         'main' => [
@@ -32,7 +32,7 @@ return [
         ],
         'alliance' => [
             'class' => 'app\modules\alliance\Module',
-            'layoutPath' => '@app/modules/alliance/views/layouts',
+            'layoutPath' => '@app/modules/main/views/layouts',
             'layout' => 'main'
         ],
         'skoda' => [

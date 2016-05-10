@@ -29,7 +29,7 @@ use rmrevin\yii\fontawesome\FA;
 
     <?php // echo $form->field($model, 'author') ?>
 
-    <div class="col-md-8">
+    <div class="col-md-6">
 
     <?php // echo  $form->field($model, 'globalSearch') ?>
 
@@ -37,7 +37,7 @@ use rmrevin\yii\fontawesome\FA;
 
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-6">
 
     <div class="form-group" style="text-align: right;">
         <?= Html::submitButton(FA::icon('search') . ' ' . Module::t('module', 'SEARCH'), ['class' => 'btn btn-primary btn-sm']) ?>

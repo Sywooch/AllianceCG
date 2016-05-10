@@ -40,7 +40,7 @@ class ContactController extends Controller
         $model = new ContactForm();
         if ($user = Yii::$app->user->identity) {
             /** @var \app\modules\user\models\User $user */
-            $model->name = $user->username;
+            $model->name = $user->getAllName();
             $model->email = $user->email;
         }
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {

@@ -26,11 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php else: ?>
 
         <div class="row">
-            <div class="col-lg-6 col-lg-offset-3">
+            <!-- <div class="col-lg-6 col-lg-offset-3"> -->
 
                 <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
                 
-                <h1><?= Html::encode($this->title) ?></h1>
+                <h1>
+                    <?= Html::encode($this->title) ?>
+                </h1>
 
                 <div class="alert alert-info">
 
@@ -46,6 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <?= $form->field($model, 'body', ['template'=>' <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-menu-hamburger"></span></span>{input}</div>{error}'])->textArea(['placeholder' => $model->getAttributeLabel( 'body' ), 'rows' => 6]) ?>
 
+                <!-- <div class="col-md-8"> -->
                     <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
                         'captchaAction' => '/main/contact/captcha',
                         'options' => [
@@ -53,16 +56,26 @@ $this->params['breadcrumbs'][] = $this->title;
                             'placeholder' => $model->getAttributeLabel( 'verifyCode' ),
                             'label' => false,
                         ],                        
-                        'template' => '<div class="row" style="text-align: left"><div class="col-lg-3">{image}</div><div class="col-lg-5"> <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-warning-sign"></span></span>{input}</div></div></div>',
+
+                        'template' => 
+                            '<div class="row">
+                                <div class="col-lg-3">{image}</div>
+                                <div class="col-lg-6">{input}</div>
+                            </div>',
+                        // 'template' => '<div class="row" style="text-align: left"><div class="col-lg-3">{image}</div><div class="col-lg-5"> <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-warning-sign"></span></span>{input}</div></div></div>',
                     ]) ?>
-                    
+                <!-- </div> -->
+
+                <!-- <div class="col-md-4"> -->
                     <div class="form-group">
                         <?= Html::submitButton('<span class="glyphicon glyphicon-envelope"></span>  ' . Module::t('module', 'BUTTON_SUBMIT'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
-                    </div>
+                    </div>                    
+                <!-- </div> -->
+                    
 
                 <?php ActiveForm::end(); ?>
 
-            </div>
+            <!-- </div> -->
         </div>
 
     <?php endif; ?>

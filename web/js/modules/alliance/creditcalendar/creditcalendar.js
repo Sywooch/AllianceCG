@@ -48,7 +48,7 @@
             // функция — callback-функция для выполнения произвольного кода
 
             eventLimit: true,  
-            eventLimitClick: 'week',            
+            eventLimitClick: 'popover',            
             views: {
                 agenda: {
                     eventLimit: 15,

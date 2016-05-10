@@ -45,15 +45,11 @@ use rmrevin\yii\fontawesome\FA;
     ]).'<hr/>'
     : false;   
     
-    echo Yii::$app->user->can('skodaIsVisible') ?
+    echo Yii::$app->user->can('admin') ?
     Nav::widget([
         'options' => ['class' => 'nav nav-stacked'],
         'encodeLabels' => false,
         'items' => array_filter([
-            // [
-            //     'label' => FA::icon('cog') . Module::t('module', 'NAV_ADMIN'),
-            //     'options' => ['class' => 'list-group-item disabled'],
-            // ],
             [
                 'label' => FA::icon('cog') . ' ' . Module::t('module', 'NAV_ADMIN'),
                 'url' => '/admin',
@@ -64,6 +60,10 @@ use rmrevin\yii\fontawesome\FA;
                 'url' => '/admin/users',
                 // 'options' => ['class' => 'list-group-item'],
 
+            ],
+            [
+                'label' => FA::icon('cog') . ' ' . Module::t('module', 'NAV_USERROLES'),
+                'url' => '/admin/userroles',
             ],
             [
                 'label' => FA::icon('institution') . ' ' . Module::t('module', 'ADMIN_COMPANIES'),

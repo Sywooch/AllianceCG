@@ -42,7 +42,7 @@ return [
         ],
         'user' => [
             'class' => 'app\modules\user\Module',
-            'layoutPath' => '@app/modules/user/views/layouts',
+            'layoutPath' => '@app/modules/main/views/layouts',
             'layout' => 'main'
         ],
     ],    

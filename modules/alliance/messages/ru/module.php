@@ -18,6 +18,7 @@ return [
     'REFRESH' => 'Обновить',
     'DELETE_CONFIRMATION' => 'Удалить?',
     'SEARCH' => 'Поиск',
+    'DO_SEARCH' => 'Найти',
     'CALENDAR_TITLE' => 'Заголовок',
     'CALENDAR_DESCRIPTION' => 'Описание',
     'CREDITCALENADR_STATUS' => 'Статус',

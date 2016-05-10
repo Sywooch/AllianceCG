@@ -15,7 +15,7 @@ use janisto\timepicker\TimePicker;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="creditcalendar-search">
+<div class="creditcalendar-search" id="creditcalendar-search" style="display:none;">
     <div class="bs-callout bs-callout-info">
 
     <?php $form = ActiveForm::begin([
@@ -70,7 +70,7 @@ use janisto\timepicker\TimePicker;
         </div>
 
     <div class="form-group" style="text-align: right;">
-        <?= Html::submitButton(FA::icon('search') . ' ' . Module::t('module', 'SEARCH'), ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::submitButton(FA::icon('search') . ' ' . Module::t('module', 'DO_SEARCH'), ['class' => 'btn btn-primary btn-sm']) ?>
         <?php // Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
     </div>
 

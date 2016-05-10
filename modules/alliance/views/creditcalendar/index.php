@@ -59,7 +59,23 @@ $this->registerJs($ExportExcel, View::POS_END);
                 'confirm' => Module::t('module', 'CREDITCALENDAR_EXPORT_CONFIRM'),
             ]
          ]);
-    ?>     
+    ?>
+
+    <?= Html::button(FA::icon('search') . ' ' . Module::t('module', 'SEARCH'), ['class' => 'btn btn-link', 'id' => 'advancedSearch']) ?>
+
+    <script type="text/javascript">
+        var button = document.getElementById('advancedSearch');
+
+        button.onclick = function() {
+            var div = document.getElementById('creditcalendar-search');
+            if (div.style.display !== 'none') {
+                div.style.display = 'none';
+            }
+            else {
+                div.style.display = 'block';
+            }
+        };
+    </script>
 
 <?php
 // $script = "

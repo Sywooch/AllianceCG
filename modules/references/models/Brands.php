@@ -1,29 +1,30 @@
 <?php
 
 namespace app\modules\references\models;
-
-use Yii;
 use app\modules\references\Module;
 use yii\helpers\ArrayHelper;
 
+use Yii;
+
 /**
- * This is the model class for table "{{%targets}}".
+ * This is the model class for table "{{%brands}}".
  *
  * @property integer $id
- * @property string $target
+ * @property string $brand
+ * @property integer $state
  */
-class Targets extends \yii\db\ActiveRecord
+class Brands extends \yii\db\ActiveRecord
 {
 
     const STATUS_BLOCKED = 1;
     const STATUS_ACTIVE = 0;
-
+    
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%targets}}';
+        return '{{%brands}}';
     }
 
     /**
@@ -32,9 +33,9 @@ class Targets extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['target'], 'string', 'max' => 255],
-            [['target'], 'safe'],
-            [['target'], 'unique'],
+            [['state'], 'integer'],
+            [['brand'], 'string', 'max' => 255],
+            [['brand', 'brand_logo', 'description'], 'safe'],
         ];
     }
 
@@ -57,10 +58,13 @@ class Targets extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'target' => Module::t('module', 'TARGET'),
-            'state' => Module::t('module', 'STATE'),
+            'id' => Module::t('module', 'ID'),
+            'brand' => Module::t('module', 'BRAND'),
+            'brand_logo' => Module::t('module', 'BRAND_LOGO'),
+            'description' => Module::t('module', 'DESCRIPTION'),
+            'state' => Module::t('module', 'STATE'),            
             'globalSearch' => Module::t('module', 'SEARCH'),
+
         ];
     }
 }

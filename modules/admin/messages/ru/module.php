@@ -144,5 +144,6 @@
         'DEPARTMENT' => 'Отдел',
         'NAV_REFERENCES' => 'Справочники',
         'REFERENCES_TARGETS' => 'Цели',
+        'REFERENCES_BRANDS' => 'Бренды',
             
 	];

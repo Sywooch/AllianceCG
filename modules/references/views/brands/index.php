@@ -7,26 +7,29 @@ use app\modules\references\Module;
 use app\components\grid\LinkColumn;
 use yii\helpers\ArrayHelper;
 use app\components\grid\SetColumn;
-use app\modules\references\models\Targets;
+use app\modules\references\models\Brands;
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\references\models\TargetsSearch */
+/* @var $searchModel app\modules\references\models\BrandsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('module', 'TARGETS');
+$this->title = Module::t('module', 'BRANDS');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['references']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="targets-index">
+<div class="brands-index">
 
     <!-- <h1> -->
         <?php // Html::encode($this->title) ?>
     <!-- </h1> -->
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
-<?php Pjax::begin(); ?>    <?= GridView::widget([
-        'id' => 'targets-grid',
+    <?= $this->render('_search', ['model' => $searchModel]); ?>
+
+<?php Pjax::begin(); ?>    
+    
+    <?= GridView::widget([
+        'id' => 'brands-grid',
         'dataProvider' => $dataProvider,
-        // 'filterModel' => $searchModel,
+        'filterModel' => $searchModel,
         'summary' => false,
         'columns' => [
             [
@@ -37,34 +40,34 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'yii\grid\CheckboxColumn',
                 'contentOptions'=>['style'=>'width: 20px;']
             ],
+
+            // 'id',
+            'brand_logo',
+            // 'brand',     
             [
                 'class' => LinkColumn::className(),
-                'attribute' => 'target',
+                'attribute' => 'brand',
                 'format' => 'raw',    
                 // 'value' => function ($data) {
                 //     return $data->getFullname();
                 // },
-            ],
+            ],       
+            // 'state',
             [
                 'class' => SetColumn::className(),
-                'filter' => Targets::getStatesArray(),
+                'filter' => Brands::getStatesArray(),
                 'attribute' => 'state',
                 'name' => 'statesName',
-                'visible' => Yii::$app->user->can('admin'),
                 'contentOptions'=>['style'=>'width: 50px;'],
                 'cssCLasses' => [
-                    Targets::STATUS_ACTIVE => 'success',
-                    Targets::STATUS_BLOCKED => 'default',
+                    Brands::STATUS_ACTIVE => 'success',
+                    Brands::STATUS_BLOCKED => 'default',
                 ],
             ],
-            // 'state',
-            // 'id',
-            // 'target',
 
-            // [
-            //     'class' => 'yii\grid\ActionColumn',
-            //     'header' => 'Действия',
-            // ],
+            ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]); 
+?>
+
 <?php Pjax::end(); ?></div>

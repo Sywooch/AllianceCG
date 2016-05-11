@@ -241,6 +241,8 @@ class RbacController extends Controller
         // CHILD TO CHIEFCREDIT ROLE
         $auth->addChild($admin, $skdirector);
         $auth->addChild($admin, $deleteCreditcalendarPost);
+        // PERMISSION TO CREATE RECORDS IN Credit References
+        $auth->addChild($admin, $accessCreditReferences);
  
         $root = $auth->createRole('root');
         $root->description = 'Superuser';

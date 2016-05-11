@@ -18,6 +18,7 @@ return [
         'app\modules\user\Bootstrap',
         'app\modules\alliance\Bootstrap',
         'app\modules\skoda\Bootstrap',
+        'app\modules\references\Bootstrap',
         ],
     'modules' => [
         'admin' => [

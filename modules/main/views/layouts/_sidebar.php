@@ -89,6 +89,27 @@ use rmrevin\yii\fontawesome\FA;
     ]).'<hr/>'
     : false;
 
+
+    echo Yii::$app->user->can('admin') ?
+    Nav::widget([
+        'options' => ['class' => 'nav nav-stacked'],
+        'encodeLabels' => false,
+        'items' => array_filter([
+            [
+                'label' => FA::icon('book') . ' ' . Module::t('module', 'NAV_REFERENCES'),
+                'url' => '/references',
+                // 'options' => ['class' => 'list-group-item'],
+            ],
+            [
+                'label' => FA::icon('diamond') . ' ' . Module::t('module', 'REFERENCES_TARGETS'),
+                'url' => '/references/targets',
+                // 'options' => ['class' => 'list-group-item'],
+
+            ],
+        ]),
+    ]).'<hr/>'
+    : false;
+
     // echo ;
 
     

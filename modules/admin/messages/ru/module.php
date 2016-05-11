@@ -120,5 +120,7 @@
         'ADMIN_POSITIONS_REALY_DELETE' => 'Удалить запись?',
         'ADMIN_DEPARTMENTS' => 'Отделы',
         'DEPARTMENT' => 'Отдел',
+        'NAV_REFERENCES' => 'Справочники',
+        'REFERENCES_TARGETS' => 'Цели',
             
 	];

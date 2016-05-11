@@ -76,7 +76,7 @@ use rmrevin\yii\fontawesome\FA;
                 // 'options' => ['class' => 'list-group-item'],
             ],
             [
-                'label' => FA::icon('institution') . ' ' . Module::t('module', 'ADMIN_DEPARTMENTS'),
+                'label' => FA::icon('users') . ' ' . Module::t('module', 'ADMIN_DEPARTMENTS'),
                 'url' => '/admin/departments',
                 // 'options' => ['class' => 'list-group-item'],
             ],

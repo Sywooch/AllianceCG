@@ -64,7 +64,7 @@ $this->registerJs($toggleSearch, View::POS_END);
 
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
-            'filterModel' => $searchModel,
+            // 'filterModel' => $searchModel,
 //          'layout'=>"{sorter}\n{pager}\n{summary}\n{items}",
             'id' => 'creditcalendar-grid',
             'tableOptions' =>[

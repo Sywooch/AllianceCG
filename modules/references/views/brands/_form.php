@@ -12,11 +12,13 @@ use rmrevin\yii\fontawesome\FA;
 
 <div class="brands-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'brand')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'brand_logo')->textInput() ?>
+    <?php // $form->field($model, 'brand_logo')->textInput() ?>
+
+    <?= $form->field($model, 'file')->fileInput(); ?>
 
     <?= $form->field($model, 'description')->textInput() ?>
 

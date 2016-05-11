@@ -16,4 +16,7 @@
 			'BRAND_LOGO' => 'Логотип',
 			'DESCRIPTION' => 'Описание',
 			'STATE' => 'Состояние',
+			'CREATED_AT' => 'Создан',
+			'UPDATED_AT' => 'Обновлен',
+			'AUTHOR' => 'Автор',
 		];

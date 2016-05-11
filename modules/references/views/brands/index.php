@@ -51,12 +51,25 @@ $this->params['breadcrumbs'][] = $this->title;
                 // 'value' => function ($data) {
                 //     return $data->getFullname();
                 // },
+            ],
+            [
+                'attribute' => 'created_at',
+                'format' => 'datetime',
+            ],
+            [
+                'attribute' => 'updated_at',
+                'format' => 'datetime',
+            ],
+            [
+                'attribute' => 'author',
+                'value' => 'authorname.full_name',
             ],       
             // 'state',
             [
                 'class' => SetColumn::className(),
                 'filter' => Brands::getStatesArray(),
                 'attribute' => 'state',
+                'visible' => Yii::$app->user->can('admin'),
                 'name' => 'statesName',
                 'contentOptions'=>['style'=>'width: 50px;'],
                 'cssCLasses' => [

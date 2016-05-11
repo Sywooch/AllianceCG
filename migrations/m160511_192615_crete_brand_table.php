@@ -17,6 +17,9 @@ class m160511_192615_crete_brand_table extends Migration
             'brand_logo' => $this->string(),
             'description' => $this->text(),
             'state' => $this->integer()->notNull()->defaultValue(0),
+            'created_at' => $this->integer()->notNull(),
+            'updated_at' => $this->integer()->notNull(),
+            'author' => $this->string(255),
         ], $tableOptions);
 
         $this->createIndex('idx_brand_id', '{{%brands}}', 'id');

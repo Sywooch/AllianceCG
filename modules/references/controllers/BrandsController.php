@@ -8,7 +8,8 @@ use app\modules\references\models\BrandsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\web\UploadedFile;
+ 
 /**
  * BrandsController implements the CRUD actions for Brands model.
  */
@@ -61,18 +62,60 @@ class BrandsController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+    
     public function actionCreate()
     {
         $model = new Brands();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        // if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            // $imageName = mktime(date('h'), date('i'), date('s'), date('d'), date('m'), date('y'));
+            $imageName = $model->brand;
+            $model->file = UploadedFile::getInstance($model, 'file');
+
+            // $model->file->saveAs('img/uploads/brandlogo/'.$imageName.'.'.$model->file->extension);
+            // $model->brand_logo = 'img/uploads/brandlogo/'.$imageName.'.'.$model->file->extension; 
+            // $model->save();
+
+            if ($model->file = UploadedFile::getInstance($model, 'file'))
+            {
+                $model->file->saveAs('img/uploads/brandlogo/'.$imageName.'.'.$model->file->extension);
+                $model->brand_logo = 'img/uploads/brandlogo/'.$imageName.'.'.$model->file->extension;                
+            }
+
+            if($model->save())
+            {
+
+               $model->id = $model->getPrimaryKey();
+               return $this->redirect(['view', 'id' => $model->id]);
+            }
+            else
+            {
+                print_r($model->getErrors()); // => check whether any validation errors are there
+            }            
+            // $model->save(false);
+            
+            // return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
     }
+
+    // public function actionCreate()
+    // {
+    //     $model = new Brands();
+
+    //     if ($model->load(Yii::$app->request->post()) && $model->save()) {
+    //         return $this->redirect(['view', 'id' => $model->id]);
+    //     } else {
+    //         return $this->render('create', [
+    //             'model' => $model,
+    //         ]);
+    //     }
+    // }
 
     /**
      * Updates an existing Brands model.

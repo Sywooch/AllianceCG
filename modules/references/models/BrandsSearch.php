@@ -5,6 +5,7 @@ namespace app\modules\references\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use app\modules\admin\models\User;
 use app\modules\references\models\Brands;
 
 /**
@@ -14,6 +15,7 @@ class BrandsSearch extends Brands
 {
 
     public $globalSearch;
+    public $authorname;
 
     /**
      * @inheritdoc
@@ -23,7 +25,7 @@ class BrandsSearch extends Brands
         return [
             [['id', 'state'], 'integer'],
             [['brand', 'brand_logo', 'description'], 'safe'],
-            [['globalSearch'], 'safe'],
+            [['globalSearch', 'authorname'], 'safe'],
         ];
     }
 
@@ -46,6 +48,12 @@ class BrandsSearch extends Brands
     public function search($params)
     {
         $query = Brands::find();
+        $query->joinWith(['authorname']);
+
+        $dataProvider->sort->attributes['authorname'] = [
+            'asc' => ['{{%user}}.full_name' => SORT_ASC],
+            'desc' => ['{{%user}}.full_name' => SORT_DESC],
+        ];
 
         // add conditions that should always apply here
 
@@ -69,6 +77,7 @@ class BrandsSearch extends Brands
 
         // $query->andFilterWhere(['like', 'brand', $this->brand]);
         $query->orFilterWhere(['like', 'brand', $this->globalSearch]);
+        $query->andFilterWhere(['like', '{{%user}}.full_name', $this->authorname]);
 
         return $dataProvider;
     }

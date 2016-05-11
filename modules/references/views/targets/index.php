@@ -39,14 +39,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 //     return $data->getFullname();
                 // },
             ],
-
+            // 'state',
             // 'id',
             // 'target',
 
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'header' => 'Действия',
-            ],
+            // [
+            //     'class' => 'yii\grid\ActionColumn',
+            //     'header' => 'Действия',
+            // ],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

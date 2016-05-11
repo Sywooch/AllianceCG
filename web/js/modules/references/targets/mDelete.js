@@ -13,7 +13,7 @@
             else if (confirm("Удалить отмеченные записи?")) {
               $.ajax({
                 type: 'POST',
-                url : '/alliance/targets/multipledelete',
+                url : '/references/targets/multipledelete',
                 data : {row_id: PosId},
               });
             }

@@ -22,7 +22,7 @@ class TargetsSearch extends Targets
     {
         return [
             [['id'], 'integer'],
-            [['target', 'globalSearch'], 'safe'],
+            [['target', 'globalSearch', 'state'], 'safe'],
             [['target'], 'unique'],
         ];
     }
@@ -46,6 +46,9 @@ class TargetsSearch extends Targets
     public function search($params)
     {
         $query = Targets::find();
+        if(!Yii::$app->user->can('admin')){
+            $query->where(['state' => 0]);
+        }
 
         // add conditions that should always apply here
 

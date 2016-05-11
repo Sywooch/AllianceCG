@@ -91,6 +91,12 @@ class RbacController extends Controller
         // PERMISSION "updateCreditcalendarOwnPost" USED FROM "updateCreditcalendarPost"
         $auth->addChild($updateCreditcalendarOwnPost, $updateCreditcalendarPost);
 
+
+        // PERMISSION "viewCreditcalendarPost"
+        $accessCreditReferences = $auth->createPermission('accessCreditReferences');
+        $accessCreditReferences->description = 'Alliance Creditcalendar Delete post';
+        $auth->add($accessCreditReferences);         
+
         // ===  CREDITCALENDAR_END  ===        
 
         // ===  SKODA_BEGIN ===
@@ -183,6 +189,8 @@ class RbacController extends Controller
         $auth->addChild($chiefcredit, $viewCreditcalendarOwnPost); 
         // PERMISSION TO CREATE PRIVATE RECORDS IN Creditcalendar
         $auth->addChild($chiefcredit, $privateCreditcalendarPost);
+        // PERMISSION TO CREATE RECORDS IN Credit References
+        $auth->addChild($chiefcredit, $accessCreditReferences);
 
         // SENIOR CREDIT SPECIALIST
         $seniorcreditspesialist = $auth->createRole('seniorcreditspesialist');
@@ -207,6 +215,8 @@ class RbacController extends Controller
         $auth->addChild($seniorcreditspesialist, $deleteCreditcalendarPost);
         // PERMISSION TO CREATE PRIVATE RECORDS IN Creditcalendar
         $auth->addChild($seniorcreditspesialist, $privateCreditcalendarPost);
+        // PERMISSION TO CREATE RECORDS IN Credit References
+        $auth->addChild($seniorcreditspesialist, $accessCreditReferences);
 
         // ===   CREDIT_DEPARTMENT_END   ===
         

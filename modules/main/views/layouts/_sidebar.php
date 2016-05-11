@@ -90,7 +90,7 @@ use rmrevin\yii\fontawesome\FA;
     : false;
 
 
-    echo Yii::$app->user->can('admin') ?
+    echo Yii::$app->user->can('accessCreditReferences') ?
     Nav::widget([
         'options' => ['class' => 'nav nav-stacked'],
         'encodeLabels' => false,

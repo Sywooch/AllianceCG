@@ -8,6 +8,7 @@ use app\modules\references\models\TargetsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * TargetsController implements the CRUD actions for Targets model.
@@ -24,6 +25,17 @@ class TargetsController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        // 'actions'=>['index', 'create', 'view'],
+                        // 'actions'=>['*'],
+                        'roles' => ['seniorcreditspesialist', 'chiefcredit', 'admin', 'root'],
+                    ],
                 ],
             ],
         ];
@@ -99,12 +111,12 @@ class TargetsController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
+    // public function actionDelete($id)
+    // {
+    //     $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
-    }
+    //     return $this->redirect(['index']);
+    // }
 
     /**
      * Finds the Targets model based on its primary key value.
@@ -122,19 +134,26 @@ class TargetsController extends Controller
         }
     }
 
-
     public function actionMultipledelete()
     {
         $pk = Yii::$app->request->post('row_id');
-
-        foreach ($pk as $key => $value) 
-        {
-            $sql = "DELETE FROM {{%targets}} WHERE id = $value";
-            $query = Yii::$app->db->createCommand($sql)->execute();
-        }
+        $val = 1;
+        Targets::updateAll(['state' => $val], ['in', 'id', $pk]);
 
         return $this->redirect(['index']);
 
     }
 
+    public function actionMultiplerestore()
+    {
+        $pk = Yii::$app->request->post('row_id');
+        $val = 0;
+        Targets::updateAll(['state' => $val], ['in', 'id', $pk]);
+
+        return $this->redirect(['index']);
+
+    }    
+
 }
+
+            // -- $sql = "DELETE FROM {{%targets}} WHERE id = $value";

@@ -96,9 +96,8 @@
         'NAV_USERS' => 'Пользователи',
         'NAV_COMPANIES' => 'Организации',
         'NAV_POSITIONS' => 'Должности',
-                
-<<<<<<< HEAD
-            'NAV_ALLIANCE' => 'Альянс',
+               
+        'NAV_ALLIANCE' => 'Альянс',
             'NAV_ALLIANCE_DASHBOARD' => 'DASHBOARD',
             'NAV_ALLIANCE_PHONEBOOK' => 'Телефонная книга',
             'NAV_ALLIANCE_DUTY' => 'График дежурств',
@@ -119,7 +118,7 @@
             'UPDATED_AT' => 'Дата редактирования',
             'AUTHOR' => 'Автор',
             'ADMIN_POSITIONS_REALY_DELETE' => 'Удалить запись?',
-=======
+
         'NAV_ALLIANCE' => 'Альянс',
         'NAV_ALLIANCE_DASHBOARD' => 'DASHBOARD',
         'NAV_ALLIANCE_PHONEBOOK' => 'Телефонная книга',
@@ -145,6 +144,5 @@
         'DEPARTMENT' => 'Отдел',
         'NAV_REFERENCES' => 'Справочники',
         'REFERENCES_TARGETS' => 'Цели',
->>>>>>> ad11b36672335cf769efaed2ec1989d1613c4076
             
 	];

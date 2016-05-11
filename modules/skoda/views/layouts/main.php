@@ -29,7 +29,7 @@ AppAsset::register($this);
 
     <div class="container">
         <div class="col-sm-2">
-        <?= $this->render('@app/modules/skoda/views/layouts/_sidebar') ?>
+        <?= $this->render('@app/modules/main/views/layouts/_sidebar') ?>
         </div>
         <div class="col-sm-10">        
             <?= $this->render('@app/modules/main/views/layouts/_breadcrumbs') ?>

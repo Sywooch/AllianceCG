@@ -6,13 +6,18 @@ use yii\helpers\Url;
 use app\modules\admin\Module;
 use rmrevin\yii\fontawesome\FA;
 
+ // <span class="label label-pill label-success navbar-right nav-label">' . FA::icon('area-chart') . '</span>'
+ // $count = StatusmonitorSearch::find()
+ // ->count();
+    
     echo Yii::$app->user->can('creditcalendarIsVisible') ?
      Nav::widget([
         'options' => ['class' => 'nav nav-stacked'],
         'encodeLabels' => false,
         'items' => array_filter([
             [
-                'label' => FA::icon('building') . ' ' . Module::t('module', 'NAV_ALLIANCE'), 'url' => ['/alliance/'],
+                'label' => FA::icon('building') . ' ' . Module::t('module', 'NAV_ALLIANCE'),
+                'url' => ['/alliance/'],
                 'visible' => Yii::$app->user->can('creditcalendarIsVisible')
             ],
             [
@@ -33,11 +38,11 @@ use rmrevin\yii\fontawesome\FA;
                 'visible' => Yii::$app->user->can('skodaIsVisible')
             ],
             [
-                'label' => FA::icon('wrench') . ' ' . Module::t('module', 'NAV_SKODA_SERVICESHEDULER'), 'url' => ['/skoda/servicesheduler/calendar'],
+                'label' => FA::icon('male') . ' ' . Module::t('module', 'NAV_SKODA_SERVICESHEDULER'), 'url' => ['/skoda/servicesheduler/calendar'],
                 'visible' => Yii::$app->user->can('skodaIsVisible')
             ],
             [
-                'label' => FA::icon('wrench') . ' ' . Module::t('module', 'NAV_SKODA_STATUSMONITOR'), 'url' => ['/skoda/statusmonitor'],
+                'label' => FA::icon('television') . ' ' . Module::t('module', 'NAV_SKODA_STATUSMONITOR'), 'url' => ['/skoda/statusmonitor'],
                 'visible' => Yii::$app->user->can('skodaIsVisible')
             ],
         ]),

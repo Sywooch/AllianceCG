@@ -58,5 +58,6 @@ return [
     'TIME_TO_WORK' => 'Сроки исполнения: ',
     'EVENT_DESCRIPTION' => 'Описание события: ',
     'RESPONSIBLES_DOES_NOT_EXIST' => 'Ответственные не назначены',
+    'CREDITCALENDAR_EXPORT_CONFIRM' => 'Выгрузить записи в Excel?'
 
 ];

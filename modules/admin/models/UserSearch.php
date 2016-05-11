@@ -37,6 +37,8 @@ class UserSearch extends Model
     public $globalSearch;
     public $positions;
     public $companies;
+    public $department;
+    public $departments;
 
     public function rules()
     {
@@ -44,8 +46,9 @@ class UserSearch extends Model
             // [['id', 'status'], 'integer'],
             [['username', 'email', 'name', 'surname', 'patronymic', 'fullname', 'photo', 'position', 'role'], 'safe'],
             [['date_from', 'date_to'], 'date', 'format' => 'php:Y-m-d'],
-            [['fullname', 'company', 'userroles', 'globalSearch', 'positions', 'companies'], 'safe'],
+            [['fullname', 'company', 'userroles', 'globalSearch', 'positions', 'companies', 'department'], 'safe'],
             ['photo', 'safe'],
+            ['departments', 'safe'],
         ];
     }
 
@@ -66,6 +69,7 @@ class UserSearch extends Model
             'status' => Module::t('module', 'USER_STATUS'),
             'userroles' => Module::t('module', 'ADMIN_USERS_ROLE'),
             'globalSearch' => Module::t('module', 'SEARCH'),
+            'departments' => Module::t('module', 'DEPARTMENT'),
         ];
     }
 
@@ -88,7 +92,7 @@ class UserSearch extends Model
     public function search($params)
     {
         $query = User::find()->where(['<>','{{%user}}.role', 'root']);        
-        $query->joinWith(['userroles', 'positions', 'companies']);
+        $query->joinWith(['userroles', 'positions', 'companies', 'departments']);
 
 
         $sort = new Sort([
@@ -127,6 +131,11 @@ class UserSearch extends Model
         $dataProvider->sort->attributes['positions'] = [
             'asc' => ['{{%positions}}.position' => SORT_ASC],
             'desc' => ['{{%positions}}.position' => SORT_DESC],
+        ];   
+
+        $dataProvider->sort->attributes['departments'] = [
+            'asc' => ['{{%departments}}.department_name' => SORT_ASC],
+            'desc' => ['{{%departments}}.department_name' => SORT_DESC],
         ];   
         
         $dataProvider->sort->attributes['companies'] = [

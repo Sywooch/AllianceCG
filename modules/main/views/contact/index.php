@@ -57,17 +57,17 @@ $this->params['breadcrumbs'][] = $this->title;
                             'label' => false,
                         ],                        
 
-                        'template' => 
-                            '<div class="row">
-                                <div class="col-lg-3">{image}</div>
-                                <div class="col-lg-6">{input}</div>
-                            </div>',
+                        // 'template' => 
+                        //     '<div class="row">
+                        //         <div class="col-lg-">{image}</div>
+                        //         <div class="col-lg-6">{input}</div>
+                        //     </div>',
                         // 'template' => '<div class="row" style="text-align: left"><div class="col-lg-3">{image}</div><div class="col-lg-5"> <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-warning-sign"></span></span>{input}</div></div></div>',
                     ]) ?>
                 <!-- </div> -->
 
                 <!-- <div class="col-md-4"> -->
-                    <div class="form-group">
+                    <div class="form-group" style="text-align: right">
                         <?= Html::submitButton('<span class="glyphicon glyphicon-envelope"></span>  ' . Module::t('module', 'BUTTON_SUBMIT'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
                     </div>                    
                 <!-- </div> -->

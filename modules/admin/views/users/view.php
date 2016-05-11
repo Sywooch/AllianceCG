@@ -23,6 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <p style="text-align: right;">
         <?= Html::a(FA::icon('list-ol') . ' ' . Module::t('module', 'ADMIN_USERS'), ['/admin/users'], ['class' => 'btn btn-warning btn-sm']) ?>
+        <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['/admin/users/create'], ['class' => 'btn btn-success btn-sm']) ?>
         <?= Html::a(FA::icon('pencil') . ' ' . Module::t('module', 'ADMIN_USER_UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
         <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'ADMIN_USER_DELETE'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger btn-sm',
@@ -46,6 +47,10 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'position',
                 'value' => isset($model->positions->position) ? $model->positions->position : false,
+            ],
+            [
+                'attribute' => 'department',
+                'value' => isset($model->departments->department_name) ? $model->departments->department_name : false,
             ],
             [
                 'attribute' => 'company',

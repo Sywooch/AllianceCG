@@ -23,13 +23,6 @@ use janisto\timepicker\TimePicker;
         'method' => 'get',
     ]); ?>
 
-    <!-- <div class="col-md-3"> -->
-    
-    <?php // $form->field($model, 'authorname', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'author' )]) ?>
-    
-    <!-- </div> -->
-
-
         <div class="col-md-3">
             <?= $form->field($model, 'date_from', ['template' => '{input}{error}{hint}'])->widget(TimePicker::className(), [
             'language' => 'ru',
@@ -62,17 +55,19 @@ use janisto\timepicker\TimePicker;
         </div>
 
         <div class="col-md-3">
-        
+            <?= $form->field($model, 'priority', ['template' => '{input}{error}'])->dropDownList($model->getPrioritiesArray(), ['prompt' => '-- ' . $model->getAttributeLabel( 'priority' ) . ' --',]);
+            ?>
         </div>
 
         <div class="col-md-3">
-            
+            <?= $form->field($model, 'status', ['template' => '{input}{error}'])->dropDownList($model->getStatusesArray(), ['prompt' => '-- ' . $model->getAttributeLabel( 'status' ) . ' --',]);
+            ?>
         </div>
 
-    <div class="form-group" style="text-align: right;">
-        <?= Html::submitButton(FA::icon('search') . ' ' . Module::t('module', 'DO_SEARCH'), ['class' => 'btn btn-primary btn-sm']) ?>
-        <?php // Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
-    </div>
+        <div class="form-group" style="text-align: right;">
+            <?= Html::submitButton(FA::icon('search') . ' ' . Module::t('module', 'DO_SEARCH'), ['class' => 'btn btn-primary btn-sm']) ?>
+            <?php // Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
+        </div>
 
     <?php ActiveForm::end(); ?>
 

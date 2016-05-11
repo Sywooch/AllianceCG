@@ -82,6 +82,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
             [['type', 'allday', 'created_at', 'updated_at', 'status', 'private', 'calendar_type', 'priority'], 'integer'],
             [['title'], 'string', 'max' => 255],
             ['author', 'integer'],
+            [['date_from', 'time_from', 'date_to', 'time_to', 'title', 'description', 'status', 'priority'], 'required'],
         ];
     }
 

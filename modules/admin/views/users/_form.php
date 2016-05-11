@@ -5,6 +5,7 @@ use app\modules\admin\models\Userroles;
 use app\modules\admin\Module;
 use app\modules\admin\models\Positions;
 use app\modules\admin\models\Companies;
+use app\modules\admin\models\Departments;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use rmrevin\yii\fontawesome\FA;
@@ -50,8 +51,6 @@ use yii\widgets\ActiveForm;
         echo $form->field($model, 'company', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('institution') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
     ?>    
 
-
-
     <?php
         $userroles = Userroles::find()->all();
     
@@ -60,7 +59,17 @@ use yii\widgets\ActiveForm;
             'prompt' => '-- ' . $model->getAttributeLabel( 'role' ) . ' --',
         ];
         echo $form->field($model, 'role', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('briefcase') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
-    ?>   
+    ?>  
+
+    <?php
+        $departments = Departments::find()->all();
+    
+        $items = ArrayHelper::map($departments,'id','department_name');
+        $params = [
+            'prompt' => '-- ' . $model->getAttributeLabel( 'department' ) . ' --',
+        ];
+        echo $form->field($model, 'department', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('briefcase') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
+    ?>    
 
     <?php //  $form->field($model, 'role', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('briefcase') . ' </span>{input}</div>{error}'])->dropDownList(User::getRolesArray(),['prompt'=>'-- ' . $model->getAttributeLabel( 'role' ) . ' --']); ?>
 

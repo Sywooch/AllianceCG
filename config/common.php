@@ -18,6 +18,7 @@ return [
         'app\modules\user\Bootstrap',
         'app\modules\alliance\Bootstrap',
         'app\modules\skoda\Bootstrap',
+        'app\modules\references\Bootstrap',
         ],
     'modules' => [
         'admin' => [
@@ -42,6 +43,11 @@ return [
         ],
         'user' => [
             'class' => 'app\modules\user\Module',
+            'layoutPath' => '@app/modules/main/views/layouts',
+            'layout' => 'main'
+        ],
+        'references' => [
+            'class' => 'app\modules\references\Module',
             'layoutPath' => '@app/modules/main/views/layouts',
             'layout' => 'main'
         ],

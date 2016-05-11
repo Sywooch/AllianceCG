@@ -9,7 +9,7 @@ use app\modules\admin\Module;
 $this->title = $model->getAllname();
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN'), 'url' => ['default/index']];
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN_USERS'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->username, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->full_name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Module::t('module', 'ADMIN_TITLE_UPDATE');
 ?>
 <div class="user-update">

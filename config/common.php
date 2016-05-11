@@ -45,6 +45,11 @@ return [
             'layoutPath' => '@app/modules/main/views/layouts',
             'layout' => 'main'
         ],
+        'references' => [
+            'class' => 'app\modules\references\Module',
+            'layoutPath' => '@app/modules/main/views/layouts',
+            'layout' => 'main'
+        ],
     ],    
     'components' => [
         'ldap' => [

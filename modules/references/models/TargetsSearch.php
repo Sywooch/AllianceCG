@@ -12,6 +12,9 @@ use app\modules\references\models\Targets;
  */
 class TargetsSearch extends Targets
 {
+
+    public $globalSearch;
+
     /**
      * @inheritdoc
      */
@@ -19,7 +22,8 @@ class TargetsSearch extends Targets
     {
         return [
             [['id'], 'integer'],
-            [['target'], 'safe'],
+            [['target', 'globalSearch'], 'safe'],
+            [['target'], 'unique'],
         ];
     }
 
@@ -62,7 +66,8 @@ class TargetsSearch extends Targets
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'target', $this->target]);
+        // $query->andFilterWhere(['like', 'target', $this->target]);
+        $query->orFilterWhere(['like', 'target', $this->globalSearch]);
 
         return $dataProvider;
     }

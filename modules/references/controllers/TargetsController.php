@@ -121,4 +121,20 @@ class TargetsController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+
+    public function actionMultipledelete()
+    {
+        $pk = Yii::$app->request->post('row_id');
+
+        foreach ($pk as $key => $value) 
+        {
+            $sql = "DELETE FROM {{%targets}} WHERE id = $value";
+            $query = Yii::$app->db->createCommand($sql)->execute();
+        }
+
+        return $this->redirect(['index']);
+
+    }
+
 }

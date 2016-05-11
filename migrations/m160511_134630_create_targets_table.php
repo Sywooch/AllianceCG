@@ -21,6 +21,7 @@ class m160511_134630_create_targets_table extends Migration
         $this->createTable('{{%targets}}', [
             'id' => $this->primaryKey(),
             'target' => $this->string(),
+            'state' => $this->integer()->notNull()->defaultValue(0),
         ], $tableOptions);
     }
 

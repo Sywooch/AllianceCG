@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use rmrevin\yii\fontawesome\FA;
+use app\modules\references\Module;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\references\models\Targets */
@@ -12,10 +14,12 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'target')->textInput(['maxlength' => true]) ?>
+    <?php $form->field($model, 'target')->textInput(['maxlength' => true]) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    <?= $form->field($model, 'target', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('diamond') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'target' )]) ?>
+
+    <div class="form-group" style="text-align: right">
+        <?= Html::submitButton($model->isNewRecord ?  FA::icon('plus') . ' ' . Module::t('module', 'CREATE') : FA::icon('edit') . ' ' . Module::t('module', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

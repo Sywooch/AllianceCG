@@ -3,6 +3,7 @@
 namespace app\modules\references\models;
 
 use Yii;
+use app\modules\references\Module;
 
 /**
  * This is the model class for table "{{%targets}}".
@@ -27,6 +28,8 @@ class Targets extends \yii\db\ActiveRecord
     {
         return [
             [['target'], 'string', 'max' => 255],
+            [['target'], 'safe'],
+            [['target'], 'unique'],
         ];
     }
 
@@ -37,7 +40,8 @@ class Targets extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'target' => Yii::t('app', 'Target'),
+            'target' => Module::t('module', 'TARGET'),
+            'globalSearch' => Module::t('module', 'SEARCH'),
         ];
     }
 }

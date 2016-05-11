@@ -48,6 +48,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => isset($model->positions->position) ? $model->positions->position : false,
             ],
             [
+                'attribute' => 'department',
+                'value' => isset($model->departments->department_name) ? $model->departments->department_name : false,
+            ],
+            [
                 'attribute' => 'company',
                 'value' => isset($model->companies->company_name) ? $model->companies->company_name : false,
             ],

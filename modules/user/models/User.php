@@ -123,7 +123,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['email', 'unique', 'targetClass' => self::className(), 'message' => Yii::t('app', 'ERROR_EMAIL_EXISTS')],
  
             // Status - field type integer
-            ['status', 'integer'],
+            [['status', 'department'], 'integer'],
 
             // Status - default value "Active"
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
@@ -132,7 +132,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
             // ['role', 'in', 'range' => array_keys(self::getRolesArray())],
             [['fullname', 'avatar'], 'safe'],
-            [['mcname', 'role', 'company'], 'safe'],
+            [['mcname', 'role', 'company', 'department'], 'safe'],
 
         ];
     }
@@ -165,6 +165,7 @@ class User extends ActiveRecord implements IdentityInterface
             'role' => Module::t('module', 'USER_ROLE'),
             'companies' => Module::t('module', 'USER_COMPANY'),
             'positions' => Module::t('module', 'USER_POSITION'),
+            'departments' => Module::t('module', 'DEPARTMENT'),
         ];
     }    
 

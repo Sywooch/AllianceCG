@@ -17,6 +17,7 @@ class User extends \app\modules\user\models\User
     public $newPasswordRepeat;
     public $fullname;
     public $file;
+    // public $department;
  
     public function rules()
     {
@@ -24,7 +25,7 @@ class User extends \app\modules\user\models\User
             [['newPassword', 'newPasswordRepeat', 'role'], 'required', 'on' => self::SCENARIO_ADMIN_CREATE],
             ['newPassword', 'string', 'min' => 6],
             ['newPasswordRepeat', 'compare', 'compareAttribute' => 'newPassword'],
-            [['fullName', 'photo', 'file', 'role', 'company'], 'safe'],
+            [['fullName', 'photo', 'file', 'role', 'company', 'department'], 'safe'],
             [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 1],
         ]);
     }
@@ -32,8 +33,8 @@ class User extends \app\modules\user\models\User
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios[self::SCENARIO_ADMIN_CREATE] = ['surname', 'name', 'photo', 'role', 'patronymic', 'email', 'position', 'company', 'status', 'newPassword', 'newPasswordRepeat'];
-        $scenarios[self::SCENARIO_ADMIN_UPDATE] = ['surname', 'name', 'photo', 'role', 'patronymic', 'email', 'position', 'company', 'status', 'newPassword', 'newPasswordRepeat'];
+        $scenarios[self::SCENARIO_ADMIN_CREATE] = ['surname', 'name', 'photo', 'role', 'patronymic', 'email', 'position', 'company', 'status', 'newPassword', 'newPasswordRepeat', 'department'];
+        $scenarios[self::SCENARIO_ADMIN_UPDATE] = ['surname', 'name', 'photo', 'role', 'patronymic', 'email', 'position', 'company', 'status', 'newPassword', 'newPasswordRepeat', 'department'];
         return $scenarios;
     }
  
@@ -44,6 +45,8 @@ class User extends \app\modules\user\models\User
             'newPasswordRepeat' => Module::t('module', 'ADMIN_USER_REPEAT_PASSWORD'),
             'role' => Module::t('module', 'ADMIN_USERS_ROLE'),
             'userroles' => Module::t('module', 'ADMIN_USERS_ROLE'),
+            'department' => Module::t('module', 'DEPARTMENT'),
+            'departments' => Module::t('module', 'DEPARTMENT'),
         ]);
     }
 
@@ -114,6 +117,15 @@ class User extends \app\modules\user\models\User
     {
         return $this->hasOne(Positions::className(), ['id' => 'position']);
     }
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDepartments()
+    {
+        return $this->hasOne(Departments::className(), ['id' => 'department']);
+    }    
 
     /**
      * @return \yii\db\ActiveQuery

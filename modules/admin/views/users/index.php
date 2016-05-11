@@ -83,6 +83,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'companies',
                 'value' => 'companies.company_name',
             ],
+            [
+                'attribute' => 'departments',
+                'value' => 'departments.department_name',
+            ],
             // [
             //     'attribute' => 'position',
             //     'contentOptions'=>['style'=>'width: 150px;'],

@@ -76,6 +76,11 @@ use rmrevin\yii\fontawesome\FA;
                 // 'options' => ['class' => 'list-group-item'],
             ],
             [
+                'label' => FA::icon('institution') . ' ' . Module::t('module', 'ADMIN_DEPARTMENTS'),
+                'url' => '/admin/departments',
+                // 'options' => ['class' => 'list-group-item'],
+            ],
+            [
                 'label' => FA::icon('briefcase') . ' ' . Module::t('module', 'ADMIN_POSITIONS'),
                 'url' => '/admin/positions',
                 // 'options' => ['class' => 'list-group-item'],

@@ -104,7 +104,7 @@
             'NAV_ALLIANCE_CREDITCALENDAR' => 'ОК. Календарь',
             'ROLE_NAME' => 'Роль',
             'ROLE_DESCRIPTION' => 'Описание роли',
-            'NAV_USERROLES' => 'Роли пользователей',
+            'NAV_USERROLES' => 'Роли',
             'SEARCH' => 'Поиск',
             'CREATE' => 'Добавить',
             'REFRESH' => 'Обновить',

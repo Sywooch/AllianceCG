@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             // 'id',
-            // 'brand_logo',
+            'brand_logo',
             [
                 'attribute' => 'brand_logo',
                 // 'format' => 'image',

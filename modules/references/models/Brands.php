@@ -23,6 +23,7 @@ class Brands extends \yii\db\ActiveRecord
 
     const STATUS_BLOCKED = 1;
     const STATUS_ACTIVE = 0;
+    const LOGO_PATH = 'img/uploads/brandlogo/';
     
     /**
      * @inheritdoc

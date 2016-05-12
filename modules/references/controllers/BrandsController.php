@@ -72,7 +72,11 @@ class BrandsController extends Controller
 
             $imageName = mktime(date('h'), date('i'), date('s'), date('d'), date('m'), date('y'));
             $model->file = UploadedFile::getInstance($model, 'file');
-            $path = 'img/uploads/brandlogo/';
+            // $path = 'img/uploads/brandlogo/';
+            $path = Brands::LOGO_PATH;
+            if(!file_exists($path)) {
+                mkdir($path, 0777);
+            }
             // $model->brand_logo = 'img/uploads/brandlogo/'.$imageName.'.'.$model->file->extension; 
             $model->brand_logo = $path.$imageName.'.'.$model->file->extension; 
 

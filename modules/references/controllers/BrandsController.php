@@ -70,33 +70,34 @@ class BrandsController extends Controller
         // if ($model->load(Yii::$app->request->post()) && $model->save()) {
         if ($model->load(Yii::$app->request->post())) {
 
-            // $imageName = mktime(date('h'), date('i'), date('s'), date('d'), date('m'), date('y'));
-            $imageName = $model->brand;
+            $imageName = mktime(date('h'), date('i'), date('s'), date('d'), date('m'), date('y'));
+            // $imageName = $model->brand;
             $model->file = UploadedFile::getInstance($model, 'file');
+            $model->brand_logo = 'img/uploads/brandlogo/'.$imageName.'.'.$model->file->extension; 
 
-            // $model->file->saveAs('img/uploads/brandlogo/'.$imageName.'.'.$model->file->extension);
-            // $model->brand_logo = 'img/uploads/brandlogo/'.$imageName.'.'.$model->file->extension; 
-            // $model->save();
+            $model->save();
+            $model->file->saveAs('img/uploads/brandlogo/'.$imageName.'.'.$model->file->extension);
 
-            if ($model->file = UploadedFile::getInstance($model, 'file'))
-            {
-                $model->file->saveAs('img/uploads/brandlogo/'.$imageName.'.'.$model->file->extension);
-                $model->brand_logo = 'img/uploads/brandlogo/'.$imageName.'.'.$model->file->extension;                
-            }
+            // if ($model->file = UploadedFile::getInstance($model, 'file'))
+            // {
+            //     $model->file->saveAs('img/uploads/brandlogo/'.$imageName.'.'.$model->file->extension);
+            //     $model->brand_logo = 'img/uploads/brandlogo/'.$imageName.'.'.$model->file->extension;                
+            // }
 
-            if($model->save())
-            {
+            // if($model->save())
+            // {
 
-               $model->id = $model->getPrimaryKey();
-               return $this->redirect(['view', 'id' => $model->id]);
-            }
-            else
-            {
-                print_r($model->getErrors()); // => check whether any validation errors are there
-            }            
+            //    $model->id = $model->getPrimaryKey();
+            //    return $this->redirect(['view', 'id' => $model->id]);
+            // }
+            // else
+            // {
+            //     // print_r($model->getErrors());
+            //     print_r($model->errors);
+            // }            
             // $model->save(false);
             
-            // return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,

@@ -5,6 +5,7 @@ use app\modules\references\Module;
 use yii\helpers\ArrayHelper;
 use yii\behaviors\TimestampBehavior;
 use app\modules\admin\models\User;
+use yii\helpers\Url;
 
 use Yii;
  
@@ -95,6 +96,16 @@ class Brands extends \yii\db\ActiveRecord
             'author' => Module::t('module', 'AUTHOR'),
 
         ];
+    }
+
+    /**
+     * Description
+     * @return type
+     */
+    public function getImageUrl()
+    {
+       // return Url::to('@web/img/uploads/brandlogo/' . $this->brand_logo, true);
+        return Url::to('@web/' . $this->brand_logo, true);
     }
 
     /**

@@ -71,31 +71,14 @@ class BrandsController extends Controller
         if ($model->load(Yii::$app->request->post())) {
 
             $imageName = mktime(date('h'), date('i'), date('s'), date('d'), date('m'), date('y'));
-            // $imageName = $model->brand;
             $model->file = UploadedFile::getInstance($model, 'file');
-            $model->brand_logo = 'img/uploads/brandlogo/'.$imageName.'.'.$model->file->extension; 
+            $path = 'img/uploads/brandlogo/';
+            // $model->brand_logo = 'img/uploads/brandlogo/'.$imageName.'.'.$model->file->extension; 
+            $model->brand_logo = $path.$imageName.'.'.$model->file->extension; 
 
             $model->save();
-            $model->file->saveAs('img/uploads/brandlogo/'.$imageName.'.'.$model->file->extension);
-
-            // if ($model->file = UploadedFile::getInstance($model, 'file'))
-            // {
-            //     $model->file->saveAs('img/uploads/brandlogo/'.$imageName.'.'.$model->file->extension);
-            //     $model->brand_logo = 'img/uploads/brandlogo/'.$imageName.'.'.$model->file->extension;                
-            // }
-
-            // if($model->save())
-            // {
-
-            //    $model->id = $model->getPrimaryKey();
-            //    return $this->redirect(['view', 'id' => $model->id]);
-            // }
-            // else
-            // {
-            //     // print_r($model->getErrors());
-            //     print_r($model->errors);
-            // }            
-            // $model->save(false);
+            // $model->file->saveAs('img/uploads/brandlogo/'.$imageName.'.'.$model->file->extension);
+            $model->file->saveAs($path.$imageName.'.'.$model->file->extension);
             
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -145,7 +128,14 @@ class BrandsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        // $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $file = $model->brand_logo;
+        if (isset($file))
+        {
+            unlink($file);
+        }
+        $model->delete();
 
         return $this->redirect(['index']);
     }

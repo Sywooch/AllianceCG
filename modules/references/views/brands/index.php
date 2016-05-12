@@ -42,7 +42,16 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             // 'id',
-            'brand_logo',
+            // 'brand_logo',
+            [
+                'attribute' => 'brand_logo',
+                // 'format' => 'image',
+                'format' => 'html',
+                'value' => function ($model) {
+                    // return $model->getImageUrl();
+                    return Html::img($model->getImageUrl(),['width'=>50]); 
+                },
+            ],
             // 'brand',     
             [
                 'class' => LinkColumn::className(),

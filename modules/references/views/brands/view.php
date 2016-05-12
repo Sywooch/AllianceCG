@@ -37,8 +37,26 @@ $this->params['breadcrumbs'][] = $this->title;
             'brand',
             // 'state',
             [
+                'attribute' => 'brand_logo',
+                'value'=>$model->getImageUrl(),
+                'format' => ['image',['width'=>'50']],
+            ],
+            [
                 'attribute' => 'state',
                 'value' => $model->getStatesName(),
+            ],
+            [
+                'attribute' => 'created_at',
+                'format' => 'datetime',
+            ],
+            [
+                'attribute' => 'updated_at',
+                'format' => 'datetime',
+                'visible' => $model->created_at != $model->updated_at ? true : false,
+            ],
+            [
+                'attribute' => 'author',
+                'value' => $model->authorname->full_name,
             ],
         ],
     ]) ?>

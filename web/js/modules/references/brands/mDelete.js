@@ -6,29 +6,30 @@
 
     $(document).ready(function(){
     $('#MultipleDelete').click(function(){
-            var PosId = $('#targets-grid').yiiGridView('getSelectedRows');
+            var PosId = $('#brands-grid').yiiGridView('getSelectedRows');
             if (PosId=="") {
                 alert("Нет отмеченных записей!");
             }
             else if (confirm("Удалить отмеченные записи?")) {
               $.ajax({
                 type: 'POST',
-                url : '/references/targets/multipledelete',
+                url : '/references/brands/multipledelete',
                 data : {row_id: PosId},
               });
             }
     });
     $('#MultipleRestore').click(function(){
-            var PosId = $('#targets-grid').yiiGridView('getSelectedRows');
+            var PosId = $('#brands-grid').yiiGridView('getSelectedRows');
             if (PosId=="") {
                 alert("Нет отмеченных записей!");
             }
             else if (confirm("Восстановить отмеченные записи?")) {
               $.ajax({
                 type: 'POST',
-                url : '/references/targets/multiplerestore',
+                url : '/references/brands/multiplerestore',
                 data : {row_id: PosId},
               });
             }
-    });  
+    });    
+    
     });

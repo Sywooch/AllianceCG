@@ -23,21 +23,18 @@ $this->registerJs($multipleDelete, View::POS_END);
         'method' => 'get',
     ]); ?>
 
-    <div class="col-md-6">
-
-    <?php // $form->field($model, 'id') ?>
-
-    <?php // $form->field($model, 'target') ?>
+    <div class="col-md-5">
 
     <?= $form->field($model, 'globalSearch', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('search') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'globalSearch' )]) ?>
 
     </div>
 
-    <div class="col-md-6 form-group" style="text-align: right">
+    <div class="col-md-7 form-group" style="text-align: right">
         <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
         <?= Html::submitButton(FA::icon('search') . ' ' . Module::t('module', 'SEARCH'), ['class' => 'btn btn-primary btn-sm']) ?>
         <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'REFRESH'), ['index'], ['class' => 'btn btn-info btn-sm']) ?>
         <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']) ?> 
+        <?= Html::a(FA::icon('upload') . ' ' . Module::t('module', 'RESTORE'), ['#'], ['class' => 'btn btn-warning btn-sm', 'id' => 'MultipleRestore']); ?>
     </div>
 
     <?php ActiveForm::end(); ?>

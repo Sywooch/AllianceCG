@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use yii\filters\AccessControl;
  
 /**
  * BrandsController implements the CRUD actions for Brands model.
@@ -25,6 +26,21 @@ class BrandsController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions'=>['index', 'view'],
+                        'roles' => ['seniorcreditspesialist', 'chiefcredit', 'admin', 'root'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions'=>['create', 'update', 'multipledelete', 'multiplerestore', 'delete'],
+                        'roles' => ['admin', 'root'],
+                    ],
                 ],
             ],
         ];
@@ -161,19 +177,47 @@ class BrandsController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    // public function actionDelete($id)
+    // {
+    //     // $this->findModel($id)->delete();
+    //     $model = $this->findModel($id);
+    //     $file = $model->brand_logo;
+    //     if (isset($file))
+    //     {
+    //         unlink($file);
+    //     }
+    //     $model->delete();
+
+    //     return $this->redirect(['index']);
+    // }
+
+    /**
+     * Description
+     * @return type
+     */
+    public function actionMultipledelete()
     {
-        // $this->findModel($id)->delete();
-        $model = $this->findModel($id);
-        $file = $model->brand_logo;
-        if (isset($file))
-        {
-            unlink($file);
-        }
-        $model->delete();
+        $pk = Yii::$app->request->post('row_id');
+        $val = 1;
+        Brands::updateAll(['state' => $val], ['in', 'id', $pk]);
 
         return $this->redirect(['index']);
-    }
+
+    } 
+
+    /**
+     * Description
+     * @return type
+     */
+    public function actionMultiplerestore()
+    {
+        $pk = Yii::$app->request->post('row_id');
+        $val = 0;
+        Brands::updateAll(['state' => $val], ['in', 'id', $pk]);
+
+        return $this->redirect(['index']);
+
+    }   
 
     /**
      * Finds the Brands model based on its primary key value.

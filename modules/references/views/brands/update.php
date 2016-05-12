@@ -19,6 +19,10 @@ $this->params['breadcrumbs'][] = Module::t('module', 'UPDATE');
     	<?php // Html::encode($this->title) ?>
     <!-- </h1> -->
 
+	<div class="alert alert-danger">
+		<?= Module::t('module', 'WARNING_EDIT_TARGETS') ?>
+	</div>
+	
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>

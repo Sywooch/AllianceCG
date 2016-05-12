@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'id' => 'brands-grid',
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        // 'filterModel' => $searchModel,
         'summary' => false,
         'columns' => [
             [
@@ -40,26 +40,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'yii\grid\CheckboxColumn',
                 'contentOptions'=>['style'=>'width: 20px;']
             ],
-
-            // 'id',
-            // 'brand_logo',
             [
                 'attribute' => 'brand_logo',
                 // 'format' => 'image',
                 'format' => 'html',
                 'value' => function ($model) {
-                    // return $model->getImageUrl();
                     return Html::img($model->getImageUrl(),['width'=>50]); 
                 },
-            ],
-            // 'brand',     
+            ],    
             [
                 'class' => LinkColumn::className(),
                 'attribute' => 'brand',
-                'format' => 'raw',    
-                // 'value' => function ($data) {
-                //     return $data->getFullname();
-                // },
+                'format' => 'raw',
             ],
             [
                 'attribute' => 'created_at',
@@ -72,11 +64,10 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'author',
                 'value' => 'authorname.full_name',
-            ],       
-            // 'state',
+            ],
             [
                 'class' => SetColumn::className(),
-                'filter' => Brands::getStatesArray(),
+                // 'filter' => Brands::getStatesArray(),
                 'attribute' => 'state',
                 'visible' => Yii::$app->user->can('admin'),
                 'name' => 'statesName',
@@ -86,8 +77,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     Brands::STATUS_BLOCKED => 'default',
                 ],
             ],
-
-            ['class' => 'yii\grid\ActionColumn'],
+            // [
+            //     'class' => 'yii\grid\ActionColumn',
+            //     'header' => 'Действия',
+            // ],
         ],
     ]); 
 ?>

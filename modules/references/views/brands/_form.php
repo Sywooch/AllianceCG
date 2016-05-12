@@ -14,23 +14,29 @@ use rmrevin\yii\fontawesome\FA;
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-    <?= $form->field($model, 'brand')->textInput(['maxlength' => true]) ?>
-
-    <?php // $form->field($model, 'brand_logo')->textInput() ?>
-
     <?= $form->field($model, 'file')->fileInput(); ?>
 
     <?php 
     	if(isset($model->brand_logo) && !empty($model->brand_logo) && file_exists($model->brand_logo)) {
     		echo Html::img('@web/'.$model->brand_logo,["width"=>"50"]);
-    		echo "<br/>";
+    		echo "<br/><br/>";
     	}
     ?>
 
-    <?= $form->field($model, 'description')->textInput() ?>
+    <?php // echo $form->field($model, 'brand')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'brand', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('car') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'brand' )]) ?>
+
+    <?php // $form->field($model, 'brand_logo')->textInput() ?>
+
+
+    <?php // echo $form->field($model, 'description')->textInput() ?>
+
+    <?= $form->field($model, 'description', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('file-text') . ' </span>{input}</div>{error}'])->textarea(['rows' => 4, 'placeholder' => $model->getAttributeLabel('description')]) ?>
 
     <div class="form-group" style="text-align: right;">
-        <?= Html::submitButton($model->isNewRecord ? Module::t('module', 'CREATE') : Module::t('module', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
+        <?= Html::submitButton($model->isNewRecord ? FA::icon('plus') . ' ' . Module::t('module', 'CREATE') : FA::icon('edit') . ' ' . Module::t('module', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'CANCEL'), ['index'], ['class' => 'btn btn-danger btn-sm']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

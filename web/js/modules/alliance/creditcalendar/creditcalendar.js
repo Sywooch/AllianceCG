@@ -87,7 +87,7 @@
                 url: source,
                 cache: true, 
                 error: function() {
-                    alert('there was an error while fetching events!');
+                    alert('Ошибка получения источника событий');
                 },
             },
             header: {

@@ -86,7 +86,7 @@ public function calendarsearch(){
                 ON 
                     {{%calendar_responsibles}}.calendar_id = {{%calendar}}.id
                 LEFT JOIN 
-                    all_user 
+                    {{%user}} 
                 ON
                     {{%calendar_responsibles}}.user_id = {{%user}}.id 
                 WHERE 

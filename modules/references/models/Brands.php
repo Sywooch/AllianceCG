@@ -23,7 +23,9 @@ class Brands extends \yii\db\ActiveRecord
 
     const STATUS_BLOCKED = 1;
     const STATUS_ACTIVE = 0;
+
     const LOGO_PATH = 'img/uploads/brandlogo/';
+    const NO_LOGO = '@web/img/logo/company_nologo.png';
     
     /**
      * @inheritdoc
@@ -61,7 +63,7 @@ class Brands extends \yii\db\ActiveRecord
             ['author', 'default', 'value' => Yii::$app->user->getId()],
             [['brand', 'brand_logo', 'description'], 'safe'],
             // [['file'],'file'],
-            [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+            [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
             [['authorname', 'file'], 'safe'],
         ];
     }
@@ -95,7 +97,6 @@ class Brands extends \yii\db\ActiveRecord
             'created_at' => Module::t('module', 'CREATED_AT'), 
             'updated_at' => Module::t('module', 'UPDATED_AT'), 
             'author' => Module::t('module', 'AUTHOR'),
-
         ];
     }
 
@@ -105,8 +106,10 @@ class Brands extends \yii\db\ActiveRecord
      */
     public function getImageUrl()
     {
-       // return Url::to('@web/img/uploads/brandlogo/' . $this->brand_logo, true);
-        return Url::to('@web/' . $this->brand_logo, true);
+        $logo = Url::to('@web/' . $this->brand_logo, true);
+        $nologo = self::NO_LOGO;
+        $image = (isset($this->brand_logo) && !empty($this->brand_logo) && file_exists($this->brand_logo)) ? $logo : $nologo;
+        return $image;
     }
 
     /**

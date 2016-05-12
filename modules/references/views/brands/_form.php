@@ -20,6 +20,13 @@ use rmrevin\yii\fontawesome\FA;
 
     <?= $form->field($model, 'file')->fileInput(); ?>
 
+    <?php 
+    	if(isset($model->brand_logo) && !empty($model->brand_logo) && file_exists($model->brand_logo)) {
+    		echo Html::img('@web/'.$model->brand_logo,["width"=>"50"]);
+    		echo "<br/>";
+    	}
+    ?>
+
     <?= $form->field($model, 'description')->textInput() ?>
 
     <div class="form-group" style="text-align: right;">

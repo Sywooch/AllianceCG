@@ -13,7 +13,7 @@ use app\modules\references\models\Brands;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Module::t('module', 'BRANDS');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['references']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['/references']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="brands-index">
@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             // 'id',
-            'brand_logo',
+            // 'brand_logo',
             [
                 'attribute' => 'brand_logo',
                 // 'format' => 'image',

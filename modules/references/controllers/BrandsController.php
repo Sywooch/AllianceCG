@@ -67,22 +67,21 @@ class BrandsController extends Controller
     {
         $model = new Brands();
 
-        // if ($model->load(Yii::$app->request->post()) && $model->save()) {
         if ($model->load(Yii::$app->request->post())) {
-
-            $imageName = mktime(date('h'), date('i'), date('s'), date('d'), date('m'), date('y'));
-            $model->file = UploadedFile::getInstance($model, 'file');
-            // $path = 'img/uploads/brandlogo/';
-            $path = Brands::LOGO_PATH;
-            if(!file_exists($path)) {
-                mkdir($path, 0777);
+            
+            if($model->file = UploadedFile::getInstance($model, 'file')){
+                $imageName = mktime(date('h'), date('i'), date('s'), date('d'), date('m'), date('y'));
+                $path = Brands::LOGO_PATH;
+                if(!file_exists($path)) {
+                    mkdir($path, 0777);
+                } 
+                $model->brand_logo = $path.$imageName.'.'.$model->file->extension;
+                $model->save(); 
+                $model->file->saveAs($path.$imageName.'.'.$model->file->extension);
             }
-            // $model->brand_logo = 'img/uploads/brandlogo/'.$imageName.'.'.$model->file->extension; 
-            $model->brand_logo = $path.$imageName.'.'.$model->file->extension; 
-
-            $model->save();
-            // $model->file->saveAs('img/uploads/brandlogo/'.$imageName.'.'.$model->file->extension);
-            $model->file->saveAs($path.$imageName.'.'.$model->file->extension);
+            else {
+                $model->save();
+            }
             
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -115,7 +114,26 @@ class BrandsController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            
+            if($model->file = UploadedFile::getInstance($model, 'file')){
+                if (isset($model->brand_logo) && !empty($model->brand_logo) && file_exists($model->brand_logo))
+                {
+                    unlink($model->brand_logo);
+                }                
+                $imageName = mktime(date('h'), date('i'), date('s'), date('d'), date('m'), date('y'));
+                $path = Brands::LOGO_PATH;
+                if(!file_exists($path)) {
+                    mkdir($path, 0777);
+                } 
+                $model->brand_logo = $path.$imageName.'.'.$model->file->extension;
+                $model->save(); 
+                $model->file->saveAs($path.$imageName.'.'.$model->file->extension);
+            }
+            else {
+                $model->save();
+            }
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -123,6 +141,19 @@ class BrandsController extends Controller
             ]);
         }
     }
+
+    // public function actionUpdate($id)
+    // {
+    //     $model = $this->findModel($id);
+
+    //     if ($model->load(Yii::$app->request->post()) && $model->save()) {
+    //         return $this->redirect(['view', 'id' => $model->id]);
+    //     } else {
+    //         return $this->render('update', [
+    //             'model' => $model,
+    //         ]);
+    //     }
+    // }
 
     /**
      * Deletes an existing Brands model.

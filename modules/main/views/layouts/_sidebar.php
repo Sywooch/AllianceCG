@@ -5,13 +5,41 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use app\modules\admin\Module;
 use rmrevin\yii\fontawesome\FA;
+use yii\bootstrap\Collapse;
 
  // <span class="label label-pill label-success navbar-right nav-label">' . FA::icon('area-chart') . '</span>'
  // $count = StatusmonitorSearch::find()
  // ->count();
+ 
+// echo Collapse::widget([
+//     'items' => [
+//         // equivalent to the above
+//         [
+//             'label' => 'Collapsible Group Item #1',
+//             'content' => 'Anim pariatur cliche...',
+//             // open its content by default
+//             'contentOptions' => ['class' => 'in']
+//         ],
+//         // another group item
+//         [
+//             'label' => 'Collapsible Group Item #1',
+//             'content' => 'Anim pariatur cliche...',
+//         ],
+//         // if you want to swap out .panel-body with .list-group, you may use the following
+//         [
+//             'label' => 'Collapsible Group Item #1',
+//             'content' => [
+//                 'Anim pariatur cliche...',
+//                 'Anim pariatur cliche...'
+//             ],
+//             'footer' => 'Footer' // the footer label in list-group
+//         ],
+//     ]
+// ]); 
     
     echo Yii::$app->user->can('creditcalendarIsVisible') ?
      Nav::widget([
+        // 'options' => ['class' => 'nav nav-stacked'],
         'options' => ['class' => 'nav nav-stacked'],
         'encodeLabels' => false,
         'items' => array_filter([
@@ -113,7 +141,7 @@ use rmrevin\yii\fontawesome\FA;
             ],
             [
                 'label' => FA::icon('car') . ' ' . Module::t('module', 'REFERENCES_MODELS'),
-                'url' => '/references/models',
+                'url' => '/references/models    ',
                 // 'visible' => Yii::$app->user->can('admin'),
             ],
         ]),

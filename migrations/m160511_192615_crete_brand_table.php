@@ -5,7 +5,8 @@ use yii\db\Migration;
 class m160511_192615_crete_brand_table extends Migration
 {
     public function up()
-    {        /** @var TYPE_NAME $tableOptions */
+    {        
+        /** @var TYPE_NAME $tableOptions */
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';

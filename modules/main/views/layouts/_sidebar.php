@@ -110,8 +110,11 @@ use rmrevin\yii\fontawesome\FA;
                 'label' => FA::icon('car') . ' ' . Module::t('module', 'REFERENCES_BRANDS'),
                 'url' => '/references/brands',
                 // 'visible' => Yii::$app->user->can('admin'),
-                // 'options' => ['class' => 'list-group-item'],
-
+            ],
+            [
+                'label' => FA::icon('car') . ' ' . Module::t('module', 'REFERENCES_MODELS'),
+                'url' => '/references/models',
+                // 'visible' => Yii::$app->user->can('admin'),
             ],
         ]),
     ]).'<hr/>'

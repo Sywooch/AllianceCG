@@ -99,6 +99,7 @@ class Brands extends \yii\db\ActiveRecord
             'created_at' => Module::t('module', 'CREATED_AT'), 
             'updated_at' => Module::t('module', 'UPDATED_AT'), 
             'author' => Module::t('module', 'AUTHOR'),
+            'modelscount' => Module::t('module', 'MODELSCOUNT'),
         ];
     }
 
@@ -120,5 +121,19 @@ class Brands extends \yii\db\ActiveRecord
     public function getAuthorname()
     {
         return $this->hasOne(User::className(), ['id' => 'author']);
-    }    
+    }  
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getModels()
+    {
+        return $this->hasMany(Models::className(), ['brand_id' => 'id']);
+    } 
+
+    public function getModelscount()
+    {
+        // Customer has_many Order via Order.customer_id -> id
+        return $this->hasMany(Models::className(), ['brand_id' => 'id'])->count();
+    }
 }

@@ -60,13 +60,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'created_at',
                 'format' => 'datetime',
             ],
-            [
-                'attribute' => 'updated_at',
-                'format' => 'datetime',
-            ],
+            // [
+            //     'attribute' => 'updated_at',
+            //     'format' => 'datetime',
+            // ],
             [
                 'attribute' => 'author',
                 'value' => 'authorname.full_name',
+            ],
+            [
+                'attribute' => 'modelscount',
+                'format' => 'html',
+                'filter' => false,
+                'value' => function($model) {
+                    return '<span class="label label-primary">' . Module::t('module', 'MODELS') . ': ' . $model->modelscount . '</span>';
+                },   
+                'contentOptions' => ['class'=>'success;'],
             ],
             [
                 'class' => SetColumn::className(),

@@ -84,11 +84,14 @@ class Models extends \yii\db\ActiveRecord
         return [
             'id' => Module::t('module', 'ID'),
             'brand_id' => Module::t('module', 'BRAND_ID'),
+            'brand' => Module::t('module', 'BRAND_ID'),
             'model_name' => Module::t('module', 'MODEL_NAME'),
             'body_type' => Module::t('module', 'BODY_TYPE'),
+            'bodytype' => Module::t('module', 'BODY_TYPE'),
             'globalSearch' => Module::t('module', 'SEARCH'),
             'state' => Module::t('module', 'STATE'),
             'fullmodelname' => Module::t('module', 'MODEL_NAME'),
+            'models' => Module::t('module', 'MODELS'),
         ];
     }
 

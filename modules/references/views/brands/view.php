@@ -4,6 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use app\modules\references\Module;
 use rmrevin\yii\fontawesome\FA;
+use yii\grid\GridView;
+use app\components\grid\LinkColumn;
+use yii\helpers\ArrayHelper;
+use yii\data\ActiveDataProvider;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\references\models\Brands */
@@ -66,3 +71,37 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 </div>
+
+<p style="text-align: right">
+        <?= Html::a(FA::icon('edit') . ' ' . Module::t('module', 'CREATE_MODEL'), ['/references/models/create?id=' . $model->id], [
+                'class' => 'plus btn-success btn-sm',
+                // 'data' => [
+                //     'method' => 'get',
+                // ],
+            ]) ?>
+</p>
+<?php
+    echo GridView::widget([
+        'dataProvider' => new ActiveDataProvider(['query' => $model->getModels()]),
+        'showOnEmpty' => true,
+        'emptyText' => 'Записи отсутствуют',
+        'summary' => false,
+        'tableOptions' =>[
+            'class' => 'table table-striped table-bordered creditcalendargridview'
+        ],
+        'columns' => [
+            [
+                'header' => '№',
+                'class' => 'yii\grid\SerialColumn'
+            ],
+            [
+                'attribute' => 'fullmodelname',
+                // 'value' => 'fullmodelname',
+                'value' => function ($data) {
+                    return Html::a($data->fullmodelname, Url::to(['/references/models/view', 'id' => $data->id]));
+                },
+                'format' => 'raw',
+            ],
+        ],
+    ]);
+?>

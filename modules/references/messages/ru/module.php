@@ -27,4 +27,6 @@
 			'MODEL_NAME' => 'Модель',
 			'MODELS' => 'Модели',
 			'BRAND_ID' => 'Бренд',
+			'MODELSCOUNT' => 'Кол-во моделей',
+			'CREATE_MODEL' => 'Добавить модель',
 		];

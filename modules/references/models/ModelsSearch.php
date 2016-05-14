@@ -14,6 +14,8 @@ class ModelsSearch extends Models
 {
 
     public $brand;
+    public $bodytype;
+    public $globalSearch;
 
     /**
      * @inheritdoc
@@ -22,7 +24,7 @@ class ModelsSearch extends Models
     {
         return [
             [['id', 'brand_id'], 'integer'],
-            [['model_name', 'body_type', 'brand'], 'safe'],
+            [['model_name', 'body_type', 'brand', 'globalSearch', 'bodytype'], 'safe'],
         ];
     }
 
@@ -45,7 +47,7 @@ class ModelsSearch extends Models
     public function search($params)
     {
         $query = Models::find();
-        $query->joinWith(['brand']);
+        $query->joinWith(['brand', 'bodytype']);
 
         // add conditions that should always apply here
 
@@ -54,11 +56,27 @@ class ModelsSearch extends Models
         ]);
 
         $dataProvider->sort->attributes['brand'] = [
-            // The tables are the ones our relation are configured to
-            // in my case they are prefixed with "tbl_"
             'asc' => ['{{%brands}}.brand' => SORT_ASC],
             'desc' => ['{{%brands}}.brand' => SORT_DESC],
         ];
+
+        $dataProvider->sort->attributes['bodytype'] = [
+            'asc' => ['{{%bodytypes}}.body_type' => SORT_ASC],
+            'desc' => ['{{%bodytypes}}.body_type' => SORT_DESC],
+        ];
+
+        $dataProvider->setSort([
+            'attributes' => [
+                'id',
+                'fullmodelname' => [
+                    'asc' => ['model_name' => SORT_ASC, '{{%brands}}.brand' => SORT_ASC, '{{%bodytypes}}.body_type' => SORT_ASC],
+                    'desc' => ['model_name' => SORT_DESC, '{{%brands}}.brand' => SORT_DESC, '{{%bodytypes}}.body_type' => SORT_DESC],
+                    'label' => 'Full Name',
+                    'default' => SORT_ASC
+                ],
+                'state',
+            ]
+        ]);        
 
         $this->load($params);
 
@@ -74,9 +92,16 @@ class ModelsSearch extends Models
             'brand_id' => $this->brand_id,
         ]);
 
-        $query->andFilterWhere(['like', 'model_name', $this->model_name])
-            ->andFilterWhere(['like', 'body_type', $this->body_type])
-            ->andFilterWhere(['like', '{{%brands}}.brand', $this->brand]);
+        $query
+            ->orFilterWhere(['like', 'model_name', $this->globalSearch])
+            ->orFilterWhere(['like', '{{%bodytypes}}.body_type', $this->globalSearch])
+            ->orFilterWhere(['like', '{{%brands}}.brand', $this->globalSearch])
+
+            // ->andFilterWhere(['like', 'model_name', $this->model_name])
+            // ->andFilterWhere(['like', 'body_type', $this->body_type])
+            // ->andFilterWhere(['like', '{{%brands}}.brand', $this->brand])
+
+            // ->andFilterWhere(['like', '{{%bodytypes}}.body_type', $this->body_type])
             ;
 
         return $dataProvider;

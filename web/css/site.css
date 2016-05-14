@@ -375,6 +375,10 @@ a.desc:after {
         background: #46b8da;
 }
 
+#models-grid tbody tr:hover td {
+        background: #46b8da;
+}
+
 
 #sidebar .panel-group .panel + .panel {
     margin-top: 0;

@@ -3,37 +3,65 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use app\modules\references\Module;
+use app\components\grid\SetColumn;
+use app\components\grid\LinkColumn;
+use yii\helpers\ArrayHelper;
+use app\modules\references\models\Models;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\references\models\ModelsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Models');
+$this->title = Module::t('module', 'MODELS');
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['/references']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="models-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <!-- <h1> -->
+        <?php // echo Html::encode($this->title) ?>
+    <!-- </h1> -->
+    <?= $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Models'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
+        'id' => 'models-grid',
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        // 'filterModel' => $searchModel,
+        'summary' => false,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            // 'id',
-            // 'brand_id',
             [
-                'attribute' => 'brand',
-                'value' => 'brand.brand',
+                'class' => 'yii\grid\SerialColumn',
+                'header' => '№',
             ],
-            'model_name',
-            'body_type',
+            [
+                'class' => 'yii\grid\CheckboxColumn',
+                'contentOptions'=>['style'=>'width: 20px;']
+            ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => LinkColumn::className(),
+                'attribute' => 'fullmodelname',
+                'format' => 'raw',    
+                // 'value' => function ($data) {
+                //     return $data->getFullname();
+                // },
+            ],
+            [
+                'class' => SetColumn::className(),
+                'attribute' => 'state',
+                'visible' => Yii::$app->user->can('admin'),
+                'name' => 'statesName',
+                'contentOptions'=>['style'=>'width: 50px;'],
+                'cssCLasses' => [
+                    Models::STATUS_ACTIVE =>'success',
+                    Models::STATUS_BLOCKED => 'default',
+                ],
+            ],
+
+            // [
+            //     'class' => 'yii\grid\ActionColumn'
+            // ],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

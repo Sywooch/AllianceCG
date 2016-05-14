@@ -5,6 +5,8 @@ use yii\helpers\ArrayHelper;
 use rmrevin\yii\fontawesome\FA;
 use yii\widgets\ActiveForm;
 use app\modules\references\models\Brands;
+use app\modules\references\models\Bodytypes;
+use app\modules\references\Module;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\references\models\Models */
@@ -27,12 +29,23 @@ use app\modules\references\models\Brands;
         echo $form->field($model, 'brand_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('car') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
     ?>      
 
-    <?= $form->field($model, 'model_name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'model_name', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('car') . ' </span>{input}</div>{error}'])->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel( 'model_name' )]) ?>
 
-    <?= $form->field($model, 'body_type')->textInput(['maxlength' => true]) ?>
+    <?php // echo $form->field($model, 'body_type')->textInput(['maxlength' => true]) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    <?php
+        $bodytypes = Bodytypes::find()->all();
+    
+        $items = ArrayHelper::map($bodytypes,'id','body_type');
+        $params = [
+            'prompt' => '-- ' . $model->getAttributeLabel( 'body_type' ) . ' --',
+        ];
+        echo $form->field($model, 'body_type', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('car') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
+    ?>         
+
+    <div class="form-group" style="text-align: right">
+        <?= Html::submitButton($model->isNewRecord ? FA::icon('plus') . ' ' . Module::t('module', 'CREATE') : FA::icon('edit') . ' ' . Module::t('module', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'CANCEL'), ['index'], ['class' => 'btn btn-danger btn-sm']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

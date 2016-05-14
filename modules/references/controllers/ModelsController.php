@@ -8,6 +8,7 @@ use app\modules\references\models\ModelsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * ModelsController implements the CRUD actions for Models model.
@@ -26,6 +27,21 @@ class ModelsController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions'=>['index', 'view'],
+                        'roles' => ['seniorcreditspesialist', 'chiefcredit', 'admin', 'root'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions'=>['create', 'update', 'multipledelete', 'multiplerestore', 'delete'],
+                        'roles' => ['admin', 'root'],
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -35,10 +51,12 @@ class ModelsController extends Controller
      */
     public function actionIndex()
     {
+        $model = new Models();
         $searchModel = new ModelsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'model' => $model,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -99,12 +117,12 @@ class ModelsController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
+    // public function actionDelete($id)
+    // {
+    //     $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
-    }
+    //     return $this->redirect(['index']);
+    // }
 
     /**
      * Finds the Models model based on its primary key value.
@@ -121,4 +139,25 @@ class ModelsController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionMultipledelete()
+    {
+        $pk = Yii::$app->request->post('row_id');
+        $val = 1;
+        Models::updateAll(['state' => $val], ['in', 'id', $pk]);
+
+        return $this->redirect(['index']);
+
+    }
+
+    public function actionMultiplerestore()
+    {
+        $pk = Yii::$app->request->post('row_id');
+        $val = 0;
+        Models::updateAll(['state' => $val], ['in', 'id', $pk]);
+
+        return $this->redirect(['index']);
+
+    }  
+
 }

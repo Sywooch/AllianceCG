@@ -24,4 +24,7 @@
 			'BODY_TYPES' => 'Типы кузова',
 			'BODY_TYPE' => 'Тип кузова',
 			'BODY_DESCRIPTION' => 'Описание',
+			'MODEL_NAME' => 'Модель',
+			'MODELS' => 'Модели',
+			'BRAND_ID' => 'Бренд',
 		];

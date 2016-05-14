@@ -146,5 +146,6 @@
         'REFERENCES_TARGETS' => 'Цели',
         'REFERENCES_BRANDS' => 'Бренды',
         'REFERENCES_MODELS' => 'Модели',
+        'REFERENCES_BODYTYPES' => 'Типы кузова',
             
 	];

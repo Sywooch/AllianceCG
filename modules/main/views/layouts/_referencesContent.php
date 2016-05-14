@@ -35,7 +35,12 @@ use rmrevin\yii\fontawesome\FA;
             ],
             [
                 'label' => FA::icon('car') . ' ' . Module::t('module', 'REFERENCES_MODELS'),
-                'url' => '/references/models    ',
+                'url' => '/references/models',
+                // 'visible' => Yii::$app->user->can('admin'),
+            ],
+            [
+                'label' => FA::icon('car') . ' ' . Module::t('module', 'REFERENCES_BODYTYPES'),
+                'url' => '/references/bodytypes',
                 // 'visible' => Yii::$app->user->can('admin'),
             ],
         ]),

@@ -28,6 +28,9 @@ class m160513_194235_create_models_table extends Migration
 
         $this->createIndex('idx-models-brandid', '{{%models}}', 'brand_id');
         $this->addForeignKey('fk-models-brandid', '{{%models}}', 'brand_id', '{{%brands}}', 'id','CASCADE','RESTRICT');
+
+        // $this->createIndex('idx-models-bodytype', '{{%models}}', 'body_type');
+        // $this->addForeignKey('fk-models-bodytype', '{{%models}}', 'body_type', '{{%bodytypes}}', 'id','CASCADE','RESTRICT');
     }
 
     /**
@@ -35,6 +38,6 @@ class m160513_194235_create_models_table extends Migration
      */
     public function down()
     {
-        $this->dropTable('{{%%models}}');
+        $this->dropTable('{{%models}}');
     }
 }

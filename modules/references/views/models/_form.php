@@ -1,7 +1,10 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
+use rmrevin\yii\fontawesome\FA;
 use yii\widgets\ActiveForm;
+use app\modules\references\models\Brands;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\references\models\Models */
@@ -12,7 +15,17 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'brand_id')->textInput() ?>
+    <?php // echo $form->field($model, 'brand_id')->textInput() ?>
+
+    <?php
+        $brands = Brands::find()->all();
+    
+        $items = ArrayHelper::map($brands,'id','brand');
+        $params = [
+            'prompt' => '-- ' . $model->getAttributeLabel( 'brand_id' ) . ' --',
+        ];
+        echo $form->field($model, 'brand_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('car') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
+    ?>      
 
     <?= $form->field($model, 'model_name')->textInput(['maxlength' => true]) ?>
 

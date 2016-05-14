@@ -31,6 +31,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         // 'filterModel' => $searchModel,
         'summary' => false,
+        'tableOptions' =>[
+            'class' => 'table table-striped table-bordered creditcalendargridview'
+        ],
         'columns' => [
             [
                 'class' => 'yii\grid\SerialColumn',
@@ -74,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions'=>['style'=>'width: 50px;'],
                 'cssCLasses' => [
                     Brands::STATUS_ACTIVE => 'success',
-                    Brands::STATUS_BLOCKED => 'default',
+                    Brands::STATUS_BLOCKED => 'danger',
                 ],
             ],
             // [

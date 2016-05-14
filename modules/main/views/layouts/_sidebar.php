@@ -14,6 +14,7 @@ use yii\bootstrap\Collapse;
 // Yii::$app->controller->module->id;
 
 echo Collapse::widget([
+    'id' => 'sidebar',
     'options' => [
             'class' => 'collapse-test',
             'style' => 'margin-top: 0',

@@ -2,29 +2,30 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\widgets\Pjax;
 use app\modules\references\Module;
+use yii\widgets\Pjax;
 use app\components\grid\LinkColumn;
 use yii\helpers\ArrayHelper;
 use app\components\grid\SetColumn;
-use app\modules\references\models\Targets;
+use app\modules\references\models\Brands;
+use app\modules\references\models\Bodytypes;
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\references\models\TargetsSearch */
+/* @var $searchModel app\modules\references\models\BodytypesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('module', 'TARGETS');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['references']];
+$this->title = Module::t('module', 'BODY_TYPES');
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['/references']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="targets-index">
+<div class="bodytypes-index">
 
     <!-- <h1> -->
         <?php // Html::encode($this->title) ?>
     <!-- </h1> -->
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?= $this->render('_search', ['model' => $searchModel]); ?>
 
 <?php Pjax::begin(); ?>    <?= GridView::widget([
-        'id' => 'targets-grid',
+        'id' => 'bodytypes-grid',
         'dataProvider' => $dataProvider,
         // 'filterModel' => $searchModel,
         'summary' => false,
@@ -37,9 +38,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'yii\grid\CheckboxColumn',
                 'contentOptions'=>['style'=>'width: 20px;']
             ],
+
+            // 'id',
+            // 'body_type',
             [
                 'class' => LinkColumn::className(),
-                'attribute' => 'target',
+                'attribute' => 'body_type',
                 'format' => 'raw',    
                 // 'value' => function ($data) {
                 //     return $data->getFullname();
@@ -47,23 +51,20 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => SetColumn::className(),
-                'filter' => Targets::getStatesArray(),
                 'attribute' => 'state',
-                'name' => 'statesName',
                 'visible' => Yii::$app->user->can('admin'),
+                'name' => 'statesName',
                 'contentOptions'=>['style'=>'width: 50px;'],
                 'cssCLasses' => [
-                    Targets::STATUS_ACTIVE => 'success',
-                    Targets::STATUS_BLOCKED => 'danger',
+                    Bodytypes::STATUS_ACTIVE =>'success',
+                    Bodytypes::STATUS_BLOCKED => 'default',
                 ],
             ],
             // 'state',
-            // 'id',
-            // 'target',
+            // 'description:ntext',
 
             // [
-            //     'class' => 'yii\grid\ActionColumn',
-            //     'header' => 'Действия',
+            //     'class' => 'yii\grid\ActionColumn'
             // ],
         ],
     ]); ?>

@@ -5,15 +5,15 @@ namespace app\modules\references\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\references\models\Models;
+use app\modules\references\models\Bodytypes;
 
 /**
- * ModelsSearch represents the model behind the search form about `app\modules\references\models\Models`.
+ * BodytypesSearch represents the model behind the search form about `app\modules\references\models\Bodytypes`.
  */
-class ModelsSearch extends Models
+class BodytypesSearch extends Bodytypes
 {
 
-    public $brand;
+    public $globalSearch;
 
     /**
      * @inheritdoc
@@ -21,8 +21,8 @@ class ModelsSearch extends Models
     public function rules()
     {
         return [
-            [['id', 'brand_id'], 'integer'],
-            [['model_name', 'body_type', 'brand'], 'safe'],
+            [['id'], 'integer'],
+            [['body_type', 'description', 'globalSearch'], 'safe'],
         ];
     }
 
@@ -44,21 +44,13 @@ class ModelsSearch extends Models
      */
     public function search($params)
     {
-        $query = Models::find();
-        $query->joinWith(['brand']);
+        $query = Bodytypes::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
-        $dataProvider->sort->attributes['brand'] = [
-            // The tables are the ones our relation are configured to
-            // in my case they are prefixed with "tbl_"
-            'asc' => ['{{%brands}}.brand' => SORT_ASC],
-            'desc' => ['{{%brands}}.brand' => SORT_DESC],
-        ];
 
         $this->load($params);
 
@@ -71,12 +63,12 @@ class ModelsSearch extends Models
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'brand_id' => $this->brand_id,
         ]);
 
-        $query->andFilterWhere(['like', 'model_name', $this->model_name])
-            ->andFilterWhere(['like', 'body_type', $this->body_type])
-            ->andFilterWhere(['like', '{{%brands}}.brand', $this->brand]);
+        $query
+            // ->andFilterWhere(['like', 'body_type', $this->body_type])
+            // ->andFilterWhere(['like', 'description', $this->description])
+        ->andFilterWhere(['like', 'body_type', $this->globalSearch])
             ;
 
         return $dataProvider;

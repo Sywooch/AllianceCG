@@ -21,4 +21,7 @@
 			'AUTHOR' => 'Автор',
 			'RESTORE' => 'Восстановить',
 			'CANCEL' => 'Отмена',
+			'BODY_TYPES' => 'Типы кузова',
+			'BODY_TYPE' => 'Тип кузова',
+			'BODY_DESCRIPTION' => 'Описание',
 		];

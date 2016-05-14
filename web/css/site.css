@@ -363,12 +363,36 @@ a.desc:after {
         background: #46b8da;
 }
 
-.panel-group .panel + .panel {
+#brands-grid tbody tr:hover td {
+        background: #46b8da;
+}
+
+#targets-grid tbody tr:hover td {
+        background: #46b8da;
+}
+
+#bodytypes-grid tbody tr:hover td {
+        background: #46b8da;
+}
+
+
+#sidebar .panel-group .panel + .panel {
     margin-top: 0;
 }
 
-.panel-body {
+#sidebar .panel-body {
     padding: 0;
+}
+
+#sidebar .panel-default > .panel-heading {
+    color: #333;
+    background-color: #337ab7;
+    border-color: #ddd;
+}
+
+#sidebar .panel-title > a, .panel-title > small, .panel-title > .small, .panel-title > small > a, .panel-title > .small > a {
+    color: #fff;
+    text-decoration: none;
 }
 
 /*.sidebar-admin {

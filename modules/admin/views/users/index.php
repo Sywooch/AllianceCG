@@ -101,14 +101,14 @@ $this->params['breadcrumbs'][] = $this->title;
             //     'filter'=>ArrayHelper::map(Userroles::find()->asArray()->all(), 'role', 'role_description'),
             //     'contentOptions'=>['style'=>'width: 50px;'],  
             // ],
-            [
-                'class' => SetColumn::className(),
-                'attribute' => 'userroles',
-                'value' => 'userroles.role_description',
-                'contentOptions'=>['style'=>'width: 50px;'],
-                // 'filter'=>ArrayHelper::map(Userroles::find()->asArray()->all(), 'role_description', 'role_description'),    
-                'cssCLasses' => 'success',
-            ],
+            // [
+            //     'class' => SetColumn::className(),
+            //     'attribute' => 'userroles',
+            //     'value' => 'userroles.role_description',
+            //     'contentOptions'=>['style'=>'width: 50px;'],
+            //     // 'filter'=>ArrayHelper::map(Userroles::find()->asArray()->all(), 'role_description', 'role_description'),    
+            //     'cssCLasses' => 'success',
+            // ],
             [
                 'class' => SetColumn::className(),
                 'filter' => User::getStatusesArray(),

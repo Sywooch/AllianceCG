@@ -363,6 +363,14 @@ a.desc:after {
         background: #46b8da;
 }
 
+.panel-group .panel + .panel {
+    margin-top: 0;
+}
+
+.panel-body {
+    padding: 0;
+}
+
 /*.sidebar-admin {
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
     margin-top: 10px;

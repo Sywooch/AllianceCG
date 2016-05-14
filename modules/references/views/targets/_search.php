@@ -23,13 +23,13 @@ $this->registerJs($multipleDelete, View::POS_END);
         'method' => 'get',
     ]); ?>
 
-    <div class="col-md-5">
+    <div class="col-md-4">
 
     <?= $form->field($model, 'globalSearch', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('search') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'globalSearch' )]) ?>
 
     </div>
 
-    <div class="col-md-7 form-group" style="text-align: right">
+    <div class="col-md-8 form-group" style="text-align: right">
         <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
         <?= Html::submitButton(FA::icon('search') . ' ' . Module::t('module', 'SEARCH'), ['class' => 'btn btn-primary btn-sm']) ?>
         <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'REFRESH'), ['index'], ['class' => 'btn btn-info btn-sm']) ?>

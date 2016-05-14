@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- </h1> -->
 
     <p style="text-align: right">
-        <?= Html::a(FA::icon('list') . ' ' . Module::t('module', 'MODLES'), ['index'], ['class' => 'btn btn-warning btn-sm']) ?>
+        <?= Html::a(FA::icon('list') . ' ' . Module::t('module', 'MODELS'), ['index'], ['class' => 'btn btn-warning btn-sm']) ?>
         <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['index'], ['class' => 'btn btn-success btn-sm']) ?>
         <?= Html::a(FA::icon('edit') . ' ' . Module::t('module', 'UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
         <?= Html::a(FA::icon('edit') . ' ' . Module::t('module', 'DELETE'), ['delete', 'id' => $model->id], [

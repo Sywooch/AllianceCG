@@ -147,5 +147,6 @@
         'REFERENCES_BRANDS' => 'Бренды',
         'REFERENCES_MODELS' => 'Модели',
         'REFERENCES_BODYTYPES' => 'Типы кузова',
+        'REFERENCES_EMPLOYEES' => 'Сотрудники',
             
 	];

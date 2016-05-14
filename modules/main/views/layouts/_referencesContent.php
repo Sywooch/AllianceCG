@@ -23,6 +23,12 @@ use rmrevin\yii\fontawesome\FA;
                 // 'options' => ['class' => 'list-group-item'],
             ],
             [
+                'label' => FA::icon('user') . ' ' . Module::t('module', 'REFERENCES_EMPLOYEES'),
+                'url' => '/references/employees',
+                // 'options' => ['class' => 'list-group-item'],
+
+            ],
+            [
                 'label' => FA::icon('diamond') . ' ' . Module::t('module', 'REFERENCES_TARGETS'),
                 'url' => '/references/targets',
                 // 'options' => ['class' => 'list-group-item'],

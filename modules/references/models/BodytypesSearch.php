@@ -13,6 +13,8 @@ use app\modules\references\models\Bodytypes;
 class BodytypesSearch extends Bodytypes
 {
 
+    public $authorname;
+
     public $globalSearch;
 
     /**
@@ -22,7 +24,7 @@ class BodytypesSearch extends Bodytypes
     {
         return [
             [['id'], 'integer'],
-            [['body_type', 'description', 'globalSearch'], 'safe'],
+            [['body_type', 'description', 'globalSearch', 'authorname'], 'safe'],
         ];
     }
 

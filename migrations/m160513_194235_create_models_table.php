@@ -24,6 +24,10 @@ class m160513_194235_create_models_table extends Migration
             'brand_id' => $this->integer()->notNull(),
             'model_name' => $this->string(),
             'body_type' => $this->string(),
+            'state' => $this->integer()->notNull()->defaultValue(0),
+            'created_at' => $this->integer()->notNull(),
+            'updated_at' => $this->integer()->notNull(),
+            'author' => $this->string(255),
         ], $tableOptions);
 
         $this->createIndex('idx-models-brandid', '{{%models}}', 'brand_id');

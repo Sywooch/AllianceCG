@@ -39,6 +39,23 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'id',
             'body_type',
             'description:ntext',
+            [
+                'attribute' => 'state',
+                'value' => $model->getStatesName(),
+            ],
+            [
+                'attribute' => 'created_at',
+                'format' => 'datetime',
+            ],
+            [
+                'attribute' => 'updated_at',
+                'format' => 'datetime',
+                'visible' => $model->created_at != $model->updated_at ? true : false,
+            ],
+            [
+                'attribute' => 'author',
+                'value' => $model->authorname->full_name,
+            ],
         ],
     ]) ?>
 

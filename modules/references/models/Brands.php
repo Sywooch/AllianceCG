@@ -64,7 +64,7 @@ class Brands extends \yii\db\ActiveRecord
             ['author', 'default', 'value' => Yii::$app->user->getId()],
             [['brand', 'brand_logo', 'description'], 'safe'],
             // [['file'],'file'],
-            [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
+            [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => ['jpg', 'jpeg','png'],'checkExtensionByMimeType'=>false],
             [['authorname', 'file'], 'safe'],
             [['brand'], 'required'],
         ];

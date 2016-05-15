@@ -9,10 +9,12 @@ use rmrevin\yii\fontawesome\FA;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \app\modules\user\models\form\PasswordResetRequestForm */
 
+$this->registerCssFile('@web/css/landing_login.css', ['depends' => ['app\assets\AppAsset']]);  
+
 $this->title = Module::t('module', 'TITLE_PASSWORD_RESET');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-default-password-reset-request">
+<div class="user-default-password-reset-request passwordReset-form">
 
     <div class="row">
         <div class="col-lg-5  col-lg-offset-3">
@@ -23,7 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?= $form->field($model, 'email', ['template'=>' <div class="input-group"><span class="input-group-addon">'. FA::icon('envelope') .'</span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'email' )]) ?>
             <div class="form-group" style="text-align: right">
-                <?= Html::submitButton(FA::icon('send') . ' ' . Module::t('module', 'BUTTON_SEND'), ['class' => 'btn btn-primary', 'name' => 'reset-button']) ?>
+                <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'GO_BACK'), ['login'], ['class' => 'btn-resetpwd']) ?>
+                <?= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' ?>
+                <?= Html::submitButton(FA::icon('send') . ' ' . Module::t('module', 'BUTTON_SEND'), ['class' => 'btn btn-primary btn-passwdReset', 'name' => 'reset-button']) ?>
             </div>
             <?php ActiveForm::end(); ?>
         </div>

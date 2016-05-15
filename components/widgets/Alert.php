@@ -36,11 +36,11 @@ class Alert extends \yii\bootstrap\Widget
      * - $value is the bootstrap alert type (i.e. danger, success, info, warning)
      */
     public $alertTypes = [
-        'error'   => 'alert-danger',
-        'danger'  => 'alert-danger',
-        'success' => 'alert-success',
-        'info'    => 'alert-info',
-        'warning' => 'alert-warning'
+        'error'   => 'alert-danger alertmsg',
+        'danger'  => 'alert-danger alertmsg',
+        'success' => 'alert-success alertmsg',
+        'info'    => 'alert-info alertmsg',
+        'warning' => 'alert-warning alertmsg'
     ];
 
     /**

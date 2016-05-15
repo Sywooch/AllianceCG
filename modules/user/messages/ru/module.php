@@ -77,5 +77,6 @@ return [
             'NAV_ALLIANCE_DUTY' => 'График дежурств',
             'NAV_ALLIANCE_CREDITCALENDAR' => 'ОК. Календарь',
             'USER_ROLE' => 'Роль',
+            'FLASH_PASSWORD_RESET_REQUEST' => 'Ссылка для сброса пароля отправлена на указанный адрес',
 
 ];

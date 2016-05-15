@@ -12,13 +12,15 @@ use rmrevin\yii\fontawesome\FA;
 $this->title = Module::t('module', 'TITLE_LOGIN');
 $this->params['breadcrumbs'][] = $this->title;
 
-    $this->registerCssFile('@web/css/landing_login.css', ['depends' => ['app\assets\AppAsset']]);   
-   $this->registerCssFile('@web/css/counters.css', ['depends' => ['app\assets\AppAsset']]);    
-   $this->registerCssFile('@web/css/animations/slideDown.css', ['depends' => ['app\assets\AppAsset']]);
-   $this->registerJsFile(Yii::getAlias('@web/js/modules/main/default/counters.js'), ['depends' => [
-       'yii\web\YiiAsset',
-       'yii\bootstrap\BootstrapAsset'],
-   ]);        
+   $this->registerCssFile('@web/css/landing_login.css', ['depends' => ['app\assets\AppAsset']]);  
+
+   // $this->registerCssFile('@web/css/counters.css', ['depends' => ['app\assets\AppAsset']]);    
+   // $this->registerCssFile('@web/css/animations/slideDown.css', ['depends' => ['app\assets\AppAsset']]);
+   // $this->registerJsFile(Yii::getAlias('@web/js/modules/main/default/counters.js'), ['depends' => [
+   //     'yii\web\YiiAsset',
+   //     'yii\bootstrap\BootstrapAsset'],
+   // ]);      
+     
     // $this->registerJsFile(Yii::getAlias('@web/js/modules/main/login/placeholder.js'), ['depends' => [
     //     'yii\web\YiiAsset',
     //     'yii\bootstrap\BootstrapAsset'],
@@ -31,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="row">
         <!-- <div class="col-lg-5 col-lg-offset-3" id="slick-login"> -->
-        <div class="col-md-7">
+        <div class="col-md-9">
 
 <!--             <div class="counters" id="counters">    
                 <div class="counterscontainer" id="counterscontainer">
@@ -79,7 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         </div>
 
-        <div class="col-md-5 login-form">
+        <div class="col-md-3 login-form">
             <h1><?= Html::encode($this->title) ?></h1>
             
             <!-- <p> -->

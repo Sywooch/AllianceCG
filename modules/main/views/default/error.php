@@ -5,12 +5,14 @@
 /* @var $message string */
 /* @var $exception Exception */
 
+$this->registerCssFile('@web/css/landing_login.css', ['depends' => ['app\assets\AppAsset']]);  
+
 use yii\helpers\Html;
 use app\modules\main\Module;
 
 $this->title = $name;
 ?>
-<div class="site-error">
+<div class="site-error error-form">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

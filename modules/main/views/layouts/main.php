@@ -33,7 +33,9 @@ AppAsset::register($this);
         </div>
         <div class="col-sm-9">        
             <?= $this->render('@app/modules/main/views/layouts/_breadcrumbs') ?>
-            <?= Alert::widget() ?>
+            <div class="alertmsg">
+                <?= Alert::widget() ?>
+            </div>
             <?= $content ?>
         </div>
     </div>

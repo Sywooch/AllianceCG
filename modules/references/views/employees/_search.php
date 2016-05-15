@@ -2,10 +2,18 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\modules\references\Module;
+use rmrevin\yii\fontawesome\FA;
+use yii\web\View;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\references\models\EmployeesSearch */
 /* @var $form yii\widgets\ActiveForm */
+
+$multipleDelete = file_get_contents('js/modules/references/employees/deleteRestore.js');
+$this->registerJs($multipleDelete, View::POS_END);
+
 ?>
 
 <div class="employees-search">
@@ -15,25 +23,22 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <div class="col-md-4">
+        <?= $form->field($model, 'globalSearch', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('search') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'globalSearch' )]) ?>
+    </div>
 
-    <?= $form->field($model, 'name') ?>
-
-    <?= $form->field($model, 'surname') ?>
-
-    <?= $form->field($model, 'patronimyc') ?>
-
-    <?= $form->field($model, 'photo') ?>
-
-    <?php // echo $form->field($model, 'company_id') ?>
-
-    <?php // echo $form->field($model, 'department_id') ?>
-
-    <?php // echo $form->field($model, 'position_id') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
+    <div class="form-group col-md-8">
+        <?= Html::submitButton(FA::icon('search') . ' ' . Module::t('module', 'SEARCH'), ['class' => 'btn btn-primary btn-sm']) ?>
+        <?php
+            if(Yii::$app->user->can('admin')){
+                echo Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']);
+                echo '&nbsp';
+                echo Html::a(FA::icon('remove') . ' ' . Module::t('module', 'DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']);
+                echo '&nbsp';
+                echo Html::a(FA::icon('upload') . ' ' . Module::t('module', 'RESTORE'), ['#'], ['class' => 'btn btn-warning btn-sm', 'id' => 'MultipleRestore']);
+            }
+        ?>
+        <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'REFRESH'), ['index'], ['class' => 'btn btn-info btn-sm']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -8,6 +8,8 @@ use app\modules\references\models\EmployeesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\web\UploadedFile;
 
 /**
  * EmployeesController implements the CRUD actions for Employees model.
@@ -24,6 +26,21 @@ class EmployeesController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions'=>['index', 'view'],
+                        'roles' => ['seniorcreditspesialist', 'chiefcredit', 'admin', 'root'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions'=>['create', 'update', 'multipledelete', 'multiplerestore', 'delete'],
+                        'roles' => ['admin', 'root'],
+                    ],
                 ],
             ],
         ];
@@ -51,8 +68,10 @@ class EmployeesController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
@@ -65,7 +84,22 @@ class EmployeesController extends Controller
     {
         $model = new Employees();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            
+            if($model->file = UploadedFile::getInstance($model, 'file')){
+                $imageName = mktime(date('h'), date('i'), date('s'), date('d'), date('m'), date('y'));
+                $path = Employees::PHOTO_PATH;
+                if(!file_exists($path)) {
+                    mkdir($path, 0777);
+                } 
+                $model->photo = $path.$imageName.'.'.$model->file->extension;
+                $model->save(); 
+                $model->file->saveAs($path.$imageName.'.'.$model->file->extension);
+            }
+            else {
+                $model->save();
+            }
+            
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -74,17 +108,50 @@ class EmployeesController extends Controller
         }
     }
 
+    // public function actionCreate()
+    // {
+    //     $model = new Employees();
+
+    //     if ($model->load(Yii::$app->request->post()) && $model->save()) {
+    //         return $this->redirect(['view', 'id' => $model->id]);
+    //     } else {
+    //         return $this->render('create', [
+    //             'model' => $model,
+    //         ]);
+    //     }
+    // }    
+
     /**
      * Updates an existing Employees model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
      */
+
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            
+            if($model->file = UploadedFile::getInstance($model, 'file')){
+                if (isset($model->photo) && !empty($model->photo) && file_exists($model->photo))
+                {
+                    unlink($model->photo);
+                }                
+                $imageName = mktime(date('h'), date('i'), date('s'), date('d'), date('m'), date('y'));
+                $path = Employees::PHOTO_PATH;
+                if(!file_exists($path)) {
+                    mkdir($path, 0777);
+                } 
+                $model->photo = $path.$imageName.'.'.$model->file->extension;
+                $model->save(); 
+                $model->file->saveAs($path.$imageName.'.'.$model->file->extension);
+            }
+            else {
+                $model->save();
+            }
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -92,6 +159,18 @@ class EmployeesController extends Controller
             ]);
         }
     }
+    // public function actionUpdate($id)
+    // {
+    //     $model = $this->findModel($id);
+
+    //     if ($model->load(Yii::$app->request->post()) && $model->save()) {
+    //         return $this->redirect(['view', 'id' => $model->id]);
+    //     } else {
+    //         return $this->render('update', [
+    //             'model' => $model,
+    //         ]);
+    //     }
+    // }
 
     /**
      * Deletes an existing Employees model.
@@ -99,12 +178,20 @@ class EmployeesController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
+    // public function actionDelete($id)
+    // {
+    //     // $this->findModel($id)->delete();
+    //     $model = $this->findModel($id);
+    //     $file = $model->photo;
+    //     if (isset($file))
+    //     {
+    //         unlink($file);
+    //     }
+    //     $model->delete();
 
-        return $this->redirect(['index']);
-    }
+    //     return $this->redirect(['index']);
+    // }     
+
 
     /**
      * Finds the Employees model based on its primary key value.
@@ -121,4 +208,24 @@ class EmployeesController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionMultipledelete()
+    {
+        $pk = Yii::$app->request->post('row_id');
+        $val = 1;
+        Employees::updateAll(['state' => $val], ['in', 'id', $pk]);
+
+        return $this->redirect(['index']);
+
+    }
+
+    public function actionMultiplerestore()
+    {
+        $pk = Yii::$app->request->post('row_id');
+        $val = 0;
+        Employees::updateAll(['state' => $val], ['in', 'id', $pk]);
+
+        return $this->redirect(['index']);
+
+    }  
 }

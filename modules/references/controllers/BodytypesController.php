@@ -138,8 +138,6 @@ class BodytypesController extends Controller
         }
     }
 
-
-
     public function actionMultipledelete()
     {
         $pk = Yii::$app->request->post('row_id');

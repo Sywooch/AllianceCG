@@ -29,4 +29,13 @@
 			'BRAND_ID' => 'Бренд',
 			'MODELSCOUNT' => 'Кол-во моделей',
 			'CREATE_MODEL' => 'Добавить модель',
+			'EMPLOYEES' => 'Сотрудники',
+			'NAME' => 'Имя',
+			'SURNAME' => 'Фамилия',
+			'PATRONIMYC' => 'Отчество',
+			'PHOTO' => 'Фото',
+			'COMPANY' => 'Организация',
+			'DEPARTMENT' => 'Отдел',
+			'POSITION' => 'Должность',
+			'FULLNAME' => 'Ф.И.О',
 		];

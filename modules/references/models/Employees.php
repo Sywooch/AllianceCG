@@ -4,6 +4,12 @@ namespace app\modules\references\models;
 use app\modules\admin\models\Companies;
 use app\modules\admin\models\Positions;
 use app\modules\admin\models\Departments;
+use app\modules\references\models\Brands;
+use app\modules\admin\models\User;
+use app\modules\references\Module;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
+use yii\behaviors\TimestampBehavior;
 
 use Yii;
 
@@ -25,12 +31,41 @@ use Yii;
  */
 class Employees extends \yii\db\ActiveRecord
 {
+
+    const STATUS_BLOCKED = 1;
+    const STATUS_ACTIVE = 0;
+    const LOGO_PATH = 'img/uploads/brandlogo/';
+    const NO_LOGO = '@web/img/logo/company_nologo.png';
+    const PHOTO_PATH = 'img/uploads/employeesphoto/';
+    const NO_PHOTO = '@web/img/logo/avatar.jpeg';
+
+    public $globalSearch;
+    public $fullname;
+    public $file;
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
         return '{{%employees}}';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => function () {
+                    return date('U');
+                },
+            ],
+        ];
     }
 
     /**
@@ -43,8 +78,14 @@ class Employees extends \yii\db\ActiveRecord
             [['company_id', 'department_id', 'position_id'], 'integer'],
             [['name', 'surname', 'patronimyc', 'photo'], 'string', 'max' => 255],
             [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Companies::className(), 'targetAttribute' => ['company_id' => 'id']],
+            [['brand_id'], 'exist', 'skipOnError' => true, 'targetClass' => Departments::className(), 'targetAttribute' => ['brand_id' => 'id']],
             [['department_id'], 'exist', 'skipOnError' => true, 'targetClass' => Departments::className(), 'targetAttribute' => ['department_id' => 'id']],
             [['position_id'], 'exist', 'skipOnError' => true, 'targetClass' => Positions::className(), 'targetAttribute' => ['position_id' => 'id']],
+            [['globalSearch'], 'safe'],
+            [['name', 'surname', 'patronimyc', 'brand_id'], 'required'],
+            [['fullname', 'file'], 'safe'],
+            ['author', 'default', 'value' => Yii::$app->user->getId()],
+            [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => ['jpg', 'jpeg','png'],'checkExtensionByMimeType'=>false],
         ];
     }
 
@@ -54,16 +95,42 @@ class Employees extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'surname' => Yii::t('app', 'Surname'),
-            'patronimyc' => Yii::t('app', 'Patronimyc'),
-            'photo' => Yii::t('app', 'Photo'),
-            'company_id' => Yii::t('app', 'Company ID'),
-            'department_id' => Yii::t('app', 'Department ID'),
-            'position_id' => Yii::t('app', 'Position ID'),
+            'id' => Module::t('module', 'ID'),
+            'name' => Module::t('module', 'NAME'),
+            'surname' => Module::t('module', 'SURNAME'),
+            'patronimyc' => Module::t('module', 'PATRONIMYC'),
+            'photo' => Module::t('module', 'PHOTO'),
+            'file' => Module::t('module', 'PHOTO'),
+            'company_id' => Module::t('module', 'COMPANY'),
+            'department_id' => Module::t('module', 'DEPARTMENT'),
+            'position_id' => Module::t('module', 'POSITION'),
+            'globalSearch' => Module::t('module', 'SEARCH'),
+            'fullName'=>Module::t('module', 'FULLNAME'),
+            'company'=>Module::t('module', 'COMPANY'),
+            'department'=>Module::t('module', 'DEPARTMENT'),
+            'position'=>Module::t('module', 'POSITION'),
+            'brand_id'=>Module::t('module', 'BRAND'),
+            'brand'=>Module::t('module', 'BRAND'),
+            'state'=>Module::t('module', 'STATE'),
+            'created_at' => Module::t('module', 'CREATED_AT'), 
+            'updated_at' => Module::t('module', 'UPDATED_AT'), 
+            'author' => Module::t('module', 'AUTHOR'),
+            'authorname' => Module::t('module', 'AUTHOR'),
         ];
     }
+
+    public function getStatesName()
+    {
+        return ArrayHelper::getValue(self::getStatesArray(), $this->state);
+    }
+
+    public static function getStatesArray()
+    {
+        return [
+            self::STATUS_ACTIVE => 'Активен',
+            self::STATUS_BLOCKED => 'Заблокирован',
+        ];
+    } 
 
     /**
      * @return \yii\db\ActiveQuery
@@ -88,4 +155,69 @@ class Employees extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Positions::className(), ['id' => 'position_id']);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBrand()
+    {
+        return $this->hasOne(Brands::className(), ['id' => 'brand_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAuthorname()
+    {
+        return $this->hasOne(User::className(), ['id' => 'author']);
+    }  
+
+    /**
+     * Description
+     * @return type
+     */
+    public function getImageUrl()
+    {
+        $photo = Url::to('@web/' . $this->photo, true);
+        $nophoto = self::NO_PHOTO;
+        $image = (isset($this->photo) && !empty($this->photo) && file_exists($this->photo)) ? $photo : $nophoto;
+        return $image;
+    }
+
+    /**
+     * Description
+     * @return type
+     */
+    public function getBrandImageUrl()
+    {
+        $logo = Url::to('@web/' . $this->brand->brand_logo, true);
+        $nologo = self::NO_LOGO;
+        $image = (isset($this->brand->brand_logo) && !empty($this->brand->brand_logo) && file_exists($this->brand->brand_logo)) ? $logo : $nologo;
+        return $image;
+    }
+
+    public function getFullName() {
+
+        $first_name = mb_substr($this->name,0,1, 'UTF-8');
+        $last_name = mb_substr($this->name,1);
+        $first_name = mb_strtoupper($first_name, 'UTF-8');
+        $last_name = mb_strtolower($last_name, 'UTF-8');
+        $this->name = $first_name.$last_name;
+
+        $first_surname = mb_substr($this->surname,0,1, 'UTF-8');
+        $last_surname = mb_substr($this->surname,1);
+        $first_surname = mb_strtoupper($first_surname, 'UTF-8');
+        $last_surname = mb_strtolower($last_surname, 'UTF-8');
+        $this->surname = $first_surname.$last_surname;
+
+        $first_patronymic = mb_substr($this->patronimyc,0,1, 'UTF-8');
+        $last_patronymic = mb_substr($this->patronimyc,1);
+        $first_patronymic = mb_strtoupper($first_patronymic, 'UTF-8');
+        $last_patronymic = mb_strtolower($last_patronymic, 'UTF-8');
+        $this->patronimyc = $first_patronymic.$last_patronymic;
+
+        return $this->name . ' ' . $this->patronimyc . ' ' . $this->surname;
+    } 
+
+
 }

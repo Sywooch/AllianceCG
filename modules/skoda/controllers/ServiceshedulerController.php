@@ -136,47 +136,47 @@ class ServiceshedulerController extends Controller
         }
     }
 
-    public function actionImportExcel()
-    {
-        $inputDir = 'uploads/servicesheduler/';
-        if (!file_exists(''.$inputDir.'')) {
-            mkdir(''.$inputDir.'', 0777, true);
-        }
-        $inputFile = ''.$inputDir.'servicesheduler.xlsx';
-        if (!file_exists(''.$inputFile.'')) {
-            die("File Not Found");
-        }
-        else{
-            try{
-                $inputFileType = \PHPExcel_IOFactory::identify($inputFile);
-                $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
-                $objPHPExcel = $objReader->load($inputFile);
-            }catch(Exception $e){
-                die('Error');
-            }
-            $sheet = $objPHPExcel->getSheet(0);
-            $highestRow = $sheet->getHighestRow();
-            $highestColumn = $sheet->getHighestColumn();        
-            for($row = 1; $row <= $highestRow; $row++){
-                $rowData = $sheet->rangeToArray('A'.$row.':'.$highestColumn.$row,NULL,TRUE,FALSE);
-                if($row == 1)
-                {
-                    continue;
-                }
+//     public function actionImportExcel()
+//     {
+//         $inputDir = 'uploads/servicesheduler/';
+//         if (!file_exists(''.$inputDir.'')) {
+//             mkdir(''.$inputDir.'', 0777, true);
+//         }
+//         $inputFile = ''.$inputDir.'servicesheduler.xlsx';
+//         if (!file_exists(''.$inputFile.'')) {
+//             die("File Not Found");
+//         }
+//         else{
+//             try{
+//                 $inputFileType = \PHPExcel_IOFactory::identify($inputFile);
+//                 $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
+//                 $objPHPExcel = $objReader->load($inputFile);
+//             }catch(Exception $e){
+//                 die('Error');
+//             }
+//             $sheet = $objPHPExcel->getSheet(0);
+//             $highestRow = $sheet->getHighestRow();
+//             $highestColumn = $sheet->getHighestColumn();        
+//             for($row = 1; $row <= $highestRow; $row++){
+//                 $rowData = $sheet->rangeToArray('A'.$row.':'.$highestColumn.$row,NULL,TRUE,FALSE);
+//                 if($row == 1)
+//                 {
+//                     continue;
+//                 }
 
-//                $dateRowData = date($format = "Y-m-d", \PHPExcel_Shared_Date::ExcelToPHP($rowData[0][0])); 
+// //                $dateRowData = date($format = "Y-m-d", \PHPExcel_Shared_Date::ExcelToPHP($rowData[0][0])); 
 
-                $servicesheduler = new ServiceshedulerSearch();
-                $servicesheduler->date = date($format = "Y-m-d", \PHPExcel_Shared_Date::ExcelToPHP($rowData[0][0])); 
-                $servicesheduler->responsible = $rowData[0][1];
-                $servicesheduler->save();
-                if($servicesheduler->getErrors()){
-                    print_r($servicesheduler->getErrors());                    
-                }
-            }        
-            die("okay");
-        }
-    }
+//                 $servicesheduler = new ServiceshedulerSearch();
+//                 $servicesheduler->date = date($format = "Y-m-d", \PHPExcel_Shared_Date::ExcelToPHP($rowData[0][0])); 
+//                 $servicesheduler->responsible = $rowData[0][1];
+//                 $servicesheduler->save();
+//                 if($servicesheduler->getErrors()){
+//                     print_r($servicesheduler->getErrors());                    
+//                 }
+//             }        
+//             die("okay");
+//         }
+//     }
     
     /**
      * Updates an existing Servicesheduler model.

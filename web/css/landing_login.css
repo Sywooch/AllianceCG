@@ -28,7 +28,7 @@ body {
 	border-radius: 15px;
 	position: fixed;
 	margin-right: 5%;
-	margin-top: 5%;
+	margin-top: 10%;
   	right:0;
   	color: #fff;
 }
@@ -115,6 +115,69 @@ body {
 	background-color: rgba(255,255,255,0);
     color: white;
 }
+
+
+.login-form{
+    animation-name: login-form;
+    -webkit-animation-name: login-form;  
+ 
+    animation-duration: 1s; 
+    -webkit-animation-duration: 1s;
+ 
+    animation-timing-function: ease;    
+    -webkit-animation-timing-function: ease;    
+ 
+    visibility: visible !important;                     
+}
+ 
+@keyframes login-form {
+    0% {
+        transform: translateY(-100%);
+    }
+    50%{
+        transform: translateY(8%);
+    }
+    65%{
+        transform: translateY(-4%);
+    }
+    80%{
+        transform: translateY(4%);
+    }
+    95%{
+        transform: translateY(-2%);
+    }           
+    100% {
+        transform: translateY(0%);
+    }       
+}
+ 
+@-webkit-keyframes login-form {
+    0% {
+        -webkit-transform: translateY(-100%);
+    }
+    50%{
+        -webkit-transform: translateY(8%);
+    }
+    65%{
+        -webkit-transform: translateY(-4%);
+    }
+    80%{
+        -webkit-transform: translateY(4%);
+    }
+    95%{
+        -webkit-transform: translateY(-2%);
+    }           
+    100% {
+        -webkit-transform: translateY(0%);
+    }   
+}
+
+.footer {
+  position: relative;
+  margin-top: -65px;
+  height: 60;
+  clear:both;
+} 
 
 /*
 .navbar-right {

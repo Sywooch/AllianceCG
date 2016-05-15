@@ -10,10 +10,12 @@ use rmrevin\yii\fontawesome\FA;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \app\modules\user\models\form\SignupForm */
 
+$this->registerCssFile('@web/css/landing_login.css', ['depends' => ['app\assets\AppAsset']]);  
+
 $this->title = Module::t('module', 'TITLE_SIGNUP');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-default-signup">
+<div class="user-default-signup signup-form">
     
     <div class="row">
         <div class="col-lg-5 col-lg-offset-3">
@@ -46,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'placeholder' => $model->getAttributeLabel( 'verifyCode' ),
                     'label' => false,
                 ],  
-                'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6"> <div class="input-group"><span class="input-group-addon">' . FA::icon('asterisk') . '</span>{input}</div></div></div>',
+                'template' => '<div class="row"><div class="col-md-6">{image}</div></div><div class="col-md-6"> <div class="input-group"><span class="input-group-addon">' . FA::icon('asterisk') . '</span>{input}</div></div>',
             ]) ?>
             <div class="form-group" style="text-align: right">
                 <?= Html::submitButton(FA::icon('send') . Module::t('module', 'BUTTON_SUBMIT'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>

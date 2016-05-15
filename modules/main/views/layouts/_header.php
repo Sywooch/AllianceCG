@@ -10,6 +10,7 @@ use yii\helpers\Url;
     NavBar::begin([
         'brandLabel' => Html::img('@web/img/logo/alliance_logo.png', ['height'=>'55']),
         'brandUrl' => Yii::$app->homeUrl,
+        'id' => 'navmenu',
         'options' => [
             'class' => 'navbar navbar-fixed-top navbar-primary',
         ],
@@ -20,6 +21,7 @@ use yii\helpers\Url;
 echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'id' => 'navigation_menu',
+        'activateItems' => false,
         'encodeLabels' => false,
         'items' => array_filter([
         Yii::$app->user->isGuest ?

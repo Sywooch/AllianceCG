@@ -23,39 +23,35 @@ echo Collapse::widget([
     'items' => [
         [
             'label' => FA::icon('building') . ' ' . Module::t('module', 'NAV_ALLIANCE'),
-            // 'content' => Html::a(Module::t('module', 'CREATE'), ['create'], ['class' => 'nav nav-pills']),
             'content' => $this->render('_allianceContent'),
-            'visible' => Yii::$app->user->can('creditcalendarIsVisible'),
             'contentOptions' => [
                 'class' => Yii::$app->controller->module->id == 'alliance' ? 'in' : false,
             ],
+            'options' => ['style' => !Yii::$app->user->can('creditcalendarIsVisible') ? 'display: none;' : false,],
         ],
         [
             'label' => FA::icon('wrench') . ' ' . Module::t('module', 'NAV_SKODA'),
-            // 'content' => Html::a(Module::t('module', 'CREATE'), ['create'], ['class' => 'nav nav-pills']),
             'content' => $this->render('_skodaContent'),
-            'visible' => Yii::$app->user->can('creditcalendarIsVisible'),
             'contentOptions' => [
                 'class' => Yii::$app->controller->module->id == 'skoda' ? 'in' : false,
             ],
+            'options' => ['style' => !Yii::$app->user->can('skodaIsVisible') ? 'display: none;' : false,],
         ],
         [
             'label' => FA::icon('book') . ' ' . Module::t('module', 'NAV_REFERENCES'),
-            // 'content' => Html::a(Module::t('module', 'CREATE'), ['create'], ['class' => 'nav nav-pills']),
             'content' => $this->render('_referencesContent'),
-            'visible' => Yii::$app->user->can('creditcalendarIsVisible'),
             'contentOptions' => [
                 'class' => Yii::$app->controller->module->id == 'references' ? 'in' : false,
             ],
+            'options' => ['style' => !Yii::$app->user->can('creditcalendarIsVisible') ? 'display: none;' : false,],
         ],
         [
             'label' => FA::icon('cog') . ' ' . Module::t('module', 'NAV_ADMIN'),
-            // 'content' => Html::a(Module::t('module', 'CREATE'), ['create'], ['class' => 'nav nav-pills']),
             'content' => $this->render('_adminContent'),
-            'visible' => Yii::$app->user->can('creditcalendarIsVisible'),
             'contentOptions' => [
                 'class' => Yii::$app->controller->module->id == 'admin' ? 'in' : false,
             ],
+            'options' => ['style' => !Yii::$app->user->can('admin') ? 'display: none;' : false,],
         ],
     ]
 ]); 

@@ -1,0 +1,145 @@
+body {
+	background: url('/img/site/main-bg.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.navbar-primary {
+/*	width: 100%;
+	height: 90px;*/
+	margin: 0 auto;
+	background-color: rgba(255,255,255,0.5);
+}
+
+.footer {
+/*	width: 100%;
+	height: 90px;*/
+	margin: 0 auto;
+	background-color: rgba(255,255,255,0.5);
+}
+
+.login-form {
+/*	width: 100%;
+	height: 90px;*/
+	margin: 0 auto;
+	background-color: rgba(255,255,255,0.5);
+	border-radius: 15px;
+	position: fixed;
+	margin-right: 5%;
+	margin-top: 5%;
+  	right:0;
+  	color: #fff;
+}
+
+.has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline, .has-error.radio label, .has-error.checkbox label, .has-error.radio-inline label, .has-error.checkbox-inline label {
+	color: #ededed;
+	font-size: large;
+}
+
+.rememberCheckbox {
+	color: #ededed;
+	font-size: medium;
+}
+
+.passwordReset > a{
+	color: #ededed;
+	font-size: medium;
+}
+
+.navbar-brand > img {	
+  mix-blend-mode: multiply;
+  height: 100%;
+  /*opacity: 0.3; */
+}
+
+.btn-login:hover {
+    -webkit-transform: scale(1.3);
+    -ms-transform: scale(1.3);
+    transform: scale(1.3);
+}
+
+.btn-resetpwd {
+  position: relative;
+  color: #337ab7;
+}
+.btn-resetpwd:after {
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 0;
+  height: 2px;
+  background-color: #337ab7;
+  content: "";
+  transition: width 0.2s;
+}
+.btn-resetpwd:hover {
+  color: #fff;
+  text-decoration: none;
+}
+.btn-resetpwd:hover:after {
+  width: 100%;
+}
+
+
+.nav {
+  position: relative;
+  color: #337ab7;
+}
+.nav:after {
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 0;
+  height: 10px;
+  background-color: #337ab7;
+  content: "";
+  transition: width 0.2s;
+}
+.nav:hover {
+  color: #fff;
+  text-decoration: none;
+}
+.nav:hover:after {
+  width: 100%;
+}
+
+.navbar-right > li > a {
+	color: #fff;
+}
+
+.nav li.active a, .nav li.active a:hover  {
+	background-color: rgba(255,255,255,0);
+    color: white;
+}
+
+/*
+.navbar-right {
+  position: relative;
+  color: #337ab7;
+}
+.navbar-right:after {
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 0;
+  height: 10px;
+  background-color: #337ab7;
+  content: "";
+  transition: width 0.2s;
+}
+.navbar-right:hover {
+  color: #fff;
+  text-decoration: none;
+}
+.navbar-right:hover:after {
+  width: 100%;
+}
+
+.navbar-right > li > a {
+	color: #fff;
+}*/

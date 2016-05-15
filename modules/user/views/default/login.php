@@ -12,7 +12,13 @@ use rmrevin\yii\fontawesome\FA;
 $this->title = Module::t('module', 'TITLE_LOGIN');
 $this->params['breadcrumbs'][] = $this->title;
 
-    // $this->registerCssFile('@web/css/login.css', ['depends' => ['app\assets\AppAsset']]);      
+    $this->registerCssFile('@web/css/landing_login.css', ['depends' => ['app\assets\AppAsset']]);   
+   $this->registerCssFile('@web/css/counters.css', ['depends' => ['app\assets\AppAsset']]);    
+   $this->registerCssFile('@web/css/animations/slideDown.css', ['depends' => ['app\assets\AppAsset']]);
+   $this->registerJsFile(Yii::getAlias('@web/js/modules/main/default/counters.js'), ['depends' => [
+       'yii\web\YiiAsset',
+       'yii\bootstrap\BootstrapAsset'],
+   ]);        
     // $this->registerJsFile(Yii::getAlias('@web/js/modules/main/login/placeholder.js'), ['depends' => [
     //     'yii\web\YiiAsset',
     //     'yii\bootstrap\BootstrapAsset'],
@@ -25,9 +31,55 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="row">
         <!-- <div class="col-lg-5 col-lg-offset-3" id="slick-login"> -->
-        <div class="col-md-7"></div>
+        <div class="col-md-7">
 
-        <div class="col-md-5">
+<!--             <div class="counters" id="counters">    
+                <div class="counterscontainer" id="counterscontainer">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4" id="centerFA">
+                                <?= FA::icon('pencil')->size(FA::SIZE_5X) ?>
+                            </div>
+                            <div class="col-md-4" id="centerFA">
+                                <?= FA::icon('clock-o')->size(FA::SIZE_5X) ?>
+                            </div>
+                            <div class="col-md-4" id="centerFA">
+                                <?= FA::icon('coffee')->size(FA::SIZE_5X) ?>                    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div id="codeStringsCounter"></div>
+                            </div>
+                            <div class="col-md-4" id="centerFA">
+                                <div id="dateCounter"></div>
+                            </div>
+                            <div class="col-md-4" id="centerFA">
+                                <div id="coffeeCounter"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div id="codeStringsText"></div>
+                            </div>
+                            <div class="col-md-4" id="centerFA">
+                                <div id="dateText"></div>
+                            </div>
+                            <div class="col-md-4" id="centerFA">
+                                <div id="coffeeText"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+        </div>
+
+        <div class="col-md-5 login-form">
             <h1><?= Html::encode($this->title) ?></h1>
             
             <!-- <p> -->
@@ -41,15 +93,15 @@ $this->params['breadcrumbs'][] = $this->title;
             
             <?php Module::t('module', 'LOGIN_INFO') ?>
             
-                <div class="col-md-4" style="text-align: left">
+                <div class="col-md-4 rememberCheckbox" style="text-align: left">
                     <?= $form->field($model, 'rememberMe')->checkbox() ?>
                 </div>
             <div class="login-buttons">
-                <div class="col-md-5" style="padding-top: 8px;">
-                    <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'LINK_PASSWORD_RESET'), ['password-reset-request']) ?>
+                <div class="col-md-5 passwordReset" style="padding-top: 8px;">
+                    <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'LINK_PASSWORD_RESET'), ['password-reset-request'], ['class' => 'btn-resetpwd']) ?>
                 </div>
                 <div class="col-md-3">
-                    <?= Html::submitButton(FA::icon('sign-in') . ' ' . Module::t('module', 'USER_BUTTON_LOGIN'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                    <?= Html::submitButton(FA::icon('sign-in') . ' ' . Module::t('module', 'USER_BUTTON_LOGIN'), ['class' => 'btn btn-primary btn-login', 'name' => 'login-button']) ?>
                 </div>
             </div>
 

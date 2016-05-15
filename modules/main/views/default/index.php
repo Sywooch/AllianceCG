@@ -24,8 +24,7 @@ $this->title = Yii::$app->name;;
 
 <?php 
    $this->registerCssFile('@web/css/counters.css', ['depends' => ['app\assets\AppAsset']]);    
-   $this->registerCssFile('@web/css/animations/slideDown.css', ['depends' => ['app\assets\AppAsset']]);  
-   // $this->registerCssFile('@web/css/animation.css', ['depends' => ['app\assets\AppAsset']]);
+   $this->registerCssFile('@web/css/animations/slideDown.css', ['depends' => ['app\assets\AppAsset']]);
    $this->registerJsFile(Yii::getAlias('@web/js/modules/main/default/counters.js'), ['depends' => [
        'yii\web\YiiAsset',
        'yii\bootstrap\BootstrapAsset'],

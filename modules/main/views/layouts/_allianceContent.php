@@ -27,6 +27,10 @@ use rmrevin\yii\fontawesome\FA;
                 'label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_CREDITCALENDAR'), 'url' => ['/alliance/creditcalendar/calendar'],
                 'visible' => Yii::$app->user->can('creditcalendarIsVisible')
             ],
+            [
+                'label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_CLIENTCIRCULATION'), 'url' => ['/alliance/clientcirculation'],
+                'visible' => Yii::$app->user->can('creditcalendarIsVisible')
+            ],
         ]),
     ])
     : false;

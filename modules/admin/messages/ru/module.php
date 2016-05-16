@@ -148,5 +148,7 @@
         'REFERENCES_MODELS' => 'Модели',
         'REFERENCES_BODYTYPES' => 'Типы кузова',
         'REFERENCES_EMPLOYEES' => 'Сотрудники',
+        'REFERENCES_REGIONS' => 'Регионы',
+        'NAV_ALLIANCE_CLIENTCIRCULATION' => 'ОК. Траффик клиентов',
             
 	];

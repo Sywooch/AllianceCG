@@ -29,6 +29,11 @@ use rmrevin\yii\fontawesome\FA;
 
             ],
             [
+                'label' => FA::icon('asterisk') . ' ' . Module::t('module', 'REFERENCES_REGIONS'),
+                'url' => '/references/regions',
+                // 'visible' => Yii::$app->user->can('admin'),
+            ],
+            [
                 'label' => FA::icon('diamond') . ' ' . Module::t('module', 'REFERENCES_TARGETS'),
                 'url' => '/references/targets',
                 // 'options' => ['class' => 'list-group-item'],

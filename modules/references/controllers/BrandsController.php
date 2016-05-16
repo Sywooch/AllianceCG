@@ -7,6 +7,7 @@ use app\modules\references\models\Brands;
 use app\modules\references\models\BrandsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\HttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\filters\AccessControl;

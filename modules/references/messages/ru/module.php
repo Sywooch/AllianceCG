@@ -40,4 +40,10 @@
 			'FULLNAME' => 'Ф.И.О',
 			'EMPLOYEESSCOUNT' => 'Кол-во сотрудников',
 			'CREATE_EMPLOYEES' => 'Добавить сотрудника',
+			'REGION_NAME' => 'Регион',
+			'REGION_CODE' => 'Код региона',
+			'REGIONS' => 'Регионы',
+			'REGIONANDCODES' => 'Регион с учетом кода',
+			'IMPORTEXCEL' => 'Импорт',
+			'GO_BACK' => 'Назад',
 		];

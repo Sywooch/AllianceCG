@@ -5,7 +5,7 @@ use app\modules\admin\models\Userroles;
 use app\modules\admin\Module;
 use app\modules\references\models\Positions;
 use app\modules\admin\models\Companies;
-use app\modules\admin\models\Departments;
+use app\modules\references\models\Departments;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use rmrevin\yii\fontawesome\FA;

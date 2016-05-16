@@ -7,7 +7,7 @@ use yii\data\Sort;
 use yii\data\ActiveDataProvider;
 use app\modules\references\Module;
 use app\modules\admin\models\User;
-
+ 
 /**
  * This is the model class for table "{{%positions}}".
  *
@@ -20,6 +20,7 @@ class PositionsSearch extends \yii\db\ActiveRecord
 
     public $userscount;
     public $globalSearch;
+    public $authorname;
 
     /**
      * @inheritdoc
@@ -38,7 +39,7 @@ class PositionsSearch extends \yii\db\ActiveRecord
             // ['position', 'unique', 'targetClass' => Positions::className(), 'message' => Module::t('module', 'ADMIN_POSITIONS_ERROR_RECORD_EXIST')],
             [['description'], 'string'],
             [['position'], 'string', 'max' => 255],
-            [['userscount', 'globalSearch'], 'safe'],
+            [['userscount', 'globalSearch', 'authorname'], 'safe'],
         ];
     }
 
@@ -68,19 +69,24 @@ class PositionsSearch extends \yii\db\ActiveRecord
         $query = Positions::find();
         $query -> joinWith(['user']);
 
-        $sort = new Sort([
-            'attributes' => [
-                'id',
-                'position',
-                'description',
-            ],
-        ]);        
+        // $sort = new Sort([
+        //     'attributes' => [
+        //         'id',
+        //         'position',
+        //         'description',
+        //         'aurthorname'
+        //     ],
+        // ]);        
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => $sort,
+            // 'sort' => $sort,
         ]);
 
+        $dataProvider->sort->attributes['authorname'] = [
+                'asc' => ['{{%user}}.full_name' => SORT_ASC],
+                'desc' => ['{{%user}}.full_name' => SORT_DESC],
+            ];  
 
         $this->load($params);
 

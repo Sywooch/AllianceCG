@@ -37,11 +37,6 @@ use rmrevin\yii\fontawesome\FA;
                 'url' => '/admin/companies',
                 // 'options' => ['class' => 'list-group-item'],
             ],
-            [
-                'label' => FA::icon('users') . ' ' . Module::t('module', 'ADMIN_DEPARTMENTS'),
-                'url' => '/admin/departments',
-                // 'options' => ['class' => 'list-group-item'],
-            ],
         ]),
     ])
     : false;  

@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use rmrevin\yii\fontawesome\FA;
-use app\modules\admin\Module;
+use app\modules\references\Module;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Departments */
@@ -21,6 +21,9 @@ use app\modules\admin\Module;
 
     <div class="form-group" style="text-align: right">
         <?= Html::submitButton($model->isNewRecord ? FA::icon('floppy-o') . ' ' . Module::t('module', 'CREATE') : FA::icon('edit') . ' ' . Module::t('module', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
+
+        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'CANCEL'), ['index'], ['class' => 'btn btn-danger btn-sm']) ?>
+
     </div>
 
     <?php ActiveForm::end(); ?>

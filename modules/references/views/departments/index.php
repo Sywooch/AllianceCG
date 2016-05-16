@@ -4,14 +4,16 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use rmrevin\yii\fontawesome\FA;
-use app\modules\admin\Module;
+use app\modules\references\Module;
 use app\components\grid\LinkColumn;
+use app\components\grid\SetColumn;
+use app\modules\references\models\Departments;
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\admin\models\DepartmentsSearch */
+/* @var $searchModel app\modules\references\models\DepartmentsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('module', 'ADMIN_DEPARTMENTS');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN'), 'url' => ['/admin']];
+$this->title = Module::t('module', 'DEPARTMENTS');
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['/references']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="departments-index">
@@ -25,7 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php Pjax::begin(); ?>
 
     <?= GridView::widget([
-        'id' => 'departments-positions-grid',
+        'id' => 'departments-grid',
+        'summary' => false,
         'dataProvider' => $dataProvider,
         // 'filterModel' => $searchModel,
         'columns' => [
@@ -54,6 +57,30 @@ $this->params['breadcrumbs'][] = $this->title;
                 },   
                 'contentOptions' => ['class'=>'success;'],
             ], 
+            [
+                'attribute' => 'created_at',
+                'format' => 'datetime',
+            ],
+            [
+                'attribute' => 'updated_at',
+                'format' => 'datetime',
+            ],
+            [
+                'attribute' => 'authorname',
+                'value' => 'authorname.full_name',
+            ],
+            [
+                'class' => SetColumn::className(),
+                // 'filter' => Brands::getStatesArray(),
+                'attribute' => 'state',
+                'visible' => Yii::$app->user->can('admin'),
+                'name' => 'statesName',
+                'contentOptions'=>['style'=>'width: 50px;'],
+                'cssCLasses' => [
+                    Departments::STATUS_ACTIVE => 'success',
+                    Departments::STATUS_BLOCKED => 'danger',
+                ],
+            ],
             // 'user_id',
 
             [

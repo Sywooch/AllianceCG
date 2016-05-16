@@ -50,5 +50,5 @@
 			'REFERENCES_DESCRIPTION' => 'Описание',
 			'COUNTUSERS' => 'Кол-во пользователей',
 			'POSITIONS' => 'Должности',
-			''
+			'DEPARTMENTS' => 'Отделы',
 		];

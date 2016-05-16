@@ -1,10 +1,10 @@
 <?php
 
-namespace app\modules\admin\controllers;
+namespace app\modules\references\controllers;
 
 use Yii;
-use app\modules\admin\models\Departments;
-use app\modules\admin\models\DepartmentsSearch;
+use app\modules\references\models\Departments;
+use app\modules\references\models\DepartmentsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

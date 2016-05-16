@@ -6,6 +6,7 @@ use yii\helpers\ArrayHelper;
 // use app\modules\user\Module;
 use app\modules\admin\Module;
 use app\modules\references\models\Positions;
+use app\modules\references\models\Departments;
 use Yii;
  
 class User extends \app\modules\user\models\User

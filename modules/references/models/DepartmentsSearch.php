@@ -1,19 +1,20 @@
 <?php
 
-namespace app\modules\admin\models;
+namespace app\modules\references\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\admin\models\Departments;
+use app\modules\references\models\Departments;
 
 /**
- * DepartmentsSearch represents the model behind the search form about `app\modules\admin\models\Departments`.
+ * DepartmentsSearch represents the model behind the search form about `app\modules\references\models\Departments`.
  */
 class DepartmentsSearch extends Departments
 {
 
     public $globalSearch;
+    public $authorname;
 
     /**
      * @inheritdoc
@@ -22,7 +23,7 @@ class DepartmentsSearch extends Departments
     {
         return [
             [['id'], 'integer'],
-            [['department_name', 'globalSearch'], 'safe'],
+            [['department_name', 'globalSearch', 'authorname'], 'safe'],
             [['department_name'], 'required'],
         ];
     }
@@ -46,12 +47,18 @@ class DepartmentsSearch extends Departments
     public function search($params)
     {
         $query = Departments::find();
+        $query -> joinWith(['user']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['authorname'] = [
+                'asc' => ['{{%user}}.full_name' => SORT_ASC],
+                'desc' => ['{{%user}}.full_name' => SORT_DESC],
+            ];  
 
         $this->load($params);
 

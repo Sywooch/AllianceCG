@@ -90,6 +90,7 @@ class ClientCirculation extends \yii\db\ActiveRecord
             'region_id' => Module::t('module', 'REGION'),
             'regions' => Module::t('module', 'REGION'),
             'authorname' => Module::t('module', 'AUTHOR'),
+            'employee_id' => Module::t('module', 'EMPLOYEE'),
         ];
     }
 

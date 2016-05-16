@@ -75,9 +75,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <p style="text-align: right">
         <?= Html::a(FA::icon('edit') . ' ' . Module::t('module', 'CREATE_MODEL'), ['/references/models/create?id=' . $model->id], [
                 'class' => 'plus btn-success btn-sm',
-                // 'data' => [
-                //     'method' => 'get',
-                // ],
             ]) ?>
 </p>
 <?php
@@ -104,4 +101,40 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]);
+
+?>
+
+<p style="text-align: right">
+        <?= Html::a(FA::icon('edit') . ' ' . Module::t('module', 'CREATE_EMPLOYEES'), ['/references/employees/create?id=' . $model->id], [
+                'class' => 'plus btn-success btn-sm',
+            ]) ?>
+</p>
+
+<?php
+
+    echo GridView::widget([
+        'dataProvider' => new ActiveDataProvider(['query' => $model->getEmployees()]),
+        'showOnEmpty' => true,
+        'emptyText' => 'Записи отсутствуют',
+        'summary' => false,
+        'tableOptions' =>[
+            'class' => 'table table-striped table-bordered creditcalendargridview'
+        ],
+        'columns' => [
+            [
+                'header' => '№',
+                'class' => 'yii\grid\SerialColumn'
+            ],
+            [
+                'attribute' => 'fullName',
+                // 'value' => 'fullmodelname',
+                'value' => function ($data) {
+                    return Html::a($data->fullName, Url::to(['/references/employees/view', 'id' => $data->id]));
+                },
+                'format' => 'raw',
+            ],
+        ],
+    ]);
+
+
 ?>

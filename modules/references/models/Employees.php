@@ -74,11 +74,11 @@ class Employees extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['company_id', 'department_id', 'position_id'], 'required'],
-            [['company_id', 'department_id', 'position_id'], 'integer'],
+            [['company_id', 'department_id', 'position_id', 'brand_id'], 'required'],
+            [['company_id', 'department_id', 'position_id', 'brand_id'], 'integer'],
             [['name', 'surname', 'patronimyc', 'photo'], 'string', 'max' => 255],
             [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Companies::className(), 'targetAttribute' => ['company_id' => 'id']],
-            [['brand_id'], 'exist', 'skipOnError' => true, 'targetClass' => Departments::className(), 'targetAttribute' => ['brand_id' => 'id']],
+            [['brand_id'], 'exist', 'skipOnError' => true, 'targetClass' => Brands::className(), 'targetAttribute' => ['brand_id' => 'id']],
             [['department_id'], 'exist', 'skipOnError' => true, 'targetClass' => Departments::className(), 'targetAttribute' => ['department_id' => 'id']],
             [['position_id'], 'exist', 'skipOnError' => true, 'targetClass' => Positions::className(), 'targetAttribute' => ['position_id' => 'id']],
             [['globalSearch'], 'safe'],

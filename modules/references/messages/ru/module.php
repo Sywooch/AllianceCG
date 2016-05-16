@@ -38,4 +38,6 @@
 			'DEPARTMENT' => 'Отдел',
 			'POSITION' => 'Должность',
 			'FULLNAME' => 'Ф.И.О',
+			'EMPLOYEESSCOUNT' => 'Кол-во сотрудников',
+			'CREATE_EMPLOYEES' => 'Добавить сотрудника',
 		];

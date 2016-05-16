@@ -100,6 +100,7 @@ class Brands extends \yii\db\ActiveRecord
             'updated_at' => Module::t('module', 'UPDATED_AT'), 
             'author' => Module::t('module', 'AUTHOR'),
             'modelscount' => Module::t('module', 'MODELSCOUNT'),
+            'employeescount' => Module::t('module', 'EMPLOYEESSCOUNT'),
         ];
     }
 
@@ -135,5 +136,19 @@ class Brands extends \yii\db\ActiveRecord
     {
         // Customer has_many Order via Order.customer_id -> id
         return $this->hasMany(Models::className(), ['brand_id' => 'id'])->count();
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEmployees()
+    {
+        return $this->hasMany(Employees::className(), ['brand_id' => 'id']);
+    } 
+
+    public function getEmployeescount()
+    {
+        // Customer has_many Order via Order.customer_id -> id
+        return $this->hasMany(Employees::className(), ['brand_id' => 'id'])->count();
     }
 }

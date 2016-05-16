@@ -47,7 +47,7 @@ class TargetsSearch extends Targets
     {
         $query = Targets::find();
         if(!Yii::$app->user->can('admin')){
-            $query->where(['state' => 0]);
+            $query->where(['state' => Targets::STATUS_ACTIVE]);
         }
 
         // add conditions that should always apply here

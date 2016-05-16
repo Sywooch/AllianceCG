@@ -48,6 +48,9 @@ class BrandsSearch extends Brands
     public function search($params)
     {
         $query = Brands::find();
+        if(!Yii::$app->user->can('admin')){
+            $query->where(['state' => Brands::STATUS_ACTIVE]);
+        }
         $query->joinWith(['authorname']);
 
         $dataProvider->sort->attributes['authorname'] = [

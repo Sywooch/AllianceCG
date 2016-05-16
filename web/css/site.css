@@ -449,6 +449,13 @@ a.desc:after {
   width: 100%;
 }*/
 
+/*
+.btn:hover {
+    -webkit-transform: scale(1.3);
+    -ms-transform: scale(1.3);
+    transform: scale(1.3);
+}*/
+
 .navbar-right > li > a {
     color: #337ab7;
 }

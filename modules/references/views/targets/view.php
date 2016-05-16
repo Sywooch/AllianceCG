@@ -9,7 +9,7 @@ use rmrevin\yii\fontawesome\FA;
 /* @var $model app\modules\references\models\Targets */
 
 $this->title = $model->target;
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['references']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['/references']];
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'TARGETS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

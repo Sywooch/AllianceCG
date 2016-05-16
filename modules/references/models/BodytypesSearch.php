@@ -47,6 +47,9 @@ class BodytypesSearch extends Bodytypes
     public function search($params)
     {
         $query = Bodytypes::find();
+        if(!Yii::$app->user->can('admin')){
+            $query->where(['state' => Bodytypes::STATUS_ACTIVE]);
+        }
 
         // add conditions that should always apply here
 

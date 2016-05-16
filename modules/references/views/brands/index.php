@@ -69,6 +69,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => 'authorname.full_name',
             ],
             [
+                'attribute' => 'employeescount',
+                'format' => 'html',
+                'filter' => false,
+                'value' => function($model) {
+                    return '<span class="label label-primary">' . Module::t('module', 'EMPLOYEES') . ': ' . $model->employeescount . '</span>';
+                },   
+                'contentOptions' => ['class'=>'success;'],
+            ],
+            [
                 'attribute' => 'modelscount',
                 'format' => 'html',
                 'filter' => false,

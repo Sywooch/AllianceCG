@@ -47,7 +47,7 @@ class ContactController extends Controller
             Yii::$app->session->setFlash('contactFormSubmitted');
             return $this->refresh();
         } else {
-            return $this->renderAjax('index', [
+            return $this->render('index', [
                 'model' => $model,
             ]);
         }

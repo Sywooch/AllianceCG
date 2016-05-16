@@ -47,6 +47,9 @@ class ModelsSearch extends Models
     public function search($params)
     {
         $query = Models::find();
+        if(!Yii::$app->user->can('admin')){
+            $query->where(['{{%models}}.state' => Models::STATUS_ACTIVE]);
+        }
         $query->joinWith(['brand', 'bodytype']);
 
         // add conditions that should always apply here

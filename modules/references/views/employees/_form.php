@@ -60,11 +60,11 @@ use yii\helpers\ArrayHelper;
     ?> 
 
     <?php
-        $brands = Brands::find()->all();
+        $brands = Brands::find()->where(['<>', 'state', Brands::STATUS_BLOCKED])->all();
     
         $items = ArrayHelper::map($brands,'id','brand');
         $params = [
-            // 'options' => [$_GET['id'] => ['Selected'=>'selected']],
+            'options' => isset($_GET['id']) ? [$_GET['id'] => ['Selected'=>'selected']] : false,
             'prompt' => '-- ' . $model->getAttributeLabel( 'brand_id' ) . ' --',
         ];
         echo $form->field($model, 'brand_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('car') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);

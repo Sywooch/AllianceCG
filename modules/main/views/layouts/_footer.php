@@ -17,7 +17,6 @@
             ?>
             <?php
                 echo date('Y'); 
-                echo Html::button(FA::icon('comment') . ' ' . Module::t('module', 'COMMENT'), ['value' => Url::to('/main/contact'), 'class' => 'btn btn-info btn-sm', 'id' => 'modalButton']);
             ?>
         </b></p>
 
@@ -29,16 +28,3 @@
 
     </div>
 </footer>
-
-<?php
-    Modal::begin([
-        'header' => '<h4>' . Module::t('module', 'COMMENT') .'</h4>',
-        'id' => 'modal',
-        'size' => 'modal-lg'
-    ]);
-
-    echo "<div id='modalContent'></div>";
-
-    Modal::end();
-
-?>

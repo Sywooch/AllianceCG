@@ -20,11 +20,11 @@ use app\modules\references\Module;
     <?php // echo $form->field($model, 'brand_id')->textInput() ?>
 
     <?php
-        $brands = Brands::find()->all();
+        $brands = Brands::find()->where(['<>', 'state', Brands::STATUS_BLOCKED])->all();
     
         $items = ArrayHelper::map($brands,'id','brand');
         $params = [
-            'options' => [$_GET['id'] => ['Selected'=>'selected']],
+            'options' => isset($_GET['id']) ? [$_GET['id'] => ['Selected'=>'selected']] : false,
             'prompt' => '-- ' . $model->getAttributeLabel( 'brand_id' ) . ' --',
         ];
         echo $form->field($model, 'brand_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('car') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
@@ -35,7 +35,7 @@ use app\modules\references\Module;
     <?php // echo $form->field($model, 'body_type')->textInput(['maxlength' => true]) ?>
 
     <?php
-        $bodytypes = Bodytypes::find()->all();
+        $bodytypes = Bodytypes::find()->where(['<>', 'state', Bodytypes::STATUS_BLOCKED])->all();
     
         $items = ArrayHelper::map($bodytypes,'id','body_type');
         $params = [

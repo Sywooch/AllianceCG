@@ -1,11 +1,12 @@
 <?php
 
-namespace app\modules\admin\models;
+namespace app\modules\references\models;
 
 use Yii;
 use yii\data\Sort;
 use yii\data\ActiveDataProvider;
-use app\modules\admin\Module;
+use app\modules\references\Module;
+use app\modules\admin\models\User;
 
 /**
  * This is the model class for table "{{%positions}}".

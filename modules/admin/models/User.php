@@ -5,6 +5,7 @@ namespace app\modules\admin\models;
 use yii\helpers\ArrayHelper;
 // use app\modules\user\Module;
 use app\modules\admin\Module;
+use app\modules\references\models\Positions;
 use Yii;
  
 class User extends \app\modules\user\models\User

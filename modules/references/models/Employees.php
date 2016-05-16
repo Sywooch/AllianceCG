@@ -2,7 +2,7 @@
 
 namespace app\modules\references\models;
 use app\modules\admin\models\Companies;
-use app\modules\admin\models\Positions;
+use app\modules\references\models\Positions;
 use app\modules\admin\models\Departments;
 use app\modules\references\models\Brands;
 use app\modules\admin\models\User;

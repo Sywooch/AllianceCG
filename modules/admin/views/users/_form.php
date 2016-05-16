@@ -3,7 +3,7 @@
 use app\modules\admin\models\User;
 use app\modules\admin\models\Userroles;
 use app\modules\admin\Module;
-use app\modules\admin\models\Positions;
+use app\modules\references\models\Positions;
 use app\modules\admin\models\Companies;
 use app\modules\admin\models\Departments;
 use yii\helpers\ArrayHelper;
@@ -27,7 +27,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'patronymic', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'patronymic' )]) ?>
     
     <?php
-        $pos = Positions::find()->all();
+        $pos = Positions::find()->where(['<>', 'state', Positions::STATUS_BLOCKED])->all();
     
         $items = ArrayHelper::map($pos,'id','position');
         $params = [

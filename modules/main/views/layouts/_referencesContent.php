@@ -54,6 +54,11 @@ use rmrevin\yii\fontawesome\FA;
                 'url' => '/references/bodytypes',
                 // 'visible' => Yii::$app->user->can('admin'),
             ],
+            [
+                'label' => FA::icon('briefcase') . ' ' . Module::t('module', 'ADMIN_POSITIONS'),
+                'url' => '/references/positions',
+                // 'options' => ['class' => 'list-group-item'],
+            ],
         ]),
     ])
     : false;  

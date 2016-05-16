@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use dosamigos\tinymce\TinyMce;
-use app\modules\admin\Module;
+use app\modules\references\Module;
 use rmrevin\yii\fontawesome\FA;
 
 /* @var $this yii\web\View */
@@ -22,10 +22,10 @@ use rmrevin\yii\fontawesome\FA;
            
     <div class="form-group" style="text-align: right;">
         <?= Html::submitButton(
-            $model->isNewRecord ? FA::icon('floppy-o') . ' ' . Module::t('module', 'ADMIN_CREATE_POSITIONS') : FA::icon('edit') . ' ' . Module::t('module', 'ADMIN_POSITIONS_BUTTON_UPDATE'),
+            $model->isNewRecord ? FA::icon('floppy-o') . ' ' . Module::t('module', 'CREATE') : FA::icon('edit') . ' ' . Module::t('module', 'UPDATE'),
             ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']
         ) ?>
-        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'ADMIN_POSITIONS_BUTTON_CANCEL'), ['/admin/positions'], ['class' => 'btn btn-danger btn-sm']) ?>
+        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'CANCEL'), ['index'], ['class' => 'btn btn-danger btn-sm']) ?>
     </div>    
     
 

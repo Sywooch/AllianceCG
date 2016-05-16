@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 use app\modules\references\Module;
 use rmrevin\yii\fontawesome\FA;
 use app\modules\admin\models\Companies;
-use app\modules\admin\models\Positions;
+use app\modules\references\models\Positions;
 use app\modules\admin\models\Departments;
 use app\modules\references\models\Brands;
 use yii\helpers\ArrayHelper;
@@ -93,7 +93,7 @@ use yii\helpers\ArrayHelper;
     <?php // echo $form->field($model, 'position_id', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('briefcase') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'position_id' )]) ?>
 
     <?php
-        $positions = Positions::find()->all();
+        $positions = Positions::find()->where(['<>', 'state', Positions::STATUS_BLOCKED])->all();
     
         $items = ArrayHelper::map($positions,'id','position');
         $params = [

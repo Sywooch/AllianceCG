@@ -5,18 +5,19 @@ use yii\grid\GridView;
 use app\components\grid\ActionColumn;
 use app\components\grid\LinkColumn;
 use yii\helpers\Url;
-use app\modules\admin\Module;
+use app\modules\references\Module;
 use yii\helpers\ArrayHelper;
-use app\modules\admin\models\Positions;
+use app\modules\references\models\Positions;
 use rmrevin\yii\fontawesome\FA;
 use yii\web\View;
+use app\components\grid\SetColumn;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\admin\models\PositionsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('module', 'ADMIN_POSITIONS');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_ADMIN'), 'url' => ['/admin']];
+$this->title = Module::t('module', 'POSITIONS');
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['/references']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -26,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="positions-index center-block">
 
 <?= GridView::widget([
-    'id' => 'admin-positions-grid',
+    'id' => 'positions-grid',
     'dataProvider' => $dataProvider,
     // 'filterModel' => $searchModel,
     // 'summary'=> "{begin} - {end} {count} {totalCount} {page} {pageCount}",
@@ -58,11 +59,36 @@ $this->params['breadcrumbs'][] = $this->title;
             },   
             'contentOptions' => ['class'=>'success;'],
         ],
-
         [
-            'class' => 'yii\grid\ActionColumn',
-            'header' => 'Действия',
+            'attribute' => 'created_at',
+            'format' => 'datetime',
         ],
+        [
+            'attribute' => 'updated_at',
+            'format' => 'datetime',
+        ],
+        [
+            'attribute' => 'authorname',
+            'value' => 'authorname.full_name',
+        ],
+
+        // [
+        //     'class' => 'yii\grid\ActionColumn',
+        //     'header' => 'Действия',
+        // ],
+        [
+            'class' => SetColumn::className(),
+            // 'filter' => Brands::getStatesArray(),
+            'attribute' => 'state',
+            'visible' => Yii::$app->user->can('admin'),
+            'name' => 'statesName',
+            'contentOptions'=>['style'=>'width: 50px;'],
+            'cssCLasses' => [
+                Positions::STATUS_ACTIVE => 'success',
+                Positions::STATUS_BLOCKED => 'danger',
+            ],
+        ],
+
     ],
 ]); 
 ?>

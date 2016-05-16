@@ -1,10 +1,10 @@
 <?php
 
-namespace app\modules\admin\controllers;
+namespace app\modules\references\controllers;
 
 use Yii;
-use app\modules\admin\models\Positions;
-use app\modules\admin\models\PositionsSearch;
+use app\modules\references\models\Positions;
+use app\modules\references\models\PositionsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -99,12 +99,12 @@ class PositionsController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
+    // public function actionDelete($id)
+    // {
+    //     $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
-    }
+    //     return $this->redirect(['index']);
+    // }
 
     /**
      * Finds the Positions model based on its primary key value.
@@ -125,15 +125,21 @@ class PositionsController extends Controller
     public function actionMultipledelete()
     {
         $pk = Yii::$app->request->post('row_id');
-
-        foreach ($pk as $key => $value) 
-        {
-            $sql = "DELETE FROM {{%positions}} WHERE id = $value";
-            $query = Yii::$app->db->createCommand($sql)->execute();
-        }
+        $val = Positions::STATUS_BLOCKED;
+        Positions::updateAll(['state' => $val], ['in', 'id', $pk]);
 
         return $this->redirect(['index']);
 
     }
+
+    public function actionMultiplerestore()
+    {
+        $pk = Yii::$app->request->post('row_id');
+        $val = Positions::STATUS_ACTIVE;
+        Positions::updateAll(['state' => $val], ['in', 'id', $pk]);
+
+        return $this->redirect(['index']);
+
+    }  
 
 }

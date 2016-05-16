@@ -46,4 +46,9 @@
 			'REGIONANDCODES' => 'Регион с учетом кода',
 			'IMPORTEXCEL' => 'Импорт',
 			'GO_BACK' => 'Назад',
+			'REFERENCES_POSITION' => 'Должность',
+			'REFERENCES_DESCRIPTION' => 'Описание',
+			'COUNTUSERS' => 'Кол-во пользователей',
+			'POSITIONS' => 'Должности',
+			''
 		];

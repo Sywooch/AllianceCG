@@ -23,6 +23,7 @@ class m160516_063756_create_client_circulation_table extends Migration
             'updated_at' => $this->integer()->notNull(),
             'author' => $this->string(255),
             'region_id' => $this->integer()->notNull(),
+            'employee_id' => $this->integer()->notNull(),
         ]);
     }
 

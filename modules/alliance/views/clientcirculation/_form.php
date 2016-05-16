@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\widgets\MaskedInput;
 use app\modules\alliance\Module;
 use app\modules\references\models\Regions;
+use app\modules\references\models\Employees;
 use yii\helpers\ArrayHelper;
 use rmrevin\yii\fontawesome\FA;
 
@@ -44,6 +45,23 @@ use rmrevin\yii\fontawesome\FA;
         ];
         echo $form->field($model, 'region_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('map') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
     ?> 
+
+
+    <?php
+        $employees = Employees::find()->where(['<>', 'state', Employees::STATUS_BLOCKED])->all();
+        // $regions = Regions::find()->all();
+        // 
+        // foreach ($employees as $arr) {
+        //     $arr->merge_employees = $arr->name . ' ' . $arr->surname;
+        // }
+    
+        $items = ArrayHelper::map($employees,'id','surname');
+        $params = [
+            'options' => isset($_GET['id']) ? [$_GET['id'] => ['Selected'=>'selected']] : false,
+            'prompt' => '-- ' . $model->getAttributeLabel( 'employee_id' ) . ' --',
+        ];
+        echo $form->field($model, 'employee_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('map') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
+    ?>     
 
 
     <div class="form-group" style="text-align: right">

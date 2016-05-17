@@ -4,7 +4,7 @@ use app\modules\admin\models\User;
 use app\modules\admin\models\Userroles;
 use app\modules\admin\Module;
 use app\modules\references\models\Positions;
-use app\modules\admin\models\Companies;
+use app\modules\references\models\Companies;
 use app\modules\references\models\Departments;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -39,12 +39,8 @@ use yii\widgets\ActiveForm;
     
     <?php
         $companies = Companies::find()->all();
-
-        foreach ($companies as $arr) {
-            $arr->merge_companies = $arr->company_name . ' (' . $arr->company_brand . ')';
-        }
     
-        $items = ArrayHelper::map($companies,'id','merge_companies');
+        $items = ArrayHelper::map($companies,'id','company_name');
         $params = [
             'prompt' => '-- ' . $model->getAttributeLabel( 'company' ) . ' --',
         ];

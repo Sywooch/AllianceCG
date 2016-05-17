@@ -26,7 +26,7 @@ use rmrevin\yii\fontawesome\FA;
     <?php // echo $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'phone', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('phone') . ' </span>{input}</div>{error}'])->widget(MaskedInput::className(), [
-        'mask' => '+7(999)999-99-99',
+        'mask' => '+7 (999) 999-99-99',
     ]) ?>
 
     <?= $form->field($model, 'email', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('inbox') . ' </span>{input}</div>{error}'])->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('email')]) ?>

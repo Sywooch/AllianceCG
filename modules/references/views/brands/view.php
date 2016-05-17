@@ -81,11 +81,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </div>
 
-<p style="text-align: right">
+
+<div class="col-sm-3">
         <?= Html::a(FA::icon('edit') . ' ' . Module::t('module', 'CREATE_MODEL'), ['/references/models/create?id=' . $model->id], [
-                'class' => 'plus btn-success btn-sm',
+                'class' => 'btn-success btn-sm',
             ]) ?>
-</p>
+</div>
+
+<div class="col-sm-9">
+    <?= '<h3>' . Module::t('module', 'MODELS_THIS_BRAND') . '</h3>' ?>
+</div>
+
 <?php
     echo GridView::widget([
         'dataProvider' => new ActiveDataProvider(['query' => $model->getModels()]),
@@ -113,11 +119,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<p style="text-align: right">
+<div class="col-sm-3">
         <?= Html::a(FA::icon('edit') . ' ' . Module::t('module', 'CREATE_EMPLOYEES'), ['/references/employees/create?id=' . $model->id], [
                 'class' => 'plus btn-success btn-sm',
             ]) ?>
-</p>
+</div>
+
+<div class="col-sm-9">
+    <?= '<h3>' . Module::t('module', 'EMPLOYEES_THIS_BRAND') . '</h3>' ?>
+</div>
 
 <?php
 

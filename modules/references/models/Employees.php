@@ -9,6 +9,7 @@ use app\modules\admin\models\User;
 use app\modules\references\Module;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
+use yii\helpers\Html;
 use yii\behaviors\TimestampBehavior;
 
 use Yii;
@@ -102,6 +103,7 @@ class Employees extends \yii\db\ActiveRecord
             'photo' => Module::t('module', 'PHOTO'),
             'file' => Module::t('module', 'PHOTO'),
             'company_id' => Module::t('module', 'COMPANY'),
+            'companies' => Module::t('module', 'COMPANY'),
             'department_id' => Module::t('module', 'DEPARTMENT'),
             'position_id' => Module::t('module', 'POSITION'),
             'globalSearch' => Module::t('module', 'SEARCH'),
@@ -116,6 +118,7 @@ class Employees extends \yii\db\ActiveRecord
             'updated_at' => Module::t('module', 'UPDATED_AT'), 
             'author' => Module::t('module', 'AUTHOR'),
             'authorname' => Module::t('module', 'AUTHOR'),
+            'brandlogo' => Module::t('module', 'BRAND_LOGO'),
         ];
     }
 
@@ -194,6 +197,30 @@ class Employees extends \yii\db\ActiveRecord
         $nologo = self::NO_LOGO;
         $image = (isset($this->brand->brand_logo) && !empty($this->brand->brand_logo) && file_exists($this->brand->brand_logo)) ? $logo : $nologo;
         return $image;
+    }
+
+    public function getBrandlink()
+    {
+        $link = isset($this->brand->brand) ? Html::a($this->brand->brand, ['/references/brands/view', 'id' => $this->brand->id]) : false;
+        return $link;
+    }
+
+    public function getCompanylink()
+    {
+        $link = isset($this->company->company_name) ? Html::a($this->company->company_name, ['/references/companies/view', 'id' => $this->company->id]) : false;
+        return $link;
+    }
+
+    public function getDepartmentlink()
+    {
+        $link = isset($this->department->department_name) ? Html::a($this->department->department_name, ['/references/departments/view', 'id' => $this->department->id]) : false;
+        return $link;
+    }
+
+    public function getPositionlink()
+    {
+        $link = isset($this->position->position) ? Html::a($this->position->position, ['/references/positions/view', 'id' => $this->position->id]) : false;
+        return $link;
     }
 
     public function getFullName() {

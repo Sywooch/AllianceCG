@@ -61,27 +61,55 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'surname',
             // 'company_id',
             [
-                'attribute' => 'brand',
+                'attribute' => 'brandlogo',
                 // 'format' => 'image',
                 'format' => 'html',
                 'value' => function ($model) {
                     return Html::img($model->getBrandImageUrl(),['width'=>50]); 
                 },
             ],
+            // [
+            //     'attribute' => 'company',
+            //     'value' => 'company.company_name'
+            // ],
             [
-                'attribute' => 'company',
-                'value' => 'company.company_name'
-            ],
+               'attribute'=>'brand',
+               'format' => 'raw',
+               'value'=>function ($data) {
+                    return $data->getBrandlink();
+                },
+            ], 
+            [
+               'attribute'=>'company',
+               'format' => 'raw',
+               'value'=>function ($data) {
+                    return $data->getCompanylink();
+                },
+            ],   
             // 'department_id',
+            // [
+            //     'attribute' => 'department',
+            //     'value' => 'department.department_name'
+            // ],
             [
-                'attribute' => 'department',
-                'value' => 'department.department_name'
-            ],
+               'attribute'=>'department',
+               'format' => 'raw',
+               'value'=>function ($data) {
+                    return $data->getDepartmentlink();
+                },
+            ], 
             // 'position_id',
+            // [
+            //     'attribute' => 'position',
+            //     'value' => 'position.position',
+            // ],
             [
-                'attribute' => 'position',
-                'value' => 'position.position',
-            ],
+               'attribute'=>'position',
+               'format' => 'raw',
+               'value'=>function ($data) {
+                    return $data->getPositionlink();
+                },
+            ], 
             // [
             //     'attribute' => 'created_at',
             //     'format' => 'datetime',

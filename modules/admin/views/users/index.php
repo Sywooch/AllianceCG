@@ -79,23 +79,44 @@ $this->params['breadcrumbs'][] = $this->title;
             //     'contentOptions'=>['style'=>'width: 150px;'],
             //     'filter'=>ArrayHelper::map(User::find()->asArray()->all(), 'company', 'company'),
             // ],
+            // [
+            //     'attribute' => 'companies',
+            //     'value' => 'companies.company_name',
+            // ],
             [
-                'attribute' => 'companies',
-                'value' => 'companies.company_name',
-            ],
+               'attribute'=>'companies',
+               'format' => 'raw',
+               'value'=>function ($data) {
+                    return $data->getCompanylink();
+                },
+            ],            
+            // [
+            //     'attribute' => 'departments',
+            //     'value' => 'departments.department_name',
+            // ],
             [
-                'attribute' => 'departments',
-                'value' => 'departments.department_name',
-            ],
+               'attribute'=>'departments',
+               'format' => 'raw',
+               'value'=>function ($data) {
+                    return $data->getDepartmentlink();
+                },
+            ],     
             // [
             //     'attribute' => 'position',
             //     'contentOptions'=>['style'=>'width: 150px;'],
             //     'filter'=>ArrayHelper::map(User::find()->asArray()->all(), 'position', 'position'),
             // ],
+            // [
+            //     'attribute' => 'positions',
+            //     'value' => 'positions.position',
+            // ],
             [
-                'attribute' => 'positions',
-                'value' => 'positions.position',
-            ],
+               'attribute'=>'positions',
+               'format' => 'raw',
+               'value'=>function ($data) {
+                    return $data->getPositionlink();
+                },
+            ], 
             // [
             //     'attribute' => 'role',
             //     'filter'=>ArrayHelper::map(Userroles::find()->asArray()->all(), 'role', 'role_description'),

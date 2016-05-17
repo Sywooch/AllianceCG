@@ -44,17 +44,35 @@ $this->params['breadcrumbs'][] = $this->title;
              ],
             'username',
             // 'position',
+            // [
+            //     'attribute' => 'position',
+            //     'value' => isset($model->positions->position) ? $model->positions->position : false,
+            // ],
             [
                 'attribute' => 'position',
-                'value' => isset($model->positions->position) ? $model->positions->position : false,
+                'format'=>'raw',
+                'value' => $model->getPositionlink(),
+                'visible' => !empty($model->positions->position) ? true : false,
             ],
+            // [
+            //     'attribute' => 'department',
+            //     'value' => isset($model->departments->department_name) ? $model->departments->department_name : false,
+            // ],
             [
                 'attribute' => 'department',
-                'value' => isset($model->departments->department_name) ? $model->departments->department_name : false,
+                'format'=>'raw',
+                'value' => $model->getDepartmentlink(),
+                'visible' => !empty($model->departments->department_name) ? true : false,
             ],
+            // [
+            //     'attribute' => 'company',
+            //     'value' => isset($model->companies->company_name) ? $model->companies->company_name : false,
+            // ],
             [
-                'attribute' => 'company',
-                'value' => isset($model->companies->company_name) ? $model->companies->company_name : false,
+                'attribute' => 'companies',
+                'format'=>'raw',
+                'value' => $model->getCompanylink(),
+                'visible' => !empty($model->companies->company_name) ? true : false,
             ],
             // 'company',
             [
@@ -65,6 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'role',
                 'value' => isset($model->userroles->role_description) ? $model->userroles->role_description : false,
+                'visible' => isset($model->userroles->role_description) ? true : false,
                 // 'value' => Yii::$app->user->identity->getRoleName(),
             ],
             [

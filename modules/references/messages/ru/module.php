@@ -56,4 +56,7 @@
 			'COMPANY_BRAND' => 'Бренд',
 			'COMPANY_LOGO' => 'Логотип',
 			'COMPANY_DESCRIPTION' => 'Описание',
+			'BRAND_LOGO' => 'Логотип',
+			'MODELS_THIS_BRAND' => 'Автомобили бренда',
+			'EMPLOYEES_THIS_BRAND' => 'Сотрудники бренда',
 		];

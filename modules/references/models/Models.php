@@ -5,6 +5,7 @@ namespace app\modules\references\models;
 use Yii;
 use app\modules\references\Module;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\behaviors\TimestampBehavior;
 use app\modules\admin\models\User;
 
@@ -117,5 +118,17 @@ class Models extends \yii\db\ActiveRecord
     public function getFullmodelname()
     {
         return $this->brand->brand . ' ' . $this->model_name . ' ' . $this->bodytype->body_type;
+    }
+
+    public function getBrandslink()
+    {
+        $link = isset($this->brand->brand) ? Html::a($this->brand->brand, ['/references/brands/view', 'id' => $this->brand->id]) : false;
+        return $link;
+    }
+
+    public function getBodytypeslink()
+    {
+        $link = isset($this->bodytype->body_type) ? Html::a($this->bodytype->body_type, ['/references/brands/view', 'id' => $this->bodytype->id]) : false;
+        return $link;
     }
 }

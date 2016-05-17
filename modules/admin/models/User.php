@@ -7,6 +7,8 @@ use yii\helpers\ArrayHelper;
 use app\modules\admin\Module;
 use app\modules\references\models\Positions;
 use app\modules\references\models\Departments;
+use app\modules\references\models\Companies;
+use yii\helpers\Html;
 use Yii;
  
 class User extends \app\modules\user\models\User
@@ -135,6 +137,24 @@ class User extends \app\modules\user\models\User
     public function getCompanies()
     {
         return $this->hasOne(Companies::className(), ['id' => 'company']);
+    }
+
+    public function getCompanylink()
+    {
+        $link = isset($this->companies->company_name) ? Html::a($this->companies->company_name, ['/references/companies/view', 'id' => $this->companies->id]) : false;
+        return $link;
+    }
+
+    public function getDepartmentlink()
+    {
+        $link = isset($this->departments->department_name) ? Html::a($this->departments->department_name, ['/references/departments/view', 'id' => $this->departments->id]) : false;
+        return $link;
+    }
+
+    public function getPositionlink()
+    {
+        $link = isset($this->positions->position) ? Html::a($this->positions->position, ['/references/positions/view', 'id' => $this->positions->id]) : false;
+        return $link;
     }
     
     public function afterSave($insert, $changedAttributes)

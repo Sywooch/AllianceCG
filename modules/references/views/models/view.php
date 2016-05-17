@@ -35,14 +35,26 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
+            // [
+            //     'attribute' => 'brand',
+            //     'value' => $model->brand->brand,
+            // ],
             [
                 'attribute' => 'brand',
-                'value' => $model->brand->brand,
+                'format'=>'raw',
+                'value' => $model->getBrandslink(),
+                'visible' => !empty($model->brand->brand) ? true : false,
             ],
             'model_name',
+            // [
+            //     'attribute' => 'bodytype',
+            //     'value' => $model->bodytype->body_type,
+            // ],
             [
-                'attribute' => 'bodytype',
-                'value' => $model->bodytype->body_type,
+                'attribute' => 'brand',
+                'format'=>'raw',
+                'value' => $model->getBodytypeslink(),
+                'visible' => !empty($model->bodytype->body_type) ? true : false,
             ],
         ],
     ]) ?>

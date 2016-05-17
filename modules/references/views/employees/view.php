@@ -39,29 +39,40 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'fullName',
             ],
-            // 'name',
-            // 'surname',
-            // 'patronimyc',
             [
                 'attribute' => 'photo',
                 'value'=>$model->getImageUrl(),
                 'format' => ['image',['width'=>'50']],
             ],
-            // 'photo',
-            // 'company_id',
+            // [
+            //     'attribute' => 'company',
+            //     'value' => $model->company->company_name,
+            // ],
             [
-                'attribute' => 'company',
-                'value' => $model->company->company_name,
+                'attribute' => 'companies',
+                'format'=>'raw',
+                'value' => $model->getCompanylink(),
+                'visible' => !empty($model->company->company_name) ? true : false,
             ],
-            // 'department_id',
+            // [
+            //     'attribute' => 'department',
+            //     'value' => $model->department->department_name,
+            // ],
             [
                 'attribute' => 'department',
-                'value' => $model->department->department_name,
+                'format'=>'raw',
+                'value' => $model->getDepartmentlink(),
+                'visible' => !empty($model->department->department_name) ? true : false,
             ],
-            // 'position_id',
+            // [
+            //     'attribute' => 'position',
+            //     'value' => $model->position->position,
+            // ],
             [
                 'attribute' => 'position',
-                'value' => $model->position->position,
+                'format'=>'raw',
+                'value' => $model->getPositionlink(),
+                'visible' => !empty($model->position->position) ? true : false,
             ],
         ],
     ]) ?>

@@ -15,7 +15,7 @@ class m160516_063756_create_client_circulation_table extends Migration
         $this->createTable('{{%client_circulation}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string(),
-            'phone' => $this->string('16'),
+            'phone' => $this->string('18'),
             'email' => $this->string(),
             // 'region' => $this->string(),
             'state' => $this->integer()->notNull()->defaultValue(0),

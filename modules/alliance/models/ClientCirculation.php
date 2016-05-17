@@ -64,7 +64,7 @@ class ClientCirculation extends \yii\db\ActiveRecord
         return [
             [['state', 'created_at', 'updated_at', 'region_id'], 'integer'],
             [['name', 'email', 'author'], 'string', 'max' => 255],
-            [['phone'], 'string', 'max' => 16],
+            [['phone'], 'string', 'max' => 18],
             [['globalSearch'], 'safe'],
             ['author', 'default', 'value' => Yii::$app->user->getId()],
             [['name', 'phone', 'email', 'region_id'], 'required'],

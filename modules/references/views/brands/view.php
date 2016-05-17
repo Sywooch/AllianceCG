@@ -47,8 +47,17 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'state',
             [
                 'attribute' => 'brand_logo',
-                'value'=>$model->getImageUrl(),
+                'value' => $model->getImageUrl(),
                 'format' => ['image',['width'=>'50']],
+                'visible' => !empty($model->companies->company_name) ? true : false,
+            ],
+            [
+                'attribute' => 'companies',
+                // 'value' => $model->companies->company_name,
+                'format'=>'raw',
+                // 'value'=>Html::a($model->companies->company_name, ['/references/companies/view', 'id' => $model->companies->id]),
+                'value' => $model->getCompanylink(),
+                'visible' => !empty($model->companies->company_name) ? true : false,
             ],
             [
                 'attribute' => 'state',

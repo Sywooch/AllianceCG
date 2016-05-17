@@ -148,8 +148,15 @@ class Companies extends \yii\db\ActiveRecord
      */
     public function getCompanybrandlogo()
     {
-        $logo = isset($this->brands->brand_logo) ? $this->brands->brandlogo : false;
+        $logo = isset($this->brands->brand_logo) ? '/' . $this->brands->brand_logo : false;
         return $logo;
     } 
+
+    public function getBrandlink()
+    {
+        $link = isset($this->brands->brand) ? Html::a($this->brands->brand, ['/references/brands/view', 'id' => $this->brands->id]) : false;
+        // Html::a($model->companies->company_name, ['/references/companies/view', 'id' => $model->companies->id]),
+        return $link;
+    }
 
 }

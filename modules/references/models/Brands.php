@@ -6,6 +6,7 @@ use yii\helpers\ArrayHelper;
 use yii\behaviors\TimestampBehavior;
 use app\modules\admin\models\User;
 use yii\helpers\Url;
+use yii\helpers\Html;
 
 use Yii;
  
@@ -20,6 +21,7 @@ class Brands extends \yii\db\ActiveRecord
 {
 
     public $file;
+    // public $brandlogo;
 
     const STATUS_BLOCKED = 1;
     const STATUS_ACTIVE = 0;
@@ -159,5 +161,12 @@ class Brands extends \yii\db\ActiveRecord
     public function getCompanies()
     {
         return $this->hasOne(Companies::className(), ['company_brand' => 'id']);
+    }
+
+    public function getCompanylink()
+    {
+        $link = isset($this->companies->company_name) ? Html::a($this->companies->company_name, ['/references/companies/view', 'id' => $this->companies->id]) : false;
+        // Html::a($model->companies->company_name, ['/references/companies/view', 'id' => $model->companies->id]),
+        return $link;
     }
 }

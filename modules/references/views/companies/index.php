@@ -91,11 +91,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 },   
                 'contentOptions' => ['class'=>'success;'],
             ], 
-            [
-                'class' => ActionColumn::className(),
-                'contentOptions'=>['style'=>'width: 20px;'],
-                'template' => '{update}',
-            ],
+            // [
+            //     'class' => ActionColumn::className(),
+            //     'contentOptions'=>['style'=>'width: 20px;'],
+            //     'template' => '{update}',
+            // ],
         ],
     ]); ?>
 

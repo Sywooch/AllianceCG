@@ -41,9 +41,17 @@ $this->params['breadcrumbs'][] = $this->title;
     'attributes' => [
         'company_name',
         // 'company_brand',
+        // [
+        //   'attribute' => 'brands',
+        //   'value' => (isset($model->brands->brand) && !empty($model->brands->brand)) ? $model->brands->brand : false,
+        // ],
         [
-          'attribute' => 'brands',
-          'value' => (isset($model->brands->brand) && !empty($model->brands->brand)) ? $model->brands->brand : false,
+            'attribute' => 'brands',
+            // 'value' => $model->companies->company_name,
+            'format'=>'raw',
+            // 'value'=>Html::a($model->companies->company_name, ['/references/companies/view', 'id' => $model->companies->id]),
+            'value' => $model->getBrandlink(),
+            'visible' => !empty($model->brands->brand) ? true : false,
         ],
         [
           'attribute' => 'brandlogo',

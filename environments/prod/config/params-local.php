@@ -1,6 +1,9 @@
 <?php
 
 return [
-    'adminEmail' => 'admin@example.com',
-    'supportEmail' => 'admin@example.com',
+    'adminEmail' => 'ADMIN_EMAIL',
+    'supportEmail' => 'SUPPORT_EMAIL',
+    'skoda' => 'SKODA',
+    'sk_brand' => 'ŠKODA',
+    'icon-framework' => 'fa',
 ];

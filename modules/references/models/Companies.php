@@ -57,7 +57,7 @@ class Companies extends \yii\db\ActiveRecord
             'id' => Module::t('module', 'ID'),
             'company_name' => Module::t('module', 'COMPANY_NAME'),
             'company_brand' => Module::t('module', 'COMPANY_BRAND'),
-            'company_logo' => Module::t('module', 'ADMIN_COMPANY_LOGO'),
+            'company_logo' => Module::t('module', 'COMPANY_LOGO'),
             'brandlogo' => Module::t('module', 'COMPANY_LOGO'),
             'company_description' => Module::t('module', 'COMPANY_DESCRIPTION'),
             'userscount' => Module::t('module', 'COUNTUSERS'),   

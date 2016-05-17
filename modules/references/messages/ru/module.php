@@ -54,4 +54,6 @@
 			'COMPANIES' => 'Организации',
 			'COMPANY_NAME' => 'Название',
 			'COMPANY_BRAND' => 'Бренд',
+			'COMPANY_LOGO' => 'Логотип',
+			'COMPANY_DESCRIPTION' => 'Описание',
 		];

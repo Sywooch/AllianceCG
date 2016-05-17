@@ -15,6 +15,10 @@ class m160306_205848_create_positions_table extends Migration
             'id' => $this->primaryKey(),
             'position' => $this->string(255),
             'description' => $this->text(),
+            'state' => $this->integer()->notNull()->defaultValue(0),
+            'created_at' => $this->integer()->notNull(),
+            'updated_at' => $this->integer()->notNull(),
+            'author' => $this->string(255),
         ]);
     }
 

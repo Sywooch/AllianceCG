@@ -15,7 +15,10 @@ class m160511_070638_create_departments_table extends Migration
         $this->createTable('{{%departments}}', [
             'id' => $this->primaryKey(),
             'department_name' => $this->string(),
-            // 'user_id' => $this->integer()->notNull(),
+            'state', $this->integer()->notNull()->defaultValue(0),
+            'created_at', $this->integer()->notNull(),
+            'updated_at', $this->integer()->notNull(),
+            'author', $this->string(255),
         ]);
 
         // $this->createIndex('idx-departments', '{{%departments}}', 'user_id');

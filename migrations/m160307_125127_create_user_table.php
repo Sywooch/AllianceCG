@@ -22,6 +22,7 @@ class m160307_125127_create_user_table extends Migration
             'photo' => $this->string(255),
             'company' => $this->string(255),
             'position' => $this->string(255),
+            'department' => $this->integer()->notNull(),
             'role' => $this->string(255),
             'username' => $this->string()->notNull(),
             'auth_key' => $this->string(32),

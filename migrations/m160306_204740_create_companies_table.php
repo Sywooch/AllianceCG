@@ -16,6 +16,10 @@ class m160306_204740_create_companies_table extends Migration
             'company_name' => $this->string(255),
             'company_brand' => $this->string(255),
             'company_description' => $this->text(),
+            'state' => $this->integer()->notNull()->defaultValue(0),
+            'created_at' => $this->integer()->notNull(),
+            'updated_at' => $this->integer()->notNull(),
+            'author' => $this->string(255),
         ]);
     }
 

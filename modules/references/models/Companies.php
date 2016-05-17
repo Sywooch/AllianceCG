@@ -1,10 +1,11 @@
 <?php
 
-namespace app\modules\admin\models;
+namespace app\modules\references\models;
 
 use Yii;
-use app\modules\admin\Module;
+use app\modules\references\Module;
 use yii\helpers\Html;
+use app\modules\admin\models\User;
 
 /**
  * This is the model class for table "{{%companies}}".
@@ -54,11 +55,11 @@ class Companies extends \yii\db\ActiveRecord
     {
         return [
             'id' => Module::t('module', 'ID'),
-            'company_name' => Module::t('module', 'ADMIN_COMPANY_NAME'),
-            'company_brand' => Module::t('module', 'ADMIN_COMPANY_BRAND'),
+            'company_name' => Module::t('module', 'COMPANY_NAME'),
+            'company_brand' => Module::t('module', 'COMPANY_BRAND'),
             'company_logo' => Module::t('module', 'ADMIN_COMPANY_LOGO'),
-            'brandlogo' => Module::t('module', 'ADMIN_COMPANY_LOGO'),
-            'company_description' => Module::t('module', 'ADMIN_COMPANY_DESCRIPTION'),
+            'brandlogo' => Module::t('module', 'COMPANY_LOGO'),
+            'company_description' => Module::t('module', 'COMPANY_DESCRIPTION'),
             'userscount' => Module::t('module', 'COUNTUSERS'),   
             'globalSearch' => Module::t('module', 'SEARCH'),        
         ];

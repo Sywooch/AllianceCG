@@ -1,14 +1,14 @@
 <?php
 
-namespace app\modules\admin\models;
+namespace app\modules\references\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\admin\models\Companies;
+use app\modules\references\models\Companies;
 
 /**
- * CompaniesSearch represents the model behind the search form about `app\modules\admin\models\Companies`.
+ * CompaniesSearch represents the model behind the search form about `app\modules\references\models\Companies`.
  */
 class CompaniesSearch extends Companies
 {

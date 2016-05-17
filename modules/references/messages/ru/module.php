@@ -51,4 +51,7 @@
 			'COUNTUSERS' => 'Кол-во пользователей',
 			'POSITIONS' => 'Должности',
 			'DEPARTMENTS' => 'Отделы',
+			'COMPANIES' => 'Организации',
+			'COMPANY_NAME' => 'Название',
+			'COMPANY_BRAND' => 'Бренд',
 		];

@@ -2,15 +2,15 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use app\modules\admin\Module;
+use app\modules\references\Module;
 use rmrevin\yii\fontawesome\FA;
 use yii\web\View;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\admin\models\CompaniesSearch */
+/* @var $model app\modules\references\models\CompaniesSearch */
 /* @var $form yii\widgets\ActiveForm */
 
-$multipleDelete = file_get_contents('js/modules/admin/companies/multipleDelete.js');
+$multipleDelete = file_get_contents('js/modules/references/companies/deleteRestore.js');
 $this->registerJs($multipleDelete, View::POS_END);
 
 ?>
@@ -34,11 +34,11 @@ $this->registerJs($multipleDelete, View::POS_END);
     <div class="form-group col-sm-6" style="text-align: right">
         <?= Html::submitButton(FA::icon('search') . ' ' . Module::t('module', 'SEARCH'), ['class' => 'btn btn-primary btn-sm']) ?>
 
-        <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'ADMIN_USERS_CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+        <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
         
-        <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'ADMIN_USERS_REFRESH'), ['index'], ['class' => 'btn btn-info btn-sm', 'id' => 'refreshButton']) ?>
+        <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'REFRESH'), ['index'], ['class' => 'btn btn-info btn-sm', 'id' => 'refreshButton']) ?>
 
-        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'ADMIN_USERS_DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']) ?> 
+        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']) ?> 
     
     </div>
 

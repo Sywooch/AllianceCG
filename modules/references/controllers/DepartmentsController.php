@@ -8,6 +8,7 @@ use app\modules\references\models\DepartmentsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * DepartmentsController implements the CRUD actions for Departments model.
@@ -24,6 +25,21 @@ class DepartmentsController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions'=>['index', 'view'],
+                        'roles' => ['seniorcreditspesialist', 'chiefcredit', 'admin', 'root'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions'=>['create', 'update', 'multipledelete', 'multiplerestore', 'delete'],
+                        'roles' => ['admin', 'root'],
+                    ],
                 ],
             ],
         ];
@@ -99,26 +115,12 @@ class DepartmentsController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
+    // public function actionDelete($id)
+    // {
+    //     $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
-    }
-
-    public function actionMultipledelete()
-    {
-        $pk = Yii::$app->request->post('row_id');
-
-        foreach ($pk as $key => $value) 
-        {
-            $sql = "DELETE FROM {{%departments}} WHERE id = $value";
-            $query = Yii::$app->db->createCommand($sql)->execute();
-        }
-
-        return $this->redirect(['index']);
-
-    }
+    //     return $this->redirect(['index']);
+    // }
 
     /**
      * Finds the Departments model based on its primary key value.
@@ -135,4 +137,32 @@ class DepartmentsController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     * Description
+     * @return type
+     */
+    public function actionMultipledelete()
+    {
+        $pk = Yii::$app->request->post('row_id');
+        $val = Departments::STATUS_BLOCKED;
+        Departments::updateAll(['state' => $val], ['in', 'id', $pk]);
+
+        return $this->redirect(['index']);
+
+    } 
+
+    /**
+     * Description
+     * @return type
+     */
+    public function actionMultiplerestore()
+    {
+        $pk = Yii::$app->request->post('row_id');
+        $val = Departments::STATUS_ACTIVE;
+        Departments::updateAll(['state' => $val], ['in', 'id', $pk]);
+
+        return $this->redirect(['index']);
+
+    }   
 }

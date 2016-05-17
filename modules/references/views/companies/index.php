@@ -2,19 +2,19 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use app\modules\admin\Module;
+use app\modules\references\Module;
 use app\components\grid\ActionColumn;
 use yii\helpers\ArrayHelper;
-use app\modules\admin\models\Companies;
+use app\modules\references\models\Companies;
 use app\components\grid\LinkColumn;
 use rmrevin\yii\fontawesome\FA;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\admin\models\CompaniesSearch */
+/* @var $searchModel app\modules\references\models\CompaniesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('module', 'ADMIN_COMPANIES_TITLE');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN'), 'url' => ['/admin']];
+$this->title = Module::t('module', 'COMPANIES');
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['/references']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="user-index center-block">
 
     <?= GridView::widget([
-        'id' => 'companies-positions-grid',
+        'id' => 'companies-grid',
         'dataProvider' => $dataProvider,
         // 'filterModel' => $searchModel,
         'layout'=>"{pager}\n{summary}\n{items}",

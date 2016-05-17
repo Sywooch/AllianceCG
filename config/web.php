@@ -9,20 +9,11 @@ $config = [
             'timeZone' => 'UTC',
             'dateFormat' => 'yyyy-MM-dd',
             'timeFormat' => 'php:H:i:s',
-            'datetimeFormat' => 'yyyy-MM-dd H:mm',
+            'datetimeFormat' => 'yyyy-MM-dd HH:mm',
             'decimalSeparator' => ',',
             'thousandSeparator' => ' ',
             'currencyCode' => 'EUR',
         ],
-//        'authManager' => [
-//            'class' => 'yii\rbac\DbManager',
-//            'defaultRoles' => [
-//                'manager',
-//                'head',
-//                'admin',
-//                'root'
-//            ],
-//        ],
         'user' => [
             'identityClass' => 'app\modules\user\models\User',
             'enableAutoLogin' => true,

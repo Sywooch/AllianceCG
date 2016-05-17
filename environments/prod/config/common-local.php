@@ -26,7 +26,7 @@ return [
         ], 
         'mailer' => [
            'class' => 'yii\swiftmailer\Mailer',
-           'viewPath' => '@app/mail',
+           'viewPath' => '@app/modules/main/mail',
            'useFileTransport' => false,
            'transport' => [
               'class'=>'Swift_SmtpTransport',

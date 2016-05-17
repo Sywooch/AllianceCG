@@ -5,6 +5,8 @@ use yii\widgets\ActiveForm;
 use dosamigos\tinymce\TinyMce;
 use app\modules\references\Module;
 use rmrevin\yii\fontawesome\FA;
+use app\modules\references\models\Brands;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\references\models\Companies */
@@ -30,11 +32,18 @@ use rmrevin\yii\fontawesome\FA;
    
     <?= $form->field($model, 'company_name', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('institution') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'company_name' )]) ?>
     
-    <?= $form->field($model, 'company_brand', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('institution') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'company_brand' )]) ?>
+    <?php // echo $form->field($model, 'company_brand', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('institution') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'company_brand' )]) ?>
 
-    <?php $form->field($model, 'brandlogo')->fileInput() ?>
+    <?php
+        $brands = Brands::find()->where(['<>', 'state', Brands::STATUS_BLOCKED])->all();
     
-    <?= $form->field($model, 'brandlogo', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('photo') . ' </span>{input}</div>{error}'])->fileInput() ?>
+        $items = ArrayHelper::map($brands,'id','brand');
+        $params = [
+            'options' => isset($_GET['id']) ? [$_GET['id'] => ['Selected'=>'selected']] : false,
+            'prompt' => '-- ' . $model->getAttributeLabel( 'company_brand' ) . ' --',
+        ];
+        echo $form->field($model, 'company_brand', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('car') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
+    ?> 
 
     <?= $form->field($model, 'company_description')->widget(TinyMce::className(), [
     'options' => ['rows' => 10, 'cols' => 20],

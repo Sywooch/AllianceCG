@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use yii\filters\AccessControl;
 
 /**
  * CompaniesController implements the CRUD actions for Companies model.
@@ -24,6 +25,21 @@ class CompaniesController extends Controller
                     'delete' => ['post'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions'=>['index', 'view'],
+                        'roles' => ['seniorcreditspesialist', 'chiefcredit', 'admin', 'root'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions'=>['create', 'update', 'multipledelete', 'multiplerestore', 'delete'],
+                        'roles' => ['admin', 'root'],
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -33,10 +49,12 @@ class CompaniesController extends Controller
      */
     public function actionIndex()
     {
+        $model = new Companies();
         $searchModel = new CompaniesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'model' => $model,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -48,29 +66,29 @@ class CompaniesController extends Controller
         return $this->render('test');
     }    
 
-    public function actionCreate()
-    {
-        $model = new Companies();
+    // public function actionCreate()
+    // {
+    //     $model = new Companies();
  
-        if ($model->load(Yii::$app->request->post())) {
+    //     if ($model->load(Yii::$app->request->post())) {
 
-            $imageName = mktime(date('h'), date('i'), date('s'), date('d'), date('m'), date('y'));
-            $model->brandlogo = UploadedFile::getInstance($model, 'brandlogo');
-            if ($model->brandlogo = UploadedFile::getInstance($model, 'brandlogo'))
-            {
-                $model->brandlogo->saveAs('img/uploads/companylogo/'.$imageName.'.'.$model->brandlogo->extension);
-                $model->company_logo = 'img/uploads/companylogo/'.$imageName.'.'.$model->brandlogo->extension;
-            }
+    //         $imageName = mktime(date('h'), date('i'), date('s'), date('d'), date('m'), date('y'));
+    //         $model->brandlogo = UploadedFile::getInstance($model, 'brandlogo');
+    //         if ($model->brandlogo = UploadedFile::getInstance($model, 'brandlogo'))
+    //         {
+    //             $model->brandlogo->saveAs('img/uploads/companylogo/'.$imageName.'.'.$model->brandlogo->extension);
+    //             $model->company_logo = 'img/uploads/companylogo/'.$imageName.'.'.$model->brandlogo->extension;
+    //         }
 
-            $model->save();
+    //         $model->save();
 
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }     
+    //         return $this->redirect(['view', 'id' => $model->id]);
+    //     } else {
+    //         return $this->render('create', [
+    //             'model' => $model,
+    //         ]);
+    //     }
+    // }     
 
     /**
      * Displays a single Companies model.
@@ -89,18 +107,18 @@ class CompaniesController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    // public function actionCreate()
-    // {
-    //     $model = new Companies();
+    public function actionCreate()
+    {
+        $model = new Companies();
 
-    //     if ($model->load(Yii::$app->request->post()) && $model->save()) {
-    //         return $this->redirect(['view', 'id' => $model->id]);
-    //     } else {
-    //         return $this->render('create', [
-    //             'model' => $model,
-    //         ]);
-    //     }
-    // }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+    }
 
     /**
      * Updates an existing Companies model.
@@ -112,19 +130,8 @@ class CompaniesController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
- 
-        if ($model->load(Yii::$app->request->post())) {
 
-            $imageName = mktime(date('h'), date('i'), date('s'), date('d'), date('m'), date('y'));
-            if ($model->brandlogo = UploadedFile::getInstance($model, 'brandlogo')) {
-            @unlink($model->company_logo);
-            $model->brandlogo->saveAs('img/uploads/companylogo/'.$imageName.'.'.$model->brandlogo->extension);
-            $model->company_logo = 'img/uploads/companylogo/'.$imageName.'.'.$model->brandlogo->extension;
-
-            }
-
-            $model->save();
-
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

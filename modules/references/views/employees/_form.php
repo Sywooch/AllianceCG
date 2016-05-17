@@ -4,9 +4,9 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\modules\references\Module;
 use rmrevin\yii\fontawesome\FA;
-use app\modules\admin\models\Companies;
+use app\modules\references\models\Companies;
 use app\modules\references\models\Positions;
-use app\modules\admin\models\Departments;
+use app\modules\references\models\Departments;
 use app\modules\references\models\Brands;
 use yii\helpers\ArrayHelper;
 

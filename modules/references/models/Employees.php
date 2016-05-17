@@ -1,9 +1,9 @@
 <?php
 
 namespace app\modules\references\models;
-use app\modules\admin\models\Companies;
+use app\modules\references\models\Companies;
 use app\modules\references\models\Positions;
-use app\modules\admin\models\Departments;
+use app\modules\references\models\Departments;
 use app\modules\references\models\Brands;
 use app\modules\admin\models\User;
 use app\modules\references\Module;

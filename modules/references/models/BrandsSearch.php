@@ -25,7 +25,7 @@ class BrandsSearch extends Brands
         return [
             [['id', 'state'], 'integer'],
             [['brand', 'brand_logo', 'description'], 'safe'],
-            [['globalSearch', 'authorname'], 'safe'],
+            [['globalSearch', 'authorname', 'companies'], 'safe'],
         ];
     }
 
@@ -51,18 +51,24 @@ class BrandsSearch extends Brands
         if(!Yii::$app->user->can('admin')){
             $query->where(['state' => Brands::STATUS_ACTIVE]);
         }
-        $query->joinWith(['authorname']);
-
-        $dataProvider->sort->attributes['authorname'] = [
-            'asc' => ['{{%user}}.full_name' => SORT_ASC],
-            'desc' => ['{{%user}}.full_name' => SORT_DESC],
-        ];
+        $query->joinWith(['authorname', 'companies']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+
+        $dataProvider->sort->attributes['authorname'] = [
+            'asc' => ['{{%user}}.full_name' => SORT_ASC],
+            'desc' => ['{{%user}}.full_name' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['companies'] = [
+            'asc' => ['{{%companies}}.company_name' => SORT_ASC],
+            'desc' => ['{{%companies}}.company_name' => SORT_DESC],
+        ];
 
         $this->load($params);
 

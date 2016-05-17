@@ -57,6 +57,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
             ],
             [
+                'attribute' => 'companies',
+                'value' => 'companies.company_name',
+            ],
+            [
                 'attribute' => 'created_at',
                 'format' => 'datetime',
             ],

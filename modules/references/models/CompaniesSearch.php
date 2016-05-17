@@ -13,10 +13,11 @@ use app\modules\references\models\Companies;
 class CompaniesSearch extends Companies
 {
 
-    public $brandlogo;
     public $globalSearch;
     public $user;
     public $usercount;
+    public $authorname;
+    public $brands;
 
     /**
      * @inheritdoc
@@ -25,9 +26,8 @@ class CompaniesSearch extends Companies
     {
         return [
             [['id'], 'integer'],
-            [['brandlogo'], 'safe'],
-            [['company_name', 'company_brand', 'company_logo', 'company_description', 'brandlogo'], 'safe'],
-            [['globalSearch', 'user', 'usercount'], 'safe'],
+            [['company_name', 'company_brand', 'company_description'], 'safe'],
+            [['globalSearch', 'user', 'usercount', 'authorname', 'brands'], 'safe'],
         ];
     }
 
@@ -50,11 +50,22 @@ class CompaniesSearch extends Companies
     public function search($params)
     {
         $query = Companies::find();
+        $query->joinWith(['user', 'brands']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
+        $dataProvider->sort->attributes['authorname'] = [
+            'asc' => ['{{%user}}.full_name' => SORT_ASC],
+            'desc' => ['{{%user}}.full_name' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['brands'] = [
+            'asc' => ['{{%brands}}.brand' => SORT_ASC],
+            'desc' => ['{{%brands}}.brand' => SORT_DESC],
+        ];
+        
         $this->load($params);
 
         if (!$this->validate()) {
@@ -70,13 +81,11 @@ class CompaniesSearch extends Companies
         $query
             ->orFilterWhere(['like', 'company_name', $this->globalSearch])
             ->orFilterWhere(['like', 'company_brand', $this->globalSearch])
-            ->orFilterWhere(['like', 'company_logo', $this->globalSearch])
             ->orFilterWhere(['like', 'company_description', $this->globalSearch])
         ;
 
         // $query->andFilterWhere(['like', 'company_name', $this->company_name])
         //     ->andFilterWhere(['like', 'company_brand', $this->company_brand])
-        //     ->andFilterWhere(['like', 'company_logo', $this->company_logo])
         //     ->andFilterWhere(['like', 'company_description', $this->company_description]);
 
         return $dataProvider;

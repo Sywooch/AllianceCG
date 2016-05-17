@@ -101,6 +101,7 @@ class Brands extends \yii\db\ActiveRecord
             'author' => Module::t('module', 'AUTHOR'),
             'modelscount' => Module::t('module', 'MODELSCOUNT'),
             'employeescount' => Module::t('module', 'EMPLOYEESSCOUNT'),
+            'companies' => Module::t('module', 'COMPANIES'),
         ];
     }
 
@@ -150,5 +151,13 @@ class Brands extends \yii\db\ActiveRecord
     {
         // Customer has_many Order via Order.customer_id -> id
         return $this->hasMany(Employees::className(), ['brand_id' => 'id'])->count();
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCompanies()
+    {
+        return $this->hasOne(Companies::className(), ['company_brand' => 'id']);
     }
 }

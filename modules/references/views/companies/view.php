@@ -40,15 +40,32 @@ $this->params['breadcrumbs'][] = $this->title;
     'model' => $model,
     'attributes' => [
         'company_name',
-        'company_brand',
-         [
-             'attribute'=>'company_logo',
-             'value'=>$model->getSingleLogo(),
-             'format' => ['image',['height'=>'80']],
-         ],
+        // 'company_brand',
         [
-            'attribute' => 'company_description',
-            'format' => 'raw',
+          'attribute' => 'brands',
+          'value' => (isset($model->brands->brand) && !empty($model->brands->brand)) ? $model->brands->brand : false,
+        ],
+        [
+          'attribute' => 'brandlogo',
+          // 'value' => (isset($model->brands->brand) && !empty($model->brands->brand)) ? '/' . $model->brands->brand_logo : false,
+          'value' => $model->getCompanybrandlogo(),
+          'format' => ['image',['width'=>'50','height'=>'50']],
+        ],
+        [
+          'attribute' => 'company_description',
+          'format' => 'raw',
+        ],
+        [
+          'attribute' => 'created_at',
+          'format' => 'datetime',
+        ],
+        [
+          'attribute' => 'updated_at',
+          'format' => 'datetime',
+        ],
+        [
+          'attribute' => 'authorname',
+          'value' => $model->authorname->full_name,
         ],
     ],
 ]); 

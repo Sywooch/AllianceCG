@@ -37,7 +37,7 @@ class RegionsController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions'=>['create', 'update', 'multipledelete', 'multiplerestore', 'delete', 'importExcel'],
+                        'actions'=>['create', 'update', 'multipledelete', 'multiplerestore', 'delete', 'import-excel'],
                         'roles' => ['admin', 'root'],
                     ],
                 ],

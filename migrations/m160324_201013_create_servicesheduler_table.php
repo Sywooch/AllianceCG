@@ -15,6 +15,10 @@ class m160324_201013_create_servicesheduler_table extends Migration
             'id' => $this->primaryKey(),
             'date' => $this->date(),
             'responsible' => $this->integer()->notNull(),
+            'state' => $this->integer()->notNull()->defaultValue(0),
+            'created_at' => $this->integer()->notNull(),
+            'updated_at' => $this->integer()->notNull(),
+            'author' => $this->string(),
         ], $tableOptions);
     }
 

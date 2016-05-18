@@ -69,6 +69,11 @@
             'NAV_ALLIANCE_PHONEBOOK' => 'Телефонная книга',
             'NAV_ALLIANCE_DUTY' => 'График дежурств',
             'NAV_ALLIANCE_CREDITCALENDAR' => 'ОК. Календарь',
+            'CREATED_AT' => 'Создан',
+            'UPDATED_AT' => 'Изменен',
+            'AUTHOR' => 'Автор',
+            'CREATE' => 'Добавить',
+            'UPDATE' => 'Редактирование',
             
 	];
 	

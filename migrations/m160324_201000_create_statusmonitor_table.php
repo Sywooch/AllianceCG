@@ -16,6 +16,10 @@ class m160324_201000_create_statusmonitor_table extends Migration
             'regnumber' => $this->string(255),
             'from' => $this->datetime(),
             'to' => $this->datetime(),
+            'state' => $this->integer()->notNull()->defaultValue(0),
+            'created_at' => $this->integer()->notNull(),
+            'updated_at' => $this->integer()->notNull(),
+            'author' => $this->string(),
         ], $tableOptions);
     }
 

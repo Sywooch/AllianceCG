@@ -176,6 +176,18 @@ endif; ?>
                 ],
                 [
                     'class' => SetColumn::className(),
+                    // 'filter' => Brands::getStatesArray(),
+                    'attribute' => 'state',
+                    'visible' => Yii::$app->user->can('admin'),
+                    'name' => 'statesName',
+                    'contentOptions'=>['style'=>'width: 50px;'],
+                    'cssCLasses' => [
+                        Statusmonitor::STATUS_ACTIVE => 'success',
+                        Statusmonitor::STATUS_BLOCKED => 'danger',
+                    ],
+                ],
+                [
+                    'class' => SetColumn::className(),
                     'attribute' => 'carstatus',
                     'filter' => false,
                     'format' => 'raw',    

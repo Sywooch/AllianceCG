@@ -6,6 +6,8 @@ use Yii;
 use app\modules\skoda\Module;
 use app\modules\skoda\models\Servicesheduler;
 use app\modules\references\models\Employees;
+use yii\behaviors\TimestampBehavior;
+use app\modules\admin\models\User;
 
 /**
  * This is the model class for table "{{%servicesheduler}}".
@@ -31,6 +33,23 @@ class Servicesheduler extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => function () {
+                    return date('U');
+                },
+            ],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
@@ -39,7 +58,8 @@ class Servicesheduler extends \yii\db\ActiveRecord
             [['responsible'], 'safe'],
             [['date_from', 'date_to'], 'safe'],
             [['date'], 'unique'],
-            [['responsible'], 'string']
+            [['responsible'], 'string'],
+            ['author', 'default', 'value' => Yii::$app->user->getId()],
         ];
     }
 
@@ -52,8 +72,17 @@ class Servicesheduler extends \yii\db\ActiveRecord
             'id' => Module::t('module', 'ID'),
             'date' => Module::t('module', 'WORKSHEDULER_DATE'),
             'responsible' => Module::t('module', 'WORKSHEDULER_RESPONSIBLE'),
+            'author' => Module::t('module', 'AUTHOR'),
         ];
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAuthorname()
+    {
+        return $this->hasOne(User::className(), ['id' => 'author']);
+    } 
 
     /**
      * @return \yii\db\ActiveQuery

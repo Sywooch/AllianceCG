@@ -8,6 +8,7 @@ use app\modules\admin\models\User;
 use app\modules\skoda\models\Statusmonitor;
 use app\modules\skoda\models\Servicesheduler;
 use yii\helpers\ArrayHelper;
+use yii\behaviors\TimestampBehavior;
 // use app\components\validators\WorkshedulerValidator;
 
 /**
@@ -32,12 +33,33 @@ class Statusmonitor extends \yii\db\ActiveRecord
     const STATUS_ATWORK = 1;
     const STATUS_WAIT = 2;
 
+    const STATUS_BLOCKED = 1;
+    const STATUS_ACTIVE = 0;
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
         return '{{%statusmonitor}}';
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => function () {
+                    return date('U');
+                },
+            ],
+        ];
     }
 
     public function getCarWorkStatus() 
@@ -134,8 +156,22 @@ class Statusmonitor extends \yii\db\ActiveRecord
             ['to', 'validateWorkshedulerTo'],
             ['from', 'validateWorkshedulerFrom'],
             [['responsible', 'regnumber'], 'string', 'max' => 255],
+            ['author', 'default', 'value' => Yii::$app->user->getId()],
         ];
     }
+
+    public function getStatesName()
+    {
+        return ArrayHelper::getValue(self::getStatesArray(), $this->state);
+    }
+
+    public static function getStatesArray()
+    {
+        return [
+            self::STATUS_ACTIVE => 'Активен',
+            self::STATUS_BLOCKED => 'Заблокирован',
+        ];
+    }  
 
     /**
      * @inheritdoc
@@ -149,6 +185,10 @@ class Statusmonitor extends \yii\db\ActiveRecord
             'worker' => Module::t('module', 'STATUS_RESPONSIBLE'),
             'carstatus' => Module::t('module', 'STATUS_STATUS'),
             'progress' => Module::t('module', 'STATUS_PROGRESS'),
+            'author' => Module::t('module', 'AUTHOR'),
+            'authorname' => Module::t('module', 'AUTHOR'),
+            'created_at' => Module::t('module', 'CREATED_AT'),
+            'updated_at' => Module::t('module', 'UPDATED_AT'),
         ];
     }
 
@@ -196,6 +236,14 @@ class Statusmonitor extends \yii\db\ActiveRecord
         
         return $worker_result;
         
-    }        
+    }  
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAuthorname()
+    {
+        return $this->hasOne(User::className(), ['id' => 'author']);
+    }       
 
 }

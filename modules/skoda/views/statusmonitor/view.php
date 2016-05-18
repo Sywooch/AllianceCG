@@ -21,15 +21,18 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="col-lg-12">
 
     <p style="text-align: right">
-        <?= Html::a(FA::icon('tasks') . Module::t('module', 'STATUS_TITLE'), ['calendar'], ['class' => 'btn btn-warning btn-sm', 'id' => 'refreshButton']) ?>
-        <?= Html::a(FA::icon('edit') . Module::t('module', 'STATUS_UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
-        <?= Html::a(FA::icon('remove') . Module::t('module', 'STATUS_DELETE'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger btn-sm',
-            'data' => [
-                'confirm' => Module::t('module', 'STATUS_CONFIRM_DELETE'),
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::a(FA::icon('tasks') . ' ' . Module::t('module', 'STATUS_TITLE'), ['calendar'], ['class' => 'btn btn-warning btn-sm', 'id' => 'refreshButton']) ?>
+        <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+        <?= Html::a(FA::icon('edit') . ' ' . Module::t('module', 'UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+        <?php 
+            // Html::a(FA::icon('remove') . Module::t('module', 'STATUS_DELETE'), ['delete', 'id' => $model->id], [
+            //     'class' => 'btn btn-danger btn-sm',
+            //     'data' => [
+            //         'confirm' => Module::t('module', 'STATUS_CONFIRM_DELETE'),
+            //         'method' => 'post',
+            //     ],
+            // ]) 
+        ?>
     </p>
 
     <?= DetailView::widget([
@@ -52,6 +55,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             'В работе' => 'danger',
                             'Ожидание' => 'warning',
                         ],
+            ],
+            'created_at:datetime',
+            'updated_at:datetime',
+            [
+                'attribute' => 'authorname',
+                'value' => $model->authorname->full_name,
             ],
         ],
     ]) ?>

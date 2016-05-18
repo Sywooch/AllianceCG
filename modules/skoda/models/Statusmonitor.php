@@ -28,9 +28,6 @@ class Statusmonitor extends \yii\db\ActiveRecord
     public $timeformat;
     public $worker;
 
-    public $to_date = Yii::$app->formatter->asDate($this->to, 'yyyy-MM-dd');
-    public $from_date = Yii::$app->formatter->asDate($this->from, 'yyyy-MM-dd');
-
     const STATUS_FINISHED = 0;
     const STATUS_ATWORK = 1;
     const STATUS_WAIT = 2;
@@ -113,10 +110,10 @@ class Statusmonitor extends \yii\db\ActiveRecord
     
     public function getResponsible()
     {
-        // $to_date = Yii::$app->formatter->asDate($this->to, 'yyyy-MM-dd');
+        $to_date = Yii::$app->formatter->asDate($this->to, 'yyyy-MM-dd');
         $wcs = Servicesheduler::find()
             ->joinWith(['responsibles'])
-            ->where(['date' => $this->to_date])
+            ->where(['date' => $to_date])
             ->all();
 
         foreach ($wcs as $wc) {

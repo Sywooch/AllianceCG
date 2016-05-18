@@ -20,6 +20,7 @@ class ServiceshedulerSearch extends Servicesheduler
     public $date_to;
     public $events;
     public $tasks;
+    public $responsibles;
 
     /**
      * @inheritdoc
@@ -30,7 +31,7 @@ class ServiceshedulerSearch extends Servicesheduler
             [['id'], 'integer'],
             [['responsible'], 'string'],
             [['date_from', 'date_to'], 'safe'],
-            [['date'], 'safe'],
+            [['date', 'responsibles'], 'safe'],
         ];
     }
 
@@ -53,6 +54,7 @@ class ServiceshedulerSearch extends Servicesheduler
     public function search($params)
     {
         $query = Servicesheduler::find();
+        $query->joinWith('responsibles');
 
         $sort = new Sort([
             'defaultOrder' => ['date' => SORT_DESC],
@@ -71,6 +73,11 @@ class ServiceshedulerSearch extends Servicesheduler
             ],
         ]);
 
+        $dataProvider->sort->attributes['responsibles'] = [
+            'asc' => ['{{%responsibles}}.fullName' => SORT_ASC],
+            'desc' => ['{{%responsibles}}.fullName' => SORT_DESC],
+        ];        
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -82,6 +89,8 @@ class ServiceshedulerSearch extends Servicesheduler
             ->andFilterWhere(['like', 'responsible', $this->responsible])
             ->andFilterWhere(['>=', 'date', $this->date_from])
             ->andFilterWhere(['<=', 'date', $this->date_to])
+            ->andFilterWhere(['like', '{{%employees}}.name', $this->responsibles])
+            ->orFilterWhere(['like', '{{%employees}}.surname', $this->responsibles])
             // ->andFilterWhere(['>=', 'date', $this->date_from ? strtotime($this->date_from) : null])
             // ->andFilterWhere(['<=', 'date', $this->date_to ? strtotime($this->date_to) : null])
             ->andFilterWhere(['like', 'date', $this->date]);

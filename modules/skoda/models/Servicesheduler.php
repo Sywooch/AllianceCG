@@ -8,6 +8,7 @@ use app\modules\skoda\models\Servicesheduler;
 use app\modules\references\models\Employees;
 use yii\behaviors\TimestampBehavior;
 use app\modules\admin\models\User;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%servicesheduler}}".
@@ -23,6 +24,9 @@ class Servicesheduler extends \yii\db\ActiveRecord
     public $date_to;
 
     const CURRENT_BRAND = 'Skoda';
+
+    const STATUS_BLOCKED = 1;
+    const STATUS_ACTIVE = 0;
 
     /**
      * @inheritdoc
@@ -78,8 +82,23 @@ class Servicesheduler extends \yii\db\ActiveRecord
             'authorname' => Module::t('module', 'AUTHOR'),
             'created_at' => Module::t('module', 'CREATED_AT'),
             'updated_at' => Module::t('module', 'UPDATED_AT'),
+            'responsibles' => Module::t('module', 'WORKSHEDULER_RESPONSIBLE'),
         ];
     }
+    
+    public function getStatesName()
+    {
+        return ArrayHelper::getValue(self::getStatesArray(), $this->state);
+    }
+
+    public static function getStatesArray()
+    {
+        return [
+            self::STATUS_ACTIVE => 'Активен',
+            self::STATUS_BLOCKED => 'Заблокирован',
+        ];
+    }
+    
 
     /**
      * @return \yii\db\ActiveQuery
@@ -95,11 +114,12 @@ class Servicesheduler extends \yii\db\ActiveRecord
     public function getResponsibles()
     {
         return $this->hasOne(Employees::className(), ['id' => 'responsible']);
-    }  
+    }
 
     public function workerevent() {
         $today = Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
         $wcs = Servicesheduler::find()
+            ->joinWith('responsibles')
             ->where(['date' => $today])
             ->one();
     
@@ -109,7 +129,7 @@ class Servicesheduler extends \yii\db\ActiveRecord
         }
         else
         {
-            $worker_result = Yii::$app->formatter->asDate($wcs->date, 'dd/MM/yyyy') . ' - ' . Module::t('module', 'CURRENT_MASTER_CONSULTANT') .' - '. $wcs->responsible;
+            $worker_result = Yii::$app->formatter->asDate($wcs->date, 'dd/MM/yyyy') . ' - ' . Module::t('module', 'CURRENT_MASTER_CONSULTANT') .' - '. $wcs->responsibles->fullName;
         }   
         
         return $worker_result;

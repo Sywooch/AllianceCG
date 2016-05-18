@@ -35,13 +35,6 @@
 
     </p>
     
-<!-- <script src='/js/jqfc/lib/jquery.min.js'></script>
-<script src='/js/jqfc/lib/moment.min.js'></script>
-<link rel='stylesheet' type='text/css' href='/css/jqfc/fullcalendar_sk_statusmonitor.css' />
-<link rel='stylesheet' type='text/css' href='/css/jqfc/fullcalendar.print.css' media='print' />
-<script src='/js/jqfc/fullcalendar.js'></script>
-<script src='/js/jqfc/lang/ru.js'></script> -->
-
 <?php 
    $this->registerCssFile('@web/css/jqfc/fullcalendar_sk_statusmonitor.css', ['depends' => ['app\assets\AppAsset']]);    
    $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/jquery.min.js'), ['depends' => [
@@ -69,8 +62,6 @@
 <div id='skoda_statusmonitor_calendar'></div>    
 
 <script>
-    $(document).ready(function(){
-        var worker_today = "<?php echo $model->workerevent()?>";
-        top.alert(worker_today);
-    });
+  var worker_today = "<?php echo $model->workerevent()?>";
+  top.alert(worker_today);
 </script>

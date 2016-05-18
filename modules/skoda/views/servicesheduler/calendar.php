@@ -40,42 +40,33 @@
 
     </p>
 
-<!-- <script src='/js/jqfc/lib/jquery.min.js'></script>
-<script src='/js/jqfc/lib/moment.min.js'></script>
-<link rel='stylesheet' type='text/css' href='/css/jqfc/fullcalendar.css' />
-<link rel='stylesheet' type='text/css' href='/css/jqfc/fullcalendar.print.css' media='print' />
-<script src='/js/jqfc/fullcalendar.js'></script>
-<script src='/js/jqfc/lang/ru.js'></script> -->
-
-                <?php 
-                   $this->registerCssFile('@web/css/calendars/calendars.css', ['depends' => ['app\assets\AppAsset']]);    
-                   $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/jquery.min.js'), ['depends' => [
-                       'yii\web\YiiAsset',
-                       'yii\bootstrap\BootstrapAsset'],
-                   ]);          
-                   $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/moment.min.js'), ['depends' => [
-                       'yii\web\YiiAsset',
-                       'yii\bootstrap\BootstrapAsset'],
-                   ]);
-                   $this->registerJsFile(Yii::getAlias('@web/js/jqfc/fullcalendar.js'), ['depends' => [
-                       'yii\web\YiiAsset',
-                       'yii\bootstrap\BootstrapAsset'],
-                   ]);
-                   $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lang/ru.js'), ['depends' => [
-                       'yii\web\YiiAsset',
-                       'yii\bootstrap\BootstrapAsset'],
-                   ]);  
-                   $this->registerJsFile(Yii::getAlias('@web/js/modules/skoda/servicesheduler/serviceshedulerCalendar.js'), ['depends' => [
-                       'yii\web\YiiAsset',
-                       'yii\bootstrap\BootstrapAsset'],
-                   ]);    
-               ?>
+<?php 
+   $this->registerCssFile('@web/css/calendars/calendars.css', ['depends' => ['app\assets\AppAsset']]);    
+   $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/jquery.min.js'), ['depends' => [
+       'yii\web\YiiAsset',
+       'yii\bootstrap\BootstrapAsset'],
+   ]);          
+   $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/moment.min.js'), ['depends' => [
+       'yii\web\YiiAsset',
+       'yii\bootstrap\BootstrapAsset'],
+   ]);
+   $this->registerJsFile(Yii::getAlias('@web/js/jqfc/fullcalendar.js'), ['depends' => [
+       'yii\web\YiiAsset',
+       'yii\bootstrap\BootstrapAsset'],
+   ]);
+   $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lang/ru.js'), ['depends' => [
+       'yii\web\YiiAsset',
+       'yii\bootstrap\BootstrapAsset'],
+   ]);  
+   $this->registerJsFile(Yii::getAlias('@web/js/modules/skoda/servicesheduler/serviceshedulerCalendar.js'), ['depends' => [
+       'yii\web\YiiAsset',
+       'yii\bootstrap\BootstrapAsset'],
+   ]);    
+?>
 
 <div id='skoda_calendar'></div>
 
 <script>
-    $(document).ready(function(){
-        var worker_today = "<?php echo $model->workerevent()?>";
-        top.alert(worker_today);
-    });
+  var worker_today = "<?php echo $model->workerevent() ?>";
+  top.alert(worker_today);
 </script>

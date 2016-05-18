@@ -29,27 +29,6 @@ $this->title = Module::t('module', 'STATUS_TITLE');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda']];
 $this->params['breadcrumbs'][] = $this->title;
 
-// $this->registerJs(' 
-
-//     $(document).ready(function(){
-//     $(\'#MultipleDelete\').click(function(){
-//             var PosId = $(\'#statusmonitor-users-grid\').yiiGridView(\'getSelectedRows\');
-//             if (PosId=="") {
-//                 alert("Нет отмеченных записей!", "Alert Dialog");
-//             }
-//             else if (confirm("Удалить отмеченные записи?")) {
-//               $.ajax({
-//                 type: \'POST\',
-//                 url : \'/skoda/statusmonitor/multipledelete\',
-//                 data : {row_id: PosId},
-//                 success : function() {
-//                     alert("successfully!!!");
-//                 }
-//               });
-//             }
-//     });
-//     });', \yii\web\View::POS_READY);
-
 $deleteRestore = file_get_contents('js/modules/skoda/statusmonitor/deleteRestore.js');
 $this->registerJs($deleteRestore, View::POS_END);
 
@@ -172,7 +151,8 @@ endif; ?>
                 [
                     'attribute' => 'worker',
                     'format' => 'raw',
-                    'filter' => ArrayHelper::map(Servicesheduler::find()->asArray()->all(), 'responsible', 'responsible'),
+                    // 'filter' => ArrayHelper::map(Servicesheduler::find()->asArray()->all(), 'responsible', 'responsible'),
+                    'filter' => false,
                     'value' => function ($data) {
                         return $data->getResponsible();
                     },
@@ -221,10 +201,10 @@ endif; ?>
                     },
                     'contentOptions'=>['style'=>'width: 100px;'],
                 ],
-                [
-                    'class' => ActionColumn::className(),
-                    'template' => '{view}{update}{delete}',
-                ],
+                // [
+                //     'class' => ActionColumn::className(),
+                //     'template' => '{view}{update}{delete}',
+                // ],
             ],
         ]); 
     ?>
@@ -234,8 +214,6 @@ endif; ?>
     
     
 <script>
-    $(document).ready(function(){
-        var worker_today = "<?php echo $model->workerevent()?>";
-        top.alert(worker_today);
-    });
+    var worker_today = "<?php echo $model->workerevent()?>";
+    top.alert(worker_today);
 </script>

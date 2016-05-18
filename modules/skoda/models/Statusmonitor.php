@@ -139,7 +139,6 @@ class Statusmonitor extends \yii\db\ActiveRecord
             ->all();
 
         foreach ($wcs as $wc) {
-            // $worker = $wc->responsible;
             $worker = $wc->responsibles->name . ' ' . $wc->responsibles->surname;
             return $worker;
         }

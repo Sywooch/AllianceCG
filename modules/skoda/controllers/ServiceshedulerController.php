@@ -47,18 +47,7 @@ class ServiceshedulerController extends Controller
     public function actionExport(){
 
 
-    }       
-    
-    public function actionList()
-    {
-        $model = new ServiceshedulerSearch();
-        $dataProvider = $model->search(Yii::$app->request->queryParams);
-        
-        return $this->render('list', [
-            'dataProvider' => $dataProvider,
-            'model' => $model,
-        ]);
-    }
+    }      
 
     public function actionCalendar()
     {
@@ -190,16 +179,22 @@ class ServiceshedulerController extends Controller
     public function actionMultipledelete()
     {
         $pk = Yii::$app->request->post('row_id');
-
-        foreach ($pk as $key => $value) 
-        {
-            $sql = "DELETE FROM {{%servicesheduler}} WHERE id = $value";
-            $query = Yii::$app->db->createCommand($sql)->execute();
-        }
+        $val = Servicesheduler::STATUS_BLOCKED;
+        Servicesheduler::updateAll(['state' => $val], ['in', 'id', $pk]);
 
         return $this->redirect(['index']);
 
     }
+
+    public function actionMultiplerestore()
+    {
+        $pk = Yii::$app->request->post('row_id');
+        $val = Servicesheduler::STATUS_ACTIVE;
+        Servicesheduler::updateAll(['state' => $val], ['in', 'id', $pk]);
+
+        return $this->redirect(['index']);
+
+    }   
 
     /**
      * Finds the Servicesheduler model based on its primary key value.

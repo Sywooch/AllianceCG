@@ -26,13 +26,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <p style="text-align: right">
         <?= Html::a(FA::icon('tasks') . Module::t('module', 'SERVICESHEDULER_INDEX'), ['calendar'], ['class' => 'btn btn-warning btn-sm', 'id' => 'refreshButton']) ?>
         <?= Html::a(FA::icon('edit') . Module::t('module', 'STATUS_UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
-        <?= Html::a(FA::icon('remove') . Module::t('module', 'STATUS_DELETE'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger btn-sm',
-            'data' => [
-                'confirm' => Module::t('module', 'STATUS_CONFIRM_DELETE'),
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?php
+            // Html::a(FA::icon('remove') . Module::t('module', 'STATUS_DELETE'), ['delete', 'id' => $model->id], [
+            //     'class' => 'btn btn-danger btn-sm',
+            //     'data' => [
+            //         'confirm' => Module::t('module', 'STATUS_CONFIRM_DELETE'),
+            //         'method' => 'post',
+            //     ],
+            // ]) 
+        ?>
     </p>
 
     <?= DetailView::widget([
@@ -45,6 +47,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => ['date', 'php:d/m/Y'],
             ],
             // 'responsible',
+            [
+                'attribute' => 'responsibles',
+                'value' => $model->responsibles->fullName,
+            ],
             [
                 'attribute' => 'created_at',
                 'format' => 'datetime',

@@ -5,6 +5,7 @@ use yii\grid\GridView;
 use app\modules\skoda\Module;
 use yii\bootstrap\Nav;
 use app\components\grid\LinkColumn;
+use app\components\grid\SetColumn;
 use app\components\grid\ActionColumn;
 use yii\helpers\Url;
 use yii\jui\DatePicker;
@@ -12,6 +13,7 @@ use yii\helpers\ArrayHelper;
 use app\modules\skoda\models\Servicesheduler;
 use rmrevin\yii\fontawesome\FA;
 use yii\bootstrap\Alert;
+use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\skoda\models\ServiceshedulerSearch */
@@ -24,26 +26,30 @@ use yii\bootstrap\Alert;
 // JS;
 // $this->registerJs($script);
 
-$this->registerJs(' 
+// $this->registerJs(' 
 
-    $(document).ready(function(){
-    $(\'#MultipleDelete\').click(function(){
-            var PosId = $(\'#servicesheduler-grid\').yiiGridView(\'getSelectedRows\');
-            if (PosId=="") {
-                alert("Нет отмеченных записей!", "Alert Dialog");
-            }
-            else if (confirm("Удалить записи?")) {
-              $.ajax({
-                type: \'POST\',
-                url : \'/skoda/servicesheduler/multipledelete\',
-                data : {row_id: PosId},
-                success : function() {
-                    alert("successfully!!!");
-                }
-              });
-            }
-    });
-    });', \yii\web\View::POS_READY);
+//     $(document).ready(function(){
+//     $(\'#MultipleDelete\').click(function(){
+//             var PosId = $(\'#servicesheduler-grid\').yiiGridView(\'getSelectedRows\');
+//             if (PosId=="") {
+//                 alert("Нет отмеченных записей!", "Alert Dialog");
+//             }
+//             else if (confirm("Удалить записи?")) {
+//               $.ajax({
+//                 type: \'POST\',
+//                 url : \'/skoda/servicesheduler/multipledelete\',
+//                 data : {row_id: PosId},
+//                 success : function() {
+//                     alert("successfully!!!");
+//                 }
+//               });
+//             }
+//     });
+//     });', \yii\web\View::POS_READY);
+
+
+$deleteRestore = file_get_contents('js/modules/skoda/servicesheduler/deleteRestore.js');
+$this->registerJs($deleteRestore, View::POS_END);
 
 $this->title = Module::t('module', 'SERVICESHEDULER_INDEX');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda']];
@@ -58,7 +64,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= Html::a(FA::icon('refresh') . Module::t('module', 'STATUS_REFRESH'), ['index'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
 
-        <?= Html::a(FA::icon('trash') . Module::t('module', 'STATUS_DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']) ?>  
+        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']); ?>
+        
+        <?= Html::a(FA::icon('upload') . ' ' . Module::t('module', 'RESTORE'), ['#'], ['class' => 'btn btn-warning btn-sm', 'id' => 'MultipleRestore']); ?>
         
         <?= Html::a(FA::icon('file-excel-o') . Module::t('module', 'STATUS_EXPORT_EXCEL'), ['export'], ['class' => 'btn btn-warning btn-sm']) ?>
 
@@ -110,9 +118,22 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => LinkColumn::className(),
-                'attribute' => 'responsible',
-                'filter' => ArrayHelper::map(Servicesheduler::find()->asArray()->all(), 'responsible', 'responsible'),
+                'attribute' => 'responsibles',
+                // 'filter' => ArrayHelper::map(Servicesheduler::find()->asArray()->all(), 'responsible', 'responsible'),
                 'format' => 'raw',
+                'value' => 'responsibles.fullName',
+            ],
+            [
+                'class' => SetColumn::className(),
+                // 'filter' => Brands::getStatesArray(),
+                'attribute' => 'state',
+                'visible' => Yii::$app->user->can('admin'),
+                'name' => 'statesName',
+                'contentOptions'=>['style'=>'width: 50px;'],
+                'cssCLasses' => [
+                    Servicesheduler::STATUS_ACTIVE => 'success',
+                    Servicesheduler::STATUS_BLOCKED => 'danger',
+                ],
             ],
             [
                 'class' => ActionColumn::className(),
@@ -133,8 +154,6 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
 <script>
-    $(document).ready(function(){
-        var worker_today = "<?php echo $model->workerevent()?>";
-        top.alert(worker_today);
-    });
+    var worker_today = "<?php echo $model->workerevent()?>";
+    top.alert(worker_today);
 </script>

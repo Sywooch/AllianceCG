@@ -7,6 +7,7 @@ use app\modules\admin\models\User;
 use yii\helpers\ArrayHelper;
 use yii\jui\DatePicker;
 use rmrevin\yii\fontawesome\FA;
+use app\modules\references\models\Employees;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\skoda\models\Servicesheduler */
@@ -35,25 +36,63 @@ use rmrevin\yii\fontawesome\FA;
     <?= $form->field($model,'date', ['template' => '{input}{error}'])->widget(DatePicker::className(),['options' => ['class' => 'form-control', 'placeholder' => $model->getAttributeLabel( 'date' )]]) ?>
 
     <?php
-        echo '<br/>';
+        // echo '<br/>';
 
-        $mc = User::findAll([
-                'position' => 'Мастер-консультант',
-                ]            
-            );
+        // $mc = User::findAll([
+        //         'position' => 'Мастер-консультант',
+        //         ]            
+        //     );
 
-        foreach ($mc as $key => $value) {
-            $mcname = $value->name . ' ' . $value->surname;
-            $value->allname = $mcname;
-        }
+        // foreach ($mc as $key => $value) {
+        //     $mcname = $value->name . ' ' . $value->surname;
+        //     $value->allname = $mcname;
+        // }
     
-        $items = ArrayHelper::map($mc,'allname','allname');
-        $params = [
-            'prompt' => '-- ' . $model->getAttributeLabel( 'responsible' ) . ' --',
-            'inline' => false,
-        ];
+        // $items = ArrayHelper::map($mc,'allname','allname');
+        // $params = [
+        //     'prompt' => '-- ' . $model->getAttributeLabel( 'responsible' ) . ' --',
+        //     'inline' => false,
+        // ];
 
-        echo $form->field($model, 'responsible', ['template'=>' {input}{error}'])->dropDownList($items,$params,['class' => 'form-control input-sm radio', 'itemOptions' => ['class' => 'radio']])
+        // echo $form->field($model, 'responsible', ['template'=>' {input}{error}'])->dropDownList($items,$params,['class' => 'form-control input-sm radio', 'itemOptions' => ['class' => 'radio']])
+    ?> 
+
+    <?php
+        // $responsible = Employees::find()->andwhere(['<>', 'state', Employees::STATUS_BLOCKED])->all();
+        // $responsible = Employees::findAll(
+        //         ['name' => 'Леонид']
+        //         // ['<>', 'state', Employees::STATUS_BLOCKED],
+        //     );
+        
+        $responsible = Employees::find()
+            ->joinWith('position')
+            ->where([
+                    '<>', '{{%employees}}.state', Employees::STATUS_BLOCKED,
+                ])
+            ->andwhere([
+                    // '{{%positions}}.position' => 'Мастер-консультант'
+                    '{{%positions}}.position' => Employees::MASTER_CONSULTANT
+                ])
+            // ->andwhere([
+            //         'position' => 'Мастер-консультант',
+            //     ])
+            ->all();
+
+
+        // var_dump($responsible);        
+    
+        foreach ($responsible as $key => $value) {
+            $mcname = $value->name . ' ' . $value->surname;
+            $value->name = $mcname;
+        }
+
+
+        $items = ArrayHelper::map($responsible,'id','name');
+        $params = [
+            'options' => isset($_GET['id']) ? [$_GET['id'] => ['Selected'=>'selected']] : false,
+            'prompt' => '-- ' . $model->getAttributeLabel( 'responsible' ) . ' --',
+        ];
+        echo $form->field($model, 'responsible', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
     ?> 
 
     <?php ActiveForm::end(); ?>

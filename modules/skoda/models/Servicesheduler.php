@@ -5,6 +5,7 @@ namespace app\modules\skoda\models;
 use Yii;
 use app\modules\skoda\Module;
 use app\modules\skoda\models\Servicesheduler;
+use app\modules\references\models\Employees;
 
 /**
  * This is the model class for table "{{%servicesheduler}}".
@@ -53,6 +54,14 @@ class Servicesheduler extends \yii\db\ActiveRecord
             'responsible' => Module::t('module', 'WORKSHEDULER_RESPONSIBLE'),
         ];
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getResponsibles()
+    {
+        return $this->hasOne(Employees::className(), ['id' => 'responsible']);
+    }  
 
     public function workerevent() {
         $today = Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');

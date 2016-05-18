@@ -29,7 +29,7 @@ use app\modules\user\models\User;
         <tr>
             <td>
                 <?php
-                    echo '<h4>' . HtmlPurifier::process($model->position ) . '</h4>'    
+                    echo '<h4>' . HtmlPurifier::process($model->position->position) . '</h4>'    
                 ?>
             </td>
         </tr>

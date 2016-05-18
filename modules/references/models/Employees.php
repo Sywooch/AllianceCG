@@ -35,6 +35,7 @@ class Employees extends \yii\db\ActiveRecord
 
     const STATUS_BLOCKED = 1;
     const STATUS_ACTIVE = 0;
+    const MASTER_CONSULTANT = 'Мастер-консультант';
     const LOGO_PATH = 'img/uploads/brandlogo/';
     const NO_LOGO = '@web/img/logo/company_nologo.png';
     const PHOTO_PATH = 'img/uploads/employeesphoto/';

@@ -12,6 +12,7 @@ use app\modules\skoda\models\MonitorSearch;
 use app\modules\skoda\models\Servicesheduler;
 use app\components\grid\SetColumn;
 use app\modules\user\models\User;
+use app\modules\references\models\Employees;
 use yii\widgets\ListView;
 use yii\helpers\Html;
 use yii\data\ActiveDataProvider;
@@ -51,7 +52,8 @@ $this->registerJs($script);
                     
         if(!empty($master_cons_today->responsible)){
             $provider_top = new ActiveDataProvider([
-                'query' => User::find()->where(['full_name' => $master_cons_today->responsible])
+                // 'query' => User::find()->where(['full_name' => $master_cons_today->responsible])
+                'query' => Employees::find()->where(['id' => $master_cons_today->responsible])
                     ]);
             
                     echo '<div class="col-lg-12" style="text-align: center; margin-left: 40%;">';

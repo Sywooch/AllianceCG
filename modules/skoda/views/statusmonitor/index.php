@@ -19,6 +19,7 @@ use yii\jui\AutoComplete;
 use rmrevin\yii\fontawesome\FA;
 use yii\bootstrap\Modal;
 use yii\bootstrap\Alert;
+use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\status\models\StatusmonitorSearch */
@@ -28,27 +29,29 @@ $this->title = Module::t('module', 'STATUS_TITLE');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda']];
 $this->params['breadcrumbs'][] = $this->title;
 
-$this->registerJs(' 
+// $this->registerJs(' 
 
-    $(document).ready(function(){
-    $(\'#MultipleDelete\').click(function(){
-            var PosId = $(\'#statusmonitor-users-grid\').yiiGridView(\'getSelectedRows\');
-            if (PosId=="") {
-                alert("Нет отмеченных записей!", "Alert Dialog");
-            }
-            else if (confirm("Удалить отмеченные записи?")) {
-              $.ajax({
-                type: \'POST\',
-                url : \'/skoda/statusmonitor/multipledelete\',
-                data : {row_id: PosId},
-                success : function() {
-                    alert("successfully!!!");
-                }
-              });
-            }
-    });
-    });', \yii\web\View::POS_READY);
+//     $(document).ready(function(){
+//     $(\'#MultipleDelete\').click(function(){
+//             var PosId = $(\'#statusmonitor-users-grid\').yiiGridView(\'getSelectedRows\');
+//             if (PosId=="") {
+//                 alert("Нет отмеченных записей!", "Alert Dialog");
+//             }
+//             else if (confirm("Удалить отмеченные записи?")) {
+//               $.ajax({
+//                 type: \'POST\',
+//                 url : \'/skoda/statusmonitor/multipledelete\',
+//                 data : {row_id: PosId},
+//                 success : function() {
+//                     alert("successfully!!!");
+//                 }
+//               });
+//             }
+//     });
+//     });', \yii\web\View::POS_READY);
 
+$deleteRestore = file_get_contents('js/modules/skoda/statusmonitor/deleteRestore.js');
+$this->registerJs($deleteRestore, View::POS_END);
 
 ?>
    
@@ -92,7 +95,8 @@ endif; ?>
         
         <?= Html::a(FA::icon('refresh') . Module::t('module', 'STATUS_REFRESH'), ['index'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
 
-        <?= Html::a(FA::icon('trash') . Module::t('module', 'STATUS_DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']) ?>  
+        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']); ?>
+        <?= Html::a(FA::icon('upload') . ' ' . Module::t('module', 'RESTORE'), ['#'], ['class' => 'btn btn-warning btn-sm', 'id' => 'MultipleRestore']); ?>
 
         <?= Html::a(FA::icon('bar-chart') . Module::t('module', 'STATUS_SHOW_MONITOR'), ['monitor'], ['class' => 'btn btn-info btn-sm']) ?>
         
@@ -105,7 +109,7 @@ endif; ?>
     <?php // Pjax::begin(); ?>    
     <?= 
         GridView::widget([
-            'id' => 'statusmonitor-users-grid',
+            'id' => 'statusmonitor-grid',
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
             'rowOptions' => function($model){

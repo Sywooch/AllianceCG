@@ -202,14 +202,20 @@ class StatusmonitorController extends Controller
     public function actionMultipledelete()
     {
         $pk = Yii::$app->request->post('row_id');
-
-        foreach ($pk as $key => $value) 
-        {
-            $sql = "DELETE FROM {{%statusmonitor}} WHERE id = $value";
-            $query = Yii::$app->db->createCommand($sql)->execute();
-        }
+        $val = Statusmonitor::STATUS_BLOCKED;
+        Statusmonitor::updateAll(['state' => $val], ['in', 'id', $pk]);
 
         return $this->redirect(['index']);
 
-    }    
+    }
+
+    public function actionMultiplerestore()
+    {
+        $pk = Yii::$app->request->post('row_id');
+        $val = Statusmonitor::STATUS_ACTIVE;
+        Statusmonitor::updateAll(['state' => $val], ['in', 'id', $pk]);
+
+        return $this->redirect(['index']);
+
+    }   
 }

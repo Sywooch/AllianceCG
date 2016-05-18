@@ -189,6 +189,7 @@ class Statusmonitor extends \yii\db\ActiveRecord
             'authorname' => Module::t('module', 'AUTHOR'),
             'created_at' => Module::t('module', 'CREATED_AT'),
             'updated_at' => Module::t('module', 'UPDATED_AT'),
+            'state' => Module::t('module', 'STATE'),
         ];
     }
 

@@ -8,6 +8,7 @@ use yii\helpers\ArrayHelper;
 use yii\jui\DatePicker;
 use rmrevin\yii\fontawesome\FA;
 use app\modules\references\models\Employees;
+use app\modules\skoda\models\Servicesheduler;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\skoda\models\Servicesheduler */
@@ -26,9 +27,8 @@ use app\modules\references\models\Employees;
 
     <h1><?php $model->isNewRecord ? FA::icon('bed') .' '. Module::t('module', 'STATUS_CREATE') : FA::icon('bed') .' '. Module::t('module', 'STATUS_UPDATE_RN') . ' ' . $model->date; ?></h1>
 
-    <div class="form-group" style="text-align: right">
-        <?= Html::submitButton($model->isNewRecord ? FA::icon('save') . Module::t('module', 'STATUS_CREATE') : FA::icon('edit') . Module::t('module', 'STATUS_UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
-        <?= Html::a(FA::icon('remove') . Module::t('module', 'BUTTON_CANCEL'), ['/skoda/servicesheduler/calendar'], ['class' => 'btn btn-danger btn-sm']) ?>
+    <div class="alert alert-danger">
+        <?= Module::t('module', 'ADD_SERVICESHEDULER_INFO'); ?>
     </div>
 
     <?= $form->errorSummary($model); ?>
@@ -36,50 +36,19 @@ use app\modules\references\models\Employees;
     <?= $form->field($model,'date', ['template' => '{input}{error}'])->widget(DatePicker::className(),['options' => ['class' => 'form-control', 'placeholder' => $model->getAttributeLabel( 'date' )]]) ?>
 
     <?php
-        // echo '<br/>';
 
-        // $mc = User::findAll([
-        //         'position' => 'Мастер-консультант',
-        //         ]            
-        //     );
-
-        // foreach ($mc as $key => $value) {
-        //     $mcname = $value->name . ' ' . $value->surname;
-        //     $value->allname = $mcname;
-        // }
-    
-        // $items = ArrayHelper::map($mc,'allname','allname');
-        // $params = [
-        //     'prompt' => '-- ' . $model->getAttributeLabel( 'responsible' ) . ' --',
-        //     'inline' => false,
-        // ];
-
-        // echo $form->field($model, 'responsible', ['template'=>' {input}{error}'])->dropDownList($items,$params,['class' => 'form-control input-sm radio', 'itemOptions' => ['class' => 'radio']])
-    ?> 
-
-    <?php
-        // $responsible = Employees::find()->andwhere(['<>', 'state', Employees::STATUS_BLOCKED])->all();
-        // $responsible = Employees::findAll(
-        //         ['name' => 'Леонид']
-        //         // ['<>', 'state', Employees::STATUS_BLOCKED],
-        //     );
-        
         $responsible = Employees::find()
-            ->joinWith('position')
+            ->joinWith(['position', 'brand'])
             ->where([
                     '<>', '{{%employees}}.state', Employees::STATUS_BLOCKED,
                 ])
             ->andwhere([
-                    // '{{%positions}}.position' => 'Мастер-консультант'
-                    '{{%positions}}.position' => Employees::MASTER_CONSULTANT
+                    '{{%positions}}.position' => Employees::MASTER_CONSULTANT,
                 ])
-            // ->andwhere([
-            //         'position' => 'Мастер-консультант',
-            //     ])
-            ->all();
-
-
-        // var_dump($responsible);        
+            ->andwhere([
+                    '{{%brands}}.brand' => Servicesheduler::CURRENT_BRAND,
+                ])
+            ->all();   
     
         foreach ($responsible as $key => $value) {
             $mcname = $value->name . ' ' . $value->surname;
@@ -94,6 +63,11 @@ use app\modules\references\models\Employees;
         ];
         echo $form->field($model, 'responsible', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
     ?> 
+
+    <div class="form-group" style="text-align: right">
+        <?= Html::submitButton($model->isNewRecord ? FA::icon('save') . Module::t('module', 'STATUS_CREATE') : FA::icon('edit') . Module::t('module', 'STATUS_UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(FA::icon('remove') . Module::t('module', 'BUTTON_CANCEL'), ['/skoda/servicesheduler/calendar'], ['class' => 'btn btn-danger btn-sm']) ?>
+    </div>
 
     <?php ActiveForm::end(); ?>
     

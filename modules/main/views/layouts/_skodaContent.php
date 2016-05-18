@@ -26,7 +26,7 @@ use rmrevin\yii\fontawesome\FA;
                 'visible' => Yii::$app->user->can('skodaIsVisible')
             ],
             [
-                'label' => FA::icon('television') . ' ' . Module::t('module', 'NAV_SKODA_STATUSMONITOR'), 'url' => ['/skoda/statusmonitor'],
+                'label' => FA::icon('television') . ' ' . Module::t('module', 'NAV_SKODA_STATUSMONITOR'), 'url' => ['/skoda/statusmonitor/calendar'],
                 'visible' => Yii::$app->user->can('skodaIsVisible')
             ],
         ]),

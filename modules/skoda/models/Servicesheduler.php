@@ -22,6 +22,8 @@ class Servicesheduler extends \yii\db\ActiveRecord
     public $date_from;
     public $date_to;
 
+    const CURRENT_BRAND = 'Skoda';
+
     /**
      * @inheritdoc
      */
@@ -73,6 +75,9 @@ class Servicesheduler extends \yii\db\ActiveRecord
             'date' => Module::t('module', 'WORKSHEDULER_DATE'),
             'responsible' => Module::t('module', 'WORKSHEDULER_RESPONSIBLE'),
             'author' => Module::t('module', 'AUTHOR'),
+            'authorname' => Module::t('module', 'AUTHOR'),
+            'created_at' => Module::t('module', 'CREATED_AT'),
+            'updated_at' => Module::t('module', 'UPDATED_AT'),
         ];
     }
 

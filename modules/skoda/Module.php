@@ -32,7 +32,7 @@ class Module extends \yii\base\Module
                         'roles' => ['@'],
                     ],
                     [
-                        'actions'=>['delete', 'multipleDelete'],
+                        'actions'=>['delete', 'multipleDelete', 'multiplerestore'],
                         'allow' => true,
                         'roles' => ['head', 'admin', 'root'],
                     ],

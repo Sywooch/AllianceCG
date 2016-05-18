@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p style="text-align: right">
         <?= Html::a(FA::icon('list') . ' ' . Module::t('module', 'EMPLOYEES'), ['index'], ['class' => 'btn btn-warning btn-sm']) ?>
-        <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['index'], ['class' => 'btn btn-success btn-sm']) ?>
+        <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
         <?= Html::a(FA::icon('edit') . ' ' .Module::t('module', 'UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
         <?= Html::a(FA::icon('remove') . ' ' .Module::t('module', 'DELETE'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger btn-sm',
@@ -73,6 +73,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format'=>'raw',
                 'value' => $model->getPositionlink(),
                 'visible' => !empty($model->position->position) ? true : false,
+            ],
+            [
+                'attribute' => 'created_at',
+                'format' => 'datetime',
+            ],
+            [
+                'attribute' => 'updated_at',
+                'format' => 'datetime',
+            ],
+            [
+                'attribute' => 'authorname',
+                'value' => $model->authorname->full_name,
             ],
         ],
     ]) ?>

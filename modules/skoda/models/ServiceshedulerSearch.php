@@ -104,7 +104,20 @@ class ServiceshedulerSearch extends Servicesheduler
     }
     
     public function calendarsearch(){
-        $items = Yii::$app->db->createCommand("SELECT `id` AS id, `id` AS url, `date` AS start, `date` AS end, `responsible` AS title FROM {{%servicesheduler}};")->queryAll();
+        // $items = Yii::$app->db->createCommand("SELECT `id` AS id, `id` AS url, `date` AS start, `date` AS end, `responsible` AS title FROM {{%servicesheduler}};")->queryAll();
+        $query = "
+                    SELECT
+                        {{%servicesheduler}}.`id` AS id,
+                        {{%servicesheduler}}.`id` AS url,
+                        {{%servicesheduler}}.`date` AS start,
+                        {{%servicesheduler}}.`date` AS end,
+                        CONCAT({{%employees}}.`name`, ' ', {{%employees}}.`surname`) AS title
+                    FROM 
+                        {{%servicesheduler}}
+                    LEFT JOIN {{%employees}} ON {{%servicesheduler}}.`responsible` = {{%employees}}.`id`;
+            ";
+        $items = Yii::$app->db->createCommand($query)->queryAll();
+
         return Json::encode($items);
     }
     

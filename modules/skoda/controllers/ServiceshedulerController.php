@@ -45,30 +45,7 @@ class ServiceshedulerController extends Controller
     }
     
     public function actionExport(){
-        $model = ServiceshedulerSearch::find()->All();
-        $filename = 'Servicesheduler-'.Date('Y-m-d-H-i-s').'.xls';
-        echo '<meta http-equiv="Content-type" content="text/html; charset=utf-8" />';
-        header("Content-type: application/vnd-ms-excel; charset=utf-8");
-        header("Content-Transfer-Encoding: binary");
-//        header("Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        header("Content-Disposition: attachment; filename=".$filename);
-        header('Pragma: no-cache');
-        echo '<table border="1" width="100%">
-            <thead>
-                <tr>
-                    <th>Дата</th>
-                    <th>Мастер-консультант</th>
-                </tr>
-            </thead>';
-            foreach($model as $data){
-                echo '
-                    <tr>
-                        <td>'.$data['date'].'</td>
-                        <td>'.$data['responsible'].'</td>
-                    </tr>
-                ';
-            }
-        echo '</table>';
+
 
     }       
     
@@ -203,12 +180,12 @@ class ServiceshedulerController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
+    // public function actionDelete($id)
+    // {
+    //     $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
-    }
+    //     return $this->redirect(['index']);
+    // }
 
     public function actionMultipledelete()
     {

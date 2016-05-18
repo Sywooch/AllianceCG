@@ -44,7 +44,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'date',
                 'format' => ['date', 'php:d/m/Y'],
             ],
-            'responsible',
+            // 'responsible',
+            [
+                'attribute' => 'created_at',
+                'format' => 'datetime',
+            ],
+            [
+                'attribute' => 'updated_at',
+                'format' => 'datetime',
+            ],
+            [
+                'attribute' => 'authorname',
+                'value' => $model->authorname->full_name,
+            ],
         ],
     ]) ?>
 

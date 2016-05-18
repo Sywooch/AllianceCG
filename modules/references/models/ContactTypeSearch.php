@@ -12,6 +12,10 @@ use app\modules\references\models\ContactType;
  */
 class ContactTypeSearch extends ContactType
 {
+    
+    public $authorname;
+    public $globalSearch;
+
     /**
      * @inheritdoc
      */
@@ -19,7 +23,7 @@ class ContactTypeSearch extends ContactType
     {
         return [
             [['id', 'state', 'created_at', 'updated_at'], 'integer'],
-            [['contact_type', 'author'], 'safe'],
+            [['contact_type', 'author', 'authorname', 'globalSearch'], 'safe'],
         ];
     }
 
@@ -42,12 +46,18 @@ class ContactTypeSearch extends ContactType
     public function search($params)
     {
         $query = ContactType::find();
+        $query->joinWith('authorname');
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['authorname'] = [
+            'asc' => ['{{%user}}.full_name' => SORT_ASC],
+            'desc' => ['{{%user}}.full_name' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -65,8 +75,11 @@ class ContactTypeSearch extends ContactType
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'contact_type', $this->contact_type])
-            ->andFilterWhere(['like', 'author', $this->author]);
+        $query
+            // ->andFilterWhere(['like', 'contact_type', $this->contact_type])
+            // ->andFilterWhere(['like', 'author', $this->author])
+            ->andFilterWhere(['like', 'contact_type', $this->globalSearch])
+            ;
 
         return $dataProvider;
     }

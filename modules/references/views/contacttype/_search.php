@@ -2,10 +2,16 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\web\View;
+use rmrevin\yii\fontawesome\FA;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\references\models\ContactTypeSearch */
 /* @var $form yii\widgets\ActiveForm */
+
+$deleteRestore = file_get_contents('js/modules/references/contacttypes/deleteRestore.js');
+$this->registerJs($deleteRestore, View::POS_END);
+
 ?>
 
 <div class="contact-type-search">
@@ -15,21 +21,21 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <div class="col-sm-4">
+        <?= $form->field($model, 'globalSearch', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('search') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'globalSearch' )]) ?>
+    </div>
 
-    <?= $form->field($model, 'contact_type') ?>
-
-    <?= $form->field($model, 'state') ?>
-
-    <?= $form->field($model, 'created_at') ?>
-
-    <?= $form->field($model, 'updated_at') ?>
-
-    <?php // echo $form->field($model, 'author') ?>
+    <div class="col-sm-8">
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton(Yii::t('app', '{icon} SEARCH', ['icon' => FA::icon('search')]), ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => FA::icon('refresh')]), ['index'], ['class' => 'btn btn-info btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} DELETE', ['icon' => FA::icon('remove')]), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']) ?>
+        <?= Html::a(Yii::t('app', '{icon} RESTORE', ['icon' => FA::icon('upload')]), ['#'], ['class' => 'btn btn-warning btn-sm', 'id' => 'MultipleRestore']) ?>
+
+    </div>
+
     </div>
 
     <?php ActiveForm::end(); ?>

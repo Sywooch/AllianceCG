@@ -7,6 +7,7 @@ use yii\helpers\Html;
 /* @var $model app\modules\references\models\ContactType */
 
 $this->title = Yii::t('app', 'Create Contact Type');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'REFERENCES'), 'url' => ['/references']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Contact Types'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -14,13 +14,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'contact_type')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'state')->textInput() ?>
+    <?php //echo $form->field($model, 'state')->textInput() ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
+    <?php //echo $form->field($model, 'created_at')->textInput() ?>
 
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+    <?php //echo $form->field($model, 'updated_at')->textInput() ?>
 
-    <?= $form->field($model, 'author')->textInput(['maxlength' => true]) ?>
+    <?php //echo $form->field($model, 'author')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

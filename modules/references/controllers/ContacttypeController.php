@@ -99,12 +99,12 @@ class ContacttypeController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
+    // public function actionDelete($id)
+    // {
+    //     $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
-    }
+    //     return $this->redirect(['index']);
+    // }
 
     /**
      * Finds the ContactType model based on its primary key value.
@@ -121,4 +121,32 @@ class ContacttypeController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     * Description
+     * @return type
+     */
+    public function actionMultipledelete()
+    {
+        $pk = Yii::$app->request->post('row_id');
+        $val = ContactType::STATUS_BLOCKED;
+        ContactType::updateAll(['state' => $val], ['in', 'id', $pk]);
+
+        return $this->redirect(['index']);
+
+    } 
+
+    /**
+     * Description
+     * @return type
+     */
+    public function actionMultiplerestore()
+    {
+        $pk = Yii::$app->request->post('row_id');
+        $val = ContactType::STATUS_ACTIVE;
+        ContactType::updateAll(['state' => $val], ['in', 'id', $pk]);
+
+        return $this->redirect(['index']);
+
+    } 
 }

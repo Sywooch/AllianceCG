@@ -130,5 +130,13 @@ class ClientCirculation extends \yii\db\ActiveRecord
         $link = isset($this->regions->region_name) ? Html::a($this->regions->region_name, ['/references/regions/view', 'id' => $this->regions->id]) : false;
         // Html::a($model->companies->company_name, ['/references/companies/view', 'id' => $model->companies->id]),
         return $link;
-    }    
+    } 
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getClientcomment()
+    {
+        return $this->hasMany(ClientCirculation::className(), ['clientcirculation_id' => 'id']);
+    }   
 }

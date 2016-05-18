@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use app\modules\alliance\Module;
 use rmrevin\yii\fontawesome\FA;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\alliance\models\ClientCirculation */
@@ -74,3 +76,21 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 </div>
+
+<?php
+    echo "<p style='text-align: right'>";
+    echo Html::button(FA::icon('comment') . ' ' . Module::t('module', 'COMMENT'), ['value' => Url::to(['comment', 'id' => $model->id]), 'class' => 'btn btn-info btn-sm', 'id' => 'modalButton']);
+    echo "</p>";
+?>
+
+<?php
+    Modal::begin([
+        'header' => '<h4>' . Module::t('module', 'COMMENT') .'</h4>',
+        'id' => 'modal',
+        'size' => 'modal-lg'
+    ]);
+
+    echo "<div id='modalContent'></div>";
+
+    Modal::end();
+?>

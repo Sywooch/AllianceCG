@@ -5,6 +5,7 @@ namespace app\modules\alliance\controllers;
 use Yii;
 use app\modules\alliance\models\ClientCirculation;
 use app\modules\alliance\models\ClientCirculationSearch;
+use app\modules\alliance\models\Clientcirculationcomment;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -120,6 +121,27 @@ class ClientcirculationController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionComment($id)
+    {
+        $model = $this->findModel($id);
+        $commentModel = new Clientcirculationcomment();
+
+        if ($commentModel->load(Yii::$app->request->post())) {
+            $commentModel->clientcirculation_id = $model->id;
+            $commentModel->author = Yii::$app->user->getId();
+            $commentModel->save();
+
+            return $this->redirect(['view', 'id' => $model->id]);
+
+        } else {
+            return $this->renderAjax('comment', [
+                'model' => $model,
+                'commentModel' => $commentModel,
+            ]);
+        }
+
     }
 
     /**

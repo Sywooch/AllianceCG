@@ -41,7 +41,7 @@ $this->registerJs($deleteRestore, View::POS_END);
         ?>
         <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'REFRESH'), ['index'], ['class' => 'btn btn-info btn-sm']) ?>
         <?= '<br/><br/>'?>
-        <?= Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'IMPORTEXCEL'), ['import-excel'], ['class' => 'btn btn-info btn-sm']) ?>
+        <?= Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'IMPORTEXCEL'), ['importexcel'], ['class' => 'btn btn-info btn-sm']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

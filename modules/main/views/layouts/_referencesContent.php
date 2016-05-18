@@ -69,6 +69,11 @@ use rmrevin\yii\fontawesome\FA;
                 'url' => '/references/companies',
                 // 'options' => ['class' => 'list-group-item'],
             ],
+            [
+                'label' => FA::icon('male') . ' ' . Module::t('module', 'CONTACTTYPE'),
+                'url' => '/references/contacttype',
+                // 'options' => ['class' => 'list-group-item'],
+            ],
         ]),
     ])
     : false;  

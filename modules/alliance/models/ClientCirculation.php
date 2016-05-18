@@ -8,6 +8,7 @@ use yii\behaviors\TimestampBehavior;
 use app\modules\alliance\Module;
 use yii\helpers\ArrayHelper;
 use app\modules\references\models\Regions;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "{{%client_circulation}}".
@@ -123,4 +124,11 @@ class ClientCirculation extends \yii\db\ActiveRecord
             self::STATUS_BLOCKED => 'Заблокирован',
         ];
     }
+
+    public function getRegionslink()
+    {
+        $link = isset($this->regions->region_name) ? Html::a($this->regions->region_name, ['/references/regions/view', 'id' => $this->regions->id]) : false;
+        // Html::a($model->companies->company_name, ['/references/companies/view', 'id' => $model->companies->id]),
+        return $link;
+    }    
 }

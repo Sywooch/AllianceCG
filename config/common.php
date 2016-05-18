@@ -67,14 +67,27 @@ return [
             'class' => '',
             'defaultRoles' => [],
         ],
+        // 'i18n' => [
+        //     'translations' => [
+        //         'app' => [
+        //             'class' => 'yii\i18n\PhpMessageSource',
+        //             'forceTranslation' => true,
+        //         ],
+        //     ],
+        // ], 
         'i18n' => [
             'translations' => [
-                'app' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'forceTranslation' => true,
-                ],
+                'app*' => [
+                    'class' => 'yii\i18n\DbMessageSource',
+                    'sourceMessageTable'=>'{{%source_message}}',
+                    'messageTable'=>'{{%message}}',
+                    'db' => 'db',
+                    'enableCaching' => false,
+                    'cachingDuration' => 10,
+                    'forceTranslation'=>true,
+                ]
             ],
-        ], 
+        ],
         'urlManager' => [
             'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => true,

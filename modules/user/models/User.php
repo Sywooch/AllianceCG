@@ -10,9 +10,9 @@ use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
 use app\modules\user\models\query\UserQuery;
 use yii\web\UploadedFile;
-use app\modules\admin\models\Positions;
+use app\modules\references\models\Positions;
 use app\modules\user\Module;
-use app\modules\admin\models\Companies;
+use app\modules\references\models\Companies;
 use app\modules\admin\models\Userroles;
 
 /**

@@ -85,7 +85,7 @@
         'NAV_CONTACT' => 'Обратная связь',
         'NAV_LOGIN' => 'Вход',
         'NAV_SKODA' => 'ŠKODA',
-        'NAV_ADMIN' => 'Admin',
+        'NAV_ADMIN' => 'Администрирование',
         'NAV_PROFILE' => 'Профиль',
         'NAV_LOGOUT' => 'Выход',
         
@@ -150,5 +150,6 @@
         'REFERENCES_EMPLOYEES' => 'Сотрудники',
         'REFERENCES_REGIONS' => 'Регионы',
         'NAV_ALLIANCE_CLIENTCIRCULATION' => 'ОК. Траффик клиентов',
+        'CONTACTTYPE' => 'Тип контакта',
             
 	];

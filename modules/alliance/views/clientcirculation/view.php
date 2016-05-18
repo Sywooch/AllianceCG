@@ -37,7 +37,24 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'phone',
             'email:email',
-            // 'state',
+            // [
+            //     'attribute' => 'regions',
+            //     'value' => $model->regions->region_name,
+            // ],
+            [
+                'attribute' => 'regions',
+                'value' => $model->getRegionslink(),
+                'format' => 'raw',
+            ],
+            // [
+            //     'attribute' => 'regions',
+            //     // 'value' => 'fullmodelname',
+            //     'value' => function ($data) {
+            //         return Html::a($data->region_name, Url::to(['/references/regions/view', 'id' => $data->id]));
+            //     },
+            //     'format' => 'raw',
+            // ],
+            // // 'state',
             [
                 'attribute' => 'state',
                 'value' => $model->getStatesName(),
@@ -52,10 +69,6 @@ $this->params['breadcrumbs'][] = $this->title;
             [
               'attribute' => 'authorname',
               'value' => $model->authorname->full_name,
-            ],
-            [
-                'attribute' => 'regions',
-                'value' => $model->regions->region_name,
             ],
         ],
     ]) ?>

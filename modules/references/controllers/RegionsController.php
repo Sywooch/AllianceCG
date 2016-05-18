@@ -37,7 +37,7 @@ class RegionsController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions'=>['create', 'update', 'multipledelete', 'multiplerestore', 'delete', 'import-excel'],
+                        'actions'=>['create', 'update', 'multipledelete', 'multiplerestore', 'delete', 'importexcel'],
                         'roles' => ['admin', 'root'],
                     ],
                 ],
@@ -158,7 +158,7 @@ class RegionsController extends Controller
 
     } 
 
-    public function actionImportExcel()
+    public function actionImportexcel()
     {
         $inputDir = Regions::DIR_FOR_UPLOAD;
         if (!file_exists(''.$inputDir.'')) {

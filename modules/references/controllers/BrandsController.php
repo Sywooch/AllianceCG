@@ -181,19 +181,19 @@ class BrandsController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-        // $model = $this->findModel($id);
-        // $file = $model->brand_logo;
-        // if (isset($file))
-        // {
-        //     unlink($file);
-        // }
-        // $model->delete();
+    // public function actionDelete($id)
+    // {
+    //     $this->findModel($id)->delete();
+    //     // $model = $this->findModel($id);
+    //     // $file = $model->brand_logo;
+    //     // if (isset($file))
+    //     // {
+    //     //     unlink($file);
+    //     // }
+    //     // $model->delete();
 
-        return $this->redirect(['index']);
-    }
+    //     return $this->redirect(['index']);
+    // }
 
     /**
      * Description

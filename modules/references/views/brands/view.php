@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'brand_logo',
                 'value' => $model->getImageUrl(),
                 'format' => ['image',['width'=>'50']],
-                'visible' => !empty($model->companies->company_name) ? true : false,
+                // 'visible' => !empty($model->companies->company_name) ? true : false,
             ],
             [
                 'attribute' => 'companies',

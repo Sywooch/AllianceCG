@@ -29,13 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
         <?= Html::a(FA::icon('edit') . ' ' . Module::t('module', 'UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
         <?php 
-            // echo Html::a(FA::icon('edit') . ' ' . Module::t('module', 'DELETE'), ['delete', 'id' => $model->id], [
-            //     'class' => 'btn btn-danger btn-sm',
-            //     'data' => [
-            //         'confirm' => Module::t('module', 'CONFIRM_DELETE'),
-            //         'method' => 'post',
-            //     ],
-            // ]) 
+            echo Html::a(FA::icon('edit') . ' ' . Module::t('module', 'DELETE'), ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger btn-sm',
+                'data' => [
+                    'confirm' => Module::t('module', 'CONFIRM_DELETE'),
+                    'method' => 'post',
+                ],
+            ]) 
         ?>
     </p>
 

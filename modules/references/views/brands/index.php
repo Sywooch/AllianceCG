@@ -102,10 +102,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     Brands::STATUS_BLOCKED => 'danger',
                 ],
             ],
-            // [
-            //     'class' => 'yii\grid\ActionColumn',
-            //     'header' => 'Действия',
-            // ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'header' => 'Действия',
+            ],
         ],
     ]); 
 ?>

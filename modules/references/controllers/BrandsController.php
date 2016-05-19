@@ -93,7 +93,7 @@ class BrandsController extends Controller
                 $imageName = mktime(date('h'), date('i'), date('s'), date('d'), date('m'), date('y'));
                 $path = Brands::LOGO_PATH;
                 if(!file_exists($path)) {
-                    mkdir($path, 0777);
+                    mkdir($path, 0777, true);
                 } 
                 $model->brand_logo = $path.$imageName.'.'.$model->file->extension;
                 $model->save(); 
@@ -181,19 +181,19 @@ class BrandsController extends Controller
      * @param integer $id
      * @return mixed
      */
-    // public function actionDelete($id)
-    // {
-    //     // $this->findModel($id)->delete();
-    //     $model = $this->findModel($id);
-    //     $file = $model->brand_logo;
-    //     if (isset($file))
-    //     {
-    //         unlink($file);
-    //     }
-    //     $model->delete();
+    public function actionDelete($id)
+    {
+        // $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $file = $model->brand_logo;
+        if (isset($file))
+        {
+            unlink($file);
+        }
+        $model->delete();
 
-    //     return $this->redirect(['index']);
-    // }
+        return $this->redirect(['index']);
+    }
 
     /**
      * Description

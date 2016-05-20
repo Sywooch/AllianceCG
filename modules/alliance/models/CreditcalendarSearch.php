@@ -145,11 +145,11 @@ public function calendarsearch(){
         if(Yii::$app->user->can('creditmanager')){        
             $query->where(['<>','private', 1]);
             $query->andWhere(['like', 'user_id', Yii::$app->user->getId()]);
-            $query->orFilterWhere(['author' => Yii::$app->user->getId()]);
+            $query->orFilterWhere(['{{%calendar}}.author' => Yii::$app->user->getId()]);
         }
         else {
             $query->where(['private' => 1]);
-            $query->andWhere(['author' => Yii::$app->user->getId()]);
+            $query->andWhere(['{{%calendar}}.author' => Yii::$app->user->getId()]);
             $query->orWhere(['private' => 0]);
         }
         $query->joinWith(['locations', 'users']);

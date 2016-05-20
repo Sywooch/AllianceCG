@@ -30,12 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
     // echo '<br/>';
 
-    // if(Yii::$app->user->can('deleteCreditcalendarPost')) {
-    //     echo 'viewCreditcalendarOwnPost';
-    // }
-    // else {
-    //     echo 'not viewCreditcalendarOwnPost';
-    // }
+    if(Yii::$app->user->can('updateCreditcalendarPost')) {
+        echo 'viewCreditcalendarOwnPost';
+    }
+    else {
+        echo 'not viewCreditcalendarOwnPost';
+    }
 
 
 

@@ -201,7 +201,7 @@ class CreditcalendarController extends Controller
     {
         $model = $this->findModel($id);
 
-        if (!Yii::$app->user->can('updateCreditcalendarOwnPost', ['creditcalendar' => $model])) {
+        if (!Yii::$app->user->can('updateCreditcalendarOwnPost', ['creditcalendar' => $model]) && !Yii::$app->user->can('updateCreditcalendarPost')) {
             throw new ForbiddenHttpException(Module::t('module', 'ONLY_AUTHOR_CAN_UPDATE_THIS_RECORD'));
         }
         else

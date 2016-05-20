@@ -2,7 +2,7 @@
 
 namespace app\modules\alliance\models;
 
-use app\modules\admin\models\Companies;
+use app\modules\references\models\Companies;
 use Yii;
 use yii\helpers\ArrayHelper;
 use app\modules\admin\models\User;

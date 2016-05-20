@@ -9,7 +9,7 @@ use janisto\timepicker\TimePicker;
 use app\modules\alliance\Module;
 use yii\jui\DatePicker;
 use app\modules\admin\models\User;
-use app\modules\admin\models\Companies;
+use app\modules\references\models\Companies;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\alliance\models\Creditcalendar */

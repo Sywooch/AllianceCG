@@ -13,6 +13,9 @@ use app\modules\admin\models\SourceMessage;
 class SourceMessageSearch extends SourceMessage
 {
 
+    public $language;
+    public $translation;
+
     /**
      * @inheritdoc
      */
@@ -21,6 +24,7 @@ class SourceMessageSearch extends SourceMessage
         return [
             [['id'], 'integer'],
             [['category', 'message'], 'safe'],
+            [['language', 'translation'], 'safe']
         ];
     }
 
@@ -43,12 +47,23 @@ class SourceMessageSearch extends SourceMessage
     public function search($params)
     {
         $query = SourceMessage::find();
+        $query->joinWith('messages');
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['language'] = [
+            'asc' => ['{{%message}}.language' => SORT_ASC],
+            'desc' => ['{{%message}}.language' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['translation'] = [
+            'asc' => ['{{%message}}.translation' => SORT_ASC],
+            'desc' => ['{{%message}}.translation' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -60,11 +75,16 @@ class SourceMessageSearch extends SourceMessage
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            '{{%source_message}}.id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'category', $this->category])
-            ->andFilterWhere(['like', 'message', $this->message]);
+        $query
+            ->andFilterWhere(['like', '{{%source_message}}.id', $this->id])
+            ->andFilterWhere(['like', '{{%message}}.language', $this->language])
+            ->andFilterWhere(['like', '{{%message}}.translation', $this->translation])
+            ->andFilterWhere(['like', 'category', $this->category])
+            ->andFilterWhere(['like', 'message', $this->message])
+            ;
 
         return $dataProvider;
     }

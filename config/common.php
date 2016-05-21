@@ -77,11 +77,11 @@ return [
         // ], 
         'i18n' => [
             'translations' => [
-                'app*' => [
+                '*' => [
                     'class' => 'yii\i18n\DbMessageSource',
                     'sourceMessageTable'=>'{{%source_message}}',
                     'messageTable'=>'{{%message}}',
-                    'sourceLanguage' => 'en-EN',
+                    'sourceLanguage' => 'ru',
                     'db' => 'db',
                     'enableCaching' => false,
                     'cachingDuration' => 10,

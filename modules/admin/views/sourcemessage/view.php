@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\SourceMessage */
@@ -31,6 +32,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'category',
             'message:ntext',
+            [
+                'attribute' => 'language',
+                'value' => implode(', ', ArrayHelper::map($model->messages, 'id', 'language')),
+            ],
+            [
+                'attribute' => 'translation',
+                'value' => implode(', ', ArrayHelper::map($model->messages, 'id', 'translation')),
+            ],
         ],
     ]) ?>
 

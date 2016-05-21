@@ -15,7 +15,6 @@ use Yii;
  */
 class SourceMessage extends \yii\db\ActiveRecord
 {
-
     public $language;
     public $translation;
 
@@ -57,6 +56,7 @@ class SourceMessage extends \yii\db\ActiveRecord
     public function getMessages()
     {
         return $this->hasMany(Message::className(), ['id' => 'id']);
+        // return $this->hasOne(Message::className(), ['id' => 'id']);
     }
 
     public function afterSave($insert, $changedAttributes)

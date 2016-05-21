@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\admin\models\SourceMessageSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -27,6 +28,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'category',
             'message:ntext',
+            [
+                'attribute' => 'language',
+                'value' => function($model) {
+                     return implode(', ', ArrayHelper::map($model->messages, 'id', 'language'));
+                }                
+            ],
+            [
+                'attribute' => 'translation',
+                'value' => function($model) {
+                     return implode(', ', ArrayHelper::map($model->messages, 'id', 'translation'));
+                }                
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

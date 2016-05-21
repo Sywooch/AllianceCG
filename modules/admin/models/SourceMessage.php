@@ -3,6 +3,7 @@
 namespace app\modules\admin\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%source_message}}".
@@ -34,7 +35,7 @@ class SourceMessage extends \yii\db\ActiveRecord
         return [
             [['message'], 'string'],
             [['category'], 'string', 'max' => 32],
-            [['language', 'translation'], 'safe']
+            [['language', 'translation'], 'safe'],
         ];
     }
 
@@ -62,9 +63,7 @@ class SourceMessage extends \yii\db\ActiveRecord
     public function afterSave($insert, $changedAttributes)
     {
         $sourceMessage = SourceMessage::findOne($this->id);
-        // $sourceMessage = new SourceMessage();
-        $message = new Message();
-        // $message->id = $this->id;
+        $message = $insert ? new Message() : Message::findOne($this->id);
         $message->language = $this->language;
         $message->translation = $this->translation;
         $sourceMessage->link('messages', $message);

@@ -8,6 +8,7 @@ use app\modules\admin\models\SourceMessageSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\modules\admin\models\Message;
 
 /**
  * SourcemessageController implements the CRUD actions for SourceMessage model.
@@ -83,6 +84,9 @@ class SourcemessageController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $msgModel = Message::findOne($id);
+        $model->language = $msgModel->language;
+        $model->translation = $msgModel->translation;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

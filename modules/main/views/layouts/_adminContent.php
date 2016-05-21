@@ -32,6 +32,10 @@ use rmrevin\yii\fontawesome\FA;
                 'label' => FA::icon('cog') . ' ' . Module::t('module', 'NAV_USERROLES'),
                 'url' => '/admin/userroles',
             ],
+            [
+                'label' => FA::icon('cog') . ' ' . Module::t('module', 'TRANSLATIONS'),
+                'url' => '/admin/sourcemessage',
+            ],
         ]),
     ])
     : false;  

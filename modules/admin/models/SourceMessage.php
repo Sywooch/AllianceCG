@@ -15,6 +15,10 @@ use Yii;
  */
 class SourceMessage extends \yii\db\ActiveRecord
 {
+
+    public $language;
+    public $translation;
+
     /**
      * @inheritdoc
      */
@@ -31,6 +35,7 @@ class SourceMessage extends \yii\db\ActiveRecord
         return [
             [['message'], 'string'],
             [['category'], 'string', 'max' => 32],
+            [['language', 'translation'], 'safe']
         ];
     }
 
@@ -53,4 +58,19 @@ class SourceMessage extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Message::className(), ['id' => 'id']);
     }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        $sourceMessage = SourceMessage::findOne($this->id);
+        // $sourceMessage = new SourceMessage();
+        $message = new Message();
+        // $message->id = $this->id;
+        $message->language = $this->language;
+        $message->translation = $this->translation;
+        $sourceMessage->link('messages', $message);
+
+        parent::afterSave($insert, $changedAttributes);
+    }
+
+
 }

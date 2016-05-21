@@ -12,6 +12,7 @@ use app\modules\admin\models\SourceMessage;
  */
 class SourceMessageSearch extends SourceMessage
 {
+
     /**
      * @inheritdoc
      */

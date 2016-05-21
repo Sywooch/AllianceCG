@@ -81,6 +81,7 @@ return [
                     'class' => 'yii\i18n\DbMessageSource',
                     'sourceMessageTable'=>'{{%source_message}}',
                     'messageTable'=>'{{%message}}',
+                    'sourceLanguage' => 'en-EN',
                     'db' => 'db',
                     'enableCaching' => false,
                     'cachingDuration' => 10,

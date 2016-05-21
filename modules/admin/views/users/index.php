@@ -15,21 +15,16 @@ use yii\helpers\Url;
 use rmrevin\yii\fontawesome\FA;
 use yii\widgets\Pjax;
 use yii\helpers\ArrayHelper;
-use app\modules\admin\Module;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\admin\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('module', 'ADMIN_USERS');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN'), 'url' => ['/admin']];
+$this->title = Yii::t('app', 'ADMIN_USERS');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'ADMIN'), 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-    <!--<h1>-->
-        <!--<span class="glyphicon glyphicon-user" style='padding-right:10px;'></span>-->
-            <?php // Html::encode($this->title) ?>
-    <!--</h1>-->
     <?= $this->render('_search', ['model' => $searchModel]); ?>
 
     <!-- <div class="user-index col-lg-offset-5 col-centered"> -->
@@ -69,10 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => LinkColumn::className(),
                 'attribute' => 'full_name',
-                'format' => 'raw',    
-                // 'value' => function ($data) {
-                //     return $data->getFullname();
-                // },
+                'format' => 'raw',
             ],
             // [
             //     'attribute' => 'company',

@@ -50,6 +50,7 @@ class SourceMessage extends \yii\db\ActiveRecord
             'message' => Yii::t('app', 'Message'),
             'translation' => Yii::t('app', 'Translation'),
             'language' => Yii::t('app', 'Language'),
+            'globalSearch' => Yii::t('app', 'Search'),
         ];
     }
 

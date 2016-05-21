@@ -8,7 +8,7 @@ use app\modules\admin\models\SourceMessageSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-// use app\modules\admin\models\Message;
+use app\modules\admin\models\Message;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
 

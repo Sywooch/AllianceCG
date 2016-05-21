@@ -3,7 +3,6 @@
 use yii\bootstrap\Nav;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use app\modules\admin\Module;
 use rmrevin\yii\fontawesome\FA;
 
 ?>
@@ -18,15 +17,15 @@ use rmrevin\yii\fontawesome\FA;
         'encodeLabels' => false,
         'items' => array_filter([
             [
-                'label' => FA::icon('wrench') . ' ' . Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda/'],
+                'label' => FA::icon('wrench') . ' ' . Yii::t('app', 'NAV_SKODA'), 'url' => ['/skoda/'],
                 'visible' => Yii::$app->user->can('skodaIsVisible')
             ],
             [
-                'label' => FA::icon('male') . ' ' . Module::t('module', 'NAV_SKODA_SERVICESHEDULER'), 'url' => ['/skoda/servicesheduler/calendar'],
+                'label' => FA::icon('male') . ' ' . Yii::t('app', 'NAV_SKODA_SERVICESHEDULER'), 'url' => ['/skoda/servicesheduler/calendar'],
                 'visible' => Yii::$app->user->can('skodaIsVisible')
             ],
             [
-                'label' => FA::icon('television') . ' ' . Module::t('module', 'NAV_SKODA_STATUSMONITOR'), 'url' => ['/skoda/statusmonitor/calendar'],
+                'label' => FA::icon('television') . ' ' . Yii::t('app', 'NAV_SKODA_STATUSMONITOR'), 'url' => ['/skoda/statusmonitor/calendar'],
                 'visible' => Yii::$app->user->can('skodaIsVisible')
             ],
         ]),

@@ -3,7 +3,6 @@
 use app\modules\admin\models\User;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use app\modules\admin\Module;
 use rmrevin\yii\fontawesome\FA;
 use yii\web\View;
 
@@ -30,11 +29,11 @@ use yii\web\View;
     </div>
 
     <div class="form-group col-sm-5" style="text-align: right">
-        <?= Html::submitButton(FA::icon('search') . ' ' . Module::t('module', 'SEARCH'), ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::submitButton(Yii::t('app', '{icon} SEARCH', ['icon' => FA::icon('search')]), ['class' => 'btn btn-primary btn-sm']) ?>
 
-        <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'ADMIN_USERS_CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} ADMIN_USERS_CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
         
-        <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'ADMIN_USERS_REFRESH'), ['index'], ['class' => 'btn btn-info btn-sm', 'id' => 'refreshButton']) ?>
+        <?= Html::a(Yii::t('app', '{icon} ADMIN_USERS_REFRESH', ['icon' => FA::icon('refresh')]), ['index'], ['class' => 'btn btn-info btn-sm', 'id' => 'refreshButton']) ?>
     
     </div>
 

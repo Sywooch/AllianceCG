@@ -15,6 +15,7 @@ class SourceMessageSearch extends SourceMessage
 
     public $language;
     public $translation;
+    public $globalSearch;
 
     /**
      * @inheritdoc
@@ -24,7 +25,7 @@ class SourceMessageSearch extends SourceMessage
         return [
             [['id'], 'integer'],
             [['category', 'message'], 'safe'],
-            [['language', 'translation'], 'safe']
+            [['language', 'translation', 'globalSearch'], 'safe']
         ];
     }
 
@@ -75,16 +76,21 @@ class SourceMessageSearch extends SourceMessage
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            '{{%source_message}}.id' => $this->id,
+        $query->orFilterWhere([
+            '{{%source_message}}.id' => $this->globalSearch,
         ]);
 
         $query
-            ->andFilterWhere(['like', '{{%source_message}}.id', $this->id])
-            ->andFilterWhere(['like', '{{%message}}.language', $this->language])
-            ->andFilterWhere(['like', '{{%message}}.translation', $this->translation])
-            ->andFilterWhere(['like', 'category', $this->category])
-            ->andFilterWhere(['like', 'message', $this->message])
+            // ->andFilterWhere(['like', '{{%source_message}}.id', $this->id])
+            // ->andFilterWhere(['like', '{{%message}}.language', $this->language])
+            // ->andFilterWhere(['like', '{{%message}}.translation', $this->translation])
+            // ->andFilterWhere(['like', 'category', $this->category])
+            // ->andFilterWhere(['like', 'message', $this->message])
+            ->orFilterWhere(['like', '{{%source_message}}.id', $this->globalSearch])
+            ->orFilterWhere(['like', '{{%message}}.language', $this->globalSearch])
+            ->orFilterWhere(['like', '{{%message}}.translation', $this->globalSearch])
+            ->orFilterWhere(['like', 'category', $this->globalSearch])
+            ->orFilterWhere(['like', 'message', $this->globalSearch])
             ;
 
         return $dataProvider;

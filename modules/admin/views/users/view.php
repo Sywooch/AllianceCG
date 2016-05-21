@@ -3,15 +3,14 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use app\modules\admin\models\Positions;
-use app\modules\admin\Module;
 use rmrevin\yii\fontawesome\FA;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\user\models\User */
 
 $this->title = $model->getFullname();
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN'), 'url' => ['/admin']];
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN_USERS'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'ADMIN'), 'url' => ['/admin']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'ADMIN_USERS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-view col-lg-10 col-lg-offset-1">
@@ -22,13 +21,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <!--</h1>-->
     
     <p style="text-align: right;">
-        <?= Html::a(FA::icon('list-ol') . ' ' . Module::t('module', 'ADMIN_USERS'), ['/admin/users'], ['class' => 'btn btn-warning btn-sm']) ?>
-        <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['/admin/users/create'], ['class' => 'btn btn-success btn-sm']) ?>
-        <?= Html::a(FA::icon('pencil') . ' ' . Module::t('module', 'ADMIN_USER_UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
-        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'ADMIN_USER_DELETE'), ['delete', 'id' => $model->id], [
+        <?= Html::a(FA::icon('list-ol') . ' ' . Yii::t('app', 'ADMIN_USERS'), ['/admin/users'], ['class' => 'btn btn-warning btn-sm']) ?>
+        <?= Html::a(FA::icon('plus') . ' ' . Yii::t('app', 'CREATE'), ['/admin/users/create'], ['class' => 'btn btn-success btn-sm']) ?>
+        <?= Html::a(FA::icon('pencil') . ' ' . Yii::t('app', 'ADMIN_USER_UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(FA::icon('remove') . ' ' . Yii::t('app', 'ADMIN_USER_DELETE'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger btn-sm',
             'data' => [
-                'confirm' => Module::t('module', 'ADMIN_USER_DELETE_CONFIRM'),
+                'confirm' => Yii::t('app', 'ADMIN_USER_DELETE_CONFIRM'),
                 'method' => 'post',
             ],
         ]) ?>        

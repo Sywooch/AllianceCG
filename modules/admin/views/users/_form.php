@@ -2,7 +2,6 @@
 
 use app\modules\admin\models\User;
 use app\modules\admin\models\Userroles;
-use app\modules\admin\Module;
 use app\modules\references\models\Positions;
 use app\modules\references\models\Companies;
 use app\modules\references\models\Departments;
@@ -83,10 +82,10 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group" style="text-align: right;">
         <?= Html::submitButton(
-            $model->isNewRecord ? FA::icon('floppy-o') . ' ' . Module::t('module', 'BUTTON_CREATE') : FA::icon('pencil') . ' ' . Module::t('module', 'ADMIN_USERS_BUTTON_UPDATE'),
+            $model->isNewRecord ? Yii::t('app', '{icon} BUTTON_CREATE', ['icon' => FA::icon('floppy-o')]) : Yii::t('app', '{icon} ADMIN_USERS_BUTTON_UPDATE', ['icon' => FA::icon('pencil')]),
             ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']
         ) ?>
-        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'ADMIN_USERS_BUTTON_CANCEL'), ['/admin/users'], ['class' => 'btn btn-danger btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} ADMIN_USERS_BUTTON_CANCEL', ['icon' => FA::icon('remove')]), ['/admin/users'], ['class' => 'btn btn-danger btn-sm']) ?>
     </div>
 
  

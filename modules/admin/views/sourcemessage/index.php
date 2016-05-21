@@ -21,15 +21,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- <h1> -->
     <?php // echo Html::encode($this->title) ?>
     <!-- </h1> -->
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?= $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p style="text-align: right;">
-        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => FA::icon('refresh')]), ['index'], ['class' => 'btn btn-primary btn-sm']) ?>
-    </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+<?php Pjax::begin(); ?>    
+<?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        // 'filterModel' => $searchModel,
         'summary' => false,
         'columns' => [
             [
@@ -62,5 +59,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
             // ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]); 
+?>
 <?php Pjax::end(); ?></div>

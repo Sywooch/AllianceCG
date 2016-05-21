@@ -3,8 +3,6 @@
 namespace app\modules\admin\models;
  
 use yii\helpers\ArrayHelper;
-// use app\modules\user\Module;
-use app\modules\admin\Module;
 use app\modules\references\models\Positions;
 use app\modules\references\models\Departments;
 use app\modules\references\models\Companies;
@@ -45,12 +43,12 @@ class User extends \app\modules\user\models\User
     public function attributeLabels()
     {
         return ArrayHelper::merge(parent::attributeLabels(), [
-            'newPassword' => Module::t('module', 'ADMIN_USER_NEW_PASSWORD'),
-            'newPasswordRepeat' => Module::t('module', 'ADMIN_USER_REPEAT_PASSWORD'),
-            'role' => Module::t('module', 'ADMIN_USERS_ROLE'),
-            'userroles' => Module::t('module', 'ADMIN_USERS_ROLE'),
-            'department' => Module::t('module', 'DEPARTMENT'),
-            'departments' => Module::t('module', 'DEPARTMENT'),
+            'newPassword' => Yii::t('app', 'ADMIN_USER_NEW_PASSWORD'),
+            'newPasswordRepeat' => Yii::t('app', 'ADMIN_USER_REPEAT_PASSWORD'),
+            'role' => Yii::t('app', 'ADMIN_USERS_ROLE'),
+            'userroles' => Yii::t('app', 'ADMIN_USERS_ROLE'),
+            'department' => Yii::t('app', 'DEPARTMENT'),
+            'departments' => Yii::t('app', 'DEPARTMENT'),
         ]);
     }
 

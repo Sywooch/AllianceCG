@@ -1,13 +1,13 @@
 <?php
  
 use yii\helpers\Html;
-use app\modules\admin\Module;
+// use app\modules\admin\Module;
 use yii\bootstrap\Nav;
  
 /* @var $this yii\web\View */
 /* @var $model \app\modules\user\models\User */
  
-$this->title = Module::t('module', 'ADMIN');
+$this->title = Yii::t('app', 'ADMIN');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="admin-default-index center-block">
@@ -23,15 +23,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'encodeLabels' => false,
                 'items' => array_filter([
                     [
-                        'label' => '<span class="glyphicon glyphicon-user"></span>  ' . Module::t('module', 'ADMIN_USERS'),
+                        'label' => '<span class="glyphicon glyphicon-user"></span>  ' . Yii::t('app', 'ADMIN_USERS'),
                         'url' => '/admin/users/index',
                     ],
                     [
-                        'label' => '<span class="glyphicon glyphicon-briefcase"></span>  ' . Module::t('module', 'ADMIN_POSITIONS'),
+                        'label' => '<span class="glyphicon glyphicon-briefcase"></span>  ' . Yii::t('app', 'ADMIN_POSITIONS'),
                         'url' => '/admin/positions/index',
                     ],
                     [
-                        'label' => '<span class="glyphicon glyphicon-tent"></span>  ' . Module::t('module', 'ADMIN_COMPANIES'),
+                        'label' => '<span class="glyphicon glyphicon-tent"></span>  ' . Yii::t('app', 'ADMIN_COMPANIES'),
                         'url' => '/admin/companies/index',
                     ],
                 ]),

@@ -1,15 +1,13 @@
 <?php
 
 use yii\helpers\Html;
-use app\modules\admin\Module;
-
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Userroles */
 
-$this->title = Module::t('module', 'CREATE');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN'), 'url' => ['/admin']];
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_USERROLES'), 'url' => ['index']];
+$this->title = Yii::t('app', 'CREATE');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'ADMIN'), 'url' => ['/admin']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'NAV_USERROLES'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="userroles-create">

@@ -2,7 +2,7 @@
 
 namespace app\modules\admin\models;
 use yii\behaviors\TimestampBehavior;
-use app\modules\admin\Module;
+// use app\modules\admin\Module;
 
 use Yii;
 
@@ -87,14 +87,14 @@ class Userroles extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Module::t('module', 'ID'),
-            'role' => Module::t('module', 'ROLE_NAME'),
-            'role_description' => Module::t('module', 'ROLE_DESCRIPTION'),
-            'created_at' => Module::t('module', 'CREATED_AT'),
-            'updated_at' => Module::t('module', 'UPDATED_AT'),
-            'author' => Module::t('module', 'AUTHOR'),
-            'globalSearch' => Module::t('module', 'SEARCH'),
-            'userroles_count' => Module::t('module', 'USERROLESCOUNT'),
+            'id' => Yii::t('app', 'ID'),
+            'role' => Yii::t('app', 'ROLE_NAME'),
+            'role_description' => Yii::t('app', 'ROLE_DESCRIPTION'),
+            'created_at' => Yii::t('app', 'CREATED_AT'),
+            'updated_at' => Yii::t('app', 'UPDATED_AT'),
+            'author' => Yii::t('app', 'AUTHOR'),
+            'globalSearch' => Yii::t('app', 'SEARCH'),
+            'userroles_count' => Yii::t('app', 'USERROLESCOUNT'),
         ];
     }
 }

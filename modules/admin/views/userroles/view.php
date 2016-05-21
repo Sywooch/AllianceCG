@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use app\modules\admin\models\User;
 use yii\data\ActiveDataProvider;
-use app\modules\admin\Module;
 use yii\grid\GridView;
 use rmrevin\yii\fontawesome\FA;
 
@@ -12,8 +11,8 @@ use rmrevin\yii\fontawesome\FA;
 /* @var $model app\modules\admin\models\Userroles */
 
 $this->title = $model->role_description;
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN'), 'url' => ['/admin']];
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_USERROLES'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'ADMIN'), 'url' => ['/admin']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'NAV_USERROLES'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="userroles-view">
@@ -23,11 +22,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- </h1> -->
 
     <p style="text-align: right">
-        <?= Html::a(FA::icon('pencil') . ' ' . Module::t('module', 'UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
-        <?= Html::a(FA::icon('trash') . ' ' . Module::t('module', 'DELETE'), ['delete', 'id' => $model->id], [
+        <?= Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => FA::icon('pencil')]), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} DELETE', ['icon' => FA::icon('trash')]), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger btn-sm',
             'data' => [
-                'confirm' => Module::t('module', 'REALLY_DELETE'),
+                'confirm' => Yii::t('app', 'REALLY_DELETE'),
                 'method' => 'post',
             ],
         ]) ?>

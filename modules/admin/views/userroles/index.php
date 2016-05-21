@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-use app\modules\admin\Module;
 use app\components\grid\ActionColumn;
 use app\components\grid\SetColumn;
 use app\components\grid\LinkColumn;
@@ -11,8 +10,8 @@ use app\components\grid\LinkColumn;
 /* @var $searchModel app\modules\admin\models\UserrolesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('module', 'NAV_USERROLES');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN'), 'url' => ['/admin']];
+$this->title = Yii::t('app', 'NAV_USERROLES');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'ADMIN'), 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="userroles-index">
@@ -23,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     
 
     <p style="text-align: right;">
-        <?php // Html::a(Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?php // Html::a(Yii::t('app', 'CREATE'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -50,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //     'format' => 'html',
             //     'filter' => false,
             //     'value' => function($model) {
-            //         return '<span class="label label-primary">' . Module::t('module', 'COUNTUSERS') . ': ' . $model->userrolescount . '</span>';
+            //         return '<span class="label label-primary">' . Yii::t('app', 'COUNTUSERS') . ': ' . $model->userrolescount . '</span>';
             //     },   
             //     'contentOptions' => ['class'=>'success;'],
             // ],
@@ -59,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'html',
                 'filter' => false,
                 'value' => function($model) {
-                    return '<span class="label label-primary">' . Module::t('module', 'COUNTUSERS') . ': ' . $model->userrolescount . '</span>';
+                    return '<span class="label label-primary">' . Yii::t('app', 'COUNTUSERS') . ': ' . $model->userrolescount . '</span>';
                 },   
                 'contentOptions' => ['class'=>'success;'],
             ],

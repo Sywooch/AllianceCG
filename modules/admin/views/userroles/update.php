@@ -1,16 +1,15 @@
 <?php
 
 use yii\helpers\Html;
-use app\modules\admin\Module;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Userroles */
 
-$this->title = Module::t('module', 'UPDATE') . ' ' . $model->role_description;
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN'), 'url' => ['/admin']];
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_USERROLES'), 'url' => ['index']];
+$this->title = Yii::t('app', 'UPDATE') . ' ' . $model->role_description;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'ADMIN'), 'url' => ['/admin']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'NAV_USERROLES'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->role_description, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Module::t('module', 'UPDATE');
+$this->params['breadcrumbs'][] = Yii::t('app', 'UPDATE');
 ?>
 <div class="userroles-update">
 

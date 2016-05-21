@@ -9,7 +9,7 @@ $params = ArrayHelper::merge(
  
 return [
     'name' => 'ГК "Альянс"',
-    'language' => 'ru',
+    'language' => 'ru-RU',
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',
@@ -77,12 +77,13 @@ return [
         // ], 
         'i18n' => [
             'translations' => [
-                '*' => [
+                'app*' => [
                     'class' => 'yii\i18n\DbMessageSource',
                     'sourceMessageTable'=>'{{%source_message}}',
                     'messageTable'=>'{{%message}}',
-                    'sourceLanguage' => 'ru',
-                    'db' => 'db',
+                    // 'language' => 'ru-RU',
+                    // 'sourceLanguage' => 'ru-RU',
+                    // 'db' => 'db',
                     'enableCaching' => false,
                     'cachingDuration' => 10,
                     'forceTranslation'=>true,

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use yii\helpers\ArrayHelper;
+// \Yii::$app->language = 'ru-RU';
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\admin\models\SourceMessageSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */

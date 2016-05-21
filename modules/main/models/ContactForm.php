@@ -5,7 +5,7 @@ namespace app\modules\main\models;
 
 use Yii;
 use yii\base\Model;
-use app\modules\main\Module;
+// use app\modules\main\Module;
 
 /**
  * ContactForm is the model behind the contact form.
@@ -41,11 +41,11 @@ class ContactForm extends Model
     public function attributeLabels()
     {
         return [
-            'name' => Module::t('module', 'CONTACT_NAME'),
-            'email' => Module::t('module', 'CONTACT_EMAIL'),
-            'subject' => Module::t('module', 'CONTACT_SUBJECT'),
-            'body' => Module::t('module', 'CONTACT_BODY'),
-            'verifyCode' => Module::t('module', 'CONTACT_VERIFYCODE'),
+            'name' => Yii::t('app', 'CONTACT_NAME'),
+            'email' => Yii::t('app', 'CONTACT_EMAIL'),
+            'subject' => Yii::t('app', 'CONTACT_SUBJECT'),
+            'body' => Yii::t('app', 'CONTACT_BODY'),
+            'verifyCode' => Yii::t('app', 'CONTACT_VERIFYCODE'),
         ];
     }
 

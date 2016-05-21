@@ -4,7 +4,6 @@ use yii\bootstrap\NavBar;
 use yii\bootstrap\Nav;
 use yii\helpers\Html;
 use rmrevin\yii\fontawesome\FA;
-use app\modules\main\Module;
 use yii\helpers\Url;
 
     NavBar::begin([
@@ -26,20 +25,20 @@ echo Nav::widget([
         'items' => array_filter([
         Yii::$app->user->isGuest ?
             [
-                'label' => FA::icon('user') . ' ' . Module::t('module', 'NAV_LOGIN'),
+                'label' => FA::icon('user') . ' ' . Yii::t('app', 'NAV_LOGIN'),
                 'url' => ['/user/default/login']
             ] : false,
         !Yii::$app->user->isGuest ?
             [
-                'label' => FA::icon('cog') . ' ' . Module::t('module', 'NAV_CONTACT'),
+                'label' => FA::icon('cog') . ' ' . Yii::t('app', 'NAV_CONTACT'),
                 'url' => ['/main/contact'],
                 // 'visible' => Yii::$app->user->can('adminIsVisible')
             ] :
             false,
         !Yii::$app->user->isGuest ?
             ['label' => FA::icon('user') . ' ' . Yii::$app->user->identity->userfullname, 'items' => [
-                ['label' => FA::icon('user') . ' ' . Module::t('module', 'NAV_PROFILE'), 'url' => ['/user/profile']],
-                ['label' => FA::icon('power-off') . ' ' . Module::t('module', 'NAV_LOGOUT'),
+                ['label' => FA::icon('user') . ' ' . Yii::t('app', 'NAV_PROFILE'), 'url' => ['/user/profile']],
+                ['label' => FA::icon('power-off') . ' ' . Yii::t('app', 'NAV_LOGOUT'),
                     'url' => ['/user/default/logout'],
                     'linkOptions' => ['data-method' => 'post']]
                 ]

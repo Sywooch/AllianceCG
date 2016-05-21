@@ -7,9 +7,9 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
-use app\modules\main\Module;
+use rmrevin\yii\fontawesome\FA;
 
-$this->title = Module::t('module', 'TITLE_CONTACT');
+$this->title = Yii::t('app', 'TITLE_CONTACT');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-contact">
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
 
         <div class="alert alert-success">
-            <?= Module::t('module', 'CONTACT_THANKS') ?>
+            <?= Yii::t('app', 'CONTACT_THANKS') ?>
         </div>
 
     <?php // endif; ?>
@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <div class="alert alert-info">
 
-                    <p><?= Module::t('module', 'CONTACT_INFO'); ?></p>
+                    <p><?= Yii::t('app', 'CONTACT_INFO'); ?></p>
 
                 </div>
 
@@ -68,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <!-- <div class="col-md-4"> -->
                     <div class="form-group" style="text-align: right">
-                        <?= Html::submitButton('<span class="glyphicon glyphicon-envelope"></span>  ' . Module::t('module', 'BUTTON_SUBMIT'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+                        <?= Html::submitButton(Yii::t('app', '{icon} BUTTON_SUBMIT', ['icon' => FA::icon('mail-reply-all')]), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
                     </div>                    
                 <!-- </div> -->
                     

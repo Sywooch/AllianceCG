@@ -3,7 +3,6 @@
 use yii\bootstrap\Nav;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use app\modules\admin\Module;
 use rmrevin\yii\fontawesome\FA;
 
 ?>
@@ -19,16 +18,16 @@ use rmrevin\yii\fontawesome\FA;
         'encodeLabels' => false,
         'items' => array_filter([
             [
-                'label' => FA::icon('building') . ' ' . Module::t('module', 'NAV_ALLIANCE'),
+                'label' => Yii::t('app', '{icon} NAV_ALLIANCE', ['icon' => FA::icon('building')]),
                 'url' => ['/alliance/'],
                 'visible' => Yii::$app->user->can('creditcalendarIsVisible')
             ],
             [
-                'label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_CREDITCALENDAR'), 'url' => ['/alliance/creditcalendar/calendar'],
+                'label' =>  Yii::t('app', '{icon} NAV_ALLIANCE_CREDITCALENDAR', ['icon' => FA::icon('calendar')]), 'url' => ['/alliance/creditcalendar/calendar'],
                 'visible' => Yii::$app->user->can('creditcalendarIsVisible')
             ],
             [
-                'label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_CLIENTCIRCULATION'), 'url' => ['/alliance/clientcirculation'],
+                'label' => Yii::t('app', '{icon} NAV_ALLIANCE_CLIENTCIRCULATION', ['icon' => FA::icon('calendar')]), 'url' => ['/alliance/clientcirculation'],
                 'visible' => Yii::$app->user->can('creditcalendarIsVisible')
             ],
         ]),

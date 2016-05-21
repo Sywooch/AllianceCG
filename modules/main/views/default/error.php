@@ -8,7 +8,6 @@
 $this->registerCssFile('@web/css/landing_login.css', ['depends' => ['app\assets\AppAsset']]);  
 
 use yii\helpers\Html;
-use app\modules\main\Module;
 
 $this->title = $name;
 ?>
@@ -21,11 +20,11 @@ $this->title = $name;
     </div>
 
     <p>
-        <?php Module::t('module', 'ERROR_OCCURED'); ?>
+        <?php Yii::t('app', 'ERROR_OCCURED'); ?>
         <!-- The above error occurred while the Web server was processing your request. -->
     </p>
     <p>
-        <?php Module::t('module', 'PLEASE_CONTACT'); ?>
+        <?php Yii::t('app', 'PLEASE_CONTACT'); ?>
         <!-- Please contact us if you think this is a server error. Thank you. -->
     </p>
 

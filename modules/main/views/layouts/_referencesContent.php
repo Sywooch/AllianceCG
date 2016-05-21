@@ -3,7 +3,6 @@
 use yii\bootstrap\Nav;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use app\modules\admin\Module;
 use rmrevin\yii\fontawesome\FA;
 
 ?>
@@ -18,59 +17,59 @@ use rmrevin\yii\fontawesome\FA;
         'encodeLabels' => false,
         'items' => array_filter([
             [
-                'label' => FA::icon('book') . ' ' . Module::t('module', 'NAV_REFERENCES'),
+                'label' => Yii::t('app', '{icon} NAV_REFERENCES', ['icon' => FA::icon('book')]),
                 'url' => '/references',
                 // 'options' => ['class' => 'list-group-item'],
             ],
             [
-                'label' => FA::icon('user') . ' ' . Module::t('module', 'REFERENCES_EMPLOYEES'),
+                'label' => Yii::t('app', '{icon} REFERENCES_EMPLOYEES', ['icon' => FA::icon('user')]),
                 'url' => '/references/employees',
                 // 'options' => ['class' => 'list-group-item'],
 
             ],
             [
-                'label' => FA::icon('asterisk') . ' ' . Module::t('module', 'REFERENCES_REGIONS'),
+                'label' => Yii::t('app', '{icon} REFERENCES_REGIONS', ['icon' => FA::icon('asterisk')]),
                 'url' => '/references/regions',
                 // 'visible' => Yii::$app->user->can('admin'),
             ],
             [
-                'label' => FA::icon('diamond') . ' ' . Module::t('module', 'REFERENCES_TARGETS'),
+                'label' => Yii::t('app', '{icon} REFERENCES_TARGETS', ['icon' => FA::icon('diamond')]),
                 'url' => '/references/targets',
                 // 'options' => ['class' => 'list-group-item'],
 
             ],
             [
-                'label' => FA::icon('car') . ' ' . Module::t('module', 'REFERENCES_BRANDS'),
+                'label' => Yii::t('app', '{icon} REFERENCES_BRANDS', ['icon' => FA::icon('car')]),
                 'url' => '/references/brands',
                 // 'visible' => Yii::$app->user->can('admin'),
             ],
             [
-                'label' => FA::icon('car') . ' ' . Module::t('module', 'REFERENCES_MODELS'),
+                'label' => Yii::t('app', '{icon} REFERENCES_MODELS', ['icon' => FA::icon('car')]),
                 'url' => '/references/models',
                 // 'visible' => Yii::$app->user->can('admin'),
             ],
             [
-                'label' => FA::icon('car') . ' ' . Module::t('module', 'REFERENCES_BODYTYPES'),
+                'label' => Yii::t('app', '{icon} REFERENCES_BODYTYPES', ['icon' => FA::icon('car')]),
                 'url' => '/references/bodytypes',
                 // 'visible' => Yii::$app->user->can('admin'),
             ],
             [
-                'label' => FA::icon('briefcase') . ' ' . Module::t('module', 'ADMIN_POSITIONS'),
+                'label' => Yii::t('app', '{icon} ADMIN_POSITIONS', ['icon' => FA::icon('briefcase')]),
                 'url' => '/references/positions',
                 // 'options' => ['class' => 'list-group-item'],
             ],
             [
-                'label' => FA::icon('users') . ' ' . Module::t('module', 'ADMIN_DEPARTMENTS'),
+                'label' => Yii::t('app', '{icon} ADMIN_DEPARTMENTS', ['icon' => FA::icon('users')]),
                 'url' => '/references/departments',
                 // 'options' => ['class' => 'list-group-item'],
             ],
             [
-                'label' => FA::icon('institution') . ' ' . Module::t('module', 'ADMIN_COMPANIES'),
+                'label' => Yii::t('app', '{icon} ADMIN_COMPANIES', ['icon' => FA::icon('institution')]),
                 'url' => '/references/companies',
                 // 'options' => ['class' => 'list-group-item'],
             ],
             [
-                'label' => FA::icon('male') . ' ' . Module::t('module', 'CONTACTTYPE'),
+                'label' => Yii::t('app', '{icon} CONTACTTYPE', ['icon' => FA::icon('male')]),
                 'url' => '/references/contacttype',
                 // 'options' => ['class' => 'list-group-item'],
             ],

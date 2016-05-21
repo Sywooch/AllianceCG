@@ -465,6 +465,10 @@ a.desc:after {
     /*color: white;*/
 }
 
+.buttonpane {
+    text-align: right;
+}
+
 /*.wrap {background: url('/img/site/main-bg.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;

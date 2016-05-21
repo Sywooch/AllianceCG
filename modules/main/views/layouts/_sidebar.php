@@ -3,7 +3,7 @@
 use yii\bootstrap\Nav;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use app\modules\admin\Module;
+// use app\modules\admin\Module;
 use rmrevin\yii\fontawesome\FA;
 use yii\bootstrap\Collapse;
 
@@ -22,7 +22,7 @@ echo Collapse::widget([
     'encodeLabels' => false,
     'items' => [
         [
-            'label' => FA::icon('building') . ' ' . Module::t('module', 'NAV_ALLIANCE'),
+            'label' => FA::icon('building') . ' ' . Yii::t('app', 'NAV_ALLIANCE'),
             'content' => $this->render('_allianceContent'),
             'contentOptions' => [
                 'class' => Yii::$app->controller->module->id == 'alliance' ? 'in' : false,
@@ -30,7 +30,7 @@ echo Collapse::widget([
             'options' => ['style' => !Yii::$app->user->can('creditcalendarIsVisible') ? 'display: none;' : false,],
         ],
         [
-            'label' => FA::icon('wrench') . ' ' . Module::t('module', 'NAV_SKODA'),
+            'label' => FA::icon('wrench') . ' ' . Yii::t('app', 'NAV_SKODA'),
             'content' => $this->render('_skodaContent'),
             'contentOptions' => [
                 'class' => Yii::$app->controller->module->id == 'skoda' ? 'in' : false,
@@ -38,7 +38,7 @@ echo Collapse::widget([
             'options' => ['style' => !Yii::$app->user->can('skodaIsVisible') ? 'display: none;' : false,],
         ],
         [
-            'label' => FA::icon('book') . ' ' . Module::t('module', 'NAV_REFERENCES'),
+            'label' => FA::icon('book') . ' ' . Yii::t('app', 'NAV_REFERENCES'),
             'content' => $this->render('_referencesContent'),
             'contentOptions' => [
                 'class' => Yii::$app->controller->module->id == 'references' ? 'in' : false,
@@ -46,7 +46,7 @@ echo Collapse::widget([
             'options' => ['style' => !Yii::$app->user->can('creditcalendarIsVisible') ? 'display: none;' : false,],
         ],
         [
-            'label' => FA::icon('cog') . ' ' . Module::t('module', 'NAV_ADMIN'),
+            'label' => FA::icon('cog') . ' ' . Yii::t('app', 'NAV_ADMIN'),
             'content' => $this->render('_adminContent'),
             'contentOptions' => [
                 'class' => Yii::$app->controller->module->id == 'admin' ? 'in' : false,
@@ -63,12 +63,12 @@ echo Collapse::widget([
     //     'encodeLabels' => false,
     //     'items' => array_filter([
     //         [
-    //             'label' => FA::icon('building') . ' ' . Module::t('module', 'NAV_ALLIANCE'),
+    //             'label' => FA::icon('building') . ' ' . Yii::t('app', 'NAV_ALLIANCE'),
     //             'url' => ['/alliance/'],
     //             'visible' => Yii::$app->user->can('creditcalendarIsVisible')
     //         ],
     //         [
-    //             'label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_CREDITCALENDAR'), 'url' => ['/alliance/creditcalendar/calendar'],
+    //             'label' => FA::icon('calendar') . ' ' . Yii::t('app', 'NAV_ALLIANCE_CREDITCALENDAR'), 'url' => ['/alliance/creditcalendar/calendar'],
     //             'visible' => Yii::$app->user->can('creditcalendarIsVisible')
     //         ],
     //     ]),
@@ -81,15 +81,15 @@ echo Collapse::widget([
     //     'encodeLabels' => false,
     //     'items' => array_filter([
     //         [
-    //             'label' => FA::icon('wrench') . ' ' . Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda/'],
+    //             'label' => FA::icon('wrench') . ' ' . Yii::t('app', 'NAV_SKODA'), 'url' => ['/skoda/'],
     //             'visible' => Yii::$app->user->can('skodaIsVisible')
     //         ],
     //         [
-    //             'label' => FA::icon('male') . ' ' . Module::t('module', 'NAV_SKODA_SERVICESHEDULER'), 'url' => ['/skoda/servicesheduler/calendar'],
+    //             'label' => FA::icon('male') . ' ' . Yii::t('app', 'NAV_SKODA_SERVICESHEDULER'), 'url' => ['/skoda/servicesheduler/calendar'],
     //             'visible' => Yii::$app->user->can('skodaIsVisible')
     //         ],
     //         [
-    //             'label' => FA::icon('television') . ' ' . Module::t('module', 'NAV_SKODA_STATUSMONITOR'), 'url' => ['/skoda/statusmonitor'],
+    //             'label' => FA::icon('television') . ' ' . Yii::t('app', 'NAV_SKODA_STATUSMONITOR'), 'url' => ['/skoda/statusmonitor'],
     //             'visible' => Yii::$app->user->can('skodaIsVisible')
     //         ],
     //     ]),
@@ -103,32 +103,32 @@ echo Collapse::widget([
     //     'encodeLabels' => false,
     //     'items' => array_filter([
     //         [
-    //             'label' => FA::icon('cog') . ' ' . Module::t('module', 'NAV_ADMIN'),
+    //             'label' => FA::icon('cog') . ' ' . Yii::t('app', 'NAV_ADMIN'),
     //             'url' => '/admin',
     //             // 'options' => ['class' => 'list-group-item'],
     //         ],
     //         [
-    //             'label' => FA::icon('user') . ' ' . Module::t('module', 'ADMIN_USERS'),
+    //             'label' => FA::icon('user') . ' ' . Yii::t('app', 'ADMIN_USERS'),
     //             'url' => '/admin/users',
     //             // 'options' => ['class' => 'list-group-item'],
 
     //         ],
     //         [
-    //             'label' => FA::icon('cog') . ' ' . Module::t('module', 'NAV_USERROLES'),
+    //             'label' => FA::icon('cog') . ' ' . Yii::t('app', 'NAV_USERROLES'),
     //             'url' => '/admin/userroles',
     //         ],
     //         [
-    //             'label' => FA::icon('institution') . ' ' . Module::t('module', 'ADMIN_COMPANIES'),
+    //             'label' => FA::icon('institution') . ' ' . Yii::t('app', 'ADMIN_COMPANIES'),
     //             'url' => '/admin/companies',
     //             // 'options' => ['class' => 'list-group-item'],
     //         ],
     //         [
-    //             'label' => FA::icon('users') . ' ' . Module::t('module', 'ADMIN_DEPARTMENTS'),
+    //             'label' => FA::icon('users') . ' ' . Yii::t('app', 'ADMIN_DEPARTMENTS'),
     //             'url' => '/admin/departments',
     //             // 'options' => ['class' => 'list-group-item'],
     //         ],
     //         [
-    //             'label' => FA::icon('briefcase') . ' ' . Module::t('module', 'ADMIN_POSITIONS'),
+    //             'label' => FA::icon('briefcase') . ' ' . Yii::t('app', 'ADMIN_POSITIONS'),
     //             'url' => '/admin/positions',
     //             // 'options' => ['class' => 'list-group-item'],
     //         ],
@@ -143,23 +143,23 @@ echo Collapse::widget([
     //     'encodeLabels' => false,
     //     'items' => array_filter([
     //         [
-    //             'label' => FA::icon('book') . ' ' . Module::t('module', 'NAV_REFERENCES'),
+    //             'label' => FA::icon('book') . ' ' . Yii::t('app', 'NAV_REFERENCES'),
     //             'url' => '/references',
     //             // 'options' => ['class' => 'list-group-item'],
     //         ],
     //         [
-    //             'label' => FA::icon('diamond') . ' ' . Module::t('module', 'REFERENCES_TARGETS'),
+    //             'label' => FA::icon('diamond') . ' ' . Yii::t('app', 'REFERENCES_TARGETS'),
     //             'url' => '/references/targets',
     //             // 'options' => ['class' => 'list-group-item'],
 
     //         ],
     //         [
-    //             'label' => FA::icon('car') . ' ' . Module::t('module', 'REFERENCES_BRANDS'),
+    //             'label' => FA::icon('car') . ' ' . Yii::t('app', 'REFERENCES_BRANDS'),
     //             'url' => '/references/brands',
     //             // 'visible' => Yii::$app->user->can('admin'),
     //         ],
     //         [
-    //             'label' => FA::icon('car') . ' ' . Module::t('module', 'REFERENCES_MODELS'),
+    //             'label' => FA::icon('car') . ' ' . Yii::t('app', 'REFERENCES_MODELS'),
     //             'url' => '/references/models    ',
     //             // 'visible' => Yii::$app->user->can('admin'),
     //         ],

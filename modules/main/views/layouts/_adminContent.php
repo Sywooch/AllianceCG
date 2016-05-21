@@ -3,7 +3,7 @@
 use yii\bootstrap\Nav;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use app\modules\admin\Module;
+// use app\modules\admin\Module;
 use rmrevin\yii\fontawesome\FA;
 
 ?>
@@ -18,22 +18,22 @@ use rmrevin\yii\fontawesome\FA;
         'encodeLabels' => false,
         'items' => array_filter([
             [
-                'label' => FA::icon('cog') . ' ' . Module::t('module', 'NAV_ADMIN'),
+                'label' => FA::icon('cog') . ' ' . Yii::t('app', 'NAV_ADMIN'),
                 'url' => '/admin',
                 // 'options' => ['class' => 'list-group-item'],
             ],
             [
-                'label' => FA::icon('user') . ' ' . Module::t('module', 'ADMIN_USERS'),
+                'label' => FA::icon('user') . ' ' . Yii::t('app', 'ADMIN_USERS'),
                 'url' => '/admin/users',
                 // 'options' => ['class' => 'list-group-item'],
 
             ],
             [
-                'label' => FA::icon('cog') . ' ' . Module::t('module', 'NAV_USERROLES'),
+                'label' => FA::icon('cog') . ' ' . Yii::t('app', 'NAV_USERROLES'),
                 'url' => '/admin/userroles',
             ],
             [
-                'label' => FA::icon('cog') . ' ' . Module::t('module', 'TRANSLATIONS'),
+                'label' => FA::icon('cog') . ' ' . Yii::t('app', 'TRANSLATIONS'),
                 'url' => '/admin/sourcemessage',
             ],
         ]),

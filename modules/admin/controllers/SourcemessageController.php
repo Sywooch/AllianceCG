@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\modules\admin\models\Message;
 use yii\data\ActiveDataProvider;
+use yii\web\UploadedFile;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -38,10 +39,12 @@ class SourcemessageController extends Controller
      */
     public function actionIndex()
     {
+        $model = new SourceMessage();
         $searchModel = new SourceMessageSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'model' => $model,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -311,8 +314,12 @@ class SourcemessageController extends Controller
         return $this->redirect(Yii::$app->request->referrer);
     }
 
+    public function actionUpload()
+    {
 
-    public function actionImportexcel()
+    }
+
+    public function actionImport()
     {
         $inputDir = SourceMessage::DIR_FOR_UPLOAD;
         if (!file_exists(''.$inputDir.'')) {

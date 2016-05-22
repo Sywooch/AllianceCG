@@ -4,6 +4,7 @@ namespace app\modules\admin\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "{{%source_message}}".
@@ -16,6 +17,7 @@ use yii\helpers\ArrayHelper;
  */
 class SourceMessage extends \yii\db\ActiveRecord
 {
+    public $xlsxFile;
     public $language;
     public $translation;
 
@@ -40,6 +42,7 @@ class SourceMessage extends \yii\db\ActiveRecord
             [['message'], 'string'],
             [['category'], 'string', 'max' => 32],
             [['language', 'translation'], 'safe'],
+            [['xlsxFile'], 'file', 'skipOnEmpty' => false, 'extensions' => ['xlsx'],'checkExtensionByMimeType'=>false],
         ];
     }
 
@@ -77,6 +80,4 @@ class SourceMessage extends \yii\db\ActiveRecord
 
         parent::afterSave($insert, $changedAttributes);
     }
-
-
 }

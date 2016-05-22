@@ -187,10 +187,6 @@ class SourcemessageController extends Controller
                 ->setCellValue('B'.($row-1), $model->getAttributeLabel('message'))
                 ->setCellValue('C'.($row-1), $model->getAttributeLabel('language'))
                 ->setCellValue('D'.($row-1), $model->getAttributeLabel('translation'))
-                // ->setCellValue('E'.($row-1), $model->getAttributeLabel('responsibles'))
-                // ->setCellValue('F'.($row-1), $model->getAttributeLabel('locations'))
-                // ->setCellValue('G'.($row-1), $model->getAttributeLabel('status'))
-                // ->setCellValue('H'.($row-1), $model->getAttributeLabel('priority'))
                 ;
 
             // Данные из запроса
@@ -282,30 +278,92 @@ class SourcemessageController extends Controller
             $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(20);
             $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(20);
             $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(15);
-            // $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(15);
-            // $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(15);
-            // $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(13);
-            // $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(13);
-
             // Заголовок по центру
             $objPHPExcel->getActiveSheet()->getStyle('A'.$titleNumber.':D'.$titleNumber)->applyFromArray($centered);
 
             // Текст заголовка
-            $objPHPExcel->getActiveSheet()->setCellValue('A'.$titleNumber, Yii::t('app', 'TRANSLATION_EXCEL_TABLEHEADER') . date("d.m.Y H:i"));
+            $objPHPExcel->getActiveSheet()->setCellValue('A'.$titleNumber, Yii::t('app', 'TRANSLATION_EXCEL_TABLEHEADER') . '_' . date("d.m.Y H:i"));
             // $objPHPExcel->getActiveSheet()->setCellValue('A'.($titleNumber+1), $rowNumber);
 
             // Тип выгружаемого файла
-            header('Content-Type: application/vnd.ms-excel');
+            // header('Content-Type: application/vnd.ms-excel'); // Excel < 2007
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); // Excel2007
 
             // Имя выгружаемого файла
-            $filename = Yii::t('app','TRANSLATION_EXCEL_TITLE').date("d-m-Y-H-i-s").".xls";
+            $filename = Yii::t('app','TRANSLATION_EXCEL_TITLE') . '_' . date("d-m-Y-H-i-s").".xlsx";
 
             header('Content-Disposition: attachment;filename='.$filename .' ');
             header('Cache-Control: max-age=0');
-            $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+
+            $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007'); // Excel5 для выгрузки с расширением .xls
             $objWriter->save('php://output'); 
         }
     }     
 
+    public function actionGetmessages()
+    {
+        $msg_config_file = "@app/modules/main/messages/config.php";
+
+        $exec_command = "php yii message/extract";
+
+        exec("$exec_command $msg_config_file", $output, $return_var);
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+
+    public function actionImportexcel()
+    {
+        $inputDir = SourceMessage::DIR_FOR_UPLOAD;
+        if (!file_exists(''.$inputDir.'')) {
+            mkdir(''.$inputDir.'', 0777, true);
+        }
+
+        $inputFile = ''.$inputDir.SourceMessage::XLSX_FILE_FOR_UPLOAD;
+        // $inputFile = 'files/sourcemessage/sourcemessage.xlsx';
+        if (!file_exists(''.$inputFile.'')) {
+            Yii::$app->getSession()->setFlash('error', 'Отсутствует файл для загрузки.');  
+            return $this->render('importExcel');     
+            die("");
+        }
+        else{
+            try{
+                SourceMessage::deleteAll();
+                $inputFileType = \PHPExcel_IOFactory::identify($inputFile);
+                $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
+                $objPHPExcel = $objReader->load($inputFile);
+            }catch(Exception $e){
+                die('Error');
+            }
+            $sheet = $objPHPExcel->getSheet(0);
+            $highestRow = $sheet->getHighestRow();
+            $highestColumn = $sheet->getHighestColumn();        
+            for($row = 4; $row <= $highestRow; $row++){
+
+                $rowData = $sheet->rangeToArray('A'.$row.':'.$highestColumn.$row,NULL,TRUE,FALSE);
+                if($row == 1)
+                {
+                    continue;
+                }
+
+                $sourcemsg = new SourceMessageSearch();
+                $sourcemsg->category = $rowData[0][0]; 
+                $sourcemsg->message = $rowData[0][1];
+                $sourcemsg->language = $rowData[0][2];
+                $sourcemsg->translation = $rowData[0][3];
+                $sourcemsg->save();
+                if($sourcemsg->getErrors()){
+                    print_r($sourcemsg->getErrors());                    
+                }
+            }          
+            unlink($inputFile); 
+            Yii::$app->getSession()->setFlash('success', 'Импорт Выполнен.');   
+            return $this->render('importExcel', [
+                'model' => $sourcemsg,
+            ]);     
+            die();
+        }
+
+    }    
 
 }

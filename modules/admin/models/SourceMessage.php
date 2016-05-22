@@ -19,6 +19,10 @@ class SourceMessage extends \yii\db\ActiveRecord
     public $language;
     public $translation;
 
+    const DIR_FOR_UPLOAD = 'files/sourcemessage/';
+    const XLSX_FILE_FOR_UPLOAD = 'sourcemessage.xlsx';
+    const UPLOAD_FILE_EXT = 'xlsx';
+
     /**
      * @inheritdoc
      */

@@ -25,6 +25,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- </h1> -->
     <?= $this->render('_search', ['model' => $searchModel]); ?>
 
+<?php 
+// echo exec('yii message/extract @app/modules/main/messages/config.php');
+?>
+
 <?php Pjax::begin(); ?>    
 <?= GridView::widget([
         'dataProvider' => $dataProvider,

@@ -306,7 +306,7 @@ class SourcemessageController extends Controller
 
         $exec_command = "php yii message/extract";
 
-        exec("$exec_command $msg_config_file", $output, $return_var);
+        exec("php yii message/extract @app/modules/main/messages/config.php");
 
         return $this->redirect(Yii::$app->request->referrer);
     }

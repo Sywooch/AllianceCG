@@ -40,9 +40,21 @@ $this->params['breadcrumbs'][] = $this->title;
             'role_description:ntext',
             'created_at:datetime',
             'updated_at:datetime',
-            'author',
+            // 'author',
+            [
+                'attribute' => 'authorname',
+                'value' => $model->authorname->full_name,
+            ],
         ],
     ]); 
+
+    ?>
+    
+    <?= '<h3>' . Yii::t('app', '{icon} USERS_WITH_CURRENT_ROLE', ['icon' => FA::icon('users')]) . '</h3>' ?>
+
+    <?= '<p class="buttonpane">' . Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['/admin/users/create'], ['class' => 'btn btn-sm btn-success']) . '</p>' ?>
+
+    <?php
 
     echo GridView::widget([
         'dataProvider' => new ActiveDataProvider(['query' => $model->getUsersbyrole()]),
@@ -55,10 +67,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 'header' => '№',
                 'class' => 'yii\grid\SerialColumn'
             ],
+            // [
+            //     'attribute' => 'fullname',
+            //     'value' => 'full_name',
+            // ],
             [
-                'attribute' => 'fullname',
-                'value' => 'full_name',
-            ],
+               'attribute'=>'fullname',
+               'format' => 'raw',
+               'value'=>function ($data) {
+                    return $data->getUserlink();
+                },
+            ], 
         ],
     ]);    
 ?>

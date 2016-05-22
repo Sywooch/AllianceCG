@@ -38,7 +38,7 @@ return [
         ],
         'skoda' => [
             'class' => 'app\modules\skoda\Module',
-            'layoutPath' => '@app/modules/skoda/views/layouts',
+            'layoutPath' => '@app/modules/main/views/layouts/skoda',
             'layout' => 'main'
         ],
         'user' => [

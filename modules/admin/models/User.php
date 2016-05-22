@@ -104,6 +104,12 @@ class User extends \app\modules\user\models\User
         return false;
     }
 
+    public function getUserlink()
+    {
+        $link = isset($this->full_name) ? Html::a($this->full_name, ['/admin/users/view', 'id' => $this->id]) : false;
+        return $link;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

@@ -13,7 +13,7 @@ use app\modules\skoda\Module;
 class DefaultController extends Controller
 {
 
-    public $layout = '@app/modules/skoda/views/layouts/default/main';
+    public $layout = '@app/modules/main/views/layouts/skoda/default/main';
 
     public function behaviors()
     {

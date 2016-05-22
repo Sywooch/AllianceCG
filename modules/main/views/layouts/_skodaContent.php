@@ -17,15 +17,15 @@ use rmrevin\yii\fontawesome\FA;
         'encodeLabels' => false,
         'items' => array_filter([
             [
-                'label' => FA::icon('wrench') . ' ' . Yii::t('app', 'NAV_SKODA'), 'url' => ['/skoda/'],
+                'label' => Yii::t('app', '{icon} NAV_SKODA', ['icon' => FA::icon('wrench')]), 'url' => ['/skoda/'],
                 'visible' => Yii::$app->user->can('skodaIsVisible')
             ],
             [
-                'label' => FA::icon('male') . ' ' . Yii::t('app', 'NAV_SKODA_SERVICESHEDULER'), 'url' => ['/skoda/servicesheduler/calendar'],
+                'label' => Yii::t('app', '{icon} NAV_SKODA_SERVICESHEDULER', ['icon' => FA::icon('male')]), 'url' => ['/skoda/servicesheduler/calendar'],
                 'visible' => Yii::$app->user->can('skodaIsVisible')
             ],
             [
-                'label' => FA::icon('television') . ' ' . Yii::t('app', 'NAV_SKODA_STATUSMONITOR'), 'url' => ['/skoda/statusmonitor/calendar'],
+                'label' => Yii::t('app', '{icon} NAV_SKODA_STATUSMONITOR', ['icon' => FA::icon('television')]), 'url' => ['/skoda/statusmonitor/calendar'],
                 'visible' => Yii::$app->user->can('skodaIsVisible')
             ],
         ]),

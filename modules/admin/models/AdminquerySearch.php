@@ -93,5 +93,4 @@ class AdminquerySearch extends Model
         return Json::encode($data_user);
     }
 
-
 }

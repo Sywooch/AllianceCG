@@ -56,6 +56,7 @@ class Userroles extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'integer'],
             [['role', 'author'], 'string', 'max' => 255],
             [['globalSearch', 'userroles_count'], 'safe'],
+            ['author', 'default', 'value' => Yii::$app->user->getId()],
         ];
     }
 
@@ -82,6 +83,14 @@ class Userroles extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAuthorname()
+    {
+        return $this->hasOne(User::className(), ['id' => 'author']);
+    }
+
+    /**
      * @inheritdoc
      */
     public function attributeLabels()
@@ -93,8 +102,10 @@ class Userroles extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'CREATED_AT'),
             'updated_at' => Yii::t('app', 'UPDATED_AT'),
             'author' => Yii::t('app', 'AUTHOR'),
+            'authorname' => Yii::t('app', 'AUTHOR'),
             'globalSearch' => Yii::t('app', 'SEARCH'),
             'userroles_count' => Yii::t('app', 'USERROLESCOUNT'),
         ];
     }
+    
 }

@@ -25,7 +25,7 @@ AppAsset::register($this);
 
 <div class="wrap">
 
-<?= $this->render('@app/modules/user/views/layouts/default/_header') ?>
+<?= $this->render('@app/modules/main/views/layouts/user/default/_header') ?>
 
     <div class="container">
         <div class="col-sm-12">
@@ -35,7 +35,7 @@ AppAsset::register($this);
     </div>
 </div>
 
-<?= $this->render('@app/modules/user/views/layouts/default/_footer') ?>
+<?= $this->render('@app/modules/main/views/layouts/user/default/_footer') ?>
 
 <?php $this->endBody() ?>
 </body>

@@ -5,6 +5,8 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 use yii\helpers\ArrayHelper;
 use app\components\grid\SetColumn;
+use app\components\grid\ActionColumn;
+use yii\helpers\Url;
 use app\components\grid\LinkColumn;
 use rmrevin\yii\fontawesome\FA;
 // \Yii::$app->language = 'ru-RU';
@@ -49,6 +51,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model) {
                      return implode(', ', ArrayHelper::map($model->messages, 'id', 'translation'));
                 }                
+            ],
+            [
+                'class' => ActionColumn::className(),
+                'contentOptions'=>['style'=>'width: 20px;'],
+                'template' => '{update}',
+                'buttons' => [
+                    'update' => function ($url, $model) {
+                        $title = false;
+                        $options = []; 
+                        $icon = '<span class="glyphicon glyphicon-pencil"></span>';
+                        $label = $icon;
+                        $url = Url::toRoute(['update', 'id' => $model->id]);
+                        $options['tabindex'] = '-1';
+                        return Html::a($label, $url, $options) .''. PHP_EOL;
+                    },
+                ],
             ],
             // [
             //     'attribute' => 'language',

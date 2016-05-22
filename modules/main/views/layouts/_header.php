@@ -25,20 +25,20 @@ echo Nav::widget([
         'items' => array_filter([
         Yii::$app->user->isGuest ?
             [
-                'label' => FA::icon('user') . ' ' . Yii::t('app', 'NAV_LOGIN'),
+                'label' => Yii::t('app', '{icon} NAV_LOGIN', ['icon' => FA::icon('user')]),
                 'url' => ['/user/default/login']
             ] : false,
         !Yii::$app->user->isGuest ?
             [
-                'label' => FA::icon('cog') . ' ' . Yii::t('app', 'NAV_CONTACT'),
+                'label' => Yii::t('app', '{icon} NAV_CONTACT', ['icon' => FA::icon('cog')]),
                 'url' => ['/main/contact'],
                 // 'visible' => Yii::$app->user->can('adminIsVisible')
             ] :
             false,
         !Yii::$app->user->isGuest ?
             ['label' => FA::icon('user') . ' ' . Yii::$app->user->identity->userfullname, 'items' => [
-                ['label' => FA::icon('user') . ' ' . Yii::t('app', 'NAV_PROFILE'), 'url' => ['/user/profile']],
-                ['label' => FA::icon('power-off') . ' ' . Yii::t('app', 'NAV_LOGOUT'),
+                ['label' => Yii::t('app', '{icon} NAV_PROFILE', ['icon' => FA::icon('user')]), 'url' => ['/user/profile']],
+                ['label' => Yii::t('app', '{icon} NAV_LOGOUT', ['icon' => FA::icon('power-off')]),
                     'url' => ['/user/default/logout'],
                     'linkOptions' => ['data-method' => 'post']]
                 ]

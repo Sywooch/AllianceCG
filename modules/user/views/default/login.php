@@ -2,14 +2,13 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use app\modules\user\Module;
 use rmrevin\yii\fontawesome\FA;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \app\modules\user\models\form\LoginForm */
 
-$this->title = Module::t('module', 'TITLE_LOGIN');
+$this->title = Yii::t('app', '{icon} TITLE_LOGIN', ['icon' => FA::icon('sign-in')]);
 $this->params['breadcrumbs'][] = $this->title;
 
    $this->registerCssFile('@web/css/landing_login.css', ['depends' => ['app\assets\AppAsset']]);  
@@ -82,28 +81,31 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
         <div class="col-md-3 login-form">
-            <h1><?= Html::encode($this->title) ?></h1>
+            <h1>
+                <?php // echo Html::encode($this->title) ?>
+            </h1>
+
+            <h1>
+                <?= $this->title; ?>
+            </h1>
             
-            <!-- <p> -->
-                <?php// Module::t('module', 'PLEASE_FILL_FOR_LOGIN') ?>
-            <!-- </p> -->
 
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
             <?= $form->field($model, 'username', ['template'=>' <div class="input-group"><span class="input-group-addon">'. FA::icon('user') . '</span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'username' )]) ?>
 
             <?= $form->field($model, 'password', ['template'=>' <div class="input-group"><span class="input-group-addon">'. FA::icon('briefcase') . '</span>{input}</div>{error}'])->passwordInput(['placeholder' => $model->getAttributeLabel( 'password' )]) ?>
             
-            <?php Module::t('module', 'LOGIN_INFO') ?>
+            <?php Yii::t('app', 'LOGIN_INFO') ?>
             
                 <div class="col-md-4 rememberCheckbox" style="text-align: left">
                     <?= $form->field($model, 'rememberMe')->checkbox() ?>
                 </div>
             <div class="login-buttons">
                 <div class="col-md-5 passwordReset" style="padding-top: 8px;">
-                    <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'LINK_PASSWORD_RESET'), ['password-reset-request'], ['class' => 'btn-resetpwd']) ?>
+                    <?= Html::a(Yii::t('app', '{icon} LINK_PASSWORD_RESET', ['icon' => FA::icon('refresh')]), ['password-reset-request'], ['class' => 'btn-resetpwd']) ?>
                 </div>
                 <div class="col-md-3">
-                    <?= Html::submitButton(FA::icon('sign-in') . ' ' . Module::t('module', 'USER_BUTTON_LOGIN'), ['class' => 'btn btn-primary btn-login', 'name' => 'login-button']) ?>
+                    <?= Html::submitButton(Yii::t('app', '{icon} USER_BUTTON_LOGIN', ['icon' => FA::icon('sign-in')]), ['class' => 'btn btn-primary btn-login', 'name' => 'login-button']) ?>
                 </div>
             </div>
 

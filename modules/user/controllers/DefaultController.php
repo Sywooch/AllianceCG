@@ -74,7 +74,7 @@ class DefaultController extends Controller
  
      public function actionLogin()
     {
-        $this->layout = '@app/modules/user/views/layouts/default/main';
+        $this->layout = '@app/modules/main/views/layouts/user/default/main';
 
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -99,7 +99,7 @@ class DefaultController extends Controller
  
     public function actionSignup()
     {
-        $this->layout = '@app/modules/user/views/layouts/default/main';
+        $this->layout = '@app/modules/main/views/layouts/user/default/main';
 
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
@@ -133,7 +133,7 @@ class DefaultController extends Controller
  
     public function actionPasswordResetRequest()
     {
-        $this->layout = '@app/modules/user/views/layouts/default/main';
+        $this->layout = '@app/modules/main/views/layouts/user/default/main';
 
         $model = new PasswordResetRequestForm($this->module->passwordResetTokenExpire);
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -151,7 +151,7 @@ class DefaultController extends Controller
  
     public function actionPasswordReset($token)
     {
-        $this->layout = '@app/modules/user/views/layouts/default/main';
+        $this->layout = '@app/modules/main/views/layouts/user/default/main';
         
         try {
             $model = new PasswordResetForm($token, $this->module->passwordResetTokenExpire);

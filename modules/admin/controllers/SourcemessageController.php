@@ -158,6 +158,7 @@ class SourcemessageController extends Controller
             // $query->where(['id' => $keyListArray]);
             $dataProvider = new ActiveDataProvider([
                 'query' => $query,
+                'pagination' => false,
             ]);
                      
             // Размер листа, ориентация

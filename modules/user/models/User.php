@@ -11,7 +11,7 @@ use yii\web\IdentityInterface;
 use app\modules\user\models\query\UserQuery;
 use yii\web\UploadedFile;
 use app\modules\references\models\Positions;
-use app\modules\user\Module;
+// use app\modules\user\Module;
 use app\modules\references\models\Companies;
 use app\modules\admin\models\Userroles;
 
@@ -144,28 +144,28 @@ class User extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'created_at' => Module::t('module', 'USER_CREATED_AT'),
-            'updated_at' => Module::t('module', 'USER_UPDATED_AT'),
-            'username' => Module::t('module', 'USER_USERNAME'),
-            'email' => Module::t('module', 'USER_EMAIL'),
-            'status' => Module::t('module', 'USER_STATUS'),
-            'user_id' => Module::t('module', 'User ID'),
-            'surname' => Module::t('module', 'USER_SURNAME'),
-            'name' => Module::t('module', 'USER_NAME'),
-            'patronymic' => Module::t('module', 'USER_PATRONYMIC'),
-            'company' => Module::t('module', 'USER_COMPANY'),
-            'department' => Module::t('module', 'USER_DEPARTMENT'),
-            'position' => Module::t('module', 'USER_POSITION'),
-            'fullname' => Module::t('module', 'USER_FULLNAME'),
-            'full_name' => Module::t('module', 'USER_FULLNAME'),
-            'allname' => Module::t('module', 'USER_FULLNAME'),
-            'photo' => Module::t('module', 'USER_PHOTO'),
-            'file' => Module::t('module', 'USER_PHOTO'),
-            'company' => Module::t('module', 'USER_COMPANY'),
-            'role' => Module::t('module', 'USER_ROLE'),
-            'companies' => Module::t('module', 'USER_COMPANY'),
-            'positions' => Module::t('module', 'USER_POSITION'),
-            'departments' => Module::t('module', 'DEPARTMENT'),
+            'created_at' => Yii::t('app', 'USER_CREATED_AT'),
+            'updated_at' => Yii::t('app', 'USER_UPDATED_AT'),
+            'username' => Yii::t('app', 'USER_USERNAME'),
+            'email' => Yii::t('app', 'USER_EMAIL'),
+            'status' => Yii::t('app', 'USER_STATUS'),
+            'user_id' => Yii::t('app', 'User ID'),
+            'surname' => Yii::t('app', 'USER_SURNAME'),
+            'name' => Yii::t('app', 'USER_NAME'),
+            'patronymic' => Yii::t('app', 'USER_PATRONYMIC'),
+            'company' => Yii::t('app', 'USER_COMPANY'),
+            'department' => Yii::t('app', 'USER_DEPARTMENT'),
+            'position' => Yii::t('app', 'USER_POSITION'),
+            'fullname' => Yii::t('app', 'USER_FULLNAME'),
+            'full_name' => Yii::t('app', 'USER_FULLNAME'),
+            'allname' => Yii::t('app', 'USER_FULLNAME'),
+            'photo' => Yii::t('app', 'USER_PHOTO'),
+            'file' => Yii::t('app', 'USER_PHOTO'),
+            'company' => Yii::t('app', 'USER_COMPANY'),
+            'role' => Yii::t('app', 'USER_ROLE'),
+            'companies' => Yii::t('app', 'USER_COMPANY'),
+            'positions' => Yii::t('app', 'USER_POSITION'),
+            'departments' => Yii::t('app', 'DEPARTMENT'),
         ];
     }    
 

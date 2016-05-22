@@ -7,7 +7,7 @@ use Yii;
 
 class Module extends \yii\base\Module
 {
-    public $controllerNamespace = 'app\modules\user\controllers';
+    // public $controllerNamespace = 'app\modules\user\controllers';
     /**
      * @var int
      */
@@ -20,14 +20,14 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
-        if (Yii::$app instanceof ConsoleApplication) {
-            $this->controllerNamespace = 'app\modules\user\commands';
-        }
+        // if (Yii::$app instanceof ConsoleApplication) {
+        //     $this->controllerNamespace = 'app\modules\user\commands';
+        // }
     }
 
-    public static function t($category, $message, $params = [], $language = null)
-    {
-        return Yii::t('modules/user/' . $category, $message, $params, $language);
-    }
+    // public static function t($category, $message, $params = [], $language = null)
+    // {
+    //     return Yii::t('modules/user/' . $category, $message, $params, $language);
+    // }
     
 }

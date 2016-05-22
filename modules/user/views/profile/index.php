@@ -2,14 +2,13 @@
  
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use app\modules\user\Module;
 use rmrevin\yii\fontawesome\FA;
  
 /* @var $this yii\web\View */
 /* @var $model app\modules\user\models\User */
  
 // $this->title = Yii::t('app', 'TITLE_PROFILE');
-$this->title = Module::t('module', 'PROFILE_TITLE_PROFILE');
+$this->title = Yii::t('app', 'PROFILE_TITLE_PROFILE');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <!-- <div class="user-profile col-lg-6 col-lg-offset-3"> -->
@@ -30,12 +29,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
     // echo '<br/>';
 
-    if(Yii::$app->user->can('updateCreditcalendarPost')) {
-        echo 'viewCreditcalendarOwnPost';
-    }
-    else {
-        echo 'not viewCreditcalendarOwnPost';
-    }
+    // if(Yii::$app->user->can('updateCreditcalendarPost')) {
+    //     echo 'viewCreditcalendarOwnPost';
+    // }
+    // else {
+    //     echo 'not viewCreditcalendarOwnPost';
+    // }
 
 
 
@@ -82,8 +81,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </h1>
     
     <p style="text-align: right;">
-        <?= Html::a(FA::icon('edit') . ' ' . Module::t('module', 'PROFILE_BUTTON_UPDATE'), ['update'], ['class' => 'btn btn-success btn-sm']) ?>
-        <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'PROFILE_LINK_PASSWORD_CHANGE'), ['password-change'], ['class' => 'btn btn-danger btn-sm']) ?>
+        <?= Html::a(FA::icon('edit') . ' ' . Yii::t('app', 'PROFILE_BUTTON_UPDATE'), ['update'], ['class' => 'btn btn-success btn-sm']) ?>
+        <?= Html::a(FA::icon('refresh') . ' ' . Yii::t('app', 'PROFILE_LINK_PASSWORD_CHANGE'), ['password-change'], ['class' => 'btn btn-danger btn-sm']) ?>
     </p>
 
     <h1><?= Html::img($model->getImageUrl(),['height' => '80', 'class'=>'img-rounded']) . ' &nbsp; ' .  $model->getAllname(); ?></h1>

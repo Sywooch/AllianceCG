@@ -1,14 +1,13 @@
 <?php
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
-use app\modules\user\Module;
 use rmrevin\yii\fontawesome\FA;
  
 /* @var $this yii\web\View */
 /* @var $model app\modules\user\models\User */
  
-$this->title = Module::t('module', 'PROFILE_TITLE_UPDATE');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'PROFILE_TITLE_PROFILE'), 'url' => ['index']];
+$this->title = Yii::t('app', 'PROFILE_TITLE_UPDATE');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'PROFILE_TITLE_PROFILE'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-profile-update">
@@ -26,8 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
         </h1>
          
          <div class="form-group" style="text-align: right">
-            <?= Html::submitButton(FA::icon('edit') . ' ' . Module::t('module', 'PROFILE_BUTTON_SAVE'), ['class' => 'btn btn-primary btn-sm']) ?>
-            <?= Html::a(FA::icon('edit') . ' ' . Module::t('module', 'PROFILE_BUTTON_CANCEL'), ['/user/profile'], ['class' => 'btn btn-danger btn-sm']) ?>
+            <?= Html::submitButton(Yii::t('app', '{icon} PROFILE_BUTTON_SAVE', ['icon' => FA::icon('edit')]), ['class' => 'btn btn-primary btn-sm']) ?>
+            <?= Html::a(Yii::t('app', '{icon} PROFILE_BUTTON_CANCEL', ['icon' => FA::icon('remove')]), ['/user/profile'], ['class' => 'btn btn-danger btn-sm']) ?>
         </div>
         
         <!--<h1>-->
@@ -62,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php ActiveForm::end(); ?>
             
             <div class="alert alert-danger">
-                <?= Module::t('module', 'PROFILE_UPDATE_INFO') ?>
+                <?= Yii::t('app', 'PROFILE_UPDATE_INFO') ?>
             </div>            
  
     </div>

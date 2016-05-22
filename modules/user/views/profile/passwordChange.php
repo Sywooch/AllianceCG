@@ -2,14 +2,13 @@
  
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
-use app\modules\user\Module;
 use rmrevin\yii\fontawesome\FA;
  
 /* @var $this yii\web\View */
 /* @var $model app\modules\user\models\ChangePasswordForm */
  
-$this->title = Module::t('module', 'PROFILE_TITLE_PASSWORD_CHANGE');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'PROFILE_TITLE_PROFILE'), 'url' => ['index']];
+$this->title = Yii::t('app', 'PROFILE_TITLE_PASSWORD_CHANGE');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'PROFILE_TITLE_PROFILE'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-profile-password-change">
@@ -18,8 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <div>
         
         <div class="form-group" style="text-align: right">
-            <?= Html::submitButton(FA::icon('edit') . ' ' . Module::t('module', 'PROFILE_BUTTON_SAVE'), ['class' => 'btn btn-primary btn-sm']) ?>
-            <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'PROFILE_BUTTON_CANCEL'), ['/user/profile'], ['class' => 'btn btn-danger btn-sm']) ?>
+            <?= Html::submitButton(FA::icon('edit') . ' ' . Yii::t('app', 'PROFILE_BUTTON_SAVE'), ['class' => 'btn btn-primary btn-sm']) ?>
+            <?= Html::a(FA::icon('remove') . ' ' . Yii::t('app', 'PROFILE_BUTTON_CANCEL'), ['/user/profile'], ['class' => 'btn btn-danger btn-sm']) ?>
         </div>
         
         <!--<h1>-->

@@ -26,7 +26,6 @@ return [
         ], 
         'mailer' => [
            'class' => 'yii\swiftmailer\Mailer',
-           'viewPath' => '@app/modules/main/mail',
            'useFileTransport' => false,
            'transport' => [
               'class'=>'Swift_SmtpTransport',
@@ -36,6 +35,8 @@ return [
               'port'=>'465', // 25, OR 587 (TLS), OR 465 (SSL)
               'encryption'=>'ssl', //TLS, OR SSL, OR FALSE
            ],
+           'viewPath' => '@app/modules/main/mail/layouts/html',
+           'htmlLayout' => '@app/modules/main/mail/layouts/html',  
        ],
         'cache' => [
             'class' => 'yii\caching\DbCache',

@@ -1,7 +1,7 @@
 <?php
  
 use yii\helpers\Html;
-// use app\modules\admin\Module;
+use rmrevin\yii\fontawesome\FA;
 use yii\bootstrap\Nav;
  
 /* @var $this yii\web\View */
@@ -23,15 +23,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'encodeLabels' => false,
                 'items' => array_filter([
                     [
-                        'label' => '<span class="glyphicon glyphicon-user"></span>  ' . Yii::t('app', 'ADMIN_USERS'),
+                        'label' => Yii::t('app', '{icon} ADMIN_USERS', ['icon' => FA::icon('user')]),
                         'url' => '/admin/users/index',
                     ],
                     [
-                        'label' => '<span class="glyphicon glyphicon-briefcase"></span>  ' . Yii::t('app', 'ADMIN_POSITIONS'),
+                        'label' => Yii::t('app', '{icon} ADMIN_POSITIONS', ['icon' => FA::icon('briefcase')]),
                         'url' => '/admin/positions/index',
                     ],
                     [
-                        'label' => '<span class="glyphicon glyphicon-tent"></span>  ' . Yii::t('app', 'ADMIN_COMPANIES'),
+                        'label' => Yii::t('app', '{icon} ADMIN_COMPANIES', ['icon' => FA::icon('building')]),
                         'url' => '/admin/companies/index',
                     ],
                 ]),

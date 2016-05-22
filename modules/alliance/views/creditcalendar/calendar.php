@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
                    ]);    
                ?>
 <!--           <select id="status_selector" name=<?php // $model->getAttributeLabel('status') ?>>
-            <option value="all"><?= Module::t('module', 'CREDITCALENDAR_TABLE_ALL') ?></a>
+            <option value="all"><?php // Module::t('module', 'CREDITCALENDAR_TABLE_ALL') ?></a>
             <option value=<?php // $model::STATUS_ATWORK ?>><?php // $model->getStatusesArray()['0'] ?></a>
             <option value=<?php // $model::STATUS_CLARIFY?>><?php // $model->getStatusesArray()['1'] ?></a>
             <option value=<?php // $model::STATUS_FINISHED?>><?php // $model->getStatusesArray()['2'] ?></a>

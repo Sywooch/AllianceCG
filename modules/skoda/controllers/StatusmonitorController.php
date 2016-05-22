@@ -111,7 +111,7 @@ class StatusmonitorController extends Controller
 
     public function actionMonitor()
     {
-        $this->layout = '@app/modules/skoda/views/layouts/monitor/main';
+        $this->layout = '@app/modules/main/views/layouts/skoda/monitor/main';
         $searchModel = new MonitorSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

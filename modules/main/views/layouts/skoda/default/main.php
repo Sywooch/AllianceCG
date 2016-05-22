@@ -29,8 +29,13 @@ AppAsset::register($this);
 
 
     <div class="container">
+        <div class="col-sm-3">
+        <?= $this->render('@app/modules/main/views/layouts/_sidebar') ?>
+        </div>
+        <div class="col-sm-9">  
     	<?= $this->render('@app/modules/main/views/layouts/_breadcrumbs') ?>
         <?= $content ?>
+        </div>
     </div>
 </div>
 

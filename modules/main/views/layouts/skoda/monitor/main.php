@@ -25,14 +25,14 @@ AppAsset::register($this);
 
 <div class="wrap">
 
-<?= $this->render('@app/modules/skoda/views/layouts/monitor/_header') ?>
+<?= $this->render('@app/modules/main/views/layouts/skoda/monitor/_header') ?>
 
     <div class="container">
             <?= $content ?>
     </div>
 </div>
 
-<?php echo $this->render('@app/modules/skoda/views/layouts/monitor/_footer') ?>
+<?php echo $this->render('@app/modules/main/views/layouts/skoda/monitor/_footer') ?>
 
 <?php $this->endBody() ?>
 </body>

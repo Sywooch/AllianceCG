@@ -6,7 +6,8 @@ use yii\widgets\Pjax;
 use rmrevin\yii\fontawesome\FA;
 use app\components\grid\SetColumn;
 use app\components\grid\LinkColumn;
-use app\modules\references\models\Regions;
+// use app\modules\references\models\Regions;
+use app\modules\alliance\models\Clientcirculation;
 use yii\web\View;
 
 /* @var $this yii\web\View */
@@ -73,14 +74,14 @@ $this->registerJs($deleteRestore, View::POS_END);
                 ],
                 [
                     'class' => SetColumn::className(),
-                    // 'filter' => Brands::getStatesArray(),
+                    'filter' => Clientcirculation::getStatesArray(),
                     'attribute' => 'state',
                     'visible' => Yii::$app->user->can('admin'),
                     'name' => 'statesName',
                     'contentOptions'=>['style'=>'width: 50px;'],
                     'cssCLasses' => [
-                        Regions::STATUS_ACTIVE => 'success',
-                        Regions::STATUS_BLOCKED => 'danger',
+                        Clientcirculation::STATUS_ACTIVE => 'success',
+                        Clientcirculation::STATUS_BLOCKED => 'danger',
                     ],
                 ],
 

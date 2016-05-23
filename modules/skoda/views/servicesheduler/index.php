@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use app\modules\skoda\Module;
 use yii\bootstrap\Nav;
 use app\components\grid\LinkColumn;
 use app\components\grid\SetColumn;
@@ -51,8 +50,8 @@ use yii\web\View;
 $deleteRestore = file_get_contents('js/modules/skoda/servicesheduler/deleteRestore.js');
 $this->registerJs($deleteRestore, View::POS_END);
 
-$this->title = Module::t('module', 'SERVICESHEDULER_INDEX');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda']];
+$this->title = Yii::t('app', 'SERVICESHEDULER_INDEX');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'NAV_SKODA'), 'url' => ['/skoda']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -60,15 +59,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p style="text-align: right">
 
-        <?= Html::a(FA::icon('plus') . Module::t('module', 'STATUS_CREATE'), ['create'], ['class' => 'btn btn-success btn-sm', 'id' => 'refreshButton']) ?>
+        <?= Html::a(Yii::t('app', '{icon} STATUS_CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm', 'id' => 'refreshButton']) ?>
 
-        <?= Html::a(FA::icon('refresh') . Module::t('module', 'STATUS_REFRESH'), ['index'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
+        <?= Html::a(Yii::t('app', '{icon} STATUS_REFRESH', ['icon' => FA::icon('refresh')]), ['index'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
 
-        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']); ?>
+        <?= Html::a(Yii::t('app', '{icon} DELETE', ['icon' => FA::icon('remove')]), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']); ?>
         
-        <?= Html::a(FA::icon('upload') . ' ' . Module::t('module', 'RESTORE'), ['#'], ['class' => 'btn btn-warning btn-sm', 'id' => 'MultipleRestore']); ?>
+        <?= Html::a(Yii::t('app', '{icon} RESTORE', ['icon' => FA::icon('upload')]), ['#'], ['class' => 'btn btn-warning btn-sm', 'id' => 'MultipleRestore']); ?>
         
-        <?= Html::a(FA::icon('file-excel-o') . Module::t('module', 'STATUS_EXPORT_EXCEL'), ['export'], ['class' => 'btn btn-warning btn-sm']) ?>
+        <?php // echo Html::a(Yii::t('app', '{icon} STATUS_EXPORT_EXCEL', ['icon' => FA::icon('file-excel-o')]), ['export'], ['class' => 'btn btn-warning btn-sm']) ?>
 
     </p>
     

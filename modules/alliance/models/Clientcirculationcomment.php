@@ -6,6 +6,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use app\modules\references\models\Targets;
 use app\modules\references\models\ContactType;
+use app\modules\admin\models\User;
 
 /**
  * This is the model class for table "{{%clientcirculationcomment}}".
@@ -83,6 +84,7 @@ class Clientcirculationcomment extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'author' => Yii::t('app', 'Author'),
+            'authorname' => Yii::t('app', 'Author'),
         ];
     }
 
@@ -102,5 +104,13 @@ class Clientcirculationcomment extends \yii\db\ActiveRecord
     public function getContacttypes()
     {
         return $this->hasOne(ContactType::className(), ['id' => 'contact_type']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAuthorname()
+    {
+        return $this->hasOne(User::className(), ['id' => 'author']);
     }
 }

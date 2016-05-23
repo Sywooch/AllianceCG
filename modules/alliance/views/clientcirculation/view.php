@@ -20,16 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="client-circulation-view">
 
-<?php
-
-$employees = Employees::find()->where(['<>', 'state', Employees::STATUS_BLOCKED])->all();
-
-foreach ($employees as $value) {
-    echo $value->fullName . '<br/>';
-}
-
-?>
-
     <!-- <h1> -->
         <?php // echo Html::encode($this->title) ?>
     <!-- </h1> -->
@@ -130,6 +120,14 @@ foreach ($employees as $value) {
             ],
             [
                 'attribute' => 'comment',
+            ],
+            [
+                'attribute' => 'created_at',
+                'format' => 'datetime',
+            ],
+            [
+                'attribute' => 'authorname',
+                'value' => 'authorname.full_name',
             ],
         ],
     ]);

@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use app\modules\skoda\Module;
 use app\modules\admin\models\User;
 use yii\helpers\ArrayHelper;
 use yii\jui\DatePicker;
@@ -25,10 +24,12 @@ use app\modules\skoda\models\Servicesheduler;
         ]); 
     ?>
 
-    <h1><?php $model->isNewRecord ? FA::icon('bed') .' '. Module::t('module', 'STATUS_CREATE') : FA::icon('bed') .' '. Module::t('module', 'STATUS_UPDATE_RN') . ' ' . $model->date; ?></h1>
+    <h1>
+        <?php // echo $model->isNewRecord ? Yii::t('app', '{icon} STATUS_CREATE', ['icon' => FA::icon('bed')]) : Yii::t('app', '{icon} STATUS_UPDATE_RN', ['icon' => FA::icon)('bed')]) . ' ' . $model->date; ?>
+    </h1>
 
     <div class="alert alert-danger">
-        <?= Module::t('module', 'ADD_SERVICESHEDULER_INFO'); ?>
+        <?= Yii::t('app', 'ADD_SERVICESHEDULER_INFO'); ?>
     </div>
 
     <?= $form->errorSummary($model); ?>
@@ -65,8 +66,8 @@ use app\modules\skoda\models\Servicesheduler;
     ?> 
 
     <div class="form-group" style="text-align: right">
-        <?= Html::submitButton($model->isNewRecord ? FA::icon('save') . Module::t('module', 'STATUS_CREATE') : FA::icon('edit') . Module::t('module', 'STATUS_UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
-        <?= Html::a(FA::icon('remove') . Module::t('module', 'BUTTON_CANCEL'), ['/skoda/servicesheduler/calendar'], ['class' => 'btn btn-danger btn-sm']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', '{icon} STATUS_CREATE', ['icon' => FA::icon('save')]) : Yii::t('app', '{icon} STATUS_UPDATE', ['icon' => FA::icon('edit')]), ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} BUTTON_CANCEL', ['icon' => FA::icon('remove')]), ['/skoda/servicesheduler/calendar'], ['class' => 'btn btn-danger btn-sm']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

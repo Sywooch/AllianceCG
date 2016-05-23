@@ -14,6 +14,8 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->errorSummary($model); ?>
+
     <?= $form->field($model, 'category')->textInput(['readonly' => !$model->isNewRecord, 'maxlength' => true]) ?>
 
     <?= $form->field($model, 'message')->textarea(['readonly' => !$model->isNewRecord, 'rows' => 6]) ?>

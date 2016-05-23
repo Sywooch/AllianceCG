@@ -42,7 +42,7 @@ class SourceMessage extends \yii\db\ActiveRecord
             [['message'], 'string'],
             [['category'], 'string', 'max' => 32],
             [['language', 'translation'], 'safe'],
-            [['xlsxFile'], 'file', 'skipOnEmpty' => false, 'extensions' => ['xlsx'],'checkExtensionByMimeType'=>false],
+            [['xlsxFile'], 'file', 'skipOnEmpty' => true, 'extensions' => ['xlsx'],'checkExtensionByMimeType'=>false],
         ];
     }
 

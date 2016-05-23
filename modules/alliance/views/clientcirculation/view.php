@@ -2,34 +2,51 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use app\modules\alliance\Module;
 use rmrevin\yii\fontawesome\FA;
 use yii\bootstrap\Modal;
+use yii\grid\GridView;
+use yii\data\ActiveDataProvider;
+use app\modules\references\models\Employees;
 use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\alliance\models\ClientCirculation */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_ALLIANCE'), 'url' => ['/alliance']];
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'CLIENTCIRCULATION'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'NAV_ALLIANCE'), 'url' => ['/alliance']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'CLIENTCIRCULATION'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="client-circulation-view">
+
+<?php
+
+$employees = Employees::find()->where(['<>', 'state', Employees::STATUS_BLOCKED])->all();
+
+foreach ($employees as $value) {
+    echo $value->fullName . '<br/>';
+}
+
+?>
 
     <!-- <h1> -->
         <?php // echo Html::encode($this->title) ?>
     <!-- </h1> -->
 
     <p style="text-align: right;">
-        <?= Html::a(FA::icon('edit') . ' ' . Module::t('module', 'UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
-        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'DELETE'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger btn-sm',
-            'data' => [
-                'confirm' => Module::t('module', 'CONFIRM_DELETE'),
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::a(Yii::t('app', '{icon} CLIENTCIRCULATION', ['icon' => FA::icon('list')]), ['index'], ['class' => 'btn btn-warning btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => FA::icon('edit')]), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+        <?php 
+            // Html::a(Yii::t('app', '{icon} DELETE', ['icon' => FA::icon('remove')]), ['delete', 'id' => $model->id], [
+            //     'class' => 'btn btn-danger btn-sm',
+            //     'data' => [
+            //         'confirm' => Yii::t('app', 'CONFIRM_DELETE'),
+            //         'method' => 'post',
+            //     ],
+            // ]) 
+        ?>
     </p>
 
     <?= DetailView::widget([
@@ -77,15 +94,52 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </div>
 
+<div class='buttonpane'>
+    <?= Html::button(Yii::t('app', '{icon} ADD_EVENT', ['icon' => FA::icon('comment')]), ['value' => Url::to(['addevent', 'id' => $model->id]), 'class' => 'btn btn-info btn-sm', 'id' => 'modalButton']);
+    ?>
+</div>
+
 <?php
-    echo "<p style='text-align: right'>";
-    echo Html::button(FA::icon('comment') . ' ' . Module::t('module', 'COMMENT'), ['value' => Url::to(['comment', 'id' => $model->id]), 'class' => 'btn btn-info btn-sm', 'id' => 'modalButton']);
-    echo "</p>";
+
+    $query = $model->getClientcomment();
+    // $query->where(['state' => Models::STATUS_ACTIVE]);
+
+    echo GridView::widget([
+        'dataProvider' => new ActiveDataProvider(['query' => $query]),
+        'showOnEmpty' => true,
+        'emptyText' => 'Записи отсутствуют',
+        'summary' => false,
+        'tableOptions' =>[
+            'class' => 'table table-striped table-bordered creditcalendargridview'
+        ],
+        'columns' => [
+            [
+                'header' => '№',
+                'class' => 'yii\grid\SerialColumn'
+            ],
+            [
+                'attribute' => 'contact_type',
+                'value' => 'contacttypes.contact_type',
+            ],
+            [
+                'attribute' => 'target',
+                'value' => 'targets.target',
+            ],
+            [
+                'attribute' => 'car_model',
+            ],
+            [
+                'attribute' => 'comment',
+            ],
+        ],
+    ]);
+
 ?>
+
 
 <?php
     Modal::begin([
-        'header' => '<h4>' . Module::t('module', 'COMMENT') .'</h4>',
+        'header' => '<h4>' . Yii::t('app', '{icon} ADD_EVENT', ['icon' => FA::icon('comment')]) .'</h4>',
         'id' => 'modal',
         'size' => 'modal-lg'
     ]);

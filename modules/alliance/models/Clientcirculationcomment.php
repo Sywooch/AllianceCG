@@ -3,6 +3,9 @@
 namespace app\modules\alliance\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use app\modules\references\models\Targets;
+use app\modules\references\models\ContactType;
 
 /**
  * This is the model class for table "{{%clientcirculationcomment}}".
@@ -33,14 +36,34 @@ class Clientcirculationcomment extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => function () {
+                    return date('U');
+                },
+            ],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
-            [['clientcirculation_id', 'created_at', 'updated_at'], 'required'],
+            // [['clientcirculation_id', 'created_at', 'updated_at'], 'required'],
             [['clientcirculation_id', 'state', 'created_at', 'updated_at'], 'integer'],
             [['comment'], 'string'],
-            [['contact_type', 'target', 'car_model', 'author'], 'string', 'max' => 255],
+            // [['contact_type', 'target', 'car_model', 'author'], 'string', 'max' => 255],
+            // [['car_model', 'author'], 'string', 'max' => 255],
             [['clientcirculation_id'], 'exist', 'skipOnError' => true, 'targetClass' => ClientCirculation::className(), 'targetAttribute' => ['clientcirculation_id' => 'id']],
+            [['clientcirculation_id', 'contact_type', 'target', 'car_model', 'author'], 'safe'],
+            [['contact_type', 'target'], 'required']
         ];
     }
 
@@ -69,5 +92,15 @@ class Clientcirculationcomment extends \yii\db\ActiveRecord
     public function getClientcirculation()
     {
         return $this->hasOne(ClientCirculation::className(), ['id' => 'clientcirculation_id']);
+    }
+
+    public function getTargets()
+    {
+        return $this->hasOne(Targets::className(), ['id' => 'target']);
+    }
+
+    public function getContacttypes()
+    {
+        return $this->hasOne(ContactType::className(), ['id' => 'contact_type']);
     }
 }

@@ -123,12 +123,13 @@ class ClientcirculationController extends Controller
         }
     }
 
-    public function actionComment($id)
+    public function actionAddevent($id)
     {
         $model = $this->findModel($id);
         $commentModel = new Clientcirculationcomment();
 
         if ($commentModel->load(Yii::$app->request->post())) {
+
             $commentModel->clientcirculation_id = $model->id;
             $commentModel->author = Yii::$app->user->getId();
             $commentModel->save();
@@ -140,6 +141,7 @@ class ClientcirculationController extends Controller
                 'model' => $model,
                 'commentModel' => $commentModel,
             ]);
+            
         }
 
     }

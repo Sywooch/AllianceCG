@@ -53,19 +53,21 @@ use rmrevin\yii\fontawesome\FA;
         // 
         // foreach ($employees as $arr) {
         //     $arr->merge_employees = $arr->name . ' ' . $arr->surname;
+        //     ArrayHelper::merge('name', 'surname')
         // }
     
-        $items = ArrayHelper::map($employees,'id','surname');
+        $items = ArrayHelper::map($employees,'id','fullName');
         $params = [
             'options' => isset($_GET['id']) ? [$_GET['id'] => ['Selected'=>'selected']] : false,
             'prompt' => '-- ' . $model->getAttributeLabel( 'employee_id' ) . ' --',
         ];
-        echo $form->field($model, 'employee_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('map') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
+        echo $form->field($model, 'employee_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('briefcase') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
     ?>     
 
 
     <div class="form-group" style="text-align: right">
-        <?= Html::submitButton($model->isNewRecord ? FA::icon('plus') . ' ' . Module::t('module', 'CREATE') : FA::icon('edit') . ' ' . Module::t('module', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]) : Yii::t('app', '{icon} UPDATE', ['icon' => FA::icon('edit')]), ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} CANCEL', ['icon' => FA::icon('remove')]), ['index'], ['class' => 'btn btn-sm btn-danger'])?>
     </div>
 
     <?php ActiveForm::end(); ?>

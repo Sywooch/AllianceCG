@@ -28,6 +28,10 @@ class ClientCirculation extends \yii\db\ActiveRecord
 {
 
     public $globalSearch;
+    public $contact_type;
+    public $target;
+    public $car_model;
+    public $comment;
 
     const STATUS_BLOCKED = 1;
     const STATUS_ACTIVE = 0;
@@ -71,6 +75,7 @@ class ClientCirculation extends \yii\db\ActiveRecord
             [['name', 'phone', 'email', 'region_id'], 'required'],
             [['phone', 'email'], 'unique'],
             ['email', 'email'],
+            [['contact_type', 'target', 'car_model', 'comment'], 'safe']
         ];
     }
 
@@ -80,18 +85,22 @@ class ClientCirculation extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Module::t('module', 'ID'),
-            'name' => Module::t('module', 'CLIENTNAME'),
-            'phone' => Module::t('module', 'PHONE'),
-            'email' => Module::t('module', 'EMAIL'),
-            'state' => Module::t('module', 'STATE'),
-            'created_at' => Module::t('module', 'CREATED_AT'),
-            'updated_at' => Module::t('module', 'UPDATED_AT'),
-            'author' => Module::t('module', 'AUTHOR'),
-            'region_id' => Module::t('module', 'REGION'),
-            'regions' => Module::t('module', 'REGION'),
-            'authorname' => Module::t('module', 'AUTHOR'),
-            'employee_id' => Module::t('module', 'EMPLOYEE'),
+            'id' => Yii::t('app', 'ID'),
+            'name' => Yii::t('app', 'CLIENTNAME'),
+            'phone' => Yii::t('app', 'PHONE'),
+            'email' => Yii::t('app', 'EMAIL'),
+            'state' => Yii::t('app', 'STATE'),
+            'created_at' => Yii::t('app', 'CREATED_AT'),
+            'updated_at' => Yii::t('app', 'UPDATED_AT'),
+            'author' => Yii::t('app', 'AUTHOR'),
+            'region_id' => Yii::t('app', 'REGION'),
+            'regions' => Yii::t('app', 'REGION'),
+            'authorname' => Yii::t('app', 'AUTHOR'),
+            'employee_id' => Yii::t('app', 'EMPLOYEE'),
+            'contact_type' => Yii::t('app', 'CONTACT_TYPE'),
+            'target' => Yii::t('app', 'TARGET'),
+            'car_model' => Yii::t('app', 'CAR_MODEL'),
+            'comment' => Yii::t('app', 'COMMENT'),
         ];
     }
 
@@ -137,6 +146,6 @@ class ClientCirculation extends \yii\db\ActiveRecord
      */
     public function getClientcomment()
     {
-        return $this->hasMany(ClientCirculation::className(), ['clientcirculation_id' => 'id']);
+        return $this->hasMany(ClientCirculationcomment::className(), ['clientcirculation_id' => 'id']);
     }   
 }

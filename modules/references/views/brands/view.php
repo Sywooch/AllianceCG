@@ -9,6 +9,8 @@ use app\components\grid\LinkColumn;
 use yii\helpers\ArrayHelper;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
+use app\modules\references\models\Employees;
+use app\modules\references\models\Models;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\references\models\Brands */
@@ -93,8 +95,12 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <?php
+
+    $query = $model->getModels();
+    $query->where(['state' => Models::STATUS_ACTIVE]);
+
     echo GridView::widget([
-        'dataProvider' => new ActiveDataProvider(['query' => $model->getModels()]),
+        'dataProvider' => new ActiveDataProvider(['query' => $query]),
         'showOnEmpty' => true,
         'emptyText' => 'Записи отсутствуют',
         'summary' => false,
@@ -131,8 +137,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php
 
+    $query = $model->getEmployees();
+    $query->where(['state' => Employees::STATUS_ACTIVE]);
+
+
     echo GridView::widget([
-        'dataProvider' => new ActiveDataProvider(['query' => $model->getEmployees()]),
+        'dataProvider' => new ActiveDataProvider(['query' => $query]),
         'showOnEmpty' => true,
         'emptyText' => 'Записи отсутствуют',
         'summary' => false,

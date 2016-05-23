@@ -2,8 +2,6 @@
 
     use yii\bootstrap\Nav;
     use rmrevin\yii\fontawesome\FA;
-    use app\modules\skoda\Module;
-
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,11 +13,11 @@
         'encodeLabels' => false,
         'items' => array_filter([
             [
-                'label' => FA::icon('calendar') . ' ' . Module::t('module', 'STATUSMONITOR_CALENDAR'),
+                'label' => Yii::t('app', '{icon} STATUSMONITOR_CALENDAR', ['icon' => FA::icon('calendar')]),
                 'url' => '/skoda/statusmonitor/calendar',
             ],
             [
-                'label' => FA::icon('table') . ' ' . Module::t('module', 'STATUSMONITOR_TABLE'),
+                'label' => Yii::t('app', 'STATUSMONITOR_TABLE', ['icon' => FA::icon('table')]),
                 'url' => '/skoda/statusmonitor',
             ],
 //            [

@@ -6,6 +6,7 @@ use rmrevin\yii\fontawesome\FA;
 use yii\web\View;
 use yii\helpers\Url;
 use app\modules\admin\models\form\UploadForm;
+use yii\bootstrap\Progress;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\SourceMessageSearch */
@@ -41,28 +42,13 @@ $this->registerJs($toggleSearch, View::POS_END);
 
 </div>
 
-    <div class="col-sm-12 bs-callout bs-callout-info" id="excel" style="display: true">
+    <div class="col-sm-12 bs-callout bs-callout-info" id="excel" style="display: none">
  
         <div class="col-sm-6">
-            <?php $form = ActiveForm::begin([
-                'method' => 'post',
-                'action' => ['upload'],
-                'options' => [
-                        'enctype' => 'multipart/form-data']
-                    ]) 
-            ?>
-            <div class="col-sm-6">
-               <?= $form->field($model, 'xlsxFile', ['template' => '{input}{error}'])->fileInput(); ?>
-            </div>
-            <div class="col-sm-6">    
-               <?php // echo Html::submitButton(Yii::t('app', '{icon} Upload', ['icon' => FA::icon('upload')]), ['class' => 'btn btn-primary btn-sm']) ?>
-               <?= Html::submitButton(Yii::t('app', '{icon} Upload', ['icon' => FA::icon('upload')]), ['value' => Url::to(['upload']), 'class' => 'btn btn-primary btn-sm']);
-               ?>
-            </div>
-            <?php ActiveForm::end() ?>
         </div>
         <div class="col-sm-6">
-            <?= Html::a(Yii::t('app', '{icon} IMPORT_EXCEL', ['icon' => FA::icon('file-excel-o')]), ['import'], ['class' => 'btn btn-link btn-sm']) ?>
+            <?= Html::a(Yii::t('app', '{icon} IMPORT_EXCEL', ['icon' => FA::icon('upload')]), ['upload'], ['class' => 'btn btn-link btn-sm']) ?>
+            <?php // echo Html::a(Yii::t('app', '{icon} IMPORT_EXCEL', ['icon' => FA::icon('file-excel-o')]), ['import'], ['class' => 'btn btn-link btn-sm']) ?>
             <?= Html::a(Yii::t('app', '{icon} EXPORT_EXCEL', ['icon' => FA::icon('file-excel-o')]), ['export'], ['class' => 'btn btn-link btn-sm']) ?>
         </div>
     </div>
@@ -71,4 +57,11 @@ $this->registerJs($toggleSearch, View::POS_END);
     <div class="col-lg-12 alert alert-danger">
         <?= Yii::t('app', 'MESSAGE_TRANSLATION_INFO') ?>
     </div>
-    
+
+
+<?php
+echo Progress::widget([
+    'percent' => 65,
+    'barOptions' => ['class' => 'progress-bar-danger']
+]);
+?>

@@ -22,8 +22,8 @@ class SourceMessage extends \yii\db\ActiveRecord
     public $translation;
 
     const DIR_FOR_UPLOAD = 'files/sourcemessage/';
-    const XLSX_FILE_FOR_UPLOAD = 'sourcemessage.xlsx';
-    const UPLOAD_FILE_EXT = 'xlsx';
+    const XLSX_FILE_FOR_UPLOAD = 'sourcemessage';
+    const UPLOAD_FILE_EXT = '.xlsx';
 
     /**
      * @inheritdoc
@@ -58,6 +58,7 @@ class SourceMessage extends \yii\db\ActiveRecord
             'translation' => Yii::t('app', 'Translation'),
             'language' => Yii::t('app', 'Language'),
             'globalSearch' => Yii::t('app', 'Search'),
+            'xlsxFile' => Yii::t('app', 'xlsxFile'),
         ];
     }
 

@@ -9,6 +9,7 @@ use app\modules\alliance\Module;
 use yii\helpers\ArrayHelper;
 use app\modules\references\models\Regions;
 use yii\helpers\Html;
+use app\modules\alliance\models\Clientcirculationcomment;
 
 /**
  * This is the model class for table "{{%client_circulation}}".
@@ -146,6 +147,6 @@ class ClientCirculation extends \yii\db\ActiveRecord
      */
     public function getClientcomment()
     {
-        return $this->hasMany(ClientCirculationcomment::className(), ['clientcirculation_id' => 'id']);
+        return $this->hasMany(Clientcirculationcomment::className(), ['clientcirculation_id' => 'id']);
     }   
 }

@@ -8,15 +8,14 @@
 
     header("Content-type: application/javascript");
     use yii\web\AssetBundle;
-    use app\modules\skoda\Module;
     use yii\helpers\Html;
     use rmrevin\yii\fontawesome\FA;
     use yii\helpers\Json;
     use yii\widgets\ActiveForm;
     use yii\helpers\ArrayHelper;
     
-    $this->title = Module::t('module', 'STATUSMONITOR_INDEX');
-    $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_SKODA'), 'url' => ['/skoda']];
+    $this->title = Yii::t('app', 'STATUSMONITOR_INDEX');
+    $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'NAV_SKODA'), 'url' => ['/skoda']];
     $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -27,11 +26,11 @@
 
     <p style="text-align: right">
 
-        <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'STATUS_CREATE'), ['create'], ['class' => 'btn btn-success btn-sm', 'id' => 'refreshButton']) ?>
+        <?= Html::a(Yii::t('app', '{icon} STATUS_CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm', 'id' => 'refreshButton']) ?>
 
-        <?= Html::a(FA::icon('refresh')  . ' ' . Module::t('module', 'STATUS_REFRESH'), ['calendar'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
+        <?= Html::a(Yii::t('app', 'STATUS_REFRESH', ['icon' => FA::icon('refresh')]), ['calendar'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
         
-        <?= Html::a(FA::icon('file-excel-o') . Module::t('module', 'STATUS_EXPORT_EXCEL'), ['export'], ['class' => 'btn btn-warning btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} STATUS_EXPORT_EXCEL', ['icon' => FA::icon('file-excel-o')]), ['export'], ['class' => 'btn btn-warning btn-sm']) ?>
 
     </p>
     

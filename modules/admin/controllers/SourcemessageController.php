@@ -317,17 +317,22 @@ class SourcemessageController extends Controller
     public function actionUpload()
     {
 
-    }
+        $model = new SourceMessage();
 
-    public function actionImport()
-    {
-        $inputDir = SourceMessage::DIR_FOR_UPLOAD;
-        if (!file_exists(''.$inputDir.'')) {
-            mkdir(''.$inputDir.'', 0777, true);
-        }
-
-        $inputFile = ''.$inputDir.SourceMessage::XLSX_FILE_FOR_UPLOAD;
-        // $inputFile = 'files/sourcemessage/sourcemessage.xlsx';
+        if ($model->load(Yii::$app->request->post())) {
+            
+            if($model->xlsxFile = UploadedFile::getInstance($model, 'xlsxFile')){
+                $fileName = SourceMessage::XLSX_FILE_FOR_UPLOAD;
+                $path = SourceMessage::DIR_FOR_UPLOAD;
+                if(!file_exists($path)) {
+                    mkdir($path, 0777, true);
+                } 
+                // $model->xlsxFile->saveAs($path.$fileName.'.'.$model->xlsxFile->extension);
+                $model->xlsxFile->saveAs($path.$fileName.'.'.$model->xlsxFile->extension);
+            }
+            
+        // $inputFile = ''.SourceMessage::DIR_FOR_UPLOAD.SourceMessage::XLSX_FILE_FOR_UPLOAD.SourceMessage::UPLOAD_FILE_EXT;
+        $inputFile = 'files/sourcemessage/sourcemessage.xlsx';
         if (!file_exists(''.$inputFile.'')) {
             Yii::$app->getSession()->setFlash('error', 'Отсутствует файл для загрузки.');  
             return $this->render('importExcel');     
@@ -371,6 +376,68 @@ class SourcemessageController extends Controller
             die();
         }
 
-    }    
+
+            // return $this->render('uploadFile');
+            // return $this->redirect('index');
+        } else {
+            return $this->render('uploadFile', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    // public function actionImport()
+    // {
+    //     $inputDir = SourceMessage::DIR_FOR_UPLOAD;
+    //     if (!file_exists(''.$inputDir.'')) {
+    //         mkdir(''.$inputDir.'', 0777, true);
+    //     }
+
+    //     $inputFile = ''.$inputDir.SourceMessage::XLSX_FILE_FOR_UPLOAD;
+    //     // $inputFile = 'files/sourcemessage/sourcemessage.xlsx';
+    //     if (!file_exists(''.$inputFile.'')) {
+    //         Yii::$app->getSession()->setFlash('error', 'Отсутствует файл для загрузки.');  
+    //         return $this->render('importExcel');     
+    //         die("");
+    //     }
+    //     else{
+    //         try{
+    //             SourceMessage::deleteAll();
+    //             $inputFileType = \PHPExcel_IOFactory::identify($inputFile);
+    //             $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
+    //             $objPHPExcel = $objReader->load($inputFile);
+    //         }catch(Exception $e){
+    //             die('Error');
+    //         }
+    //         $sheet = $objPHPExcel->getSheet(0);
+    //         $highestRow = $sheet->getHighestRow();
+    //         $highestColumn = $sheet->getHighestColumn();        
+    //         for($row = 4; $row <= $highestRow; $row++){
+
+    //             $rowData = $sheet->rangeToArray('A'.$row.':'.$highestColumn.$row,NULL,TRUE,FALSE);
+    //             if($row == 1)
+    //             {
+    //                 continue;
+    //             }
+
+    //             $sourcemsg = new SourceMessageSearch();
+    //             $sourcemsg->category = $rowData[0][0]; 
+    //             $sourcemsg->message = $rowData[0][1];
+    //             $sourcemsg->language = $rowData[0][2];
+    //             $sourcemsg->translation = $rowData[0][3];
+    //             $sourcemsg->save();
+    //             if($sourcemsg->getErrors()){
+    //                 print_r($sourcemsg->getErrors());                    
+    //             }
+    //         }          
+    //         unlink($inputFile); 
+    //         Yii::$app->getSession()->setFlash('success', 'Импорт Выполнен.');   
+    //         return $this->render('importExcel', [
+    //             'model' => $sourcemsg,
+    //         ]);     
+    //         die();
+    //     }
+
+    // }    
 
 }

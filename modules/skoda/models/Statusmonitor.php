@@ -3,7 +3,6 @@
 namespace app\modules\skoda\models;
 
 use Yii;
-use app\modules\skoda\Module;
 use app\modules\admin\models\User;
 use app\modules\skoda\models\Statusmonitor;
 use app\modules\skoda\models\Servicesheduler;
@@ -178,17 +177,17 @@ class Statusmonitor extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'regnumber' => Module::t('module', 'STATUS_REGNUMBER'),
-            'from' => Module::t('module', 'STATUS_FROM'),
-            'to' => Module::t('module', 'STATUS_TO'),
-            'worker' => Module::t('module', 'STATUS_RESPONSIBLE'),
-            'carstatus' => Module::t('module', 'STATUS_STATUS'),
-            'progress' => Module::t('module', 'STATUS_PROGRESS'),
-            'author' => Module::t('module', 'AUTHOR'),
-            'authorname' => Module::t('module', 'AUTHOR'),
-            'created_at' => Module::t('module', 'CREATED_AT'),
-            'updated_at' => Module::t('module', 'UPDATED_AT'),
-            'state' => Module::t('module', 'STATE'),
+            'regnumber' => Yii::t('app', 'STATUS_REGNUMBER'),
+            'from' => Yii::t('app', 'STATUS_FROM'),
+            'to' => Yii::t('app', 'STATUS_TO'),
+            'worker' => Yii::t('app', 'STATUS_RESPONSIBLE'),
+            'carstatus' => Yii::t('app', 'STATUS_STATUS'),
+            'progress' => Yii::t('app', 'STATUS_PROGRESS'),
+            'author' => Yii::t('app', 'AUTHOR'),
+            'authorname' => Yii::t('app', 'AUTHOR'),
+            'created_at' => Yii::t('app', 'CREATED_AT'),
+            'updated_at' => Yii::t('app', 'UPDATED_AT'),
+            'state' => Yii::t('app', 'STATE'),
         ];
     }
 
@@ -202,7 +201,7 @@ class Statusmonitor extends \yii\db\ActiveRecord
     
             if(empty($wcs->responsible))                
             {
-                $this->addError('to', Module::t('module', 'ERROR_WORKSHEDULER_DOES_NOT_EXIST_TO'));
+                $this->addError('to', Yii::t('app', 'ERROR_WORKSHEDULER_DOES_NOT_EXIST_TO'));
             }
     }
 
@@ -215,7 +214,7 @@ class Statusmonitor extends \yii\db\ActiveRecord
     
         if(empty($wcs->responsible))                
         {
-            $this->addError('from', Module::t('module', 'ERROR_WORKSHEDULER_DOES_NOT_EXIST_FROM'));
+            $this->addError('from', Yii::t('app', 'ERROR_WORKSHEDULER_DOES_NOT_EXIST_FROM'));
         }
     }  
 
@@ -227,11 +226,11 @@ class Statusmonitor extends \yii\db\ActiveRecord
     
         if(empty($wcs->responsible))                
         {            
-            $worker_result = Yii::$app->formatter->asDate('now', 'dd/MM/yyyy') . ' - ' . Module::t('module', 'MASTER_CONSULTANT_DOES_NOT_EXIST_TODAY');
+            $worker_result = Yii::$app->formatter->asDate('now', 'dd/MM/yyyy') . ' - ' . Yii::t('app', 'MASTER_CONSULTANT_DOES_NOT_EXIST_TODAY');
         }
         else
         {
-            $worker_result = Yii::$app->formatter->asDate($wcs->date, 'dd/MM/yyyy') . ' - ' . Module::t('module', 'CURRENT_MASTER_CONSULTANT') .' - '. $wcs->responsible;
+            $worker_result = Yii::$app->formatter->asDate($wcs->date, 'dd/MM/yyyy') . ' - ' . Yii::t('app', 'CURRENT_MASTER_CONSULTANT') .' - '. $wcs->responsible;
         }   
         
         return $worker_result;

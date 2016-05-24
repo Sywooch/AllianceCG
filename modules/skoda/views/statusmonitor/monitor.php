@@ -1,8 +1,8 @@
 
 <!--<meta http-equiv="Refresh" content="30" />-->
 
-<link rel="stylesheet" href="/css/queryLoader.css" type="text/css">
-<script type='text/javascript' src='/js/queryLoader.js'></script>
+<!-- <link rel="stylesheet" href="/css/queryLoader.css" type="text/css"> -->
+<!-- <script type='text/javascript' src='/js/queryLoader.js'></script> -->
 
 <?php
 
@@ -20,19 +20,22 @@ use yii\grid\GridView;
 use yii\data\SqlDataProvider;
 use yii\bootstrap\Progress;
 use yii\widgets\Pjax;
+use yii\web\View;
 
 $this->title = Yii::t('app', 'STATUSMONITOR_TITLE');
 
-$script = <<< JS
-$(document).ready(function() {
-    setInterval(function(){ $("#service_statusmonitor_refresh").click(); }, 5000);
-});
-JS;
-$this->registerJs($script);
+$autoUpdate = file_get_contents('js/modules/skoda/statusmonitor/monitorPjaxUpdate.js');
+$this->registerJs($autoUpdate, View::POS_HEAD);
+
 
 ?>
 
-<?php Pjax::begin(['id' => 'service_statusmonitor']) ?>
+<?php 
+    Pjax::begin([
+            'id' => 'service_statusmonitor',
+            'timeout' => 2000,
+        ]) 
+?>
 
 <?= Html::a("", ['/skoda/statusmonitor/monitor'], ['class' => 'hidden_button', 'id' => 'service_statusmonitor_refresh']) ?>
 

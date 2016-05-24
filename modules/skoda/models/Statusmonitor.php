@@ -140,6 +140,7 @@ class Statusmonitor extends \yii\db\ActiveRecord
         foreach ($wcs as $wc) {
             // $worker = $wc->responsibles->name . ' ' . $wc->responsibles->surname;
             $worker = $wc->responsibles->fullName;
+            $worker = isset($worker) ? $worker : false;
             return $worker;
         }
     }   

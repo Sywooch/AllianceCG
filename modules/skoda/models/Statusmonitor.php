@@ -133,12 +133,13 @@ class Statusmonitor extends \yii\db\ActiveRecord
     {
         $to_date = Yii::$app->formatter->asDate($this->to, 'yyyy-MM-dd');
         $wcs = Servicesheduler::find()
-            // ->joinWith(['responsibles'])
+            ->joinWith(['responsibles'])
             ->where(['date' => $to_date])
             ->all();
 
         foreach ($wcs as $wc) {
-            $worker = $wc->responsibles->name . ' ' . $wc->responsibles->surname;
+            // $worker = $wc->responsibles->name . ' ' . $wc->responsibles->surname;
+            $worker = $wc->responsibles->fullName;
             return $worker;
         }
     }   

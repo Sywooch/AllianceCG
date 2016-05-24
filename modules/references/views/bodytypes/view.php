@@ -2,15 +2,14 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use app\modules\references\Module;
 use rmrevin\yii\fontawesome\FA;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\references\models\Bodytypes */
 
 $this->title = $model->body_type;
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['/references']];
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'BODY_TYPES'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'REFERENCES'), 'url' => ['/references']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'BODY_TYPES'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="bodytypes-view">
@@ -21,16 +20,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p style="text-align: right">
 
-        <?= Html::a(FA::icon('list') . ' ' . Module::t('module', 'BODY_TYPES'), ['index'], ['class' => 'btn btn-warning btn-sm']) ?>
-        <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
-        <?= Html::a(FA::icon('edit') . ' ' . Module::t('module', 'UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
-        <?= Html::a(FA::icon('remove') . ' ' . Module::t('module', 'DELETE'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger btn-sm',
-            'data' => [
-                'confirm' => Module::t('module', 'CONFIRM_DELETE'),
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::a(Yii::t('app', '{icon} BODY_TYPES', ['icon' => FA::icon('list')]), ['index'], ['class' => 'btn btn-warning btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => FA::icon('edit')]), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+        <?php 
+            // Html::a(FA::icon('remove') . ' ' . Yii::t('app', '{icon} DELETE', ['icon' => FA::icon('remove')]), ['delete', 'id' => $model->id], [
+            //     'class' => 'btn btn-danger btn-sm',
+            //     'data' => [
+            //         'confirm' => Yii::t('app', 'CONFIRM_DELETE'),
+            //         'method' => 'post',
+            //     ],
+            // ]) 
+        ?>
     </p>
 
     <?= DetailView::widget([

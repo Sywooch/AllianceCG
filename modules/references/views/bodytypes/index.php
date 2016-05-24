@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use app\modules\references\Module;
 use yii\widgets\Pjax;
 use app\components\grid\LinkColumn;
 use yii\helpers\ArrayHelper;
@@ -13,8 +12,8 @@ use app\modules\references\models\Bodytypes;
 /* @var $searchModel app\modules\references\models\BodytypesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('module', 'BODY_TYPES');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['/references']];
+$this->title = Yii::t('app', 'BODY_TYPES');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'REFERENCES'), 'url' => ['/references']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="bodytypes-index">

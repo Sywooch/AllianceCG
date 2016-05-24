@@ -96,6 +96,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     echo GridView::widget([
         'dataProvider' => new ActiveDataProvider(['query' => $query]),
+        'filterModel' => new ActiveDataProvider(['query' => $query]),
         'showOnEmpty' => true,
         'emptyText' => 'Записи отсутствуют',
         'summary' => false,

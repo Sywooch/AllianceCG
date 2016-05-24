@@ -33,11 +33,10 @@ $this->registerJs($autoUpdate, View::POS_HEAD);
 <?php 
     Pjax::begin([
             'id' => 'service_statusmonitor',
-            'timeout' => 2000,
         ]) 
 ?>
 
-<?= Html::a("", ['/skoda/statusmonitor/monitor'], ['class' => 'hidden_button', 'id' => 'service_statusmonitor_refresh']) ?>
+<?php // echo Html::a("", ['/skoda/statusmonitor/monitor'], ['class' => 'hidden_button', 'id' => 'service_statusmonitor_refresh']) ?>
 
 <div class="row">
 

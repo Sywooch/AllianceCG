@@ -99,7 +99,6 @@ class Servicesheduler extends \yii\db\ActiveRecord
         ];
     }
     
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -119,7 +118,7 @@ class Servicesheduler extends \yii\db\ActiveRecord
     public function workerevent() {
         $today = Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
         $wcs = Servicesheduler::find()
-            ->joinWith('responsibles')
+            // ->joinWith('responsibles')
             ->where(['date' => $today])
             ->one();
     

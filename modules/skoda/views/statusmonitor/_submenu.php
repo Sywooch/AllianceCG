@@ -17,7 +17,7 @@
                 'url' => '/skoda/statusmonitor/calendar',
             ],
             [
-                'label' => Yii::t('app', 'STATUSMONITOR_TABLE', ['icon' => FA::icon('table')]),
+                'label' => Yii::t('app', '{icon} STATUSMONITOR_TABLE', ['icon' => FA::icon('table')]),
                 'url' => '/skoda/statusmonitor',
             ],
 //            [

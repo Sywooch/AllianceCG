@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use app\modules\skoda\Module;
 use rmrevin\yii\fontawesome\FA;
 use app\modules\admin\models\User;
 use yii\helpers\ArrayHelper;
@@ -21,7 +20,7 @@ use yii\helpers\ArrayHelper;
         ],        
     ]); ?>
 
-    <?= $form->field($model, 'responsible', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('th-large') . ' </span>{input}<span class="input-group-addon"> ' . Html::submitButton(FA::icon('search') . ' ' . Module::t('module', 'SERVICESHEDULER_SEARCH'), ['class' => 'btn-link']) . ' </span></div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'responsible' )])    ?>
+    <?= $form->field($model, 'responsible', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('th-large') . ' </span>{input}<span class="input-group-addon"> ' . Html::submitButton(FA::icon('search') . ' ' . Yii::t('app', 'SERVICESHEDULER_SEARCH'), ['class' => 'btn-link']) . ' </span></div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'responsible' )])    ?>
 
     <?php ActiveForm::end(); ?>
 

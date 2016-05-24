@@ -17,12 +17,11 @@ use yii\widgets\ListView;
 use yii\helpers\Html;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
-use app\modules\skoda\Module;
 use yii\data\SqlDataProvider;
 use yii\bootstrap\Progress;
 use yii\widgets\Pjax;
 
-$this->title = Module::t('module', 'STATUSMONITOR_TITLE');
+$this->title = Yii::t('app', 'STATUSMONITOR_TITLE');
 
 $script = <<< JS
 $(document).ready(function() {
@@ -47,7 +46,7 @@ $this->registerJs($script);
             ->one();
 
         echo '<div class="col-lg-12" style="text-align: center"><h1>';
-        echo Module::t('module', 'WELCOME_MSG');
+        echo Yii::t('app', 'WELCOME_MSG');
         echo '</h1></div>';
                     
         if(!empty($master_cons_today->responsible)){
@@ -108,7 +107,7 @@ $this->registerJs($script);
     'dataProvider' => $dataProvider,
     'summary' => "",
     'showOnEmpty' => false,
-    'emptyText' => Module::t('module', 'NO_RECORDS_FOUND'),
+    'emptyText' => Yii::t('app', 'NO_RECORDS_FOUND'),
     'emptyTextOptions' => ['class' => 'empty_grid label label-xs label-success col-md-offset-4', 'id' => 'empty_grid', 'style' => 'text-align: center'],
     'showHeader' => false,
     'columns' => [

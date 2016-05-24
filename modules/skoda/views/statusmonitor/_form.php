@@ -6,7 +6,6 @@ use app\modules\admin\models\User;
 use app\modules\user\models\User as UserName;
 use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
-use app\modules\skoda\Module;
 use kartik\datetime\DateTimePicker;
 use rmrevin\yii\fontawesome\FA;
 
@@ -22,13 +21,7 @@ use rmrevin\yii\fontawesome\FA;
         
     <?php $form = ActiveForm::begin(); ?>
 
-    <h1><?php $model->isNewRecord ? FA::icon('car') . Module::t('module', 'STATUS_CREATE_RN') : FA::icon('car') . Module::t('module', 'STATUS_UPDATE_RN') . ' ' . $model->regnumber; ?></h1>
-
-
-    <div class="form-group" style="text-align: right">
-        <?= Html::submitButton($model->isNewRecord ? FA::icon('floppy-o') . Module::t('module', 'STATUS_CREATE') : FA::icon('edit') . Module::t('module', 'STATUS_UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
-        <?= Html::a(FA::icon('undo') . Module::t('module', 'BUTTON_CANCEL'), ['/skoda/statusmonitor/calendar'], ['class' => 'btn btn-danger btn-sm']) ?>
-    </div>
+    <h1><?php $model->isNewRecord ? Yii::t('app', '{icon} STATUS_CREATE_RN', ['icon' => FA::icon('car')]) : Yii::t('app', 'STATUS_UPDATE_RN', ['icon' => FA::icon('car')]) . ' ' . $model->regnumber; ?></h1>
 
     <?= $form->errorSummary($model); ?>
 
@@ -59,6 +52,12 @@ use rmrevin\yii\fontawesome\FA;
             ]
         ]);
     ?>
+
+    <div class="form-group" style="text-align: right; margin-top: 15px;">
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', '{icon} STATUS_CREATE', ['icon' => FA::icon('floppy-o')]) : Yii::t('app', '{icon} STATUS_UPDATE', ['icon' => FA::icon('edit')]), ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} BUTTON_CANCEL', ['icon' => FA::icon('remove')]), ['/skoda/statusmonitor/calendar'], ['class' => 'btn btn-danger btn-sm']) ?>
+    </div>
+
 
     <?php ActiveForm::end(); ?>
 

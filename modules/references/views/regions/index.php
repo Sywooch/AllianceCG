@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-use app\modules\references\Module;
 use rmrevin\yii\fontawesome\FA;
 use app\components\grid\SetColumn;
 use app\components\grid\LinkColumn;
@@ -12,8 +11,8 @@ use app\modules\references\models\Regions;
 /* @var $searchModel app\modules\references\models\RegionsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('module', 'REGIONS');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['/references']];
+$this->title = Yii::t('app', 'REGIONS');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'REFERENCES'), 'url' => ['/references']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="regions-index">

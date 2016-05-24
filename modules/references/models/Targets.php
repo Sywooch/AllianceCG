@@ -3,7 +3,6 @@
 namespace app\modules\references\models;
 
 use Yii;
-use app\modules\references\Module;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -58,9 +57,9 @@ class Targets extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'target' => Module::t('module', 'TARGET'),
-            'state' => Module::t('module', 'STATE'),
-            'globalSearch' => Module::t('module', 'SEARCH'),
+            'target' => Yii::t('app', 'TARGET'),
+            'state' => Yii::t('app', 'STATE'),
+            'globalSearch' => Yii::t('app', 'SEARCH'),
         ];
     }
 }

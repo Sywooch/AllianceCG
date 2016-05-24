@@ -6,7 +6,6 @@ use app\modules\references\models\Positions;
 use app\modules\references\models\Departments;
 use app\modules\references\models\Brands;
 use app\modules\admin\models\User;
-use app\modules\references\Module;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\helpers\Html;
@@ -97,29 +96,29 @@ class Employees extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Module::t('module', 'ID'),
-            'name' => Module::t('module', 'NAME'),
-            'surname' => Module::t('module', 'SURNAME'),
-            'patronimyc' => Module::t('module', 'PATRONIMYC'),
-            'photo' => Module::t('module', 'PHOTO'),
-            'file' => Module::t('module', 'PHOTO'),
-            'company_id' => Module::t('module', 'COMPANY'),
-            'companies' => Module::t('module', 'COMPANY'),
-            'department_id' => Module::t('module', 'DEPARTMENT'),
-            'position_id' => Module::t('module', 'POSITION'),
-            'globalSearch' => Module::t('module', 'SEARCH'),
-            'fullName'=>Module::t('module', 'FULLNAME'),
-            'company'=>Module::t('module', 'COMPANY'),
-            'department'=>Module::t('module', 'DEPARTMENT'),
-            'position'=>Module::t('module', 'POSITION'),
-            'brand_id'=>Module::t('module', 'BRAND'),
-            'brand'=>Module::t('module', 'BRAND'),
-            'state'=>Module::t('module', 'STATE'),
-            'created_at' => Module::t('module', 'CREATED_AT'), 
-            'updated_at' => Module::t('module', 'UPDATED_AT'), 
-            'author' => Module::t('module', 'AUTHOR'),
-            'authorname' => Module::t('module', 'AUTHOR'),
-            'brandlogo' => Module::t('module', 'BRAND_LOGO'),
+            'id' => Yii::t('app', 'ID'),
+            'name' => Yii::t('app', 'NAME'),
+            'surname' => Yii::t('app', 'SURNAME'),
+            'patronimyc' => Yii::t('app', 'PATRONIMYC'),
+            'photo' => Yii::t('app', 'PHOTO'),
+            'file' => Yii::t('app', 'PHOTO'),
+            'company_id' => Yii::t('app', 'COMPANY'),
+            'companies' => Yii::t('app', 'COMPANY'),
+            'department_id' => Yii::t('app', 'DEPARTMENT'),
+            'position_id' => Yii::t('app', 'POSITION'),
+            'globalSearch' => Yii::t('app', 'SEARCH'),
+            'fullName'=>Yii::t('app', 'FULLNAME'),
+            'company'=>Yii::t('app', 'COMPANY'),
+            'department'=>Yii::t('app', 'DEPARTMENT'),
+            'position'=>Yii::t('app', 'POSITION'),
+            'brand_id'=>Yii::t('app', 'BRAND'),
+            'brand'=>Yii::t('app', 'BRAND'),
+            'state'=>Yii::t('app', 'STATE'),
+            'created_at' => Yii::t('app', 'CREATED_AT'), 
+            'updated_at' => Yii::t('app', 'UPDATED_AT'), 
+            'author' => Yii::t('app', 'AUTHOR'),
+            'authorname' => Yii::t('app', 'AUTHOR'),
+            'brandlogo' => Yii::t('app', 'BRAND_LOGO'),
         ];
     }
 

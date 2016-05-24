@@ -3,7 +3,6 @@
 namespace app\modules\references\models;
 
 use Yii;
-use app\modules\references\Module;
 use yii\helpers\Html;
 use app\modules\admin\models\User;
 use yii\helpers\ArrayHelper;
@@ -91,20 +90,20 @@ class Companies extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Module::t('module', 'ID'),
-            'company_name' => Module::t('module', 'COMPANY_NAME'),
-            'company_brand' => Module::t('module', 'COMPANY_BRAND'),
-            'brands' => Module::t('module', 'COMPANY_BRAND'),
-            'company_logo' => Module::t('module', 'COMPANY_LOGO'),
-            'brandlogo' => Module::t('module', 'COMPANY_LOGO'),
-            'company_description' => Module::t('module', 'COMPANY_DESCRIPTION'),
-            'userscount' => Module::t('module', 'COUNTUSERS'),   
-            'globalSearch' => Module::t('module', 'SEARCH'),   
-            'created_at' => Module::t('module', 'CREATED_AT'), 
-            'updated_at' => Module::t('module', 'UPDATED_AT'), 
-            'author' => Module::t('module', 'AUTHOR'),     
-            'authorname' => Module::t('module', 'AUTHOR'),     
-            'state' => Module::t('module', 'STATE'),
+            'id' => Yii::t('app', 'ID'),
+            'company_name' => Yii::t('app', 'COMPANY_NAME'),
+            'company_brand' => Yii::t('app', 'COMPANY_BRAND'),
+            'brands' => Yii::t('app', 'COMPANY_BRAND'),
+            'company_logo' => Yii::t('app', 'COMPANY_LOGO'),
+            'brandlogo' => Yii::t('app', 'COMPANY_LOGO'),
+            'company_description' => Yii::t('app', 'COMPANY_DESCRIPTION'),
+            'userscount' => Yii::t('app', 'COUNTUSERS'),   
+            'globalSearch' => Yii::t('app', 'SEARCH'),   
+            'created_at' => Yii::t('app', 'CREATED_AT'), 
+            'updated_at' => Yii::t('app', 'UPDATED_AT'), 
+            'author' => Yii::t('app', 'AUTHOR'),     
+            'authorname' => Yii::t('app', 'AUTHOR'),     
+            'state' => Yii::t('app', 'STATE'),
         ];
     }
 

@@ -1,17 +1,16 @@
 <?php
 
 use yii\helpers\Html;
-use app\modules\references\Module;
 use rmrevin\yii\fontawesome\FA;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\references\models\Brands */
 
-$this->title = Module::t('module', 'UPDATE') . $model->brand;
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['references']];
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'BRANDS'), 'url' => ['index']];
+$this->title = Yii::t('app', 'UPDATE') . $model->brand;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'REFERENCES'), 'url' => ['references']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'BRANDS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->brand, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Module::t('module', 'UPDATE');
+$this->params['breadcrumbs'][] = Yii::t('app', 'UPDATE');
 ?>
 <div class="brands-update">
 
@@ -20,7 +19,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'UPDATE');
     <!-- </h1> -->
 
 	<div class="alert alert-danger">
-		<?= Module::t('module', 'WARNING_EDIT_TARGETS') ?>
+		<?= Yii::t('app', 'WARNING_EDIT_TARGETS') ?>
 	</div>
 	
     <?= $this->render('_form', [

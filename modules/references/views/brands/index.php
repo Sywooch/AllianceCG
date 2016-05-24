@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-use app\modules\references\Module;
 use app\components\grid\LinkColumn;
 use yii\helpers\ArrayHelper;
 use app\components\grid\SetColumn;
@@ -12,8 +11,8 @@ use app\modules\references\models\Brands;
 /* @var $searchModel app\modules\references\models\BrandsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('module', 'BRANDS');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['/references']];
+$this->title = Yii::t('app', 'BRANDS');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'REFERENCES'), 'url' => ['/references']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="brands-index">
@@ -77,7 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'html',
                 'filter' => false,
                 'value' => function($model) {
-                    return '<span class="label label-primary">' . Module::t('module', 'EMPLOYEES') . ': ' . $model->employeescount . '</span>';
+                    return '<span class="label label-primary">' . Yii::t('app', 'EMPLOYEES') . ': ' . $model->employeescount . '</span>';
                 },   
                 'contentOptions' => ['class'=>'success;'],
             ],
@@ -86,7 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'html',
                 'filter' => false,
                 'value' => function($model) {
-                    return '<span class="label label-primary">' . Module::t('module', 'MODELS') . ': ' . $model->modelscount . '</span>';
+                    return '<span class="label label-primary">' . Yii::t('app', 'MODELS') . ': ' . $model->modelscount . '</span>';
                 },   
                 'contentOptions' => ['class'=>'success;'],
             ],

@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-use app\modules\references\Module;
 use app\components\grid\LinkColumn;
 use yii\helpers\ArrayHelper;
 use app\components\grid\SetColumn;
@@ -12,8 +11,8 @@ use app\modules\references\models\Targets;
 /* @var $searchModel app\modules\references\models\TargetsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('module', 'TARGETS');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['/references']];
+$this->title = Yii::t('app', 'TARGETS');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'REFERENCES'), 'url' => ['/references']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="targets-index">

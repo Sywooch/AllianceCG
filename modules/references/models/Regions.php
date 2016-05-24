@@ -4,7 +4,6 @@ namespace app\modules\references\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
-use app\modules\references\Module;
 use yii\helpers\ArrayHelper;
 use app\modules\admin\models\User;
 
@@ -78,16 +77,16 @@ class Regions extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Module::t('module', 'ID'),
-            'region_name' => Module::t('module', 'REGION_NAME'),
-            'region_code' => Module::t('module', 'REGION_CODE'),
-            'state' => Module::t('module', 'STATE'),
-            'created_at' => Module::t('module', 'CREATED_AT'),
-            'updated_at' => Module::t('module', 'UPDATED_AT'),
-            'author' => Module::t('module', 'AUTHOR'),
-            'globalSearch' => Module::t('module', 'SEARCH'),
-            'authorname' => Module::t('module', 'AUTHOR'),
-            'regionandcodes' => Module::t('module', 'REGIONANDCODES')
+            'id' => Yii::t('app', 'ID'),
+            'region_name' => Yii::t('app', 'REGION_NAME'),
+            'region_code' => Yii::t('app', 'REGION_CODE'),
+            'state' => Yii::t('app', 'STATE'),
+            'created_at' => Yii::t('app', 'CREATED_AT'),
+            'updated_at' => Yii::t('app', 'UPDATED_AT'),
+            'author' => Yii::t('app', 'AUTHOR'),
+            'globalSearch' => Yii::t('app', 'SEARCH'),
+            'authorname' => Yii::t('app', 'AUTHOR'),
+            'regionandcodes' => Yii::t('app', 'REGIONANDCODES')
         ];
     }
 

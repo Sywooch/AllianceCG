@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use app\modules\references\Module;
 use rmrevin\yii\fontawesome\FA;
 use yii\grid\GridView;
 use app\components\grid\LinkColumn;
@@ -16,8 +15,8 @@ use app\modules\references\models\Models;
 /* @var $model app\modules\references\models\Brands */
 
 $this->title = $model->brand;
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['references']];
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'BRANDS'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'REFERENCES'), 'url' => ['references']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'BRANDS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="brands-view">
@@ -27,14 +26,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- </h1> -->
 
     <p style="text-align: right">
-        <?= Html::a(FA::icon('list') . ' ' . Module::t('module', 'BRANDS'), ['index'], ['class' => 'btn btn-warning btn-sm']) ?>
-        <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
-        <?= Html::a(FA::icon('edit') . ' ' . Module::t('module', 'UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} BRANDS', ['icon' => FA::icon('list')]), ['index'], ['class' => 'btn btn-warning btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => FA::icon('edit')]), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
         <?php 
-            // echo Html::a(FA::icon('edit') . ' ' . Module::t('module', 'DELETE'), ['delete', 'id' => $model->id], [
+            // echo Html::a(FA::icon('edit') . ' ' . Yii::t('app', 'DELETE'), ['delete', 'id' => $model->id], [
             //     'class' => 'btn btn-danger btn-sm',
             //     'data' => [
-            //         'confirm' => Module::t('module', 'CONFIRM_DELETE'),
+            //         'confirm' => Yii::t('app', 'CONFIRM_DELETE'),
             //         'method' => 'post',
             //     ],
             // ]) 
@@ -85,13 +84,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <div class="col-sm-3">
-        <?= Html::a(FA::icon('edit') . ' ' . Module::t('module', 'CREATE_MODEL'), ['/references/models/create?id=' . $model->id], [
+        <?= Html::a(Yii::t('app', '{icon} CREATE_MODEL', ['icon' => FA::icon('edit')]), ['/references/models/create?id=' . $model->id], [
                 'class' => 'btn-success btn-sm',
             ]) ?>
 </div>
 
 <div class="col-sm-9">
-    <?= '<h3>' . Module::t('module', 'MODELS_THIS_BRAND') . '</h3>' ?>
+    <?= '<h3>' . Yii::t('app', 'MODELS_THIS_BRAND') . '</h3>' ?>
 </div>
 
 <?php
@@ -126,13 +125,13 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="col-sm-3">
-        <?= Html::a(FA::icon('edit') . ' ' . Module::t('module', 'CREATE_EMPLOYEES'), ['/references/employees/create?id=' . $model->id], [
+        <?= Html::a(Yii::t('app', 'CREATE_EMPLOYEES', ['icon' => FA::icon('edit')]), ['/references/employees/create?id=' . $model->id], [
                 'class' => 'plus btn-success btn-sm',
             ]) ?>
 </div>
 
 <div class="col-sm-9">
-    <?= '<h3>' . Module::t('module', 'EMPLOYEES_THIS_BRAND') . '</h3>' ?>
+    <?= '<h3>' . Yii::t('app', 'EMPLOYEES_THIS_BRAND') . '</h3>' ?>
 </div>
 
 <?php

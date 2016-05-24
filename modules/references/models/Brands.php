@@ -1,7 +1,6 @@
 <?php
 
 namespace app\modules\references\models;
-use app\modules\references\Module;
 use yii\helpers\ArrayHelper;
 use yii\behaviors\TimestampBehavior;
 use app\modules\admin\models\User;
@@ -91,19 +90,19 @@ class Brands extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Module::t('module', 'ID'),
-            'brand' => Module::t('module', 'BRAND'),
-            'brand_logo' => Module::t('module', 'BRAND_LOGO'),
-            'file' => Module::t('module', 'BRAND_LOGO'),
-            'description' => Module::t('module', 'DESCRIPTION'),
-            'state' => Module::t('module', 'STATE'),            
-            'globalSearch' => Module::t('module', 'SEARCH'),
-            'created_at' => Module::t('module', 'CREATED_AT'), 
-            'updated_at' => Module::t('module', 'UPDATED_AT'), 
-            'author' => Module::t('module', 'AUTHOR'),
-            'modelscount' => Module::t('module', 'MODELSCOUNT'),
-            'employeescount' => Module::t('module', 'EMPLOYEESSCOUNT'),
-            'companies' => Module::t('module', 'COMPANIES'),
+            'id' => Yii::t('app', 'ID'),
+            'brand' => Yii::t('app', 'BRAND'),
+            'brand_logo' => Yii::t('app', 'BRAND_LOGO'),
+            'file' => Yii::t('app', 'BRAND_LOGO'),
+            'description' => Yii::t('app', 'DESCRIPTION'),
+            'state' => Yii::t('app', 'STATE'),            
+            'globalSearch' => Yii::t('app', 'SEARCH'),
+            'created_at' => Yii::t('app', 'CREATED_AT'), 
+            'updated_at' => Yii::t('app', 'UPDATED_AT'), 
+            'author' => Yii::t('app', 'AUTHOR'),
+            'modelscount' => Yii::t('app', 'MODELSCOUNT'),
+            'employeescount' => Yii::t('app', 'EMPLOYEESSCOUNT'),
+            'companies' => Yii::t('app', 'COMPANIES'),
         ];
     }
 

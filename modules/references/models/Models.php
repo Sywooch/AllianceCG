@@ -3,7 +3,6 @@
 namespace app\modules\references\models;
 
 use Yii;
-use app\modules\references\Module;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\behaviors\TimestampBehavior;
@@ -83,16 +82,16 @@ class Models extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Module::t('module', 'ID'),
-            'brand_id' => Module::t('module', 'BRAND_ID'),
-            'brand' => Module::t('module', 'BRAND_ID'),
-            'model_name' => Module::t('module', 'MODEL_NAME'),
-            'body_type' => Module::t('module', 'BODY_TYPE'),
-            'bodytype' => Module::t('module', 'BODY_TYPE'),
-            'globalSearch' => Module::t('module', 'SEARCH'),
-            'state' => Module::t('module', 'STATE'),
-            'fullmodelname' => Module::t('module', 'MODEL_NAME'),
-            'models' => Module::t('module', 'MODELS'),
+            'id' => Yii::t('app', 'ID'),
+            'brand_id' => Yii::t('app', 'BRAND_ID'),
+            'brand' => Yii::t('app', 'BRAND_ID'),
+            'model_name' => Yii::t('app', 'MODEL_NAME'),
+            'body_type' => Yii::t('app', 'BODY_TYPE'),
+            'bodytype' => Yii::t('app', 'BODY_TYPE'),
+            'globalSearch' => Yii::t('app', 'SEARCH'),
+            'state' => Yii::t('app', 'STATE'),
+            'fullmodelname' => Yii::t('app', 'MODEL_NAME'),
+            'models' => Yii::t('app', 'MODELS'),
         ];
     }
 

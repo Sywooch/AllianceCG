@@ -1,15 +1,14 @@
 <?php
 
 use yii\helpers\Html;
-use app\modules\references\Module;
 
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\references\models\Brands */
 
-$this->title = Module::t('module', 'CREATE');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['references']];
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'BRANDS'), 'url' => ['index']];
+$this->title = Yii::t('app', 'CREATE');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'REFERENCES'), 'url' => ['references']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'BRANDS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="brands-create">

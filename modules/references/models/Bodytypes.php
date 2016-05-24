@@ -3,7 +3,6 @@
 namespace app\modules\references\models;
 
 use Yii;
-use app\modules\references\Module;
 use yii\helpers\ArrayHelper;
 use yii\behaviors\TimestampBehavior;
 use app\modules\admin\models\User;
@@ -79,14 +78,14 @@ class Bodytypes extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Module::t('module', 'ID'),
-            'body_type' => Module::t('module', 'BODY_TYPE'),
-            'description' => Module::t('module', 'BODY_DESCRIPTION'),
-            'state' => Module::t('module', 'STATE'),
-            'created_at' => Module::t('module', 'CREATED_AT'),
-            'updated_at' => Module::t('module', 'UPDATED_AT'),
-            'author' => Module::t('module', 'AUTHOR'),
-            'globalSearch' => Module::t('module', 'SEARCH'),
+            'id' => Yii::t('app', 'ID'),
+            'body_type' => Yii::t('app', 'BODY_TYPE'),
+            'description' => Yii::t('app', 'BODY_DESCRIPTION'),
+            'state' => Yii::t('app', 'STATE'),
+            'created_at' => Yii::t('app', 'CREATED_AT'),
+            'updated_at' => Yii::t('app', 'UPDATED_AT'),
+            'author' => Yii::t('app', 'AUTHOR'),
+            'globalSearch' => Yii::t('app', 'SEARCH'),
         ];
     }
 

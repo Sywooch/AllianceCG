@@ -1,7 +1,6 @@
 <?php
 
 namespace app\modules\references\models;
-use app\modules\references\Module;
 use app\modules\admin\models\User;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\ArrayHelper;
@@ -79,15 +78,15 @@ class Departments extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Module::t('module', 'ID'),
-            'department_name' => Module::t('module', 'DEPARTMENT'),
-            'userscount' => Module::t('module', 'COUNTUSERS'),   
-            'globalSearch' => Module::t('module', 'SEARCH'),
-            'state'=>Module::t('module', 'STATE'),
-            'created_at' => Module::t('module', 'CREATED_AT'), 
-            'updated_at' => Module::t('module', 'UPDATED_AT'), 
-            'author' => Module::t('module', 'AUTHOR'),
-            'authorname' => Module::t('module', 'AUTHOR'),     
+            'id' => Yii::t('app', 'ID'),
+            'department_name' => Yii::t('app', 'DEPARTMENT'),
+            'userscount' => Yii::t('app', 'COUNTUSERS'),   
+            'globalSearch' => Yii::t('app', 'SEARCH'),
+            'state'=>Yii::t('app', 'STATE'),
+            'created_at' => Yii::t('app', 'CREATED_AT'), 
+            'updated_at' => Yii::t('app', 'UPDATED_AT'), 
+            'author' => Yii::t('app', 'AUTHOR'),
+            'authorname' => Yii::t('app', 'AUTHOR'),     
         ];
     }
 

@@ -11,8 +11,8 @@ use app\components\grid\SetColumn;
 /* @var $searchModel app\modules\references\models\EmployeesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('module', 'EMPLOYEES');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['/references']];
+$this->title = Yii::t('app', 'EMPLOYEES');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'REFERENCES'), 'url' => ['/references']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="employees-index">
@@ -25,7 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- <p> -->
         <?php // echo Html::a(Yii::t('app', 'Create Employees'), ['create'], ['class' => 'btn btn-success']) ?>
     <!-- </p> -->
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+<?php Pjax::begin(); ?>    
+    <?= GridView::widget([
         'id' => 'employees-grid',
         'summary' => false,
         'dataProvider' => $dataProvider,
@@ -47,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 // 'format' => 'image',
                 'format' => 'html',
                 'value' => function ($model) {
-                    return Html::img($model->getImageUrl(),['width'=>50]); 
+                    return Html::img($model->getImageUrl(), ['width'=>50, 'class' => 'img-rounded']); 
                 },
             ],
             // 'fullName',    
@@ -65,7 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 // 'format' => 'image',
                 'format' => 'html',
                 'value' => function ($model) {
-                    return Html::img($model->getBrandImageUrl(),['width'=>50]); 
+                    return Html::img($model->getBrandImageUrl(),['width'=>50, 'class' => 'img-rounded']); 
                 },
             ],
             // [
@@ -135,7 +136,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            // ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]); 
+    ?>
 <?php Pjax::end(); ?></div>

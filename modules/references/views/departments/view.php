@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use rmrevin\yii\fontawesome\FA;
-use app\modules\references\Module;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 
@@ -11,8 +10,8 @@ use yii\grid\GridView;
 /* @var $model app\modules\references\models\Departments */
 
 $this->title = $model->department_name;
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['/references']];
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'DEPARTMENTS'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'REFERENCES'), 'url' => ['/references']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'DEPARTMENTS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="departments-view">
@@ -22,14 +21,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- </h1> -->
 
     <p style="text-align: right">
-        <?= Html::a(FA::icon('list') . ' ' . Module::t('module', 'DEPARTMENTS'), ['index'], ['class' => 'btn btn-sm btn-warning']) ?>
-        <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-sm btn-success']) ?>
-        <?= Html::a(FA::icon('edit') . ' ' . Module::t('module', 'UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-sm btn-primary']) ?>
+        <?= Html::a(Yii::t('app', '{icon} DEPARTMENTS', ['icon' => FA::icon('list')]), ['index'], ['class' => 'btn btn-sm btn-warning']) ?>
+        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-sm btn-success']) ?>
+        <?= Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => FA::icon('edit')]), ['update', 'id' => $model->id], ['class' => 'btn btn-sm btn-primary']) ?>
         <?php
-          //  Html::a(FA::icon('remove') . ' ' . Module::t('module', 'DELETE'), ['delete', 'id' => $model->id], [
+          //  Html::a(FA::icon('remove') . ' ' . Yii::t('app', '{icon} DELETE', ['icon' => FA::icon('remove')]), ['delete', 'id' => $model->id], [
           //     'class' => 'btn btn-danger btn-sm',
           //     'data' => [
-          //         'confirm' => Module::t('module', 'CONFIRM_DELETE'),
+          //         'confirm' => Yii::t('app', 'CONFIRM_DELETE'),
           //         'method' => 'post',
           //     ],
           // ]) 

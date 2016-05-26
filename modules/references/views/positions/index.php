@@ -5,7 +5,6 @@ use yii\grid\GridView;
 use app\components\grid\ActionColumn;
 use app\components\grid\LinkColumn;
 use yii\helpers\Url;
-use app\modules\references\Module;
 use yii\helpers\ArrayHelper;
 use app\modules\references\models\Positions;
 use rmrevin\yii\fontawesome\FA;
@@ -16,8 +15,8 @@ use app\components\grid\SetColumn;
 /* @var $searchModel app\modules\admin\models\PositionsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('module', 'POSITIONS');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['/references']];
+$this->title = Yii::t('app', 'POSITIONS');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'REFERENCES'), 'url' => ['/references']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -55,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'format' => 'html',
             'filter' => false,
             'value' => function($model) {
-                return '<span class="label label-primary">' . Module::t('module', 'COUNTUSERS') . ': ' . $model->userscount . '</span>';
+                return '<span class="label label-primary">' . Yii::t('app', 'COUNTUSERS') . ': ' . $model->userscount . '</span>';
             },   
             'contentOptions' => ['class'=>'success;'],
         ],

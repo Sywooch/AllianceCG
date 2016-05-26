@@ -36,7 +36,7 @@ class PositionsSearch extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            // ['position', 'unique', 'targetClass' => Positions::className(), 'message' => Module::t('module', 'ADMIN_POSITIONS_ERROR_RECORD_EXIST')],
+            // ['position', 'unique', 'targetClass' => Positions::className(), 'message' => Yii::t('app', 'ADMIN_POSITIONS_ERROR_RECORD_EXIST')],
             [['description'], 'string'],
             [['position'], 'string', 'max' => 255],
             [['userscount', 'globalSearch', 'authorname'], 'safe'],
@@ -49,11 +49,11 @@ class PositionsSearch extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Module::t('module', 'ID'),
-            'position' => Module::t('module', 'ADMIN_POSITIONS_POSITION'),
-            'description' => Module::t('module', 'ADMIN_POSITIONS_DESCRIPTION'),   
-            'userscount' => Module::t('module', 'ADMIN_USERS_COUNT'), 
-            'globalSearch' => Module::t('module', 'SEARCH'),
+            'id' => Yii::t('app', 'ID'),
+            'position' => Yii::t('app', 'ADMIN_POSITIONS_POSITION'),
+            'description' => Yii::t('app', 'ADMIN_POSITIONS_DESCRIPTION'),   
+            'userscount' => Yii::t('app', 'ADMIN_USERS_COUNT'), 
+            'globalSearch' => Yii::t('app', 'SEARCH'),
         ];
     }
     

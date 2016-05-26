@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use rmrevin\yii\fontawesome\FA;
-use app\modules\references\Module;
 use app\components\grid\LinkColumn;
 use app\components\grid\SetColumn;
 use app\modules\references\models\Departments;
@@ -12,8 +11,8 @@ use app\modules\references\models\Departments;
 /* @var $searchModel app\modules\references\models\DepartmentsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('module', 'DEPARTMENTS');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['/references']];
+$this->title = Yii::t('app', 'DEPARTMENTS');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'REFERENCES'), 'url' => ['/references']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="departments-index">
@@ -53,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'html',
                 'filter' => false,
                 'value' => function($model) {
-                    return '<span class="label label-primary">' . Module::t('module', 'COUNTUSERS'  ) . ': ' . $model->userscount . '</span>';
+                    return '<span class="label label-primary">' . Yii::t('app', 'COUNTUSERS'  ) . ': ' . $model->userscount . '</span>';
                 },   
                 'contentOptions' => ['class'=>'success;'],
             ], 
@@ -83,10 +82,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             // 'user_id',
 
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'header' => 'Действия'
-            ],
+            // [
+            //     'class' => 'yii\grid\ActionColumn',
+            //     'header' => 'Действия'
+            // ],
         ],
     ]);
 ?>

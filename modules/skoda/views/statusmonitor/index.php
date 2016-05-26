@@ -31,6 +31,9 @@ $this->params['breadcrumbs'][] = $this->title;
 $deleteRestore = file_get_contents('js/modules/skoda/statusmonitor/deleteRestore.js');
 $this->registerJs($deleteRestore, View::POS_END);
 
+$ExportExcel = file_get_contents('js/modules/skoda/statusmonitor/gridViewExcelExport.js');
+$this->registerJs($ExportExcel, View::POS_END);
+
 ?>
    
     <?= $this->render('_submenu', [
@@ -78,7 +81,18 @@ endif; ?>
 
         <?php // echo Html::a(Yii::t('app', '{icon} STATUS_SHOW_MONITOR', ['icon' => FA::icon('bar-chart')]), ['monitor'], ['class' => 'btn btn-info btn-sm']) ?>
         
-        <?= Html::a(Yii::t('app', '{icon} STATUS_EXPORT_EXCEL', ['icon' => FA::icon('file-excel-o')]), ['export'], ['class' => 'btn btn-info btn-sm']) ?>
+        <?php // echo Html::a(Yii::t('app', '{icon} STATUS_EXPORT_EXCEL', ['icon' => FA::icon('file-excel-o')]), ['export'], ['class' => 'btn btn-info btn-sm']) ?>
+
+        <?= Html::a(Yii::t('app', '{icon} STATUS_EXPORT_EXCEL', ['icon' => FA::icon('file-excel-o')]), ['export'], [
+                'id' => 'Excel',
+                'class' => 'btn btn-info btn-sm',
+                'onclick' => 'setParams()',
+                'data' => [
+                    'method' => 'post',
+                    'confirm' => Yii::t('app', 'CREDITCALENDAR_EXPORT_CONFIRM'),
+                ]
+             ]);
+        ?>        
 
     </p>
 

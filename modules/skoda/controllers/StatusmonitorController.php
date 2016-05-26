@@ -112,10 +112,11 @@ class StatusmonitorController extends Controller
             $model = new Statusmonitor();
 
             // Получить id отмеченных записей (преобразовать полученный массив в строку)
-            // $keyList = Yii::$app->request->post('keyList');
-            // $keyListArray = explode(',', $keyList);
+            $keyList = Yii::$app->request->post('keyList');
+            $keyListArray = explode(',', $keyList);
 
-            $query = Statusmonitor::find();
+            $query = Statusmonitor::find();            
+            $query->where(['{{%statusmonitor}}.id' => $keyListArray]);
             $query->joinWith('authorname');
             // Условие выборки - отмеченные записи
             // $query->where(['id' => $keyListArray]);

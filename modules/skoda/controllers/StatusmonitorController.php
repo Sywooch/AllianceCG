@@ -305,6 +305,16 @@ class StatusmonitorController extends Controller
             'dataProvider' => $dataProvider,
         ]);     
     }    
+    
+
+    /**
+     * Renders the index view for the module
+     * @return string
+     */
+    public function actionGraph()
+    {
+        return $this->render('graph');     
+    } 
 
     /**
      * Displays a single Statusmonitor model.

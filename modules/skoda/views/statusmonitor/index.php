@@ -35,10 +35,7 @@ $ExportExcel = file_get_contents('js/modules/skoda/statusmonitor/gridViewExcelEx
 $this->registerJs($ExportExcel, View::POS_END);
 
 ?>
-   
-    <?= $this->render('_submenu', [
-        'model' => $model,
-    ]) ?>
+
 
 
 <?php if (Yii::$app->session->hasFlash('masterConsultantDoesNotExistToday')): ?>
@@ -69,6 +66,15 @@ endif; ?>
     
     <div class="user-index center-block">
     <!-- <div class="statusmonitor-index"> -->
+
+
+<div class="col-md-12 buttonpane">
+   
+    <?= $this->render('_submenu', [
+        'model' => $model,
+    ]) ?>
+
+</div>
 
 
     <p class="buttonpane">

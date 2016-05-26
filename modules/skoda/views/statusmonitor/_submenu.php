@@ -24,9 +24,9 @@
                 'label' => Yii::t('app', '{icon} STATUS_SHOW_MONITOR', ['icon' => FA::icon('bar-chart')]),
                 'url' => '/skoda/statusmonitor/monitor',
             ],
-//            [
-//                'label' => FA::icon('list') . ' ' . Module::t('module', 'SERVICESHEDULER_LIST'),
-//                'url' => '/skoda/servicesheduler/list',
-//            ],
+           [
+               'label' => FA::icon('list') . ' ' . Yii::t('app', '{icon} SERVICESHEDULER_GRAPH', ['icon' => FA::icon('chart')]),
+               'url' => '/skoda/statusmonitor/graph',
+           ],
         ]),
     ]);

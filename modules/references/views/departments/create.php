@@ -8,7 +8,7 @@ use rmrevin\yii\fontawesome\FA;
 /* @var $model app\modules\admin\models\Departments */
 
 $this->title = Yii::t('app', 'CREATE');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'ADMIN'), 'url' => ['/admin']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'REFERENCES'), 'url' => ['/references']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'ADMIN_DEPARTMENTS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -1,15 +1,14 @@
 <?php
 
 use yii\helpers\Html;
-use app\modules\admin\Module;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Companies */
 
-$this->title = Module::t('module', 'ADMIN_COMPANIES_UPDATE') . ' ' . $model->company_name;
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'ADMIN_COMPANIES_TITLE'), 'url' => ['index']];
+$this->title = Yii::t('app', 'ADMIN_COMPANIES_UPDATE') . ' ' . $model->company_name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'ADMIN_COMPANIES_TITLE'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->company_name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Module::t('module', 'ADMIN_COMPANIES_UPDATE');
+$this->params['breadcrumbs'][] = Yii::t('app', 'ADMIN_COMPANIES_UPDATE');
 ?>
 <div class="companies-update">
 

@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use app\modules\references\Module;
 use app\components\grid\ActionColumn;
 use yii\helpers\ArrayHelper;
 use app\modules\references\models\Companies;
@@ -14,8 +13,8 @@ use app\components\grid\SetColumn;
 /* @var $searchModel app\modules\references\models\CompaniesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('module', 'COMPANIES');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'REFERENCES'), 'url' => ['/references']];
+$this->title = Yii::t('app', 'COMPANIES');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'REFERENCES'), 'url' => ['/references']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -87,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'html',
                 'filter' => false,
                 'value' => function($model) {
-                    return '<span class="label label-primary">' . Module::t('module', 'COUNTUSERS'  ) . ': ' . $model->userscount . '</span>';
+                    return '<span class="label label-primary">' . Yii::t('app', 'COUNTUSERS'  ) . ': ' . $model->userscount . '</span>';
                 },   
                 'contentOptions' => ['class'=>'success;'],
             ], 

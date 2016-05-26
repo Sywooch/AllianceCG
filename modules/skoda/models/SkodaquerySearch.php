@@ -49,7 +49,29 @@ class SkodaquerySearch extends Model
     public function serviceworkerloadquery()
     {
 //        $items = Yii::$app->db->createCommand("SELECT DISTINCT(`responsible`) AS worker, COUNT(all_statusmonitor.regnumber) AS carcount FROM all_servicesheduler INNER JOIN all_statusmonitor ON date = DATE_FORMAT(`to`, '%Y-%m-%d') AND YEAR(date) = YEAR(NOW()) AND MONTH(date) = MONTH(NOW()) GROUP BY worker")->queryAll();
-        $items = Yii::$app->db->createCommand("SELECT DISTINCT(`responsible`) AS worker, COUNT({{%statusmonitor.regnumber}}) AS carcount FROM {{%servicesheduler}} INNER JOIN {{%statusmonitor}} ON date = DATE_FORMAT(`to`, '%Y-%m-%d') AND YEAR(date) = YEAR(NOW()) AND MONTH(date) = MONTH(NOW()) GROUP BY worker")->queryAll();
+//        
+    // $query = "SELECT DISTINCT(`responsible`) AS worker, COUNT({{%statusmonitor.regnumber}}) AS carcount FROM {{%servicesheduler}} INNER JOIN {{%statusmonitor}} ON date = DATE_FORMAT(`to`, '%Y-%m-%d') AND YEAR(date) = YEAR(NOW()) AND MONTH(date) = MONTH(NOW()) GROUP BY worker";
+    $query = "SELECT
+                DISTINCT(CONCAT({{%employees}}.`name`, ' ', {{%employees}}.`surname`)) AS `worker`,
+                COUNT({{%statusmonitor}}.`regnumber`) AS carcount 
+            FROM 
+                {{%servicesheduler}}
+            INNER JOIN 
+                {{%statusmonitor}}
+            ON 
+                date = DATE_FORMAT(`to`, '%Y-%m-%d')
+            AND
+                YEAR(date) = YEAR(NOW()) 
+            AND
+                MONTH(date) = MONTH(NOW())
+            LEFT JOIN
+                {{%employees}}
+            ON 
+                {{%employees}}.`id` = {{%servicesheduler}}.`responsible`
+            GROUP BY
+                `worker`";
+
+        $items = Yii::$app->db->createCommand($query)->queryAll();
         foreach ($items as $row){
             $data_worker[] = [$row['worker'],(int)$row['carcount']];
         }

@@ -15,24 +15,13 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php // Html::encode($this->title) ?>
     <!--</h1>-->
     
-    <p style="text-align: right">
-        <?php 
-            echo Nav::widget([
-                'options' => ['class' => 'nav navbar-right nav-pills'],
-                'encodeLabels' => false,
-                'items' => array_filter([
-                    [
-                        'label' => Yii::t('app', '{icon} SERVICESHEDULER', ['icon' => FA::icon('calendar')]),
-                        'url' => '/skoda/servicesheduler/calendar',
-                    ],
-                    [
-                        'label' => Yii::t('app', '{icon} STATUSMONITOR', ['icon' => FA::icon('wrench')]),
-                        'url' => '/skoda/statusmonitor/',
-                    ],
-                ]),
-            ]);
-        ?>
-    </p>    
+<div class="col-md-12 buttonpane">
+   
+    <?= $this->render('_submenu', [
+        'model' => $model,
+    ]) ?>
+
+</div>
     
 </div>
 

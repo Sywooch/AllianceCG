@@ -313,7 +313,10 @@ class StatusmonitorController extends Controller
      */
     public function actionGraph()
     {
-        return $this->render('graph');     
+        $model = new Statusmonitor();
+        return $this->render('graph', [
+                'model' => $model,
+            ]);     
     } 
 
     /**

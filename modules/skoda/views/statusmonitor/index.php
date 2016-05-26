@@ -71,7 +71,7 @@ endif; ?>
     <!-- <div class="statusmonitor-index"> -->
 
 
-    <p style="text-align: right">
+    <p class="buttonpane">
         <?= Html::a(Yii::t('app', '{icon} STATUS_CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
         
         <?= Html::a(Yii::t('app', '{icon} STATUS_REFRESH', ['icon' => FA::icon('refresh')]), ['index'], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>

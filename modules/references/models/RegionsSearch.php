@@ -54,6 +54,8 @@ class RegionsSearch extends Regions
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => false,
+            'sort'=> ['defaultOrder' => ['regionandcodes'=>SORT_ASC]]
         ]);
 
         $dataProvider->sort->attributes['authorname'] = [
@@ -77,6 +79,9 @@ class RegionsSearch extends Regions
                 'state' => [
                     'asc' => ['state'=>SORT_ASC],
                     'desc' => ['state' => SORT_DESC],
+                ],
+                'defaultOrder' => [
+                    'regionandcodes' => SORT_DESC,
                 ],
             ]
         ]);

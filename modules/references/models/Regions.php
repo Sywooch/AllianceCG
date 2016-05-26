@@ -22,10 +22,10 @@ class Regions extends \yii\db\ActiveRecord
 {
 
     public $fullregionName;
-    public $file;
+    public $xlsxFile;
 
     const DIR_FOR_UPLOAD = 'files/regions/';
-    const XLSX_FILE_FOR_UPLOAD = 'regions.xlsx';
+    const XLSX_FILE_FOR_UPLOAD = 'regions';
     const UPLOAD_FILE_EXT = 'xlsx';
     const STATUS_BLOCKED = 1;
     const STATUS_ACTIVE = 0;
@@ -51,6 +51,7 @@ class Regions extends \yii\db\ActiveRecord
             [['fullregionName', 'file'], 'safe'],
             // [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => ['xlsx'],'checkExtensionByMimeType'=>true],
             [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => [self::UPLOAD_FILE_EXT],'checkExtensionByMimeType'=>true],
+            [['xlsxFile'], 'file', 'skipOnEmpty' => true, 'extensions' => ['xlsx'],'checkExtensionByMimeType'=>false],
         ];
     }
 
@@ -86,6 +87,7 @@ class Regions extends \yii\db\ActiveRecord
             'author' => Yii::t('app', 'AUTHOR'),
             'globalSearch' => Yii::t('app', 'SEARCH'),
             'authorname' => Yii::t('app', 'AUTHOR'),
+            'xlsxFile' => Yii::t('app', 'xlsxFile'),
             'regionandcodes' => Yii::t('app', 'REGIONANDCODES')
         ];
     }

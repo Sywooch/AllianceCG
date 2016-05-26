@@ -23,13 +23,13 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
         <?= Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => FA::icon('edit')]), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
         <?php
-         echo Html::a(Yii::t('app', '{icon} DELETE', ['icon' => FA::icon('remove')]), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger btn-sm',
-            'data' => [
-                'confirm' => Yii::t('app', 'CONFIRM_DELETE'),
-                'method' => 'post',
-            ],
-        ]) 
+        //  Html::a(Yii::t('app', '{icon} DELETE', ['icon' => FA::icon('remove')]), ['delete', 'id' => $model->id], [
+        //     'class' => 'btn btn-danger btn-sm',
+        //     'data' => [
+        //         'confirm' => Yii::t('app', 'CONFIRM_DELETE'),
+        //         'method' => 'post',
+        //     ],
+        // ]) 
         ?>
     </p>
 

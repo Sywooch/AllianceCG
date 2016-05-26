@@ -78,6 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'showFooter' => true,
+        'summary' => false,
         'rowOptions' => function($model, $key, $index, $grid){
             $curdate = Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
             if($model->date >= $curdate){
@@ -134,10 +135,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     Servicesheduler::STATUS_BLOCKED => 'danger',
                 ],
             ],
-            [
-                'class' => ActionColumn::className(),
-                'contentOptions'=>['style'=>'width: 80px;'],
-            ],
+            // [
+            //     'class' => ActionColumn::className(),
+            //     'contentOptions'=>['style'=>'width: 80px;'],
+            // ],
         ],
 //        'rowOptions' => function ($model, $key, $index, $grid) {
 //            return [

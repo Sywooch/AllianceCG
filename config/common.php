@@ -67,14 +67,6 @@ return [
             'class' => '',
             'defaultRoles' => [],
         ],
-        // 'i18n' => [
-        //     'translations' => [
-        //         'app' => [
-        //             'class' => 'yii\i18n\PhpMessageSource',
-        //             'forceTranslation' => true,
-        //         ],
-        //     ],
-        // ], 
         'i18n' => [
             'translations' => [
                 'app*' => [
@@ -107,7 +99,16 @@ return [
             ],
         ],
         'log' => [
-            'class' => 'yii\log\Dispatcher',
+            // 'class' => 'yii\log\Dispatcher',
+            // 'class' => 'yii\log\DbTarget',
+            'targets' => [
+                [
+                    'class' => 'yii\log\DbTarget',
+                    'logTable' => '{{%logging}}',
+                    'categories' => ['yii\db\*'],
+                    'levels' => ['trace', 'error', 'warning'],
+                ],
+            ],
         ],
     ],
     'params' => $params,

@@ -20,6 +20,10 @@
                 'label' => Yii::t('app', '{icon} STATUSMONITOR_TABLE', ['icon' => FA::icon('table')]),
                 'url' => '/skoda/statusmonitor',
             ],
+            [
+                'label' => Yii::t('app', '{icon} STATUS_SHOW_MONITOR', ['icon' => FA::icon('bar-chart')]),
+                'url' => '/skoda/statusmonitor/monitor',
+            ],
 //            [
 //                'label' => FA::icon('list') . ' ' . Module::t('module', 'SERVICESHEDULER_LIST'),
 //                'url' => '/skoda/servicesheduler/list',

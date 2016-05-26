@@ -115,11 +115,10 @@ class StatusmonitorController extends Controller
             $keyList = Yii::$app->request->post('keyList');
             $keyListArray = explode(',', $keyList);
 
-            $query = Statusmonitor::find();            
+            $query = Statusmonitor::find();      
+            // Условие выборки - отмеченные записи      
             $query->where(['{{%statusmonitor}}.id' => $keyListArray]);
             $query->joinWith('authorname');
-            // Условие выборки - отмеченные записи
-            // $query->where(['id' => $keyListArray]);
             $dataProvider = new ActiveDataProvider([
                 'query' => $query,
                 'pagination' => false,

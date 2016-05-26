@@ -37,3 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="col-lg-12" id="skoda"></div>
+
+<script>
+  var worker_today = "<?php echo $model->workerevent()?>";
+  top.alert(worker_today);
+</script>

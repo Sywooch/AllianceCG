@@ -247,8 +247,8 @@ class RegionsController extends Controller
             }
             $sheet = $objPHPExcel->getSheet(0);
             $highestRow = $sheet->getHighestRow();
-            $highestColumn = $sheet->getHighestColumn();        
-            for($row = 4; $row <= $highestRow; $row++){
+            $highestColumn = $sheet->getHighestDataColumn();        
+            for($row = 1; $row <= $sheet->getHighestRow(); $row++){
 
                 $rowData = $sheet->rangeToArray('A'.$row.':'.$highestColumn.$row,NULL,TRUE,FALSE);
                 if($row == 1)

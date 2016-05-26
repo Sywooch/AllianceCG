@@ -56,18 +56,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 },   
                 'contentOptions' => ['class'=>'success;'],
             ], 
-            [
-                'attribute' => 'created_at',
-                'format' => 'datetime',
-            ],
-            [
-                'attribute' => 'updated_at',
-                'format' => 'datetime',
-            ],
-            [
-                'attribute' => 'authorname',
-                'value' => 'authorname.full_name',
-            ],
+            // [
+            //     'attribute' => 'created_at',
+            //     'format' => 'datetime',
+            // ],
+            // [
+            //     'attribute' => 'updated_at',
+            //     'format' => 'datetime',
+            // ],
+            // [
+            //     'attribute' => 'authorname',
+            //     'value' => 'authorname.full_name',
+            // ],
             [
                 'class' => SetColumn::className(),
                 // 'filter' => Brands::getStatesArray(),

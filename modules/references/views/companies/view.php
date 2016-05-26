@@ -5,6 +5,7 @@ use yii\widgets\DetailView;
 use rmrevin\yii\fontawesome\FA;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
+use app\modules\references\models\Employees;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\references\models\Companies */
@@ -15,7 +16,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'COMPANIES'), 'url' =
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <!-- <div class="companies-view col-lg-5 col-lg-offset-3"> -->
-<div class="companies-view col-lg-10 col-lg-offset-1">
+<!-- <div class="companies-view col-lg-10 col-lg-offset-1"> -->
 
     <!--<h1>-->
         <?php // $model->getLogoName(); ?>
@@ -77,9 +78,27 @@ $this->params['breadcrumbs'][] = $this->title;
     ],
 ]); 
 
+?>
+
+
+<div class="col-sm-9">
+    <?= '<h3>' . Yii::t('app', 'EMPLOYEES_THIS_COMPANY') . '</h3>' ?>
+</div>
+<div class="col-sm-3">
+        <?= Html::a(Yii::t('app', '{icon} CREATE_EMPLOYEES', ['icon' => FA::icon('edit')]), ['/references/employees/create'], [
+                'class' => 'plus btn-success btn-sm',
+            ]) ?>
+</div>
+
+<?php
+
+    $query = $model->getEmployees();
+    $query->where(['state' => Employees::STATUS_ACTIVE]);
+
     echo GridView::widget([
-          'dataProvider' => new ActiveDataProvider(['query' => $model->getUser()]),
+          'dataProvider' => new ActiveDataProvider(['query' => $query]),
           'showOnEmpty' => true,
+          'summary' => false,
           'tableOptions' =>[
               'class' => 'table table-striped table-bordered creditcalendargridview'
           ],
@@ -89,12 +108,12 @@ $this->params['breadcrumbs'][] = $this->title;
                   'class' => 'yii\grid\SerialColumn'
               ],
               [
-                  'attribute' => 'fullname',
-                  'value' => 'full_name',
+                  'attribute' => 'fullName',
+                  'value' => 'fullName',
               ],
           ],
       ]); 
 
 ?>
 
-</div>
+<!-- </div> -->

@@ -53,6 +53,9 @@ use yii\helpers\ArrayHelper;
         $items = ArrayHelper::map($companies,'id','company_name');
         $params = [
             // 'options' => [$_GET['id'] => ['Selected'=>'selected']],
+            // 'options' => [
+            //     isset($_GET['orgid']) => ['Selected'=>'selected'],                
+            // ],
             'prompt' => '-- ' . $model->getAttributeLabel( 'company_id' ) . ' --',
         ];
         echo $form->field($model, 'company_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('building') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
@@ -96,7 +99,9 @@ use yii\helpers\ArrayHelper;
     
         $items = ArrayHelper::map($positions,'id','position');
         $params = [
-            // 'options' => [$_GET['id'] => ['Selected'=>'selected']],
+            'options' => [
+                isset($_GET['id']) => ['Selected'=>'selected'],                
+            ],
             'prompt' => '-- ' . $model->getAttributeLabel( 'position_id' ) . ' --',
         ];
         echo $form->field($model, 'position_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('briefcase') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);

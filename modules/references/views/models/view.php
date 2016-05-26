@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //     'value' => $model->bodytype->body_type,
             // ],
             [
-                'attribute' => 'brand',
+                'attribute' => 'bodytype',
                 'format'=>'raw',
                 'value' => $model->getBodytypeslink(),
                 'visible' => !empty($model->bodytype->body_type) ? true : false,

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use rmrevin\yii\fontawesome\FA;
 use yii\data\ActiveDataProvider;
+use app\modules\references\models\Employees;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
@@ -54,9 +55,28 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); 
 
-    echo GridView::widget([
-          'dataProvider' => new ActiveDataProvider(['query' => $model->getUser()]),
+?>
+
+
+<div class="col-sm-9">
+    <?= '<h3>' . Yii::t('app', 'EMPLOYEES_THIS_POSITION') . '</h3>' ?>
+</div>
+
+<div class="col-sm-3">
+        <?= Html::a(Yii::t('app', '{icon} CREATE_EMPLOYEES', ['icon' => FA::icon('edit')]), ['/references/employees/create?id=' . $model->id], [
+                'class' => 'plus btn-success btn-sm',
+            ]) ?>
+</div>
+
+<?php
+
+$query = $model->getEmployees();
+$query->where(['state' => Employees::STATUS_ACTIVE]);
+
+echo GridView::widget([
+          'dataProvider' => new ActiveDataProvider(['query' => $query]),
           'showOnEmpty' => true,
+          'summary' => false,
           'tableOptions' =>[
               'class' => 'table table-striped table-bordered creditcalendargridview'
           ],
@@ -66,8 +86,8 @@ $this->params['breadcrumbs'][] = $this->title;
                   'class' => 'yii\grid\SerialColumn'
               ],
               [
-                  'attribute' => 'fullname',
-                  'value' => 'full_name',
+                  'attribute' => 'fullName',
+                  'value' => 'fullName',
               ],
           ],
       ]); 

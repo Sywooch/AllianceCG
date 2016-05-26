@@ -36,7 +36,7 @@ $this->registerJs($multipleDelete, View::POS_END);
                 echo Html::a(Yii::t('app', '{icon} RESTORE', ['icon' => FA::icon('upload')]), ['#'], ['class' => 'btn btn-warning btn-sm', 'id' => 'MultipleRestore']);
             }
         ?>
-        <?= Html::a(Yii::t('app', 'REFRESH', ['icon' => FA::icon('refresh')]), ['index'], ['class' => 'btn btn-info btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => FA::icon('refresh')]), ['index'], ['class' => 'btn btn-info btn-sm']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

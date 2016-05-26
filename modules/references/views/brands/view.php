@@ -125,7 +125,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="col-sm-3">
-        <?= Html::a(Yii::t('app', 'CREATE_EMPLOYEES', ['icon' => FA::icon('edit')]), ['/references/employees/create?id=' . $model->id], [
+        <?= Html::a(Yii::t('app', '{icon} CREATE_EMPLOYEES', ['icon' => FA::icon('edit')]), ['/references/employees/create?id=' . $model->id], [
                 'class' => 'plus btn-success btn-sm',
             ]) ?>
 </div>

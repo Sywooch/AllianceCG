@@ -86,6 +86,11 @@ class Positions extends \yii\db\ActiveRecord
         return $this->hasMany(User::className(), ['position' => 'id']);
     }
 
+    public function getEmployees()
+    {
+        return $this->hasMany(Employees::className(), ['position_id' => 'id']);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

@@ -59,18 +59,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'companies',
                 'value' => 'companies.company_name',
             ],
-            [
-                'attribute' => 'created_at',
-                'format' => 'datetime',
-            ],
+            // [
+            //     'attribute' => 'created_at',
+            //     'format' => 'datetime',
+            // ],
             // [
             //     'attribute' => 'updated_at',
             //     'format' => 'datetime',
             // ],
-            [
-                'attribute' => 'author',
-                'value' => 'authorname.full_name',
-            ],
+            // [
+            //     'attribute' => 'author',
+            //     'value' => 'authorname.full_name',
+            // ],
             [
                 'attribute' => 'employeescount',
                 'format' => 'html',

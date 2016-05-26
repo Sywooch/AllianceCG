@@ -107,6 +107,11 @@ class Departments extends \yii\db\ActiveRecord
         return $this->hasMany(User::className(), ['department' => 'id']);
     }
 
+    public function getEmployees()
+    {
+        return $this->hasMany(Employees::className(), ['department_id' => 'id']);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

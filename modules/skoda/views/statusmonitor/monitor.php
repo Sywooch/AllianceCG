@@ -109,8 +109,9 @@ $this->registerJs($autoUpdate, View::POS_HEAD);
     'dataProvider' => $dataProvider,
     'summary' => "",
     'showOnEmpty' => false,
-    'emptyText' => Yii::t('app', 'NO_RECORDS_FOUND'),
-    'emptyTextOptions' => ['class' => 'empty_grid label label-xs label-success col-md-offset-4', 'id' => 'empty_grid', 'style' => 'text-align: center'],
+    // 'emptyText' => Yii::t('app', 'NO_RECORDS_FOUND'),
+    'emptyText' => ' ',
+    // 'emptyTextOptions' => ['class' => 'empty_grid label label-xs label-success col-md-offset-4', 'id' => 'empty_grid', 'style' => 'text-align: center'],
     'showHeader' => false,
     'columns' => [
         [

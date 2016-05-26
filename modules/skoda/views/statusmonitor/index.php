@@ -90,6 +90,7 @@ endif; ?>
             'id' => 'statusmonitor-grid',
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
+            'summary' => false,
             'rowOptions' => function($model){
                 $curdate = Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
                 $begindate = Yii::$app->formatter->asDate($model->from, 'yyyy-MM-dd');

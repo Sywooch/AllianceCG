@@ -6,7 +6,7 @@
     <div class="container">
         <p class="pull-left"><b>&copy; 
             <?php
-                echo Yii::$app->params['skoda'] . '' 
+                echo 'ООО "СтрелаАвто"' 
             ?>
             <?php
                 echo date('Y') 

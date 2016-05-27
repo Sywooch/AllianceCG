@@ -15,6 +15,7 @@ class ClientCirculationSearch extends ClientCirculation
 
     public $authorname;
     public $regions;
+    public $comment;
 
     /**
      * @inheritdoc
@@ -25,6 +26,7 @@ class ClientCirculationSearch extends ClientCirculation
             [['id', 'state', 'created_at', 'updated_at', 'region_id'], 'integer'],
             [['name', 'phone', 'email', 'author'], 'safe'],
             [['authorname', 'regions'], 'safe'],
+            ['comment', 'safe']
         ];
     }
 
@@ -47,7 +49,7 @@ class ClientCirculationSearch extends ClientCirculation
     public function search($params)
     {
         $query = ClientCirculation::find();
-        $query->joinWith(['authorname', 'regions']);
+        $query->joinWith(['authorname', 'regions', 'clientcomment']);
 
         // add conditions that should always apply here
 
@@ -83,13 +85,17 @@ class ClientCirculationSearch extends ClientCirculation
             'region_id' => $this->region_id,
         ]);
 
-        $query->andFilterWhere(['like', '{{%client_circulation}}.name', $this->name])
+        $query
+            ->andFilterWhere(['like', '{{%client_circulation}}.name', $this->name])
             ->andFilterWhere(['like', '{{%client_circulation}}.phone', $this->phone])
             ->andFilterWhere(['like', '{{%client_circulation}}.email', $this->email])
             ->andFilterWhere(['like', '{{%user}}.full_name', $this->authorname])
             ->andFilterWhere(['like', '{{%regions}}.region_name', $this->regions])
             ->orFilterWhere(['like', '{{%regions}}.region_code', $this->regions])
-            ->andFilterWhere(['like', '{{%client_circulation}}.author', $this->author]);
+            ->andFilterWhere(['like', '{{%client_circulation}}.author', $this->author])
+            // ->andFilterWhere(['like', Yii::$app->formatter->asDate('{{%clientcirculationcomment}}.created_at' ,'yyyy-mm-dd'), $this->comment])
+            ->andFilterWhere(['like', '{{%clientcirculationcomment}}.created_at', $this->comment])
+            ;
 
         return $dataProvider;
     }

@@ -34,15 +34,17 @@ $this->registerJs($toggleAdvanced, View::POS_END);
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?= $form->field($model, 'comment') ?>
 
-    <?= $form->field($model, 'name') ?>
+    <?php // echo $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'phone') ?>
+    <?php // echo $form->field($model, 'name') ?>
 
-    <?= $form->field($model, 'email') ?>
+    <?php // echo $form->field($model, 'phone') ?>
 
-    <?= $form->field($model, 'region_id') ?>
+    <?php // echo $form->field($model, 'email') ?>
+
+    <?php // echo $form->field($model, 'region_id') ?>
 
     <?php // echo $form->field($model, 'state') ?>
 

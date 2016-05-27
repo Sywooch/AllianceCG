@@ -7,6 +7,7 @@ use yii\bootstrap\Modal;
 use yii\grid\GridView;
 use yii\data\ActiveDataProvider;
 use app\modules\references\models\Employees;
+use app\modules\alliance\models\Clientcirculationcomment;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 
@@ -146,4 +147,15 @@ $this->params['breadcrumbs'][] = $this->title;
     echo "<div id='modalContent'></div>";
 
     Modal::end();
+?>
+
+<?php
+    $cm = Clientcirculationcomment::find()
+        ->where(['clientcirculation_id' => $model->id])
+        ->all()
+        ;
+    // print_r($cm);
+    foreach ($cm as $key => $value) {
+        echo Yii::$app->formatter->asDate($value->created_at ,'yyyy-mm-dd') . '<br/>';
+    }
 ?>

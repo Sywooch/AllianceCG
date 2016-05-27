@@ -48,12 +48,24 @@ use rmrevin\yii\fontawesome\FA;
 
 
     <?php
+        // $employees = Employees::find()
+        //     ->joinWith(['position'])
+        //     ->where("{{%employees}}.state = ".Employees::STATUS_ACTIVE." and {{%employees}}.company_id = '".Yii::$app->user->identity->usercompany."' and ({{%positions}}.position = '".Employees::SALES_MANAGER."' or {{%positions}}.position = '".Employees::HEAD_OF_SALES_DEPARTMENT."')")
+        //     ->all();
+    
         $employees = Employees::find()
             ->joinWith(['position'])
             ->where("{{%employees}}.state = ".Employees::STATUS_ACTIVE." and {{%employees}}.company_id = '".Yii::$app->user->identity->usercompany."' and ({{%positions}}.position = '".Employees::SALES_MANAGER."' or {{%positions}}.position = '".Employees::HEAD_OF_SALES_DEPARTMENT."')")
             ->all();
-    
-        $items = ArrayHelper::map($employees,'id','fullName');
+
+        $employeesAdmin = Employees::find()
+            ->joinWith(['position'])
+            ->where("{{%employees}}.state = ".Employees::STATUS_ACTIVE." and ({{%positions}}.position = '".Employees::SALES_MANAGER."' or {{%positions}}.position = '".Employees::HEAD_OF_SALES_DEPARTMENT."')")
+            ->all();            
+
+        $employeesResult = Yii::$app->user->can('admin') ? $employeesAdmin : $employees;
+
+        $items = ArrayHelper::map($employeesResult,'id','fullName');
         $params = [
             'options' => isset($_GET['id']) ? [$_GET['id'] => ['Selected'=>'selected']] : false,
             'prompt' => '-- ' . $model->getAttributeLabel( 'employee_id' ) . ' --',

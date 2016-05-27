@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\modules\alliance\models\ClientCirculation;
+use app\modules\references\models\Employees;
 
 /**
  * ClientCirculationSearch represents the model behind the search form about `app\modules\alliance\models\ClientCirculation`.
@@ -16,6 +17,7 @@ class ClientCirculationSearch extends ClientCirculation
     public $authorname;
     public $regions;
     public $comment;
+    public $employees;
 
     /**
      * @inheritdoc
@@ -26,7 +28,7 @@ class ClientCirculationSearch extends ClientCirculation
             [['id', 'state', 'created_at', 'updated_at', 'region_id'], 'integer'],
             [['name', 'phone', 'email', 'author'], 'safe'],
             [['authorname', 'regions'], 'safe'],
-            ['comment', 'safe']
+            [['comment', 'employees'], 'safe']
         ];
     }
 
@@ -49,13 +51,32 @@ class ClientCirculationSearch extends ClientCirculation
     public function search($params)
     {
         $query = ClientCirculation::find();
-        $query->joinWith(['authorname', 'regions', 'clientcomment']);
+        $query->joinWith(['authorname', 'regions', 'clientcomment', 'employees']);
 
         // add conditions that should always apply here
+           
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+
+        $dataProvider->setSort([
+                'attributes' => [
+                    'name' => [
+                        'asc' => ['name' => SORT_ASC],
+                        'desc' => ['name' => SORT_DESC],
+                    ],
+                    'phone',
+                    'email',
+                    'created_at' => [
+                        'asc' =>    [ '{{%clientcirculationcomment}}.created_at' => SORT_ASC ],
+                        'desc' =>   [ '{{%clientcirculationcomment}}.created_at' => SORT_DESC ],
+                        'label' => 'created_at'
+                    ],                 
+                ],
+                'defaultOrder' => ['created_at' => SORT_DESC],
+           ]);             
 
         $this->load($params);
 
@@ -74,16 +95,21 @@ class ClientCirculationSearch extends ClientCirculation
         $dataProvider->sort->attributes['regions'] = [
                 'asc' => ['{{%regions}}.region_name' => SORT_ASC],
                 'desc' => ['{{%regions}}.region_name' => SORT_DESC],
-            ];        
+            ]; 
+
+        $dataProvider->sort->attributes['employees'] = [
+                'asc' => ['{{%employees}}.surname' => SORT_ASC],
+                'desc' => ['{{%employees}}.surname' => SORT_DESC],
+            ];       
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'state' => $this->state,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'region_id' => $this->region_id,
-        ]);
+        // $query->andFilterWhere([
+        //     'id' => $this->id,
+        //     'state' => $this->state,
+        //     'created_at' => $this->created_at,
+        //     'updated_at' => $this->updated_at,
+        //     'region_id' => $this->region_id,
+        // ]);
 
         $query
             ->andFilterWhere(['like', '{{%client_circulation}}.name', $this->name])
@@ -93,8 +119,9 @@ class ClientCirculationSearch extends ClientCirculation
             ->andFilterWhere(['like', '{{%regions}}.region_name', $this->regions])
             ->orFilterWhere(['like', '{{%regions}}.region_code', $this->regions])
             ->andFilterWhere(['like', '{{%client_circulation}}.author', $this->author])
-            // ->andFilterWhere(['like', Yii::$app->formatter->asDate('{{%clientcirculationcomment}}.created_at' ,'yyyy-mm-dd'), $this->comment])
-            ->andFilterWhere(['like', '{{%clientcirculationcomment}}.created_at', $this->comment])
+            ->andFilterWhere(['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.created_at)", $this->comment])
+            ->andFilterWhere(['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.updated_at)", $this->comment])
+            // ->andFilterWhere(['{{%clientcirculationcomment}}.created_at' => date('yyyy-mm-dd',strtotime($this->comment))])
             ;
 
         return $dataProvider;

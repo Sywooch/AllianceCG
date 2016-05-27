@@ -99,16 +99,7 @@ return [
             ],
         ],
         'log' => [
-            // 'class' => 'yii\log\Dispatcher',
-            // 'class' => 'yii\log\DbTarget',
-            'targets' => [
-                [
-                    'class' => 'yii\log\DbTarget',
-                    'logTable' => '{{%logging}}',
-                    'categories' => ['yii\db\*'],
-                    'levels' => ['trace', 'error', 'warning'],
-                ],
-            ],
+            'class' => 'yii\log\Dispatcher',
         ],
     ],
     'params' => $params,

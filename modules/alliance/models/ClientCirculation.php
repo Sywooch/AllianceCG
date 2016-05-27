@@ -10,6 +10,7 @@ use yii\helpers\ArrayHelper;
 use app\modules\references\models\Regions;
 use yii\helpers\Html;
 use app\modules\alliance\models\Clientcirculationcomment;
+use app\modules\references\models\Employees;
 
 /**
  * This is the model class for table "{{%client_circulation}}".
@@ -98,6 +99,7 @@ class ClientCirculation extends \yii\db\ActiveRecord
             'regions' => Yii::t('app', 'REGION'),
             'authorname' => Yii::t('app', 'AUTHOR'),
             'employee_id' => Yii::t('app', 'EMPLOYEE'),
+            'employees' => Yii::t('app', 'EMPLOYEE'),
             'contact_type' => Yii::t('app', 'CONTACT_TYPE'),
             'target' => Yii::t('app', 'TARGET'),
             'car_model' => Yii::t('app', 'CAR_MODEL'),
@@ -112,6 +114,14 @@ class ClientCirculation extends \yii\db\ActiveRecord
     public function getAuthorname()
     {
         return $this->hasOne(User::className(), ['id' => 'author']);
+    }  
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEmployees()
+    {
+        return $this->hasOne(Employees::className(), ['id' => 'employee_id']);
     }  
 
     /**

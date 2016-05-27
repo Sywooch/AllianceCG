@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use rmrevin\yii\fontawesome\FA;
 use yii\web\View;
+use dosamigos\datepicker\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\alliance\models\ClientCirculationSearch */
@@ -27,38 +28,35 @@ $this->registerJs($toggleAdvanced, View::POS_END);
     <?= Html::button(Yii::t('app', '{icon} ADVANCED', ['icon' => FA::icon('list')]), ['class' => 'btn-link', 'id' => 'advanced']) ?>    
 </p>
 
-<div class="client-circulation-search" id="clientcirculation" style="display: none;">
+<div class="client-circulation-search" id="clientcirculation">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'comment') ?>
+    <div class="col-md-10">
 
-    <?php // echo $form->field($model, 'id') ?>
+    <?= $form->field($model, 'comment', ['template' => '{input}{error}'])->widget(
+        DatePicker::className(), [
+                'inline' => false, 
+                'language' => 'ru',
+                'size' => 'ms',
+                // 'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
+                'template' => '{addon}{input}',
+                'options' => ['placeholder' => $model->getAttributeLabel('comment')],
+                'clientOptions' => [
+                    'autoclose' => true,
+                    'format' => 'yyyy-mm-dd'
+                ]
+            ]
+        );
+    ?>
 
-    <?php // echo $form->field($model, 'name') ?>
+    </div>
 
-    <?php // echo $form->field($model, 'phone') ?>
-
-    <?php // echo $form->field($model, 'email') ?>
-
-    <?php // echo $form->field($model, 'region_id') ?>
-
-    <?php // echo $form->field($model, 'state') ?>
-
-    <?php // echo $form->field($model, 'created_at') ?>
-
-    <?php // echo $form->field($model, 'updated_at') ?>
-
-    <?php // echo $form->field($model, 'author') ?>
-
-    <?php // echo $form->field($model, 'region_id') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
+    <div class="form-group col-md-2">
+        <?= Html::submitButton(Yii::t('app', '{icon} Search', ['icon' => FA::icon('search')]), ['class' => 'btn btn-primary btn-sm']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

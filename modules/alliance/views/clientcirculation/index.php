@@ -64,6 +64,10 @@ $this->registerJs($deleteRestore, View::POS_END);
                     'value' => 'regions.region_name'
                 ],
                 [
+                    'attribute' => 'employees',
+                    'value' => 'employees.fullName'
+                ],
+                [
                     'class' => SetColumn::className(),
                     'filter' => Clientcirculation::getStatesArray(),
                     'attribute' => 'state',

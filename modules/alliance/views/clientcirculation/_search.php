@@ -2,13 +2,32 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use rmrevin\yii\fontawesome\FA;
+use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\alliance\models\ClientCirculationSearch */
 /* @var $form yii\widgets\ActiveForm */
+
+$toggleAdvanced = file_get_contents('js/modules/alliance/clientcirculation/toggleAdvanced.js');
+$this->registerJs($toggleAdvanced, View::POS_END);
+
 ?>
 
-<div class="client-circulation-search">
+<p class="buttonpane">
+    <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+    <?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => FA::icon('refresh')]), ['index'], ['class' => 'btn btn-info btn-sm']) ?>
+    <?php
+        if(Yii::$app->user->can('admin')){
+            echo Html::a(Yii::t('app', '{icon} DELETE', ['icon' => FA::icon('remove')]), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']);
+            echo '&nbsp';
+            echo Html::a(Yii::t('app', '{icon} RESTORE', ['icon' => FA::icon('upload')]), ['#'], ['class' => 'btn btn-warning btn-sm', 'id' => 'MultipleRestore']);
+        }
+    ?>    
+    <?= Html::button(Yii::t('app', '{icon} ADVANCED', ['icon' => FA::icon('list')]), ['class' => 'btn-link', 'id' => 'advanced']) ?>    
+</p>
+
+<div class="client-circulation-search" id="clientcirculation" style="display: none;">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -23,7 +42,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'email') ?>
 
-    <?= $form->field($model, 'region') ?>
+    <?= $form->field($model, 'region_id') ?>
 
     <?php // echo $form->field($model, 'state') ?>
 

@@ -73,7 +73,7 @@ class ClientCirculation extends \yii\db\ActiveRecord
             [['phone'], 'string', 'max' => 18],
             [['globalSearch'], 'safe'],
             ['author', 'default', 'value' => Yii::$app->user->getId()],
-            [['name', 'phone', 'email', 'region_id'], 'required'],
+            [['name', 'phone', 'region_id', 'employee_id'], 'required'],
             [['phone', 'email'], 'unique'],
             ['email', 'email'],
             [['contact_type', 'target', 'car_model', 'comment'], 'safe']

@@ -23,8 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?php Html::encode($this->title) ?></h1>
 
     <p style="text-align: right">
-        <?= Html::a(FA::icon('tasks') . Yii::t('app', 'SERVICESHEDULER_INDEX'), ['calendar'], ['class' => 'btn btn-warning btn-sm', 'id' => 'refreshButton']) ?>
-        <?= Html::a(FA::icon('edit') . Yii::t('app', 'STATUS_UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} SERVICESHEDULER_INDEX', ['icon' => FA::icon('tasks')]), ['calendar'], ['class' => 'btn btn-warning btn-sm', 'id' => 'refreshButton']) ?>
+        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} STATUS_UPDATE', ['icon' => FA::icon('edit')]), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
         <?php
             // Html::a(FA::icon('remove') . Yii::t('app', 'STATUS_DELETE'), ['delete', 'id' => $model->id], [
             //     'class' => 'btn btn-danger btn-sm',

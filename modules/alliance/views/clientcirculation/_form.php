@@ -48,13 +48,10 @@ use rmrevin\yii\fontawesome\FA;
 
 
     <?php
-        $employees = Employees::find()->where(['<>', 'state', Employees::STATUS_BLOCKED])->all();
-        // $regions = Regions::find()->all();
-        // 
-        // foreach ($employees as $arr) {
-        //     $arr->merge_employees = $arr->name . ' ' . $arr->surname;
-        //     ArrayHelper::merge('name', 'surname')
-        // }
+        $employees = Employees::find()
+            ->joinWith(['position'])
+            ->where("{{%employees}}.state = ".Employees::STATUS_ACTIVE." and {{%employees}}.company_id = '".Yii::$app->user->identity->usercompany."' and ({{%positions}}.position = '".Employees::SALES_MANAGER."' or {{%positions}}.position = '".Employees::HEAD_OF_SALES_DEPARTMENT."')")
+            ->all();
     
         $items = ArrayHelper::map($employees,'id','fullName');
         $params = [

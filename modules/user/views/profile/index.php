@@ -72,6 +72,8 @@ $this->params['breadcrumbs'][] = $this->title;
 //}
 //print_r($table);
 
+echo Yii::$app->user->identity->usercompany;
+
 ?>    
     
     <h1>

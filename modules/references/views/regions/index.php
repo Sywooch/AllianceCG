@@ -15,9 +15,6 @@ use yii\web\View;
 $deleteRestore = file_get_contents('js/modules/references/regions/deleteRestore.js');
 $this->registerJs($deleteRestore, View::POS_END);
 
-$toggleSearch = file_get_contents('js/modules/references/regions/toggleSearch.js');
-$this->registerJs($toggleSearch, View::POS_END);
-
 $this->title = Yii::t('app', 'REGIONS');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'REFERENCES'), 'url' => ['/references']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -30,30 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- </h1> -->
 
     <?= $this->render('_search', ['model' => $searchModel]); ?>
-
-<div class="buttonpane">
-
-<?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm']); ?>
-        
-<?= Html::a(Yii::t('app', '{icon} DELETE', ['icon' => FA::icon('remove')]), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']); ?>
-        
-<?= Html::a(Yii::t('app', '{icon} RESTORE', ['icon' => FA::icon('upload')]), ['#'], ['class' => 'btn btn-warning btn-sm', 'id' => 'MultipleRestore']); ?>
-
-<?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => FA::icon('refresh')]), ['index'], ['class' => 'btn btn-info btn-sm']) ?>
-<?= Html::button(Yii::t('app', '{icon} EXCEL_OPERATIONS', ['icon' => FA::icon('file-excel-o')]), ['class' => 'btn-link btn-sm', 'id' => 'excelOperations']) ?>
-
-</div>
-
-<div class="col-sm-12 bs-callout bs-callout-info" id="excel" style="display: none">
-
-    <div class="col-sm-6">
-    </div>
-    <div class="col-sm-6">
-        <?= Html::a(Yii::t('app', '{icon} IMPORT_EXCEL', ['icon' => FA::icon('upload')]), ['upload'], ['class' => 'btn btn-link btn-sm']) ?>
-        <?php // echo Html::a(Yii::t('app', '{icon} IMPORT_EXCEL', ['icon' => FA::icon('file-excel-o')]), ['import'], ['class' => 'btn btn-link btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} EXPORT_EXCEL', ['icon' => FA::icon('file-excel-o')]), ['export'], ['class' => 'btn btn-link btn-sm']) ?>
-    </div>
-</div>            
 
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'id' => 'regions-grid',

@@ -1,7 +1,7 @@
-var button = document.getElementById('excelOperations');
+var button = document.getElementById('advancedOperations');
 
 button.onclick = function() {
-    var div = document.getElementById('excel');
+    var div = document.getElementById('advanced');
     if (div.style.display !== 'none') {
         div.style.display = 'none';
     }

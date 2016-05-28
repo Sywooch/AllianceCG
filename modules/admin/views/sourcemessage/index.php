@@ -15,9 +15,6 @@ use yii\web\View;
 /* @var $searchModel app\modules\admin\models\SourceMessageSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$toggleSearch = file_get_contents('js/modules/admin/sourcemessage/toggleSearch.js');
-$this->registerJs($toggleSearch, View::POS_END);
-
 $this->title = Yii::t('app', 'Source Messages');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'ADMIN'), 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -30,22 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $this->render('_search', ['model' => $searchModel]); ?>
 
 
-    <div class="form-group buttonpane">
-        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => FA::icon('refresh')]), ['index'], ['class' => 'btn btn-info btn-sm']) ?>
-        <?= Html::button(Yii::t('app', '{icon} EXCEL_OPERATIONS', ['icon' => FA::icon('file-excel-o')]), ['class' => 'btn-link btn-sm', 'id' => 'excelOperations']) ?>
-    </div>
 
-    <div class="col-sm-12 bs-callout bs-callout-info" id="excel" style="display: none">
- 
-        <div class="col-sm-6">
-        </div>
-        <div class="col-sm-6">
-            <?= Html::a(Yii::t('app', '{icon} IMPORT_EXCEL', ['icon' => FA::icon('upload')]), ['upload'], ['class' => 'btn btn-link btn-sm']) ?>
-            <?php // echo Html::a(Yii::t('app', '{icon} IMPORT_EXCEL', ['icon' => FA::icon('file-excel-o')]), ['import'], ['class' => 'btn btn-link btn-sm']) ?>
-            <?= Html::a(Yii::t('app', '{icon} EXPORT_EXCEL', ['icon' => FA::icon('file-excel-o')]), ['export'], ['class' => 'btn btn-link btn-sm']) ?>
-        </div>
-    </div>
 
 
     <div class="col-lg-12 alert alert-danger">

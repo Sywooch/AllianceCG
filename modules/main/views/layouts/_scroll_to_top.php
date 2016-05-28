@@ -2,7 +2,7 @@
 
 	use yii\helpers\Html;
 
-   	// $this->registerCssFile('/css/scroll-top.css', ['depends' => ['app\assets\AppAsset']]);  
+   	$this->registerCssFile('/css/scroll-top.css', ['depends' => ['app\assets\AppAsset']]);  
 ?>
 
 <?= \bluezed\scrollTop\ScrollTop::widget() ?>

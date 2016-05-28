@@ -364,7 +364,7 @@ a.desc:after {
 }
 
 .collapse-test {
-    position: fixed;
+    position: fixed; 
     width:20%;
 }
 

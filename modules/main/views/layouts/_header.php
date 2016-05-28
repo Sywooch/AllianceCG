@@ -12,13 +12,15 @@ use yii\helpers\Url;
         'id' => 'navmenu',
         'options' => [
             'class' => 'navbar navbar-fixed-top navbar-primary',
+            'data-spy' => "affix", 
+            'data-offset-top' => "100",
         ],
     ]);
 
     // echo $this->render('@app/modules/main/views/layouts/_shared_header');
     
 echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
+        'options' => ['class' => 'navbar-nav navbar-right nav-collapse'],
         'id' => 'navigation_menu',
         'activateItems' => false,
         'encodeLabels' => false,

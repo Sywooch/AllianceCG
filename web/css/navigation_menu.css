@@ -1,4 +1,4 @@
-/*#navigation_menu ul{
+#navigation_menu ul{
     padding-left: 0;
     text-align: center;
 }
@@ -15,8 +15,8 @@
     border-bottom: 2px solid transparent;
 }
 #navigation_menu ul > li a:hover{
-    border-bottom: 2px solid #f00; /* вместо этого цвета можно использовать любой другой */
-}*/
+    border-bottom: 2px solid #f00;
+}
 
 
 /*.sidebar-admin {
@@ -78,3 +78,5 @@ ul li.active:after{
 }
 */
 /*End*/
+
+/*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */

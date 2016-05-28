@@ -17,6 +17,7 @@ body {
 
 .wrap > .container {
     padding: 70px 15px 20px;
+    margin-top: 15px;
 }
 
 .footer {
@@ -162,6 +163,14 @@ a.desc:after {
 .navbar-fixed-top a:active{
     color:#555;
 }
+.navbar-nav > li > a {
+    /* padding-top: 15px; */
+    /* padding-bottom: 15px; */
+}
+
+.navbar-fixed-top {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 5px 0 rgba(0, 0, 0, 0.10);
+}
 
 /* */
 
@@ -179,11 +188,6 @@ a.desc:after {
     letter-spacing: 0.1em;
     max-width: 7em;
 }
-
-/*.user-index {
-    width: 75%;
-    float: left;
-}*/
 
 .servicesheduler-index {
     width: 75%;
@@ -210,11 +214,6 @@ a.desc:after {
     float: left;
 }
 
-.positions-index {
-/*    width: 75%;
-    float: left;    */
-}
-
 .user-form {
     width: 60%;
 }
@@ -222,18 +221,6 @@ a.desc:after {
 .positions-form {
     width: 60%;
 }
-
-.user-search-form {
-    /* width: 40%; */
-/*    float: right;
-    margin-top: -6%;*/
-}
-
-/*.companies-search-form {
-     width: 40%; 
-    float: right;
-    margin-top: -6%;
-}*/
 
 .servicesheduler-search-form {
     /* width: 40%; */
@@ -250,14 +237,6 @@ a.desc:after {
 .admin-default-index {
     width:60%;
     
-}
-
-.user-view {
-    /*width: 60%;*/
-}
-
-#statusmonitor-users-grid {
-    /*margin-left: 10%;*/
 }
 
 #excel {
@@ -414,7 +393,7 @@ a.desc:after {
   left: 0;
   bottom: -1px;
   width: 0;
-  height: 10px;
+  height: 8px;
   background-color: #337ab7;
   content: "";
   transition: width 0.2s;
@@ -472,6 +451,41 @@ a.desc:after {
 
 .buttonpane {
     text-align: right;
+    margin-bottom: 5px;
+}
+
+/*Navbar Scroll Down Animation Begin*/
+section {
+  height:calc(90% - 50px);
+}
+
+.affix {
+  padding:0px;
+  -webkit-transition:padding 0.4s linear;
+  -moz-transition:padding 0.4s linear;  
+  -o-transition:padding 0.4s linear;         
+  transition:padding 0.4s linear;  
+
+}
+
+.affix-top {
+  padding-top:5px;
+  padding-bottom:5px;
+  -webkit-transition:padding 0.4s linear;
+  -moz-transition:padding 0.4s linear;  
+  -o-transition:padding 0.4s linear;         
+  transition:padding 0.4s linear;  
+}
+
+/*Navbar Scroll Down Animation End*/
+
+.nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+    background-color: #fff;
+}
+
+.bluezed-scroll-top-circle {
+    background-color: #337ab7;
 }
 
 /*.wrap {background: url('/img/site/main-bg.jpg') no-repeat center center fixed;

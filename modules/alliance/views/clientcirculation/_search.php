@@ -53,6 +53,20 @@ $this->registerJs($toggleAdvanced, View::POS_END);
         );
     ?>
 
+<?php 
+    //  $form->field($model, 'email', [
+    //     'template' => '<div class="input-group"><span class="input-group-btn">'.
+    //         '<button class="btn btn-default">Go!</button></span>{input}</div>',
+    // ]);
+ ?>    
+
+<?php
+// $form->field($model, 'email', [
+//         'template' => '<div class="input-group">{input}<span class="input-group-btn">'.
+//             Html::submitButton(Yii::t('app', '{icon} Search', ['icon' => FA::icon('search')]), ['class' => 'btn btn-primary']).'</span></div>',
+//     ]); 
+?>
+
     </div>
 
     <div class="form-group col-md-2">

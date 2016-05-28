@@ -1,10 +1,4 @@
-/**
- * @link      https://github.com/bluezed/yii2-scroll-top
- * @copyright Copyright (c) 2015 Thomas Geppert
- * @license   https://github.com/bluezed/yii2-scroll-top/blob/master/LICENSE
- */
-
-.bluezed-scroll-top {
+.scrolltop {
     position: fixed;
     bottom: 10px;
     right: 15px;
@@ -13,18 +7,16 @@
     text-align: center;
 }
 
-.bluezed-scroll-top-circle {
+.scrolltop-circle{
     border-radius: 50%;
     width: 50px;
     height: 50px;
-    /*background-color: #a0a0a0;*/
     background-color: #337ab7;
     padding-top: 15px;
     font-size: 1.25em;
     color: #ffffff;
 }
 
-.bluezed-scroll-top-circle:hover {
-    /*background-color: #666666;*/
+.scrolltop-circle:hover {
     background-color: #5cb85c;
 }

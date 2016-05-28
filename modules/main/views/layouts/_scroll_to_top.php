@@ -1,25 +1,10 @@
 <?php 
-
 	use yii\helpers\Html;
+	use yii\web\View;
 
    	$this->registerCssFile('/css/scroll-top.css', ['depends' => ['app\assets\AppAsset']]);  
+	$scrollToTop = file_get_contents('js/modules/main/default/scrollToTop.js');
+	$this->registerJs($scrollToTop, View::POS_END);
 ?>
 
-<?= \bluezed\scrollTop\ScrollTop::widget() ?>
-
-<!-- <script type="text/javascript">
-
-	var t;
-	function up() {
-		var top = Math.max(document.body.scrollTop,document.documentElement.scrollTop);
-		if(top > 0) {
-			window.scrollBy(0,-100);
-			t = setTimeout('up()',10);
-		}
-		else clearTimeout(t);
-	return false;
-	}
-
-</script> -->
-
-<!-- <a href="#" onclick="return up()">наверх</a> -->
+<?= Html::a(Html::tag('i', '', ['class'=>'glyphicon glyphicon-menu-up scrolltop-circle']), '#', ['onclick' => "return up()", 'id'=>'btn-scrolltop', 'class'=>'scrolltop']); ?>

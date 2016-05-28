@@ -22,6 +22,7 @@
 		"2amigos/yii2-tinymce-widget": "~1.1",
 		"FortAwesome/Font-Awesome": "*",
 		"rmrevin/yii2-fontawesome": "~2.12",
+                "bluezed/yii2-scroll-top": "*",
                 "phpoffice/phpexcel": "dev-develop",
 		"janisto/yii2-timepicker": "*",
 		"2amigos/yii2-date-picker-widget": "~1.0"

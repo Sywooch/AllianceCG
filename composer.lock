@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "31b1d01ae73ec4204ab1cb4b3c754476",
-    "content-hash": "26e58f9e87145e0563f06b571fedb735",
+    "hash": "53fa46896a89159af6eb8b333b64ad49",
+    "content-hash": "2fa5ce340b29834c83f5b3b4f241185e",
     "packages": [
         {
             "name": "2amigos/yii2-date-picker-widget",
@@ -127,51 +127,6 @@
                 "yii2"
             ],
             "time": "2015-03-28 21:53:43"
-        },
-        {
-            "name": "bluezed/yii2-scroll-top",
-            "version": "v1.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bluezed/yii2-scroll-top.git",
-                "reference": "3e3ca28df6762df92770a99a5af3b0df3e26e91c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bluezed/yii2-scroll-top/zipball/3e3ca28df6762df92770a99a5af3b0df3e26e91c",
-                "reference": "3e3ca28df6762df92770a99a5af3b0df3e26e91c",
-                "shasum": ""
-            },
-            "require": {
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "bluezed\\scrollTop\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Thomas Geppert",
-                    "email": "bluezed.apps@gmail.com"
-                }
-            ],
-            "description": "This Yii 2 widget adds a simple scroll-to-top button to your site.",
-            "keywords": [
-                "button",
-                "extension",
-                "scroll",
-                "scroll-to",
-                "scroll-to-top",
-                "top",
-                "yii2"
-            ],
-            "time": "2016-05-11 16:49:46"
         },
         {
             "name": "bower-asset/bootstrap",

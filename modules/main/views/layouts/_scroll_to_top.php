@@ -2,12 +2,12 @@
 
 	use yii\helpers\Html;
 
-   	$this->registerCssFile('css/scroll-top.css', ['depends' => ['app\assets\AppAsset']]);  
+   	// $this->registerCssFile('/css/scroll-top.css', ['depends' => ['app\assets\AppAsset']]);  
 ?>
 
 <?= \bluezed\scrollTop\ScrollTop::widget() ?>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 
 	var t;
 	function up() {
@@ -20,6 +20,6 @@
 	return false;
 	}
 
-</script>
+</script> -->
 
 <!-- <a href="#" onclick="return up()">наверх</a> -->

@@ -54,12 +54,3 @@ $this->registerJs($toggleSearch, View::POS_END);
     </div>
 </div>            
 
-
-
-<div class="regions-search">
-
-
-
-
-
-</div>

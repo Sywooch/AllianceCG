@@ -5,6 +5,7 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 use app\components\grid\ActionColumn;
 use app\components\grid\SetColumn;
+use rmrevin\yii\fontawesome\FA;
 use app\components\grid\LinkColumn;
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\admin\models\UserrolesSearch */
@@ -20,12 +21,16 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php // ehco Html::encode($this->title) ?>
     <!-- </h1> -->
     
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p style="text-align: right;">
-        <?php // Html::a(Yii::t('app', 'CREATE'), ['create'], ['class' => 'btn btn-success']) ?>
+    <p class="buttonpane">
+        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => FA::icon('refresh')]), ['index'], ['class' => 'btn btn-info btn-sm']) ?>
     </p>
 
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+    <div class="col-lg-12 alert alert-danger">
+        <?= Yii::t('app', 'USERROLES_INFO') ?>
+    </div>
 
 <?php Pjax::begin(); ?>
     <?= GridView::widget([

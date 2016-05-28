@@ -363,6 +363,10 @@ a.desc:after {
         background: #46b8da;
 }
 
+.collapse-test {
+    position: fixed;
+    width:20%;
+}
 
 #sidebar .panel-group .panel + .panel {
     margin-top: 0;

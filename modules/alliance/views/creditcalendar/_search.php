@@ -72,7 +72,7 @@ $this->registerJs($ExportExcel, View::POS_END);
         </div>
 
         <div class="form-group buttonpane">
-            <?= Html::submitButton(Yii::t('app', '{icon} SEARCH', ['icon' => '<i class="fa fa-search"></i>']), ['class' => 'btn btn-primary btn-sm']) ?>
+            <?= Html::submitButton(Yii::t('app', '{icon} SEARCH', ['icon' => '<i class="fa fa-search"></i>']), ['class' => 'btn btn-primary btn-sm animlink']) ?>
         </div>
 
     <?php ActiveForm::end(); ?>

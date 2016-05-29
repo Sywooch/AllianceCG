@@ -240,7 +240,7 @@ use kartik\date\DatePicker;
 <?php } ?>
 
         <div class="form-group" style="text-align: right; margin-top: 30;">
-            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']) : Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-edit"></i>']), ['class' => $model->isNewRecord ? 'btn btn-success btn-menu' : 'btn btn-primary btn-menu']) ?>
+            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']) : Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-edit"></i>']), ['class' => $model->isNewRecord ? 'btn btn-success btn-menu animlink' : 'btn btn-primary btn-menu']) ?>
             <?= Html::a(Yii::t('app', '{icon} CANCEL', ['icon' => '<i class="fa fa-remove"></i>']), 'index', ['class' => 'btn btn-danger btn-menu btn-sm']) ?>
         </div>
 </div>

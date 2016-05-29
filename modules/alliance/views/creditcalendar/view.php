@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ]) ?>
 
             <p style="text-align: right">
-                <?= Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-pencil"></i>']), ['update', 'id' => $model->id], ['class' => 'btn btn-link btn-sm']) ?>
+                <?= Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-pencil"></i>']), ['update', 'id' => $model->id], ['class' => 'btn btn-link animlink']) ?>
                 <?php 
                     // Html::a(Yii::t('app', '{icon} DELETE', ['icon' => '<i class="fa fa-trash"></i>']), ['delete', 'id' => $model->id], [
                     //     'class' => 'btn btn-link btn-sm',
@@ -112,7 +112,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?php
                 echo "<p style='text-align: right'>";
-                echo Html::button(Yii::t('app', '{icon} COMMENT', ['icon' => '<i class="fa fa-comment"></i>']), ['value' => Url::to(['comment', 'id' => $model->id]), 'class' => 'btn btn-link btn-sm', 'id' => 'modalButton']);
+                echo Html::button(Yii::t('app', '{icon} COMMENT', ['icon' => '<i class="fa fa-comment"></i>']), ['value' => Url::to(['comment', 'id' => $model->id]), 'class' => 'btn btn-link animlink', 'id' => 'modalButton']);
                 echo "</p>";
             ?>
 

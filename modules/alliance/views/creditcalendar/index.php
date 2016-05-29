@@ -36,18 +36,18 @@ $this->registerJs($toggleSearch, View::POS_END);
 ]) ?>
 
 <p style="text-align: right">
-    <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-link btn-sm']) ?>
+    <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-link animlink']) ?>
 
-    <?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => '<i class="fa fa-refresh"></i>']), ['index'], ['class' => 'btn btn-link btn-sm']) ?>
+    <?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => '<i class="fa fa-refresh"></i>']), ['index'], ['class' => 'btn btn-link animlink']) ?>
     <?php
         if (Yii::$app->user->can('deleteCreditcalendarPost') || Yii::$app->user->can('admin')) {
-            echo Html::a(Yii::t('app', '{icon} DELETE', ['icon' => '<i class="fa fa-trash"></i>']), ['#'], ['class' => 'btn btn-link btn-sm', 'id' => 'MultipleDelete']);
+            echo Html::a(Yii::t('app', '{icon} DELETE', ['icon' => '<i class="fa fa-trash"></i>']), ['#'], ['class' => 'btn btn-link animlink', 'id' => 'MultipleDelete']);
         }
     ?>
 
     <?= Html::a(Yii::t('app', '{icon} CREDITCALENDAR_EXPORT_EXCEL', ['icon' =>'<i class="fa fa-file-excel-o"></i>'] ), ['export'], [
             'id' => 'Excel',
-            'class' => 'btn btn-link btn-sm',
+            'class' => 'btn btn-link animlink',
             'onclick' => 'setParams()',
             'data' => [
                 'method' => 'post',
@@ -56,7 +56,7 @@ $this->registerJs($toggleSearch, View::POS_END);
          ]);
     ?>
 
-    <?= Html::button(Yii::t('app', '{icon} SEARCH', ['icon' => '<i class="fa fa-search"></i>']), ['class' => 'btn-link', 'id' => 'advancedSearch']) ?>
+    <?= Html::button(Yii::t('app', '{icon} SEARCH', ['icon' => '<i class="fa fa-search"></i>']), ['class' => 'btn-link animlink', 'id' => 'advancedSearch']) ?>
 
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 

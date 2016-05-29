@@ -12,39 +12,46 @@ use yii\web\View;
 $multipleDelete = file_get_contents('js/modules/references/bodytypes/deleteRestore.js');
 $this->registerJs($multipleDelete, View::POS_END);
 
+$toggleSearch = file_get_contents('js/modules/references/regions/toggleSearch.js');
+$this->registerJs($toggleSearch, View::POS_END);
+
 ?>
 
-<div class="bodytypes-search">
+<div class="buttonpane">
+
+<?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-link']); ?>
+        
+<?= Html::a(Yii::t('app', '{icon} DELETE', ['icon' => '<i class="fa fa-remove"></i>']), ['#'], ['class' => 'btn btn-link', 'id' => 'MultipleDelete']); ?>
+        
+<?= Html::a(Yii::t('app', '{icon} RESTORE', ['icon' => '<i class="fa fa-upload"></i>']), ['#'], ['class' => 'btn btn-link', 'id' => 'MultipleRestore']); ?>
+
+<?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => '<i class="fa fa-refresh"></i>']), ['index'], ['class' => 'btn btn-link']) ?>
+
+<?= Html::button(Yii::t('app', '{icon} ADVANCED', ['icon' => '<i class="fa fa-file-excel-o"></i>']), ['class' => 'btn-link', 'id' => 'advancedOperations']) ?>
+
+</div>
+
+<div class="col-sm-12 bs-callout bs-callout-info" id="advanced">
+
+    <div class="col-sm-6">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <div class="col-md-4">
-
-        <?= $form->field($model, 'globalSearch', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('search') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'globalSearch' )]) ?>
-
-    </div>
-
-    <div class="col-md-8">
-
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', '{icon} SEARCH', ['icon' => FA::icon('search')]), ['class' => 'btn btn-primary btn-sm']) ?>
-        <?php
-            if(Yii::$app->user->can('admin')){
-                echo Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm']);
-                echo '&nbsp';
-                echo Html::a(Yii::t('app', '{icon} DELETE', ['icon' => FA::icon('remove')]), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']);
-                echo '&nbsp';
-                echo Html::a(Yii::t('app', '{icon} RESTORE', ['icon' => FA::icon('upload')]), ['#'], ['class' => 'btn btn-warning btn-sm', 'id' => 'MultipleRestore']);
-            }
-        ?>        
-        <?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => FA::icon('refresh')]), ['index'], ['class' => 'btn btn-info btn-sm']) ?>
-    </div>
-
-    </div>
+    <?= $form->field($model, 'globalSearch', [
+            'template' => '<div class="input-group"><span class="input-group-addon"> <i class="fa fa-search"></i> </span>{input}<span class="input-group-btn">'.
+                Html::submitButton(Yii::t('app', '{icon} Search', ['icon' => '<i class="fa fa-search"></i>']), ['class' => 'btn btn-primary']).'</span></div>',
+        ]); 
+    ?>        
 
     <?php ActiveForm::end(); ?>
 
-</div>
+    </div>
+    <div class="col-sm-6">
+        <?= Html::a(Yii::t('app', '{icon} IMPORT_EXCEL', ['icon' => '<i class="fa fa-upload"></i>']), ['upload'], ['class' => 'btn btn-link']) ?>
+        <?= Html::a(Yii::t('app', '{icon} EXPORT_EXCEL', ['icon' => '<i class="fa fa-file-excel-o"></i>']), ['export'], ['class' => 'btn btn-link']) ?>
+    </div>
+</div>            
+

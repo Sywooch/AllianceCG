@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-use rmrevin\yii\fontawesome\FA;
 use app\components\grid\LinkColumn;
 use app\components\grid\SetColumn;
 use app\modules\references\models\Departments;

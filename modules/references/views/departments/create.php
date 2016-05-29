@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use rmrevin\yii\fontawesome\FA;
 
 
 /* @var $this yii\web\View */
@@ -9,7 +8,7 @@ use rmrevin\yii\fontawesome\FA;
 
 $this->title = Yii::t('app', 'CREATE');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'REFERENCES'), 'url' => ['/references']];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'ADMIN_DEPARTMENTS'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'DEPARTMENTS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="departments-create">

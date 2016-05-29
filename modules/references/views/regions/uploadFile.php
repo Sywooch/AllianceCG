@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use rmrevin\yii\fontawesome\FA;
 use yii\bootstrap\Progress;
 use yii\web\View;
 
@@ -11,8 +10,8 @@ use yii\web\View;
 /* @var $form yii\widgets\ActiveForm */
 
 $this->title = Yii::t('app', 'UPLOAD_FILE');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'ADMIN'), 'url' => ['/admin']];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'SOURCEMESSAGES'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'REFERENCES'), 'url' => ['references']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'REGIONS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $toggleSearch = file_get_contents('js/modules/references/regions/toggleProgress.js');
@@ -42,8 +41,8 @@ $this->registerJs($toggleSearch, View::POS_END);
 	</div>
 
     <div class="form-group" style="text-align: center;">
-        <?= Html::submitButton(Yii::t('app', '{icon} UPLOAD', ['icon' => FA::icon('upload')]), ['class' => 'btn btn-primary btn-sm', 'id' => 'toggleProgressBar']) ?>
-        <?= Html::a(Yii::t('app', '{icon} CANCEL', ['icon' => FA::icon('remove')]), ['index'], ['class' => 'btn btn-danger btn-sm']) ?>
+        <?= Html::submitButton(Yii::t('app', '{icon} UPLOAD', ['icon' => '<i class="fa fa-upload"></i>']), ['class' => 'btn btn-primary', 'id' => 'toggleProgressBar']) ?>
+        <?= Html::a(Yii::t('app', '{icon} CANCEL', ['icon' => '<i class="fa fa-remove"></i>']), ['index'], ['class' => 'btn btn-danger btn-sm']) ?>
     </div>
 
 

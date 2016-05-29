@@ -1,6 +1,5 @@
 <?php
 use yii\helpers\Html;
-use rmrevin\yii\fontawesome\FA;
 use yii\web\View;
 use yii\widgets\ActiveForm;
 
@@ -11,4 +10,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?= Html::a(FA::icon('arrow-circle-left') . ' ' . Yii::t('app', 'GO_BACK'), ['index'], ['class' => 'btn btn-primary btn-sm']) ?>
+<?= Html::a(Yii::t('app', '{icon} GO_BACK', ['icon' => '<i class="fa fa-arrow-circle-left"></i>']), ['index'], ['class' => 'btn btn-primary btn-sm']) ?>

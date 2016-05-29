@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use rmrevin\yii\fontawesome\FA;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\references\models\ContactType */
@@ -19,11 +18,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- </h1> -->
 
     <p class="buttonpane">
-        <?= Html::a(Yii::t('app', '{icon} CONTACTTYPES', ['icon' => FA::icon('list')]), ['index'], ['class' => 'btn btn-warning btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} Update', ['icon' => FA::icon('edit')]), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} CONTACTTYPES', ['icon' => '<i class="fa fa-list"></i>']), ['index'], ['class' => 'btn btn-link']) ?>
+        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-link']) ?>
+        <?= Html::a(Yii::t('app', '{icon} Update', ['icon' => '<i class="fa fa-edit"></i>']), ['update', 'id' => $model->id], ['class' => 'btn btn-link']) ?>
         <?php 
-            // Html::a(Yii::t('app', '{icon} Delete', ['icon' => FA::icon('remove')]), ['delete', 'id' => $model->id], [
+            // Html::a(Yii::t('app', '{icon} Delete', ['icon' => '<i class-"fa fa-remove"></i>']), ['delete', 'id' => $model->id], [
             //     'class' => 'btn btn-danger btn-sm',
             //     'data' => [
             //         'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),

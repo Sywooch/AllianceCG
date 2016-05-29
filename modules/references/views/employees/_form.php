@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use rmrevin\yii\fontawesome\FA;
 use app\modules\references\models\Companies;
 use app\modules\references\models\Positions;
 use app\modules\references\models\Departments;
@@ -20,15 +19,15 @@ use yii\helpers\ArrayHelper;
 
     <?php // echo $form->field($model, 'surname')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'surname', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'surname' )]) ?>
+    <?= $form->field($model, 'surname', ['template'=>' <div class="input-group"><span class="input-group-addon">  <i class="fa fa-user"></i>  </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'surname' )]) ?>
 
     <?php // echo $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'name', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'name' )]) ?>
+    <?= $form->field($model, 'name', ['template'=>' <div class="input-group"><span class="input-group-addon">  <i class="fa fa-user"></i>  </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'name' )]) ?>
 
     <?php // echo $form->field($model, 'patronimyc')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'patronimyc', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'patronimyc' )]) ?>
+    <?= $form->field($model, 'patronimyc', ['template'=>' <div class="input-group"><span class="input-group-addon">  <i class="fa fa-user"></i>  </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'patronimyc' )]) ?>
 
     <?php // echo $form->field($model, 'photo')->textInput(['maxlength' => true]) ?>
 
@@ -58,7 +57,7 @@ use yii\helpers\ArrayHelper;
             // ],
             'prompt' => '-- ' . $model->getAttributeLabel( 'company_id' ) . ' --',
         ];
-        echo $form->field($model, 'company_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('building') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
+        echo $form->field($model, 'company_id', ['template'=>'<div class="input-group"><span class="input-group-addon">  <i class="fa fa-building"></i>  </span>{input}</div>{error}'])->dropDownList($items,$params);
     ?> 
 
     <?php
@@ -69,7 +68,7 @@ use yii\helpers\ArrayHelper;
             'options' => isset($_GET['id']) ? [$_GET['id'] => ['Selected'=>'selected']] : false,
             'prompt' => '-- ' . $model->getAttributeLabel( 'brand_id' ) . ' --',
         ];
-        echo $form->field($model, 'brand_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('car') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
+        echo $form->field($model, 'brand_id', ['template'=>'<div class="input-group"><span class="input-group-addon">  <i class="fa fa-car"></i>  </span>{input}</div>{error}'])->dropDownList($items,$params);
     ?> 
 
 
@@ -86,7 +85,7 @@ use yii\helpers\ArrayHelper;
             // 'options' => [$_GET['id'] => ['Selected'=>'selected']],
             'prompt' => '-- ' . $model->getAttributeLabel( 'department_id' ) . ' --',
         ];
-        echo $form->field($model, 'department_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('bar-chart-o') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
+        echo $form->field($model, 'department_id', ['template'=>'<div class="input-group"><span class="input-group-addon">  <i class="fa fa-bar-chart-o"></i>  </span>{input}</div>{error}'])->dropDownList($items,$params);
     ?>     
 
     <?php // echo $form->field($model, 'position_id')->textInput() ?>
@@ -104,12 +103,12 @@ use yii\helpers\ArrayHelper;
             ],
             'prompt' => '-- ' . $model->getAttributeLabel( 'position_id' ) . ' --',
         ];
-        echo $form->field($model, 'position_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('briefcase') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
+        echo $form->field($model, 'position_id', ['template'=>'<div class="input-group"><span class="input-group-addon">  <i class="fa fa-briefcase"></i>  </span>{input}</div>{error}'])->dropDownList($items,$params);
     ?>     
 
     <div class="form-group" style="text-align: right">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]) : Yii::t('app', '{icon} UPDATE', ['icon' => FA::icon('edit')]), ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} CANCEL', ['icon' => FA::icon('remove')]), ['index'], ['class' => 'btn btn-danger btn-sm']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']) : Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-edit"></i>']), ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} CANCEL', ['icon' => '<i class="fa fa-remove"></i>']), ['index'], ['class' => 'btn btn-danger btn-sm']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

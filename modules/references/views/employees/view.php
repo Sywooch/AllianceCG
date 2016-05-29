@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use rmrevin\yii\fontawesome\FA;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\references\models\Employees */
@@ -19,10 +18,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- </h1> -->
 
     <p style="text-align: right">
-        <?= Html::a(Yii::t('app', '{icon} EMPLOYEES', ['icon' => FA::icon('list')]), ['index'], ['class' => 'btn btn-warning btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => FA::icon('edit')]), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} DELETE', ['icon' => FA::icon('remove')]), ['delete', 'id' => $model->id], [
+        <?= Html::a(Yii::t('app', '{icon} EMPLOYEES', ['icon' => '<i class="fa fa-list"></i>']), ['index'], ['class' => 'btn btn-warning btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-edit"></i>']), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} DELETE', ['icon' => '<i class="fa fa-remove"></i>']), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger btn-sm',
             'data' => [
                 'confirm' => Yii::t('app', 'CONFIRM_DELETE'),

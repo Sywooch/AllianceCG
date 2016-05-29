@@ -1,6 +1,6 @@
 .scrolltop {
     position: fixed;
-    bottom: 10px;
+    bottom: 100px;
     right: 15px;
     display: none;
     z-index: 9999999;
@@ -15,8 +15,10 @@
     padding-top: 15px;
     font-size: 1.25em;
     color: #ffffff;
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.10);
 }
 
 .scrolltop-circle:hover {
     background-color: #5cb85c;
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.10);
 }

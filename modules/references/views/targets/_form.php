@@ -2,8 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use rmrevin\yii\fontawesome\FA;
-use app\modules\references\Module;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\references\models\Targets */
@@ -16,11 +14,11 @@ use app\modules\references\Module;
 
     <?php $form->field($model, 'target')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'target', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('diamond') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'target' )]) ?>
+    <?= $form->field($model, 'target', ['template'=>' <div class="input-group"><span class="input-group-addon"> <i class="fa fa-diamond"></i> </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'target' )]) ?>
 
     <div class="form-group" style="text-align: right">
-        <?= Html::submitButton($model->isNewRecord ?  Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]) : Yii::t('app', '{icon} UPDATE', ['icon' => FA::icon('edit')]), ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} CANCEL', ['icon' => FA::icon('remove')]), ['index'], ['class' => 'btn btn-danger btn-sm']) ?>
+        <?= Html::submitButton($model->isNewRecord ?  Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']) : Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-edit"></i>']), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', '{icon} CANCEL', ['icon' => '<i class="fa fa-remove"></i>']), ['index'], ['class' => 'btn btn-danger btn-sm']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -5,17 +5,20 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\modules\alliance\models\Creditcalendar;
 use app\modules\admin\models\User;
-use yii\jui\AutoComplete;
-use rmrevin\yii\fontawesome\FA;
-use app\modules\alliance\Module;
-use janisto\timepicker\TimePicker;
+// use yii\jui\AutoComplete;
+use kartik\date\DatePicker;
+use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\alliance\models\CreditcalendarSearch */
 /* @var $form yii\widgets\ActiveForm */
+
+$ExportExcel = file_get_contents('js/modules/alliance/creditcalendar/gridViewExcelExport.js');
+$this->registerJs($ExportExcel, View::POS_END);
+
 ?>
 
-<div class="creditcalendar-search" id="creditcalendar-search" style="display:none;">
+<div class="creditcalendar-search" id="creditcalendar-search">
     <div class="bs-callout bs-callout-info">
 
     <?php $form = ActiveForm::begin([
@@ -23,50 +26,53 @@ use janisto\timepicker\TimePicker;
         'method' => 'get',
     ]); ?>
 
-        <div class="col-md-3">
-            <?= $form->field($model, 'date_from', ['template' => '{input}{error}{hint}'])->widget(TimePicker::className(), [
-            'language' => 'ru',
-            'mode' => 'date',
-            'clientOptions' => [
-                'dateFormat' => 'yy-mm-dd',
-            ],
-            'options' => [
-                'class' => 'form-control',
-                'placeholder' => $model->getAttributeLabel( 'date_from' ),
-            ],
-        ]);
-            ?>            
-        </div>
+        <div class="col-md-12" style="margin: 10px">
 
-        <div class="col-md-3">
-            <?= $form->field($model, 'date_to', ['template' => '{input}{error}{hint}'])->widget(TimePicker::className(), [
-                    'language' => 'ru',
-                    'mode' => 'date',
-                    'clientOptions' => [
-                        'dateFormat' => 'yy-mm-dd',
+        <div class="col-md-6">
 
-                    ],
-                    'options' => [
-                        'class' => 'form-control',
-                        'placeholder' => $model->getAttributeLabel( 'date_to' ),
-                    ],
+            <?= DatePicker::widget([
+                    'model' => $model,
+                    'attribute' => 'date_from',
+                    'options' => ['placeholder' => $model->getAttributeLabel( 'date_from' )],
+                    'convertFormat' => true,
+                    'pluginOptions' => [
+                        'todayHighlight' => true
+                    ]
                 ]);
-            ?>            
+            ?>
+
         </div>
 
-        <div class="col-md-3">
-            <?= $form->field($model, 'priority', ['template' => '{input}{error}'])->dropDownList($model->getPrioritiesArray(), ['prompt' => '-- ' . $model->getAttributeLabel( 'priority' ) . ' --',]);
+        <div class="col-md-6">
+            <?= DatePicker::widget([
+                    'model' => $model,
+                    'attribute' => 'date_to',
+                    'options' => ['placeholder' => $model->getAttributeLabel( 'date_to' )],
+                    'convertFormat' => true,
+                    'pluginOptions' => [
+                        'todayHighlight' => true
+                    ]
+                ]);
+            ?>                        
+        </div>
+        </div>
+
+        <div class="col-md-12" style="margin: 10px">
+
+        <div class="col-md-6">
+            <?= $form->field($model, 'priority', ['template' => '<div class="input-group"><span class="input-group-addon"> <i class="fa fa-hashtag"></i> </span>{input}</span></div>{error}'])->dropDownList($model->getPrioritiesArray(), ['prompt' => '-- ' . $model->getAttributeLabel( 'priority' ) . ' --',]);
+            ?>         
+        </div>
+
+        <div class="col-md-6">
+            <?= $form->field($model, 'status', ['template' => '<div class="input-group"><span class="input-group-addon"> <i class="fa fa-flag"></i> </span>{input}</span></div>{error}'])->dropDownList($model->getStatusesArray(), ['prompt' => '-- ' . $model->getAttributeLabel( 'status' ) . ' --',]);
             ?>
         </div>
 
-        <div class="col-md-3">
-            <?= $form->field($model, 'status', ['template' => '{input}{error}'])->dropDownList($model->getStatusesArray(), ['prompt' => '-- ' . $model->getAttributeLabel( 'status' ) . ' --',]);
-            ?>
         </div>
 
-        <div class="form-group" style="text-align: right;">
-            <?= Html::submitButton(FA::icon('search') . ' ' . Module::t('module', 'DO_SEARCH'), ['class' => 'btn btn-primary btn-sm']) ?>
-            <?php // Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
+        <div class="form-group buttonpane">
+            <?= Html::submitButton(Yii::t('app', '{icon} SEARCH', ['icon' => '<i class="fa fa-search"></i>']), ['class' => 'btn btn-primary btn-sm']) ?>
         </div>
 
     <?php ActiveForm::end(); ?>

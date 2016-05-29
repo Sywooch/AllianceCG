@@ -1,9 +1,7 @@
 <?php
 
-use app\modules\alliance\Module;
 use yii\widgets\Pjax;
 use yii\helpers\Html;
-use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Url;
 
 /* 
@@ -12,9 +10,9 @@ use yii\helpers\Url;
  * and open the template in the editor.
  */
 
-$this->title = Module::t('module', 'CREDITCALENDAR');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_ALLIANCE'), 'url' => ['/alliance']];
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'CREDITCALENDARS'), 'url' => ['index']];
+$this->title = Yii::t('app', 'CREDITCALENDAR');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'NAV_ALLIANCE'), 'url' => ['/alliance']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'CREDITCALENDARS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -25,9 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'model' => $model,
             ]) ?>
 
-            <p style="text-align: right">
-                <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
-                <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'REFRESH'), ['calendar'], ['class' => 'btn btn-info btn-sm']) ?>
+            <p class="buttonpane">
+                <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-link btn-sm']) ?>
+                <?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => '<i class="fa fa-refresh"></i>']), ['calendar'], ['class' => 'btn btn-link btn-sm']) ?>
             </p>
 
             <!-- <br/><br/><br/> -->
@@ -56,13 +54,6 @@ $this->params['breadcrumbs'][] = $this->title;
                        'yii\bootstrap\BootstrapAsset'],
                    ]);    
                ?>
-<!--           <select id="status_selector" name=<?php // $model->getAttributeLabel('status') ?>>
-            <option value="all"><?php // Module::t('module', 'CREDITCALENDAR_TABLE_ALL') ?></a>
-            <option value=<?php // $model::STATUS_ATWORK ?>><?php // $model->getStatusesArray()['0'] ?></a>
-            <option value=<?php // $model::STATUS_CLARIFY?>><?php // $model->getStatusesArray()['1'] ?></a>
-            <option value=<?php // $model::STATUS_FINISHED?>><?php // $model->getStatusesArray()['2'] ?></a>
-          </select>   -->
-
 
           <select id="author_selector">
             <option value="all">Все записи</a>

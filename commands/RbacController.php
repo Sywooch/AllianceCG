@@ -230,6 +230,8 @@ class RbacController extends Controller
         $auth->addChild($admin, $createCreditcalendarPost);
         // INHERITANCE PERMISSION TO UPDATE RECORDS IN Creditcalendar
         $auth->addChild($admin, $updateCreditcalendarPost);
+        // INHERITANCE PERMISSION TO VIEW OWN RECORDS IN Creditcalendar
+        $auth->addChild($admin, $viewCreditcalendarOwnPost);
         // PERMISSION TO SET RESPONSIBLE IN CREDITCALENDAR
         $auth->addChild($admin, $creditcalendarSetResponsibles);
         // PERMISSION TO VIEW CREDITCALENDAR COMPONENTS

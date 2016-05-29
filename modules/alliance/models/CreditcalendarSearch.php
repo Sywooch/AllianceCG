@@ -179,20 +179,20 @@ public function calendarsearch(){
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'date_from' => $this->date_from,
-            'time_from' => $this->time_from,
-            'date_to' => $this->date_to,
-            'time_to' => $this->time_to,
-            'type' => $this->type,
-            'allday' => $this->allday,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'status' => $this->status,
-            'private' => $this->private,
-            'calendar_type' => $this->calendar_type,
-        ]);
+        // $query->andFilterWhere([
+        //     'id' => $this->id,
+        //     'date_from' => $this->date_from,
+        //     'time_from' => $this->time_from,
+        //     'date_to' => $this->date_to,
+        //     'time_to' => $this->time_to,
+        //     'type' => $this->type,
+        //     'allday' => $this->allday,
+        //     'created_at' => $this->created_at,
+        //     'updated_at' => $this->updated_at,
+        //     'status' => $this->status,
+        //     'private' => $this->private,
+        //     'calendar_type' => $this->calendar_type,
+        // ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'description', $this->description])
@@ -201,6 +201,8 @@ public function calendarsearch(){
             // ->andFilterWhere(['like', 'author', $this->author])
             ->andFilterWhere(['like', '{{%user}}.full_name', $this->authorname])
             ->andFilterWhere(['like', '{{%user}}.full_name', $this->responsibles])
+            ->andFilterWhere(['like', '{{%calendar}}.status', $this->status])
+            ->andFilterWhere(['like', 'priority', $this->priority])
             ->andFilterWhere(['like', '{{%companies}}.company_name', $this->locations]);
 
 
@@ -219,7 +221,7 @@ public function calendarsearch(){
         $query = Creditcalendar::find();
 
         $query->where(['private' => 1]);
-        $query->andWhere(['author' => Yii::$app->user->getId()]);
+        $query->andWhere(['{{%calendar}}.author' => Yii::$app->user->getId()]);
 
         $query->joinWith(['locations', 'users']);
 
@@ -247,25 +249,27 @@ public function calendarsearch(){
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'date_from' => $this->date_from,
-            'time_from' => $this->time_from,
-            'date_to' => $this->date_to,
-            'time_to' => $this->time_to,
-            'type' => $this->type,
-            'allday' => $this->allday,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'status' => $this->status,
-            'private' => $this->private,
-            'calendar_type' => $this->calendar_type,
-        ]);
+        // $query->andFilterWhere([
+        //     'id' => $this->id,
+        //     'date_from' => $this->date_from,
+        //     'time_from' => $this->time_from,
+        //     'date_to' => $this->date_to,
+        //     'time_to' => $this->time_to,
+        //     'type' => $this->type,
+        //     'allday' => $this->allday,
+        //     'created_at' => $this->created_at,
+        //     'updated_at' => $this->updated_at,
+        //     'status' => $this->status,
+        //     'private' => $this->private,
+        //     'calendar_type' => $this->calendar_type,
+        // ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['>=', 'date_from', $this->date_from])
             ->andFilterWhere(['>=', 'date_to', $this->date_to])
+            ->andFilterWhere(['like', '{{%calendar}}.status', $this->status])
+            ->andFilterWhere(['like', 'priority', $this->priority])
             ->andFilterWhere(['like', 'author', $this->author]);
 
 

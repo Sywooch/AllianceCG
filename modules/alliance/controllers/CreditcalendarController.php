@@ -12,7 +12,6 @@ use yii\web\NotFoundHttpException;
 use yii\web\HttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
-use app\modules\alliance\Module;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -107,7 +106,7 @@ class CreditcalendarController extends Controller
 
         if($model->private == 1 && !Yii::$app->user->can('viewCreditcalendarOwnPost', ['creditcalendar' => $model]))
         {
-            throw new HttpException(403, Module::t('module', 'ONLY_CHIEFCREDIT_CAN_DO_THERE'));
+            throw new HttpException(403, Yii::t('app', 'YOU_CANNOT_EXECUTE_THIS_ACTION'));
         }
         else
         {
@@ -142,7 +141,7 @@ class CreditcalendarController extends Controller
                     ])
                     ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
                     ->setReplyTo(Yii::$app->params['supportEmail'])
-                    ->setSubject(date('d/m/Y H:i:s') . '. ' . Module::t('module', 'NEW_CREDITCALENDAR_COMMENT') . ' ' . $model->title)
+                    ->setSubject(date('d/m/Y H:i:s') . '. ' . Yii::t('app', 'NEW_CREDITCALENDAR_COMMENT') . ' ' . $model->title)
                     ->setTextBody($commentModel->comment_text)
                     ->setTo($summaryEmails)
                     ->send();
@@ -202,7 +201,7 @@ class CreditcalendarController extends Controller
         $model = $this->findModel($id);
 
         if (!Yii::$app->user->can('updateCreditcalendarOwnPost', ['creditcalendar' => $model]) && !Yii::$app->user->can('updateCreditcalendarPost')) {
-            throw new ForbiddenHttpException(Module::t('module', 'ONLY_AUTHOR_CAN_UPDATE_THIS_RECORD'));
+            throw new ForbiddenHttpException(Yii::t('app', 'YOU_CANNOT_EXECUTE_THIS_ACTION'));
         }
         else
         {
@@ -226,7 +225,7 @@ class CreditcalendarController extends Controller
     public function actionDelete($id)
     {
         if (!Yii::$app->user->can('deleteCreditcalendarPost')) {
-            throw new ForbiddenHttpException(Module::t('module', 'ONLY_CHIEFCREDIT_CAN_DELETE_THERE'));
+            throw new ForbiddenHttpException(Yii::t('app', 'YOU_CANNOT_EXECUTE_THIS_ACTION'));
         }
         else {
             $this->findModel($id)->delete();
@@ -242,7 +241,7 @@ class CreditcalendarController extends Controller
     public function actionMultipledelete()
     {
         if (!Yii::$app->user->can('deleteCreditcalendarPost')) {
-            throw new ForbiddenHttpException(Module::t('module', 'ONLY_CHIEFCREDIT_CAN_DELETE_THERE'));
+            throw new ForbiddenHttpException(Yii::t('app', 'YOU_CANNOT_EXECUTE_THIS_ACTION'));
         }
         else {
             $pk = Yii::$app->request->post('row_id');
@@ -273,8 +272,8 @@ class CreditcalendarController extends Controller
     }
 
     public function actionExport(){
-        if (!Yii::$app->user->can('deleteCreditcalendarPost')) {
-            throw new ForbiddenHttpException(Module::t('module', 'ONLY_CHIEFCREDIT_CAN_EXPORT_EXCEL'));
+        if (!(Yii::$app->user->can('chiefcredit') || Yii::$app->user->can('seniorcreditspesialist') || Yii::$app->user->can('admin'))) {
+            throw new ForbiddenHttpException(Yii::t('app', 'YOU_CANNOT_EXECUTE_THIS_ACTION'));
         }
         else {
             $objPHPExcel = new \PHPExcel();         
@@ -323,7 +322,7 @@ class CreditcalendarController extends Controller
             $objPHPExcel->getActiveSheet()->getStyle('A'.$titleNumber)->getFont()->setBold(true);
 
             // Заголовки колонок
-            $objPHPExcel->getActiveSheet()->setTitle(Module::t('module','CREDITCALENDAR_EXCEL_TITLE').date("d-m-Y-H-i"))                
+            $objPHPExcel->getActiveSheet()->setTitle(Yii::t('app','CREDITCALENDAR_EXCEL_TITLE').date("d-m-Y-H-i"))                
                 ->setCellValue('A'.($row-1), $model->getAttributeLabel('title'))
                 ->setCellValue('B'.($row-1), $model->getAttributeLabel('date_from'))
                 ->setCellValue('C'.($row-1), $model->getAttributeLabel('date_to'))
@@ -349,7 +348,7 @@ class CreditcalendarController extends Controller
             // Excel list header
             $objPHPExcel->getActiveSheet()
                 ->getHeaderFooter()
-                ->setOddHeader('&R&B'.Module::t('module', 'CREDITCALENDAR_HEADER_TEXT'));
+                ->setOddHeader('&R&B'.Yii::t('app', 'CREDITCALENDAR_HEADER_TEXT'));
 
             // Excel list footer
             $objPHPExcel->getActiveSheet()
@@ -435,14 +434,14 @@ class CreditcalendarController extends Controller
             $objPHPExcel->getActiveSheet()->getStyle('A'.$titleNumber.':H'.$titleNumber)->applyFromArray($centered);
 
             // Текст заголовка
-            $objPHPExcel->getActiveSheet()->setCellValue('A'.$titleNumber, Module::t('module', 'CREDITCALENDAR_EXCEL_TABLEHEADER') . date("d.m.Y H:i"));
+            $objPHPExcel->getActiveSheet()->setCellValue('A'.$titleNumber, Yii::t('app', 'CREDITCALENDAR_EXCEL_TABLEHEADER') . date("d.m.Y H:i"));
             // $objPHPExcel->getActiveSheet()->setCellValue('A'.($titleNumber+1), $rowNumber);
 
             // Тип выгружаемого файла
             header('Content-Type: application/vnd.ms-excel');
 
             // Имя выгружаемого файла
-            $filename = Module::t('module','CREDITCALENDAR_EXCEL_TITLE').date("d-m-Y-H-i-s").".xls";
+            $filename = Yii::t('app','CREDITCALENDAR_EXCEL_TITLE').date("d-m-Y-H-i-s").".xls";
 
             header('Content-Disposition: attachment;filename='.$filename .' ');
             header('Cache-Control: max-age=0');

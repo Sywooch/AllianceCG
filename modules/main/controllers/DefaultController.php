@@ -48,6 +48,14 @@ class DefaultController extends Controller
         ];
     }
 
+    public function beforeAction($action)
+    {
+        if ($action->id == 'error') {
+            $this->layout = '@app/modules/main/views/layouts/error/main';
+        }
+     
+        return parent::beforeAction($action);
+    }
  
     public function actionIndex()
     {

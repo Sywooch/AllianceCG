@@ -1,8 +1,6 @@
 <?php
 
 use yii\bootstrap\Nav;
-use rmrevin\yii\fontawesome\FA;
-use app\modules\alliance\Module;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,31 +15,31 @@ echo Nav::widget([
     'encodeLabels' => false,
     'items' => array_filter([
         [
-            'label' => FA::icon('calendar') . ' ' . Module::t('module', 'CREDITCALENDAR_CALENDAR'),
+            'label' => Yii::t('app', '{icon} CREDITCALENDAR_CALENDAR', ['icon' => '<i class="fa fa-calendar"></i>']),
             'url' => '/alliance/creditcalendar/calendar',
         ],
         [
-            'label' => FA::icon('table') . ' ' . Module::t('module', 'CREDITCALENDAR_TABLE'),
+            'label' => Yii::t('app', '{icon} CREDITCALENDAR_TABLE', ['icon' => '<i class="fa fa-table"></i>']),
             'url' => '/alliance/creditcalendar',
             'visible' => !Yii::$app->user->can('privateCreditcalendarPost'),
         ],
         [
-            'label' => FA::icon('table') . ' ' . Module::t('module', 'CREDITCALENDAR_TABLE'),
+            'label' => Yii::t('app', '{icon} CREDITCALENDAR_TABLE', ['icon' => '<i class="fa fa-table"></i>']),
             'visible' => Yii::$app->user->can('privateCreditcalendarPost'),
             'items' => [
                     [
-                        'label' => FA::icon('table') . ' ' . Module::t('module', 'CREDITCALENDAR_TABLE_ALL'),
+                        'label' => Yii::t('app', '{icon} CREDITCALENDAR_TABLE_ALL', ['icon' => '<i class="fa fa-table"></i>']),
                         'url' => ['/alliance/creditcalendar'],
                     ],
                     [
-                        'label' => FA::icon('table') . ' ' . Module::t('module', 'CREDITCALENDAR_TABLE_PRIVATE'),
+                        'label' => Yii::t('app', '{icon} CREDITCALENDAR_TABLE_PRIVATE', ['icon' => '<i class="fa fa-table"></i>']),
                         'url' => ['/alliance/creditcalendar/private'],
                         
                     ],                    
                 ],
         ],
         [
-            'label' => FA::icon('pie-chart') . ' ' . Module::t('module', 'CREDITCALENDAR_GRAPH'),
+            'label' => Yii::t('app', '{icon} CREDITCALENDAR_GRAPH', ['icon' => '<i class="fa fa-pie-chart"></i>']),
             'url' => '/alliance/creditcalendar/graph',
             'visible' => Yii::$app->user->can('root')
         ],

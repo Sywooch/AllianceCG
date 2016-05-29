@@ -8,8 +8,6 @@ use app\components\grid\SetColumn;
 use yii\helpers\ArrayHelper;
 use app\components\grid\LinkColumn;
 use yii\jui\AutoComplete;
-use rmrevin\yii\fontawesome\FA;
-use app\modules\alliance\Module;
 use yii\grid\ActionColumn;
 use yii\helpers\Url;
 use yii\web\View;
@@ -17,8 +15,8 @@ use yii\web\View;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('module', 'CREDITCALENDARS');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_ALLIANCE'), 'url' => ['/alliance']];
+$this->title = Yii::t('app', 'CREDITCALENDARS');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'NAV_ALLIANCE'), 'url' => ['/alliance']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $multipleDelete = file_get_contents('js/modules/alliance/creditcalendar/gridViewMultipleDelete.js');
@@ -38,27 +36,27 @@ $this->registerJs($toggleSearch, View::POS_END);
 ]) ?>
 
 <p style="text-align: right">
-    <?= Html::a(FA::icon('plus') . ' ' . Module::t('module', 'CREATE'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+    <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-link btn-sm']) ?>
 
-    <?= Html::a(FA::icon('refresh') . ' ' . Module::t('module', 'REFRESH'), ['index'], ['class' => 'btn btn-info btn-sm']) ?>
+    <?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => '<i class="fa fa-refresh"></i>']), ['index'], ['class' => 'btn btn-link btn-sm']) ?>
     <?php
         if (Yii::$app->user->can('deleteCreditcalendarPost') || Yii::$app->user->can('admin')) {
-            echo Html::a(FA::icon('trash') . ' ' . Module::t('module', 'DELETE'), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']);
+            echo Html::a(Yii::t('app', '{icon} DELETE', ['icon' => '<i class="fa fa-trash"></i>']), ['#'], ['class' => 'btn btn-link btn-sm', 'id' => 'MultipleDelete']);
         }
     ?>
 
-    <?= Html::a(FA::icon('file-excel-o') . ' ' . Module::t('module', 'CREDITCALENDAR_EXPORT_EXCEL'  ), ['export'], [
+    <?= Html::a(Yii::t('app', '{icon} CREDITCALENDAR_EXPORT_EXCEL', ['icon' =>'<i class="fa fa-file-excel-o"></i>'] ), ['export'], [
             'id' => 'Excel',
-            'class' => 'btn btn-warning btn-sm',
+            'class' => 'btn btn-link btn-sm',
             'onclick' => 'setParams()',
             'data' => [
                 'method' => 'post',
-                'confirm' => Module::t('module', 'CREDITCALENDAR_EXPORT_CONFIRM'),
+                'confirm' => Yii::t('app', 'CREDITCALENDAR_EXPORT_CONFIRM'),
             ]
          ]);
     ?>
 
-    <?= Html::button(FA::icon('search') . ' ' . Module::t('module', 'SEARCH'), ['class' => 'btn-link', 'id' => 'advancedSearch']) ?>
+    <?= Html::button(Yii::t('app', '{icon} SEARCH', ['icon' => '<i class="fa fa-search"></i>']), ['class' => 'btn-link', 'id' => 'advancedSearch']) ?>
 
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -121,7 +119,7 @@ $this->registerJs($toggleSearch, View::POS_END);
                 [
                     'attribute' => 'responsibles',
                     'value' => function($model) {
-                        return !empty($model->users) ? implode(', ', ArrayHelper::map($model->users, 'id', 'full_name')) : Module::t('module', 'RESPONSIBLES_DOES_NOT_EXIST');
+                        return !empty($model->users) ? implode(', ', ArrayHelper::map($model->users, 'id', 'full_name')) : Yii::t('app', 'RESPONSIBLES_DOES_NOT_EXIST');
                     },
                     'visible' => !Yii::$app->user->can('creditmanager') ? true : false,
                 ],
@@ -155,7 +153,7 @@ $this->registerJs($toggleSearch, View::POS_END);
                     'format' => 'html',
                     'filter' => false,
                     'value' => function($model) {
-                        return '<span class="label label-primary">' . Module::t('module', 'COMMENTS') . ': ' . $model->calendarcommentscount . '</span>';
+                        return '<span class="label label-primary">' . Yii::t('app', 'COMMENTS') . ': ' . $model->calendarcommentscount . '</span>';
                     },   
                     'contentOptions' => ['class'=>'success;'],
                 ],

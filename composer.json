@@ -1,7 +1,7 @@
 {
 	"name": "m-ishchenko/AllianceCG",
 	"description": "Alliance Company Group",
-	"homepage": "http://monitor.strela-avto.ru",
+	"homepage": "http://work.alians-kmv.ru",
 	"type": "project",
 	"license": "BSD-3-Clause",
 	"support": {
@@ -14,17 +14,16 @@
 		"yiisoft/yii2": "*",
 		"yiisoft/yii2-bootstrap": "^2.0",
 		"yiisoft/yii2-swiftmailer": "*",
-		"bower-asset/html5shiv": "*",
-		"bower-asset/respond": "*",
-		"bower-asset/jquery": "1.*",
-		"kartik-v/yii2-widget-datetimepicker": "*",
 		"yiisoft/yii2-jui": "^2.0",
-		"2amigos/yii2-tinymce-widget": "~1.1",
 		"FortAwesome/Font-Awesome": "*",
 		"rmrevin/yii2-fontawesome": "~2.12",
-                "phpoffice/phpexcel": "dev-develop",
+		"phpoffice/phpexcel": "dev-develop",
 		"janisto/yii2-timepicker": "*",
-		"2amigos/yii2-date-picker-widget": "~1.0"
+		"kartik-v/yii2-widget-datepicker": "@dev",
+		"kartik-v/yii2-widget-timepicker": "*",
+		"kartik-v/yii2-widget-datetimepicker": "*",
+		"2amigos/yii2-date-picker-widget": "~1.0",
+		"2amigos/yii2-tinymce-widget": "~1.1"
 	},
 	"require-dev": {
 		"yiisoft/yii2-codeception": "*",

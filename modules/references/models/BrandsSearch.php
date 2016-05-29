@@ -49,7 +49,7 @@ class BrandsSearch extends Brands
     {
         $query = Brands::find();
         if(!Yii::$app->user->can('admin')){
-            $query->where(['state' => Brands::STATUS_ACTIVE]);
+            $query->where(['{{%brands}}.state' => Brands::STATUS_ACTIVE]);
         }
         $query->joinWith(['authorname', 'companies']);
 

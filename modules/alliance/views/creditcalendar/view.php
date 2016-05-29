@@ -4,8 +4,6 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
-use rmrevin\yii\fontawesome\FA;
-use app\modules\alliance\Module;
 use yii\data\ActiveDataProvider;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
@@ -15,8 +13,8 @@ use app\modules\admin\models\User;
 /* @var $model app\modules\alliance\models\Creditcalendar */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'NAV_ALLIANCE'), 'url' => ['/alliance']];
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'CREDITCALENDARS'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'NAV_ALLIANCE'), 'url' => ['/alliance']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'CREDITCALENDARS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="creditcalendar-view">
@@ -43,44 +41,17 @@ $this->params['breadcrumbs'][] = $this->title;
             ]) ?>
 
             <p style="text-align: right">
-                <?= Html::a(FA::icon('pencil') . ' ' . Module::t('module', 'UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
-                <?= Html::a(FA::icon('trash') . ' ' . Module::t('module', 'DELETE'), ['delete', 'id' => $model->id], [
-                    'class' => 'btn btn-danger btn-sm',
-                    'data' => [
-                        'confirm' => Module::t('module', 'DELETE_CONFIRMATION'),
-                        'method' => 'post',
-                    ],
-                ]) ?>
+                <?= Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-pencil"></i>']), ['update', 'id' => $model->id], ['class' => 'btn btn-link btn-sm']) ?>
+                <?php 
+                    // Html::a(Yii::t('app', '{icon} DELETE', ['icon' => '<i class="fa fa-trash"></i>']), ['delete', 'id' => $model->id], [
+                    //     'class' => 'btn btn-link btn-sm',
+                    //     'data' => [
+                    //         'confirm' => Yii::t('app', 'DELETE_CONFIRMATION', ['icon' => '<i class="fa fa-"></i>']),
+                    //         'method' => 'post',
+                    //     ],
+                    // ]) 
+                ?>
             </p>
-
-            <?php 
-                // foreach($model->users as $tmp) {
-                //     echo $tmp->email;
-                //     echo '<br/>';
-                // }
-                
-            // $emails = User::find()->where(['IN', 'id', $this->userids])->all();
-            
-            // $credit_heads = User::find()->where(['role' => 'chiefcredit'])->orWhere(['role' => 'seniorcreditspesialist'])->all();
-            
-            // foreach($credit_heads as $head){
-            //     $head_email[] = $head->email;
-            // }
-
-
-            // //TRUE
-            // $head_email[] = $model->authorname->email;
-
-            // foreach($model->users as $email)
-            // {
-            //     $mail[] = $email->email;
-            // }
-
-            // $summaryEmails = ArrayHelper::merge($head_email, $mail);
-
-            // var_dump($summaryEmails);
-
-            ?>
 
             <?= DetailView::widget([
                 'model' => $model,
@@ -133,7 +104,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="panel-heading panel-info">
             <h4>
-                <?= FA::icon('comment') . ' ' . Module::t('module', 'COMMENTS'); ?>
+                <?= Yii::t('app', '{icon} COMMENTS', ['icon' => '<i class="fa fa-comment"></i>']); ?>
             </h4>
         </div>
 
@@ -141,7 +112,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?php
                 echo "<p style='text-align: right'>";
-                echo Html::button(FA::icon('comment') . ' ' . Module::t('module', 'COMMENT'), ['value' => Url::to(['comment', 'id' => $model->id]), 'class' => 'btn btn-info btn-sm', 'id' => 'modalButton']);
+                echo Html::button(Yii::t('app', '{icon} COMMENT', ['icon' => '<i class="fa fa-comment"></i>']), ['value' => Url::to(['comment', 'id' => $model->id]), 'class' => 'btn btn-link btn-sm', 'id' => 'modalButton']);
                 echo "</p>";
             ?>
 
@@ -174,7 +145,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]);
 
                 Modal::begin([
-                    'header' => '<h4>' . Module::t('module', 'COMMENT') .'</h4>',
+                    'header' => '<h4>' . Yii::t('app', 'COMMENT') .'</h4>',
                     'id' => 'modal',
                     'size' => 'modal-lg'
                 ]);

@@ -413,6 +413,33 @@ a.desc:after {
 .navbar-right > li > a {
     color: #fff;
 }
+
+.navbar-left > li {
+  position: relative;
+  color: #337ab7;
+}
+.navbar-left > li:after {
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 0;
+  height: 8px;
+  background-color: #337ab7;
+  content: "";
+  transition: width 0.2s;
+}
+.navbar-left > li:hover {
+  color: #337ab7;
+  text-decoration: none;
+}
+.navbar-left > li:hover:after {
+  width: 100%;
+}
+
+.navbar-left > li > a {
+    color: #337ab7;
+}
 /*
 .nav > li {
   position: relative;

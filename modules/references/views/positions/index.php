@@ -7,7 +7,6 @@ use app\components\grid\LinkColumn;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use app\modules\references\models\Positions;
-use rmrevin\yii\fontawesome\FA;
 use yii\web\View;
 use app\components\grid\SetColumn;
 

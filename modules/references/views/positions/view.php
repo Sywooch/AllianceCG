@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use rmrevin\yii\fontawesome\FA;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 
@@ -14,18 +13,12 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'REFERENCES'), 'url' 
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'POSITIONS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<!--<div class="positions-view col-lg-5 col-lg-offset-3">-->
 
-    <!--<h1>-->
-        <!--<span class="glyphicon glyphicon-briefcase" style='padding-right:10px;'></span>-->
-            <?php // Html::encode($this->title) ?>
-    <!--</h1>-->
-
-    <p style="text-align: right;">
-        <?= Html::a(Yii::t('app', '{icon} POSITIONS', ['icon' => FA::icon('list')]), ['index'], ['class' => 'btn btn-warning btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => FA::icon('edit')]), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+    <p class="buttonpane">
+        <?= Html::a(Yii::t('app', '{icon} POSITIONS', ['icon' => '<i class="fa fa-list"></i>']), ['index'], ['class' => 'btn btn-warning btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-edit"></i>']), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
         <?php
-          //  Html::a(Yii::t('app', '{icon} DELETE', ['icon' => FA::icon('remove')]), ['delete', 'id' => $model->id], [
+          //  Html::a(Yii::t('app', '{icon} DELETE', ['icon' => '<i class="fa fa-remove"></i>']), ['delete', 'id' => $model->id], [
           //     'class' => 'btn btn-danger btn-sm',
           //     'data' => [
           //         'confirm' => Yii::t('app', 'CONFIRM_DELETE'),
@@ -69,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <div class="col-sm-3">
-        <?= Html::a(Yii::t('app', '{icon} CREATE_EMPLOYEES', ['icon' => FA::icon('edit')]), ['/references/employees/create?id=' . $model->id], [
+        <?= Html::a(Yii::t('app', '{icon} CREATE_EMPLOYEES', ['icon' => '<i class="fa fa-edit"></i>']), ['/references/employees/create?id=' . $model->id], [
                 'class' => 'plus btn-success btn-sm',
             ]) ?>
 </div>

@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use rmrevin\yii\fontawesome\FA;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use app\modules\references\models\Employees;
@@ -23,9 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <!--</h1>-->
     
     <p style="text-align: right;">
-        <?= Html::a(Yii::t('app', '{icon} COMPANIES', ['icon' => FA::icon('list')]), ['index'], ['class' => 'btn btn-warning btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => FA::icon('edit')]), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} COMPANIES', ['icon' => '<i class="fa fa-list"></i>']), ['index'], ['class' => 'btn btn-link']) ?>
+        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-link']) ?>
+        <?= Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-edit"></i>']), ['update', 'id' => $model->id], ['class' => 'btn btn-link']) ?>
         <?php  
           // Html::a(Yii::t('app', '{icon} ADMIN_COMPANIES_DELETE', ['icon' => FA::icon('')]), ['delete', 'id' => $model->id], [
           //     'class' => 'btn btn-danger btn-sm',
@@ -85,8 +84,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= '<h3>' . Yii::t('app', 'EMPLOYEES_THIS_COMPANY') . '</h3>' ?>
 </div>
 <div class="col-sm-3">
-        <?= Html::a(Yii::t('app', '{icon} CREATE_EMPLOYEES', ['icon' => FA::icon('edit')]), ['/references/employees/create'], [
-                'class' => 'plus btn-success btn-sm',
+        <?= Html::a(Yii::t('app', '{icon} CREATE_EMPLOYEES', ['icon' => '<i class="fa fa-edit"></i>']), ['/references/employees/create'], [
+                'class' => 'plus btn-link',
             ]) ?>
 </div>
 

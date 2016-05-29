@@ -6,7 +6,6 @@ use app\components\grid\ActionColumn;
 use yii\helpers\ArrayHelper;
 use app\modules\references\models\Companies;
 use app\components\grid\LinkColumn;
-use rmrevin\yii\fontawesome\FA;
 use app\components\grid\SetColumn;
 
 /* @var $this yii\web\View */

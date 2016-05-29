@@ -77,7 +77,7 @@ class Employees extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['company_id', 'department_id', 'position_id', 'brand_id'], 'required'],
+            [['company_id', 'department_id', 'position_id'], 'required'],
             [['company_id', 'department_id', 'position_id', 'brand_id'], 'integer'],
             [['name', 'surname', 'patronimyc', 'photo'], 'string', 'max' => 255],
             [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Companies::className(), 'targetAttribute' => ['company_id' => 'id']],
@@ -85,9 +85,10 @@ class Employees extends \yii\db\ActiveRecord
             [['department_id'], 'exist', 'skipOnError' => true, 'targetClass' => Departments::className(), 'targetAttribute' => ['department_id' => 'id']],
             [['position_id'], 'exist', 'skipOnError' => true, 'targetClass' => Positions::className(), 'targetAttribute' => ['position_id' => 'id']],
             [['globalSearch'], 'safe'],
-            [['name', 'surname', 'patronimyc', 'brand_id'], 'required'],
+            [['name', 'surname', 'patronimyc'], 'required'],
             [['fullname', 'file'], 'safe'],
             ['author', 'default', 'value' => Yii::$app->user->getId()],
+            ['brand_id', 'default', 'value' => 0],
             [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => ['jpg', 'jpeg','png'],'checkExtensionByMimeType'=>false],
         ];
     }
@@ -183,9 +184,9 @@ class Employees extends \yii\db\ActiveRecord
      */
     public function getImageUrl()
     {
-        $photo = Url::to('@web/' . $this->photo, true);
+        $photo = ($this->brand_id > 0) ? Url::to('@web/' . $this->photo, true) : false;
         $nophoto = self::NO_PHOTO;
-        $image = (isset($this->photo) && !empty($this->photo) && file_exists($this->photo)) ? $photo : $nophoto;
+        $image = ($this->brand_id > 0 && isset($this->photo) && !empty($this->photo) && file_exists($this->photo)) ? $photo : $nophoto;
         return $image;
     }
 
@@ -195,9 +196,9 @@ class Employees extends \yii\db\ActiveRecord
      */
     public function getBrandImageUrl()
     {
-        $logo = Url::to('@web/' . $this->brand->brand_logo, true);
+        $logo = ($this->brand_id > 0) ? Url::to('@web/' . $this->brand->brand_logo, true) : false;
         $nologo = self::NO_LOGO;
-        $image = (isset($this->brand->brand_logo) && !empty($this->brand->brand_logo) && file_exists($this->brand->brand_logo)) ? $logo : $nologo;
+        $image = ($this->brand_id > 0 && isset($this->brand->brand_logo) && !empty($this->brand->brand_logo) && file_exists($this->brand->brand_logo)) ? $logo : $nologo;
         return $image;
     }
 

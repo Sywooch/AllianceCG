@@ -22,7 +22,7 @@ use yii\helpers\ArrayHelper;
     <!--</h1>-->
                 
    
-    <?= $form->field($model, 'company_name', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('institution') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'company_name' )]) ?>
+    <?= $form->field($model, 'company_name', ['template'=>' <div class="input-group"><span class="input-group-addon"> <i class="fa fa-institution"></i> </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'company_name' )]) ?>
     
     <?php // echo $form->field($model, 'company_brand', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('institution') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'company_brand' )]) ?>
 
@@ -34,7 +34,7 @@ use yii\helpers\ArrayHelper;
             'options' => isset($_GET['id']) ? [$_GET['id'] => ['Selected'=>'selected']] : false,
             'prompt' => '-- ' . $model->getAttributeLabel( 'company_brand' ) . ' --',
         ];
-        echo $form->field($model, 'company_brand', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('car') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
+        echo $form->field($model, 'company_brand', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-car"></i> </span>{input}</div>{error}'])->dropDownList($items,$params);
     ?> 
 
     <?= $form->field($model, 'company_description')->widget(TinyMce::className(), [
@@ -52,10 +52,10 @@ use yii\helpers\ArrayHelper;
 
     <div class="form-group" style="text-align: right;">
         <?= Html::submitButton(
-            $model->isNewRecord ? Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('floppy-o')]) : Yii::t('app', '{icon} UPDATE', ['icon' => FA::icon('edit')]),
-            ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']
+            $model->isNewRecord ? Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']) : Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-edit"></i>']),
+            ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']
         ) ?>
-        <?= Html::a(Yii::t('app', '{icon} CANCEL', ['icon' => FA::icon('remove')]), ['index'], ['class' => 'btn btn-danger btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} CANCEL', ['icon' => '<i class="fa fa-remove"></i>']), ['index'], ['class' => 'btn btn-danger btn-sm']) ?>
     </div>  
     
 

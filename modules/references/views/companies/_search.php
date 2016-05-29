@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use rmrevin\yii\fontawesome\FA;
 use yii\web\View;
 
 /* @var $this yii\web\View */
@@ -12,38 +11,38 @@ use yii\web\View;
 $deleteRestore = file_get_contents('js/modules/references/companies/deleteRestore.js');
 $this->registerJs($deleteRestore, View::POS_END);
 
+$toggleSearch = file_get_contents('js/modules/references/companies/toggleSearch.js');
+$this->registerJs($toggleSearch, View::POS_END);
+
 ?>
 
-<div class="companies-search" id="companies_search">
+
+<div class="buttonpane">
+
+<?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-link']); ?>
+        
+<?= Html::a(Yii::t('app', '{icon} DELETE', ['icon' => '<i class="fa fa-remove"></i>']), ['#'], ['class' => 'btn btn-link', 'id' => 'MultipleDelete']); ?>
+        
+<?= Html::a(Yii::t('app', '{icon} RESTORE', ['icon' => '<i class="fa fa-upload"></i>']), ['#'], ['class' => 'btn btn-link', 'id' => 'MultipleRestore']); ?>
+
+<?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => '<i class="fa fa-refresh"></i>']), ['index'], ['class' => 'btn btn-link']) ?>
+<?= Html::button(Yii::t('app', '{icon} ADVANCED', ['icon' => '<i class="fa fa-file-excel-o"></i>']), ['class' => 'btn-link', 'id' => 'advancedOperations']) ?>
+
+</div>
+
+<div class="col-sm-12 bs-callout bs-callout-info" id="advanced">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
-        'options' => [
-            'class' => 'companies-search-form',
-        ],
     ]); ?>
 
-    <div class="col-sm-4">
-
-    <?= $form->field($model, 'globalSearch', ['template'=>' <div class="input-group"><span class="input-group-addon"> ' . FA::icon('search') . ' </span>{input}</div>{error}'])->textInput(['placeholder' => $model->getAttributeLabel( 'globalSearch' )]) ?>
-    
-    </div>
-
-    <div class="form-group col-sm-8" style="text-align: right">
-        <?= Html::submitButton(Yii::t('app', '{icon} SEARCH', ['icon' => FA::icon('search')]), ['class' => 'btn btn-primary btn-sm']) ?>
-
-        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
-        
-        <?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => FA::icon('refresh')]), ['index'], ['class' => 'btn btn-info btn-sm', 'id' => 'refreshButton']) ?>
-
-        <?php // echo Html::a(FA::icon('remove') . ' ' . Yii::t('app', '{icon} DELETE', ['icon' => FA::icon('refresh')]), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']) ?> 
-
-        <?= Html::a(Yii::t('app', '{icon} DELETE', ['icon' => FA::icon('remove')]), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']); ?>
-        <?= Html::a(Yii::t('app', '{icon} RESTORE', ['icon' => FA::icon('upload')]), ['#'], ['class' => 'btn btn-warning btn-sm', 'id' => 'MultipleRestore']); ?>
-    
-    </div>
+    <?= $form->field($model, 'globalSearch', [
+            'template' => '<div class="input-group"><span class="input-group-addon"> <i class="fa fa-search"></i> </span>{input}<span class="input-group-btn">'.
+                Html::submitButton(Yii::t('app', '{icon} Search', ['icon' => '<i class="fa fa-search"></i>']), ['class' => 'btn btn-primary']).'</span></div>',
+        ]); 
+    ?>        
 
     <?php ActiveForm::end(); ?>
 
-</div>
+</div>            

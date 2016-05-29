@@ -43,7 +43,7 @@ class m160514_144827_create_employees_table extends Migration
         $this->addForeignKey('fk-companyid', '{{%employees}}', 'company_id', '{{%companies}}', 'id','CASCADE','RESTRICT');
         $this->addForeignKey('fk-departmentid', '{{%employees}}', 'department_id', '{{%departments}}', 'id','CASCADE','RESTRICT');
         $this->addForeignKey('fk-positionid', '{{%employees}}', 'position_id', '{{%positions}}', 'id','CASCADE','RESTRICT');
-        $this->addForeignKey('fk-brandid', '{{%employees}}', 'brand_id', '{{%brands}}', 'id','CASCADE','RESTRICT');
+        // $this->addForeignKey('fk-brandid', '{{%employees}}', 'brand_id', '{{%brands}}', 'id','CASCADE','RESTRICT');
 
     }
 

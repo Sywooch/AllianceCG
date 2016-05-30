@@ -30,6 +30,10 @@ use rmrevin\yii\fontawesome\FA;
                 'label' => Yii::t('app', '{icon} NAV_ALLIANCE_CLIENTCIRCULATION', ['icon' => FA::icon('calendar')]), 'url' => ['/alliance/clientcirculation'],
                 'visible' => Yii::$app->user->can('creditcalendarIsVisible')
             ],
+            [
+                'label' => Yii::t('app', '{icon} NAV_ALLIANCE_CCIRCULATIONCOMMENT', ['icon' => FA::icon('calendar')]), 'url' => ['/alliance/clientcirculationcomment'],
+                'visible' => Yii::$app->user->can('creditcalendarIsVisible')
+            ],
         ]),
     ])
     : false;

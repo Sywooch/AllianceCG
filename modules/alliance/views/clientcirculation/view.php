@@ -74,7 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'updated_at',
                 'format' => 'datetime',
-                'visible' => $model->updated_at = $model->created_at ? false : true,
+                // 'visible' => $model->updated_at = $model->created_at ? false : true,
             ],
             [
               'attribute' => 'authorname',

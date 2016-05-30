@@ -52,6 +52,9 @@ class ClientCirculationSearch extends ClientCirculation
     public function search($params)
     {
         $query = ClientCirculation::find();
+        if(!Yii::$app->user->can('admin')){
+            $query->where(['{{%client_circulation}}.state' => ClientCirculation::STATUS_ACTIVE]);
+        }
         $query->joinWith(['authorname', 'regions', 'clientcomment', 'employees']);
 
         // add conditions that should always apply here

@@ -41,10 +41,8 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => LinkColumn::className(),
                 'attribute' => 'fullmodelname',
+                // 'attribute' => 'model_name',
                 'format' => 'raw',    
-                // 'value' => function ($data) {
-                //     return $data->getFullname();
-                // },
             ],
             [
                 'class' => SetColumn::className(),
@@ -54,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions'=>['style'=>'width: 50px;'],
                 'cssCLasses' => [
                     Models::STATUS_ACTIVE =>'success',
-                    Models::STATUS_BLOCKED => 'default',
+                    Models::STATUS_BLOCKED => 'danger',
                 ],
             ],
 

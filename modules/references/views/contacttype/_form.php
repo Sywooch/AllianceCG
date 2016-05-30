@@ -25,8 +25,8 @@ use yii\widgets\ActiveForm;
     <?php //echo $form->field($model, 'author')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group buttonpane">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', '{icon} Create', ['icon' => '<i class="fa fa-plus"></i>']) : Yii::t('app', '{icon} Update', ['icon' => '<i class="fa fa-edit"></i>']), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary ']) ?>
-        <?= Html::a(Yii::t('app', '{icon} CANCEL', ['icon' => '<i class="fa fa-remove"></i>']), ['index'], ['class' => 'btn btn-danger btn-sm']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', '{icon} Create', ['icon' => '<i class="fa fa-plus"></i>']) : Yii::t('app', '{icon} Update', ['icon' => '<i class="fa fa-edit"></i>']), ['class' => $model->isNewRecord ? 'btn btn-success animlinkColor' : 'btn btn-primary animlinkColor']) ?>
+        <?= Html::a(Yii::t('app', '{icon} CANCEL', ['icon' => '<i class="fa fa-remove"></i>']), ['index'], ['class' => 'btn btn-danger animlinkColor btn-sm']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

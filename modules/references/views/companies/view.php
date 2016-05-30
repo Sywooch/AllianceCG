@@ -22,9 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <!--</h1>-->
     
     <p style="text-align: right;">
-        <?= Html::a(Yii::t('app', '{icon} COMPANIES', ['icon' => '<i class="fa fa-list"></i>']), ['index'], ['class' => 'btn btn-link']) ?>
-        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-link']) ?>
-        <?= Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-edit"></i>']), ['update', 'id' => $model->id], ['class' => 'btn btn-link']) ?>
+        <?= Html::a(Yii::t('app', '{icon} COMPANIES', ['icon' => '<i class="fa fa-list"></i>']), ['index'], ['class' => 'btn btn-link animlink']) ?>
+        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-link animlink']) ?>
+        <?= Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-edit"></i>']), ['update', 'id' => $model->id], ['class' => 'btn btn-link animlink']) ?>
         <?php  
           // Html::a(Yii::t('app', '{icon} ADMIN_COMPANIES_DELETE', ['icon' => FA::icon('')]), ['delete', 'id' => $model->id], [
           //     'class' => 'btn btn-danger btn-sm',
@@ -85,7 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <div class="col-sm-3">
         <?= Html::a(Yii::t('app', '{icon} CREATE_EMPLOYEES', ['icon' => '<i class="fa fa-edit"></i>']), ['/references/employees/create'], [
-                'class' => 'plus btn-link',
+                'class' => 'btn btn-link animlink',
             ]) ?>
 </div>
 

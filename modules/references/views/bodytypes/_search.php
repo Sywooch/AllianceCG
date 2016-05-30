@@ -50,7 +50,7 @@ $this->registerJs($toggleSearch, View::POS_END);
 
     </div>
     <div class="col-sm-6">
-        <?= Html::a(Yii::t('app', '{icon} IMPORT_EXCEL', ['icon' => '<i class="fa fa-upload"></i>']), ['upload'], ['class' => 'btn btn-link animlink']) ?>
+        <?php // Html::a(Yii::t('app', '{icon} IMPORT_EXCEL', ['icon' => '<i class="fa fa-upload"></i>']), ['upload'], ['class' => 'btn btn-link animlink']) ?>
         <?= Html::a(Yii::t('app', '{icon} EXPORT_EXCEL', ['icon' => '<i class="fa fa-file-excel-o"></i>']), ['export'], ['class' => 'btn btn-link animlink']) ?>
     </div>
 </div>            

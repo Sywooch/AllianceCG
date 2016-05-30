@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
+use yii\web\UploadedFile;
 
 /**
  * BodytypesController implements the CRUD actions for Bodytypes model.
@@ -38,7 +39,7 @@ class BodytypesController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions'=>['create', 'update', 'multipledelete', 'multiplerestore', 'delete', 'export'],
+                        'actions'=>['create', 'update', 'multipledelete', 'multiplerestore', 'delete', 'export', 'upload'],
                         'roles' => ['admin', 'root'],
                     ],
                 ],
@@ -157,6 +158,75 @@ class BodytypesController extends Controller
 
         return $this->redirect(['index']);
 
+    }    
+
+    public function actionUpload()
+    {
+
+        $model = new Bodytypes();
+
+        if ($model->load(Yii::$app->request->post())) {
+            
+            if($model->xlsxFile = UploadedFile::getInstance($model, 'xlsxFile')){
+                $fileName = Bodytypes::XLSX_FILE_FOR_UPLOAD;
+                $path = Bodytypes::DIR_FOR_UPLOAD;
+                if(!file_exists($path)) {
+                    mkdir($path, 0777, true);
+                } 
+                // $model->xlsxFile->saveAs($path.$fileName.'.'.$model->xlsxFile->extension);
+                $model->xlsxFile->saveAs($path.$fileName.'.'.$model->xlsxFile->extension);
+            }
+            
+        // $inputFile = ''.SourceMessage::DIR_FOR_UPLOAD.SourceMessage::XLSX_FILE_FOR_UPLOAD.SourceMessage::UPLOAD_FILE_EXT;
+        $inputFile = 'files/bodytypes/bodytypes.xlsx';
+        if (!file_exists(''.$inputFile.'')) {
+            Yii::$app->getSession()->setFlash('error', 'Отсутствует файл для загрузки.');  
+            return $this->render('importExcel');     
+            die("");
+        }
+        else{
+            try{
+                // Bodytypes::deleteAll();
+                $inputFileType = \PHPExcel_IOFactory::identify($inputFile);
+                $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
+                $objPHPExcel = $objReader->load($inputFile);
+            }catch(Exception $e){
+                die('Error');
+            }
+            $sheet = $objPHPExcel->getSheet(0);
+            $highestRow = $sheet->getHighestRow();
+            $highestColumn = $sheet->getHighestDataColumn();        
+            for($row = 2; $row <= $sheet->getHighestRow(); $row++){
+
+                $rowData = $sheet->rangeToArray('A'.$row.':'.$highestColumn.$row,NULL,TRUE,FALSE);
+                if($row == 2)
+                {
+                    continue;
+                }
+
+                $sourcemsg = new BodytypesSearch();
+                $sourcemsg->body_type = $rowData[0][0]; 
+                $sourcemsg->author = Yii::$app->user->getId();
+                $sourcemsg->save();
+                if($sourcemsg->getErrors()){
+                    print_r($sourcemsg->getErrors());                    
+                }
+            }          
+            unlink($inputFile); 
+            Yii::$app->getSession()->setFlash('success', 'Импорт Выполнен.');   
+            return $this->render('importExcel', [
+                'model' => $sourcemsg,
+            ]);     
+            die();
+        }
+
+            // return $this->render('uploadFile');
+            // return $this->redirect('index');
+        } else {
+            return $this->render('uploadFile', [
+                'model' => $model,
+            ]);
+        }
     }    
 
 

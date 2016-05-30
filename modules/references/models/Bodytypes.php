@@ -17,9 +17,13 @@ use app\modules\admin\models\User;
 class Bodytypes extends \yii\db\ActiveRecord
 {
 
+    public $xlsxFile;
 
     const STATUS_BLOCKED = 1;
-    const STATUS_ACTIVE = 0;
+    const STATUS_ACTIVE = 0;    
+    const DIR_FOR_UPLOAD = 'files/bodytypes/';
+    const XLSX_FILE_FOR_UPLOAD = 'bodytypes';
+    const UPLOAD_FILE_EXT = 'xlsx';
 
     /**
      * @inheritdoc
@@ -69,6 +73,7 @@ class Bodytypes extends \yii\db\ActiveRecord
             [['body_type'], 'string', 'max' => 255],
             [['body_type'], 'required'],
             ['author', 'default', 'value' => Yii::$app->user->getId()],
+            [['xlsxFile'], 'file', 'skipOnEmpty' => true, 'extensions' => ['xlsx'],'checkExtensionByMimeType'=>false],
         ];
     }
 
@@ -86,6 +91,7 @@ class Bodytypes extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('app', 'UPDATED_AT'),
             'author' => Yii::t('app', 'AUTHOR'),
             'globalSearch' => Yii::t('app', 'SEARCH'),
+            'xlsxFile' => Yii::t('app', 'xlsxFile'),
         ];
     }
 

@@ -42,7 +42,7 @@ $this->registerJs($toggleSearch, View::POS_END);
 
     <?= $form->field($model, 'globalSearch', [
             'template' => '<div class="input-group"><span class="input-group-addon"> <i class="fa fa-search"></i> </span>{input}<span class="input-group-btn">'.
-                Html::submitButton(Yii::t('app', '{icon} Search', ['icon' => '<i class="fa fa-search"></i>']), ['class' => 'btn btn-primary']).'</span></div>',
+                Html::submitButton(Yii::t('app', '{icon} Search', ['icon' => '<i class="fa fa-search"></i>']), ['class' => 'btn btn-primary animlink']).'</span></div>',
         ]); 
     ?>        
 

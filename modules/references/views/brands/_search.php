@@ -31,8 +31,6 @@ $this->registerJs($toggleSearch, View::POS_END);
 
 <div class="col-sm-12 bs-callout bs-callout-info" id="advanced">
 
-    <div class="col-sm-6">
-
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
@@ -46,9 +44,4 @@ $this->registerJs($toggleSearch, View::POS_END);
 
     <?php ActiveForm::end(); ?>
 
-    </div>
-    <div class="col-sm-6">
-        <?= Html::a(Yii::t('app', '{icon} IMPORT_EXCEL', ['icon' => '<i class="fa fa-upload"></i>']), ['upload'], ['class' => 'btn btn-link']) ?>
-        <?= Html::a(Yii::t('app', '{icon} EXPORT_EXCEL', ['icon' => '<i class="fa fa-file-excel-o"></i>']), ['export'], ['class' => 'btn btn-link']) ?>
-    </div>
 </div>      

@@ -8,6 +8,7 @@ use app\modules\references\models\BodytypesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 
 /**
@@ -37,7 +38,7 @@ class BodytypesController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions'=>['create', 'update', 'multipledelete', 'multiplerestore', 'delete'],
+                        'actions'=>['create', 'update', 'multipledelete', 'multiplerestore', 'delete', 'export'],
                         'roles' => ['admin', 'root'],
                     ],
                 ],
@@ -156,6 +157,178 @@ class BodytypesController extends Controller
 
         return $this->redirect(['index']);
 
+    }    
+
+
+    public function actionExport(){
+        if (!Yii::$app->user->can('admin')) {
+            throw new ForbiddenHttpException(Yii::t('app', 'ONLY_ADMIN_CAN_EXPORT_EXCEL'));
+        }
+        else {
+            $objPHPExcel = new \PHPExcel();         
+            
+            // № листа
+            $sheet=0;
+            
+            // № строки с которой начинаются табличные данные
+            $row=4;
+
+            // № строки заголовка
+            $titleNumber=1;   
+
+            $objPHPExcel->setActiveSheetIndex($sheet);
+     
+            $model = new Bodytypes();
+
+            // Получить id отмеченных записей (преобразовать полученный массив в строку)
+            // $keyList = Yii::$app->request->post('keyList');
+            // $keyListArray = explode(',', $keyList);
+
+            $query = Bodytypes::find();
+            $query->where(['state' => Bodytypes::STATUS_ACTIVE]);
+            // Условие выборки - отмеченные записи
+            // $query->where(['id' => $keyListArray]);
+            $dataProvider = new ActiveDataProvider([
+                'query' => $query,
+                'pagination' => false,
+            ]);
+                     
+            // Размер листа, ориентация
+            $objPHPExcel->getActiveSheet()
+                ->getPageSetup()
+                ->setOrientation(\PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+            $objPHPExcel->getActiveSheet()
+                ->getPageSetup()
+                ->setPaperSize(\PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4);
+            
+            // Автофильтр
+            $objPHPExcel->getActiveSheet()->setAutoFilter('A'.($row-1).':A'.($row-1));
+
+            // Слияние ячеек в заголовке таблицы
+            $objPHPExcel->getActiveSheet()->mergeCells('A'.$titleNumber.':B'.$titleNumber);
+
+            // Жирный шрифт в заголовке
+            $objPHPExcel->getActiveSheet()->getStyle('A'.($row-1).':B'.($row-1))->getFont()->setBold(true);
+
+            // Жирный шрифт в заголовках колонок
+            $objPHPExcel->getActiveSheet()->getStyle('A'.$titleNumber)->getFont()->setBold(true);
+
+            // Заголовки колонок
+            $objPHPExcel->getActiveSheet()->setTitle(Yii::t('app','BT_EXCEL_TITLE_').date("d-m-Y-H-i"))                
+                ->setCellValue('A'.($row-1), $model->getAttributeLabel('body_type'))
+                // ->setCellValue('B'.($row-1), $model->getAttributeLabel('region_code'))
+                // ->setCellValue('C'.($row-1), $model->getAttributeLabel('created_at'))
+                // ->setCellValue('D'.($row-1), $model->getAttributeLabel('author'))
+                ;
+
+            // Данные из запроса
+            foreach ($dataProvider->models as $exportrows) {
+                $objPHPExcel->getActiveSheet()->setCellValue('A'.$row,$exportrows->body_type); 
+                // $objPHPExcel->getActiveSheet()->setCellValue('C'.$row,implode(', ', ArrayHelper::map($exportrows->messages, 'language', 'language')));
+                // $objPHPExcel->getActiveSheet()->setCellValue('D'.$row,implode(', ', ArrayHelper::map($exportrows->messages, 'translation', 'translation'))); 
+                $row++ ;
+            }  
+
+            // Excel list header
+            $objPHPExcel->getActiveSheet()
+                ->getHeaderFooter()
+                ->setOddHeader('&R&B'.Yii::t('app', 'BODY_TYPE'));
+
+            // Excel list footer
+            $objPHPExcel->getActiveSheet()
+                ->getHeaderFooter()->setOddFooter('&R&F Стр. &P / &N');
+            $objPHPExcel->getActiveSheet()
+                ->getHeaderFooter()->setEvenFooter('&L&F Стр. &P / &N'); 
+
+
+            // № последней ячейки с данными
+            $rowNumber = $objPHPExcel->setActiveSheetIndex()->getHighestRow();  
+
+            // Excel table borders
+            $border_thin = [
+              'borders' => [
+                'allborders' => [
+                  'style' => \PHPExcel_Style_Border::BORDER_THIN
+                ]
+              ]
+            ];
+
+            // Текст по центру
+            $centered = [
+                'alignment' => [
+                    'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                ]
+            ]; 
+
+            // Цвет ячеек таблицы
+            $colors = [
+                    'fill' => [
+                        'type' => \PHPExcel_Style_Fill::FILL_SOLID,
+                        'color' => ['rgb' => 'EDEDED']  // 1E90FF
+                    ]
+                ];
+
+            // Цвет ячеек заголовков
+            $headercolors = [
+                    'fill' => [
+                        'type' => \PHPExcel_Style_Fill::FILL_SOLID,
+                        'color' => ['rgb' => '5cb85c']  // EDEDED
+                    ]
+                ];
+
+            // Цвет текста
+            $fontheadercolors = [
+                'font'  => [
+                    'bold'  => true,
+                    'color' => ['rgb' => 'FFFFFF'],
+                    'size'  => 10,
+                    'name'  => 'Verdana'
+                ]];
+
+            $tablefont = [
+                'font'  => [
+                    'bold'  => true,
+                    'color' => ['rgb' => '000000'],
+                    'size'  => 8,
+                    'name'  => 'Verdana'
+                ]];
+
+
+            $objPHPExcel->getActiveSheet()->getStyle('A3:A'.($row-1))->applyFromArray($headercolors);
+            $objPHPExcel->getActiveSheet()->getStyle('A3:A3')->applyFromArray($fontheadercolors);
+
+            $objPHPExcel->getActiveSheet()->getStyle('A4:A'.($row-1))->applyFromArray($colors);
+            $objPHPExcel->getActiveSheet()->getStyle('A4:A'.($row-1))->applyFromArray($tablefont);
+
+
+            $objPHPExcel->getActiveSheet()->getStyle("A3:A".($rowNumber))->applyFromArray($border_thin);
+            unset($styleArray);
+
+            // Ширина колонок таблицы
+            $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(30);
+            // $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(20);
+            // $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(20);
+            // $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(15);
+            // Заголовок по центру
+            $objPHPExcel->getActiveSheet()->getStyle('A'.$titleNumber.':A'.$titleNumber)->applyFromArray($centered);
+
+            // Текст заголовка
+            $objPHPExcel->getActiveSheet()->setCellValue('A'.$titleNumber, Yii::t('app', 'BODYTYPES_EXCEL_TABLEHEADER') . '_' . date("d.m.Y H:i"));
+            // $objPHPExcel->getActiveSheet()->setCellValue('A'.($titleNumber+1), $rowNumber);
+
+            // Тип выгружаемого файла
+            // header('Content-Type: application/vnd.ms-excel'); // Excel < 2007
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); // Excel2007
+
+            // Имя выгружаемого файла
+            $filename = Yii::t('app','BODYTYPES_EXCEL_TITLE') . '_' . date("d-m-Y-H-i-s").".xlsx";
+
+            header('Content-Disposition: attachment;filename='.$filename .' ');
+            header('Cache-Control: max-age=0');
+
+            $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007'); // Excel5 для выгрузки с расширением .xls
+            $objWriter->save('php://output'); 
+        }
     }    
 
 }

@@ -113,7 +113,8 @@ class ClientCirculationSearch extends ClientCirculation
 
         $query
             ->andFilterWhere(['like', '{{%client_circulation}}.name', $this->name])
-            ->andFilterWhere(['like', '{{%client_circulation}}.phone', $this->phone])
+            // ->andFilterWhere(['like', '{{%client_circulation}}.phone', $this->phone])
+            ->andFilterWhere(['like', 'phone', $this->phone])
             ->andFilterWhere(['like', '{{%client_circulation}}.email', $this->email])
             ->andFilterWhere(['like', '{{%user}}.full_name', $this->authorname])
             ->andFilterWhere(['like', '{{%regions}}.region_name', $this->regions])

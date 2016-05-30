@@ -7,7 +7,6 @@ use app\modules\alliance\Module;
 use app\modules\references\models\Regions;
 use app\modules\references\models\Employees;
 use yii\helpers\ArrayHelper;
-use rmrevin\yii\fontawesome\FA;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\alliance\models\ClientCirculation */
@@ -21,15 +20,15 @@ use rmrevin\yii\fontawesome\FA;
 
     <?= $form->errorSummary($model); ?>
 
-    <?= $form->field($model, 'name', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('users') . ' </span>{input}</div>{error}'])->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('name')]) ?>
+    <?= $form->field($model, 'name', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-users"></i> </span>{input}</div>{error}'])->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('name')]) ?>
 
     <?php // echo $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'phone', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('phone') . ' </span>{input}</div>{error}'])->widget(MaskedInput::className(), [
+    <?= $form->field($model, 'phone', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-phone"></i> </span>{input}</div>{error}'])->widget(MaskedInput::className(), [
         'mask' => '+7 (999) 999-99-99',
     ]) ?>
 
-    <?= $form->field($model, 'email', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('inbox') . ' </span>{input}</div>{error}'])->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('email')]) ?>
+    <?= $form->field($model, 'email', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-inbox"></i> </span>{input}</div>{error}'])->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('email')]) ?>
 
     <?php // echo $form->field($model, 'region_id')->textInput() ?>
 
@@ -43,7 +42,7 @@ use rmrevin\yii\fontawesome\FA;
             'options' => isset($_GET['id']) ? [$_GET['id'] => ['Selected'=>'selected']] : false,
             'prompt' => '-- ' . $model->getAttributeLabel( 'region_id' ) . ' --',
         ];
-        echo $form->field($model, 'region_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('map') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
+        echo $form->field($model, 'region_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-map"></i> </span>{input}</div>{error}'])->dropDownList($items,$params);
     ?> 
 
 
@@ -70,13 +69,13 @@ use rmrevin\yii\fontawesome\FA;
             'options' => isset($_GET['id']) ? [$_GET['id'] => ['Selected'=>'selected']] : false,
             'prompt' => '-- ' . $model->getAttributeLabel( 'employee_id' ) . ' --',
         ];
-        echo $form->field($model, 'employee_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('briefcase') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
+        echo $form->field($model, 'employee_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-briefcase"></i> </span>{input}</div>{error}'])->dropDownList($items,$params);
     ?>     
 
 
     <div class="form-group" style="text-align: right">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]) : Yii::t('app', '{icon} UPDATE', ['icon' => FA::icon('edit')]), ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} CANCEL', ['icon' => FA::icon('remove')]), ['index'], ['class' => 'btn btn-sm btn-danger'])?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']) : Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-edit"></i>']), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', '{icon} CANCEL', ['icon' => '<i class="fa fa-remove"></i>']), ['index'], ['class' => 'btn btn-sm btn-danger'])?>
     </div>
 
     <?php ActiveForm::end(); ?>

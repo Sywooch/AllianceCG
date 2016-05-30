@@ -26,12 +26,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- </h1> -->
 
     <p style="text-align: right;">
-        <?= Html::a(Yii::t('app', '{icon} CLIENTCIRCULATION', ['icon' => FA::icon('list')]), ['index'], ['class' => 'btn btn-warning btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => FA::icon('edit')]), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} CLIENTCIRCULATION', ['icon' => FA::icon('list')]), ['index'], ['class' => 'btn btn-link animlink']) ?>
+        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-link animlink']) ?>
+        <?= Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => FA::icon('edit')]), ['update', 'id' => $model->id], ['class' => 'btn btn-link animlink']) ?>
         <?php 
             // Html::a(Yii::t('app', '{icon} DELETE', ['icon' => FA::icon('remove')]), ['delete', 'id' => $model->id], [
-            //     'class' => 'btn btn-danger btn-sm',
+            //     'class' => 'btn btn-link animlink',
             //     'data' => [
             //         'confirm' => Yii::t('app', 'CONFIRM_DELETE'),
             //         'method' => 'post',
@@ -86,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <div class='buttonpane'>
-    <?= Html::button(Yii::t('app', '{icon} ADD_EVENT', ['icon' => FA::icon('comment')]), ['value' => Url::to(['addevent', 'id' => $model->id]), 'class' => 'btn btn-info btn-sm', 'id' => 'modalButton']);
+    <?= Html::button(Yii::t('app', '{icon} ADD_EVENT', ['icon' => FA::icon('comment')]), ['value' => Url::to(['addevent', 'id' => $model->id]), 'class' => 'btn btn-link animlink', 'id' => 'modalButton']);
     ?>
 </div>
 

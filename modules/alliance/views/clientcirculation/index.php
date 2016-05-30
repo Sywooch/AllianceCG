@@ -7,6 +7,7 @@ use rmrevin\yii\fontawesome\FA;
 use app\components\grid\SetColumn;
 use app\components\grid\LinkColumn;
 // use app\modules\references\models\Regions;
+use yii\widgets\MaskedInput;
 use app\modules\alliance\models\Clientcirculation;
 use yii\web\View;
 
@@ -53,15 +54,32 @@ $this->registerJs($deleteRestore, View::POS_END);
                     'attribute' => 'name',
                     'format' => 'raw',
                 ],
-                'phone',
+                [
+                    'attribute' => 'phone',                
+                    'filter' => MaskedInput::widget([
+                            'model' => $searchModel,
+                            'attribute' => 'phone',
+                            // 'name' => 'ClientcirculationSearch[phone]',
+                            'mask' => '+7 (999) 999-99-99',
+                        ]),
+                    'contentOptions'=>['style'=>'width: 150px;'],
+                ],
+                // 'phone',
                 'email:email',
                 // [
                 //     'attribute' => 'authorname',
                 //     'value' => 'authorname.full_name',
                 // ],
+                // [
+                //     'attribute' => 'regions',
+                //     'value' => 'regions.region_name'
+                // ],
                 [
-                    'attribute' => 'regions',
-                    'value' => 'regions.region_name'
+                   'attribute'=>'regions',
+                   'format' => 'raw',
+                   'value'=>function ($data) {
+                        return $data->getRegionslink();
+                    },
                 ],
                 [
                     'attribute' => 'employees',

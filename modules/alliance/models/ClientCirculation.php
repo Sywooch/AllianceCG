@@ -77,7 +77,7 @@ class ClientCirculation extends \yii\db\ActiveRecord
             [['name', 'phone', 'region_id', 'employee_id'], 'required'],
             [['phone', 'email'], 'unique'],
             ['email', 'email'],
-            [['contact_type', 'target', 'car_model', 'comment'], 'safe']
+            [['contact_type', 'target', 'car_model', 'comment', 'phone'], 'safe']
         ];
     }
 
@@ -103,7 +103,7 @@ class ClientCirculation extends \yii\db\ActiveRecord
             'contact_type' => Yii::t('app', 'CONTACT_TYPE'),
             'target' => Yii::t('app', 'TARGET'),
             'car_model' => Yii::t('app', 'CAR_MODEL'),
-            'comment' => Yii::t('app', 'COMMENT'),
+            'comment' => Yii::t('app', 'COMMENTDATE'),
         ];
     }
 
@@ -151,6 +151,13 @@ class ClientCirculation extends \yii\db\ActiveRecord
         // Html::a($model->companies->company_name, ['/references/companies/view', 'id' => $model->companies->id]),
         return $link;
     } 
+
+
+    // public function getBrandlink()
+    // {
+    //     $link = isset($this->brand->brand) ? Html::a($this->brand->brand, ['/references/brands/view', 'id' => $this->brand->id]) : false;
+    //     return $link;
+    // }    
 
     /**
      * @return \yii\db\ActiveQuery

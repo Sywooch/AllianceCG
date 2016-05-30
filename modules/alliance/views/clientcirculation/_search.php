@@ -16,16 +16,16 @@ $this->registerJs($toggleAdvanced, View::POS_END);
 ?>
 
 <p class="buttonpane">
-    <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
-    <?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => FA::icon('refresh')]), ['index'], ['class' => 'btn btn-info btn-sm']) ?>
+    <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-link animlink']) ?>
+    <?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => FA::icon('refresh')]), ['index'], ['class' => 'btn btn-link animlink']) ?>
     <?php
         if(Yii::$app->user->can('admin')){
-            echo Html::a(Yii::t('app', '{icon} DELETE', ['icon' => FA::icon('remove')]), ['#'], ['class' => 'btn btn-danger btn-sm', 'id' => 'MultipleDelete']);
+            echo Html::a(Yii::t('app', '{icon} DELETE', ['icon' => FA::icon('remove')]), ['#'], ['class' => 'btn btn-link animlink', 'id' => 'MultipleDelete']);
             echo '&nbsp';
-            echo Html::a(Yii::t('app', '{icon} RESTORE', ['icon' => FA::icon('upload')]), ['#'], ['class' => 'btn btn-warning btn-sm', 'id' => 'MultipleRestore']);
+            echo Html::a(Yii::t('app', '{icon} RESTORE', ['icon' => FA::icon('upload')]), ['#'], ['class' => 'btn btn-link animlink', 'id' => 'MultipleRestore']);
         }
     ?>    
-    <?= Html::button(Yii::t('app', '{icon} ADVANCED', ['icon' => FA::icon('list')]), ['class' => 'btn-link', 'id' => 'advanced']) ?>    
+    <?= Html::button(Yii::t('app', '{icon} ADVANCED', ['icon' => FA::icon('list')]), ['class' => 'btn-link animlink', 'id' => 'advanced']) ?>    
 </p>
 
 <div class="client-circulation-search" id="clientcirculation">

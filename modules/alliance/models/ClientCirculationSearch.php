@@ -18,6 +18,7 @@ class ClientCirculationSearch extends ClientCirculation
     public $regions;
     public $comment;
     public $employees;
+    public $globalSearch;
 
     /**
      * @inheritdoc
@@ -28,7 +29,7 @@ class ClientCirculationSearch extends ClientCirculation
             [['id', 'state', 'created_at', 'updated_at', 'region_id'], 'integer'],
             [['name', 'phone', 'email', 'author'], 'safe'],
             [['authorname', 'regions'], 'safe'],
-            [['comment', 'employees'], 'safe']
+            [['comment', 'employees', 'globalSearch'], 'safe']
         ];
     }
 
@@ -112,9 +113,20 @@ class ClientCirculationSearch extends ClientCirculation
         // ]);
 
         $query
+
+            ->orFilterWhere(['like', '{{%client_circulation}}.name', $this->globalSearch])
+            ->orFilterWhere(['like', '{{%client_circulation}}.phone', $this->globalSearch])
+            ->orFilterWhere(['like', '{{%client_circulation}}.email', $this->globalSearch])
+            ->orFilterWhere(['like', '{{%user}}.full_name', $this->globalSearch])
+            ->orFilterWhere(['like', '{{%regions}}.region_name', $this->globalSearch])
+            ->orFilterWhere(['like', '{{%regions}}.region_code', $this->globalSearch])
+            ->orFilterWhere(['like', '{{%employees}}.name', $this->globalSearch])
+            ->orFilterWhere(['like', '{{%employees}}.surname', $this->globalSearch])
+            ->orFilterWhere(['like', '{{%employees}}.patronimyc', $this->globalSearch])
+            ->orFilterWhere(['like', '{{%client_circulation}}.author', $this->globalSearch])
+
             ->andFilterWhere(['like', '{{%client_circulation}}.name', $this->name])
-            // ->andFilterWhere(['like', '{{%client_circulation}}.phone', $this->phone])
-            ->andFilterWhere(['like', 'phone', $this->phone])
+            ->andFilterWhere(['like', '{{%client_circulation}}.phone', $this->phone])
             ->andFilterWhere(['like', '{{%client_circulation}}.email', $this->email])
             ->andFilterWhere(['like', '{{%user}}.full_name', $this->authorname])
             ->andFilterWhere(['like', '{{%regions}}.region_name', $this->regions])

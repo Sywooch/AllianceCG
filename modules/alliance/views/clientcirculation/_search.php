@@ -35,42 +35,35 @@ $this->registerJs($toggleAdvanced, View::POS_END);
         'method' => 'get',
     ]); ?>
 
-    <div class="col-md-10">
+    <div class="col-md-4">
 
-    <?= $form->field($model, 'comment', ['template' => '{input}{error}'])->widget(
-        DatePicker::className(), [
-                'inline' => false, 
-                'language' => 'ru',
-                'size' => 'ms',
-                // 'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
-                'template' => '{addon}{input}',
-                'options' => ['placeholder' => $model->getAttributeLabel('comment')],
-                'clientOptions' => [
-                    'autoclose' => true,
-                    'format' => 'yyyy-mm-dd'
+        <?= $form->field($model, 'comment', ['template' => '{input}{error}'])->widget(
+            DatePicker::className(), [
+                    'inline' => false, 
+                    'language' => 'ru',
+                    'size' => 'ms',
+                    // 'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
+                    'template' => '{addon}{input}',
+                    'options' => ['placeholder' => $model->getAttributeLabel('comment')],
+                    'clientOptions' => [
+                        'autoclose' => true,
+                        'format' => 'yyyy-mm-dd'
+                    ]
                 ]
-            ]
-        );
-    ?>
-
-<?php 
-    //  $form->field($model, 'email', [
-    //     'template' => '<div class="input-group"><span class="input-group-btn">'.
-    //         '<button class="btn btn-default">Go!</button></span>{input}</div>',
-    // ]);
- ?>    
-
-<?php
-// $form->field($model, 'email', [
-//         'template' => '<div class="input-group">{input}<span class="input-group-btn">'.
-//             Html::submitButton(Yii::t('app', '{icon} Search', ['icon' => FA::icon('search')]), ['class' => 'btn btn-primary']).'</span></div>',
-//     ]); 
-?>
+            );
+        ?>
 
     </div>
 
-    <div class="form-group col-md-2">
-        <?= Html::submitButton(Yii::t('app', '{icon} Search', ['icon' => FA::icon('search')]), ['class' => 'btn btn-primary btn-sm']) ?>
+    <div class="form-group col-md-8">        
+        <?= $form->field($model, 'globalSearch', [
+                'template' => '<div class="input-group"><span class="input-group-addon"> <i class="fa fa-search"></i> </span>{input}{error}</div>',
+            ]); 
+        ?>   
+    </div>
+
+    <div class="buttonpane col-md-12">
+        <?= Html::submitButton(Yii::t('app', '{icon} Search', ['icon' => FA::icon('search')]), ['class' => 'btn btn-primary btn-sm animlink']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -22,6 +22,9 @@ class m160511_134630_create_targets_table extends Migration
             'id' => $this->primaryKey(),
             'target' => $this->string(),
             'state' => $this->integer()->notNull()->defaultValue(0),
+            'created_at' => $this->integer()->notNull()->defaultValue(0),
+            'updated_at' => $this->integer()->notNull()->defaultValue(0),
+            'author' => $this->integer()->notNull()->defaultValue(0),
         ], $tableOptions);
     }
 

@@ -56,6 +56,11 @@ class TargetsSearch extends Targets
             'query' => $query,
         ]);
 
+        $dataProvider->sort->attributes['authorname'] = [
+            'asc' => ['{{%user}}.full_name' => SORT_ASC],
+            'desc' => ['{{%user}}.full_name' => SORT_DESC],
+        ];        
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -69,8 +74,10 @@ class TargetsSearch extends Targets
             'id' => $this->id,
         ]);
 
-        // $query->andFilterWhere(['like', 'target', $this->target]);
-        $query->orFilterWhere(['like', 'target', $this->globalSearch]);
+        $query
+            ->orFilterWhere(['like', '{{%user}}.fullname', $this->authorname])
+            ->orFilterWhere(['like', 'target', $this->globalSearch])
+        ;
 
         return $dataProvider;
     }

@@ -44,6 +44,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 //     return $data->getFullname();
                 // },
             ],
+            'created_at:datetime',
+            'updated_at:datetime',
+            [
+                'attribute' => 'authorname',
+                'value' => 'authorname.full_name',
+            ],
             [
                 'class' => SetColumn::className(),
                 'filter' => Targets::getStatesArray(),

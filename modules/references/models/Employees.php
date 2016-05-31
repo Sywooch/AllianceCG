@@ -37,6 +37,8 @@ class Employees extends \yii\db\ActiveRecord
     const SALES_MANAGER = "Менеджер отдела продаж";
     const HEAD_OF_SALES_DEPARTMENT = "Руководитель отдела продаж";
     const MASTER_CONSULTANT = 'Мастер-консультант';
+    const CREDIT_MANAGER = 'Кредитный специалист';
+    const INSURANCE_MANAGER = 'Страховой специалист';
     const LOGO_PATH = 'img/uploads/brandlogo/';
     const NO_LOGO = '@web/img/logo/company_nologo.png';
     const PHOTO_PATH = 'img/uploads/employeesphoto/';

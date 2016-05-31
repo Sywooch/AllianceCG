@@ -34,6 +34,8 @@ class ClientCirculation extends \yii\db\ActiveRecord
     public $target;
     public $car_model;
     public $comment;
+    public $sales_manager_id;
+    public $credit_manager_id;
 
     const STATUS_BLOCKED = 1;
     const STATUS_ACTIVE = 0;
@@ -77,7 +79,7 @@ class ClientCirculation extends \yii\db\ActiveRecord
             [['name', 'phone', 'region_id'], 'required'],
             [['phone', 'email'], 'unique'],
             ['email', 'email'],
-            [['contact_type', 'target', 'car_model', 'comment', 'phone'], 'safe']
+            [['contact_type', 'target', 'car_model', 'comment', 'phone', 'sales_manager_id', 'credit_manager_id'], 'safe']
         ];
     }
 
@@ -102,6 +104,8 @@ class ClientCirculation extends \yii\db\ActiveRecord
             'target' => Yii::t('app', 'TARGET'),
             'car_model' => Yii::t('app', 'CAR_MODEL'),
             'comment' => Yii::t('app', 'COMMENTDATE'),
+            'sales_manager_id' => Yii::t('app', 'SALESMANAGER'),
+            'credit_manager_id' => Yii::t('app', 'CREDITMANAGER'),
         ];
     }
 

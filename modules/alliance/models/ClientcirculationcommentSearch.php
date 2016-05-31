@@ -12,6 +12,10 @@ use app\modules\alliance\models\Clientcirculationcomment;
  */
 class ClientcirculationcommentSearch extends Clientcirculationcomment
 {
+
+    public $creditmanagers;
+    public $salesmanagers;
+
     /**
      * @inheritdoc
      */
@@ -42,6 +46,7 @@ class ClientcirculationcommentSearch extends Clientcirculationcomment
     public function search($params)
     {
         $query = Clientcirculationcomment::find();
+        $query->joinWith(['creditmanagers', 'salesmanagers']);
 
         // add conditions that should always apply here
 

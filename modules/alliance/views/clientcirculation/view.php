@@ -9,6 +9,7 @@ use yii\data\ActiveDataProvider;
 use app\modules\references\models\Employees;
 use app\modules\alliance\models\Clientcirculationcomment;
 use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
@@ -39,6 +40,10 @@ $this->params['breadcrumbs'][] = $this->title;
             // ]) 
         ?>
     </p>
+    
+    <?php $form = ActiveForm::begin(); ?>
+    <?= $form->errorSummary($commentModel); ?>    
+    <?php ActiveForm::end(); ?>
 
     <?= DetailView::widget([
         'model' => $model,
@@ -122,15 +127,26 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'comment',
+                    'contentOptions'=>['style'=>'width: 50px;'],
+            ],
+            [
+                // 'attribute' => 'credit_manager_id',
+                'attribute' => 'creditmanagers',
+                'value' => 'creditmanagers.fullName'
+            ],
+            [
+                // 'attribute' => 'sales_manager_id',
+                'attribute' => 'salesmanagers',
+                'value' => 'salesmanagers.fullName',
             ],
             [
                 'attribute' => 'created_at',
                 'format' => 'datetime',
             ],
-            [
-                'attribute' => 'authorname',
-                'value' => 'authorname.full_name',
-            ],
+            // [
+            //     'attribute' => 'authorname',
+            //     'value' => 'authorname.full_name',
+            // ],
         ],
     ]);
 

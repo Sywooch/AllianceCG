@@ -52,8 +52,12 @@ class ClientcirculationController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $commentModel = new Clientcirculationcomment();
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'commentModel' => $commentModel,
         ]);
     }
 
@@ -132,6 +136,8 @@ class ClientcirculationController extends Controller
 
             $commentModel->clientcirculation_id = $model->id;
             $commentModel->author = Yii::$app->user->getId();
+            $commentModel->sales_manager_id = $commentModel->sales_manager_id;
+            $commentModel->credit_manager_id = $commentModel->credit_manager_id;
             $commentModel->save();
 
             return $this->redirect(['view', 'id' => $model->id]);

@@ -7,6 +7,7 @@ use yii\behaviors\TimestampBehavior;
 use app\modules\references\models\Targets;
 use app\modules\references\models\ContactType;
 use app\modules\admin\models\User;
+use app\modules\references\models\Employees;
 
 /**
  * This is the model class for table "{{%clientcirculationcomment}}".
@@ -63,7 +64,7 @@ class Clientcirculationcomment extends \yii\db\ActiveRecord
             // [['contact_type', 'target', 'car_model', 'author'], 'string', 'max' => 255],
             // [['car_model', 'author'], 'string', 'max' => 255],
             [['clientcirculation_id'], 'exist', 'skipOnError' => true, 'targetClass' => ClientCirculation::className(), 'targetAttribute' => ['clientcirculation_id' => 'id']],
-            [['clientcirculation_id', 'contact_type', 'target', 'car_model', 'author'], 'safe'],
+            [['clientcirculation_id', 'contact_type', 'target', 'car_model', 'author', 'sales_manager_id', 'credit_manager_id', 'creditmanagers', 'salesmanagers'], 'safe'],
             [['contact_type', 'target'], 'required']
         ];
     }
@@ -85,6 +86,10 @@ class Clientcirculationcomment extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('app', 'Updated At'),
             'author' => Yii::t('app', 'Author'),
             'authorname' => Yii::t('app', 'Author'),
+            'sales_manager_id' => Yii::t('app', 'SALESMANAGER'),
+            'credit_manager_id' => Yii::t('app', 'CREDITMANAGER'),
+            'salesmanagers' => Yii::t('app', 'SALESMANAGER'),
+            'creditmanagers' => Yii::t('app', 'CREDITMANAGER'),
         ];
     }
 
@@ -105,6 +110,16 @@ class Clientcirculationcomment extends \yii\db\ActiveRecord
     {
         return $this->hasOne(ContactType::className(), ['id' => 'contact_type']);
     }
+
+    public function getCreditmanagers()
+    {
+        return $this->hasOne(Employees::className(), ['id' => 'credit_manager_id']);
+    }  
+
+    public function getSalesmanagers()
+    {
+        return $this->hasOne(Employees::className(), ['id' => 'sales_manager_id']);
+    }      
 
     /**
      * @return \yii\db\ActiveQuery

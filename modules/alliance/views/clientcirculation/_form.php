@@ -47,29 +47,25 @@ use yii\helpers\ArrayHelper;
 
 
     <?php
+    
         // $employees = Employees::find()
         //     ->joinWith(['position'])
         //     ->where("{{%employees}}.state = ".Employees::STATUS_ACTIVE." and {{%employees}}.company_id = '".Yii::$app->user->identity->usercompany."' and ({{%positions}}.position = '".Employees::SALES_MANAGER."' or {{%positions}}.position = '".Employees::HEAD_OF_SALES_DEPARTMENT."')")
         //     ->all();
-    
-        $employees = Employees::find()
-            ->joinWith(['position'])
-            ->where("{{%employees}}.state = ".Employees::STATUS_ACTIVE." and {{%employees}}.company_id = '".Yii::$app->user->identity->usercompany."' and ({{%positions}}.position = '".Employees::SALES_MANAGER."' or {{%positions}}.position = '".Employees::HEAD_OF_SALES_DEPARTMENT."')")
-            ->all();
 
-        $employeesAdmin = Employees::find()
-            ->joinWith(['position'])
-            ->where("{{%employees}}.state = ".Employees::STATUS_ACTIVE." and ({{%positions}}.position = '".Employees::SALES_MANAGER."' or {{%positions}}.position = '".Employees::HEAD_OF_SALES_DEPARTMENT."')")
-            ->all();            
+        // $employeesAdmin = Employees::find()
+        //     ->joinWith(['position'])
+        //     ->where("{{%employees}}.state = ".Employees::STATUS_ACTIVE." and ({{%positions}}.position = '".Employees::SALES_MANAGER."' or {{%positions}}.position = '".Employees::HEAD_OF_SALES_DEPARTMENT."')")
+        //     ->all();            
 
-        $employeesResult = Yii::$app->user->can('admin') ? $employeesAdmin : $employees;
+        // $employeesResult = Yii::$app->user->can('admin') ? $employeesAdmin : $employees;
 
-        $items = ArrayHelper::map($employeesResult,'id','fullName');
-        $params = [
-            'options' => isset($_GET['id']) ? [$_GET['id'] => ['Selected'=>'selected']] : false,
-            'prompt' => '-- ' . $model->getAttributeLabel( 'employee_id' ) . ' --',
-        ];
-        echo $form->field($model, 'employee_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-briefcase"></i> </span>{input}</div>{error}'])->dropDownList($items,$params);
+        // $items = ArrayHelper::map($employeesResult,'id','fullName');
+        // $params = [
+        //     'options' => isset($_GET['id']) ? [$_GET['id'] => ['Selected'=>'selected']] : false,
+        //     'prompt' => '-- ' . $model->getAttributeLabel( 'employee_id' ) . ' --',
+        // ];
+        // echo $form->field($model, 'employee_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-briefcase"></i> </span>{input}</div>{error}'])->dropDownList($items,$params);
     ?>     
 
 

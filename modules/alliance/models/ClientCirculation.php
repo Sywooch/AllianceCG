@@ -74,7 +74,7 @@ class ClientCirculation extends \yii\db\ActiveRecord
             [['phone'], 'string', 'max' => 18],
             [['globalSearch'], 'safe'],
             ['author', 'default', 'value' => Yii::$app->user->getId()],
-            [['name', 'phone', 'region_id', 'employee_id'], 'required'],
+            [['name', 'phone', 'region_id'], 'required'],
             [['phone', 'email'], 'unique'],
             ['email', 'email'],
             [['contact_type', 'target', 'car_model', 'comment', 'phone'], 'safe']
@@ -98,8 +98,6 @@ class ClientCirculation extends \yii\db\ActiveRecord
             'region_id' => Yii::t('app', 'REGION'),
             'regions' => Yii::t('app', 'REGION'),
             'authorname' => Yii::t('app', 'AUTHOR'),
-            'employee_id' => Yii::t('app', 'EMPLOYEE'),
-            'employees' => Yii::t('app', 'EMPLOYEE'),
             'contact_type' => Yii::t('app', 'CONTACT_TYPE'),
             'target' => Yii::t('app', 'TARGET'),
             'car_model' => Yii::t('app', 'CAR_MODEL'),
@@ -114,14 +112,6 @@ class ClientCirculation extends \yii\db\ActiveRecord
     public function getAuthorname()
     {
         return $this->hasOne(User::className(), ['id' => 'author']);
-    }  
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getEmployees()
-    {
-        return $this->hasOne(Employees::className(), ['id' => 'employee_id']);
     }  
 
     /**
@@ -151,13 +141,6 @@ class ClientCirculation extends \yii\db\ActiveRecord
         // Html::a($model->companies->company_name, ['/references/companies/view', 'id' => $model->companies->id]),
         return $link;
     } 
-
-
-    // public function getBrandlink()
-    // {
-    //     $link = isset($this->brand->brand) ? Html::a($this->brand->brand, ['/references/brands/view', 'id' => $this->brand->id]) : false;
-    //     return $link;
-    // }    
 
     /**
      * @return \yii\db\ActiveQuery

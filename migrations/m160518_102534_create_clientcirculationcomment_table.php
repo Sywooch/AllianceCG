@@ -18,10 +18,14 @@ class m160518_102534_create_clientcirculationcomment_table extends Migration
             'contact_type' => $this->string(),
             'target' => $this->string(),
             'car_model' => $this->string(),
+            'sales_manager_id' => $this->integer()->notNull(),
+            'credit_manager_id' => $this->integer()->notNull()
             'comment' => $this->text(),
             'state' => $this->integer()->notNull()->defaultValue(0),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
+            'sales_manager_id' => $this->integer()->notNull(),
+            'credit_manager_id' => $this->integer()->notNull(),
             'author' => $this->string(255),
         ]);
 

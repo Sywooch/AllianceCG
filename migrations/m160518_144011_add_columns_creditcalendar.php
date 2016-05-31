@@ -6,10 +6,10 @@ class m160518_144011_add_columns_creditcalendar extends Migration
 {
     public function up()
     {
-        $this->addColumn('{{%statusmonitor}}', 'state', $this->integer()->notNull()->defaultValue(0));
-        $this->addColumn('{{%statusmonitor}}', 'created_at', $this->integer()->notNull());
-        $this->addColumn('{{%statusmonitor}}', 'updated_at', $this->integer()->notNull());
-        $this->addColumn('{{%statusmonitor}}', 'author', $this->string());
+        // $this->addColumn('{{%statusmonitor}}', 'state', $this->integer()->notNull()->defaultValue(0));
+        // $this->addColumn('{{%statusmonitor}}', 'created_at', $this->integer()->notNull());
+        // $this->addColumn('{{%statusmonitor}}', 'updated_at', $this->integer()->notNull());
+        // $this->addColumn('{{%statusmonitor}}', 'author', $this->string());
     }
 
     public function down()

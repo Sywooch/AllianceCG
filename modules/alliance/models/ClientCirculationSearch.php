@@ -17,7 +17,6 @@ class ClientCirculationSearch extends ClientCirculation
     public $authorname;
     public $regions;
     public $comment;
-    public $employees;
     public $globalSearch;
 
     /**
@@ -29,7 +28,7 @@ class ClientCirculationSearch extends ClientCirculation
             [['id', 'state', 'created_at', 'updated_at', 'region_id'], 'integer'],
             [['name', 'phone', 'email', 'author'], 'safe'],
             [['authorname', 'regions'], 'safe'],
-            [['comment', 'employees', 'globalSearch'], 'safe']
+            [['comment', 'globalSearch'], 'safe']
         ];
     }
 
@@ -55,7 +54,7 @@ class ClientCirculationSearch extends ClientCirculation
         if(!Yii::$app->user->can('admin')){
             $query->where(['{{%client_circulation}}.state' => ClientCirculation::STATUS_ACTIVE]);
         }
-        $query->joinWith(['authorname', 'regions', 'clientcomment', 'employees']);
+        $query->joinWith(['authorname', 'regions', 'clientcomment']);
 
         // add conditions that should always apply here
            
@@ -101,11 +100,6 @@ class ClientCirculationSearch extends ClientCirculation
                 'desc' => ['{{%regions}}.region_name' => SORT_DESC],
             ]; 
 
-        $dataProvider->sort->attributes['employees'] = [
-                'asc' => ['{{%employees}}.surname' => SORT_ASC],
-                'desc' => ['{{%employees}}.surname' => SORT_DESC],
-            ];       
-
         // grid filtering conditions
         // $query->andFilterWhere([
         //     'id' => $this->id,
@@ -123,9 +117,6 @@ class ClientCirculationSearch extends ClientCirculation
             ->orFilterWhere(['like', '{{%user}}.full_name', $this->globalSearch])
             ->orFilterWhere(['like', '{{%regions}}.region_name', $this->globalSearch])
             ->orFilterWhere(['like', '{{%regions}}.region_code', $this->globalSearch])
-            ->orFilterWhere(['like', '{{%employees}}.name', $this->globalSearch])
-            ->orFilterWhere(['like', '{{%employees}}.surname', $this->globalSearch])
-            ->orFilterWhere(['like', '{{%employees}}.patronimyc', $this->globalSearch])
             ->orFilterWhere(['like', '{{%client_circulation}}.author', $this->globalSearch])
 
             ->andFilterWhere(['like', '{{%client_circulation}}.name', $this->name])

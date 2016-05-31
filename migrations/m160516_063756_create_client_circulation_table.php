@@ -17,13 +17,12 @@ class m160516_063756_create_client_circulation_table extends Migration
             'name' => $this->string(),
             'phone' => $this->string('18'),
             'email' => $this->string(),
-            // 'region' => $this->string(),
             'state' => $this->integer()->notNull()->defaultValue(0),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
             'author' => $this->string(255),
             'region_id' => $this->integer()->notNull(),
-            'employee_id' => $this->integer()->notNull(),
+            // 'employee_id' => $this->integer()->notNull(),
         ]);
     }
 

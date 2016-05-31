@@ -21,9 +21,9 @@ $this->registerJs($toggleSearch, View::POS_END);
 <div class="source-message-search">
 
     <div class="form-group buttonpane">
-        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => FA::icon('refresh')]), ['index'], ['class' => 'btn btn-info btn-sm']) ?>
-        <?= Html::button(Yii::t('app', '{icon} ADVANCED', ['icon' => FA::icon('file-excel-o')]), ['class' => 'btn-link btn-sm', 'id' => 'advancedOperations']) ?>
+        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-link animlink']) ?>
+        <?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => FA::icon('refresh')]), ['index'], ['class' => 'btn btn-link animlink']) ?>
+        <?= Html::button(Yii::t('app', '{icon} ADVANCED', ['icon' => FA::icon('file-excel-o')]), ['class' => 'btn-link animlink', 'id' => 'advancedOperations']) ?>
     </div>
 
     <div class="col-sm-12 bs-callout bs-callout-info" id="advanced">
@@ -38,7 +38,7 @@ $this->registerJs($toggleSearch, View::POS_END);
 
         <?= $form->field($model, 'globalSearch', [
                 'template' => '<div class="input-group"><span class="input-group-addon"> ' . FA::icon('search') . ' </span>{input}<span class="input-group-btn">'.
-                    Html::submitButton(Yii::t('app', '{icon} Search', ['icon' => FA::icon('search')]), ['class' => 'btn btn-primary']).'</span></div>',
+                    Html::submitButton(Yii::t('app', '{icon} Search', ['icon' => FA::icon('search')]), ['class' => 'btn btn-primary animlink']).'</span></div>',
             ]); 
         ?> 
 
@@ -46,9 +46,9 @@ $this->registerJs($toggleSearch, View::POS_END);
 
     </div>
     <div class="col-sm-6">
-        <?= Html::a(Yii::t('app', '{icon} IMPORT_EXCEL', ['icon' => FA::icon('upload')]), ['upload'], ['class' => 'btn btn-link btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} IMPORT_EXCEL', ['icon' => FA::icon('upload')]), ['upload'], ['class' => 'btn btn-link animlink']) ?>
         <?php // echo Html::a(Yii::t('app', '{icon} IMPORT_EXCEL', ['icon' => FA::icon('file-excel-o')]), ['import'], ['class' => 'btn btn-link btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} EXPORT_EXCEL', ['icon' => FA::icon('file-excel-o')]), ['export'], ['class' => 'btn btn-link btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} EXPORT_EXCEL', ['icon' => FA::icon('file-excel-o')]), ['export'], ['class' => 'btn btn-link animlink']) ?>
     </div>
     </div>
 

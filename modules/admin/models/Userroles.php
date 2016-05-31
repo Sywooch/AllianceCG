@@ -21,6 +21,11 @@ class Userroles extends \yii\db\ActiveRecord
 
     public $globalSearch;
     public $userroles_count;
+    public $xlsxFile;
+
+    const DIR_FOR_UPLOAD = 'files/userroles/';
+    const XLSX_FILE_FOR_UPLOAD = 'userroles';
+    const UPLOAD_FILE_EXT = 'xlsx';
 
     /**
      * @inheritdoc
@@ -57,6 +62,7 @@ class Userroles extends \yii\db\ActiveRecord
             [['role', 'author'], 'string', 'max' => 255],
             [['globalSearch', 'userroles_count'], 'safe'],
             ['author', 'default', 'value' => Yii::$app->user->getId()],
+            [['xlsxFile'], 'file', 'skipOnEmpty' => true, 'extensions' => ['xlsx'],'checkExtensionByMimeType'=>false],
         ];
     }
 
@@ -105,6 +111,7 @@ class Userroles extends \yii\db\ActiveRecord
             'authorname' => Yii::t('app', 'AUTHOR'),
             'globalSearch' => Yii::t('app', 'SEARCH'),
             'userroles_count' => Yii::t('app', 'USERROLESCOUNT'),
+            'xlsxFile' => Yii::t('app', 'xlsxFile'),
         ];
     }
     

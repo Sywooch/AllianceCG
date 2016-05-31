@@ -25,8 +25,8 @@ use yii\helpers\ArrayHelper;
     <?= $form->field($model, 'translation')->textarea(['rows' => 6]) ?>
 
     <div class="form-group buttonpane">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', '{icon} Create', ['icon' => FA::icon('plus')]) : Yii::t('app', '{icon} Update', ['icon' => FA::icon('edit')]), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', '{icon} CANCEL', ['icon' => FA::icon('remove')]), ['index'], ['class' => 'btn btn-danger btn-sm']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', '{icon} Create', ['icon' => FA::icon('plus')]) : Yii::t('app', '{icon} Update', ['icon' => FA::icon('edit')]), ['class' => $model->isNewRecord ? 'btn btn-success animlinkColor' : 'btn btn-primary animlinkColor']) ?>
+        <?= Html::a(Yii::t('app', '{icon} CANCEL', ['icon' => FA::icon('remove')]), ['index'], ['class' => 'btn btn-danger btn-sm animlinkColor']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

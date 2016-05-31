@@ -20,16 +20,18 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- </h1> -->
 
     <p class="buttonpane">
-        <?= Html::a(Yii::t('app', '{icon} TRANSLATIONS', ['icon' => FA::icon('list')]), ['index'], ['class' => 'btn btn-warning btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} Create', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} Update', ['icon' => FA::icon('edit')]), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} Delete', ['icon' => FA::icon('trash')]), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger btn-sm',
-            'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::a(Yii::t('app', '{icon} TRANSLATIONS', ['icon' => FA::icon('list')]), ['index'], ['class' => 'btn btn-link animlink']) ?>
+        <?= Html::a(Yii::t('app', '{icon} Create', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-link animlink']) ?>
+        <?= Html::a(Yii::t('app', '{icon} Update', ['icon' => FA::icon('edit')]), ['update', 'id' => $model->id], ['class' => 'btn btn-link animlink']) ?>
+        <?php 
+        // Html::a(Yii::t('app', '{icon} Delete', ['icon' => FA::icon('trash')]), ['delete', 'id' => $model->id], [
+        //     'class' => 'btn btn-danger btn-sm',
+        //     'data' => [
+        //         'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+        //         'method' => 'post',
+        //     ],
+        // ]) 
+        ?>
     </p>
 
     <?= DetailView::widget([

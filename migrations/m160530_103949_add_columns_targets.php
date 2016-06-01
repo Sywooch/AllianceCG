@@ -6,9 +6,9 @@ class m160530_103949_add_columns_targets extends Migration
 {
     public function up()
     {
-        // $this->addColumn('{{%targets}}', 'created_at', $this->integer()->notNull());
-        // $this->addColumn('{{%targets}}', 'updated_at', $this->integer()->notNull());
-        // $this->addColumn('{{%targets}}', 'author', $this->string());
+        $this->addColumn('{{%targets}}', 'created_at', $this->integer()->notNull());
+        $this->addColumn('{{%targets}}', 'updated_at', $this->integer()->notNull());
+        $this->addColumn('{{%targets}}', 'author', $this->string());
     }
 
     public function down()

@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php // echo Html::encode($this->title) ?>
     <!-- </h1> -->
 
-    <p style="text-align: right;">
+    <p class="buttonpane">
         <?= Html::a(Yii::t('app', '{icon} CLIENTCIRCULATION', ['icon' => FA::icon('list')]), ['index'], ['class' => 'btn btn-link animlink']) ?>
         <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-link animlink']) ?>
         <?= Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => FA::icon('edit')]), ['update', 'id' => $model->id], ['class' => 'btn btn-link animlink']) ?>
@@ -41,6 +41,22 @@ $this->params['breadcrumbs'][] = $this->title;
         ?>
     </p>
     
+
+    <?php if (Yii::$app->session->hasFlash('err')) { ?>
+
+        <div class="alert alert-danger">
+            <?= Yii::t('app', 'CLIENTCIRCULATIONCOMMENTVALIDATIONERROR') ?>
+        </div>
+
+    <?php } 
+    elseif (Yii::$app->session->hasFlash('ok')) { ?>
+
+        <div class="alert alert-success">
+            <?= Yii::t('app', 'CLIENTCIRCULATIONCOMMENTDONE') ?>
+        </div>        
+
+    <?php } ?>
+
     <?php $form = ActiveForm::begin(); ?>
     <?= $form->errorSummary($commentModel); ?>    
     <?php ActiveForm::end(); ?>
@@ -98,11 +114,37 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php
 
     $query = $model->getClientcomment();
-    // $query->where(['state' => Models::STATUS_ACTIVE]);
+
+    $commentDataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'sort' => [
+                'defaultOrder' => ['created_at' => SORT_DESC],
+            ],
+        ]);
+
+    // $commentDataProvider->setSort([
+    //     'attributes' => [
+    //         'created_at' => [
+    //             'asc' => ['created_at' => SORT_ASC],
+    //             'desc' => ['created_at' => SORT_DESC],
+    //             'label' => 'created_at',
+    //             'default' => SORT_ASC
+    //         ],
+    //     ]
+    // ]);    
+
+    $query->andFilterWhere(['like', 'contact_type', $commentModel->contact_type])
+        ->andFilterWhere(['like', 'target', $commentModel->target])
+        ->andFilterWhere(['like', 'car_model', $commentModel->car_model])
+        ->andFilterWhere(['like', 'comment', $commentModel->comment])
+        ->andFilterWhere(['like', 'author', $commentModel->author])
+        ;
 
     echo GridView::widget([
-        'dataProvider' => new ActiveDataProvider(['query' => $query]),
-        'filterModel' => new ActiveDataProvider(['query' => $query]),
+        // 'dataProvider' => new ActiveDataProvider(['query' => $query]),
+        'dataProvider' => $commentDataProvider,
+        // 'filterModel' => new ActiveDataProvider(['query' => $query]),
+        'filterModel' => $commentDataProvider,
         'showOnEmpty' => true,
         'emptyText' => 'Записи отсутствуют',
         'summary' => false,

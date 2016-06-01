@@ -140,7 +140,14 @@ class ClientcirculationController extends Controller
             $commentModel->credit_manager_id = $commentModel->credit_manager_id;
             $commentModel->save();
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            if($model->hasErrors() || $commentModel->hasErrors()) {
+                Yii::$app->session->setFlash('err', "Errors!");
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+            else {
+                Yii::$app->session->setFlash('ok', "All Right!!");
+                return $this->redirect(['view', 'id' => $model->id]);
+            }            
 
         } else {
             return $this->renderAjax('comment', [

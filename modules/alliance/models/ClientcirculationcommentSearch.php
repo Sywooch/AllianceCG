@@ -15,6 +15,9 @@ class ClientcirculationcommentSearch extends Clientcirculationcomment
 
     public $creditmanagers;
     public $salesmanagers;
+    public $targets;
+    public $contacttypes;
+    public $clientname;
 
     /**
      * @inheritdoc
@@ -24,6 +27,7 @@ class ClientcirculationcommentSearch extends Clientcirculationcomment
         return [
             [['id', 'clientcirculation_id', 'state', 'created_at', 'updated_at'], 'integer'],
             [['contact_type', 'target', 'car_model', 'comment', 'author'], 'safe'],
+            [['targets', 'contacttypes', 'clientname'], 'safe'],
         ];
     }
 
@@ -46,13 +50,36 @@ class ClientcirculationcommentSearch extends Clientcirculationcomment
     public function search($params)
     {
         $query = Clientcirculationcomment::find();
-        $query->joinWith(['creditmanagers', 'salesmanagers']);
+        // $query->joinWith(['creditmanagers', 'salesmanagers']);
+        $query->joinWith(['creditmanagers', 'targets', 'contacttypes', 'authorname']);
+        $query->with(['salesmanagers']);
+        if(!Yii::$app->user->can('admin')){
+            $query->andWhere(['{{%clientcirculationcomment}}.state' => Clientcirculationcomment::STATUS_ACTIVE]);
+        }
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => ['created_at' => SORT_DESC],
+            ],
         ]);
+
+        $dataProvider->sort->attributes['targets'] = [
+            'asc' => ['{{%targets}}.target' => SORT_ASC],
+            'desc' => ['{{%targets}}.target' => SORT_DESC],
+        ];  
+
+        $dataProvider->sort->attributes['contacttypes'] = [
+            'asc' => ['{{%contact_type}}.contact_type' => SORT_ASC],
+            'desc' => ['{{%contact_type}}.contact_type' => SORT_DESC],
+        ];      
+
+        $dataProvider->sort->attributes['authorname'] = [
+            'asc' => ['{{%user}}.surname' => SORT_ASC],
+            'desc' => ['{{%user}}.surname' => SORT_DESC],
+        ];                      
 
         $this->load($params);
 
@@ -71,11 +98,13 @@ class ClientcirculationcommentSearch extends Clientcirculationcomment
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'contact_type', $this->contact_type])
+        $query
+            ->andFilterWhere(['like', 'contact_type', $this->contact_type])
             ->andFilterWhere(['like', 'target', $this->target])
             ->andFilterWhere(['like', 'car_model', $this->car_model])
             ->andFilterWhere(['like', 'comment', $this->comment])
-            ->andFilterWhere(['like', 'author', $this->author]);
+            ->andFilterWhere(['like', 'author', $this->author])
+            ;
 
         return $dataProvider;
     }

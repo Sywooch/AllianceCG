@@ -33,7 +33,7 @@ class PositionsController extends Controller
                     [
                         'allow' => true,
                         'actions'=>['index', 'view'],
-                        'roles' => ['seniorcreditspesialist', 'chiefcredit', 'admin', 'root'],
+                        'roles' => ['seniorcreditspesialist', 'chiefcredit', 'admin', 'root', 'accessCreditReferences'],
                     ],
                     [
                         'allow' => true,

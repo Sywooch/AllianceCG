@@ -1,6 +1,7 @@
 <?php
 
 namespace app\modules\alliance\models;
+use yii\helpers\ArrayHelper;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -8,6 +9,7 @@ use app\modules\references\models\Targets;
 use app\modules\references\models\ContactType;
 use app\modules\admin\models\User;
 use app\modules\references\models\Employees;
+use app\modules\references\models\Models;
 use yii\helpers\Html;
 
 /**
@@ -28,6 +30,12 @@ use yii\helpers\Html;
  */
 class Clientcirculationcomment extends \yii\db\ActiveRecord
 {
+
+    const STATUS_BLOCKED = 1;
+    const STATUS_ACTIVE = 0;
+
+    public $clientname;
+
     /**
      * @inheritdoc
      */
@@ -65,7 +73,7 @@ class Clientcirculationcomment extends \yii\db\ActiveRecord
             // [['contact_type', 'target', 'car_model', 'author'], 'string', 'max' => 255],
             // [['car_model', 'author'], 'string', 'max' => 255],
             [['clientcirculation_id'], 'exist', 'skipOnError' => true, 'targetClass' => ClientCirculation::className(), 'targetAttribute' => ['clientcirculation_id' => 'id']],
-            [['clientcirculation_id', 'contact_type', 'target', 'car_model', 'author', 'sales_manager_id', 'credit_manager_id', 'creditmanagers', 'salesmanagers'], 'safe'],
+            [['clientcirculation_id', 'contact_type', 'target', 'car_model', 'author', 'sales_manager_id', 'credit_manager_id', 'creditmanagers', 'salesmanagers', 'clientname'], 'safe'],
             [['contact_type', 'target'], 'required']
         ];
     }
@@ -91,8 +99,24 @@ class Clientcirculationcomment extends \yii\db\ActiveRecord
             'credit_manager_id' => Yii::t('app', 'CREDITMANAGER'),
             'salesmanagers' => Yii::t('app', 'SALESMANAGER'),
             'creditmanagers' => Yii::t('app', 'CREDITMANAGER'),
+            'clientname' => Yii::t('app', 'CLIENTNAME'),
+            'contacttypes' => Yii::t('app', 'Contact Type'),
+            'targets' => Yii::t('app', 'Target'),
         ];
     }
+
+    public function getStatesName()
+    {
+        return ArrayHelper::getValue(self::getStatesArray(), $this->state);
+    }
+
+    public static function getStatesArray()
+    {
+        return [
+            self::STATUS_ACTIVE => 'Активен',
+            self::STATUS_BLOCKED => 'Заблокирован',
+        ];
+    }    
 
     /**
      * @return \yii\db\ActiveQuery
@@ -128,6 +152,14 @@ class Clientcirculationcomment extends \yii\db\ActiveRecord
     public function getAuthorname()
     {
         return $this->hasOne(User::className(), ['id' => 'author']);
+    }     
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCars()
+    {
+        return $this->hasOne(Models::className(), ['id' => 'car_model']);
     }
 
     public function getSalesmanagerlink()

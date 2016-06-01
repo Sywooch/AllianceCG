@@ -127,6 +127,8 @@ $this->registerJs($toggleClientData, View::POS_END);
     // $query = $model->getClientcomment();
     $query = Clientcirculationcomment::find();
     $query->where(['clientcirculation_id' => $model->id]);
+    $query->andwhere(['{{%clientcirculationcomment}}.state' => Clientcirculationcomment::STATUS_ACTIVE]);
+    $query->joinWith(['cars']);
     $filterModel = new Clientcirculationcomment();
 
     $commentDataProvider = new ActiveDataProvider([
@@ -188,7 +190,11 @@ $this->registerJs($toggleClientData, View::POS_END);
                 'value' => 'targets.target',
             ],
             [
-                'attribute' => 'car_model',
+                // 'attribute' => 'car_model',
+                'attribute' => 'cars',
+                'value' => function($data){
+                        return is_numeric($data->car_model) ? $data->cars->fullModelName : $data->car_model;
+                }
             ],
             [
                 'attribute' => 'created_at',

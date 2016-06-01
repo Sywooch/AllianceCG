@@ -349,7 +349,7 @@ class TargetsController extends Controller
         }
         else{
             try{
-                // Targets::deleteAll();
+                Targets::deleteAll();
                 $inputFileType = \PHPExcel_IOFactory::identify($inputFile);
                 $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
                 $objPHPExcel = $objReader->load($inputFile);

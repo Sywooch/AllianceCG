@@ -33,6 +33,7 @@ $this->registerJs($toggleClientData, View::POS_END);
     <p class="buttonpane">
         <?= Html::a(Yii::t('app', '{icon} CLIENTCIRCULATION', ['icon' => '<i class="fa fa-list"></i>']), ['index'], ['class' => 'btn btn-link animlink']) ?>
         <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-link animlink']) ?>
+        <?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => '<i class="fa fa-refresh"></i>']), ['view', 'id' => $model->id], ['class' => 'btn btn-link animlink']) ?>
         <?= Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-edit"></i>']), ['update', 'id' => $model->id], ['class' => 'btn btn-link animlink']) ?>
         <?php 
             // Html::a(Yii::t('app', '{icon} DELETE', ['icon' => FA::icon('remove')]), ['delete', 'id' => $model->id], [
@@ -123,7 +124,10 @@ $this->registerJs($toggleClientData, View::POS_END);
 
 <?php
 
-    $query = $model->getClientcomment();
+    // $query = $model->getClientcomment();
+    $query = Clientcirculationcomment::find();
+    $query->where(['clientcirculation_id' => $model->id]);
+    $filterModel = new Clientcirculationcomment();
 
     $commentDataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -143,18 +147,27 @@ $this->registerJs($toggleClientData, View::POS_END);
     //     ]
     // ]);    
 
-    $query->andFilterWhere(['like', 'contact_type', $commentModel->contact_type])
-        ->andFilterWhere(['like', 'target', $commentModel->target])
-        ->andFilterWhere(['like', 'car_model', $commentModel->car_model])
-        ->andFilterWhere(['like', 'comment', $commentModel->comment])
-        ->andFilterWhere(['like', 'author', $commentModel->author])
+        // $query->andFilterWhere([
+        //     'id' => $this->id,
+        //     'contact_type' => $this->contact_type,
+        //     'target' => $this->target,
+        //     'car_model' => $this->car_model,
+        //     'author' => $this->author,
+        // ]);
+
+    // $query
+    //     ->andFilterWhere(['like', 'contact_type', $commentDataProvider->contact_type])
+    //     ->andFilterWhere(['like', 'target', $commentDataProvider->target])
+    //     ->andFilterWhere(['like', 'car_model', $commentDataProvider->car_model])
+    //     ->andFilterWhere(['like', 'comment', $commentDataProvider->comment])
+    //     ->andFilterWhere(['like', 'author', $commentDataProvider->author])
         ;
 
     echo GridView::widget([
         // 'dataProvider' => new ActiveDataProvider(['query' => $query]),
         'dataProvider' => $commentDataProvider,
         // 'filterModel' => new ActiveDataProvider(['query' => $query]),
-        'filterModel' => $commentDataProvider,
+        // 'filterModel' => $filterModel,
         'showOnEmpty' => true,
         'emptyText' => 'Записи отсутствуют',
         'summary' => false,
@@ -188,12 +201,19 @@ $this->registerJs($toggleClientData, View::POS_END);
             [
                 // 'attribute' => 'credit_manager_id',
                 'attribute' => 'creditmanagers',
-                'value' => 'creditmanagers.fullName'
+                'format' => 'raw',
+                // 'value' => 'creditmanagers.fullName',
+                'value'=>function ($data) {
+                    return $data->getCreditmanagerlink();
+                },
             ],
             [
-                // 'attribute' => 'sales_manager_id',
                 'attribute' => 'salesmanagers',
-                'value' => 'salesmanagers.fullName',
+                'format' => 'raw',
+                // 'value' => 'salesmanagers.fullName',
+                'value'=>function ($data) {
+                     return $data->getSalesmanagerlink();
+                },
             ],
             // [
             //     'attribute' => 'authorname',

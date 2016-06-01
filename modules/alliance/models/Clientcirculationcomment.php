@@ -8,6 +8,7 @@ use app\modules\references\models\Targets;
 use app\modules\references\models\ContactType;
 use app\modules\admin\models\User;
 use app\modules\references\models\Employees;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "{{%clientcirculationcomment}}".
@@ -128,4 +129,19 @@ class Clientcirculationcomment extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'author']);
     }
+
+    public function getSalesmanagerlink()
+    {
+        $link = isset($this->salesmanagers->fullName) ? Html::a($this->salesmanagers->fullName, ['/references/employees/view', 'id' => $this->salesmanagers->id]) : false;
+        // Html::a($model->companies->company_name, ['/references/companies/view', 'id' => $model->companies->id]),
+        return $link;
+    }  
+
+    public function getCreditmanagerlink()
+    {
+        $link = isset($this->creditmanagers->fullName) ? Html::a($this->creditmanagers->fullName, ['/references/employees/view', 'id' => $this->creditmanagers->id]) : false;
+        // Html::a($model->companies->company_name, ['/references/companies/view', 'id' => $model->companies->id]),
+        return $link;
+    }      
+
 }

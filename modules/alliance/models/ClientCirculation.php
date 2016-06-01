@@ -145,6 +145,7 @@ class ClientCirculation extends \yii\db\ActiveRecord
         // Html::a($model->companies->company_name, ['/references/companies/view', 'id' => $model->companies->id]),
         return $link;
     } 
+  
 
     /**
      * @return \yii\db\ActiveQuery

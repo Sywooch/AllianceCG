@@ -12,8 +12,8 @@ class m160531_115313_add_columns_to_clientcirculationcomment extends Migration
      */
     public function up()
     {
-        $this->addColumn('{{%clientcirculationcomment}}', 'sales_manager_id', $this->integer()->notNull());
-        $this->addColumn('{{%clientcirculationcomment}}', 'credit_manager_id', $this->integer()->notNull());
+        // $this->addColumn('{{%clientcirculationcomment}}', 'sales_manager_id', $this->integer()->notNull());
+        // $this->addColumn('{{%clientcirculationcomment}}', 'credit_manager_id', $this->integer()->notNull());
     }
 
     /**

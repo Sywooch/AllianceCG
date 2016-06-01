@@ -359,10 +359,10 @@ class TargetsController extends Controller
             $sheet = $objPHPExcel->getSheet(0);
             $highestRow = $sheet->getHighestRow();
             $highestColumn = $sheet->getHighestDataColumn();        
-            for($row = 1; $row <= $sheet->getHighestRow(); $row++){
+            for($row = 3; $row <= $sheet->getHighestRow(); $row++){
 
                 $rowData = $sheet->rangeToArray('A'.$row.':'.$highestColumn.$row,NULL,TRUE,FALSE);
-                if($row == 1)
+                if($row == 3)
                 {
                     continue;
                 }
@@ -393,5 +393,3 @@ class TargetsController extends Controller
     }                 
 
 }
-
-            // -- $sql = "DELETE FROM {{%targets}} WHERE id = $value";

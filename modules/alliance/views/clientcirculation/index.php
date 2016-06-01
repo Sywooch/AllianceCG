@@ -29,7 +29,9 @@ $this->registerJs($deleteRestore, View::POS_END);
         <?php // echo Html::encode($this->title) ?>
     <!-- </h1> -->
 
-
+<?php
+    // echo $searchModel->getBrands();
+?>
 
     <?= $this->render('_search', ['model' => $searchModel]); ?>
 

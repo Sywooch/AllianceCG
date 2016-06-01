@@ -167,6 +167,8 @@ class RbacController extends Controller
         $auth->addChild($creditmanager, $createCreditcalendarPost);
         // PERMISSION TO VIEW CREDITCALENDAR COMPONENTS
         $auth->addChild($creditmanager, $creditcalendarIsVisible);
+        // PERMISSION TO VIEW CREDITCALENDAR COMPONENTS
+        $auth->addChild($creditmanager, $accessCreditReferences);
 
         // CHIEF OF CREDIT DEPARTMENT
         $chiefcredit = $auth->createRole('chiefcredit');

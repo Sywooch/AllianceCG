@@ -13,6 +13,7 @@ use yii\web\UploadedFile;
 use app\modules\references\models\Positions;
 // use app\modules\user\Module;
 use app\modules\references\models\Companies;
+use app\modules\references\models\Brands;
 use app\modules\admin\models\Userroles;
 
 /**
@@ -184,7 +185,15 @@ class User extends ActiveRecord implements IdentityInterface
             return $profile->company;
         return false;
     }    
-    
+
+    public function getUserbrand()
+    {
+
+        $company = Companies::find()->where(['id'=>$this->getUsercompany()])->one();
+        if ($company !==null)
+            return $company->company_brand;
+    }
+
     public function getStatusName()
     {
         return ArrayHelper::getValue(self::getStatusesArray(), $this->status);

@@ -33,12 +33,12 @@ class ModelsController extends Controller
                     [
                         'allow' => true,
                         'actions'=>['index', 'view'],
-                        'roles' => ['seniorcreditspesialist', 'chiefcredit', 'admin', 'root'],
+                        'roles' => ['seniorcreditspesialist', 'chiefcredit', 'accessCreditReferences', 'admin', 'root'],
                     ],
                     [
                         'allow' => true,
                         'actions'=>['create', 'update', 'multipledelete', 'multiplerestore', 'delete'],
-                        'roles' => ['admin', 'root'],
+                        'roles' => ['admin', 'root', 'accessCreditReferences'],
                     ],
                 ],
             ],

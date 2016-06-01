@@ -72,7 +72,9 @@ $this->params['breadcrumbs'][] = $this->title;
 //}
 //print_r($table);
 
-echo Yii::$app->user->identity->usercompany;
+// echo Yii::$app->user->identity->usercompany;
+// echo '<br/>';
+// echo Yii::$app->user->identity->userbrand;
 
 ?>    
     

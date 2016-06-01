@@ -11,6 +11,7 @@ use app\modules\references\models\Regions;
 use yii\helpers\Html;
 use app\modules\alliance\models\Clientcirculationcomment;
 use app\modules\references\models\Employees;
+use app\modules\references\models\Brands;
 
 /**
  * This is the model class for table "{{%client_circulation}}".
@@ -146,6 +147,16 @@ class ClientCirculation extends \yii\db\ActiveRecord
         return $link;
     } 
   
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBrands()
+    {
+        $brands = Brands::find()->where(['id' => Yii::$app->user->identity->userbrand])->one();
+        if ($brands !==null)
+            return $brands->brand;
+        return false;
+    }   
 
     /**
      * @return \yii\db\ActiveQuery

@@ -7,13 +7,14 @@ use app\modules\references\models\ContactType;
 use app\modules\references\models\Targets;
 use app\modules\references\models\Employees;
 use app\modules\references\models\Regions;
+use app\modules\references\models\Models;
 /**
  * Created by PhpStorm.
  * User: user
  * Date: 4/29/16
  * Time: 11:06 PM
  */
-
+    // echo $model->getBrands();
 ?>
 
 
@@ -36,6 +37,7 @@ use app\modules\references\models\Regions;
         echo $form->field($commentModel, 'contact_type', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-map"></i> </span>{input}</div>{error}'])->dropDownList($items,$params);
     ?>    
 
+
     <?php
         $targets = Targets::find()->where(['<>', 'state', Targets::STATUS_BLOCKED])->all();
     
@@ -44,9 +46,29 @@ use app\modules\references\models\Regions;
             'prompt' => '-- ' . $commentModel->getAttributeLabel( 'target' ) . ' --',
         ];
         echo $form->field($commentModel, 'target', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-diamond"></i> </span>{input}</div>{error}'])->dropDownList($items,$params);
-    ?>          
+    ?>     
 
-    <?= $form->field($commentModel, 'car_model', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-car"></i> </span>{input}</div>{error}'])->textInput(['maxlength' => true, 'placeholder' => $commentModel->getAttributeLabel('car_model')]) ?>    
+    <?php
+        if (!empty($model->getBrands()))
+        {
+            // echo $model->getBrands();
+            $cars = Models::find()
+                ->where(['<>', 'state', Models::STATUS_BLOCKED])
+                ->andWhere(['brand_id' => Yii::$app->user->identity->userbrand])
+                ->all();
+        
+            $items = ArrayHelper::map($cars,'id','fullmodelname');
+            $params = [
+                'prompt' => '-- ' . $commentModel->getAttributeLabel( 'car_model' ) . ' --',
+            ];
+            echo $form->field($commentModel, 'car_model', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-car"></i> </span>{input}</div>{error}'])->dropDownList($items,$params);            
+        }
+        else 
+        {
+            echo $form->field($commentModel, 'car_model', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-car"></i> </span>{input}</div>{error}'])->textInput(['maxlength' => true, 'placeholder' => $commentModel->getAttributeLabel('car_model')]);    
+        }
+    ?> 
+
     
     <?= $form->field($commentModel, 'comment', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-users"></i> </span>{input}</div>{error}'])->textArea(['maxlength' => true, 'placeholder' => $commentModel->getAttributeLabel('comment')]) ?>
 

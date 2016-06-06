@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use app\modules\skoda\models\Servicesheduler;
-use rmrevin\yii\fontawesome\FA;
+// use rmrevin\yii\fontawesome\FA;
 
 
 /* @var $this yii\web\View */
@@ -23,9 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?php Html::encode($this->title) ?></h1>
 
     <p style="text-align: right">
-        <?= Html::a(Yii::t('app', '{icon} SERVICESHEDULER_INDEX', ['icon' => FA::icon('tasks')]), ['calendar'], ['class' => 'btn btn-warning btn-sm', 'id' => 'refreshButton']) ?>
-        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} STATUS_UPDATE', ['icon' => FA::icon('edit')]), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(Yii::t('app', '{icon} SERVICESHEDULER_INDEX', ['icon' => '<i class="fa fa-tasks"></i>']), ['calendar'], ['class' => 'btn btn-link animlink', 'id' => 'refreshButton']) ?>
+        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-link animlink']) ?>
+        <?= Html::a(Yii::t('app', '{icon} STATUS_UPDATE', ['icon' => '<i class="fa fa-edit"></i>']), ['update', 'id' => $model->id], ['class' => 'btn btn-link animlink']) ?>
         <?php
             // Html::a(FA::icon('remove') . Yii::t('app', 'STATUS_DELETE'), ['delete', 'id' => $model->id], [
             //     'class' => 'btn btn-danger btn-sm',

@@ -11,7 +11,7 @@
     use yii\web\AssetBundle;
     use yii\helpers\Html;
     use yii\widgets\ActiveForm;
-    use rmrevin\yii\fontawesome\FA;
+    // use rmrevin\yii\fontawesome\FA;
     use yii\helpers\ArrayHelper;
     use yii\jui\DatePicker;
     use app\modules\admin\models\User;
@@ -31,9 +31,9 @@
 
     <p style="text-align: right">
 
-        <?= Html::a(Yii::t('app', '{icon} STATUS_CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-success btn-sm', 'id' => 'refreshButton']) ?>
+        <?= Html::a(Yii::t('app', '{icon} STATUS_CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-success btn-sm', 'id' => 'refreshButton']) ?>
 
-        <?= Html::a(Yii::t('app', '{icon} STATUS_REFRESH', ['icon' => FA::icon('refresh')]), [''], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
+        <?= Html::a(Yii::t('app', '{icon} STATUS_REFRESH', ['icon' => '<i class="fa fa-refresh"></i>']), [''], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
         
         <?php // echo Html::a(Yii::t('app', '{icon} STATUS_EXPORT_EXCEL', ['icon' => FA::icon('file-excel-o')]), ['export'], ['class' => 'btn btn-warning btn-sm']) ?>
 

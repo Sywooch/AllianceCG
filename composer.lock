@@ -837,12 +837,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PHPExcel.git",
-                "reference": "8af620f97b8b1c8a677d90b3d7203fa562050db1"
+                "reference": "fcc5c6585574054bd2dce530d5fb3f5da745bc49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/8af620f97b8b1c8a677d90b3d7203fa562050db1",
-                "reference": "8af620f97b8b1c8a677d90b3d7203fa562050db1",
+                "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/fcc5c6585574054bd2dce530d5fb3f5da745bc49",
+                "reference": "fcc5c6585574054bd2dce530d5fb3f5da745bc49",
                 "shasum": ""
             },
             "require": {
@@ -890,7 +890,7 @@
                 "xls",
                 "xlsx"
             ],
-            "time": "2016-04-14 22:19:40"
+            "time": "2016-06-05 15:48:23"
         },
         {
             "name": "rmrevin/yii2-fontawesome",

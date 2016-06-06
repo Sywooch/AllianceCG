@@ -1,7 +1,6 @@
 <?php
 
     use yii\bootstrap\Nav;
-    use rmrevin\yii\fontawesome\FA;
 
 /* 
  * To change this license header, choose License Headers in Project Properties.
@@ -14,16 +13,12 @@
         'encodeLabels' => false,
         'items' => array_filter([
             [
-                'label' => FA::icon('calendar') . ' ' . Yii::t('app', 'SERVICESHEDULER_CALENDAR'),
+                'label' => Yii::t('app', '{icon} SERVICESHEDULER_CALENDAR', ['icon' => '<i class="fa fa-calendar"></i>']),
                 'url' => '/skoda/servicesheduler/calendar',
             ],
             [
-                'label' => FA::icon('table') . ' ' . Yii::t('app', 'SERVICESHEDULER_TABLE'),
+                'label' => Yii::t('app', '{icon} SERVICESHEDULER_TABLE', ['icon' => '<i class="fa fa-table"></i>']),
                 'url' => '/skoda/servicesheduler',
             ],
-//            [
-//                'label' => FA::icon('list') . ' ' . Yii::t('app', 'SERVICESHEDULER_LIST'),
-//                'url' => '/skoda/servicesheduler/list',
-//            ],
         ]),
     ]);

@@ -4,8 +4,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\modules\admin\models\User;
 use yii\helpers\ArrayHelper;
-use yii\jui\DatePicker;
-use rmrevin\yii\fontawesome\FA;
+// use yii\jui\DatePicker;
+use kartik\date\DatePicker;
 use app\modules\references\models\Employees;
 use app\modules\skoda\models\Servicesheduler;
 
@@ -34,7 +34,19 @@ use app\modules\skoda\models\Servicesheduler;
 
     <?= $form->errorSummary($model); ?>
 
-    <?= $form->field($model,'date', ['template' => '{input}{error}'])->widget(DatePicker::className(),['options' => ['class' => 'form-control', 'placeholder' => $model->getAttributeLabel( 'date' )]]) ?>
+    <?php // $form->field($model,'date', ['template' => '{input}{error}'])->widget(DatePicker::className(),['options' => ['class' => 'form-control', 'placeholder' => $model->getAttributeLabel( 'date' )]]) ?>
+
+    <?php
+        echo $form->field($model, 'date')->widget(DatePicker::classname(), [
+            'options' => ['placeholder' => 'Enter birth date ...'],
+            'pluginOptions' => [
+                'autoclose'=>true,
+                'todayHighlight' => true,
+                'todayBtn' => true,
+                'format' => 'yyyy-mm-dd',
+            ]
+        ]);
+    ?>
 
     <?php
 
@@ -62,12 +74,12 @@ use app\modules\skoda\models\Servicesheduler;
             'options' => isset($_GET['id']) ? [$_GET['id'] => ['Selected'=>'selected']] : false,
             'prompt' => '-- ' . $model->getAttributeLabel( 'responsible' ) . ' --',
         ];
-        echo $form->field($model, 'responsible', ['template'=>'<div class="input-group"><span class="input-group-addon"> ' . FA::icon('user') . ' </span>{input}</div>{error}'])->dropDownList($items,$params);
+        echo $form->field($model, 'responsible', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-user"></i> </span>{input}</div>{error}'])->dropDownList($items,$params);
     ?> 
 
     <div class="form-group" style="text-align: right">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', '{icon} STATUS_CREATE', ['icon' => FA::icon('save')]) : Yii::t('app', '{icon} STATUS_UPDATE', ['icon' => FA::icon('edit')]), ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} BUTTON_CANCEL', ['icon' => FA::icon('remove')]), ['/skoda/servicesheduler/calendar'], ['class' => 'btn btn-danger btn-sm']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', '{icon} STATUS_CREATE', ['icon' => '<i class="fa fa-save"></i>']) : Yii::t('app', '{icon} STATUS_UPDATE', ['icon' => '<i class="fa fa-edit"></i>']), ['class' => $model->isNewRecord ? 'btn btn-success animlinkColor' : 'btn btn-primary animlinkColor']) ?>
+        <?= Html::a(Yii::t('app', '{icon} BUTTON_CANCEL', ['icon' => '<i class="fa fa-remove"></i>']), ['/skoda/servicesheduler/calendar'], ['class' => 'btn btn-danger animlinkColor btn-sm']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

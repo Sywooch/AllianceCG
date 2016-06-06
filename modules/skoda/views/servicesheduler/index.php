@@ -7,7 +7,8 @@ use app\components\grid\LinkColumn;
 use app\components\grid\SetColumn;
 use app\components\grid\ActionColumn;
 use yii\helpers\Url;
-use yii\jui\DatePicker;
+// use yii\jui\DatePicker;
+use kartik\date\DatePicker;
 use yii\helpers\ArrayHelper;
 use app\modules\skoda\models\Servicesheduler;
 // use rmrevin\yii\fontawesome\FA;
@@ -109,10 +110,22 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'date',
                 'format' => ['date', 'php:d/m/Y'],
+                // 'filter' => DatePicker::widget([
+                //         'model' => $searchModel,
+                //         'attribute' => 'date',
+                //         'options' => ['class' => 'form-control']
+                //     ]),
                 'filter' => DatePicker::widget([
                         'model' => $searchModel,
                         'attribute' => 'date',
-                        'options' => ['class' => 'form-control']
+                        'type' => DatePicker::TYPE_INPUT,
+                        'options' => ['class' => 'form-control'],
+                        'pluginOptions' => [
+                            'autoclose'=>true,
+                            'todayHighlight' => true,
+                            'todayBtn' => true,
+                            'format' => 'yyyy-mm-dd',
+                        ]
                     ]),
                 'contentOptions'=>['style'=>'width: 150px;']
             ],

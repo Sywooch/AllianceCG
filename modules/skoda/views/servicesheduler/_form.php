@@ -38,7 +38,7 @@ use app\modules\skoda\models\Servicesheduler;
 
     <?php
         echo $form->field($model, 'date')->widget(DatePicker::classname(), [
-            'options' => ['placeholder' => 'Enter birth date ...'],
+            'options' => ['placeholder' => $model->getAttributeLabel( 'date' )],
             'pluginOptions' => [
                 'autoclose'=>true,
                 'todayHighlight' => true,

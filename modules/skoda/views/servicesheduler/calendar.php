@@ -31,9 +31,9 @@
 
     <p style="text-align: right">
 
-        <?= Html::a(Yii::t('app', '{icon} STATUS_CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-success btn-sm', 'id' => 'refreshButton']) ?>
+        <?= Html::a(Yii::t('app', '{icon} STATUS_CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-link animlink', 'id' => 'refreshButton']) ?>
 
-        <?= Html::a(Yii::t('app', '{icon} STATUS_REFRESH', ['icon' => '<i class="fa fa-refresh"></i>']), [''], ['class' => 'btn btn-primary btn-sm', 'id' => 'refreshButton']) ?>
+        <?= Html::a(Yii::t('app', '{icon} STATUS_REFRESH', ['icon' => '<i class="fa fa-refresh"></i>']), [''], ['class' => 'btn btn-link animlink', 'id' => 'refreshButton']) ?>
         
         <?php // echo Html::a(Yii::t('app', '{icon} STATUS_EXPORT_EXCEL', ['icon' => FA::icon('file-excel-o')]), ['export'], ['class' => 'btn btn-warning btn-sm']) ?>
 

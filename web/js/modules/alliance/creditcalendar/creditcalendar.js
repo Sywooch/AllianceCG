@@ -10,8 +10,10 @@
     $(document).ready(function() {
         var source = "/alliance/creditcalendar/calendarsearch";
         var filter = document.getElementById('autor_selector')
+
+
         $('#credit_calendar').fullCalendar({
-            contentHeight: 800,
+            contentHeight: 600,
             aspectRatio: 8,
             handleWindowResize: true, // Изменять размер календаря пропорционально изменению окна браузера
             editable: false, // Редактирование запрещено, т.к. источник событий json-feed из БД
@@ -23,8 +25,8 @@
             defaultView: 'month',          
             selectable: false,
             editable: false,
-            height: 800,
-            width: 800,
+            height: 400,
+            width: 400,
             lang: 'ru',
             more: 3,
             firstday: 1,
@@ -122,6 +124,7 @@
         });
     });
 
+
     // Опции селектора
 
     $('#author_selector').on('change',function(){
@@ -130,4 +133,21 @@
 
     // $('#status_selector').on('change',function(){
     //     $('#credit_calendar').fullCalendar('rerenderEvents');
+    // });
+
+
+    $('#datepicker').datepicker({
+        inline: true,
+        onSelect: function(dateText, inst) {
+            var d = new Date(dateText);
+            $('#credit_calendar').fullCalendar('gotoDate', d);
+        }
+    }); 
+
+    // $('#datepicker').datepicker({
+    //     inline: true,
+    //     onSelect: function(dateText, inst) {
+    //         var d = new Date(dateText);
+    //         $('#credit_calendar').fullCalendar('gotoDate', d);
+    //     }
     // });

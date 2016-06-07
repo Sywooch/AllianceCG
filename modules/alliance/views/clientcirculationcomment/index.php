@@ -6,21 +6,28 @@ use yii\widgets\Pjax;
 use app\components\grid\SetColumn;
 use app\components\grid\LinkColumn;
 use app\modules\alliance\models\Clientcirculationcomment;
+use yii\helpers\ArrayHelper;
+use app\modules\references\models\Targets;
+use app\modules\references\models\ContactType;
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\alliance\models\ClientcirculationcommentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Clientcirculationcomments');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'NAV_ALLIANCE'), 'url' => ['/alliance']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="clientcirculationcomment-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <!-- <h1> -->
+        <?php // echo Html::encode($this->title) ?>
+    <!-- </h1> -->
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Clientcirculationcomment'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <!-- <p class="buttonpane"> -->
+        <?php // echo Html::a(Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-animlink']) ?>
+        <?php // echo Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => '<i class="fa fa-refresh"></i>']), ['index'], ['class' => 'btn btn-animlink']) ?>
+    <!-- </p> -->
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -49,10 +56,13 @@ $this->params['breadcrumbs'][] = $this->title;
             // ],
             [
                 'attribute'=> 'contacttypes',
+                'filter'=>ArrayHelper::map(ContactType::find()->where(['state' => ContactType::STATUS_ACTIVE])->asArray()->all(), 'contact_type', 'contact_type'),
+                // 'filter' => Html::activeDropDownList($searchModel, 'targets', ArrayHelper::map(Targets::find()->asArray()->all(), 'id', 'target'),['class'=>'form-control','prompt' => 'Select Targets']),
                 'value' => 'contacttypes.contact_type',
             ],
             [
                 'attribute'=> 'targets',
+                'filter'=>ArrayHelper::map(Targets::find()->where(['state' => ContactType::STATUS_ACTIVE])->asArray()->all(), 'target', 'target'),
                 'value' => 'targets.target',
             ],
             // 'contact_type',

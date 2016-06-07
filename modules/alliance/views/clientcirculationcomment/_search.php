@@ -2,42 +2,69 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use dosamigos\datepicker\DatePicker;
+use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\alliance\models\ClientcirculationcommentSearch */
 /* @var $form yii\widgets\ActiveForm */
+
+$toggleAdvanced = file_get_contents('js/modules/alliance/clientcirculationcomment/toggleAdvanced.js');
+$this->registerJs($toggleAdvanced, View::POS_END);
+
 ?>
 
-<div class="clientcirculationcomment-search">
+<p class="buttonpane">
+    <?php echo Html::a(Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-link animlink']) ?>
+    <?php echo Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => '<i class="fa fa-refresh"></i>']), ['index'], ['class' => 'btn btn-link animlink']) ?>
+    <?php
+        if(Yii::$app->user->can('admin')){
+            echo Html::a(Yii::t('app', '{icon} DELETE', ['icon' => '<i class="fa fa-remove"></i>']), ['#'], ['class' => 'btn btn-link animlink', 'id' => 'MultipleDelete']);
+            echo '&nbsp';
+            echo Html::a(Yii::t('app', '{icon} RESTORE', ['icon' => '<i class="fa fa-upload"></i>']), ['#'], ['class' => 'btn btn-link animlink', 'id' => 'MultipleRestore']);
+        }
+    ?>    
+    <?php echo Html::button(Yii::t('app', '{icon} ADVANCED', ['icon' => '<i class="fa fa-list"></i>']), ['class' => 'btn-link animlink', 'id' => 'advanced']) ?>    
+</p>
+
+<div class="clientcirculationcomment-search" id="clientcirculation">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <div class="col-md-4">
 
-    <?= $form->field($model, 'clientcirculation_id') ?>
+        <?php echo $form->field($model, 'comment', ['template' => '{input}{error}'])->widget(
+            DatePicker::className(), [
+                    'inline' => false, 
+                    'language' => 'ru',
+                    'size' => 'ms',
+                    // 'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
+                    'template' => '{addon}{input}',
+                    'options' => ['placeholder' => $model->getAttributeLabel('comment')],
+                    'clientOptions' => [
+                        'autoclose' => true,
+                        'format' => 'yyyy-mm-dd',
+                        'todayHighlight' => true,
+                        'todayBtn' => true,
+                    ]
+                ]
+            );
+        ?>
 
-    <?= $form->field($model, 'contact_type') ?>
+    </div>
 
-    <?= $form->field($model, 'target') ?>
+    <div class="form-group col-md-8">        
+        <?php echo $form->field($model, 'globalSearch', [
+                'template' => '<div class="input-group"><span class="input-group-addon"> <i class="fa fa-search"></i> </span>{input}{error}</div>',
+            ]); 
+        ?>   
+    </div>
 
-    <?= $form->field($model, 'car_model') ?>
-
-    <?php // echo $form->field($model, 'comment') ?>
-
-    <?php // echo $form->field($model, 'state') ?>
-
-    <?php // echo $form->field($model, 'created_at') ?>
-
-    <?php // echo $form->field($model, 'updated_at') ?>
-
-    <?php // echo $form->field($model, 'author') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
+    <div class="buttonpane col-md-12">
+        <?php echo Html::submitButton(Yii::t('app', '{icon} Search', ['icon' => '<i class="fa fa-search"></i>']), ['class' => 'btn btn-primary btn-sm animlink']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -102,6 +102,8 @@ class Clientcirculationcomment extends \yii\db\ActiveRecord
             'clientname' => Yii::t('app', 'CLIENTNAME'),
             'contacttypes' => Yii::t('app', 'Contact Type'),
             'targets' => Yii::t('app', 'Target'),
+            'CLIENTNAME' => Yii::t('app', 'CLIENTNAME'),
+            'Cars' => Yii::t('app', 'CARS'),
         ];
     }
 

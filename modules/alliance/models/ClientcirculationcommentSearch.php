@@ -18,6 +18,8 @@ class ClientcirculationcommentSearch extends Clientcirculationcomment
     public $targets;
     public $contacttypes;
     public $clientname;
+    public $authorname;
+    public $globalSearch;
 
     /**
      * @inheritdoc
@@ -27,7 +29,7 @@ class ClientcirculationcommentSearch extends Clientcirculationcomment
         return [
             [['id', 'clientcirculation_id', 'state', 'created_at', 'updated_at'], 'integer'],
             [['contact_type', 'target', 'car_model', 'comment', 'author'], 'safe'],
-            [['targets', 'contacttypes', 'clientname'], 'safe'],
+            [['targets', 'contacttypes', 'clientname', 'authorname', 'globalSearch'], 'safe'],
         ];
     }
 
@@ -101,9 +103,11 @@ class ClientcirculationcommentSearch extends Clientcirculationcomment
         $query
             ->andFilterWhere(['like', 'contact_type', $this->contact_type])
             ->andFilterWhere(['like', 'target', $this->target])
+            ->andFilterWhere(['like', '{{%targets}}.target', $this->targets])
+            ->andFilterWhere(['like', '{{%contact_type}}.contact_type', $this->contacttypes])
             ->andFilterWhere(['like', 'car_model', $this->car_model])
             ->andFilterWhere(['like', 'comment', $this->comment])
-            ->andFilterWhere(['like', 'author', $this->author])
+            ->andFilterWhere(['like', '{{%user}}.surname', $this->authorname])
             ;
 
         return $dataProvider;

@@ -26,11 +26,22 @@ $this->params['breadcrumbs'][] = $this->title;
             <p class="buttonpane">
                 <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-link animlink']) ?>
                 <?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => '<i class="fa fa-refresh"></i>']), ['calendar'], ['class' => 'btn btn-link animlink']) ?>
+                <button class='btn btn-link animlink' onclick="printPage()">
+                  <?php echo Yii::t('app', '{icon} PRINT', ['icon' => '<i class="fa fa-print"></i>']) ?>
+                </button>
+                <select id="author_selector">
+                  <option value="all">
+                    Все записи
+                  </a>
+                  <option value=<?= Yii::$app->user->getId() ?>>
+                    Мои записи
+                  </a>
+                </select> 
             </p>
 
             <!-- <br/><br/><br/> -->
 
-            <?php  Pjax::begin(); ?>
+            <?php  Pjax::begin(['id' => 'creditCalendar']); ?>
                 <?php 
                    $this->registerCssFile('@web/css/calendars/calendars.css', ['depends' => ['app\assets\AppAsset']]);    
                    $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/jquery.min.js'), ['depends' => [
@@ -52,15 +63,21 @@ $this->params['breadcrumbs'][] = $this->title;
                    $this->registerJsFile(Yii::getAlias('@web/js/modules/alliance/creditcalendar/creditcalendar.js'), ['depends' => [
                        'yii\web\YiiAsset',
                        'yii\bootstrap\BootstrapAsset'],
+                   ]);  
+                   $this->registerJsFile(Yii::getAlias('@web/js/modules/alliance/creditcalendar/printCalendar.js'), ['depends' => [
+                       'yii\web\YiiAsset',
+                       'yii\bootstrap\BootstrapAsset'],
                    ]);    
                ?>
 
-          <select id="author_selector">
-            <option value="all">Все записи</a>
-            <option value=<?= Yii::$app->user->getId() ?>>Мои записи</a>
-          </select> 
+<br/>
 
-          <div id='credit_calendar'> </div>  
+          <!-- <button onclick="printPage()">Print this page</button> -->
+          
+          <div id='credit_calendar'></div>  
+
+
+          <div id='datepicker'></div>
 
           <?php  Pjax::end(); ?>
     

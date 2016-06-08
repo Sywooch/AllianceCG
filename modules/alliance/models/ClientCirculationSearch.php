@@ -126,8 +126,9 @@ class ClientCirculationSearch extends ClientCirculation
             ->andFilterWhere(['like', '{{%regions}}.region_name', $this->regions])
             ->orFilterWhere(['like', '{{%regions}}.region_code', $this->regions])
             ->andFilterWhere(['like', '{{%client_circulation}}.author', $this->author])
-            ->andFilterWhere(['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.created_at)", $this->comment])
-            ->andFilterWhere(['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.updated_at)", $this->comment])
+            ->andFilterWhere(['and', ['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.created_at)", $this->comment], ['{{%clientcirculationcomment}}.state' =>  clientcirculationcomment::STATUS_ACTIVE]])
+            ->andFilterWhere(['and', ['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.updated_at)", $this->comment], ['{{%clientcirculationcomment}}.state' =>  clientcirculationcomment::STATUS_ACTIVE]])
+            // ->andFilterWhere(['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.updated_at)", $this->comment])
             // ->andFilterWhere(['{{%clientcirculationcomment}}.created_at' => date('yyyy-mm-dd',strtotime($this->comment))])
             ;
 

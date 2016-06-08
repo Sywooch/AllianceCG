@@ -106,8 +106,10 @@ class ClientcirculationcommentSearch extends Clientcirculationcomment
             ->andFilterWhere(['like', '{{%targets}}.target', $this->targets])
             ->andFilterWhere(['like', '{{%contact_type}}.contact_type', $this->contacttypes])
             ->andFilterWhere(['like', 'car_model', $this->car_model])
-            ->andFilterWhere(['like', 'comment', $this->comment])
+            // ->andFilterWhere(['like', 'comment', $this->comment])
             ->andFilterWhere(['like', '{{%user}}.surname', $this->authorname])
+            ->andFilterWhere(['and', ['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.created_at)", $this->comment], ['{{%clientcirculationcomment}}.state' =>  clientcirculationcomment::STATUS_ACTIVE]])
+            ->andFilterWhere(['and', ['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.updated_at)", $this->comment], ['{{%clientcirculationcomment}}.state' =>  clientcirculationcomment::STATUS_ACTIVE]])            
             ;
 
         return $dataProvider;

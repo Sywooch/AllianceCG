@@ -9,6 +9,7 @@ use app\modules\alliance\models\Clientcirculationcomment;
 use yii\helpers\ArrayHelper;
 use app\modules\references\models\Targets;
 use app\modules\references\models\ContactType;
+use yii\web\View;
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\alliance\models\ClientcirculationcommentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -16,6 +17,10 @@ use app\modules\references\models\ContactType;
 $this->title = Yii::t('app', 'Clientcirculationcomments');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'NAV_ALLIANCE'), 'url' => ['/alliance']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$deleteRestore = file_get_contents('js/modules/alliance/clientcirculationcomment/deleteRestore.js');
+$this->registerJs($deleteRestore, View::POS_END);
+
 ?>
 <div class="clientcirculationcomment-index">
 
@@ -40,20 +45,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'yii\grid\CheckboxColumn',
                 'contentOptions'=>['style'=>'width: 20px;']
             ],
-            [
-                'attribute' => 'clientname',
-                'format' => 'raw',
-                'value'=>function ($data) {
-                    return Html::a($data->clientcirculation->name, ['clientcirculation/' . $data->clientcirculation_id]);
-                },
-                // 'value' => 'clientcirculation.name',
-            ],
             // [
-            //     'class' => LinkColumn::className(),
             //     'attribute' => 'clientname',
-            //     'value' => 'clientcirculation.name',
             //     'format' => 'raw',
+            //     'value'=>function ($data) {
+            //         return Html::a($data->clientcirculation->name, ['clientcirculation/' . $data->clientcirculation_id]);
+            //     },
             // ],
+            [
+                'class' => LinkColumn::className(),
+                'attribute' => 'clientname',
+                'value' => 'clientcirculation.name',
+                'format' => 'raw',
+            ],
             [
                 'attribute'=> 'contacttypes',
                 'filter'=>ArrayHelper::map(ContactType::find()->where(['state' => ContactType::STATUS_ACTIVE])->asArray()->all(), 'contact_type', 'contact_type'),

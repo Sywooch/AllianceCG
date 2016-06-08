@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\modules\alliance\models\Clientcirculationcomment */
 
-$this->title = $model->id;
+$this->title = $model->clientcirculation->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Clientcirculationcomments'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -17,17 +17,20 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- </h1> -->
 
     <p class="buttonpane">
-        <?= Html::a(Yii::t('app', '{icon} CLIENTCIRCULATIONCOMMENTS', ['icon' => '<i class="fa fa-list"></i>']), ['index'], ['class' => 'btn btn-link animlink']) ?>
-        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-link animlink']) ?>
-        <?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => '<i class="fa fa-refresh"></i>']), ['view', 'id' => $model->id], ['class' => 'btn btn-link animlink']) ?>
-        <?= Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-edit"></i>']), ['update', 'id' => $model->id], ['class' => 'btn btn-link animlink']) ?>
-        <?= Html::a(Yii::t('app', '{icon} DELETE', ['icon' => '<i class="fa fa-edit"></i>']), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-link animlink',
-            'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?php echo Html::a(Yii::t('app', '{icon} CLIENTCIRCULATIONCOMMENTS', ['icon' => '<i class="fa fa-list"></i>']), ['index'], ['class' => 'btn btn-link animlink']) ?>
+        <?php echo Html::a(Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-link animlink']) ?>
+        <?php echo Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => '<i class="fa fa-refresh"></i>']), ['view', 'id' => $model->id], ['class' => 'btn btn-link animlink']) ?>
+        <?php echo Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-edit"></i>']), ['update', 'id' => $model->id], ['class' => 'btn btn-link animlink']) ?>
+        <?php 
+            if(Yii::$app->user->can('admin'))
+            echo Html::a(Yii::t('app', '{icon} DELETE', ['icon' => '<i class="fa fa-edit"></i>']), ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-link animlink',
+                'data' => [
+                    'confirm' => Yii::t('app', 'DELETE_CONFIRM'),
+                    'method' => 'post',
+                ],
+            ]) 
+        ?>
     </p>
 
     <?= DetailView::widget([
@@ -54,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'cars',
                 'label' => Yii::t('app', 'CARS'),
-                'value' => $model->cars->fullModelName,
+                'value' => !empty($model->cars->fullModelName) ? $model->cars->fullModelName : $model->car_model,
             ],
             'comment:ntext',
             // 'state',

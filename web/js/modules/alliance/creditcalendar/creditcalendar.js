@@ -136,7 +136,7 @@
     // });
 
 
-    $('#datepicker').datepicker({
+    jquery('#datepicker').datepicker({
         inline: true,
         onSelect: function(dateText, inst) {
             var d = new Date(dateText);

@@ -183,8 +183,13 @@ $this->registerJs($toggleClientData, View::POS_END);
             ],
             [
                 'attribute' => 'contact_type',
-                'value' => 'contacttypes.contact_type',
+                // 'value' => 'contacttypes.contact_type',
+                'format' => 'raw',
+                'value'=>function ($data) {
+                    return Html::a($data->contacttypes->contact_type, ['clientcirculationcomment/' . $data->id]);
+                },
             ],
+
             [
                 'attribute' => 'target',
                 'value' => 'targets.target',
@@ -208,18 +213,18 @@ $this->registerJs($toggleClientData, View::POS_END);
                 // 'attribute' => 'credit_manager_id',
                 'attribute' => 'creditmanagers',
                 'format' => 'raw',
-                // 'value' => 'creditmanagers.fullName',
-                'value'=>function ($data) {
-                    return $data->getCreditmanagerlink();
-                },
+                'value' => 'creditmanagers.fullName',
+                // 'value'=>function ($data) {
+                //     return $data->getCreditmanagerlink();
+                // },
             ],
             [
                 'attribute' => 'salesmanagers',
                 'format' => 'raw',
-                // 'value' => 'salesmanagers.fullName',
-                'value'=>function ($data) {
-                     return $data->getSalesmanagerlink();
-                },
+                'value' => 'salesmanagers.fullName',
+                // 'value'=>function ($data) {
+                //      return $data->getSalesmanagerlink();
+                // },
             ],
             // [
             //     'attribute' => 'authorname',

@@ -36,6 +36,7 @@ $this->registerJs($deleteRestore, View::POS_END);
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'id' => 'clientcirculationcomment-grid',
         'columns' => [
             [
                 'header' => '№',

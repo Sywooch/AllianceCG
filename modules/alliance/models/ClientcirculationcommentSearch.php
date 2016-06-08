@@ -56,7 +56,7 @@ class ClientcirculationcommentSearch extends Clientcirculationcomment
         $query->joinWith(['creditmanagers', 'targets', 'contacttypes', 'authorname']);
         $query->with(['salesmanagers']);
         if(!Yii::$app->user->can('admin')){
-            $query->andWhere(['{{%clientcirculationcomment}}.state' => Clientcirculationcomment::STATUS_ACTIVE]);
+            $query->andFilterWhere(['{{%clientcirculationcomment}}.state' => Clientcirculationcomment::STATUS_ACTIVE]);
         }
 
         // add conditions that should always apply here
@@ -108,8 +108,8 @@ class ClientcirculationcommentSearch extends Clientcirculationcomment
             ->andFilterWhere(['like', 'car_model', $this->car_model])
             // ->andFilterWhere(['like', 'comment', $this->comment])
             ->andFilterWhere(['like', '{{%user}}.surname', $this->authorname])
-            ->andFilterWhere(['and', ['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.created_at)", $this->comment], ['{{%clientcirculationcomment}}.state' =>  clientcirculationcomment::STATUS_ACTIVE]])
-            ->andFilterWhere(['and', ['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.updated_at)", $this->comment], ['{{%clientcirculationcomment}}.state' =>  clientcirculationcomment::STATUS_ACTIVE]])            
+            ->andFilterWhere(['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.created_at)", $this->comment])
+            ->andFilterWhere(['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.updated_at)", $this->comment])            
             ;
 
         return $dataProvider;

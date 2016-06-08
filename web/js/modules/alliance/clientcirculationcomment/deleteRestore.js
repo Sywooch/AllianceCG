@@ -6,14 +6,14 @@
 
     $(document).ready(function(){
     $('#MultipleDelete').click(function(){
-            var PosId = $('#clientcirculation-grid').yiiGridView('getSelectedRows');
+            var PosId = $('#clientcirculationcomment-grid').yiiGridView('getSelectedRows');
             if (PosId=="") {
                 alert("Нет отмеченных записей!");
             }
             else if (confirm("Удалить отмеченные записи?")) {
               $.ajax({
                 type: 'POST',
-                url : '/alliance/clientcirculation/multipledelete',
+                url : '/alliance/clientcirculationcomment/multipledelete',
                 data : {row_id: PosId},
               });
             }
@@ -26,7 +26,7 @@
             else if (confirm("Восстановить отмеченные записи?")) {
               $.ajax({
                 type: 'POST',
-                url : '/alliance/clientcirculation/multiplerestore',
+                url : '/alliance/clientcirculationcomment/multiplerestore',
                 data : {row_id: PosId},
               });
             }

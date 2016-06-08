@@ -128,4 +128,32 @@ class ClientcirculationcommentController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     * Description
+     * @return type
+     */
+    public function actionMultipledelete()
+    {
+        $pk = Yii::$app->request->post('row_id');
+        $val = Clientcirculationcomment::STATUS_BLOCKED;
+        Clientcirculationcomment::updateAll(['state' => $val], ['in', 'id', $pk]);
+
+        return $this->redirect(['index']);
+
+    } 
+
+    /**
+     * Description
+     * @return type
+     */
+    public function actionMultiplerestore()
+    {
+        $pk = Yii::$app->request->post('row_id');
+        $val = Clientcirculationcomment::STATUS_ACTIVE;
+        Clientcirculationcomment::updateAll(['state' => $val], ['in', 'id', $pk]);
+
+        return $this->redirect(['index']);
+
+    }
 }

@@ -22,6 +22,7 @@ class AppAsset extends AssetBundle
         'css/callouts.css',
         'css/scroll-top.css',
         'css/btn-hover.css',
+        'css/panels.css',
         // 'css/navigation_menu.css',
     ];
     public $js = [

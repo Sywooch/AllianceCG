@@ -41,10 +41,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <!-- <br/><br/><br/> -->
 
+<?php 
+  // Yii::app()->clientScript->registerCoreScript('jquery');
+  // Yii::app()->clientScript->registerCoreScript('jquery.ui');
+
+  // Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl .'/js/jquery.ui.datepicker.js'); 
+?>            
+
             <?php  Pjax::begin(['id' => 'creditCalendar']); ?>
                 <?php 
                    $this->registerCssFile('@web/css/calendars/calendars.css', ['depends' => ['app\assets\AppAsset']]);    
+                   $this->registerCssFile('@web/js/jquery-ui-1.11.4/jquery-ui.css', ['depends' => ['app\assets\AppAsset']]);    
                    $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/jquery.min.js'), ['depends' => [
+                       'yii\web\YiiAsset',
+                       'yii\bootstrap\BootstrapAsset'],
+                   ]);           
+                   $this->registerJsFile(Yii::getAlias('@web/js/jquery-ui-1.11.4/jquery-ui.min.js'), ['depends' => [
                        'yii\web\YiiAsset',
                        'yii\bootstrap\BootstrapAsset'],
                    ]);          
@@ -74,7 +86,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
           <!-- <button onclick="printPage()">Print this page</button> -->
           
-          <div id='credit_calendar'></div>  
+          <input id="datepicker"></option> 
+          <div id='credit_calendar'></div> 
 
 
           <div id='datepicker'></div>

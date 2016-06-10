@@ -11,7 +11,6 @@
         var source = "/alliance/creditcalendar/calendarsearch";
         var filter = document.getElementById('autor_selector')
 
-
         $('#credit_calendar').fullCalendar({
             contentHeight: 600,
             aspectRatio: 8,
@@ -124,6 +123,14 @@
         });
     });
 
+    $('#datepicker').datepicker({
+        dateFormat: 'yy-mm-dd',
+        inline: true,
+        onSelect: function(dateText, inst) {
+            var d = new Date(dateText);
+            $('#credit_calendar').fullCalendar('gotoDate', d);
+        }
+    }); 
 
     // Опции селектора
 
@@ -135,14 +142,6 @@
     //     $('#credit_calendar').fullCalendar('rerenderEvents');
     // });
 
-
-    jquery('#datepicker').datepicker({
-        inline: true,
-        onSelect: function(dateText, inst) {
-            var d = new Date(dateText);
-            $('#credit_calendar').fullCalendar('gotoDate', d);
-        }
-    }); 
 
     // $('#datepicker').datepicker({
     //     inline: true,

@@ -36,7 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
                   <option value=<?= Yii::$app->user->getId() ?>>
                     Мои записи
                   </a>
-                </select> 
+                </select>          
+                <input class="form-control" id="datepicker" style="width: 100px; display: initial;"></option> 
             </p>
 
             <!-- <br/><br/><br/> -->
@@ -85,12 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <br/>
 
           <!-- <button onclick="printPage()">Print this page</button> -->
-          
-          <input id="datepicker"></option> 
           <div id='credit_calendar'></div> 
-
-
-          <div id='datepicker'></div>
 
           <?php  Pjax::end(); ?>
     

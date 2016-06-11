@@ -55,6 +55,14 @@ class CreditcalendarSearch extends Creditcalendar
 
 public function calendarsearch(){
 
+    $where = "";
+
+    if(isset($_GET['status']))
+    {
+        $status = $_GET['status'];
+        $where .= "AND status='$status'";
+    }
+
         $creditmanagerquery = 
                 "SELECT
                     {{%calendar}}.id AS id,
@@ -94,7 +102,10 @@ public function calendarsearch(){
                 OR 
                     {{%calendar_responsibles}}.user_id LIKE '".Yii::$app->user->getId()."'
                 AND 
-                    {{%calendar}}.private <> 1;";
+                    {{%calendar}}.private <> 1
+                ".$where."
+                ;"
+                ;
 
         $chiefcreditquery = 
                 "SELECT
@@ -123,7 +134,10 @@ public function calendarsearch(){
                 FROM {{%calendar}}
                 WHERE 
                     IF(`private` = '1' AND `author` = '".Yii::$app->user->getId()."', 1, 0) 
-                    OR `private`=0;";
+                    OR `private`=0
+                    ".$where."
+                    ;"
+                    ;
         
         $query = !Yii::$app->user->can('creditmanager') ? $chiefcreditquery : $creditmanagerquery;
 

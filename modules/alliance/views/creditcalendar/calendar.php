@@ -45,6 +45,7 @@ $this->registerJs($toggleSearch, View::POS_END);
             <?php  Pjax::begin(['id' => 'creditCalendar']); ?>
                 <?php 
                    $this->registerCssFile('@web/css/calendars/calendars.css', ['depends' => ['app\assets\AppAsset']]);    
+                   $this->registerCssFile('@web/css/bootstrap-multiselect.css', ['depends' => ['app\assets\AppAsset']]);  
                    $this->registerCssFile('@web/js/jquery-ui-1.11.4/jquery-ui.css', ['depends' => ['app\assets\AppAsset']]);    
                    // $this->registerCssFile('@web/js/jquery-ui-1.11.4/jquery-bootstrap-datepicker.css', ['depends' => ['app\assets\AppAsset']]);   
                    $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/jquery.min.js'), ['depends' => [
@@ -54,7 +55,11 @@ $this->registerJs($toggleSearch, View::POS_END);
                    $this->registerJsFile(Yii::getAlias('@web/js/jquery-ui-1.11.4/jquery-ui.min.js'), ['depends' => [
                        'yii\web\YiiAsset',
                        'yii\bootstrap\BootstrapAsset'],
-                   ]);          
+                   ]);    
+                   $this->registerJsFile(Yii::getAlias('@web/js/libs/bootstrap-multiselect.js'), ['depends' => [
+                       'yii\web\YiiAsset',
+                       'yii\bootstrap\BootstrapAsset'],
+                   ]);                
                    $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/moment.min.js'), ['depends' => [
                        'yii\web\YiiAsset',
                        'yii\bootstrap\BootstrapAsset'],
@@ -130,6 +135,16 @@ $this->registerJs($toggleSearch, View::POS_END);
                       <!-- </button> -->
                    <!-- </span> -->
                   <!-- <button class="btn btn-primary btn-sm animlinkColor" type="button" onclick="creditcalendarfilter.reset()">Очистить</button> -->
+
+                    <select id="ddlCars" multiple="multiple">
+                      <option value="Accord">Accord</option>
+                      <option value="Duster">Duster</option>
+                      <option value="Esteem">Esteem</option>
+                      <option value="Fiero">Fiero</option>
+                      <option value="Lancer">Lancer</option>
+                      <option value="Phantom">Phantom</option>
+                    </select>
+
             </form>   
 
     </div>

@@ -8,4 +8,15 @@
 
 ?>
 
-<?= $model->calendarSearch(); ?>
+<?php
+	// if(isset($_GET['status']))
+	// {
+	// 	echo $_GET['status'];
+	// }
+	// else
+	// {
+	// 	echo 'not isset!';
+	// }
+?>
+
+<?php echo $model->calendarSearch(); ?>

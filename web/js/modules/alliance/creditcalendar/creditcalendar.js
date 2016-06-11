@@ -199,6 +199,8 @@
         $('#credit_calendar').fullCalendar('rerenderEvents');
     });
 
+    $('#ddlCars').multiselect();
+
     // $('#status_selector').on('change',function(){
     //     $('#credit_calendar').fullCalendar('rerenderEvents');
     // });

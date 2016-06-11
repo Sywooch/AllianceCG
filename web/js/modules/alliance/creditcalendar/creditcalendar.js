@@ -110,7 +110,10 @@
                 //     $("#eventInfo").html(event.description);
                 //     $("#eventLink").attr('href', event.url);
                 //     $("#eventContent").dialog({ modal: true, title: event.title, width:350});
-                // });                
+                // });
+                // 
+                // Popover при наведении      
+                $(element).popover({title: event.title, content: event.description, trigger: 'hover', placement: 'auto right', delay: {"hide": 300 }});
                 return ['all', event.author].indexOf($('#author_selector').val()) >= 0
             },
             // Действие при клике на событие
@@ -120,6 +123,26 @@
                     return false;
                 }
             }, 
+
+            // eventMouseover: function(calEvent, jsEvent) {
+            //     // var tooltip = '<div class="tooltipevent" style="width:100px;height:100px;background:#ccc;position:absolute;z-index:10001;">' + calEvent.title + '</div>';
+            //     var tooltip = '<div class="tooltip">' + calEvent.title + '</div>';
+            //     $("body").append(tooltip);
+            //     $(this).mouseover(function(e) {
+            //         $(this).css('z-index', 10000);
+            //         $('.tooltip').fadeIn('500');
+            //         $('.tooltip').fadeTo('10', 1.9);
+            //     }).mousemove(function(e) {
+            //         $('.tooltip').css('top', e.pageY + 10);
+            //         $('.tooltip').css('left', e.pageX + 20);
+            //     });
+            // },
+
+            // eventMouseout: function(calEvent, jsEvent) {
+            //      $(this).css('z-index', 8);
+            //      $('.tooltip').remove();
+            // },
+
             // Цвет дня в календаре:
             dayRender: function(date, cell){            
                 if (moment().diff(date,'days') > 0){

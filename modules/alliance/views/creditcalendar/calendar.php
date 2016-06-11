@@ -36,16 +36,61 @@ $this->registerJs($toggleSearch, View::POS_END);
                 <button class='btn btn-link animlink' onclick="printPage()">
                   <?php echo Yii::t('app', '{icon} PRINT', ['icon' => '<i class="fa fa-print"></i>']) ?>
                 </button>
-                <?= Html::button(Yii::t('app', '{icon} SEARCH', ['icon' => '<i class="fa fa-search"></i>']), ['class' => 'btn-link animlink', 'id' => 'advancedSearch']) ?>
+                <?php // echo Html::button(Yii::t('app', '{icon} SEARCH', ['icon' => '<i class="fa fa-search"></i>']), ['class' => 'btn-link animlink', 'id' => 'advancedSearch']) ?>
             </p>
 
             <!-- <div class="bs-callout bs-callout-info" id="creditcalendar-search"> -->
-            <form id="creditcalendar-search" class="buttonpane">
+         
+
+            <?php  Pjax::begin(['id' => 'creditCalendar']); ?>
+                <?php 
+                   $this->registerCssFile('@web/css/calendars/calendars.css', ['depends' => ['app\assets\AppAsset']]);    
+                   $this->registerCssFile('@web/js/jquery-ui-1.11.4/jquery-ui.css', ['depends' => ['app\assets\AppAsset']]);    
+                   // $this->registerCssFile('@web/js/jquery-ui-1.11.4/jquery-bootstrap-datepicker.css', ['depends' => ['app\assets\AppAsset']]);   
+                   $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/jquery.min.js'), ['depends' => [
+                       'yii\web\YiiAsset',
+                       'yii\bootstrap\BootstrapAsset'],
+                   ]);           
+                   $this->registerJsFile(Yii::getAlias('@web/js/jquery-ui-1.11.4/jquery-ui.min.js'), ['depends' => [
+                       'yii\web\YiiAsset',
+                       'yii\bootstrap\BootstrapAsset'],
+                   ]);          
+                   $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/moment.min.js'), ['depends' => [
+                       'yii\web\YiiAsset',
+                       'yii\bootstrap\BootstrapAsset'],
+                   ]);
+                   $this->registerJsFile(Yii::getAlias('@web/js/jqfc/fullcalendar.js'), ['depends' => [
+                       'yii\web\YiiAsset',
+                       'yii\bootstrap\BootstrapAsset'],
+                   ]);
+                   $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lang/ru.js'), ['depends' => [
+                       'yii\web\YiiAsset',
+                       'yii\bootstrap\BootstrapAsset'],
+                   ]);  
+                   $this->registerJsFile(Yii::getAlias('@web/js/modules/alliance/creditcalendar/creditcalendar.js'), ['depends' => [
+                       'yii\web\YiiAsset',
+                       'yii\bootstrap\BootstrapAsset'],
+                   ]); 
+                   $this->registerJsFile(Yii::getAlias('@web/js/modules/alliance/creditcalendar/printCalendar.js'), ['depends' => [
+                       'yii\web\YiiAsset',
+                       'yii\bootstrap\BootstrapAsset'],
+                   ]);    
+               ?>
+
+<br/>
+
+          <!-- <button onclick="printPage()">Print this page</button> -->
+
+<!-- <div class="container">   -->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+
+            <form id="creditcalendarfilter" class="buttonpane">
 
                   <div class = "input-group authorinput">
                     <span class = "input-group-addon">
                       <label for="datepicker">
-                        <i class="fa fa-users"></i>
+                        <i class="fa fa-ищщл"></i>
                       </label>
                     </span>
                 <select class="form-control" id="author_selector" style="width: 150px; display: initial;">
@@ -79,56 +124,22 @@ $this->registerJs($toggleSearch, View::POS_END);
                     >
                     </input> 
                     </div>
+                   <!-- <span class = "input-group-btn"> -->
+                      <!-- <button class = "btn btn-primary animlinkColor" type = "button"> -->
+                         <!-- Go! -->
+                      <!-- </button> -->
+                   <!-- </span> -->
+                  <!-- <button class="btn btn-primary btn-sm animlinkColor" type="button" onclick="creditcalendarfilter.reset()">Очистить</button> -->
 
-<!--                    <span class = "input-group-btn">
-                      <button class = "btn btn-primary animlinkColor" type = "button">
-                         Go!
-                      </button>
-                   </span> -->
+            </form>   
 
-              <!-- <button class="btn btn-primary btn-sm animlinkColor" type="button" onclick="calendarfilter.reset()">Очистить</button> -->
+    </div>
+    <div class="panel-body">
+      <div id='credit_calendar'></div> 
+    </div>
+  </div>
+<!-- </div> -->
 
-            </form>            
-
-            <?php  Pjax::begin(['id' => 'creditCalendar']); ?>
-                <?php 
-                   $this->registerCssFile('@web/css/calendars/calendars.css', ['depends' => ['app\assets\AppAsset']]);    
-                   $this->registerCssFile('@web/js/jquery-ui-1.11.4/jquery-ui.css', ['depends' => ['app\assets\AppAsset']]);    
-                   // $this->registerCssFile('@web/js/jquery-ui-1.11.4/jquery-bootstrap-datepicker.css', ['depends' => ['app\assets\AppAsset']]);   
-                   $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/jquery.min.js'), ['depends' => [
-                       'yii\web\YiiAsset',
-                       'yii\bootstrap\BootstrapAsset'],
-                   ]);           
-                   $this->registerJsFile(Yii::getAlias('@web/js/jquery-ui-1.11.4/jquery-ui.min.js'), ['depends' => [
-                       'yii\web\YiiAsset',
-                       'yii\bootstrap\BootstrapAsset'],
-                   ]);          
-                   $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/moment.min.js'), ['depends' => [
-                       'yii\web\YiiAsset',
-                       'yii\bootstrap\BootstrapAsset'],
-                   ]);
-                   $this->registerJsFile(Yii::getAlias('@web/js/jqfc/fullcalendar.js'), ['depends' => [
-                       'yii\web\YiiAsset',
-                       'yii\bootstrap\BootstrapAsset'],
-                   ]);
-                   $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lang/ru.js'), ['depends' => [
-                       'yii\web\YiiAsset',
-                       'yii\bootstrap\BootstrapAsset'],
-                   ]);  
-                   $this->registerJsFile(Yii::getAlias('@web/js/modules/alliance/creditcalendar/creditcalendar.js'), ['depends' => [
-                       'yii\web\YiiAsset',
-                       'yii\bootstrap\BootstrapAsset'],
-                   ]);  
-                   $this->registerJsFile(Yii::getAlias('@web/js/modules/alliance/creditcalendar/printCalendar.js'), ['depends' => [
-                       'yii\web\YiiAsset',
-                       'yii\bootstrap\BootstrapAsset'],
-                   ]);    
-               ?>
-
-<br/>
-
-          <!-- <button onclick="printPage()">Print this page</button> -->
-          <div id='credit_calendar'></div> 
 
 <!--           <div id="eventContent" title="Event Details" style="display:none;">
               Начало: <span id="startTime"></span><br>
@@ -139,11 +150,11 @@ $this->registerJs($toggleSearch, View::POS_END);
 
           <?php  Pjax::end(); ?>
 
-<!--           <script type="text/javascript">
+           <script type="text/javascript">
             var now = new Date();
             var formattedNow = now.toLocaleDateString('en-GB');
             var curUser = '<?php echo Yii::$app->user->identity->full_name;?>';
             self.alert('Текущий пользователь: ' + curUser + '\r\n' + 'Текущая дата: ' + formattedNow);
-          </script> -->
+          </script>
     
 </div>

@@ -101,6 +101,16 @@
                 // element.find('.fc-title').append("<br/>" + event.description);
                 // Tooltip при наведении
                 // $(element).tooltip({title: event.title}); 
+                // 
+                // Предварительный просмотр в jQuery Dialog
+                // element.attr('href', 'javascript:void(0);');
+                // element.click(function() {
+                //     $("#startTime").html(moment(event.start).format('MMM Do h:mm A'));
+                //     $("#endTime").html(moment(event.end).format('MMM Do h:mm A'));
+                //     $("#eventInfo").html(event.description);
+                //     $("#eventLink").attr('href', event.url);
+                //     $("#eventContent").dialog({ modal: true, title: event.title, width:350});
+                // });                
                 return ['all', event.author].indexOf($('#author_selector').val()) >= 0
             },
             // Действие при клике на событие
@@ -168,13 +178,4 @@
 
     // $('#status_selector').on('change',function(){
     //     $('#credit_calendar').fullCalendar('rerenderEvents');
-    // });
-
-
-    // $('#datepicker').datepicker({
-    //     inline: true,
-    //     onSelect: function(dateText, inst) {
-    //         var d = new Date(dateText);
-    //         $('#credit_calendar').fullCalendar('gotoDate', d);
-    //     }
     // });

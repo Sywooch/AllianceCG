@@ -19,6 +19,9 @@ $this->params['breadcrumbs'][] = $this->title;
 $toggleSearch = file_get_contents('js/modules/alliance/creditcalendar/toggleSearch.js');
 $this->registerJs($toggleSearch, View::POS_END);
 
+$toggleSearch = file_get_contents('js/modules/alliance/creditcalendar/updateCalendar.js');
+$this->registerJs($toggleSearch, View::POS_END);
+
 ?>
 
 <div class="creditcalendar-index" id="creditcalendar-index">
@@ -127,6 +130,20 @@ $this->registerJs($toggleSearch, View::POS_END);
           <!-- <button onclick="printPage()">Print this page</button> -->
           <div id='credit_calendar'></div> 
 
+<!--           <div id="eventContent" title="Event Details" style="display:none;">
+              Начало: <span id="startTime"></span><br>
+              Окончание: <span id="endTime"></span><br><br>
+              <p id="eventInfo"></p>
+              <p><strong><a id="eventLink" href="" target="_blank">Перейти на страницу записи</a></strong></p>
+          </div>     -->      
+
           <?php  Pjax::end(); ?>
+
+<!--           <script type="text/javascript">
+            var now = new Date();
+            var formattedNow = now.toLocaleDateString('en-GB');
+            var curUser = '<?php echo Yii::$app->user->identity->full_name;?>';
+            self.alert('Текущий пользователь: ' + curUser + '\r\n' + 'Текущая дата: ' + formattedNow);
+          </script> -->
     
 </div>

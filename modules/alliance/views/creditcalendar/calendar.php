@@ -90,7 +90,7 @@ $this->registerJs($toggleSearch, View::POS_END);
                   <div class = "input-group authorinput">
                     <span class = "input-group-addon">
                       <label for="datepicker">
-                        <i class="fa fa-ищщл"></i>
+                        <i class="fa fa-book"></i>
                       </label>
                     </span>
                 <select class="form-control" id="author_selector" style="width: 150px; display: initial;">
@@ -130,7 +130,6 @@ $this->registerJs($toggleSearch, View::POS_END);
                       <!-- </button> -->
                    <!-- </span> -->
                   <!-- <button class="btn btn-primary btn-sm animlinkColor" type="button" onclick="creditcalendarfilter.reset()">Очистить</button> -->
-
             </form>   
 
     </div>
@@ -150,11 +149,11 @@ $this->registerJs($toggleSearch, View::POS_END);
 
           <?php  Pjax::end(); ?>
 
-           <script type="text/javascript">
+<!--            <script type="text/javascript">
             var now = new Date();
             var formattedNow = now.toLocaleDateString('en-GB');
             var curUser = '<?php echo Yii::$app->user->identity->full_name;?>';
             self.alert('Текущий пользователь: ' + curUser + '\r\n' + 'Текущая дата: ' + formattedNow);
-          </script>
+          </script> -->
     
 </div>

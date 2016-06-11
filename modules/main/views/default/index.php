@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use app\modules\status\models\Statusmonitor;
-use rmrevin\yii\fontawesome\FA;
 
 
 /* @var $this yii\web\View */
@@ -35,13 +34,13 @@ $this->title = Yii::$app->name;;
     	<div class="col-md-12">
 			<div class="row">
 			    <div class="col-md-4" id="centerFA">
-			    	<?= FA::icon('pencil')->size(FA::SIZE_5X) ?>
+			    	<i class="fa fa-pencil fa-5x"></i>
 			    </div>
 			    <div class="col-md-4" id="centerFA">
-			        <?= FA::icon('clock-o')->size(FA::SIZE_5X) ?>
+			    	<i class="fa fa-clock-o fa-5x"></i>
 			    </div>
 			    <div class="col-md-4" id="centerFA">
-			        <?= FA::icon('coffee')->size(FA::SIZE_5X) ?>			    	
+			    	<i class="fa fa-coffee fa-5x"></i>			    	
 			    </div>
 			</div>
 		</div>

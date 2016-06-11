@@ -38,6 +38,11 @@ function counters() {
   	setValue(dateCounter, diffDays, true, 1, 5);
   	setValue(coffeeCounter, diffDays*coffeePerDay, true, coffeePerDay, 5);
   	setValue(codeCounter, diffDays*codeStringsPerDay, true, codeStringsPerDay, 5);
+
+    setValue(dateCounter, diffDays, true, 1, 5);
+    setValue(coffeeCounter, diffDays*coffeePerDay, true, coffeePerDay, 5);
+    setValue(codeCounter, diffDays*codeStringsPerDay, true, codeStringsPerDay, 5);
+
 }
 function dateText() {
 	document.getElementById("dateText").textContent = "Дней в разработке";
@@ -48,8 +53,15 @@ function coffeeText() {
 function codeText() {
 	document.getElementById("codeStringsText").textContent = "Кол-во строк кода";
 }
-window.onload = function() {
-	// dateText().done( counters() );
-	// counters(dateText);
-	counters(), dateText(), coffeeText(), codeText();
+
+function runCounters() {
+  counters(), dateText(), coffeeText(), codeText();
 }
+
+// window.onload = function() {
+// 	counters(), dateText(), coffeeText(), codeText();
+// }
+
+window.addEventListener ? 
+window.addEventListener("load",runCounters,false) : 
+window.attachEvent && window.attachEvent("onload",runCounters);

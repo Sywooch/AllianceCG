@@ -3,6 +3,7 @@
 use yii\widgets\Pjax;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\web\View;
 
 /* 
  * To change this license header, choose License Headers in Project Properties.
@@ -15,9 +16,12 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'NAV_ALLIANCE'), 'url
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'CREDITCALENDARS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
+$toggleSearch = file_get_contents('js/modules/alliance/creditcalendar/toggleSearch.js');
+$this->registerJs($toggleSearch, View::POS_END);
+
 ?>
 
-<div class="creditcalendar-index">
+<div class="creditcalendar-index" id="creditcalendar-index">
 
             <?= $this->render('_menu', [
                 'model' => $model,
@@ -29,30 +33,65 @@ $this->params['breadcrumbs'][] = $this->title;
                 <button class='btn btn-link animlink' onclick="printPage()">
                   <?php echo Yii::t('app', '{icon} PRINT', ['icon' => '<i class="fa fa-print"></i>']) ?>
                 </button>
-                <select id="author_selector">
+                <?= Html::button(Yii::t('app', '{icon} SEARCH', ['icon' => '<i class="fa fa-search"></i>']), ['class' => 'btn-link animlink', 'id' => 'advancedSearch']) ?>
+            </p>
+
+            <!-- <div class="bs-callout bs-callout-info" id="creditcalendar-search"> -->
+            <form id="creditcalendar-search" class="buttonpane">
+
+                  <div class = "input-group authorinput">
+                    <span class = "input-group-addon">
+                      <label for="datepicker">
+                        <i class="fa fa-users"></i>
+                      </label>
+                    </span>
+                <select class="form-control" id="author_selector" style="width: 150px; display: initial;">
                   <option value="all">
                     Все записи
                   </a>
                   <option value=<?= Yii::$app->user->getId() ?>>
                     Мои записи
                   </a>
-                </select>          
-                <input class="form-control" id="datepicker" style="width: 100px; display: initial;"></option> 
-            </p>
+                </select>
+                </div>
 
-            <!-- <br/><br/><br/> -->
+                  <div class = "input-group calinput">
+                    <span class = "input-group-addon">
+                      <label for="datepicker">
+                        <i class="fa fa-calendar"></i>
+                      </label>
+                    </span>
+                    <input 
+                        class="form-control datepicker datepicker-inline"
+                        id="datepicker"
+                        placeholder="Дата: ДД/ММ/ГГГГ"
+                        onkeyup="
+                            var v = this.value;
+                            if (v.match(/^\d{2}$/) !== null) {
+                                this.value = v + '/';
+                            } else if (v.match(/^\d{2}\/\d{2}$/) !== null) {
+                                this.value = v + '/';
+                            }"
+                        maxlength="10" 
+                    >
+                    </input> 
+                    </div>
 
-<?php 
-  // Yii::app()->clientScript->registerCoreScript('jquery');
-  // Yii::app()->clientScript->registerCoreScript('jquery.ui');
+<!--                    <span class = "input-group-btn">
+                      <button class = "btn btn-primary animlinkColor" type = "button">
+                         Go!
+                      </button>
+                   </span> -->
 
-  // Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl .'/js/jquery.ui.datepicker.js'); 
-?>            
+              <!-- <button class="btn btn-primary btn-sm animlinkColor" type="button" onclick="calendarfilter.reset()">Очистить</button> -->
+
+            </form>            
 
             <?php  Pjax::begin(['id' => 'creditCalendar']); ?>
                 <?php 
                    $this->registerCssFile('@web/css/calendars/calendars.css', ['depends' => ['app\assets\AppAsset']]);    
                    $this->registerCssFile('@web/js/jquery-ui-1.11.4/jquery-ui.css', ['depends' => ['app\assets\AppAsset']]);    
+                   // $this->registerCssFile('@web/js/jquery-ui-1.11.4/jquery-bootstrap-datepicker.css', ['depends' => ['app\assets\AppAsset']]);   
                    $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/jquery.min.js'), ['depends' => [
                        'yii\web\YiiAsset',
                        'yii\bootstrap\BootstrapAsset'],

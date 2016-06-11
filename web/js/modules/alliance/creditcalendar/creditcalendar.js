@@ -57,13 +57,13 @@
             },
             dayClick: function(date, calEvent, jsEvent, view, resourceObj) {
                     var datesend = date.format("YYYY-MM-DD H:mm:ss");
-                    if (confirm('Добавить новую запись?'))window.location = 'create';
-                    // if (moment().diff(date,'days') > 0){
-                    //     alert('Выбранная дата меньше текущей! Не рекомендуется добавлять записи задним числом!');
-                    // } else{
-                    //     var datesend = date.format("YYYY-MM-DD H:mm:ss");
-                    //     window.location = 'create';
-                    // }                     
+                    // if (confirm('Добавить новую запись?'))window.location = 'create';
+                    if (moment().diff(date,'days') > 0){
+                        alert('Выбранная дата меньше текущей! Не рекомендуется добавлять записи задним числом!');
+                    } else{
+                        var datesend = date.format("YYYY-MM-DD H:mm:ss");
+                        if (confirm('Добавить новую запись?'))window.location = 'create';
+                    }                     
              },
             // Статичное событие
             // Аттрибут allDay - повторять ежедневно
@@ -123,12 +123,40 @@
         });
     });
 
+    // DatePicker
+
     $('#datepicker').datepicker({
         dateFormat: 'yy-mm-dd',
         inline: true,
+        showButtonPanel: true,
+        changeYear: true,
+        changeMonth: true,
+        yearRange: '-2:+2',
+        altField: '#datepicker',
+        altFormat: 'dd/mm/yy',
+        
+        // showOn: 'both',
+        // buttonText: "<i class='fa fa-calendar'></i>",
+        // buttonImageOnly:  false,
+        // buttonImage: 'http://jqueryui.com/resources/demos/datepicker/images/calendar.gif',
+        
+        beforeShow: function() {
+            setTimeout(function(){
+                $('.ui-datepicker').css('z-index', 99999999999999);
+            }, 0);
+        },
         onSelect: function(dateText, inst) {
             var d = new Date(dateText);
-            $('#credit_calendar').fullCalendar('gotoDate', d);
+
+            if (confirm("Перейти к выбранной дате - " + d.toLocaleDateString('en-GB') + " ?")) {
+                    $('#credit_calendar').fullCalendar('changeView', 'agendaDay');
+                    $('#credit_calendar').fullCalendar('gotoDate', d);
+            }
+            else {
+                // alert(d.toLocaleDateString());
+                // $('#datepicker').datepicker('setDate', null);
+                // $('#datepicker').val('').datepicker("refresh");
+            }
         }
     }); 
 

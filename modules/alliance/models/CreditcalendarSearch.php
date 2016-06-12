@@ -55,13 +55,22 @@ class CreditcalendarSearch extends Creditcalendar
 
 public function calendarsearch(){
 
-    $where = "";
+        // $where = "";
+        global $where;
 
-    if(isset($_GET['status']))
-    {
-        $status = $_GET['status'];
-        $where .= "AND status='$status'";
-    }
+        if(isset($_GET['status']))
+        {
+            $status = array();
+            $status = $_GET['status'];
+            $status = implode(', ', $status);
+            $where = "AND {{%calendar}}.status IN (".$status.")";
+            
+            // foreach ($_GET['status[]'] as $key => $value) {
+            //     $where .= "AND status IN '$value'";
+            // }
+        }
+        
+        // $where = implode(' ', $where);
 
         $creditmanagerquery = 
                 "SELECT

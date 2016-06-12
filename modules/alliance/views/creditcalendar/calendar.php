@@ -4,6 +4,7 @@ use yii\widgets\Pjax;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
+use app\modules\alliance\models\Creditcalendar;
 
 /* 
  * To change this license header, choose License Headers in Project Properties.
@@ -136,18 +137,55 @@ $this->registerJs($toggleSearch, View::POS_END);
                    <!-- </span> -->
                   <!-- <button class="btn btn-primary btn-sm animlinkColor" type="button" onclick="creditcalendarfilter.reset()">Очистить</button> -->
 
-                    <select id="ddlCars" multiple="multiple">
-                      <option value="Accord">Accord</option>
-                      <option value="Duster">Duster</option>
-                      <option value="Esteem">Esteem</option>
-                      <option value="Fiero">Fiero</option>
-                      <option value="Lancer">Lancer</option>
-                      <option value="Phantom">Phantom</option>
-                    </select>
+
+<!--                     <select id="filterStatus" multiple="multiple">
+                      <option value=<?php echo Creditcalendar::STATUS_ATWORK; ?>>
+                        <?php //echo Creditcalendar::STATUS_ATWORK; ?>
+                        В работе
+                      </option>
+                      <option value=<?php echo Creditcalendar::STATUS_CLARIFY; ?>>
+                        Уточнение
+                      </option>
+                      <option value=<?php echo Creditcalendar::STATUS_FINISHED; ?>>
+                        Завершено
+                      </option>
+                    </select> -->
+
+                    <div class="statusAtworkDiv">
+                        <input type="checkbox" value="0" checked="checked" name="statusAtwork" id="statusAtwork" />
+                        <label for="statusAtwork">statusAtwork</label>
+                    </div>
+                    <div class="statusClarifyDiv">
+                        <input type="checkbox" value="1" checked="checked" name="statusClarify" id="statusClarify" />
+                        <label for="statusClarify">statusClarify</label>
+                    </div>
+                    <div class="statusFinishedDiv">
+                        <input type="checkbox" value="2" checked="checked" name="statusFinished" id="statusFinished" />
+                        <label for="statusFinished">statusFinished</label>
+                    </div>                    
+
 
             </form>   
 
     </div>
+
+  <?php
+    // $getCount = isset($_GET['status']) ? count($_GET['status']) : false;
+    // echo $getCount;
+    // var_dump($_SERVER['QUERY_STRING']);
+    // var_dump(parse_url($_SERVER['QUERY_STRING']));
+    // var_dump(parse_str($_SERVER['QUERY_STRING']));
+    // isset($_GET['status']) ? var_dump($_GET['status']) : false;
+  ?>
+
+  <script type="text/javascript">
+    // Если нажат checkbox с id statusFinished вернуть его значение
+    // var statusFinished = document.getElementById('statusFinished');
+    var el = (document.getElementById('statusFinished').checked) ? document.getElementById('statusFinished').value : '';
+    // Alert для проверки
+    // alert(el);
+  </script>
+  
     <div class="panel-body">
       <div id='credit_calendar'></div> 
     </div>

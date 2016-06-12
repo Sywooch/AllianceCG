@@ -32,6 +32,15 @@ use kartik\date\DatePicker;
 
     <div class="row" style="margin-bottom: 8px">
 
+<div class="panel panel-default">
+    <div class="panel-heading buttonpane">
+        <?php
+            $headerText = $model->isNewRecord ? Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']) : Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-edit"></i>']);
+            echo $headerText;
+        ?>
+    </div>
+    <div class="panel-body">
+
         <div class="col-sm-3">
 
             <?php 
@@ -171,7 +180,7 @@ use kartik\date\DatePicker;
 
     </div>
 
-    <div class="row" style="margin-bottom: 8px">
+    <div class="row creditcalendarrow">
         <div class="col-sm-6" style="text-align: right;">
             <?= $form->field($model, 'allday')->checkbox(
                 [
@@ -192,14 +201,15 @@ use kartik\date\DatePicker;
         </div>
     </div>
 
-    <div class="row" style="margin-bottom: 8px">
+
+    <div class="row creditcalendarrow">
 
         <?= $form->field($model, 'title', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-bookmark"></i> </span>{input}</div>{error}'])->textInput(['maxlength' => true,'placeholder' => $model->getAttributeLabel('title')]) ?>
 
         <?= $form->field($model, 'description', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-file-text"></i> </span>{input}</div>{error}'])->textarea(['rows' => 4, 'placeholder' => $model->getAttributeLabel('description')]) ?>
     </div>
 
-    <div class="row" style="margin-bottom: 8px">
+    <div class="row creditcalendarrow">
 
         <div class="col-sm-6">
 
@@ -217,7 +227,7 @@ use kartik\date\DatePicker;
 
 <?php if(!Yii::$app->user->can('creditmanager')) { ?>
 
-    <div class="row" style="margin-bottom: 8px">
+    <div class="row creditcalendarrow">
         <div class="col-sm-6">
 
             <?= $form->field($model, 'userids', ['template' => '<i class="fa fa-users"></i> {label}{input}'])->checkboxList(User::find()->select(['full_name', 'id'])->where(['role' => 'creditmanager'])->andWhere(['status' => 1])->indexBy('id')->column(), ['id' => 'respid']) ?>
@@ -237,12 +247,21 @@ use kartik\date\DatePicker;
         </div>
     </div>
 
+   
+
 <?php } ?>
 
-        <div class="form-group" style="text-align: right; margin-top: 30;">
+        <div class="form-group buttonpane" style="margin: 30px;">
+            <div class="panel-footerBak"><!--panelFooterBegin-->
             <?= Html::submitButton($model->isNewRecord ? Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']) : Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-edit"></i>']), ['class' => $model->isNewRecord ? 'btn btn-success btn-menu animlinkColor' : 'btn btn-primary btn-menu animlinkColor']) ?>
             <?= Html::a(Yii::t('app', '{icon} CANCEL', ['icon' => '<i class="fa fa-remove"></i>']), 'index', ['class' => 'btn btn-danger btn-menu btn-sm animlinkColor']) ?>
+            </div><!--panelFooterEnd-->
         </div>
 </div>
+
+
+
+    </div><!-- PanelContentEnd -->
+</div><!-- PanelEnd -->
 
     <?php ActiveForm::end(); ?>

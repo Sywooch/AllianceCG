@@ -5,6 +5,10 @@
  */
 
 
+#filterStatus {
+	width: 150px;
+}
+
 .fc {
 	direction: ltr;
 	text-align: left;

@@ -34,3 +34,7 @@
         /*width: auto !important;*/
     }
 }
+
+#filterStatus {
+	width: 150px;
+}

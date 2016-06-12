@@ -8,9 +8,17 @@
 //<script>
 
     $(document).ready(function() {
-        var source = "/alliance/creditcalendar/calendarsearch";
-        var filter = document.getElementById('autor_selector')
 
+        // var el = (document.getElementById('statusFinished').checked) ? document.getElementById('statusFinished').value : '';
+        
+        // var source = "/alliance/creditcalendar/calendarsearch?status[]=0&status[]=1&status[]=2";
+        var source = "/alliance/creditcalendar/calendarsearch";
+        var filter = document.getElementById('autor_selector');
+        var curSource = new Array();
+        curSource[0] = '/alliance/creditcalendar/calendarsearch?status[]=' +  $('#statusAtwork').is(':checked') + '&status[]='+ $('#statusClarify').is(':checked');
+        curSource[1] = '/alliance/creditcalendar/calendarsearch';
+        // curSource[1] = source;
+        var newSource = new Array();
         $('#credit_calendar').fullCalendar({
             contentHeight: 600,
             aspectRatio: 8,
@@ -29,6 +37,7 @@
             lang: 'ru',
             more: 3,
             firstday: 1,
+            theme:true,
             buttonIcons: {
                 prev: 'left-single-arrow',
                 next: 'right-single-arrow',
@@ -83,9 +92,12 @@
 
                 dow: [ 1, 2, 3, 4, 5, 6, 7 ]
                 // days of week. an array of zero-based day of week integers (0=Sunday) дни недели, начиная с 0 (0-ВСК)
-            }            ,
+            },
+
+            // eventSources: [curSource[0],curSource[1]],
             events: {
-                url: source,
+                // url: source,
+                url: [curSource[0],curSource[1]],
                 cache: true, 
                 error: function() {
                     alert('Ошибка получения источника событий');
@@ -199,7 +211,32 @@
         $('#credit_calendar').fullCalendar('rerenderEvents');
     });
 
-    $('#ddlCars').multiselect();
+    $('#filterStatus').multiselect({
+        numberDisplayed: 2,
+        enableFiltering: false,
+        includeSelectAllOption: true,
+        // includeDeSelectAllOption: true,
+        nonSelectedText: 'Статус',
+    });
+
+    $("#statusAtwork, #statusClarify, #statusFinished").change(function() {
+        //get current status of our filters into newSource
+        newSource[0] = '/alliance/creditcalendar/calendarsearch?status[]=' +  $('#statusAtwork').is(':checked') + '&status[]='+ $('#statusClarify').is(':checked');
+        newSource[1] = $('#statusFinished').is(':checked') ? '/alliance/creditcalendar/calendarsearch/' : '';
+
+        //remove the old eventSources
+        $('#eventFilterCalendar').fullCalendar('removeEventSource', curSource[0]);
+        $('#eventFilterCalendar').fullCalendar('removeEventSource', curSource[1]);
+        $('#eventFilterCalendar').fullCalendar('refetchEvents');
+
+        //attach the new eventSources
+        $('#eventFilterCalendar').fullCalendar('addEventSource', newSource[0]);
+        $('#eventFilterCalendar').fullCalendar('addEventSource', newSource[1]);
+        $('#eventFilterCalendar').fullCalendar('refetchEvents');
+
+        curSource[0] = newSource[0];
+        curSource[1] = newSource[1];
+    });
 
     // $('#status_selector').on('change',function(){
     //     $('#credit_calendar').fullCalendar('rerenderEvents');

@@ -519,6 +519,13 @@ section {
     background-color: #337ab7;
 }
 
+.creditcalendarrow {
+    margin-bottom: 8px;
+    margin-left: 40px;
+    margin-right: 40px;
+    display: ;
+}
+
 /*.wrap {background: url('/img/site/main-bg.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;

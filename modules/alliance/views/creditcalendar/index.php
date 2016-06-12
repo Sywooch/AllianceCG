@@ -56,13 +56,22 @@ $this->registerJs($toggleSearch, View::POS_END);
          ]);
     ?>
 
-    <?= Html::button(Yii::t('app', '{icon} SEARCH', ['icon' => '<i class="fa fa-search"></i>']), ['class' => 'btn-link animlink', 'id' => 'advancedSearch']) ?>
+    <?php // echo Html::button(Yii::t('app', '{icon} SEARCH', ['icon' => '<i class="fa fa-search"></i>']), ['class' => 'btn-link animlink', 'id' => 'advancedSearch']) ?>
 
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <div class="panel panel-default"> <!-- panelStart -->
+
+        <div class="panel-heading"><!-- panelHeaderBegin -->
+            PanelHeading
+        </div> <!-- panelHeadingEnd -->  
+        
+        <div class="panel-body"><!-- panelBodyBegin -->
 
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
-            // 'filterModel' => $searchModel,
+            'filterModel' => $searchModel,
+            'summary' => false,
 //          'layout'=>"{sorter}\n{pager}\n{summary}\n{items}",
             'id' => 'creditcalendar-grid',
             'tableOptions' =>[
@@ -201,5 +210,10 @@ $this->registerJs($toggleSearch, View::POS_END);
             ],
         ]); 
     ?>
+
+
+    </div><!-- panelBodyEnd -->
+  </div><!-- panelEnd -->
+
 
 </div>

@@ -9,16 +9,14 @@
 
     $(document).ready(function() {
 
-        // var el = (document.getElementById('statusFinished').checked) ? document.getElementById('statusFinished').value : '';
-        
-        // var source = "/alliance/creditcalendar/calendarsearch?status[]=0&status[]=1&status[]=2";
-        var source = "/alliance/creditcalendar/calendarsearch";
+        // var statusAtwork = (document.getElementById('statusFinished').checked) ? document.getElementById('statusAtwork').value : '';
+        // var statusClarify = (document.getElementById('statusFinished').checked) ? document.getElementById('statusClarify').value : '';
+        // var statusFinished = (document.getElementById('statusFinished').checked) ? document.getElementById('statusFinished').value : '';
+
+        // var curSource = "/alliance/creditcalendar/calendarsearch?status[]=0&status[]=1&status[]=2";
+        // var curSource = '/alliance/creditcalendar/calendarsearch?status[]=' +  statusAtwork + '&status[]=' + statusClarify + '&status[]=' + statusFinished;
+        var curSource = "/alliance/creditcalendar/calendarsearch";
         var filter = document.getElementById('autor_selector');
-        var curSource = new Array();
-        curSource[0] = '/alliance/creditcalendar/calendarsearch?status[]=' +  $('#statusAtwork').is(':checked') + '&status[]='+ $('#statusClarify').is(':checked');
-        curSource[1] = '/alliance/creditcalendar/calendarsearch';
-        // curSource[1] = source;
-        var newSource = new Array();
         $('#credit_calendar').fullCalendar({
             contentHeight: 600,
             aspectRatio: 8,
@@ -95,14 +93,29 @@
             },
 
             // eventSources: [curSource[0],curSource[1]],
-            events: {
-                // url: source,
-                url: [curSource[0],curSource[1]],
-                cache: true, 
-                error: function() {
-                    alert('Ошибка получения источника событий');
+            eventSources: [
+                {
+                    url: curSource,
+                    cache: true,
+                    error: function() {
+                        alert("Ошибка получения источника событий");
+                    },
                 },
-            },
+                // {
+                //     url: curSource[1],
+                //     cache: true,
+                //     error: function() {
+                //         alert("Ошибка получения источника событий №2");
+                //     },
+                // },
+            ],
+            // events: {
+            //     url: source,
+            //     cache: true, 
+            //     error: function() {
+            //         alert('Ошибка получения источника событий');
+            //     },
+            // },
             header: {
                 left: 'prev,today,next',
                 center: 'title,filter',
@@ -124,6 +137,7 @@
                 //     $("#eventContent").dialog({ modal: true, title: event.title, width:350});
                 // });
                 // 
+               
                 // Popover при наведении      
                 $(element).popover({title: event.title, content: event.description, trigger: 'hover', placement: 'auto right', delay: {"hide": 300 }});
                 return ['all', event.author].indexOf($('#author_selector').val()) >= 0
@@ -217,25 +231,6 @@
         includeSelectAllOption: true,
         // includeDeSelectAllOption: true,
         nonSelectedText: 'Статус',
-    });
-
-    $("#statusAtwork, #statusClarify, #statusFinished").change(function() {
-        //get current status of our filters into newSource
-        newSource[0] = '/alliance/creditcalendar/calendarsearch?status[]=' +  $('#statusAtwork').is(':checked') + '&status[]='+ $('#statusClarify').is(':checked');
-        newSource[1] = $('#statusFinished').is(':checked') ? '/alliance/creditcalendar/calendarsearch/' : '';
-
-        //remove the old eventSources
-        $('#eventFilterCalendar').fullCalendar('removeEventSource', curSource[0]);
-        $('#eventFilterCalendar').fullCalendar('removeEventSource', curSource[1]);
-        $('#eventFilterCalendar').fullCalendar('refetchEvents');
-
-        //attach the new eventSources
-        $('#eventFilterCalendar').fullCalendar('addEventSource', newSource[0]);
-        $('#eventFilterCalendar').fullCalendar('addEventSource', newSource[1]);
-        $('#eventFilterCalendar').fullCalendar('refetchEvents');
-
-        curSource[0] = newSource[0];
-        curSource[1] = newSource[1];
     });
 
     // $('#status_selector').on('change',function(){

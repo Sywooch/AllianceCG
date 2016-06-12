@@ -25,7 +25,7 @@ $this->registerJs($toggleSearch, View::POS_END);
 
 ?>
 
-<div class="creditcalendar-index" id="creditcalendar-index">
+<div class="creditcalendar-index" id="creditcalendar-index"> <!-- pageDiv -->
 
             <?= $this->render('_menu', [
                 'model' => $model,
@@ -37,18 +37,13 @@ $this->registerJs($toggleSearch, View::POS_END);
                 <button class='btn btn-link animlink' onclick="printPage()">
                   <?php echo Yii::t('app', '{icon} PRINT', ['icon' => '<i class="fa fa-print"></i>']) ?>
                 </button>
-                <?php // echo Html::button(Yii::t('app', '{icon} SEARCH', ['icon' => '<i class="fa fa-search"></i>']), ['class' => 'btn-link animlink', 'id' => 'advancedSearch']) ?>
             </p>
-
-            <!-- <div class="bs-callout bs-callout-info" id="creditcalendar-search"> -->
-         
 
             <?php  Pjax::begin(['id' => 'creditCalendar']); ?>
                 <?php 
                    $this->registerCssFile('@web/css/calendars/calendars.css', ['depends' => ['app\assets\AppAsset']]);    
                    $this->registerCssFile('@web/css/bootstrap-multiselect.css', ['depends' => ['app\assets\AppAsset']]);  
                    $this->registerCssFile('@web/js/jquery-ui-1.11.4/jquery-ui.css', ['depends' => ['app\assets\AppAsset']]);    
-                   // $this->registerCssFile('@web/js/jquery-ui-1.11.4/jquery-bootstrap-datepicker.css', ['depends' => ['app\assets\AppAsset']]);   
                    $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/jquery.min.js'), ['depends' => [
                        'yii\web\YiiAsset',
                        'yii\bootstrap\BootstrapAsset'],
@@ -83,15 +78,10 @@ $this->registerJs($toggleSearch, View::POS_END);
                    ]);    
                ?>
 
-<br/>
+  <div class="panel panel-default"> <!-- panelStart -->
+    <div class="panel-heading"><!-- panelHeaderBegin -->
 
-          <!-- <button onclick="printPage()">Print this page</button> -->
-
-<!-- <div class="container">   -->
-  <div class="panel panel-default">
-    <div class="panel-heading">
-
-            <form id="creditcalendarfilter" class="buttonpane">
+            <form id="creditcalendarfilter">
 
                   <div class = "input-group authorinput">
                     <span class = "input-group-addon">
@@ -130,83 +120,16 @@ $this->registerJs($toggleSearch, View::POS_END);
                     >
                     </input> 
                     </div>
-                   <!-- <span class = "input-group-btn"> -->
-                      <!-- <button class = "btn btn-primary animlinkColor" type = "button"> -->
-                         <!-- Go! -->
-                      <!-- </button> -->
-                   <!-- </span> -->
-                  <!-- <button class="btn btn-primary btn-sm animlinkColor" type="button" onclick="creditcalendarfilter.reset()">Очистить</button> -->
-
-
-<!--                     <select id="filterStatus" multiple="multiple">
-                      <option value=<?php echo Creditcalendar::STATUS_ATWORK; ?>>
-                        <?php //echo Creditcalendar::STATUS_ATWORK; ?>
-                        В работе
-                      </option>
-                      <option value=<?php echo Creditcalendar::STATUS_CLARIFY; ?>>
-                        Уточнение
-                      </option>
-                      <option value=<?php echo Creditcalendar::STATUS_FINISHED; ?>>
-                        Завершено
-                      </option>
-                    </select> -->
-
-                    <div class="statusAtworkDiv">
-                        <input type="checkbox" value="0" checked="checked" name="statusAtwork" id="statusAtwork" />
-                        <label for="statusAtwork">statusAtwork</label>
-                    </div>
-                    <div class="statusClarifyDiv">
-                        <input type="checkbox" value="1" checked="checked" name="statusClarify" id="statusClarify" />
-                        <label for="statusClarify">statusClarify</label>
-                    </div>
-                    <div class="statusFinishedDiv">
-                        <input type="checkbox" value="2" checked="checked" name="statusFinished" id="statusFinished" />
-                        <label for="statusFinished">statusFinished</label>
-                    </div>                    
-
 
             </form>   
 
-    </div>
+    </div> <!-- panelHeadingEnd -->  
+      <div class="panel-body"><!-- panelBodyBegin -->
+        <div id='credit_calendar'> <!-- calendarBegin -->
+      </div> <!-- calendarEnd -->
+    </div><!-- panelBodyEnd -->
+  </div><!-- panelEnd -->
+</div> <!-- pageDivEnd -->
 
-  <?php
-    // $getCount = isset($_GET['status']) ? count($_GET['status']) : false;
-    // echo $getCount;
-    // var_dump($_SERVER['QUERY_STRING']);
-    // var_dump(parse_url($_SERVER['QUERY_STRING']));
-    // var_dump(parse_str($_SERVER['QUERY_STRING']));
-    // isset($_GET['status']) ? var_dump($_GET['status']) : false;
-  ?>
-
-  <script type="text/javascript">
-    // Если нажат checkbox с id statusFinished вернуть его значение
-    // var statusFinished = document.getElementById('statusFinished');
-    var el = (document.getElementById('statusFinished').checked) ? document.getElementById('statusFinished').value : '';
-    // Alert для проверки
-    // alert(el);
-  </script>
-  
-    <div class="panel-body">
-      <div id='credit_calendar'></div> 
-    </div>
-  </div>
-<!-- </div> -->
-
-
-<!--           <div id="eventContent" title="Event Details" style="display:none;">
-              Начало: <span id="startTime"></span><br>
-              Окончание: <span id="endTime"></span><br><br>
-              <p id="eventInfo"></p>
-              <p><strong><a id="eventLink" href="" target="_blank">Перейти на страницу записи</a></strong></p>
-          </div>     -->      
-
-          <?php  Pjax::end(); ?>
-
-<!--            <script type="text/javascript">
-            var now = new Date();
-            var formattedNow = now.toLocaleDateString('en-GB');
-            var curUser = '<?php echo Yii::$app->user->identity->full_name;?>';
-            self.alert('Текущий пользователь: ' + curUser + '\r\n' + 'Текущая дата: ' + formattedNow);
-          </script> -->
+<?php  Pjax::end(); ?>
     
-</div>

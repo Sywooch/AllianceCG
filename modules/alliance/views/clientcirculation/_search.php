@@ -15,19 +15,6 @@ $this->registerJs($toggleAdvanced, View::POS_END);
 
 ?>
 
-<p class="buttonpane">
-    <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-link animlink']) ?>
-    <?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => FA::icon('refresh')]), ['index'], ['class' => 'btn btn-link animlink']) ?>
-    <?php
-        if(Yii::$app->user->can('admin')){
-            echo Html::a(Yii::t('app', '{icon} DELETE', ['icon' => FA::icon('remove')]), ['#'], ['class' => 'btn btn-link animlink', 'id' => 'MultipleDelete']);
-            echo '&nbsp';
-            echo Html::a(Yii::t('app', '{icon} RESTORE', ['icon' => FA::icon('upload')]), ['#'], ['class' => 'btn btn-link animlink', 'id' => 'MultipleRestore']);
-        }
-    ?>    
-    <?= Html::button(Yii::t('app', '{icon} ADVANCED', ['icon' => FA::icon('list')]), ['class' => 'btn-link animlink', 'id' => 'advanced']) ?>    
-</p>
-
 <div class="client-circulation-search" id="clientcirculation">
 
     <?php $form = ActiveForm::begin([
@@ -57,14 +44,14 @@ $this->registerJs($toggleAdvanced, View::POS_END);
 
     </div>
 
-    <div class="form-group col-md-8">        
+    <div class="form-group col-md-6">        
         <?= $form->field($model, 'globalSearch', [
                 'template' => '<div class="input-group"><span class="input-group-addon"> <i class="fa fa-search"></i> </span>{input}{error}</div>',
             ]); 
         ?>   
     </div>
 
-    <div class="buttonpane col-md-12">
+    <div class="buttonpane col-md-2">
         <?= Html::submitButton(Yii::t('app', '{icon} Search', ['icon' => FA::icon('search')]), ['class' => 'btn btn-primary btn-sm animlink']) ?>
     </div>
 

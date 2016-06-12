@@ -119,14 +119,39 @@ $this->registerJs($toggleSearch, View::POS_END);
                         maxlength="10" 
                     >
                     </input> 
-                    </div>
+                  </div>
+
+
+                  <div class = "input-group statusinput"> <!-- input-group-statusInput -->
+
+                    <span class = "input-group-addon"> <!-- span input-group-addon -->
+                      <label for="datepicker"> <!-- labelDatePicker -->
+                        <i class="fa fa-check"></i>
+                      </label> <!-- labelDatePicker -->
+                    </span> <!-- span input-group-addon -->
+
+                    <select class="form-control" id="status_selector" style="width: 150px; display: initial;"> <!-- selectStatus -->
+                      <option value="all">
+                        Любой статус
+                      </a>
+                      <option value=0>
+                        В работе
+                      </a>
+                      <option value=1>
+                        Уточнение
+                      </a>
+                      <option value=2>
+                        Завершено
+                      </a>
+                    </select> <!-- selectStatus -->
+                </div> <!-- input-group-statusInput -->
 
             </form>   
 
     </div> <!-- panelHeadingEnd -->  
       <div class="panel-body"><!-- panelBodyBegin -->
         <div id='credit_calendar'> <!-- calendarBegin -->
-      </div> <!-- calendarEnd -->
+        </div> <!-- calendarEnd -->
     </div><!-- panelBodyEnd -->
   </div><!-- panelEnd -->
 </div> <!-- pageDivEnd -->

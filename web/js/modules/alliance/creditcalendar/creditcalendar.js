@@ -140,6 +140,7 @@
                
                 // Popover при наведении      
                 $(element).popover({title: event.title, content: event.description, trigger: 'hover', placement: 'auto right', delay: {"hide": 300 }});
+                // return ['all', event.status].indexOf($('#status_selector').val()) >= 0
                 return ['all', event.author].indexOf($('#author_selector').val()) >= 0
             },
             // Действие при клике на событие
@@ -225,6 +226,10 @@
         $('#credit_calendar').fullCalendar('rerenderEvents');
     });
 
+    $('#status_selector').on('change',function(){
+        $('#credit_calendar').fullCalendar('rerenderEvents');
+    });    
+
     $('#filterStatus').multiselect({
         numberDisplayed: 2,
         enableFiltering: false,
@@ -233,6 +238,4 @@
         nonSelectedText: 'Статус',
     });
 
-    // $('#status_selector').on('change',function(){
-    //     $('#credit_calendar').fullCalendar('rerenderEvents');
-    // });
+

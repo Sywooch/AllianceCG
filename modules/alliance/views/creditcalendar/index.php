@@ -25,9 +25,6 @@ $this->registerJs($multipleDelete, View::POS_END);
 $ExportExcel = file_get_contents('js/modules/alliance/creditcalendar/gridViewExcelExport.js');
 $this->registerJs($ExportExcel, View::POS_END);
 
-$toggleSearch = file_get_contents('js/modules/alliance/creditcalendar/toggleSearch.js');
-$this->registerJs($toggleSearch, View::POS_END);
-
 ?>
 <div class="creditcalendar-index">
 
@@ -56,14 +53,10 @@ $this->registerJs($toggleSearch, View::POS_END);
          ]);
     ?>
 
-    <?php // echo Html::button(Yii::t('app', '{icon} SEARCH', ['icon' => '<i class="fa fa-search"></i>']), ['class' => 'btn-link animlink', 'id' => 'advancedSearch']) ?>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <div class="panel panel-default"> <!-- panelStart -->
 
-        <div class="panel-heading"><!-- panelHeaderBegin -->
-            PanelHeading
+        <div class="panel-heading" style="height: 70px;"><!-- panelHeaderBegin -->
+            <?php echo $this->render('_search', ['model' => $searchModel]); ?>
         </div> <!-- panelHeadingEnd -->  
         
         <div class="panel-body"><!-- panelBodyBegin -->
@@ -94,13 +87,15 @@ $this->registerJs($toggleSearch, View::POS_END);
                 [
                     'header' => '№',
                     'class' => 'yii\grid\SerialColumn',
+                    'contentOptions'=>['style'=>'width: 10px;']
                 ],
                 [
                     'class' => 'yii\grid\CheckboxColumn',
-                    'contentOptions'=>['style'=>'width: 20px;']
+                    'contentOptions'=>['style'=>'width: 10px;']
                 ],
                 [
-                    'attribute' => 'period'
+                    'attribute' => 'period',
+                    'contentOptions'=>['style'=>'width: 150px;'],
                 ],
                 [
                     'class' => LinkColumn::className(),
@@ -116,7 +111,7 @@ $this->registerJs($toggleSearch, View::POS_END);
                             'class'=>'form-control'
                         ]
                     ]),
-                    'contentOptions'=>['style'=>'width: 130px;'],
+                    // 'contentOptions'=>['style'=>'width: 130px;'],
                 ],
                 // [
                 //     'attribute' => 'locations',
@@ -125,13 +120,14 @@ $this->registerJs($toggleSearch, View::POS_END);
                 //     },
                 //     'visible' => !Yii::$app->user->can('creditmanager') ? true : false,
                 // ],
-                [
-                    'attribute' => 'responsibles',
-                    'value' => function($model) {
-                        return !empty($model->users) ? implode(', ', ArrayHelper::map($model->users, 'id', 'full_name')) : Yii::t('app', 'RESPONSIBLES_DOES_NOT_EXIST');
-                    },
-                    'visible' => !Yii::$app->user->can('creditmanager') ? true : false,
-                ],
+                // [
+                //     'attribute' => 'responsibles',
+                //     'filter' => false,
+                //     'value' => function($model) {
+                //         return !empty($model->users) ? implode(', ', ArrayHelper::map($model->users, 'id', 'full_name')) : Yii::t('app', 'RESPONSIBLES_DOES_NOT_EXIST');
+                //     },
+                //     'visible' => !Yii::$app->user->can('creditmanager') ? true : false,
+                // ],
                 [
                     'class' => SetColumn::className(),
                     'attribute' => 'priority',

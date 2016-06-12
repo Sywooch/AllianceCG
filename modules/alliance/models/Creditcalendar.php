@@ -162,8 +162,11 @@ class Creditcalendar extends \yii\db\ActiveRecord
     public function getPeriod()
     {
 
-        $dateTimeFrom = \Yii::$app->formatter->asDatetime($this->date_from . ' ' . $this->time_from, "php:Y/m/d H:i");
-        $dateTimeTo = \Yii::$app->formatter->asDatetime($this->date_to . ' ' . $this->time_to, "php:Y/m/d H:i");
+        // $dateTimeFrom = \Yii::$app->formatter->asDatetime($this->date_from . ' ' . $this->time_from, "php:Y/m/d H:i");
+        // $dateTimeTo = \Yii::$app->formatter->asDatetime($this->date_to . ' ' . $this->time_to, "php:Y/m/d H:i");
+
+        $dateTimeFrom = \Yii::$app->formatter->asDatetime($this->date_from . ' ' . $this->time_from, "php:d/m/Y H:i");
+        $dateTimeTo = \Yii::$app->formatter->asDatetime($this->date_to . ' ' . $this->time_to, "php:d/m/Y H:i");
         $period = $dateTimeFrom . ' - ' . $dateTimeTo;
         return $period;
     }

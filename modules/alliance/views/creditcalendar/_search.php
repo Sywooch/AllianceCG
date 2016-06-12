@@ -6,7 +6,8 @@ use yii\helpers\ArrayHelper;
 use app\modules\alliance\models\Creditcalendar;
 use app\modules\admin\models\User;
 // use yii\jui\AutoComplete;
-use kartik\date\DatePicker;
+// use kartik\date\DatePicker;
+use yii\jui\DatePicker;
 use yii\web\View;
 
 /* @var $this yii\web\View */
@@ -18,65 +19,32 @@ $this->registerJs($ExportExcel, View::POS_END);
 
 ?>
 
-<div class="creditcalendar-search" id="creditcalendar-search">
-    <div class="bs-callout bs-callout-info">
-
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-        <div class="col-md-12" style="margin: 10px">
+            <div class="col-md-12" style="margin: 10px">
 
-        <div class="col-md-6">
+            <div class="col-md-5">
 
-            <?= DatePicker::widget([
-                    'model' => $model,
-                    'attribute' => 'date_from',
-                    'options' => ['placeholder' => $model->getAttributeLabel( 'date_from' )],
-                    'convertFormat' => true,
-                    'pluginOptions' => [
-                        'todayHighlight' => true
-                    ]
-                ]);
-            ?>
+                <?php 
+                    echo $form->field($model, 'date_from', ['template' => '<div class="input-group"><span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>{input}</span></div>{error}'])->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd', 'options'=>['placeholder' => $model->getAttributeLabel('date_from'), 'class'=>'form-control'], 'clientOptions' => ['changeYear' => true, 'yearRange' => '-2:+2', 'changeMonth' => true, 'showButtonPanel' => true]]) 
+                ?>
+            </div> <!-- col-md-5 -->
 
-        </div>
+            <div class="col-md-5">
 
-        <div class="col-md-6">
-            <?= DatePicker::widget([
-                    'model' => $model,
-                    'attribute' => 'date_to',
-                    'options' => ['placeholder' => $model->getAttributeLabel( 'date_to' )],
-                    'convertFormat' => true,
-                    'pluginOptions' => [
-                        'todayHighlight' => true
-                    ]
-                ]);
-            ?>                        
-        </div>
-        </div>
+                <?php 
+                    echo $form->field($model, 'date_to', ['template' => '<div class="input-group"><span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>{input}</span></div>{error}'])->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd','options'=>['placeholder' => $model->getAttributeLabel('date_to'), 'class'=>'form-control'], 'clientOptions' => ['changeYear' => true, 'yearRange' => '-2:+2', 'changeMonth' => true, 'showButtonPanel' => true]]) 
+                ?>
 
-        <div class="col-md-12" style="margin: 10px">
+            </div> <!-- col-md-5 -->
 
-        <div class="col-md-6">
-            <?= $form->field($model, 'priority', ['template' => '<div class="input-group"><span class="input-group-addon"> <i class="fa fa-hashtag"></i> </span>{input}</span></div>{error}'])->dropDownList($model->getPrioritiesArray(), ['prompt' => '-- ' . $model->getAttributeLabel( 'priority' ) . ' --',]);
-            ?>         
-        </div>
-
-        <div class="col-md-6">
-            <?= $form->field($model, 'status', ['template' => '<div class="input-group"><span class="input-group-addon"> <i class="fa fa-flag"></i> </span>{input}</span></div>{error}'])->dropDownList($model->getStatusesArray(), ['prompt' => '-- ' . $model->getAttributeLabel( 'status' ) . ' --',]);
-            ?>
-        </div>
-
-        </div>
-
-        <div class="form-group buttonpane">
+        <div class="form-group buttonpane col-md-2">
             <?= Html::submitButton(Yii::t('app', '{icon} SEARCH', ['icon' => '<i class="fa fa-search"></i>']), ['class' => 'btn btn-primary btn-sm animlink']) ?>
-        </div>
+        </div> <!-- col-md-2 -->
+        
+        </div> <!-- col-md-12 -->
 
     <?php ActiveForm::end(); ?>
-
-</div>
-
-</div>

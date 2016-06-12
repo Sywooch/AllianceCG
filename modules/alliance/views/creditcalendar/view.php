@@ -19,28 +19,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="creditcalendar-view">
 
-<?php // $model->authorname->role; ?>
-
-<!--    <h1>-->
-        <?php // ehocHtml::encode($this->title) ?>
-<!--    </h1>-->
-
-
-<!--     <div class="panel panel-default">
-
-        <div class="panel-heading">
-            <h4> -->
-                <?php // FA::icon('calendar') . ' ' . Html::encode($this->title) ?>
-<!--             </h4>
-        </div>
-
-        <div class="panel-body"> -->
-
             <?= $this->render('_menu', [
                 'model' => $model,
             ]) ?>
 
-            <p style="text-align: right">
+            <p class="buttonpane">
                 <?= Html::a(Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-pencil"></i>']), ['update', 'id' => $model->id], ['class' => 'btn btn-link animlink']) ?>
                 <?php 
                     // Html::a(Yii::t('app', '{icon} DELETE', ['icon' => '<i class="fa fa-trash"></i>']), ['delete', 'id' => $model->id], [
@@ -52,6 +35,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     // ]) 
                 ?>
             </p>
+
+         <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <h4> 
+                    <?php echo '<i class="fa fa-calendar"></i> ' . Html::encode($this->title) ?>
+                </h4>
+            </div>
+
+            <div class="panel-body">
 
             <?= DetailView::widget([
                 'model' => $model,
@@ -83,18 +76,24 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'author',
                         'value' => $model->authorname->full_name,
                     ],
-                    'created_at:datetime',
+                    // 'created_at:datetime',
+                    [
+                        'attribute' => 'created_at',
+                        'format' => 'raw',
+                        'value' => \Yii::$app->formatter->asDatetime($model->created_at, "php:d/m/Y H:i"),
+                    ],
                     [
                         'attribute' => 'updated_at',
-                        'format' => 'datetime',
+                        'format' => 'raw',
+                        'value' => \Yii::$app->formatter->asDatetime($model->updated_at, "php:d/m/Y H:i"),
                         'visible' => ($model->updated_at !== $model->created_at) ? true : false,
                     ],
 
                 ],
             ]) ?>
 
-<!--         </div>
-    </div> -->
+        </div>
+    </div>
 
 
 

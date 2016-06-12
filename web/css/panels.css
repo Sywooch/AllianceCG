@@ -24,6 +24,10 @@
 	width: 150px;
 }
 
+.statusinput {
+	width: 150px;
+}
+
 .input-group {
     display: inline-table;
     vertical-align: middle;

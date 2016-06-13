@@ -1,37 +1,103 @@
 <?php
-    use app\modules\alliance\Module;
-    use rmrevin\yii\fontawesome\FA;
-    use yii\bootstrap\Nav;
+    // use app\modules\alliance\Module;
+    // use rmrevin\yii\fontawesome\FA;
+    // use yii\bootstrap\Nav;
     
 
-$this->title = Module::t('module', 'NAV_ALLIANCE');
+$this->title = Yii::t('app', 'NAV_ALLIANCE');
 $this->params['breadcrumbs'][] = $this->title;    
 ?>
 
-<div class="alliance-default-index">
-    <p style="text-align: right">
-        <?php 
-            echo Nav::widget([
-                'options' => ['class' => 'nav navbar-right nav-pills'],
-                'encodeLabels' => false,
-                'items' => array_filter([
-                    [
-                        'label' => FA::icon('phone') . ' ' . Module::t('module', 'NAV_ALLIANCE_PHONEBOOK'),
-                        'url' => '/alliance/phonebook/index',
-                        'visible' => Yii::$app->user->can('root')
-                    ],
-                    [
-                        'label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_CREDITCALENDAR'),
-                        'url' => '/alliance/creditcalendar/calendar',
-                        'visible' => Yii::$app->user->can('creditcalendarIsVisible')
-                    ],
-                    [
-                        'label' => FA::icon('calendar') . ' ' . Module::t('module', 'NAV_ALLIANCE_DUTY'),
-                        'url' => '/alliance/dutygraph/',
-                        'visible' => Yii::$app->user->can('root')
-                    ],
-                ]),
-            ]);
-        ?>
-    </p>  
-</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <?php echo '<h4>' . Yii::t('app', '{icon} CREDITWIDGETS', ['icon' => '<i class="fa fa-users fa-2x"></i>']) . '</h4>'; ?>
+    </div> <!-- panelHeadingEnd -->
+    
+    <div class="panel-body">            
+
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-body panel-green">
+                    <div class="row panel-row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-calendar fa-5x fa-inverse"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <h1>26</h1>
+                            <h4><?php echo Yii::t('app', 'COUNTRECORDS'); ?></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row panel-footer-row">
+                        <a href="/alliance/creditcalendar/calendar">
+                            <div class="col-xs-9">
+                                <?php echo Yii::t('app', 'NAV_ALLIANCE_CREDITCALENDAR'); ?>
+                            </div>
+                            <div class="col-xs-3 text-right">
+                                <i class="fa fa-arrow-right"></i>
+                            </div> <!-- col-xs-3 End -->
+                        </a> <!-- a href creditcalendar End -->
+                    </div> <!-- row panel-footer-tow End -->
+                </div> <!-- panelFooter End -->
+            </div> <!-- panel panelPrimary End -->
+        </div> <!-- col-lg-3 End -->
+
+        <div class="col-lg-4">
+            <div class="panel panel-success">
+                <div class="panel-body panel-blue">
+                    <div class="row panel-row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-users fa-5x fa-inverse"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <h1>26</h1>
+                            <h4><?php echo Yii::t('app', 'COUNTRECORDS'); ?></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row panel-footer-row">
+                        <a href="/alliance/clientcirculation/">
+                            <div class="col-xs-9">
+                                <?php echo Yii::t('app', 'CREDITTRAFFIC'); ?>
+                            </div>
+                            <div class="col-xs-3 text-right">
+                                <i class="fa fa-arrow-right"></i>
+                            </div> <!-- col-xs-3 End -->
+                        </a> <!-- a href creditcalendar End -->
+                    </div> <!-- row panel-footer-tow End -->
+                </div> <!-- panelFooter End -->
+            </div> <!-- panel panelPrimary End -->
+        </div> <!-- col-lg-3 End -->
+
+        <div class="col-lg-4">
+            <div class="panel panel-warning">
+                <div class="panel-body panel-orange">
+                    <div class="row panel-row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-car fa-5x fa-inverse"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <h1>26</h1>
+                            <h4><?php echo Yii::t('app', 'COUNTRECORDS'); ?></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row panel-footer-row">
+                        <a href="/alliance/clientcirculationcomment/">
+                            <div class="col-xs-9">
+                                <?php echo Yii::t('app', 'CREDITEVENTS'); ?>
+                            </div>
+                            <div class="col-xs-3 text-right">
+                                <i class="fa fa-arrow-right"></i>
+                            </div> <!-- col-xs-3 End -->
+                        </a> <!-- a href creditcalendar End -->
+                    </div> <!-- row panel-footer-tow End -->
+                </div> <!-- panelFooter End -->
+            </div> <!-- panel panelPrimary End -->
+        </div> <!-- col-lg-3 End -->
+
+    </div> <!-- panelBodyEnd -->
+</div> <!-- panelEnd -->

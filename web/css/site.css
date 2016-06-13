@@ -274,7 +274,7 @@ a.desc:after {
 .panel-body:after,
 .modal-footer:before,
 .modal-footer:after {
-  display: inline;
+  /*display: inline;*/
   content: " ";
 }
 

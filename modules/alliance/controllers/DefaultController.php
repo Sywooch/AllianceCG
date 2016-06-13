@@ -10,7 +10,6 @@ use app\modules\alliance\models\AllianceDefault;
  */
 class DefaultController extends Controller
 {
-    // public $layout = '@app/modules/alliance/views/layouts/default/main';
     /**
      * Renders the index view for the module
      * @return string
@@ -23,4 +22,17 @@ class DefaultController extends Controller
                     'model' => $model,
                 ]);
     }
+
+    /**
+     * [actionCreditlastcount description]
+     * @return [type] [description]
+     */
+    public function actionCreditlastcount()
+    {
+        $this->layout = false;
+        $model = new AllianceDefault();
+        return $this->render('creditlastcount', [
+            'model' => $model,
+        ]);
+    }    
 }

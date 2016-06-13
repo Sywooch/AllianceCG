@@ -44,7 +44,7 @@
                         <div class="row panel-footer-row">
                             <a href="/alliance/creditcalendar/calendar">
                                 <div class="col-xs-9">
-                                    <?php echo Yii::t('app', 'NAV_ALLIANCE_CREDITCALENDAR'); ?>
+                                    <?php echo Yii::t('app', '{icon} NAV_ALLIANCE_CREDITCALENDAR', ['icon' => '<i class="fa fa-calendar"></i>']); ?>
                                 </div>
                                 <div class="col-xs-3 text-right">
                                     <i class="fa fa-arrow-right"></i>
@@ -122,15 +122,24 @@
             </div> <!-- col-lg-3 End -->
         </div> <!-- animAllianceBody -->
 
-        <div class="col-lg-4">
-            jkjljlk
-        </div> <!-- colLg4 End -->
-        <div class="col-lg-4">
-            jkjljlk
-        </div> <!-- colLg4 End -->
-        <div class="col-lg-4">
-            jkjljlk
-        </div> <!-- colLg4 End -->
-
     </div> <!-- panelBodyEnd -->
 </div> <!-- panelEnd -->
+
+
+<div class="col-lg-4">
+    <div class="panel panel-default">
+    <div class="panel-heading">
+        <?php echo '<h4>' . Yii::t('app', '{icon} NAV_ALLIANCE_CREDITCALENDAR', ['icon' => '<i class="fa fa-calendar"></i>']) . '</h4>'; ?>
+    </div> <!-- panelHeading End -->
+        <div class="panel-body">
+            <div id="creditlastcount"></div> <!-- creditLastCount End -->    
+        </div> <!-- panelBody End -->
+    </div> <!-- panelDefault End -->
+</div> <!-- colLg4 End -->
+
+        <div class="col-lg-4">
+            <!-- график №2 -->
+        </div> <!-- colLg4 End -->
+        <div class="col-lg-4">
+            <!-- график №3 -->
+        </div> <!-- colLg4 End -->

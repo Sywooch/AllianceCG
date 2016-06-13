@@ -16,6 +16,15 @@ $this->registerJsFile(Yii::getAlias('@web/js/modules/alliance/default/counters.j
     'yii\bootstrap\BootstrapAsset'],
 ]); 
 
+$this->registerJsFile(Yii::getAlias('@web/js/libs/highcharts/highcharts.js'), ['depends' => [
+    'yii\web\YiiAsset',
+    'yii\bootstrap\BootstrapAsset'],
+]); 
+$this->registerJsFile(Yii::getAlias('@web/js/modules/alliance/default/creditlastcount.js'), ['depends' => [
+    'yii\web\YiiAsset',
+    'yii\bootstrap\BootstrapAsset'],
+]);   
+
 /** 
  * 
  */

@@ -23,8 +23,8 @@ class AppAsset extends AssetBundle
         'css/scroll-top.css',
         'css/btn-hover.css',
         'css/panels.css',
-        'css/dropdownCheckList.css'
-        // 'css/navigation_menu.css',
+        'css/dropdownCheckList.css',
+        'css/allianceDefault.css',
     ];
     public $js = [
         'js/main.js',

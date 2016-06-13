@@ -1,3 +1,19 @@
+<?php 
+    $creditcaledarCountRecords =  $model->getCreditcalendarcount();
+    $creditcaledarCountRecords = ($creditcaledarCountRecords > 0) ? $creditcaledarCountRecords : 0;
+
+    $creditTrafficCountRecords =  $model->getClientcirculationcount();
+    $creditTrafficCountRecords = ($creditTrafficCountRecords > 0) ? $creditTrafficCountRecords : 0;
+
+    $clientcirculationcommentcount =  $model->getClientcirculationcommentcount();
+    $clientcirculationcommentcount = ($clientcirculationcommentcount > 0) ? $clientcirculationcommentcount : 0;
+?>
+
+<script type="text/javascript">
+    var creditcaledarCountRecords = "<?php echo $creditcaledarCountRecords; ?>";
+    var creditTrafficCountRecords = "<?php echo $creditTrafficCountRecords; ?>";
+    var clientcirculationcommentcount = "<?php echo $clientcirculationcommentcount; ?>";
+</script>
 
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -15,7 +31,8 @@
                         </div>
                         <div class="col-xs-9 text-right">
                             <h1>
-                                <?php echo $model->getCreditcalendarcount(); ?>
+                                <div id="creditCalendar"></div>
+                                <?php //echo $model->getCreditcalendarcount(); ?>
                             </h1>
                             <h4><?php echo Yii::t('app', 'COUNTRECORDS'); ?></h4>
                         </div>
@@ -45,7 +62,8 @@
                         </div>
                         <div class="col-xs-9 text-right">
                             <h1>
-                                <?php echo $model->getClientcirculationcount(); ?>
+                                <div id="clientCirculation"></div>
+                                <?php // echo $model->getClientcirculationcount(); ?>
                             </h1>
                             <h4>
                                 <?php echo Yii::t('app', 'COUNTRECORDS'); ?>
@@ -77,7 +95,8 @@
                         </div>
                         <div class="col-xs-9 text-right">
                             <h1>
-                                <?php echo $model->getClientcirculationcommentcount(); ?>
+                                <div id="clientCirculationCommentCount"></div>
+                                <?php // echo $model->getClientcirculationcommentcount(); ?>
                             </h1>
                             <h4>
                                 <?php echo Yii::t('app', 'COUNTRECORDS'); ?>

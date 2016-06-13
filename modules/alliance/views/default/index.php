@@ -32,4 +32,11 @@ echo $this->render('_creditDepartment', [
     'model' => $model,
 ]); 
 
+/** 
+ * 
+ */
+echo $this->render('_creditDepartmentGraph', [
+    'model' => $model,
+]); 
+
 ?>

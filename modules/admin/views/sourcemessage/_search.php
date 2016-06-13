@@ -13,20 +13,15 @@ use yii\bootstrap\Progress;
 /* @var $form yii\widgets\ActiveForm */
 
 
-$toggleSearch = file_get_contents('js/modules/admin/sourcemessage/toggleSearch.js');
-$this->registerJs($toggleSearch, View::POS_END);
+// $toggleSearch = file_get_contents('js/modules/admin/sourcemessage/toggleSearch.js');
+// $this->registerJs($toggleSearch, View::POS_END);
 
 ?>
 
 <div class="source-message-search">
 
-    <div class="form-group buttonpane">
-        <?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => FA::icon('plus')]), ['create'], ['class' => 'btn btn-link animlink']) ?>
-        <?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => FA::icon('refresh')]), ['index'], ['class' => 'btn btn-link animlink']) ?>
-        <?= Html::button(Yii::t('app', '{icon} ADVANCED', ['icon' => FA::icon('file-excel-o')]), ['class' => 'btn-link animlink', 'id' => 'advancedOperations']) ?>
-    </div>
 
-    <div class="col-sm-12 bs-callout bs-callout-info" id="advanced">
+    <!-- <div class="col-sm-12 bs-callout bs-callout-info" id="advanced"> -->
  
     <div class="col-sm-6">
 
@@ -52,18 +47,4 @@ $this->registerJs($toggleSearch, View::POS_END);
     </div>
     </div>
 
-
-
-
-
-
-</div>
-
-
-
-<?php
-// echo Progress::widget([
-//     'percent' => 65,
-//     'barOptions' => ['class' => 'progress-bar-danger']
-// ]);
-?>
+<!-- </div> -->

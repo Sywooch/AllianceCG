@@ -125,21 +125,22 @@
     </div> <!-- panelBodyEnd -->
 </div> <!-- panelEnd -->
 
+<div class="col-md-12">
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+        <div class="panel-heading">
+            <?php echo '<h4>' . Yii::t('app', '{icon} NAV_ALLIANCE_CREDITCALENDAR', ['icon' => '<i class="fa fa-calendar"></i>']) . '</h4>'; ?>
+        </div> <!-- panelHeading End -->
+            <div class="panel-body">
+                <div id="creditlastcount"></div> <!-- creditLastCount End -->    
+            </div> <!-- panelBody End -->
+        </div> <!-- panelDefault End -->
+    </div> <!-- colLg4 End -->
 
-<div class="col-lg-4">
-    <div class="panel panel-default">
-    <div class="panel-heading">
-        <?php echo '<h4>' . Yii::t('app', '{icon} NAV_ALLIANCE_CREDITCALENDAR', ['icon' => '<i class="fa fa-calendar"></i>']) . '</h4>'; ?>
-    </div> <!-- panelHeading End -->
-        <div class="panel-body">
-            <div id="creditlastcount"></div> <!-- creditLastCount End -->    
-        </div> <!-- panelBody End -->
-    </div> <!-- panelDefault End -->
-</div> <!-- colLg4 End -->
-
-        <div class="col-lg-4">
-            <!-- график №2 -->
-        </div> <!-- colLg4 End -->
-        <div class="col-lg-4">
-            <!-- график №3 -->
-        </div> <!-- colLg4 End -->
+            <div class="col-lg-4">
+                <!-- график №2 -->
+            </div> <!-- colLg4 End -->
+            <div class="col-lg-4">
+                <!-- график №3 -->
+            </div> <!-- colLg4 End -->
+</div>

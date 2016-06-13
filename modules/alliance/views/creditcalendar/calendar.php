@@ -4,6 +4,8 @@ use yii\widgets\Pjax;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
+// use kartik\date\DatePicker;
+use yii\jui\DatePicker;
 use app\modules\alliance\models\Creditcalendar;
 
 /* 
@@ -121,7 +123,24 @@ $this->registerJs($toggleSearch, View::POS_END);
                     </input> 
                   </div>
 
+                <?php
+                  // echo DatePicker::widget([
+                  //     'name'  => 'dateFilter',
+                  //     'language' => 'ru',
+                  //     'dateFormat' => 'yyyy-MM-dd',
+                  //     'clientOptions' => [
+                  //       'onSelect' => new \yii\web\JsExpression('function(dateText,inst){
+                  //           var d = new Date(dateText);
 
+                  //           if (confirm("Перейти к выбранной дате - " + d.toLocaleDateString("en-GB") + " ?")) {
+                  //                   $("#credit_calendar").fullCalendar("changeView", "agendaDay");
+                  //                   $("#credit_calendar").fullCalendar("gotoDate", d);
+                  //           }
+                  //       }'),
+                  //     ],
+                  // ]);
+                ?>
+                
                   <div class = "input-group statusinput"> <!-- input-group-statusInput -->
 
                     <span class = "input-group-addon"> <!-- span input-group-addon -->
@@ -132,7 +151,8 @@ $this->registerJs($toggleSearch, View::POS_END);
 
                     <select class="form-control" id="status_selector" style="width: 150px; display: initial;"> <!-- selectStatus -->
                       <option value="all">
-                        Любой статус
+                        <!-- Любой статус -->
+                        <?php echo Yii::t('app', 'CREDITCALENADR_STATUS'); ?>
                       </a>
                       <option value=0>
                         В работе
@@ -145,6 +165,32 @@ $this->registerJs($toggleSearch, View::POS_END);
                       </a>
                     </select> <!-- selectStatus -->
                 </div> <!-- input-group-statusInput -->
+
+
+                  <div class = "input-group statusinput"> <!-- input-group-statusInput -->
+
+                    <span class = "input-group-addon"> <!-- span input-group-addon -->
+                      <label for="datepicker"> <!-- labelDatePicker -->
+                        <i class="fa fa-check"></i>
+                      </label> <!-- labelDatePicker -->
+                    </span> <!-- span input-group-addon -->
+
+                    <select class="form-control" id="priority_selector" style="width: 150px; display: initial;"> <!-- selectStatus -->
+                      <option value="all">
+                        <!-- Приоритет -->
+                        <?php echo Yii::t('app', 'CREDITCALENDAR_PRIORITY'); ?>
+                      </a>
+                      <option value=0>
+                        Обычный
+                      </a>
+                      <option value=1>
+                        Высокий
+                      </a>
+                      <option value=2>
+                        Низкий
+                      </a>
+                    </select> <!-- selectStatus -->
+                </div> <!-- input-group-statusInput -->                
 
             </form>   
 

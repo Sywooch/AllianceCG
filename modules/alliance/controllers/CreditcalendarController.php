@@ -322,7 +322,7 @@ class CreditcalendarController extends Controller
             $objPHPExcel->getActiveSheet()->getStyle('A'.$titleNumber)->getFont()->setBold(true);
 
             // Заголовки колонок
-            $objPHPExcel->getActiveSheet()->setTitle(Yii::t('app','CREDITCALENDAR_EXCEL_TITLE').date("d-m-Y-H-i"))                
+            $objPHPExcel->getActiveSheet()->setTitle(Yii::t('app','EXCEL_TITLE').date("d-m-Y-H-i"))                
                 ->setCellValue('A'.($row-1), $model->getAttributeLabel('title'))
                 ->setCellValue('B'.($row-1), $model->getAttributeLabel('date_from'))
                 ->setCellValue('C'.($row-1), $model->getAttributeLabel('date_to'))
@@ -434,14 +434,14 @@ class CreditcalendarController extends Controller
             $objPHPExcel->getActiveSheet()->getStyle('A'.$titleNumber.':H'.$titleNumber)->applyFromArray($centered);
 
             // Текст заголовка
-            $objPHPExcel->getActiveSheet()->setCellValue('A'.$titleNumber, Yii::t('app', 'CREDITCALENDAR_EXCEL_TABLEHEADER') . date("d.m.Y H:i"));
+            $objPHPExcel->getActiveSheet()->setCellValue('A'.$titleNumber, Yii::t('app', 'EXCEL_TABLEHEADER') . date("d.m.Y H:i"));
             // $objPHPExcel->getActiveSheet()->setCellValue('A'.($titleNumber+1), $rowNumber);
 
             // Тип выгружаемого файла
             header('Content-Type: application/vnd.ms-excel');
 
             // Имя выгружаемого файла
-            $filename = Yii::t('app','CREDITCALENDAR_EXCEL_TITLE').date("d-m-Y-H-i-s").".xls";
+            $filename = Yii::t('app','EXCEL_TITLE').date("d-m-Y-H-i-s").".xls";
 
             header('Content-Disposition: attachment;filename='.$filename .' ');
             header('Cache-Control: max-age=0');

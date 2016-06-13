@@ -141,7 +141,7 @@
                 // Popover при наведении      
                 $(element).popover({title: event.title, content: event.description, trigger: 'hover', placement: 'auto right', delay: {"hide": 300 }});
                 // return ['all', event.status].indexOf($('#status_selector').val()) >= 0
-                return ['all', event.author].indexOf($('#author_selector').val()) >= 0
+                return ['all', event.author].indexOf($('#author_selector').val()) >= 0 && ['all', event.status].indexOf($('#status_selector').val()) >= 0 && ['all', event.priority].indexOf($('#priority_selector').val()) >= 0;
             },
             // Действие при клике на событие
             eventClick: function(calEvent, jsEvent, view) {
@@ -222,13 +222,13 @@
 
     // Опции селектора
 
-    $('#author_selector').on('change',function(){
+    $('#author_selector, #status_selector, #priority_selector').on('change',function(){
         $('#credit_calendar').fullCalendar('rerenderEvents');
     });
 
-    $('#status_selector').on('change',function(){
-        $('#credit_calendar').fullCalendar('rerenderEvents');
-    });    
+    // $('#status_selector').on('change',function(){
+    //     $('#credit_calendar').fullCalendar('rerenderEvents');
+    // });    
 
     $('#filterStatus').multiselect({
         numberDisplayed: 2,

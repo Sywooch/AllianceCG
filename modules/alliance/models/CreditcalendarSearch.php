@@ -48,6 +48,7 @@ class CreditcalendarSearch extends Creditcalendar
     {
         $listdata= Creditcalendar::find()
             ->select(['title as value', 'title as label'])
+            ->where(['<>', 'private', 1])
             ->asArray()
             ->all();
         return $listdata;
@@ -80,6 +81,7 @@ public function calendarsearch(){
                         ELSE CONCAT({{%calendar}}.date_to, ' ', {{%calendar}}.time_to)
                         END AS end,
                     {{%calendar}}.title AS title,
+                    `priority` AS priority,
                     CASE {{%calendar}}.status
                         WHEN '0' THEN 'red'
                         WHEN '1' THEN 'primary'
@@ -124,6 +126,7 @@ public function calendarsearch(){
                         ELSE CONCAT(date_to, ' ', time_to)
                         END AS end,
                     `title` AS title,
+                    `priority` AS priority,
                     CASE status
                         WHEN '0' THEN 'red'
                         WHEN '1' THEN 'primary'

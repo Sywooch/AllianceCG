@@ -7,7 +7,6 @@ use Yii;
 use yii\helpers\ArrayHelper;
 use app\modules\admin\models\User;
 use yii\behaviors\TimestampBehavior;
-use app\modules\alliance\Module;
 
 /**
  * This is the model class for table "{{%calendar}}".
@@ -92,29 +91,29 @@ class Creditcalendar extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Module::t('module', 'ID'),
-            'title' => Module::t('module', 'CALENDAR_TITLE'),
-            'date_from' => Module::t('module', 'DATE_FROM'),
-            'time_from' => Module::t('module', 'TIME_FROM'),
-            'date_to' => Module::t('module', 'DATE_TO'),
-            'time_to' => Module::t('module', 'TIME_TO'),
-            'description' => Module::t('module', 'CALENDAR_DESCRIPTION'),
-            'location' => Module::t('module', 'CALENDAR_LOCATION'),
-            'type' => Module::t('module', 'CALENDAR_TYPE'),
-            'allday' => Module::t('module', 'CREDITCALENDAR_ALLDAY'),
-            'priority' => Module::t('module', 'CREDITCALENDAR_PRIORITY'),
-            'author' => Module::t('module', 'CREDITCALENDAR_AUTHOR'),
-            'created_at' => Module::t('module', 'CREATED_AT'),
-            'updated_at' => Module::t('module', 'UPDATED_AT'),
-            'status' => Module::t('module', 'CREDITCALENADR_STATUS'),
-            'private' => Module::t('module', 'Private'),
-            'calendar_type' => Module::t('module', 'Calendar Type'),
-            'period' => Module::t('module', 'CALENDAR_EVENT_PERIOD'),
-            'locations' => Module::t('module', 'CALENDAR_EVENT_LOCATIONS'),
-            'responsibles' => Module::t('module', 'CALENDAR_EVENT_RESPONSIBLES'),
-            'userids' => Module::t('module', 'CALENDAR_EVENT_RESPONSIBLES'),
-            'locationids' => Module::t('module', 'CALENDAR_EVENT_LOCATIONS'),
-            'calendarcommentscount' => Module::t('module', 'CALENDAR_COMMENTS_COUNT'),
+            'id' => Yii::t('app', 'ID'),
+            'title' => Yii::t('app', 'CALENDAR_TITLE'),
+            'date_from' => Yii::t('app', 'DATE_FROM'),
+            'time_from' => Yii::t('app', 'TIME_FROM'),
+            'date_to' => Yii::t('app', 'DATE_TO'),
+            'time_to' => Yii::t('app', 'TIME_TO'),
+            'description' => Yii::t('app', 'CALENDAR_DESCRIPTION'),
+            'location' => Yii::t('app', 'CALENDAR_LOCATION'),
+            'type' => Yii::t('app', 'CALENDAR_TYPE'),
+            'allday' => Yii::t('app', 'CREDITCALENDAR_ALLDAY'),
+            'priority' => Yii::t('app', 'CREDITCALENDAR_PRIORITY'),
+            'author' => Yii::t('app', 'CREDITCALENDAR_AUTHOR'),
+            'created_at' => Yii::t('app', 'CREATED_AT'),
+            'updated_at' => Yii::t('app', 'UPDATED_AT'),
+            'status' => Yii::t('app', 'CREDITCALENADR_STATUS'),
+            'private' => Yii::t('app', 'Private'),
+            'calendar_type' => Yii::t('app', 'Calendar Type'),
+            'period' => Yii::t('app', 'CALENDAR_EVENT_PERIOD'),
+            'locations' => Yii::t('app', 'CALENDAR_EVENT_LOCATIONS'),
+            'responsibles' => Yii::t('app', 'CALENDAR_EVENT_RESPONSIBLES'),
+            'userids' => Yii::t('app', 'CALENDAR_EVENT_RESPONSIBLES'),
+            'locationids' => Yii::t('app', 'CALENDAR_EVENT_LOCATIONS'),
+            'calendarcommentscount' => Yii::t('app', 'CALENDAR_COMMENTS_COUNT'),
         ];
     }
 
@@ -334,7 +333,7 @@ class Creditcalendar extends \yii\db\ActiveRecord
                 ])
                 ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
                 ->setReplyTo(Yii::$app->params['supportEmail'])
-                ->setSubject(date('d/m/Y H:i:s') . '. ' . Module::t('module', 'NEW_CREDITCALENDAR_EVENT') . ' ' . $this->title)
+                ->setSubject(date('d/m/Y H:i:s') . '. ' . Yii::t('app', 'NEW_CREDITCALENDAR_EVENT') . ' ' . $this->title)
                 ->setTextBody($this->description)
                 ->setTo($mail)
                 ->send();

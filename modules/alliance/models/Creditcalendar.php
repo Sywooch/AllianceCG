@@ -180,7 +180,6 @@ class Creditcalendar extends \yii\db\ActiveRecord
 
     public function getCalendarcommentscount()
     {
-        // Customer has_many Order via Order.customer_id -> id
         return $this->hasMany(CalendarComments::className(), ['calendar_id' => 'id'])->count();
     }
 

@@ -54,8 +54,8 @@ class CreditcalendarSearch extends Creditcalendar
         return $listdata;
     }
 
-public function calendarsearch(){
-
+    public function calendarsearch()
+    {
         global $where;
 
         if(isset($_GET['status']))
@@ -197,30 +197,10 @@ public function calendarsearch(){
             return $dataProvider;
         }
 
-        // grid filtering conditions
-        // $query->andFilterWhere([
-        //     'id' => $this->id,
-        //     'date_from' => $this->date_from,
-        //     'time_from' => $this->time_from,
-        //     'date_to' => $this->date_to,
-        //     'time_to' => $this->time_to,
-        //     'type' => $this->type,
-        //     'allday' => $this->allday,
-        //     'created_at' => $this->created_at,
-        //     'updated_at' => $this->updated_at,
-        //     'status' => $this->status,
-        //     'private' => $this->private,
-        //     'calendar_type' => $this->calendar_type,
-        // ]);
-
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'description', $this->description])
-            // ->andFilterWhere(['>=', 'date_from', $this->date_from])
-            // ->andFilterWhere(['>=', 'date_to', $this->date_to])
-            // ->andFilterWhere(['or', [['date_from', 'between', $this->date_from ? $this->date_from : null, $this->date_to ? $this->date_to : null], ['date_to', 'between', $this->date_from ? $this->date_from : null, $this->date_to ? $this->date_to : null]]])
             ->andFilterWhere(['>=', 'date_from', $this->date_from])
             ->andFilterWhere(['<=', 'date_to', $this->date_to])
-            // ->andFilterWhere(['like', 'author', $this->author])
             ->andFilterWhere(['like', '{{%user}}.full_name', $this->authorname])
             ->andFilterWhere(['like', '{{%user}}.full_name', $this->responsibles])
             ->andFilterWhere(['like', '{{%calendar}}.status', $this->status])
@@ -270,38 +250,15 @@ public function calendarsearch(){
             return $dataProvider;
         }
 
-        // grid filtering conditions
-        // $query->andFilterWhere([
-        //     'id' => $this->id,
-        //     'date_from' => $this->date_from,
-        //     'time_from' => $this->time_from,
-        //     'date_to' => $this->date_to,
-        //     'time_to' => $this->time_to,
-        //     'type' => $this->type,
-        //     'allday' => $this->allday,
-        //     'created_at' => $this->created_at,
-        //     'updated_at' => $this->updated_at,
-        //     'status' => $this->status,
-        //     'private' => $this->private,
-        //     'calendar_type' => $this->calendar_type,
-        // ]);
-
         $query
             ->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['>=', 'date_from', $this->date_from])
             ->andFilterWhere(['<=', 'date_to', $this->date_to])
-            // ->andFilterWhere(['and', 'date_to >= $this->date_from', 'date_to <= $this->date_to'])
-            // ->andFilterWhere(['>=', 'date_from', $this->date_from])
-            // ->andFilterWhere(['<=', 'date_to', $this->date_to])
-            // ->andFilterWhere(['or', [['date_from', 'between', $this->date_from ? $this->date_from : null, $this->date_to ? $this->date_to : null], ['date_to', 'between', $this->date_from ? $this->date_from : null, $this->date_to ? $this->date_to : null]]])
             ->andFilterWhere(['like', '{{%calendar}}.status', $this->status])
             ->andFilterWhere(['like', 'priority', $this->priority])
             ->andFilterWhere(['like', 'author', $this->author])
-            // ->andFilterWhere(['>=', 'created_at', $this->date_from ? strtotime($this->date_from . ' 00:00:00') : null])
-            // ->andFilterWhere(['<=', 'created_at', $this->date_to ? strtotime($this->date_to . ' 23:59:59') : null])
             ;
-
 
         return $dataProvider;
     }

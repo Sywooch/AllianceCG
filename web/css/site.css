@@ -343,9 +343,9 @@ a.desc:after {
     /*border-bottom: 1px solid rgba(0,0,0,0.15);*/
 }
 
-#creditcalendar-grid tbody tr:hover td {
+/*#creditcalendar-grid tbody tr:hover td {
         background: #46b8da;
-}
+}*/
 
 #brands-grid tbody tr:hover td {
         background: #46b8da;

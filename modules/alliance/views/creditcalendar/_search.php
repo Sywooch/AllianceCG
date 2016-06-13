@@ -6,8 +6,8 @@ use yii\helpers\ArrayHelper;
 use app\modules\alliance\models\Creditcalendar;
 use app\modules\admin\models\User;
 // use yii\jui\AutoComplete;
-// use kartik\date\DatePicker;
-use yii\jui\DatePicker;
+use kartik\date\DatePicker;
+// use yii\jui\DatePicker;
 use yii\web\View;
 
 /* @var $this yii\web\View */
@@ -29,14 +29,40 @@ $this->registerJs($ExportExcel, View::POS_END);
             <div class="col-md-5">
 
                 <?php 
-                    echo $form->field($model, 'date_from', ['template' => '<div class="input-group"><span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>{input}</span></div>{error}'])->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd', 'options'=>['maxlength' => 10, 'placeholder' => $model->getAttributeLabel('date_from'), 'class'=>'form-control'], 'clientOptions' => ['changeYear' => true, 'yearRange' => '-2:+2', 'changeMonth' => true, 'showButtonPanel' => true]]) 
+                    echo DatePicker::widget([
+                            'model' => $model,
+                            'removeButton' => false,
+                            'attribute' => 'date_from',
+                            'options' => ['placeholder' => $model->getAttributeLabel( 'date_from' )],
+                            'convertFormat' => true,
+                            'pluginOptions' => [
+                                'todayHighlight' => true
+                            ]
+                        ]);
+                ?>
+
+                <?php 
+                    // echo $form->field($model, 'date_from', ['template' => '<div class="input-group"><span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>{input}</span></div>{error}'])->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd', 'options'=>['maxlength' => 10, 'placeholder' => $model->getAttributeLabel('date_from'), 'class'=>'form-control'], 'clientOptions' => ['changeYear' => true, 'yearRange' => '-2:+2', 'changeMonth' => true, 'showButtonPanel' => true]]) 
                 ?>
             </div> <!-- col-md-5 -->
 
             <div class="col-md-5">
 
                 <?php 
-                    echo $form->field($model, 'date_to', ['template' => '<div class="input-group"><span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>{input}</span></div>{error}'])->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd','options'=>['maxlength' => 10, 'placeholder' => $model->getAttributeLabel('date_to'), 'class'=>'form-control'], 'clientOptions' => ['changeYear' => true, 'yearRange' => '-2:+2', 'changeMonth' => true, 'showButtonPanel' => true]]) 
+                    echo DatePicker::widget([
+                            'model' => $model,
+                            'attribute' => 'date_to',
+                            'removeButton' => false,
+                            'options' => ['placeholder' => $model->getAttributeLabel( 'date_to' )],
+                            'convertFormat' => true,
+                            'pluginOptions' => [
+                                'todayHighlight' => true
+                            ]
+                        ]);
+                ?>
+
+                <?php 
+                    // echo $form->field($model, 'date_to', ['template' => '<div class="input-group"><span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>{input}</span></div>{error}'])->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd','options'=>['maxlength' => 10, 'placeholder' => $model->getAttributeLabel('date_to'), 'class'=>'form-control'], 'clientOptions' => ['changeYear' => true, 'yearRange' => '-2:+2', 'changeMonth' => true, 'showButtonPanel' => true]]) 
                 ?>
 
             </div> <!-- col-md-5 -->
@@ -48,13 +74,3 @@ $this->registerJs($ExportExcel, View::POS_END);
         </div> <!-- col-md-12 -->
 
     <?php ActiveForm::end(); ?>
-
-
-<!--                         onkeyup="
-                            var v = this.value;
-                            if (v.match(/^\d{2}$/) !== null) {
-                                this.value = v + '/';
-                            } else if (v.match(/^\d{2}\/\d{2}$/) !== null) {
-                                this.value = v + '/';
-                            }"
-                        maxlength="10"  -->

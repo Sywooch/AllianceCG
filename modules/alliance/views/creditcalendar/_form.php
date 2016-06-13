@@ -61,6 +61,8 @@ use kartik\date\DatePicker;
             <?= DatePicker::widget([
                     'model' => $model,
                     'attribute' => 'date_from',
+                    'removeButton' => false,
+                    // 'type' => DatePicker::TYPE_COMPONENT_APPEND,
                     // 'type' => DatePicker::TYPE_BUTTON,
                     'options' => ['placeholder' => $model->getAttributeLabel( 'date_from' )],
                     'convertFormat' => true,
@@ -166,6 +168,8 @@ use kartik\date\DatePicker;
             <?= DatePicker::widget([
                     'model' => $model,
                     'attribute' => 'date_to',
+                    // 'type' => DatePicker::TYPE_COMPONENT_APPEND,
+                    'removeButton' => false,
                     // 'type' => DatePicker::TYPE_BUTTON,
                     'options' => ['placeholder' => $model->getAttributeLabel( 'date_to' )],
                     'convertFormat' => true,

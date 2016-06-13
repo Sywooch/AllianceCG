@@ -3,6 +3,7 @@
 namespace app\modules\alliance\controllers;
 
 use yii\web\Controller;
+use app\modules\alliance\models\AllianceDefault;
 
 /**
  * Default controller for the `alliance` module
@@ -16,6 +17,10 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+    	$model = new AllianceDefault();
+    	
+        return $this->render('index', [
+                    'model' => $model,
+                ]);
     }
 }

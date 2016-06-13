@@ -25,7 +25,7 @@
         <div class="animAllianceBody">
 
             <div class="col-lg-4">
-                <div class="panel panel-default">
+                <div class="panel panel-default panel-shadow">
                     <div class="panel-body panel-green">
                         <div class="row panel-row">
                             <div class="col-xs-3">
@@ -56,7 +56,7 @@
             </div> <!-- col-lg-3 End -->
 
             <div class="col-lg-4">
-                <div class="panel panel-success">
+                <div class="panel panel-success panel-shadow">
                     <div class="panel-body panel-blue">
                         <div class="row panel-row">
                             <div class="col-xs-3">
@@ -89,7 +89,7 @@
             </div> <!-- col-lg-3 End -->
 
             <div class="col-lg-4">
-                <div class="panel panel-warning">
+                <div class="panel panel-warning panel-shadow">
                     <div class="panel-body panel-orange">
                         <div class="row panel-row">
                             <div class="col-xs-3">
@@ -121,6 +121,16 @@
                 </div> <!-- panel panelPrimary End -->
             </div> <!-- col-lg-3 End -->
         </div> <!-- animAllianceBody -->
+
+        <div class="col-lg-4">
+            jkjljlk
+        </div> <!-- colLg4 End -->
+        <div class="col-lg-4">
+            jkjljlk
+        </div> <!-- colLg4 End -->
+        <div class="col-lg-4">
+            jkjljlk
+        </div> <!-- colLg4 End -->
 
     </div> <!-- panelBodyEnd -->
 </div> <!-- panelEnd -->

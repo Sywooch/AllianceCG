@@ -440,6 +440,10 @@ a.desc:after {
 .navbar-left > li > a {
     color: #337ab7;
 }
+
+.buttonleft {
+  float: left;
+}
 /*
 .nav > li {
   position: relative;

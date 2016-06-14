@@ -15,65 +15,49 @@ use yii\helpers\ArrayHelper;
 
 <div class="client-circulation-form">
 
+    <div class="panel panel-default">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <div class="panel-heading">
+        <div class="buttonpane">
+            <?php echo $model->isNewRecord ? Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']) : Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-edit"></i>']) ; ?>
+        </div> <!-- buttonPane End -->
+    </div> <!-- panelHeading End-->
+    <div class="panel-body">
 
-    <?= $form->errorSummary($model); ?>
+        <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-users"></i> </span>{input}</div>{error}'])->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('name')]) ?>
+        <?php echo $form->errorSummary($model); ?>
 
-    <?php // echo $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
+        <?php echo $form->field($model, 'name', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-users"></i> </span>{input}</div>{error}'])->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('name')]) ?>
 
-    <?= $form->field($model, 'phone', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-phone"></i> </span>{input}</div>{error}'])->widget(MaskedInput::className(), [
-        'mask' => '+7 (999) 999-99-99',
-    ]) ?>
+        <?php echo $form->field($model, 'phone', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-phone"></i> </span>{input}</div>{error}'])->widget(MaskedInput::className(), [
+            'mask' => '+7 (999) 999-99-99',
+        ]) ?>
 
-    <?= $form->field($model, 'email', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-inbox"></i> </span>{input}</div>{error}'])->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('email')]) ?>
+        <?php echo $form->field($model, 'email', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-inbox"></i> </span>{input}</div>{error}'])->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('email')]) ?>
 
-    <?php // echo $form->field($model, 'region_id')->textInput() ?>
+        <?php
+            $regions = Regions::find()->where(['<>', 'state', Regions::STATUS_BLOCKED])->all();
 
+            $items = ArrayHelper::map($regions,'id','region_name');
+            $params = [
+                'options' => isset($_GET['id']) ? [$_GET['id'] => ['Selected'=>'selected']] : false,
+                'prompt' => '-- ' . $model->getAttributeLabel( 'region_id' ) . ' --',
+            ];
+            echo $form->field($model, 'region_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-map"></i> </span>{input}</div>{error}'])->dropDownList($items,$params);
+        ?> 
+    </div> <!-- panelBody End -->
 
-    <?php
-        $regions = Regions::find()->where(['<>', 'state', Regions::STATUS_BLOCKED])->all();
-        // $regions = Regions::find()->all();
-    
-        $items = ArrayHelper::map($regions,'id','region_name');
-        $params = [
-            'options' => isset($_GET['id']) ? [$_GET['id'] => ['Selected'=>'selected']] : false,
-            'prompt' => '-- ' . $model->getAttributeLabel( 'region_id' ) . ' --',
-        ];
-        echo $form->field($model, 'region_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-map"></i> </span>{input}</div>{error}'])->dropDownList($items,$params);
-    ?> 
+    <div class="panel-footer">
+        <div class="form-group buttonpane">
+            <?php echo Html::submitButton($model->isNewRecord ? Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']) : Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-edit"></i>']), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            <?php echo Html::a(Yii::t('app', '{icon} CANCEL', ['icon' => '<i class="fa fa-remove"></i>']), ['index'], ['class' => 'btn btn-sm btn-danger'])?>
+        </div> <!-- buttonpane End -->
+    </div> <!-- panelFooter End -->
 
-
-    <?php
-    
-        // $employees = Employees::find()
-        //     ->joinWith(['position'])
-        //     ->where("{{%employees}}.state = ".Employees::STATUS_ACTIVE." and {{%employees}}.company_id = '".Yii::$app->user->identity->usercompany."' and ({{%positions}}.position = '".Employees::SALES_MANAGER."' or {{%positions}}.position = '".Employees::HEAD_OF_SALES_DEPARTMENT."')")
-        //     ->all();
-
-        // $employeesAdmin = Employees::find()
-        //     ->joinWith(['position'])
-        //     ->where("{{%employees}}.state = ".Employees::STATUS_ACTIVE." and ({{%positions}}.position = '".Employees::SALES_MANAGER."' or {{%positions}}.position = '".Employees::HEAD_OF_SALES_DEPARTMENT."')")
-        //     ->all();            
-
-        // $employeesResult = Yii::$app->user->can('admin') ? $employeesAdmin : $employees;
-
-        // $items = ArrayHelper::map($employeesResult,'id','fullName');
-        // $params = [
-        //     'options' => isset($_GET['id']) ? [$_GET['id'] => ['Selected'=>'selected']] : false,
-        //     'prompt' => '-- ' . $model->getAttributeLabel( 'employee_id' ) . ' --',
-        // ];
-        // echo $form->field($model, 'employee_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-briefcase"></i> </span>{input}</div>{error}'])->dropDownList($items,$params);
-    ?>     
+        <?php ActiveForm::end(); ?>
 
 
-    <div class="form-group" style="text-align: right">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']) : Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-edit"></i>']), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', '{icon} CANCEL', ['icon' => '<i class="fa fa-remove"></i>']), ['index'], ['class' => 'btn btn-sm btn-danger'])?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
+    </div> <!-- panelEnd -->
 
 </div>

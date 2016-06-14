@@ -31,7 +31,8 @@ use yii\bootstrap\Progress;
         ]); ?>
 
 
-        <?= $form->field($model, 'globalSearch', [
+        <?php 
+            echo $form->field($model, 'globalSearch', [
                 'template' => '<div class="input-group"><span class="input-group-addon"> ' . FA::icon('search') . ' </span>{input}<span class="input-group-btn">'.
                     Html::submitButton(Yii::t('app', '{icon} Search', ['icon' => FA::icon('search')]), ['class' => 'btn btn-primary animlink']).'</span></div>',
             ]); 
@@ -40,10 +41,10 @@ use yii\bootstrap\Progress;
         <?php ActiveForm::end(); ?>
 
     </div>
-    <div class="col-sm-6">
-        <?= Html::a(Yii::t('app', '{icon} IMPORT_EXCEL', ['icon' => FA::icon('upload')]), ['upload'], ['class' => 'btn btn-link animlink']) ?>
+    <div class="col-sm-6 buttonpane">
+        <?php echo Html::a(Yii::t('app', '{icon} IMPORT_EXCEL', ['icon' => FA::icon('upload')]), ['upload'], ['class' => 'btn btn-primary animlink btn-sm']) ?>
         <?php // echo Html::a(Yii::t('app', '{icon} IMPORT_EXCEL', ['icon' => FA::icon('file-excel-o')]), ['import'], ['class' => 'btn btn-link btn-sm']) ?>
-        <?= Html::a(Yii::t('app', '{icon} EXPORT_EXCEL', ['icon' => FA::icon('file-excel-o')]), ['export'], ['class' => 'btn btn-link animlink']) ?>
+        <?php echo Html::a(Yii::t('app', '{icon} EXPORT_EXCEL', ['icon' => FA::icon('file-excel-o')]), ['export'], ['class' => 'btn btn-warning animlink btn-sm']) ?>
     </div>
     </div>
 

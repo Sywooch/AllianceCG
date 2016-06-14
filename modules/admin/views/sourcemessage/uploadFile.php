@@ -23,7 +23,12 @@ $this->registerJs($toggleSearch, View::POS_END);
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <?php echo Yii::t('app', '{icon} UPLOAD_FILE', ['icon' => '<i class="fa fa-upload"></i>']); ?>
+        <div class="buttonleft">
+            <?php echo Yii::t('app', '{icon} UPLOAD_FILE', ['icon' => '<i class="fa fa-upload"></i>']); ?>
+        </div> 
+        <div class="buttonpane">
+            <?php echo Html::a(Yii::t('app', '{icon} RETURN', ['icon' => '<i class="fa fa-arrow-left"></i>']), ['index'], ['class' => 'btn btn-info btn-sm']); ?>
+        </div> <!-- buttonpane -->
     </div> <!-- panelHeading End -->
 
     <div class="panel-body">

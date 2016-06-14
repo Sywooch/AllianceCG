@@ -46,85 +46,100 @@ $this->registerJs($toggleClientData, View::POS_END);
         ?>
     </p>
 
-    <p class="buttonpane">
-        <?= Html::button(Yii::t('app', '{icon} CLIENTDATA', ['icon' => '<i class="fa fa-user"></i>']), ['class' => 'btn-link animlink', 'id' => 'showclientdata']) ?> 
-    </p>    
-
-    <?php if (Yii::$app->session->hasFlash('err')) { ?>
-
-        <div class="alert alert-danger">
-            <?= Yii::t('app', 'CLIENTCIRCULATIONCOMMENTVALIDATIONERROR') ?>
-        </div>
-
-    <?php } 
-    elseif (Yii::$app->session->hasFlash('ok')) { ?>
-
-        <div class="alert alert-success">
-            <?= Yii::t('app', 'CLIENTCIRCULATIONCOMMENTDONE') ?>
-        </div>        
-
-    <?php } ?>
+    <?php
+        if (Yii::$app->session->hasFlash('err')) { 
+            echo '<div class="alert alert-danger">';
+            echo Yii::t('app', 'VALIDATIONERROR');
+            echo '</div>';
+        } 
+        elseif (Yii::$app->session->hasFlash('ok')) { 
+            echo '<div class="alert alert-success">';
+            echo Yii::t('app', 'CLIENTCIRCULATIONCOMMENTDONE');
+            echo '</div>';
+         }
+     ?>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <p class="buttonpane">
+            <?= Html::button(Yii::t('app', '{icon} CLIENTDATA', ['icon' => '<i class="fa fa-user"></i>']), ['class' => 'btn-link', 'id' => 'showclientdata']) ?> 
+        </p> 
+    </div> <!-- panelHeading End -->   
+    
+    <div class="panel-body">
 
     <?php $form = ActiveForm::begin(); ?>
     <?= $form->errorSummary($commentModel); ?>    
     <?php ActiveForm::end(); ?>
 
-    <?= DetailView::widget([
-        'id' => 'detailClientData',
-        'model' => $model,
-        'attributes' => [
-            // 'id',
-            'name',
-            'phone',
-            'email:email',
-            // [
-            //     'attribute' => 'regions',
-            //     'value' => $model->regions->region_name,
-            // ],
-            [
-                'attribute' => 'regions',
-                'value' => $model->getRegionslink(),
-                'format' => 'raw',
+    <?php 
+        echo DetailView::widget([
+            'id' => 'detailClientData',
+            'model' => $model,
+            'attributes' => [
+                // 'id',
+                'name',
+                'phone',
+                'email:email',
+                // [
+                //     'attribute' => 'regions',
+                //     'value' => $model->regions->region_name,
+                // ],
+                [
+                    'attribute' => 'regions',
+                    'value' => $model->getRegionslink(),
+                    'format' => 'raw',
+                ],
+                // [
+                //     'attribute' => 'regions',
+                //     // 'value' => 'fullmodelname',
+                //     'value' => function ($data) {
+                //         return Html::a($data->region_name, Url::to(['/references/regions/view', 'id' => $data->id]));
+                //     },
+                //     'format' => 'raw',
+                // ],
+                // // 'state',
+                [
+                    'attribute' => 'state',
+                    'value' => $model->getStatesName(),
+                ],
+                'created_at:datetime',
+                // 'updated_at:datetime',
+                [
+                    'attribute' => 'updated_at',
+                    'format' => 'datetime',
+                    // 'visible' => $model->updated_at = $model->created_at ? false : true,
+                ],
+                [
+                  'attribute' => 'authorname',
+                  'value' => $model->authorname->full_name,
+                ],
             ],
-            // [
-            //     'attribute' => 'regions',
-            //     // 'value' => 'fullmodelname',
-            //     'value' => function ($data) {
-            //         return Html::a($data->region_name, Url::to(['/references/regions/view', 'id' => $data->id]));
-            //     },
-            //     'format' => 'raw',
-            // ],
-            // // 'state',
-            [
-                'attribute' => 'state',
-                'value' => $model->getStatesName(),
-            ],
-            'created_at:datetime',
-            // 'updated_at:datetime',
-            [
-                'attribute' => 'updated_at',
-                'format' => 'datetime',
-                // 'visible' => $model->updated_at = $model->created_at ? false : true,
-            ],
-            [
-              'attribute' => 'authorname',
-              'value' => $model->authorname->full_name,
-            ],
-        ],
-    ]) ?>
+        ]); 
+?>
+
+</div> <!-- panelBody End -->
+
+</div> <!-- panelEnd -->
 
 </div>
 
-<?= '<hr/>' ?>
+<?php echo '<hr/>' ?>
 
-<div class='buttonpane'>
-    <?= Html::button(Yii::t('app', '{icon} ADD_EVENT', ['icon' => '<i class="fa fa-comment"></i>']), ['value' => Url::to(['addevent', 'id' => $model->id]), 'class' => 'btn btn-link animlink', 'id' => 'modalButton']);
-    ?>
-</div>
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+
+        <div class='buttonpane'>
+            <?php echo Html::button(Yii::t('app', '{icon} ADD_EVENT', ['icon' => '<i class="fa fa-comment"></i>']), ['value' => Url::to(['addevent', 'id' => $model->id]), 'class' => 'btn btn-link', 'id' => 'modalButton']);
+            ?>
+        </div> <!-- buttonPane End -->
+
+    </div> <!-- panelHeading End -->
+
+    <div class="panel-body">
 
 <?php
 
-    // $query = $model->getClientcomment();
     $query = Clientcirculationcomment::find();
     $query->where(['clientcirculation_id' => $model->id]);
     $query->andwhere(['{{%clientcirculationcomment}}.state' => Clientcirculationcomment::STATUS_ACTIVE]);
@@ -137,33 +152,6 @@ $this->registerJs($toggleClientData, View::POS_END);
                 'defaultOrder' => ['created_at' => SORT_DESC],
             ],
         ]);
-
-    // $commentDataProvider->setSort([
-    //     'attributes' => [
-    //         'created_at' => [
-    //             'asc' => ['created_at' => SORT_ASC],
-    //             'desc' => ['created_at' => SORT_DESC],
-    //             'label' => 'created_at',
-    //             'default' => SORT_ASC
-    //         ],
-    //     ]
-    // ]);    
-
-        // $query->andFilterWhere([
-        //     'id' => $this->id,
-        //     'contact_type' => $this->contact_type,
-        //     'target' => $this->target,
-        //     'car_model' => $this->car_model,
-        //     'author' => $this->author,
-        // ]);
-
-    // $query
-    //     ->andFilterWhere(['like', 'contact_type', $commentDataProvider->contact_type])
-    //     ->andFilterWhere(['like', 'target', $commentDataProvider->target])
-    //     ->andFilterWhere(['like', 'car_model', $commentDataProvider->car_model])
-    //     ->andFilterWhere(['like', 'comment', $commentDataProvider->comment])
-    //     ->andFilterWhere(['like', 'author', $commentDataProvider->author])
-        ;
 
     echo GridView::widget([
         // 'dataProvider' => new ActiveDataProvider(['query' => $query]),
@@ -235,6 +223,9 @@ $this->registerJs($toggleClientData, View::POS_END);
 
 ?>
 
+</div> <!-- panelBody End -->
+
+</div> <!-- panel End -->
 
 <?php
     Modal::begin([

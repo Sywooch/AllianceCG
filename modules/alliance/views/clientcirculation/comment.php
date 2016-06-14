@@ -17,6 +17,8 @@ use app\modules\references\models\Models;
     // echo $model->getBrands();
 ?>
 
+<div class="panel panel-default">
+<div class="panel-body">
 
 <?php 
 	$form = ActiveForm::begin([
@@ -115,9 +117,16 @@ use app\modules\references\models\Models;
         echo $form->field($commentModel, 'credit_manager_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-briefcase"></i> </span>{input}</div>{error}'])->dropDownList($items,$params);
     ?>        
 
+</div> <!-- panelBody End -->
 
-    <div class="form-group" style="text-align: right;">
+<div class="panel-footer">
+
+    <div class="form-group buttonpane">
         <?= Html::submitButton(Yii::t('app', '{icon} ADD_EVENT', ['icon' => '<i class="fa fa-comment"></i>']), ['class' => 'btn btn-success btn-sm']) ?>
-    </div>
+    </div> <!-- buttonpane End -->
+
+</div> <!-- panelFooter End -->
 
 <?php ActiveForm::end(); ?>
+
+</div> <!-- panel End -->

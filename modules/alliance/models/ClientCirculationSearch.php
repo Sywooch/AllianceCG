@@ -56,13 +56,11 @@ class ClientCirculationSearch extends ClientCirculation
         }
         $query->joinWith(['authorname', 'regions', 'clientcomment']);
 
-        // add conditions that should always apply here
-           
+        // add conditions that should always apply here           
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
 
         $dataProvider->setSort([
                 'attributes' => [
@@ -89,7 +87,6 @@ class ClientCirculationSearch extends ClientCirculation
             return $dataProvider;
         }
 
-
         $dataProvider->sort->attributes['authorname'] = [
             'asc' => ['{{%user}}.full_name' => SORT_ASC],
             'desc' => ['{{%user}}.full_name' => SORT_DESC],
@@ -110,24 +107,24 @@ class ClientCirculationSearch extends ClientCirculation
         // ]);
 
         $query
-
             ->orFilterWhere(['like', '{{%client_circulation}}.name', $this->globalSearch])
             ->orFilterWhere(['like', '{{%client_circulation}}.phone', $this->globalSearch])
             ->orFilterWhere(['like', '{{%client_circulation}}.email', $this->globalSearch])
-            ->orFilterWhere(['like', '{{%user}}.full_name', $this->globalSearch])
             ->orFilterWhere(['like', '{{%regions}}.region_name', $this->globalSearch])
             ->orFilterWhere(['like', '{{%regions}}.region_code', $this->globalSearch])
             ->orFilterWhere(['like', '{{%client_circulation}}.author', $this->globalSearch])
+            ->orFilterWhere(['and', ['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.created_at)", $this->comment ? $this->comment : null], ['{{%clientcirculationcomment}}.state' =>  Clientcirculationcomment::STATUS_ACTIVE]])
+            ->orFilterWhere(['and', ['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.updated_at)", $this->comment ? $this->comment : null], ['{{%clientcirculationcomment}}.state' =>  Clientcirculationcomment::STATUS_ACTIVE]])
 
-            ->andFilterWhere(['like', '{{%client_circulation}}.name', $this->name])
-            ->andFilterWhere(['like', '{{%client_circulation}}.phone', $this->phone])
-            ->andFilterWhere(['like', '{{%client_circulation}}.email', $this->email])
-            ->andFilterWhere(['like', '{{%user}}.full_name', $this->authorname])
-            ->andFilterWhere(['like', '{{%regions}}.region_name', $this->regions])
-            ->orFilterWhere(['like', '{{%regions}}.region_code', $this->regions])
-            ->andFilterWhere(['like', '{{%client_circulation}}.author', $this->author])
-            ->andFilterWhere(['and', ['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.created_at)", $this->comment], ['{{%clientcirculationcomment}}.state' =>  Clientcirculationcomment::STATUS_ACTIVE]])
-            ->andFilterWhere(['and', ['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.updated_at)", $this->comment], ['{{%clientcirculationcomment}}.state' =>  Clientcirculationcomment::STATUS_ACTIVE]])
+            // ->andFilterWhere(['like', '{{%client_circulation}}.name', $this->name])
+            // ->andFilterWhere(['like', '{{%client_circulation}}.phone', $this->phone])
+            // ->andFilterWhere(['like', '{{%client_circulation}}.email', $this->email])
+            // ->andFilterWhere(['like', '{{%user}}.full_name', $this->authorname])
+            // ->andFilterWhere(['like', '{{%regions}}.region_name', $this->regions])
+            // ->orFilterWhere(['like', '{{%regions}}.region_code', $this->regions])
+            // ->andFilterWhere(['like', '{{%client_circulation}}.author', $this->author])
+            // ->andFilterWhere(['and', ['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.created_at)", $this->comment], ['{{%clientcirculationcomment}}.state' =>  Clientcirculationcomment::STATUS_ACTIVE]])
+            // ->andFilterWhere(['and', ['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.updated_at)", $this->comment], ['{{%clientcirculationcomment}}.state' =>  Clientcirculationcomment::STATUS_ACTIVE]])
             // ->andFilterWhere(['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.updated_at)", $this->comment])
             // ->andFilterWhere(['{{%clientcirculationcomment}}.created_at' => date('yyyy-mm-dd',strtotime($this->comment))])
             ;

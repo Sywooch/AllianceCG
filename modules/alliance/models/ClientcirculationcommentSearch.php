@@ -53,7 +53,7 @@ class ClientcirculationcommentSearch extends Clientcirculationcomment
     {
         $query = Clientcirculationcomment::find();
         // $query->joinWith(['creditmanagers', 'salesmanagers']);
-        $query->joinWith(['creditmanagers', 'targets', 'contacttypes', 'authorname']);
+        $query->joinWith(['creditmanagers', 'targets', 'contacttypes', 'authorname', 'clientcirculation']);
         $query->with(['salesmanagers']);
         if(!Yii::$app->user->can('admin')){
             $query->andFilterWhere(['{{%clientcirculationcomment}}.state' => Clientcirculationcomment::STATUS_ACTIVE]);
@@ -92,24 +92,32 @@ class ClientcirculationcommentSearch extends Clientcirculationcomment
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'clientcirculation_id' => $this->clientcirculation_id,
-            'state' => $this->state,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ]);
+        // $query->andFilterWhere([
+        //     'id' => $this->id,
+        //     'clientcirculation_id' => $this->clientcirculation_id,
+        //     'state' => $this->state,
+        //     'created_at' => $this->created_at,
+        //     'updated_at' => $this->updated_at,
+        // ]);
 
         $query
-            ->andFilterWhere(['like', 'contact_type', $this->contact_type])
-            ->andFilterWhere(['like', 'target', $this->target])
-            ->andFilterWhere(['like', '{{%targets}}.target', $this->targets])
-            ->andFilterWhere(['like', '{{%contact_type}}.contact_type', $this->contacttypes])
-            ->andFilterWhere(['like', 'car_model', $this->car_model])
-            // ->andFilterWhere(['like', 'comment', $this->comment])
-            ->andFilterWhere(['like', '{{%user}}.surname', $this->authorname])
+            // ->orFilterWhere(['like', 'contact_type', $this->globalSearch])
+            // ->orFilterWhere(['like', 'target', $this->globalSearch])
+            ->orFilterWhere(['like', '{{%client_circulation}}.name', $this->globalSearch])
+            ->orFilterWhere(['like', '{{%targets}}.target', $this->globalSearch])
+            ->orFilterWhere(['like', '{{%contact_type}}.contact_type', $this->globalSearch])
+            ->orFilterWhere(['like', 'car_model', $this->globalSearch])
+            ->orFilterWhere(['like', '{{%user}}.surname', $this->globalSearch])
             ->andFilterWhere(['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.created_at)", $this->comment])
-            ->andFilterWhere(['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.updated_at)", $this->comment])            
+            ->andFilterWhere(['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.updated_at)", $this->comment])             
+            // ->andFilterWhere(['like', 'contact_type', $this->contact_type])
+            // ->andFilterWhere(['like', 'target', $this->target])
+            // ->andFilterWhere(['like', '{{%targets}}.target', $this->targets])
+            // ->andFilterWhere(['like', '{{%contact_type}}.contact_type', $this->contacttypes])
+            // ->andFilterWhere(['like', 'car_model', $this->car_model])
+            // ->andFilterWhere(['like', '{{%user}}.surname', $this->authorname])
+            // ->andFilterWhere(['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.created_at)", $this->comment])
+            // ->andFilterWhere(['like', "FROM_UNIXTIME({{%clientcirculationcomment}}.updated_at)", $this->comment])            
             ;
 
         return $dataProvider;

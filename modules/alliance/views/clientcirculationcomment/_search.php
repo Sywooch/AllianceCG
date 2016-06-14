@@ -14,19 +14,6 @@ $this->registerJs($toggleAdvanced, View::POS_END);
 
 ?>
 
-<p class="buttonpane">
-    <?php echo Html::a(Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-link animlink']) ?>
-    <?php echo Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => '<i class="fa fa-refresh"></i>']), ['index'], ['class' => 'btn btn-link animlink']) ?>
-    <?php
-        if(Yii::$app->user->can('admin')){
-            echo Html::a(Yii::t('app', '{icon} DELETE', ['icon' => '<i class="fa fa-remove"></i>']), ['#'], ['class' => 'btn btn-link animlink', 'id' => 'MultipleDelete']);
-            echo '&nbsp';
-            echo Html::a(Yii::t('app', '{icon} RESTORE', ['icon' => '<i class="fa fa-upload"></i>']), ['#'], ['class' => 'btn btn-link animlink', 'id' => 'MultipleRestore']);
-        }
-    ?>    
-    <?php echo Html::button(Yii::t('app', '{icon} ADVANCED', ['icon' => '<i class="fa fa-list"></i>']), ['class' => 'btn-link animlink', 'id' => 'advanced']) ?>    
-</p>
-
 <div class="clientcirculationcomment-search" id="clientcirculation">
 
     <?php $form = ActiveForm::begin([
@@ -56,14 +43,14 @@ $this->registerJs($toggleAdvanced, View::POS_END);
 
     </div>
 
-    <div class="form-group col-md-8">        
+    <div class="form-group col-md-6">        
         <?php echo $form->field($model, 'globalSearch', [
                 'template' => '<div class="input-group"><span class="input-group-addon"> <i class="fa fa-search"></i> </span>{input}{error}</div>',
             ]); 
         ?>   
     </div>
 
-    <div class="buttonpane col-md-12">
+    <div class="buttonpane col-md-2">
         <?php echo Html::submitButton(Yii::t('app', '{icon} Search', ['icon' => '<i class="fa fa-search"></i>']), ['class' => 'btn btn-primary btn-sm animlink']) ?>
     </div>
 

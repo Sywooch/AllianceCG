@@ -115,17 +115,15 @@ use app\modules\references\models\Models;
             'prompt' => '-- ' . $commentModel->getAttributeLabel( 'credit_manager_id' ) . ' --',
         ];
         echo $form->field($commentModel, 'credit_manager_id', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-briefcase"></i> </span>{input}</div>{error}'])->dropDownList($items,$params);
-    ?>        
+    ?>      
+
+    <div class="form-group buttonpane">
+        <?php echo Html::submitButton(Yii::t('app', '{icon} ADD_EVENT', ['icon' => '<i class="fa fa-comment"></i>']), ['class' => 'btn btn-success btn-sm']) ?>
+    </div> <!-- buttonpane End --> 
 
 </div> <!-- panelBody End -->
 
-<div class="panel-footer">
-
-    <div class="form-group buttonpane">
-        <?= Html::submitButton(Yii::t('app', '{icon} ADD_EVENT', ['icon' => '<i class="fa fa-comment"></i>']), ['class' => 'btn btn-success btn-sm']) ?>
-    </div> <!-- buttonpane End -->
-
-</div> <!-- panelFooter End -->
+<!-- <div class="panel-footer"></div> <!-- panelFooter End --> 
 
 <?php ActiveForm::end(); ?>
 

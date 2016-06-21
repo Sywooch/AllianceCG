@@ -10,7 +10,7 @@ $config = [
             'dateFormat' => 'yyyy-MM-dd',
             'timeFormat' => 'php:H:i:s',
             'datetimeFormat' => 'yyyy-MM-dd HH:mm',
-            'decimalSeparator' => ',',
+            'decimalSeparator' => '. ',
             'thousandSeparator' => ' ',
             'currencyCode' => 'EUR',
         ],

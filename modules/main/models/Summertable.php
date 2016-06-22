@@ -41,9 +41,11 @@ class Summertable extends \yii\db\ActiveRecord
             [['model', 'body_color'], 'string', 'max' => 255],
             // [['discount_percent']],
             [['name', 'phone', 'email', 'discount_percent', 'selectedcar', 'globalSearch'], 'safe'],
+            [['phone'], 'string', 'min' => 18, 'max' => 18],
+            [['discount_percent'], 'number', 'min' => 0, 'max' => 1],
             ['discount_percent', 'compare', 'compareValue' => 1, 'operator' => '<='],
             [['model', 'body_color', 'discount', 'discount_percent', 'price', 'price_discount', 'payment'], 'required'],
-            [['name', 'phone', 'selectedcar'], 'required', 'on' => ['testdriverequest']],
+            // [['name', 'phone', 'selectedcar'], 'required', 'on' => ['testdriverequest']],
         ];
     }
 
@@ -63,6 +65,7 @@ class Summertable extends \yii\db\ActiveRecord
             'payment' => Yii::t('app', 'Payment'),
             'name' => Yii::t('app', 'Name'),
             'phone' => Yii::t('app', 'Phone'),
+            'selectedcar' => Yii::t('app', 'Selectedcar'),
 
             // 'id' => Yii::t('app', 'ID'),
             // 'model' => 'Модель',

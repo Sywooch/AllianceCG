@@ -72,7 +72,7 @@ public $layout= '@app/modules/main/views/layouts/wwwhelpers';
         $model->selectedcar = $model->model;
 
 
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()) && $model->contact("maxim.ishchenko@gmail.com")) {
+        if ($model->load(Yii::$app->request->post()) && $model->contact("maxim.ishchenko@gmail.com")) {
             Yii::$app->session->setFlash('contactFormSubmitted');
             echo 1;
             // return $this->refresh();

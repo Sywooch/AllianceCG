@@ -2,16 +2,23 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\Url;
 
 ?>
 
 
-<?php $form = ActiveForm::begin(['id' => $model->formName()]); ?>
+<?php 
+    $form = ActiveForm::begin([
+            'id' => $model->formName(),
+            'enableAjaxValidation' => true,
+            'validationUrl' => Url::toRoute('/main/summertable/validation'),
+    ]); 
+?>
 
 <?php echo $form->field($model, 'name', [
         'template' => '<div class="col-sm-3 buttonpane">{label}</div><div class="input-group col-sm-9"><span class="input-group-addon"><i class="fa fa-user"></i></span>{input}{error}</div>',
             // '<span class="input-group-addon">Ф.И.О.</span></div>',
-    ])->textInput() ?>
+    ])->textInput(); ?>
 
 <?php // echo $form->field($model, 'phone')->textInput() ?>
 
@@ -23,7 +30,7 @@ use yii\widgets\ActiveForm;
             // '<span class="input-group-addon">Тел.</span></div>',
     	])->widget(\yii\widgets\MaskedInput::className(), [
     		'mask' => '+7 (999) 999-99-99',
-	])
+	]);
 ?>
 
 <?php echo $form->field($model, 'selectedcar', [
@@ -40,14 +47,14 @@ use yii\widgets\ActiveForm;
 
 <?php
 
-$script2 = <<< JS
+$script = <<< JS
 
 $('form#{$model->formName()}').on('beforeSubmit', function(e)
 {
     var \$form = $(this);
     $.post(
         \$form.attr("action"),
-        \$form.serialize()
+        \$form.serialize(),
     )
         .done(function(result) {
             if(result == 1)
@@ -66,5 +73,5 @@ $('form#{$model->formName()}').on('beforeSubmit', function(e)
 });
 
 JS;
-$this->registerJS($script2);
+$this->registerJS($script);
 ?>

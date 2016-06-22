@@ -85,3 +85,9 @@ $('form#{$model->formName()}').on('beforeSubmit', function(e)
 JS;
 $this->registerJS($script);
 ?>
+
+<script type="text/javascript">
+    // document.querySelector("#Summertable").addEventListener("submit", function(e){
+    //     alert('lol');
+    // });
+</script>

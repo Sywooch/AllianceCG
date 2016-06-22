@@ -8,6 +8,7 @@ use app\modules\main\models\SummertableSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\widgets\ActiveForm;
 
 /**
  * SummertableController implements the CRUD actions for Summertable model.
@@ -71,10 +72,11 @@ public $layout= '@app/modules/main/views/layouts/wwwhelpers';
         $model->selectedcar = $model->model;
 
 
-        if ($model->load(Yii::$app->request->post()) && $model->contact("maxim.ishchenko@gmail.com")) {
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()) && $model->contact("maxim.ishchenko@gmail.com")) {
             Yii::$app->session->setFlash('contactFormSubmitted');
+            echo 1;
             // return $this->refresh();
-            return $this->redirect('index');
+            // return $this->redirect('index');
         } else {
             return $this->renderAjax('testdriverequest', [
                 // 'model' => $this->findModel($id),
@@ -92,9 +94,18 @@ public $layout= '@app/modules/main/views/layouts/wwwhelpers';
     {
         $model = new Summertable();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        // if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             // return $this->redirect(['view', 'id' => $model->id]);
-            return $this->redirect('index');
+            // return $this->redirect('index');
+            if($model->save())
+            {
+                echo 1;
+            }
+            else
+            {
+                echo 0;
+            }
         } else {
             return $this->renderAjax('create', [
                 'model' => $model,
@@ -112,9 +123,18 @@ public $layout= '@app/modules/main/views/layouts/wwwhelpers';
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        // if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             // return $this->redirect(['view', 'id' => $model->id]);
-            return $this->redirect('index');
+            // return $this->redirect('index');
+            if($model->save())
+            {
+                echo 1;
+            }
+            else
+            {
+                echo 0;
+            }
         } else {
             return $this->renderAjax('update', [
                 'model' => $model,
@@ -150,4 +170,15 @@ public $layout= '@app/modules/main/views/layouts/wwwhelpers';
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionValidation()
+    {
+        $model = new Summertable();
+        if(Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()))
+        {
+            Yii::$app->response->format = 'json';
+            return ActiveForm::validate($model);
+        }
+    }
+
 }

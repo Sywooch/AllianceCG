@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\main\models\Summertable */
@@ -10,34 +11,39 @@ use yii\widgets\ActiveForm;
 
 <div class="summertable-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+            'id' => $model->formName(),
+            'enableAjaxValidation' => true,
+            'validationUrl' => Url::toRoute('/main/summertable/validation')
+        ]); 
+    ?>
 
     <?= $form->field($model, 'model', [
-            'template' => '{label}<div class="input-group"><span class="input-group-addon"><i class="fa fa-car"></i></span>{input}{error}'.'</div>',
+            'template' => '<div class="col-sm-3">{label}</div><div class="input-group col-sm-9"><span class="input-group-addon"><i class="fa fa-car"></i></span>{input}</div><div class="buttonpane">{error}</div>',
         ])->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'body_color', [
-            'template' => '{label}<div class="input-group"><span class="input-group-addon"><i class="fa fa-car"></i></span>{input}{error}'.'</div>',
+            'template' => '<div class="col-sm-3">{label}</div><div class="input-group col-sm-9"><span class="input-group-addon"><i class="fa fa-car"></i></span>{input}</div><div class="buttonpane">{error}</div>',
         ])->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'discount', [
-            'template' => '{label}<div class="input-group"><span class="input-group-addon"><i class="fa fa-rouble"></i></span>{input}{error}'.'</div>',
+            'template' => '<div class="col-sm-3">{label}</div><div class="input-group col-sm-9"><span class="input-group-addon"><i class="fa fa-rouble"></i></span>{input}</div><div class="buttonpane">{error}</div>',
         ])->textInput(['type' => 'number']) ?>
 
     <?= $form->field($model, 'discount_percent', [
-            'template' => '{label}<div class="input-group"><span class="input-group-addon"><i class="fa fa-percent"></i></span>{input}{error}'.'</div>',
-        ])->textInput(['type' => 'number']) ?>
+            'template' => '<div class="col-sm-3">{label}</div><div class="input-group col-sm-9"><span class="input-group-addon"><i class="fa fa-percent"></i></span>{input}</div><div class="buttonpane">{error}</div>',
+        ])->textInput() ?>
 
     <?= $form->field($model, 'price', [
-            'template' => '{label}<div class="input-group"><span class="input-group-addon"><i class="fa fa-rouble"></i></span>{input}{error}'.'</div>',
+            'template' => '<div class="col-sm-3">{label}</div><div class="input-group col-sm-9"><span class="input-group-addon"><i class="fa fa-rouble"></i></span>{input}</div><div class="buttonpane">{error}</div>',
         ])->textInput(['type' => 'number']) ?>
     
     <?= $form->field($model, 'price_discount', [
-            'template' => '{label}<div class="input-group"><span class="input-group-addon"><i class="fa fa-rouble"></i></span>{input}{error}'.'</div>',
+            'template' => '<div class="col-sm-3">{label}</div><div class="input-group col-sm-9"><span class="input-group-addon"><i class="fa fa-rouble"></i></span>{input}</div><div class="buttonpane">{error}</div>',
         ])->textInput(['type' => 'number']) ?>
 
     <?= $form->field($model, 'payment', [
-            'template' => '{label}<div class="input-group"><span class="input-group-addon"><i class="fa fa-rouble"></i></span>{input}{error}'.'</div>',
+            'template' => '<div class="col-sm-3">{label}</div><div class="input-group col-sm-9"><span class="input-group-addon"><i class="fa fa-rouble"></i></span>{input}</div><div class="buttonpane">{error}</div>',
         ])->textInput(['type' => 'number']) ?>
 
     <div class="form-group buttonpane">
@@ -48,3 +54,34 @@ use yii\widgets\ActiveForm;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<?php
+
+$script = <<< JS
+
+$('form#{$model->formName()}').on('beforeSubmit', function(e)
+{
+    var \$form = $(this);
+    $.post(
+        \$form.attr("action"),
+        \$form.serialize()
+    )
+        .done(function(result) {
+            if(result == 1)
+            {
+                $(\$form).trigger("reset");
+                $(document).find('#mymodal').modal('hide');
+                $.pjax.reload({container: '#testdirveRequest'});
+            }else
+            {
+                $("#message").html(result);
+            }
+        }).fail(function(){
+            console.log("server error");
+        });
+    return false;
+});
+
+JS;
+$this->registerJS($script);
+?>

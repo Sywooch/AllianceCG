@@ -20,6 +20,8 @@ class SummertableSearch extends Summertable
         return [
             [['id', 'price', 'payment'], 'integer'],
             [['model', 'body_color'], 'safe'],
+            // [['model', 'body_color', 'discount', 'discount_percent', 'price', 'price_discount', 'payment'], 'required', 'on' => ['create', 'update']],
+            // [['name', 'phone', 'selectedcar'], 'required', 'on' => ['testdriverequest']],
         ];
     }
 

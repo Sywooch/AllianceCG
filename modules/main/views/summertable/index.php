@@ -14,7 +14,8 @@ use app\components\grid\LinkColumn;
 
 // $this->title = Yii::t('app', 'Summertables');
 // $this->params['breadcrumbs'][] = $this->title;
-$js=<<<JS
+
+$js1=<<<JS
 $(document).on("click","[data-remote]",function(e) {
     e.preventDefault();
     $("div#mymodal .modal-body").load($(this).data('remote'));
@@ -24,7 +25,7 @@ $('#Assigs').on('hidden.bs.modal', function (e) {
 }); 
 JS;
 
-$this->registerJs($js);
+$this->registerJs($js1);
 ?>
 
 <div class="summertable-index">
@@ -35,25 +36,18 @@ $this->registerJs($js);
     <p class="buttonpane">
         <?php
              // $createButton = Yii::$app->user->can('admin') ? Html::a(Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-sm btn-success']) : false;
-             $createButton = Yii::$app->user->can('admin') ? Html::button('Create', ['value' => Url::to('/main/summertable/create'), 'class' => 'btn btn-success btn-sm', 'id' => 'modalButton']) : false;
+             // $createButton = Yii::$app->user->can('admin') ? Html::button('<i class="fa fa-plus"></i> Добаввить', ['value' => Url::to('/main/summertable/create'), 'class' => 'btn btn-success btn-sm', 'id' => 'modalButton']) : false;
+             $createButton = Yii::$app->user->can('admin') ? Html::a(Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']), '#mymodal', [
+                                    'class' => 'btn btn-success btn-sm', 'title' => 'Назначить','data-toggle'=>'modal','data-backdrop'=>false,'data-remote'=>Url::to('/main/summertable/create')
+                                ]) : false;
              echo $createButton;
         ?>
-        <?php
-            Modal::begin([
-                    // 'header' => '<h4>Create</h4>',
-                    'id' => 'modal',
-                    'size' => 'modal-lg',
-                ]);
-            
-            echo "<div id='modalContent'></div>";
-
-            Modal::end();
-        ?>
     </p>
-<?php // Pjax::begin(); ?>    
+<?php Pjax::begin(['id' => 'testdirveRequest']); ?>    
 <?php 
     echo GridView::widget([
         'dataProvider' => $dataProvider,
+        'id' => 'testdireverequest-grid',
         'summary' => false,
         // 'filterModel' => $searchModel,
         'columns' => [
@@ -63,8 +57,6 @@ $this->registerJs($js);
             ],
             // ['class' => 'yii\grid\CheckboxColumn',],
 
-            // 'id',
-            // 'model', 
             [
                 'attribute' => 'model',
                 'visible' => !Yii::$app->user->can('admin'),
@@ -77,7 +69,6 @@ $this->registerJs($js);
                 'contentOptions'=>['style'=>'width: 300px;'],
             ],
             'body_color',
-            // 'discount',
             [
             'attribute' => 'discount',
             'content'=>function($data){
@@ -86,7 +77,6 @@ $this->registerJs($js);
                 return $fmt->format($data->discount);
             }
             ],
-            // 'discount_percent',
             [
             'attribute' => 'discount_percent',
             'content'=>function($data){
@@ -94,7 +84,6 @@ $this->registerJs($js);
                 return $formatter->asPercent($data->discount_percent);
             }
             ],
-            // 'price',
             [
             'attribute' => 'price',
             'content'=>function($data){
@@ -103,7 +92,6 @@ $this->registerJs($js);
                 return $fmt->format($data->price);
             }
             ],
-            // 'price_discount',
             [
             'attribute' => 'price_discount',
             'content'=>function($data){
@@ -112,7 +100,6 @@ $this->registerJs($js);
                 return $fmt->format($data->price_discount);
             }
             ],
-            // 'payment',
             [
             'attribute' => 'payment',
             'content'=>function($data){
@@ -121,12 +108,6 @@ $this->registerJs($js);
                 return $fmt->format($data->payment) . '/мес';
             }
             ],
-            // [
-            //     'attribute' => 'payment',
-            //     'label' => 'Ежемесячный <br/> платеж по кредиту',
-            // ],
-
-            // ['class' => 'yii\grid\ActionColumn'],
             
             [
                 'class' => 'yii\grid\ActionColumn',
@@ -146,30 +127,23 @@ $this->registerJs($js);
                         },
                     'delete' => function ($url, $model) {
                         return Html::a(
-                            '<i class="fa fa-remove"></i>',
-                            // Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model->intPropertyId], ['data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),'method' => 'post',],]); 
+                            '<i class="fa fa-trash"></i>',
                             $url=Url::to(['/main/summertable/delete','id'=>$model->id], ['data' => ['confirm' => Yii::t('app', 'Delete?'), 'method' => 'post']]),
-                            // $url=Yii::$app->getUrlManager()->createAbsoluteUrl(['/main/summertable/delete','id'=>$model->id], [
-                            //     // 'class' => 'btn btn-danger',
-                            //     'data' => [
-                            //         'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                            //         'method' => 'post',
-                            //     ],
-                            //     ],
-                            // )
                             [
                                 'data-method' => 'post',
-                                'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                                'class' => 'btn btn-link',
+                                'data-confirm' => Yii::t('app', 'CONFIRM'),
                                 'data-pjax' => '0',
                             ]
                         );
                     },
                 ],
                 'template'=>'{view}{update}{delete}',
-                'contentOptions'=>['style'=>'width: 150px;'],
+                'contentOptions'=>['style'=>'width: 250px;'],
                 'visible' => Yii::$app->user->can('admin'),
             ],
-            ['class' => 'yii\grid\ActionColumn', 
+            [
+                'class' => 'yii\grid\ActionColumn', 
                 'buttons'=>[
                     'reserv'=>function($url,$model){
                             $url=Yii::$app->getUrlManager()->createAbsoluteUrl(['/main/summertable/testdriverequest','id'=>$model->id]);
@@ -179,13 +153,27 @@ $this->registerJs($js);
                         },
                 ],
                 'template'=>'{reserv}',
-                'visible' => Yii::$app->user->can('admin'),
+                // 'visible' => Yii::$app->user->can('admin'),
             ],
-            // ],
         ],
+
+            // ['class' => 'yii\grid\ActionColumn'],
     ]);
  ?>
 
-<?php // Pjax::end(); ?></div>
+<?php Pjax::end(); ?></div>
+
 <?php \yii\bootstrap\Modal::begin(['header'=>'<h4>Зарезервировать автомобиль</h4>', 'id'=>'mymodal'])?>
 <?php \yii\bootstrap\Modal::end()?>
+
+        <?php
+            Modal::begin([
+                    // 'header' => '<h4>Create</h4>',
+                    'id' => 'modal',
+                    'size' => 'modal-lg',
+                ]);
+            
+            echo "<div id='modalContent'></div>";
+
+            Modal::end();
+        ?>

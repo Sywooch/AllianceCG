@@ -41,6 +41,9 @@ class Summertable extends \yii\db\ActiveRecord
             [['model', 'body_color'], 'string', 'max' => 255],
             // [['discount_percent']],
             [['name', 'phone', 'email', 'discount_percent', 'selectedcar', 'globalSearch'], 'safe'],
+            ['discount_percent', 'compare', 'compareValue' => 1, 'operator' => '<='],
+            [['model', 'body_color', 'discount', 'discount_percent', 'price', 'price_discount', 'payment'], 'required'],
+            [['name', 'phone', 'selectedcar'], 'required', 'on' => ['testdriverequest']],
         ];
     }
 

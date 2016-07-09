@@ -88,7 +88,7 @@ class Employees extends \yii\db\ActiveRecord
             [['position_id'], 'exist', 'skipOnError' => true, 'targetClass' => Positions::className(), 'targetAttribute' => ['position_id' => 'id']],
             [['globalSearch'], 'safe'],
             [['name', 'surname', 'patronimyc'], 'required'],
-            [['fullname', 'file'], 'safe'],
+            [['fullname', 'file', 'duty_status'], 'safe'],
             ['author', 'default', 'value' => Yii::$app->user->getId()],
             ['brand_id', 'default', 'value' => 0],
             [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => ['jpg', 'jpeg','png'],'checkExtensionByMimeType'=>false],
@@ -124,6 +124,7 @@ class Employees extends \yii\db\ActiveRecord
             'author' => Yii::t('app', 'AUTHOR'),
             'authorname' => Yii::t('app', 'AUTHOR'),
             'brandlogo' => Yii::t('app', 'BRAND_LOGO'),
+            'duty_status' => Yii::t('app', 'DUTYSTATUS'),
         ];
     }
 
@@ -226,6 +227,10 @@ class Employees extends \yii\db\ActiveRecord
     {
         $link = isset($this->position->position) ? Html::a($this->position->position, ['/references/positions/view', 'id' => $this->position->id]) : false;
         return $link;
+    }
+
+    public function getDutyStatusIcon() {
+        return $this->duty_status ? '<i class="fa fa-check"></i>' : '<i class="fa fa-remove"></i>';
     }
 
     public function getFullName() {

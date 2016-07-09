@@ -32,12 +32,27 @@ $this->params['breadcrumbs'][] = $this->title;
         ?>
     </p>
 
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <?php echo '<h4>' . $model->getFullName() . '</h4>'; ?>
+  </div>
+  <div class="panel-body">
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             // 'id',
+            // [
+            //     'attribute' => 'fullName',
+            // ],
             [
-                'attribute' => 'fullName',
+                'attribute' => 'surname',
+            ],
+            [
+                'attribute' => 'name',
+            ],
+            [
+                'attribute' => 'patronimyc',
             ],
             [
                 'attribute' => 'photo',
@@ -75,6 +90,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'visible' => !empty($model->position->position) ? true : false,
             ],
             [
+                'attribute' => 'duty_status',
+                'format' => 'raw',
+                'value' => $model->getDutyStatusIcon(),
+            ],
+            [
                 'attribute' => 'created_at',
                 'format' => 'datetime',
             ],
@@ -83,10 +103,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'datetime',
             ],
             [
-                'attribute' => 'authorname',
+                'attribute' => 'author',
                 'value' => $model->authorname->full_name,
             ],
         ],
     ]) ?>
+  </div>
+</div>    
+
 
 </div>

@@ -104,7 +104,18 @@ use yii\helpers\ArrayHelper;
             'prompt' => '-- ' . $model->getAttributeLabel( 'position_id' ) . ' --',
         ];
         echo $form->field($model, 'position_id', ['template'=>'<div class="input-group"><span class="input-group-addon">  <i class="fa fa-briefcase"></i>  </span>{input}</div>{error}'])->dropDownList($items,$params);
-    ?>     
+    ?>    
+
+    <?php
+        echo $form->field($model, 'duty_status')
+            ->checkbox([
+                // 'label' => 'Неактивный чекбокс',
+                'labelOptions' => [
+                    'style' => 'padding-left:20px;'
+                ],
+                'disabled' => false
+            ]);
+    ?> 
 
     <div class="form-group" style="text-align: right">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']) : Yii::t('app', '{icon} UPDATE', ['icon' => '<i class="fa fa-edit"></i>']), ['class' => $model->isNewRecord ? 'btn btn-success animlinkColor' : 'btn btn-primary animlinkColor']) ?>

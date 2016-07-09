@@ -17,20 +17,34 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="employees-index">
 
-    <!-- <h1> -->
-        <?php // echo Html::encode($this->title) ?>
-    <!-- </h1> -->
-    <?= $this->render('_search', ['model' => $searchModel]); ?>
 
-    <!-- <p> -->
-        <?php // echo Html::a(Yii::t('app', 'Create Employees'), ['create'], ['class' => 'btn btn-success']) ?>
-    <!-- </p> -->
+<div class="buttonpane">
+
+<?= Html::a(Yii::t('app', '{icon} CREATE', ['icon' => '<i class="fa fa-plus"></i>']), ['create'], ['class' => 'btn btn-link animlink']); ?>
+        
+<?= Html::a(Yii::t('app', '{icon} DELETE', ['icon' => '<i class="fa fa-remove"></i>']), ['#'], ['class' => 'btn btn-link animlink', 'id' => 'MultipleDelete']); ?>
+        
+<?= Html::a(Yii::t('app', '{icon} RESTORE', ['icon' => '<i class="fa fa-upload"></i>']), ['#'], ['class' => 'btn btn-link animlink', 'id' => 'MultipleRestore']); ?>
+
+<?= Html::a(Yii::t('app', '{icon} REFRESH', ['icon' => '<i class="fa fa-refresh"></i>']), ['index'], ['class' => 'btn btn-link animlink']) ?>
+<?php // echo Html::button(Yii::t('app', '{icon} ADVANCED', ['icon' => '<i class="fa fa-file-excel-o"></i>']), ['class' => 'btn btn-link animlink', 'id' => 'advancedOperations']) ?>
+
+</div>
+
 <?php Pjax::begin(); ?>    
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <?= $this->render('_search', ['model' => $searchModel]); ?>
+        </div>
+        <div class="panel-body">
+        
+
     <?= GridView::widget([
         'id' => 'employees-grid',
         'summary' => false,
         'dataProvider' => $dataProvider,
-        // 'filterModel' => $searchModel,
+        'filterModel' => $searchModel,
         'columns' => [
             [
                 'class' => 'yii\grid\SerialColumn',
@@ -46,9 +60,17 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'photo',
                 // 'format' => 'image',
+                'filter' => false,
                 'format' => 'html',
                 'value' => function ($model) {
                     return Html::img($model->getImageUrl(), ['width'=>50, 'class' => 'img-rounded']); 
+                },
+            ],
+            [
+                'attribute' => 'brandlogo',
+                'format' => 'html',
+                'value' => function ($model) {
+                    return Html::img($model->getBrandImageUrl(),['width'=>50, 'class' => 'img-rounded']); 
                 },
             ],
             // 'fullName',    
@@ -61,25 +83,18 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'patronimyc',
             // 'surname',
             // 'company_id',
-            [
-                'attribute' => 'brandlogo',
-                // 'format' => 'image',
-                'format' => 'html',
-                'value' => function ($model) {
-                    return Html::img($model->getBrandImageUrl(),['width'=>50, 'class' => 'img-rounded']); 
-                },
-            ],
             // [
             //     'attribute' => 'company',
             //     'value' => 'company.company_name'
             // ],
-            [
-               'attribute'=>'brand',
-               'format' => 'raw',
-               'value'=>function ($data) {
-                    return $data->getBrandlink();
-                },
-            ], 
+            // 
+            // [
+            //    'attribute'=>'brand',
+            //    'format' => 'raw',
+            //    'value'=>function ($data) {
+            //         return $data->getBrandlink();
+            //     },
+            // ], 
             [
                'attribute'=>'company',
                'format' => 'raw',
@@ -141,3 +156,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); 
     ?>
 <?php Pjax::end(); ?></div>
+
+
+        </div>
+    </div>    

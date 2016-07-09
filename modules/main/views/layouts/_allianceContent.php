@@ -23,6 +23,10 @@ use rmrevin\yii\fontawesome\FA;
                 'visible' => Yii::$app->user->can('creditcalendarIsVisible')
             ],
             [
+                'label' =>  Yii::t('app', '{icon} DUTYLIST', ['icon' => '<i class="fa fa-users"></i>']), 'url' => ['/alliance/dutylist/index'],
+                'visible' => Yii::$app->user->can('admin')
+            ],
+            [
                 'label' =>  Yii::t('app', '{icon} NAV_ALLIANCE_CREDITCALENDAR', ['icon' => FA::icon('calendar')]), 'url' => ['/alliance/creditcalendar/calendar'],
                 'visible' => Yii::$app->user->can('creditcalendarIsVisible')
             ],

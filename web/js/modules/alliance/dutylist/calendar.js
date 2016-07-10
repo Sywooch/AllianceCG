@@ -11,7 +11,7 @@
         var curSource = "/alliance/dutylist/calendarsearch";
         // var filter = document.getElementById('autor_selector');
         $('#dutylsitCalendar').fullCalendar({
-            contentHeight: 600,
+            contentHeight: 800,
             aspectRatio: 8,
             handleWindowResize: true, // Изменять размер календаря пропорционально изменению окна браузера
             editable: false, // Редактирование запрещено, т.к. источник событий json-feed из БД
@@ -23,8 +23,8 @@
             defaultView: 'month',          
             selectable: false,
             editable: false,
-            height: 400,
-            width: 400,
+            // height: 400,
+            // width: 400,
             lang: 'ru',
             more: 3,
             firstday: 1,
@@ -55,32 +55,9 @@
                     eventLimit: 15,
                 }
             },
-            // dayClick: function(date, calEvent, jsEvent, view, resourceObj) {
-            //         var datesend = date.format("YYYY-MM-DD H:mm:ss");
-            //         // if (confirm('Добавить новую запись?'))window.location = 'create';
-            //         if (moment().diff(date,'days') > 0){
-            //             alert('Выбранная дата меньше текущей! Не рекомендуется добавлять записи задним числом!');
-            //         } else{
-            //             var datesend = date.format("YYYY-MM-DD H:mm:ss");
-            //             if (confirm('Добавить новую запись?'))window.location = 'create';
-            //         }                     
-            //  },
-            // Статичное событие
-            // Аттрибут allDay - повторять ежедневно
-            // Аттрибут dow - повторять по дням недели (№ дня недели)
-            // events: [{
-            //     title: "ololo",
-            //     start: '10:00',
-            //     end:   '23:00',
-            //     dow: [1,4],
-            //     allDay: true,
-            // }],
-            // Статичны йцвет события          
-            // eventColor: '#4ba82e',
             bussinessHours: {
                 start: '9:00', // время начала
                 end: '21:00', // время окончания
-
                 dow: [ 1, 2, 3, 4, 5, 6, 7 ]
                 // days of week. an array of zero-based day of week integers (0=Sunday) дни недели, начиная с 0 (0-ВСК)
             },
@@ -94,77 +71,24 @@
                         alert("Ошибка получения источника событий");
                     },
                 },
-                // {
-                //     url: curSource[1],
-                //     cache: true,
-                //     error: function() {
-                //         alert("Ошибка получения источника событий №2");
-                //     },
-                // },
             ],
-            // events: {
-            //     url: source,
-            //     cache: true, 
-            //     error: function() {
-            //         alert('Ошибка получения источника событий');
-            //     },
-            // },
             header: {
                 left: 'prev,today,next',
                 center: 'title,filter',
                 right: 'month,agendaWeek,agendaDay',
             },
-            eventRender: function eventRender( event, element, view ) {
-                // Описание под темой (необходимо возвращать description в запросе)
-                // element.find('.fc-title').append("<br/>" + event.description);
-                // Tooltip при наведении
-                // $(element).tooltip({title: event.title}); 
-                // 
-                // Предварительный просмотр в jQuery Dialog
-                // element.attr('href', 'javascript:void(0);');
-                // element.click(function() {
-                //     $("#startTime").html(moment(event.start).format('MMM Do h:mm A'));
-                //     $("#endTime").html(moment(event.end).format('MMM Do h:mm A'));
-                //     $("#eventInfo").html(event.description);
-                //     $("#eventLink").attr('href', event.url);
-                //     $("#eventContent").dialog({ modal: true, title: event.title, width:350});
-                // });
-                // 
-               
-                // Popover при наведении      
-                // $(element).popover({title: event.title, content: event.description, trigger: 'hover', placement: 'auto right', delay: {"hide": 300 }});
-                //
-                // return ['all', event.status].indexOf($('#status_selector').val()) >= 0
-                // 
-                // return ['all', event.author].indexOf($('#author_selector').val()) >= 0 && ['all', event.status].indexOf($('#status_selector').val()) >= 0 && ['all', event.priority].indexOf($('#priority_selector').val()) >= 0;
-            },
-            // Действие при клике на событие
-            // eventClick: function(calEvent, jsEvent, view) {
-            //     if (calEvent.url) {
-            //         if (confirm('Перейти на страницу записи "' + calEvent.title + '"?'))window.open(calEvent.url);
-            //         return false;
-            //     }
-            // }, 
-
-            // eventMouseover: function(calEvent, jsEvent) {
-            //     // var tooltip = '<div class="tooltipevent" style="width:100px;height:100px;background:#ccc;position:absolute;z-index:10001;">' + calEvent.title + '</div>';
-            //     var tooltip = '<div class="tooltip">' + calEvent.title + '</div>';
-            //     $("body").append(tooltip);
-            //     $(this).mouseover(function(e) {
-            //         $(this).css('z-index', 10000);
-            //         $('.tooltip').fadeIn('500');
-            //         $('.tooltip').fadeTo('10', 1.9);
-            //     }).mousemove(function(e) {
-            //         $('.tooltip').css('top', e.pageY + 10);
-            //         $('.tooltip').css('left', e.pageX + 20);
-            //     });
-            // },
-
-            // eventMouseout: function(calEvent, jsEvent) {
-            //      $(this).css('z-index', 8);
-            //      $('.tooltip').remove();
-            // },
-
+            eventRender: function eventRender(event, eventElement, element, view) {
+                if (event.imageurl) {
+                    eventElement.find("div.fc-content").prepend("<div class='text-center' style='padding: 1px;'><img class='img-rounded' src='" + event.imageurl +"' width='50' height='50'></div>");
+                }
+            },    
+            eventClick:  function(event, jsEvent, view) {
+                $('#modalTitle').html(moment(event.start).format('DD/MM/YYYY') + ' - Оперативный дежурный на указанную дату:');
+                $('#modalBody').html("<div class='text-center'> <img class='img-rounded text-center' src='" + event.imageurl + "' width='50' height='50'>" + ' <b>' + event.title + '</b></div>');
+                $('#eventUrl').attr('href',event.url);
+                $('#fullCalModal').modal();
+            },        
+            
             // Цвет дня в календаре:
             dayRender: function(date, cell){            
                 if (moment().diff(date,'days') > 0){

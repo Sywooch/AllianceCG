@@ -64,8 +64,9 @@ echo Tabs::widget([
                 <?php 
                    $this->registerCssFile('@web/css/calendars/calendars.css', ['depends' => ['app\assets\AppAsset']]);    
                    $this->registerCssFile('@web/css/bootstrap-multiselect.css', ['depends' => ['app\assets\AppAsset']]);  
-                   $this->registerCssFile('@web/js/jquery-ui-1.11.4/jquery-ui.css', ['depends' => ['app\assets\AppAsset']]);    
-                   $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/jquery.min.js'), ['depends' => [
+                   $this->registerCssFile('@web/js/jquery-ui-1.11.4/jquery-ui.css', ['depends' => ['app\assets\AppAsset']]); 
+                   $this->registerJsFile('@web/js/libs/jquery.min.js',  ['position' => yii\web\View::POS_END]);   
+                   $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/jquery-3.0.0.min.js'), ['depends' => [
                        'yii\web\YiiAsset',
                        'yii\bootstrap\BootstrapAsset'],
                    ]);           
@@ -101,8 +102,23 @@ echo Tabs::widget([
 
                <div id="dutylsitCalendar"></div>
 
-<?php Pjax::end();?>
+                <div id="fullCalModal" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+                                <h4 id="modalTitle" class="modal-title"></h4>
+                            </div>
+                            <div id="modalBody" class="modal-body"></div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                                <!-- <button class="btn btn-primary"><a id="eventUrl" target="_blank">Event Page</a></button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>               
 
+<?php Pjax::end();?>
 
 <?php \yii\bootstrap\Modal::begin(['header'=>'<h4>График дежурств</h4>', 'id'=>'mymodal'])?>
 <?php \yii\bootstrap\Modal::end()?>

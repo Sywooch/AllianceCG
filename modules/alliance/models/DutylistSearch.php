@@ -99,9 +99,9 @@ class DutylistSearch extends Dutylist
                 {{%dutylist}}.id
             AS
                 id,
-                {{%dutylist}}.id
-            AS
-                url,
+            --     {{%dutylist}}.id
+            -- AS
+            --     url,
                 {{%dutylist}}.date
             AS
                 start,
@@ -109,10 +109,13 @@ class DutylistSearch extends Dutylist
             AS
                 end,
             CONCAT
-                ({{%employees}}.name,' ', {{%employees}}.patronimyc,' ', {{%employees}}.surname) 
+                -- ({{%employees}}.name,' ', {{%employees}}.patronimyc,' ', {{%employees}}.surname) 
+                -- ({{%employees}}.name,' ', {{%employees}}.surname)
+                ({{%employees}}.surname, ' ', LEFT({{%employees}}.name, 1),'.',LEFT({{%employees}}.patronimyc, 1),'.')
             AS
                 title,
-                {{%employees}}.photo
+            CONCAT
+                ('/', {{%employees}}.photo)
             AS
                 imageurl
             FROM

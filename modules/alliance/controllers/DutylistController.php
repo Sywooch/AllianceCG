@@ -47,6 +47,16 @@ class DutylistController extends Controller
         ]);
     }
 
+
+    public function actionCalendarsearch()
+    {
+        $this->layout = false;
+        $model = new DutylistSearch();
+        return $this->render('_calendarSearch', [
+            'model' => $model,
+        ]);
+    }    
+
     /**
      * Lists all Creditcalendar models.
      * @return mixed

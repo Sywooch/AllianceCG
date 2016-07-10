@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\modules\alliance\models\Dutylist;
+use yii\helpers\Json;
 
 /**
  * DutylistSearch represents the model behind the search form about `app\modules\alliance\models\Dutylist`.
@@ -89,5 +90,42 @@ class DutylistSearch extends Dutylist
             ;        
 
         return $dataProvider;
+    }
+
+    public function calendarSearch()
+    {
+        $calendarQuery = "
+            SELECT
+                {{%dutylist}}.id
+            AS
+                id,
+                {{%dutylist}}.id
+            AS
+                url,
+                {{%dutylist}}.date
+            AS
+                start,
+                {{%dutylist}}.date
+            AS
+                end,
+            CONCAT
+                ({{%employees}}.name,' ', {{%employees}}.patronimyc,' ', {{%employees}}.surname) 
+            AS
+                title,
+                {{%employees}}.photo
+            AS
+                imageurl
+            FROM
+                {{%dutylist}}
+            LEFT JOIN 
+                {{%employees}}    
+            ON
+                {{%employees}}.id = {{%dutylist}}.employee_id
+            ;
+        ";
+
+        $items = Yii::$app->db->createCommand($calendarQuery)->queryAll();       
+        
+        return Json::encode($items);     
     }
 }

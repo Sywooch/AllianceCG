@@ -24,7 +24,6 @@ $this->registerJs($toggleSearch, View::POS_END);
 
 $toggleSearch = file_get_contents('js/modules/alliance/creditcalendar/updateCalendar.js');
 $this->registerJs($toggleSearch, View::POS_END);
-
 ?>
 
 <div class="creditcalendar-index" id="creditcalendar-index"> <!-- pageDiv -->

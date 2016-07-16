@@ -114,10 +114,18 @@ class DutylistSearch extends Dutylist
                 ({{%employees}}.surname, ' ', LEFT({{%employees}}.name, 1),'.',LEFT({{%employees}}.patronimyc, 1),'.')
             AS
                 title,
-            CONCAT
-                ('/', {{%employees}}.photo)
-            AS
-                imageurl
+            CASE
+                WHEN {{%employees}}.photo IS NULL THEN '/img/logo/avatar.jpeg'
+                ELSE 
+                    CONCAT
+                        ('/', {{%employees}}.photo)
+                END AS imageurl
+            -- CONCAT
+            --     ('/', {{%employees}}.photo)
+
+            --     const NO_PHOTO = '@web/img/logo/avatar.jpeg';
+            -- AS
+            --     imageurl
             FROM
                 {{%dutylist}}
             LEFT JOIN 

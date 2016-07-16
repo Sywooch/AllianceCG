@@ -24,6 +24,7 @@ class Dutylist extends \yii\db\ActiveRecord
 
     public $globalSearch;
     public $stateName;
+    public $employee_filter;
 
     /**
      * @inheritdoc
@@ -60,7 +61,7 @@ class Dutylist extends \yii\db\ActiveRecord
             [['employee_id', 'date'], 'required'],
             [['employee_id'], 'integer'],
             ['date', 'unique', 'message' => 'В БД имеется запись на выбранную дату'],
-            [['date', 'state', 'stateName', 'globalSearch'], 'safe'],
+            [['date', 'state', 'stateName', 'globalSearch', 'employee_filter'], 'safe'],
             ['author', 'default', 'value' => Yii::$app->user->getId()],
             [['employee_id'], 'exist', 'skipOnError' => true, 'targetClass' => Employees::className(), 'targetAttribute' => ['employee_id' => 'id']],
         ];

@@ -16,7 +16,7 @@
             handleWindowResize: true, // Изменять размер календаря пропорционально изменению окна браузера
             editable: false, // Редактирование запрещено, т.к. источник событий json-feed из БД
             isRTL: false, // Отображать календарь в обратном порядке (true/false)
-            hiddenDays: [], // Скрыть дни недели [перечислить номера дней недели ч-з запятую]
+            // hiddenDays: [], // Скрыть дни недели [перечислить номера дней недели ч-з запятую]
             weekMode: 'liquid',
             weekNumbers: true,
             weekends: true,
@@ -55,10 +55,11 @@
                     eventLimit: 15,
                 }
             },
+            // hiddenDays: [ 1, 2, 3, 4, 5 ],
             bussinessHours: {
                 start: '9:00', // время начала
                 end: '21:00', // время окончания
-                dow: [ 1, 2, 3, 4, 5, 6, 7 ]
+                dow: [ 6, 7 ]
                 // days of week. an array of zero-based day of week integers (0=Sunday) дни недели, начиная с 0 (0-ВСК)
             },
 
@@ -81,6 +82,7 @@
                 if (event.imageurl) {
                     eventElement.find("div.fc-content").prepend("<div class='text-center' style='padding: 1px;'><img class='img-rounded' src='" + event.imageurl +"' width='50' height='50'></div>");
                 }
+                return ['all', event.title].indexOf($('#employee_filter').val()) >= 0;
             },    
             eventClick:  function(event, jsEvent, view) {
                 $('#modalTitle').html(moment(event.start).format('DD/MM/YYYY') + ' - Оперативный дежурный на указанную дату:');
@@ -103,15 +105,16 @@
     });
 
     // DatePicker
+    
 
-    $('#datepicker').datepicker({
+    $('#dutylistDatepicker').datepicker({
         dateFormat: 'yy-mm-dd',
         inline: true,
         showButtonPanel: true,
         changeYear: true,
         changeMonth: true,
         yearRange: '-2:+2',
-        altField: '#datepicker',
+        altField: '#dutylistDatepicker',
         altFormat: 'dd/mm/yy',
         
         beforeShow: function() {
@@ -123,8 +126,8 @@
             var d = new Date(dateText);
 
             if (confirm("Перейти к выбранной дате - " + d.toLocaleDateString('en-GB') + " ?")) {
-                    $('#credit_calendar').fullCalendar('changeView', 'agendaDay');
-                    $('#credit_calendar').fullCalendar('gotoDate', d);
+                    $('#dutylsitCalendar').fullCalendar('changeView', 'agendaDay');
+                    $('#dutylsitCalendar').fullCalendar('gotoDate', d);
             }
             else {
                 // alert(d.toLocaleDateString());
@@ -136,9 +139,29 @@
 
     // Опции селектора
 
-    // $('#author_selector, #status_selector, #priority_selector').on('change',function(){
-    //     $('#credit_calendar').fullCalendar('rerenderEvents');
-    // });
+    $('#employee_filter').on('change',function(){
+        $('#dutylsitCalendar').fullCalendar('rerenderEvents');
+    });
+
+    function showOrHide() {
+        cb = document.getElementById('checkbox');
+        if (cb.checked) hideDays();
+        else showDays();
+    }
+
+    var hideDays = function()
+    {
+        $('#dutylsitCalendar').fullCalendar('option', {
+            hiddenDays: [1, 2, 3, 4, 5],
+        });
+    }
+
+    var showDays = function()
+    {
+        $('#dutylsitCalendar').fullCalendar('option', {
+            hiddenDays: [],
+        });
+    }
 
     // $('#filterStatus').multiselect({
     //     numberDisplayed: 2,
@@ -146,5 +169,3 @@
     //     includeSelectAllOption: true,
     //     nonSelectedText: 'Статус',
     // });
-
-

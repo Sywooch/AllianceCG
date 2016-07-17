@@ -164,6 +164,7 @@ echo Tabs::widget([
                   <!-- <div class="col-md-4"> -->
                     <input type="checkbox" class="checkbox" id="checkbox" onchange = 'showOrHide();' />
                     <label for="checkbox">Показать / Скрыть будние дни</label>
+                    <!-- <input type='button' value='Change' onClick="hideSideBar()"> -->
                   <!-- </div> -->
 
 

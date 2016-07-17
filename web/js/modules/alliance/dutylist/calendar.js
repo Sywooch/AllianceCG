@@ -9,9 +9,8 @@
 
     $(document).ready(function() {
         var curSource = "/alliance/dutylist/calendarsearch";
-        // var filter = document.getElementById('autor_selector');
         $('#dutylsitCalendar').fullCalendar({
-            contentHeight: 800,
+            contentHeight: 600,
             aspectRatio: 8,
             handleWindowResize: true, // Изменять размер календаря пропорционально изменению окна браузера
             editable: false, // Редактирование запрещено, т.к. источник событий json-feed из БД
@@ -23,8 +22,6 @@
             defaultView: 'month',          
             selectable: false,
             editable: false,
-            // height: 400,
-            // width: 400,
             lang: 'ru',
             more: 3,
             firstday: 1,
@@ -56,7 +53,7 @@
                 }
             },
             // hiddenDays: [ 1, 2, 3, 4, 5 ],
-            bussinessHours: {
+            businessHours: {
                 start: '9:00', // время начала
                 end: '21:00', // время окончания
                 dow: [ 6, 7 ]
@@ -73,40 +70,77 @@
                     },
                 },
             ],
+
             header: {
                 left: 'prev,today,next',
                 center: 'title,filter',
                 right: 'month,agendaWeek,agendaDay',
             },
+
             eventRender: function eventRender(event, eventElement, element, view) {
                 if (event.imageurl) {
                     eventElement.find("div.fc-content").prepend("<div class='text-center' style='padding: 1px;'><img class='img-rounded' src='" + event.imageurl +"' width='50' height='50'></div>");
                 }
                 return ['all', event.title].indexOf($('#employee_filter').val()) >= 0;
             },    
+
             eventClick:  function(event, jsEvent, view) {
                 $('#modalTitle').html(moment(event.start).format('DD/MM/YYYY') + ' - Оперативный дежурный на указанную дату:');
                 $('#modalBody').html("<div class='text-center'> <img class='img-rounded text-center' src='" + event.imageurl + "' width='50' height='50'>" + ' <b>' + event.title + '</b></div>');
                 $('#eventUrl').attr('href',event.url);
                 $('#fullCalModal').modal();
-            },        
+            },
+
+            dayClick: function(date, jsEvent, view) {
+                var d = new Date(date);
+
+                if (confirm("Перейти к выбранной дате - " + d.toLocaleDateString('en-GB') + " ?")) {
+                        $('#dutylsitCalendar').fullCalendar('changeView', 'agendaDay');
+                        $('#dutylsitCalendar').fullCalendar('gotoDate', d);
+                }
+                // alert('Clicked on: ' + date.format());
+                // alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+                // alert('Current view: ' + view.name);
+            },
             
             // Цвет дня в календаре:
-            dayRender: function(date, cell){            
-                if (moment().diff(date,'days') > 0){
-                    cell.css("background-color","silver");
-                } else if (moment().diff(date,'days') < 0){
-                    cell.css("background-color","white");
-                } else{
-                    cell.css("background-color","white");
+            
+            // dayRender : function(date, cell) {
+            //                             var idx = null;
+            //                             var today = new Date().toDateString();
+            //                             var ddate = date.toDate().toDateString();
+
+            //                             if (ddate == today) {
+            //                                 idx = cell.index() + 1;
+            //                                 cell.css("background-color", "azure");
+            //                                 $(
+            //                                         ".fc-time-grid .fc-bg table tbody tr td:nth-child("
+            //                                                 + idx + ")").css(
+            //                                         "background-color", "azure");
+
+            //                             }
+
+            //                         },
+
+            dayRender: function (date, cell) {
+                
+                var today = new Date().toDateString();
+                var end = new Date();
+                end.setDate(today+7);
+                
+                if (date.toDate().toDateString() === today) {
+                    cell.css("background-color", "#5cb85c");
                 }
-            },
+                
+                if(date.toDate().toDateString() > today && date.toDate().toDateString() <= end) {
+                    cell.css("background-color", "yellow");
+                }
+              
+            },  
         });
     });
 
     // DatePicker
-    
-
     $('#dutylistDatepicker').datepicker({
         dateFormat: 'yy-mm-dd',
         inline: true,
@@ -162,6 +196,11 @@
             hiddenDays: [],
         });
     }
+
+    function hideSideBar() {
+        document.getElementById("sidebar").style.display = "none";
+    }
+
 
     // $('#filterStatus').multiselect({
     //     numberDisplayed: 2,

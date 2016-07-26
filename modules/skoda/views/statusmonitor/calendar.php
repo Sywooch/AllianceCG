@@ -36,7 +36,8 @@
     
 <?php 
    $this->registerCssFile('@web/css/jqfc/fullcalendar_sk_statusmonitor.css', ['depends' => ['app\assets\AppAsset']]);    
-   $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/jquery.min.js'), ['depends' => [
+   $this->registerJsFile(Yii::getAlias('@web/js/jquery-2.2.1.min.js'), ['depends' => [
+//    $this->registerJsFile(Yii::getAlias('@web/js/jqfc/lib/jquery.min.js'), ['depends' => [
        'yii\web\YiiAsset',
        'yii\bootstrap\BootstrapAsset'],
    ]);          

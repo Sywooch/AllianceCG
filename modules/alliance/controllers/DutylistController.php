@@ -72,7 +72,26 @@ class DutylistController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-    }   
+    } 
+
+    /**
+     * Lists all Creditcalendar models.
+     * @return mixed
+     */
+    public function actionPlaincalendar()
+    {
+        $this->layout = "@app/modules/main/views/layouts/plain/main";
+
+        $model = new Dutylist();
+        $searchModel = new DutylistSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('plaincalendar', [
+            'model' => $model,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }       
 
     /**
      * Displays a single Dutylist model.

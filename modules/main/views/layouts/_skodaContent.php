@@ -28,6 +28,10 @@ use rmrevin\yii\fontawesome\FA;
                 'label' => Yii::t('app', '{icon} NAV_SKODA_STATUSMONITOR', ['icon' => FA::icon('television')]), 'url' => ['/skoda/statusmonitor/calendar'],
                 'visible' => Yii::$app->user->can('skodaIsVisible')
             ],
+            [
+                'label' => Yii::t('app', '{icon} NAV_SKODA_CLIENTS', ['icon' => '<i class="fa fa-users"></i>']), 'url' => ['/skoda/clients/index'],
+                'visible' => Yii::$app->user->can('skodaIsVisible')
+            ],
         ]),
                 // 'visible' => Yii::$app->user->can('skodaIsVisible')
     ])

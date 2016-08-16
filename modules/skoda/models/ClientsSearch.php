@@ -18,8 +18,8 @@ class ClientsSearch extends Clients
     public function rules()
     {
         return [
-            [['id', 'clientDepartment', 'state', 'created_at', 'updated_at'], 'integer'],
-            [['clientName', 'clientSurname', 'clientPatronymic', 'clientPhone', 'clientEmail', 'clientBithdayDate', 'author'], 'safe'],
+            [['id', 'clientDepartment', 'created_at', 'updated_at'], 'integer'],
+            [['clientName', 'clientSurname', 'clientPatronymic', 'clientPhone', 'clientEmail', 'clientBithdayDate', 'clientFullName'], 'safe'],
         ];
     }
 
@@ -47,6 +47,8 @@ class ClientsSearch extends Clients
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=> ['defaultOrder' => ['id'=>SORT_DESC]],
+            'pagination' => ['pageSize' => 10],
         ]);
 
         $this->load($params);
@@ -62,19 +64,24 @@ class ClientsSearch extends Clients
             'id' => $this->id,
             'clientDepartment' => $this->clientDepartment,
             'clientBithdayDate' => $this->clientBithdayDate,
-            'state' => $this->state,
+            // 'state' => $this->state,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'clientRegion' => $this->clientRegion,
         ]);
 
-        $query->andFilterWhere(['like', 'clientName', $this->clientName])
-            ->andFilterWhere(['like', 'clientSurname', $this->clientSurname])
-            ->andFilterWhere(['like', 'clientPatronymic', $this->clientPatronymic])
+        $query
+            // ->andFilterWhere(['like', 'clientName', $this->clientName])
+            // ->andFilterWhere(['like', 'clientSurname', $this->clientSurname])
+            // ->andFilterWhere(['like', 'clientPatronymic', $this->clientPatronymic])
+            ->orFilterWhere(['like', 'clientName', $this->clientFullName])
+            ->orFilterWhere(['like', 'clientSurname', $this->clientFullName])
+            ->orFilterWhere(['like', 'clientPatronymic', $this->clientFullName])
             ->andFilterWhere(['like', 'clientPhone', $this->clientPhone])
             ->andFilterWhere(['like', 'clientEmail', $this->clientEmail])
             ->andFilterWhere(['like', 'clientRegion', $this->clientRegion])
-            ->andFilterWhere(['like', 'author', $this->author]);
+            // ->andFilterWhere(['like', 'author', $this->author])
+            ;
 
         return $dataProvider;
     }

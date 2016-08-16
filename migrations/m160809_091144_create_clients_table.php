@@ -22,10 +22,14 @@ class m160809_091144_create_clients_table extends Migration
             'clientRegion' => $this->text(),
             'clientDepartment' => $this->integer(),
             'clientBithdayDate' => $this->date(),
-            'state' => $this->integer()->notNull()->defaultValue(0),
+            'is_deleted' => $this->integer()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
-            'author' => $this->string(255),
+            'deleted_at' => $this->integer()->notNull(),
+            'created_by' => $this->integer()->notNull(),
+            'updated_by' => $this->integer()->notNull(),
+            'deleted_by' => $this->integer()->notNull(),
+            // 'author' => $this->string(255),
         ]);
     }
 

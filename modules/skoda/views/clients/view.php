@@ -40,15 +40,16 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'clientPatronymic',
             'clientPhone',
             'clientEmail:email',
-            'clientDepartment',
+            // 'clientDepartment',
+            [
+                'attribute' => 'clientDepartment',
+                'value' => $model->department->department_name,
+            ],
             // 'clientBithdayDate',
             [
                 'attribute' => 'clientBithdayDate',
                 'format' => ['date', 'php:d/m/Y']
             ],
-            // 'state',
-            // 'created_at',
-            // 'updated_at',
             [
                 'attribute' => 'created_at',
                 'format' => ['date', 'php:d/m/Y H:m:i'],
@@ -58,9 +59,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => ['date', 'php:d/m/Y H:m:i'],
             ],
             [
-                'attribute' => 'author',
-                'value' => $model->authorname->full_name,
+                'attribute' => 'created_by',
+                'value' => $model->creator->full_name,
             ],
+            [
+                'attribute' => 'updated_by',
+                'value' => $model->updater->full_name,
+            ],
+            [
+                'attribute' => 'deleted_at',
+                'format' => ['date', 'php:d/m/Y H:m:i'],
+                'visible' => ($model->deleted_at == 0) ? false : true,
+            ],
+            [
+                'attribute' => 'deleted_by',
+                'value' => $model->deleter->full_name,
+            ]
             // 'author',
         ],
     ]) ?>

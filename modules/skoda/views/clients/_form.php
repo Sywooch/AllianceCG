@@ -6,6 +6,8 @@ use kartik\date\DatePicker;
 use yii\widgets\MaskedInput;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
+use app\modules\references\models\Departments;
+use app\modules\skoda\models\Clients;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\skoda\models\Clients */
@@ -22,50 +24,63 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->errorSummary($model); ?>
 
-    <?= $form->field($model, 'clientName')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('clientName')]) ?>
+    <?= $form->field($model, 'clientSurname', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-user"></i> </span>{input}</div>{error}'])->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('clientSurname')]) ?>
 
-    <?= $form->field($model, 'clientSurname')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('clientSurname')]) ?>
+    <?= $form->field($model, 'clientName', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-user"></i> </span>{input}</div>{error}'])->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('clientName')]) ?>
 
-    <?= $form->field($model, 'clientPatronymic')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('clientPatronymic')]) ?>
+    <?= $form->field($model, 'clientPatronymic', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-user"></i> </span>{input}</div>{error}'])->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('clientPatronymic')]) ?>
 
-    <?php // echo $form->field($model, 'clientPhone')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'clientRegion', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-user"></i> </span>{input}</div>{error}'])->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('clientRegion')]) ?>
 
-    <?= $form->field($model, 'clientPhone')->widget(\yii\widgets\MaskedInput::className(), [
-        'mask' => '+7 (999) 999-99-99',
-    ]) ?>
+    <div class="col-md-12">
 
-    <?= $form->field($model, 'clientEmail')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('clientEmail')]) ?>
+        <div class="col-md-6">
 
-    <?= $form->field($model, 'clientRegion')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('clientRegion')]) ?>
+            <?= $form->field($model, 'clientPhone', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-phone"></i> </span>{input}</div>{error}'])->widget(\yii\widgets\MaskedInput::className(), [
+                'mask' => '+7 (999) 999-99-99',
+            ])->textInput(['placeholder' => $model->getAttributeLabel( 'clientPhone' )]) ?>
 
-    <?= $form->field($model, 'clientDepartment')->textInput() ?>
+        </div>
 
-    <?php // echo $form->field($model, 'clientBithdayDate')->textInput() ?>
+        <div class="col-md-6">
 
-    <?php
+            <?= $form->field($model, 'clientEmail', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-inbox"></i> </span>{input}</div>{error}'])->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('clientEmail')]) ?>
 
-        echo $form->field($model, 'clientBithdayDate')
-                    ->label(false)
-                    ->widget('kartik\date\DatePicker', [
-                        'options' => ['type' => DatePicker::TYPE_INPUT, 'placeholder' => $model->getAttributeLabel('clientBithdayDate')],
-                        'pluginOptions' => [
-                            'format' => 'yyyy-mm-dd',
-                            'type' => DatePicker::TYPE_INPUT,
-                            'todayHighlight' => true,
-                            'clearButton'    => true,
-                            'todayBtn' => true,
-                            'autoclose' => true,
-                        ]
-                    ]);
-    ?>    
+        </div>
 
-    <?= $form->field($model, 'state')->textInput() ?>
+    </div>
 
-    <?php // echo $form->field($model, 'created_at')->textInput() ?>
+    <div class="col-md-12">
 
-    <?php // echo $form->field($model, 'updated_at')->textInput() ?>
+        <div class="col-md-6">
 
-    <?php // echo $form->field($model, 'author')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'clientDepartment', ['template'=>'<div class="input-group"><span class="input-group-addon"> <i class="fa fa-users"></i> </span>{input}</div>{error}'])->dropdownList(Departments::find()->select(['department_name', 'id'])->where(['state' => Departments::STATUS_ACTIVE])->andWhere(['id' => [Clients::SALES_DEPARTMENT_ID, Clients::SERVICE_DEPARTMENT_ID]])->indexBy('id')->column(), ['prompt' => $model->getAttributeLabel('clientDepartment')]) ?>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <?php
+
+                echo $form->field($model, 'clientBithdayDate')
+                   ->label(false)
+                   ->widget('kartik\date\DatePicker', [
+                       'options' => ['type' => DatePicker::TYPE_INPUT, 'placeholder' => $model->getAttributeLabel('clientBithdayDate')],
+                       'pluginOptions' => [
+                           'format' => 'yyyy-mm-dd',
+                           // 'format' => 'dd/mm/yyyy',
+                           'type' => DatePicker::TYPE_INPUT,
+                           'todayHighlight' => true,
+                           'clearButton'    => true,
+                           'todayBtn' => true,
+                           'autoclose' => true,
+                       ]
+                   ]);
+            ?>    
+
+        </div>
+
+    </div>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
